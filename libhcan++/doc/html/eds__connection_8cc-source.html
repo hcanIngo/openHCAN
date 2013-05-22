@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: eds_connection.cc Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>eds_connection.cc</h1><a href="eds__connection_8cc.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;<a class="code" href="eds__connection_8h.html">eds_connection.h</a>&gt;</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;<a class="code" href="board__connection_8h.html">board_connection.h</a>&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;<a class="code" href="transport__connection_8h.html">transport_connection.h</a>&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006 <span class="keyword">using namespace </span>std;
+<a name="l00007"></a>00007 <span class="keyword">using namespace </span>hcan;
+<a name="l00008"></a>00008 
+<a name="l00014"></a><a class="code" href="eds__connection_8cc.html#f09a1a6ea304dcfde52efc6d0d928ff2">00014</a> <span class="keyword">const</span> vector&lt;eds_block_desc_t&gt; <a class="code" href="eds__connection_8cc.html#f09a1a6ea304dcfde52efc6d0d928ff2">eds_block_descriptions</a> = 
+<a name="l00015"></a>00015     <a class="code" href="eds__desc_8cc.html#f6bc343d28b136b4fbe54f737b53f3f1">eds_get_block_descriptions</a>();
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 <span class="comment">// Hilfsfunktionen:</span>
+<a name="l00018"></a>00018 <span class="comment">//</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020  
+<a name="l00025"></a><a class="code" href="eds__connection_8cc.html#4429f9022a69cc6386b135009dde6228">00025</a> <span class="keyword">const</span> <a class="code" href="structeds__block__desc__t.html">eds_block_desc_t</a> <a class="code" href="eds__connection_8cc.html#4429f9022a69cc6386b135009dde6228">get_block_desc_by_type</a>(uint8_t type)
+<a name="l00026"></a>00026 {
+<a name="l00027"></a>00027     <span class="keywordflow">for</span> (vector&lt;eds_block_desc_t&gt;::const_iterator i = 
+<a name="l00028"></a>00028             <a class="code" href="eds__connection_8cc.html#f09a1a6ea304dcfde52efc6d0d928ff2">eds_block_descriptions</a>.begin();
+<a name="l00029"></a>00029             i != <a class="code" href="eds__connection_8cc.html#f09a1a6ea304dcfde52efc6d0d928ff2">eds_block_descriptions</a>.end(); i++)
+<a name="l00030"></a>00030     {
+<a name="l00031"></a>00031         <span class="keywordflow">if</span> (i-&gt;type == type)
+<a name="l00032"></a>00032         {
+<a name="l00033"></a>00033             <span class="keywordflow">return</span> *i;
+<a name="l00034"></a>00034         }
+<a name="l00035"></a>00035     }
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037     <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds block desc of type id "</span>);
+<a name="l00038"></a>00038     <span class="keywordflow">throw</span> e &lt;&lt; type &lt;&lt; <span class="stringliteral">" not found"</span>;
+<a name="l00039"></a>00039 }
+<a name="l00040"></a>00040 
+<a name="l00045"></a><a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">00045</a> <span class="keyword">const</span> <a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> <a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a>(
+<a name="l00046"></a>00046         <span class="keyword">const</span> <a class="code" href="structeds__block__desc__t.html">eds_block_desc_t</a> &amp;desc, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key)
+<a name="l00047"></a>00047 {
+<a name="l00048"></a>00048     eds_block_fields_t::const_iterator i = desc.<a class="code" href="structeds__block__desc__t.html#ab85e12f47e88f3acb52364f191df390">fields</a>.begin();
+<a name="l00049"></a>00049     <span class="keywordflow">for</span> (; i != desc.<a class="code" href="structeds__block__desc__t.html#ab85e12f47e88f3acb52364f191df390">fields</a>.end(); i++)
+<a name="l00050"></a>00050     {
+<a name="l00051"></a>00051         <span class="keywordflow">if</span> (i-&gt;name == key)
+<a name="l00052"></a>00052             <span class="keywordflow">return</span> *i;
+<a name="l00053"></a>00053     }
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055     <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds block field desc of '"</span>);
+<a name="l00056"></a>00056     <span class="keywordflow">throw</span> e &lt;&lt; key &lt;&lt; <span class="stringliteral">"' not found"</span>;
+<a name="l00057"></a>00057 }
+<a name="l00058"></a>00058 
+<a name="l00061"></a><a class="code" href="eds__connection_8cc.html#55072500c2be3485598bb6ef2849dfc1">00061</a> <span class="keywordtype">int</span> <a class="code" href="eds__connection_8cc.html#55072500c2be3485598bb6ef2849dfc1">get_block_field_index_by_key</a>(<span class="keyword">const</span> <a class="code" href="structeds__block__desc__t.html">eds_block_desc_t</a> &amp;desc, 
+<a name="l00062"></a>00062         <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key)
+<a name="l00063"></a>00063 {
+<a name="l00064"></a>00064     eds_block_fields_t::const_iterator i = desc.<a class="code" href="structeds__block__desc__t.html#ab85e12f47e88f3acb52364f191df390">fields</a>.begin();
+<a name="l00065"></a>00065     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> counter = 0; i != desc.<a class="code" href="structeds__block__desc__t.html#ab85e12f47e88f3acb52364f191df390">fields</a>.end(); i++, counter++)
+<a name="l00066"></a>00066     {
+<a name="l00067"></a>00067         <span class="keywordflow">if</span> (i-&gt;name == key)
+<a name="l00068"></a>00068             <span class="keywordflow">return</span> counter;
+<a name="l00069"></a>00069     }
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071     <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds block field desc of '"</span>);
+<a name="l00072"></a>00072     <span class="keywordflow">throw</span> e &lt;&lt; key &lt;&lt; <span class="stringliteral">"' not found"</span>;
+<a name="l00073"></a>00073 }
+<a name="l00074"></a>00074 
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077 eds_block::eds_block(<a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ, uint16_t address) :
+<a name="l00078"></a>00078     m_econ(econ),
+<a name="l00079"></a>00079     m_bcon(econ.bcon()),
+<a name="l00080"></a>00080     m_tcon(econ.bcon().tcon()),
+<a name="l00081"></a>00081     m_address(address),
+<a name="l00082"></a>00082     m_type(0),
+<a name="l00083"></a>00083     m_size(0),
+<a name="l00084"></a>00084     m_desc(init())
+<a name="l00085"></a>00085 {
+<a name="l00086"></a>00086 }
+<a name="l00087"></a>00087 
+<a name="l00088"></a><a class="code" href="classhcan_1_1eds__block.html#a793e2020723e5636a5283a261594a2d">00088</a> eds_block::eds_block(<span class="keyword">const</span> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;b) :
+<a name="l00089"></a>00089     m_econ(b.m_econ),
+<a name="l00090"></a>00090     m_bcon(m_econ.bcon()),
+<a name="l00091"></a>00091     m_tcon(m_bcon.tcon()),
+<a name="l00092"></a>00092     m_address(b.m_address),
+<a name="l00093"></a>00093     m_type(b.m_type),
+<a name="l00094"></a>00094     m_size(b.m_size),
+<a name="l00095"></a>00095     m_desc(b.m_desc)
+<a name="l00096"></a>00096 {
+<a name="l00097"></a>00097 }
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 
+<a name="l00100"></a><a class="code" href="classhcan_1_1eds__block.html#123da5de700597099c7b50a35d029b05">00100</a> <span class="keyword">const</span> <a class="code" href="structeds__block__desc__t.html">eds_block_desc_t</a> <a class="code" href="classhcan_1_1eds__block.html#123da5de700597099c7b50a35d029b05">eds_block::init</a>()
+<a name="l00101"></a>00101 {
+<a name="l00102"></a>00102     uint8_t d2, d3;
+<a name="l00103"></a>00103     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#8287555bc96d42102743af414d4e4246">send_READ_FROM_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00104"></a>00104             m_address &gt;&gt; 8, m_address, 0);
+<a name="l00105"></a>00105     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#38888d90dae7b869f4025af568856bf3">recv_READ_FROM_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(),
+<a name="l00106"></a>00106             &amp;m_type, &amp;m_size, &amp;d2, &amp;d3);
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108     <span class="keywordflow">return</span> <a class="code" href="eds__connection_8cc.html#4429f9022a69cc6386b135009dde6228">get_block_desc_by_type</a>(m_type);
+<a name="l00109"></a>00109 }
+<a name="l00110"></a>00110 
+<a name="l00111"></a><a class="code" href="classhcan_1_1eds__block.html#4ee96e97362ba8591d5e0aedce8d7261">00111</a> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;<a class="code" href="classhcan_1_1eds__block.html#4ee96e97362ba8591d5e0aedce8d7261">eds_block::operator = </a>(<span class="keyword">const</span> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;b)
+<a name="l00112"></a>00112 {
+<a name="l00113"></a>00113     m_address = b.<a class="code" href="classhcan_1_1eds__block.html#9fe23f886417b42fb740e9f5c027b157">m_address</a>;
+<a name="l00114"></a>00114     <span class="keyword">const_cast&lt;</span> <a class="code" href="structeds__block__desc__t.html">eds_block_desc_t</a> &amp;<span class="keyword">&gt;</span>(m_desc) = <a class="code" href="classhcan_1_1eds__block.html#123da5de700597099c7b50a35d029b05">init</a>();
+<a name="l00115"></a>00115     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00116"></a>00116 }
+<a name="l00117"></a>00117 
+<a name="l00118"></a><a class="code" href="classhcan_1_1eds__block.html#07c4de2d7586acaf90f6c96a6a703c88">00118</a> <a class="code" href="classhcan_1_1eds__block.html#07c4de2d7586acaf90f6c96a6a703c88">eds_block::~eds_block</a>()
+<a name="l00119"></a>00119 {
+<a name="l00120"></a>00120 }
+<a name="l00121"></a>00121 
+<a name="l00122"></a><a class="code" href="classhcan_1_1eds__block.html#58655ce4e5f09a6833384d720ed45c06">00122</a> <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classhcan_1_1eds__block.html#58655ce4e5f09a6833384d720ed45c06">eds_block::type_name</a>()<span class="keyword"> const</span>
+<a name="l00123"></a>00123 <span class="keyword"></span>{
+<a name="l00124"></a>00124     <span class="keywordflow">return</span> m_desc.<a class="code" href="structeds__block__desc__t.html#79e29e7a26f1d56b9e555f90a7fceaf1">name</a>;
+<a name="l00125"></a>00125 }
+<a name="l00126"></a>00126 
+<a name="l00127"></a><a class="code" href="classhcan_1_1eds__block.html#06434d1ee09d11e711fba0689616383c">00127</a> uint8_t <a class="code" href="classhcan_1_1eds__block.html#06434d1ee09d11e711fba0689616383c">eds_block::field</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key)
+<a name="l00128"></a>00128 {
+<a name="l00129"></a>00129     <span class="keyword">const</span> <a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> &amp;field_desc = 
+<a name="l00130"></a>00130         <a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a>(m_desc, key);
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132     <span class="keywordflow">if</span> (field_desc.<a class="code" href="structeds__block__field__desc__t.html#687b01360445092dca95d452dab64122">datatype</a> == <span class="stringliteral">"char"</span>)
+<a name="l00133"></a>00133     {
+<a name="l00134"></a>00134         <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds_block::field: eds block field '"</span>);
+<a name="l00135"></a>00135         <span class="keywordflow">throw</span> e &lt;&lt; key &lt;&lt; <span class="stringliteral">"' is type char[], not uint8_t"</span>;
+<a name="l00136"></a>00136     }
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138     <span class="keyword">const</span> <span class="keywordtype">int</span> offset = 2; <span class="comment">// type + size sind nicht mitgerechnet</span>
+<a name="l00139"></a>00139     <span class="keywordtype">int</span> p = field_desc.<a class="code" href="structeds__block__field__desc__t.html#ccb9ddcd26f729a89b338efc1da3d7d5">pos</a> + offset;
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141     uint8_t d0,d1,d2,d3;
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#8287555bc96d42102743af414d4e4246">send_READ_FROM_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00144"></a>00144             m_address &gt;&gt; 8, m_address, p);
+<a name="l00145"></a>00145     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#38888d90dae7b869f4025af568856bf3">recv_READ_FROM_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(),
+<a name="l00146"></a>00146             &amp;d0,&amp;d1,&amp;d2,&amp;d3);
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148     <span class="keywordflow">return</span> d0;
+<a name="l00149"></a>00149 }
+<a name="l00150"></a>00150 
+<a name="l00151"></a><a class="code" href="classhcan_1_1eds__block.html#164bcb7df3fdb8625f0e663a4f4a7d22">00151</a> uint16_t <a class="code" href="classhcan_1_1eds__block.html#164bcb7df3fdb8625f0e663a4f4a7d22">eds_block::uint16_field</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key)
+<a name="l00152"></a>00152 {
+<a name="l00153"></a>00153     <span class="keyword">const</span> <a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> &amp;field_desc = 
+<a name="l00154"></a>00154         <a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a>(m_desc, key);
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156     <span class="keywordflow">if</span> (field_desc.<a class="code" href="structeds__block__field__desc__t.html#687b01360445092dca95d452dab64122">datatype</a> == <span class="stringliteral">"char"</span>)
+<a name="l00157"></a>00157     {
+<a name="l00158"></a>00158         <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds_block::field: eds block field '"</span>);
+<a name="l00159"></a>00159         <span class="keywordflow">throw</span> e &lt;&lt; key &lt;&lt; <span class="stringliteral">"' is type char[], not uint8_t"</span>;
+<a name="l00160"></a>00160     }
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162     <span class="keyword">const</span> <span class="keywordtype">int</span> offset = 2; <span class="comment">// type + size sind nicht mitgerechnet</span>
+<a name="l00163"></a>00163     <span class="keywordtype">int</span> p = field_desc.<a class="code" href="structeds__block__field__desc__t.html#ccb9ddcd26f729a89b338efc1da3d7d5">pos</a> + offset;
+<a name="l00164"></a>00164     uint8_t d0,d1,d2,d3;
+<a name="l00165"></a>00165 
+<a name="l00166"></a>00166     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#8287555bc96d42102743af414d4e4246">send_READ_FROM_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00167"></a>00167             m_address &gt;&gt; 8, m_address, p);
+<a name="l00168"></a>00168     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#38888d90dae7b869f4025af568856bf3">recv_READ_FROM_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(),
+<a name="l00169"></a>00169             &amp;d0,&amp;d1,&amp;d2,&amp;d3);
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171     <span class="keywordflow">return</span> (d1 &lt;&lt; 8) | d0;
+<a name="l00172"></a>00172 }
+<a name="l00173"></a>00173 
+<a name="l00174"></a><a class="code" href="classhcan_1_1eds__block.html#b6e52382fc6c2be423fa78b9d2cae65e">00174</a> <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1eds__block.html#b6e52382fc6c2be423fa78b9d2cae65e">eds_block::strfield</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key)
+<a name="l00175"></a>00175 {
+<a name="l00176"></a>00176     <span class="keyword">const</span> <a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> &amp;field_desc = 
+<a name="l00177"></a>00177         <a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a>(m_desc, key);
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179     <span class="keywordflow">if</span> (field_desc.<a class="code" href="structeds__block__field__desc__t.html#687b01360445092dca95d452dab64122">datatype</a> != <span class="stringliteral">"char"</span>)
+<a name="l00180"></a>00180     {
+<a name="l00181"></a>00181         <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds_block::strfield: eds block field '"</span>);
+<a name="l00182"></a>00182         <span class="keywordflow">throw</span> e &lt;&lt; key &lt;&lt; <span class="stringliteral">"' is not type char[]"</span>;
+<a name="l00183"></a>00183     }
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185     uint8_t d0,d1,d2,d3;
+<a name="l00186"></a>00186     <span class="keyword">const</span> <span class="keywordtype">int</span> offset = 2; <span class="comment">// type + size sind nicht mitgerechnet</span>
+<a name="l00187"></a>00187     <span class="keywordtype">string</span> s;
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189     <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; field_desc.<a class="code" href="structeds__block__field__desc__t.html#e3613453621720b11bf13d66902cedc1">size</a>; j += 4)
+<a name="l00190"></a>00190     {
+<a name="l00191"></a>00191         <span class="keywordtype">int</span> p = field_desc.<a class="code" href="structeds__block__field__desc__t.html#ccb9ddcd26f729a89b338efc1da3d7d5">pos</a> + offset + j;
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#8287555bc96d42102743af414d4e4246">send_READ_FROM_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00194"></a>00194                 m_address &gt;&gt; 8, m_address, p);
+<a name="l00195"></a>00195         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#38888d90dae7b869f4025af568856bf3">recv_READ_FROM_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(),
+<a name="l00196"></a>00196                 &amp;d0,&amp;d1,&amp;d2,&amp;d3);
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198         <span class="keywordflow">if</span> (d0 != 0) s += char(d0); <span class="keywordflow">else</span> <span class="keywordflow">break</span>;
+<a name="l00199"></a>00199         <span class="keywordflow">if</span> (d1 != 0) s += char(d1); <span class="keywordflow">else</span> <span class="keywordflow">break</span>;
+<a name="l00200"></a>00200         <span class="keywordflow">if</span> (d2 != 0) s += char(d2); <span class="keywordflow">else</span> <span class="keywordflow">break</span>;
+<a name="l00201"></a>00201         <span class="keywordflow">if</span> (d3 != 0) s += char(d3); <span class="keywordflow">else</span> <span class="keywordflow">break</span>;
+<a name="l00202"></a>00202     }
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204     <span class="keywordflow">return</span> s;
+<a name="l00205"></a>00205 }
+<a name="l00206"></a>00206 
+<a name="l00207"></a><a class="code" href="classhcan_1_1eds__block.html#0fa0660d4974f65834754ded3dde3018">00207</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__block.html#0fa0660d4974f65834754ded3dde3018">eds_block::set_field_uint8</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key, uint8_t v)
+<a name="l00208"></a>00208 {
+<a name="l00209"></a>00209     <span class="keyword">const</span> <a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> &amp;field_desc = 
+<a name="l00210"></a>00210         <a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a>(m_desc, key);
+<a name="l00211"></a>00211 
+<a name="l00212"></a>00212     <span class="keywordflow">if</span> (field_desc.<a class="code" href="structeds__block__field__desc__t.html#687b01360445092dca95d452dab64122">datatype</a> == <span class="stringliteral">"char"</span>)
+<a name="l00213"></a>00213     {
+<a name="l00214"></a>00214         <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds_block::set_field: eds block field '"</span>);
+<a name="l00215"></a>00215         <span class="keywordflow">throw</span> e &lt;&lt; key &lt;&lt; <span class="stringliteral">"' is type char[], not uint8_t"</span>;
+<a name="l00216"></a>00216     }
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218     <span class="keyword">const</span> <span class="keywordtype">int</span> offset = 2; <span class="comment">// type + size sind nicht mitgerechnet</span>
+<a name="l00219"></a>00219     <span class="keywordtype">int</span> p = field_desc.<a class="code" href="structeds__block__field__desc__t.html#ccb9ddcd26f729a89b338efc1da3d7d5">pos</a> + offset;
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#a58b6bef89850cc9ff91369fe69f8b4f">send_WRITE_TO_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00222"></a>00222             m_address &gt;&gt; 8, m_address, p, v);
+<a name="l00223"></a>00223     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#236075776a57f449e76bbc5021865840">recv_WRITE_TO_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>());
+<a name="l00224"></a>00224 
+<a name="l00225"></a>00225 }
+<a name="l00226"></a>00226 
+<a name="l00227"></a><a class="code" href="classhcan_1_1eds__block.html#2300eb17177ead03b2be2859d493209e">00227</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__block.html#2300eb17177ead03b2be2859d493209e">eds_block::set_field_uint16</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key, uint16_t v)
+<a name="l00228"></a>00228 {
+<a name="l00229"></a>00229     <span class="keyword">const</span> <a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> &amp;field_desc = 
+<a name="l00230"></a>00230         <a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a>(m_desc, key);
+<a name="l00231"></a>00231 
+<a name="l00232"></a>00232     <span class="keywordflow">if</span> (field_desc.<a class="code" href="structeds__block__field__desc__t.html#687b01360445092dca95d452dab64122">datatype</a> == <span class="stringliteral">"char"</span>)
+<a name="l00233"></a>00233     {
+<a name="l00234"></a>00234         <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds_block::set_field: eds block field '"</span>);
+<a name="l00235"></a>00235         <span class="keywordflow">throw</span> e &lt;&lt; key &lt;&lt; <span class="stringliteral">"' is type char[], not uint8_t"</span>;
+<a name="l00236"></a>00236     }
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238     <span class="keyword">const</span> <span class="keywordtype">int</span> offset = 2; <span class="comment">// type + size sind nicht mitgerechnet</span>
+<a name="l00239"></a>00239     <span class="keywordtype">int</span> p = field_desc.<a class="code" href="structeds__block__field__desc__t.html#ccb9ddcd26f729a89b338efc1da3d7d5">pos</a> + offset;
+<a name="l00240"></a>00240 
+<a name="l00241"></a>00241     <span class="comment">// Lo Byte</span>
+<a name="l00242"></a>00242     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#a58b6bef89850cc9ff91369fe69f8b4f">send_WRITE_TO_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00243"></a>00243             m_address &gt;&gt; 8, m_address, p + 0, v);
+<a name="l00244"></a>00244     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#236075776a57f449e76bbc5021865840">recv_WRITE_TO_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>());
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246     <span class="comment">// Hi Byte</span>
+<a name="l00247"></a>00247     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#a58b6bef89850cc9ff91369fe69f8b4f">send_WRITE_TO_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00248"></a>00248             m_address &gt;&gt; 8, m_address, p + 1, v &gt;&gt; 8);
+<a name="l00249"></a>00249     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#236075776a57f449e76bbc5021865840">recv_WRITE_TO_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>());
+<a name="l00250"></a>00250 
+<a name="l00251"></a>00251 }
+<a name="l00252"></a>00252 
+<a name="l00253"></a><a class="code" href="classhcan_1_1eds__block.html#b7a9e79c7095fe46291d507132f2c87e">00253</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__block.html#b7a9e79c7095fe46291d507132f2c87e">eds_block::set_field_str</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;v)
+<a name="l00254"></a>00254 {
+<a name="l00255"></a>00255     <span class="keyword">const</span> <a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> &amp;field_desc = 
+<a name="l00256"></a>00256         <a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a>(m_desc, key);
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258     <span class="keywordflow">if</span> (field_desc.<a class="code" href="structeds__block__field__desc__t.html#687b01360445092dca95d452dab64122">datatype</a> != <span class="stringliteral">"char"</span>)
+<a name="l00259"></a>00259     {
+<a name="l00260"></a>00260         <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"eds_block::set_field: eds block field '"</span>);
+<a name="l00261"></a>00261         <span class="keywordflow">throw</span> e &lt;&lt; key &lt;&lt; <span class="stringliteral">"' is not type char[]"</span>;
+<a name="l00262"></a>00262     }
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264     <span class="keyword">const</span> <span class="keywordtype">int</span> offset = 2; <span class="comment">// type + size sind nicht mitgerechnet</span>
+<a name="l00265"></a>00265     <span class="keywordtype">string</span> s = v;
+<a name="l00266"></a>00266 
+<a name="l00267"></a>00267     <span class="comment">// String auf die maximale Laenge kuerzen</span>
+<a name="l00268"></a>00268     <span class="keywordflow">if</span> ((s.size() + 1) &gt; field_desc.<a class="code" href="structeds__block__field__desc__t.html#e3613453621720b11bf13d66902cedc1">size</a>)
+<a name="l00269"></a>00269         s.resize(field_desc.<a class="code" href="structeds__block__field__desc__t.html#e3613453621720b11bf13d66902cedc1">size</a> -1);
+<a name="l00270"></a>00270 
+<a name="l00271"></a>00271     <span class="comment">// String chars schreiben</span>
+<a name="l00272"></a>00272     <span class="keywordtype">size_t</span> j;
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274     <span class="keywordflow">for</span> (j = 0; j &lt; s.size(); j++)
+<a name="l00275"></a>00275     {
+<a name="l00276"></a>00276         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#a58b6bef89850cc9ff91369fe69f8b4f">send_WRITE_TO_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00277"></a>00277                 m_address &gt;&gt; 8, m_address,
+<a name="l00278"></a>00278                 field_desc.<a class="code" href="structeds__block__field__desc__t.html#ccb9ddcd26f729a89b338efc1da3d7d5">pos</a> + offset + j, s[j]);
+<a name="l00279"></a>00279         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#236075776a57f449e76bbc5021865840">recv_WRITE_TO_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>());
+<a name="l00280"></a>00280 
+<a name="l00281"></a>00281     }
+<a name="l00282"></a>00282 
+<a name="l00283"></a>00283     <span class="comment">// Abschliessendes '\000' schreiben; das muss explizit geschehen,</span>
+<a name="l00284"></a>00284     <span class="comment">// denn ein s += \000; wuerde nicht funktionieren...</span>
+<a name="l00285"></a>00285     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#a58b6bef89850cc9ff91369fe69f8b4f">send_WRITE_TO_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(),
+<a name="l00286"></a>00286             m_address &gt;&gt; 8, m_address,
+<a name="l00287"></a>00287             field_desc.<a class="code" href="structeds__block__field__desc__t.html#ccb9ddcd26f729a89b338efc1da3d7d5">pos</a> + offset + j, 0);
+<a name="l00288"></a>00288     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#236075776a57f449e76bbc5021865840">recv_WRITE_TO_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>());
+<a name="l00289"></a>00289 }
+<a name="l00290"></a>00290 
+<a name="l00291"></a><a class="code" href="classhcan_1_1eds__block.html#36c9419cc70dc4b19b4ace0713591d76">00291</a> <span class="keyword">const</span> <a class="code" href="eds__desc_8h.html#a9d6a2a7f0c697f8e6db1f2f6d878f3b">eds_block_fields_t</a> &amp;<a class="code" href="classhcan_1_1eds__block.html#36c9419cc70dc4b19b4ace0713591d76">eds_block::fields</a>()<span class="keyword"> const</span>
+<a name="l00292"></a>00292 <span class="keyword"></span>{
+<a name="l00293"></a>00293     <span class="keywordflow">return</span> m_desc.<a class="code" href="structeds__block__desc__t.html#ab85e12f47e88f3acb52364f191df390">fields</a>;
+<a name="l00294"></a>00294 }
+<a name="l00295"></a>00295 
+<a name="l00296"></a><a class="code" href="classhcan_1_1eds__block.html#da1c236e1901db66820065283471bd23">00296</a> <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classhcan_1_1eds__block.html#da1c236e1901db66820065283471bd23">eds_block::field_datatype</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key)<span class="keyword"> const</span>
+<a name="l00297"></a>00297 <span class="keyword"></span>{
+<a name="l00298"></a>00298     <span class="keyword">const</span> <a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> &amp;field_desc = 
+<a name="l00299"></a>00299         <a class="code" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a>(m_desc, key);
+<a name="l00300"></a>00300 
+<a name="l00301"></a>00301     <span class="keywordflow">return</span> field_desc.<a class="code" href="structeds__block__field__desc__t.html#687b01360445092dca95d452dab64122">datatype</a>;
+<a name="l00302"></a>00302 }
+<a name="l00303"></a>00303 
+<a name="l00305"></a>00305 
+<a name="l00306"></a><a class="code" href="classhcan_1_1eds__connection.html#4d826c83f695cdfee9f66cfb59d38503">00306</a> <a class="code" href="classhcan_1_1eds__connection.html#4d826c83f695cdfee9f66cfb59d38503">eds_connection::eds_connection</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon) :
+<a name="l00307"></a>00307     m_bcon(bcon),
+<a name="l00308"></a>00308     m_tcon(m_bcon.tcon())
+<a name="l00309"></a>00309 {
+<a name="l00310"></a>00310     <a class="code" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">update</a>();
+<a name="l00311"></a>00311 }
+<a name="l00312"></a>00312 
+<a name="l00313"></a><a class="code" href="classhcan_1_1eds__connection.html#6398f28c1f2f1e5e8eb3696818b3685d">00313</a> <a class="code" href="classhcan_1_1eds__connection.html#6398f28c1f2f1e5e8eb3696818b3685d">eds_connection::~eds_connection</a>()
+<a name="l00314"></a>00314 {
+<a name="l00315"></a>00315 }
+<a name="l00316"></a>00316 
+<a name="l00317"></a><a class="code" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">00317</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">eds_connection::update</a>()
+<a name="l00318"></a>00318 {
+<a name="l00319"></a>00319     m_blocks.clear();
+<a name="l00320"></a>00320 
+<a name="l00321"></a>00321     uint8_t hi,lo,type,size;
+<a name="l00322"></a>00322     uint16_t it = 0;
+<a name="l00323"></a>00323 
+<a name="l00324"></a>00324     <span class="keywordflow">do</span>
+<a name="l00325"></a>00325     {
+<a name="l00326"></a>00326         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677">send_GET_NEXT_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), it &gt;&gt; 8, it);
+<a name="l00327"></a>00327         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935">recv_GET_NEXT_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(),
+<a name="l00328"></a>00328                 &amp;hi,&amp;lo,&amp;type,&amp;size);
+<a name="l00329"></a>00329         it = (hi &lt;&lt; 8) | lo;
+<a name="l00330"></a>00330 
+<a name="l00331"></a>00331         <span class="keywordflow">if</span> (it &amp;&amp; type)
+<a name="l00332"></a>00332         {
+<a name="l00333"></a>00333             m_blocks.push_back(<a class="code" href="classhcan_1_1eds__block.html">eds_block</a>(*<span class="keyword">this</span>,it));
+<a name="l00334"></a>00334         }
+<a name="l00335"></a>00335     }
+<a name="l00336"></a>00336     <span class="keywordflow">while</span> (it != 0);
+<a name="l00337"></a>00337 }
+<a name="l00338"></a>00338 
+<a name="l00339"></a><a class="code" href="classhcan_1_1eds__connection.html#027276a56b0aa4acb505fb18d9fcbd0e">00339</a> <span class="keywordtype">size_t</span> <a class="code" href="classhcan_1_1eds__connection.html#027276a56b0aa4acb505fb18d9fcbd0e">eds_connection::space_free</a>()<span class="keyword"> const</span>
+<a name="l00340"></a>00340 <span class="keyword"></span>{
+<a name="l00341"></a>00341     uint8_t hi,lo,type,size;
+<a name="l00342"></a>00342     uint16_t it = 0;
+<a name="l00343"></a>00343     <span class="keywordtype">size_t</span> free = 0;
+<a name="l00344"></a>00344 
+<a name="l00345"></a>00345     <span class="keywordflow">do</span>
+<a name="l00346"></a>00346     {
+<a name="l00347"></a>00347         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677">send_GET_NEXT_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), it &gt;&gt; 8, it);
+<a name="l00348"></a>00348         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935">recv_GET_NEXT_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(),
+<a name="l00349"></a>00349                 &amp;hi,&amp;lo,&amp;type,&amp;size);
+<a name="l00350"></a>00350         it = (hi &lt;&lt; 8) | lo;
+<a name="l00351"></a>00351 
+<a name="l00352"></a>00352         <span class="keywordflow">if</span> (it &amp;&amp; !type)
+<a name="l00353"></a>00353             free += size;
+<a name="l00354"></a>00354     }
+<a name="l00355"></a>00355     <span class="keywordflow">while</span> (it != 0);
+<a name="l00356"></a>00356 
+<a name="l00357"></a>00357     <span class="keywordflow">return</span> free;
+<a name="l00358"></a>00358 }
+<a name="l00359"></a>00359 
+<a name="l00360"></a><a class="code" href="classhcan_1_1eds__connection.html#10dc396906f96cf0541d4f4de2780434">00360</a> <span class="keywordtype">size_t</span> <a class="code" href="classhcan_1_1eds__connection.html#10dc396906f96cf0541d4f4de2780434">eds_connection::space_used</a>()<span class="keyword"> const</span>
+<a name="l00361"></a>00361 <span class="keyword"></span>{
+<a name="l00362"></a>00362     uint8_t hi,lo,type,size;
+<a name="l00363"></a>00363     uint16_t it = 0;
+<a name="l00364"></a>00364     <span class="keywordtype">size_t</span> used = 0;
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366     <span class="keywordflow">do</span>
+<a name="l00367"></a>00367     {
+<a name="l00368"></a>00368         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677">send_GET_NEXT_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), it &gt;&gt; 8, it);
+<a name="l00369"></a>00369         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935">recv_GET_NEXT_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(),
+<a name="l00370"></a>00370                 &amp;hi,&amp;lo,&amp;type,&amp;size);
+<a name="l00371"></a>00371         it = (hi &lt;&lt; 8) | lo;
+<a name="l00372"></a>00372 
+<a name="l00373"></a>00373         <span class="keywordflow">if</span> (it &amp;&amp; type)
+<a name="l00374"></a>00374             used += size;
+<a name="l00375"></a>00375     }
+<a name="l00376"></a>00376     <span class="keywordflow">while</span> (it != 0);
+<a name="l00377"></a>00377 
+<a name="l00378"></a>00378     <span class="keywordflow">return</span> used;
+<a name="l00379"></a>00379 }
+<a name="l00380"></a>00380 
+<a name="l00381"></a>00381 
+<a name="l00382"></a><a class="code" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">00382</a> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;<a class="code" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">eds_connection::block_by_address</a>(uint16_t address)
+<a name="l00383"></a>00383 {
+<a name="l00384"></a>00384     <span class="keywordflow">for</span> (eds_blocks::iterator i = m_blocks.begin();
+<a name="l00385"></a>00385             i != m_blocks.end(); i++)
+<a name="l00386"></a>00386     {
+<a name="l00387"></a>00387         <span class="keywordflow">if</span> (i-&gt;address() == address)
+<a name="l00388"></a>00388             <span class="keywordflow">return</span> *i;
+<a name="l00389"></a>00389     }
+<a name="l00390"></a>00390 
+<a name="l00391"></a>00391     <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"no eds block with address = "</span>);
+<a name="l00392"></a>00392     <span class="keywordflow">throw</span> e &lt;&lt; address &lt;&lt; <span class="stringliteral">" found"</span>;
+<a name="l00393"></a>00393 }
+<a name="l00394"></a>00394 
+<a name="l00395"></a><a class="code" href="classhcan_1_1eds__connection.html#8f674468e5ea4235480f84c54fa674bc">00395</a> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;<a class="code" href="classhcan_1_1eds__connection.html#8f674468e5ea4235480f84c54fa674bc">eds_connection::create_block</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type_name)
+<a name="l00396"></a>00396 {
+<a name="l00397"></a>00397     <span class="keywordflow">for</span> (vector&lt;eds_block_desc_t&gt;::const_iterator i = 
+<a name="l00398"></a>00398             <a class="code" href="eds__connection_8cc.html#f09a1a6ea304dcfde52efc6d0d928ff2">eds_block_descriptions</a>.begin();
+<a name="l00399"></a>00399             i != <a class="code" href="eds__connection_8cc.html#f09a1a6ea304dcfde52efc6d0d928ff2">eds_block_descriptions</a>.end(); i++)
+<a name="l00400"></a>00400     {
+<a name="l00401"></a>00401         <span class="keywordflow">if</span> (i-&gt;name == type_name)
+<a name="l00402"></a>00402         {
+<a name="l00403"></a>00403             m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#9efc9bbc8475a79143ddf67a430c3e37">send_ALLOCATE_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), 
+<a name="l00404"></a>00404                     i-&gt;type, i-&gt;size);
+<a name="l00405"></a>00405             uint8_t hi,lo;
+<a name="l00406"></a>00406             m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#445acff7e94e8d24b2660f83f5fa1baa">recv_ALLOCATE_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), 
+<a name="l00407"></a>00407                     &amp;hi,&amp;lo);
+<a name="l00408"></a>00408 
+<a name="l00409"></a>00409             uint16_t address = ((hi &lt;&lt; 8) | lo);
+<a name="l00410"></a>00410 
+<a name="l00411"></a>00411             m_blocks.push_back(<a class="code" href="classhcan_1_1eds__block.html">eds_block</a>(*<span class="keyword">this</span>,address));
+<a name="l00412"></a>00412 
+<a name="l00413"></a>00413             <span class="keywordflow">return</span> <a class="code" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">block_by_address</a>(address);
+<a name="l00414"></a>00414         }
+<a name="l00415"></a>00415     }
+<a name="l00416"></a>00416 
+<a name="l00417"></a>00417     <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"no eds block type with name '"</span>);
+<a name="l00418"></a>00418     <span class="keywordflow">throw</span> e &lt;&lt; type_name &lt;&lt; <span class="stringliteral">"' found"</span>;
+<a name="l00419"></a>00419 }
+<a name="l00420"></a>00420 
+<a name="l00421"></a><a class="code" href="classhcan_1_1eds__connection.html#e7f68b11d62a9ac9dc08da2ffb1ca8a2">00421</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__connection.html#e7f68b11d62a9ac9dc08da2ffb1ca8a2">eds_connection::delete_block</a>(<span class="keyword">const</span> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;block)
+<a name="l00422"></a>00422 {
+<a name="l00423"></a>00423     <span class="keywordflow">for</span> (eds_blocks::iterator i = m_blocks.begin();
+<a name="l00424"></a>00424             i != m_blocks.end(); i++)
+<a name="l00425"></a>00425     {
+<a name="l00426"></a>00426         <span class="keywordflow">if</span> (i-&gt;address() == block.<a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>())
+<a name="l00427"></a>00427         {
+<a name="l00428"></a>00428             m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#391c51c8f9d9700e1544fa26a3d14ede">send_FREE_BLOCK</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), 
+<a name="l00429"></a>00429                     block.<a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>() &gt;&gt; 8, block.<a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>());
+<a name="l00430"></a>00430             uint8_t res;
+<a name="l00431"></a>00431             m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#c82ada597dd93384b42e70de6f4cd2c3">recv_FREE_BLOCK_REPLAY</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), 
+<a name="l00432"></a>00432                     &amp;res);
+<a name="l00433"></a>00433 
+<a name="l00434"></a>00434             <span class="keywordflow">if</span> (res == 0)
+<a name="l00435"></a>00435             {
+<a name="l00436"></a>00436                 m_blocks.erase(i);
+<a name="l00437"></a>00437                 <span class="keywordflow">return</span>;
+<a name="l00438"></a>00438             }
+<a name="l00439"></a>00439 
+<a name="l00440"></a>00440             <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"error while deleting eds block at address "</span>);
+<a name="l00441"></a>00441             <span class="keywordflow">throw</span> e &lt;&lt; block.<a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>();
+<a name="l00442"></a>00442         }
+<a name="l00443"></a>00443     }
+<a name="l00444"></a>00444 
+<a name="l00445"></a>00445     <a class="code" href="classhcan_1_1eds__error.html">eds_error</a> e(<span class="stringliteral">"no eds block with address = "</span>);
+<a name="l00446"></a>00446     <span class="keywordflow">throw</span> e &lt;&lt; block.<a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>() &lt;&lt; <span class="stringliteral">" found"</span>;
+<a name="l00447"></a>00447 }
+<a name="l00448"></a>00448 
+<a name="l00449"></a><a class="code" href="classhcan_1_1eds__connection.html#e301ff324b1f11e3a3505dbc50dc3d1d">00449</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__connection.html#e301ff324b1f11e3a3505dbc50dc3d1d">eds_connection::defragment</a>()
+<a name="l00450"></a>00450 {
+<a name="l00451"></a>00451     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#f01561e3c069da9090e128920da5b5e2">send_DEFRAGMENT</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>());
+<a name="l00452"></a>00452 
+<a name="l00453"></a>00453     <a class="code" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">update</a>();
+<a name="l00454"></a>00454 }
+<a name="l00455"></a>00455 
+<a name="l00456"></a><a class="code" href="classhcan_1_1eds__connection.html#9a2de00c965afb707e23f152fb5c87de">00456</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__connection.html#9a2de00c965afb707e23f152fb5c87de">eds_connection::format</a>()
+<a name="l00457"></a>00457 {
+<a name="l00458"></a>00458     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#26eb13a3637ae871edb858a65fb10dea">send_FORMAT</a>(m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>());
+<a name="l00459"></a>00459 
+<a name="l00460"></a>00460     <a class="code" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">update</a>();
+<a name="l00461"></a>00461 }
+<a name="l00462"></a>00462 
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

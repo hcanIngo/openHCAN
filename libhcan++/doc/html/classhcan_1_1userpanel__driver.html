@@ -1,0 +1,1059 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: hcan::userpanel_driver Klassenreferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="hierarchy.html"><span>Klassenhierarchie</span></a></li>
+      <li><a href="functions.html"><span>Datenstruktur-Elemente</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="namespacehcan.html">hcan</a>::<a class="el" href="classhcan_1_1userpanel__driver.html">userpanel_driver</a>
+  </div>
+</div>
+<div class="contents">
+<h1>hcan::userpanel_driver Klassenreferenz</h1><!-- doxytag: class="hcan::userpanel_driver" --><!-- doxytag: inherits="hcan::atmega32_board_driver" --><code>#include &lt;<a class="el" href="userpanel__driver_8h-source.html">userpanel_driver.h</a>&gt;</code>
+<p>
+<div class="dynheader">
+Klassendiagramm für hcan::userpanel_driver:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1userpanel__driver__inherit__graph.png" border="0" usemap="#hcan_1_1userpanel__driver__inherit__map" alt="Inheritance graph"></center>
+<map name="hcan_1_1userpanel__driver__inherit__map">
+<area shape="rect" href="classhcan_1_1atmega32__board__driver.html" title="{hcan::atmega32_board_driver\n||+ atmega32_board_driver()\l+ ~atmega32_board_driver()\l+ exec_command()\l# show_help()\l}" alt="" coords="5,589,219,725"><area shape="rect" href="classhcan_1_1board__driver.html" title="{hcan::board_driver\n|# m_bcon\l# m_tcon\l# m_page_size\l|+ board_driver()\l+ ~board_driver()\l+ exec_command()\l# read_eeprom_byte()\l# read_eeprom_word_le()\l# read_eeprom_word_be()\l# write_eeprom_byte()\l# write_eeprom_word_le()\l# write_eeprom_word_be()\l# cmd_flash()\l# cmd_getaddress()\l# cmd_setaddress()\l# cmd_reset()\l# cmd_getuptime()\l# cmd_getstate()\l# cmd_dump_ee()\l# cmd_setsysloglevel()\l# cmd_loadapp()\l# cmd_bootloader()\l# cmd_show_system()\l# cmd_show_time()\l# show_help()\l# cached_filename()\l# load_crc16_from_board()\l# save_crc16_to_board()\l}" alt="" coords="15,7,209,540"></map>
+<center><font size="2">[<a href="graph_legend.html">Legende</a>]</font></center></div>
+<div class="dynheader">
+Zusammengehörigkeiten von hcan::userpanel_driver:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1userpanel__driver__coll__graph.png" border="0" usemap="#hcan_1_1userpanel__driver__coll__map" alt="Collaboration graph"></center>
+<map name="hcan_1_1userpanel__driver__coll__map">
+<area shape="rect" href="classhcan_1_1atmega32__board__driver.html" title="{hcan::atmega32_board_driver\n||+ atmega32_board_driver()\l+ ~atmega32_board_driver()\l+ exec_command()\l# show_help()\l}" alt="" coords="31,6403,244,6539"><area shape="rect" href="classhcan_1_1board__driver.html" title="{hcan::board_driver\n|# m_bcon\l# m_tcon\l# m_page_size\l|+ board_driver()\l+ ~board_driver()\l+ exec_command()\l# read_eeprom_byte()\l# read_eeprom_word_le()\l# read_eeprom_word_be()\l# write_eeprom_byte()\l# write_eeprom_word_le()\l# write_eeprom_word_be()\l# cmd_flash()\l# cmd_getaddress()\l# cmd_setaddress()\l# cmd_reset()\l# cmd_getuptime()\l# cmd_getstate()\l# cmd_dump_ee()\l# cmd_setsysloglevel()\l# cmd_loadapp()\l# cmd_bootloader()\l# cmd_show_system()\l# cmd_show_time()\l# show_help()\l# cached_filename()\l# load_crc16_from_board()\l# save_crc16_to_board()\l}" alt="" coords="5,5817,200,6351"><area shape="rect" href="classhcan_1_1board__connection.html" title="{hcan::board_connection\n|&#45; m_tcon\l&#45; m_driver\l&#45; m_src\l&#45; m_dst\l|+ board_connection()\l+ ~board_connection()\l+ get_transport_connection()\l+ src()\l+ dst()\l+ get_driver()\l+ tcon()\l}" alt="" coords="133,5509,344,5749"><area shape="rect" href="classhcan_1_1eds__connection.html" title="{hcan::eds_connection\n|&#45; m_bcon\l&#45; m_tcon\l&#45; m_blocks\l|+ eds_connection()\l+ ~eds_connection()\l+ update()\l+ space_free()\l+ space_used()\l+ bcon()\l+ blocks()\l+ block_by_address()\l+ create_block()\l+ delete_block()\l+ defragment()\l+ format()\l}" alt="" coords="224,5929,384,6239"><area shape="rect" href="classhcan_1_1transport__connection.html" title="{hcan::transport_connection\n|&#45; m_socket\l|+ transport_connection()\l+ ~transport_connection()\l+ keep_connection_alive()\l+ ping()\l+ flood_ping()\l+ dump()\l+ templog()\l+ syslog()\l+ send()\l+ recv_frame()\l+ recv_frame_with_timeout()\l+ socket()\l}" alt="" coords="135,5168,343,5443"><area shape="rect" href="classhcan_1_1hcan__transport.html" title="{hcan::hcan_transport\n|# m_hcand_ip\l|+ ~hcan_transport()\l+ send_PING_REQUEST()\l+ recv_PING_REQUEST()\l+ send_PING_REPLAY()\l+ recv_PING_REPLAY()\l+ send_DEVICE_STATE_REQUEST()\l+ recv_DEVICE_STATE_REQUEST()\l+ send_DEVICE_STATE_REPLAY()\l+ recv_DEVICE_STATE_REPLAY()\l+ send_DEVICE_RESET()\l+ recv_DEVICE_RESET()\l+ send_DEVICE_BOOT_STOP()\l+ recv_DEVICE_BOOT_STOP()\l+ send_DEVICE_BOOT_STOP_ACK()\l+ recv_DEVICE_BOOT_STOP_ACK()\l+ send_DEVICE_LOAD_APP()\l+ recv_DEVICE_LOAD_APP()\l+ send_DEVICE_TYPE_REQUEST()\l+ recv_DEVICE_TYPE_REQUEST()\l+ send_DEVICE_TYPE_REPLAY()\l+ recv_DEVICE_TYPE_REPLAY()\l+ send_FLASH_BUFFER_FILL()\l+ recv_FLASH_BUFFER_FILL()\l+ send_FLASH_BUFFER_FILL_ACK()\l+ recv_FLASH_BUFFER_FILL_ACK()\l+ send_FLASH_BUFFER_WRITE()\l+ recv_FLASH_BUFFER_WRITE()\l+ send_FLASH_BUFFER_WRITE_ACK()\l+ recv_FLASH_BUFFER_WRITE_ACK()\l+ send_INTERNAL_EEPROM_WRITE()\l+ recv_INTERNAL_EEPROM_WRITE()\l+ send_INTERNAL_EEPROM_WRITE_ACK()\l+ recv_INTERNAL_EEPROM_WRITE_ACK()\l+ send_INTERNAL_EEPROM_READ_REQUEST()\l+ recv_INTERNAL_EEPROM_READ_REQUEST()\l+ send_INTERNAL_EEPROM_READ_REPLAY()\l+ recv_INTERNAL_EEPROM_READ_REPLAY()\l+ send_INTERNAL_EEPROM_READ_BULK_REQUEST()\l+ recv_INTERNAL_EEPROM_READ_BULK_REQUEST()\l+ send_INTERNAL_EEPROM_READ_BULK_REPLAY()\l+ recv_INTERNAL_EEPROM_READ_BULK_REPLAY()\l+ send_UPTIME_QUERY()\l+ recv_UPTIME_QUERY()\l+ send_UPTIME_REPLAY()\l+ recv_UPTIME_REPLAY()\l+ send_SYSLOG_LEVEL_SET()\l+ recv_SYSLOG_LEVEL_SET()\l+ send_BUILD_VERSION_QUERY()\l+ recv_BUILD_VERSION_QUERY()\l+ send_BUILD_VERSION_REPLAY()\l+ recv_BUILD_VERSION_REPLAY()\l+ send_CAN_EC_QUERY()\l+ recv_CAN_EC_QUERY()\l+ send_CAN_EC_REPLAY()\l+ recv_CAN_EC_REPLAY()\l+ send_FLASH_CRC16_QUERY()\l+ recv_FLASH_CRC16_QUERY()\l+ send_FLASH_CRC16_REPLAY()\l+ recv_FLASH_CRC16_REPLAY()\l+ send_LOOP_THROUGHPUT_QUERY()\l+ recv_LOOP_THROUGHPUT_QUERY()\l+ send_LOOP_THROUGHPUT_REPLAY()\l+ recv_LOOP_THROUGHPUT_REPLAY()\l+ send_RX_RECEIVED_QUERY()\l+ recv_RX_RECEIVED_QUERY()\l+ send_RX_RECEIVED_REPLAY()\l+ recv_RX_RECEIVED_REPLAY()\l+ send_RX_LOST_QUERY()\l+ recv_RX_LOST_QUERY()\l+ send_RX_LOST_REPLAY()\l+ recv_RX_LOST_REPLAY()\l+ send_TX_SENT_QUERY()\l+ recv_TX_SENT_QUERY()\l+ send_TX_SENT_REPLAY()\l+ recv_TX_SENT_REPLAY()\l+ send_TX_DROPPED_QUERY()\l+ recv_TX_DROPPED_QUERY()\l+ send_TX_DROPPED_REPLAY()\l+ recv_TX_DROPPED_REPLAY()\l+ send_RX_TX_STATS_RESET()\l+ recv_RX_TX_STATS_RESET()\l+ send_BOOT_RESETFLAG_LOG()\l+ recv_BOOT_RESETFLAG_LOG()\l+ send_FIRMWARE_CRC16_ERROR()\l+ recv_FIRMWARE_CRC16_ERROR()\l+ send_FIRMWARE_CONFIG_COMPAT_ERROR()\l+ recv_FIRMWARE_CONFIG_COMPAT_ERROR()\l+ send_DUMP_DEBUG_INFO()\l+ recv_DUMP_DEBUG_INFO()\l+ send_TASTER_DOWN()\l+ recv_TASTER_DOWN()\l+ send_TASTER_UP()\l+ recv_TASTER_UP()\l+ send_POWER_GROUP_ON()\l+ recv_POWER_GROUP_ON()\l+ send_POWER_GROUP_OFF()\l+ recv_POWER_GROUP_OFF()\l+ send_POWER_GROUP_STATE_QUERY()\l+ recv_POWER_GROUP_STATE_QUERY()\l+ send_POWER_GROUP_STATE_REPLAY()\l+ recv_POWER_GROUP_STATE_REPLAY()\l+ send_POWER_GROUP_TIMER_QUERY()\l+ recv_POWER_GROUP_TIMER_QUERY()\l+ send_POWER_GROUP_TIMER_REPLAY()\l+ recv_POWER_GROUP_TIMER_REPLAY()\l+ send_POWER_GROUP_SET_TIMER()\l+ recv_POWER_GROUP_SET_TIMER()\l+ send_POWER_GROUP_STATE_INFO()\l+ recv_POWER_GROUP_STATE_INFO()\l+ send_ROLLADEN_POSITION_SET()\l+ recv_ROLLADEN_POSITION_SET()\l+ send_ROLLADEN_POSITION_REQUEST()\l+ recv_ROLLADEN_POSITION_REQUEST()\l+ send_ROLLADEN_POSITION_REPLAY()\l+ recv_ROLLADEN_POSITION_REPLAY()\l+ send_ROLLADEN_DEFINE_POSITION()\l+ recv_ROLLADEN_DEFINE_POSITION()\l+ send_ROLLADEN_POSITION_CHANGED_INFO()\l+ recv_ROLLADEN_POSITION_CHANGED_INFO()\l+ send_1WIRE_DISCOVER()\l+ recv_1WIRE_DISCOVER()\l+ send_1WIRE_DISCOVERED_PART_1()\l+ recv_1WIRE_DISCOVERED_PART_1()\l+ send_1WIRE_DISCOVERED_PART_2()\l+ recv_1WIRE_DISCOVERED_PART_2()\l+ send_1WIRE_ERROR()\l+ recv_1WIRE_ERROR()\l+ send_1WIRE_TEMPERATURE()\l+ recv_1WIRE_TEMPERATURE()\l+ send_1WIRE_TEMPERATURE_QUERY()\l+ recv_1WIRE_TEMPERATURE_QUERY()\l+ send_1WIRE_TEMPERATURE_REPLAY()\l+ recv_1WIRE_TEMPERATURE_REPLAY()\l+ send_REEDKONTAKT_OFFEN()\l+ recv_REEDKONTAKT_OFFEN()\l+ send_REEDKONTAKT_STATE_QUERY()\l+ recv_REEDKONTAKT_STATE_QUERY()\l+ send_REEDKONTAKT_STATE_REPLAY()\l+ recv_REEDKONTAKT_STATE_REPLAY()\l+ send_REEDKONTAKT_STATE_CHANGE()\l+ recv_REEDKONTAKT_STATE_CHANGE()\l+ send_PVSENSOR_STATE_REQUEST()\l+ recv_PVSENSOR_STATE_REQUEST()\l+ send_PVSENSOR_STATE_REPLAY()\l+ recv_PVSENSOR_STATE_REPLAY()\l+ send_PVSENSOR_STATE_CHANGE_INFO()\l+ recv_PVSENSOR_STATE_CHANGE_INFO()\l+ send_HEIZUNG_DETAILS_REQUEST()\l+ recv_HEIZUNG_DETAILS_REQUEST()\l+ send_HEIZUNG_MODE_OFF_DETAILS()\l+ recv_HEIZUNG_MODE_OFF_DETAILS()\l+ send_HEIZUNG_SET_MODE_OFF()\l+ recv_HEIZUNG_SET_MODE_OFF()\l+ send_HEIZUNG_MODE_MANUAL_DETAILS()\l+ recv_HEIZUNG_MODE_MANUAL_DETAILS()\l+ send_HEIZUNG_SET_MODE_MANUAL()\l+ recv_HEIZUNG_SET_MODE_MANUAL()\l+ send_HEIZUNG_MODE_THERMOSTAT_DETAILS()\l+ recv_HEIZUNG_MODE_THERMOSTAT_DETAILS()\l+ send_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()\l+ recv_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()\l+ send_HEIZUNG_MODE_AUTOMATIK_DETAILS()\l+ recv_HEIZUNG_MODE_AUTOMATIK_DETAILS()\l+ send_HEIZUNG_SET_MODE_AUTOMATIK()\l+ recv_HEIZUNG_SET_MODE_AUTOMATIK()\l+ send_HEIZUNG_TIST_REQUEST()\l+ recv_HEIZUNG_TIST_REQUEST()\l+ send_HEIZUNG_TIST_REPLAY()\l+ recv_HEIZUNG_TIST_REPLAY()\l+ send_HEIZUNG_WAERMEBEDARF_INFO()\l+ recv_HEIZUNG_WAERMEBEDARF_INFO()\l+ send_HEIZSTEUERUNG_STATE_REQUEST()\l+ recv_HEIZSTEUERUNG_STATE_REQUEST()\l+ send_HEIZSTEUERUNG_STATE_REPLAY()\l+ recv_HEIZSTEUERUNG_STATE_REPLAY()\l+ send_HEIZSTEUERUNG_STATE_INFO()\l+ recv_HEIZSTEUERUNG_STATE_INFO()\l+ send_HEIZSTEUERUNG_SET_VL()\l+ recv_HEIZSTEUERUNG_SET_VL()\l+ send_HEIZUNG_SOLLTEMP_LINE_REQUEST()\l+ recv_HEIZUNG_SOLLTEMP_LINE_REQUEST()\l+ send_HEIZUNG_SOLLTEMP_LINE_REPLAY()\l+ recv_HEIZUNG_SOLLTEMP_LINE_REPLAY()\l+ send_HEIZUNG_SOLLTEMP_WRITE_LINE()\l+ recv_HEIZUNG_SOLLTEMP_WRITE_LINE()\l+ send_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()\l+ recv_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()\l+ send_CONFIG_RELOAD()\l+ recv_CONFIG_RELOAD()\l+ send_CONFIG_RAM_USAGE_REQUEST()\l+ recv_CONFIG_RAM_USAGE_REQUEST()\l+ send_CONFIG_RAM_USAGE_REPLAY()\l+ recv_CONFIG_RAM_USAGE_REPLAY()\l+ send_ZEITZONE_DETAILS_REQUEST()\l+ recv_ZEITZONE_DETAILS_REQUEST()\l+ send_ZEITZONE_DETAILS_REPLAY()\l+ recv_ZEITZONE_DETAILS_REPLAY()\l+ send_ZEITZONE_WRITE_DETAILS()\l+ recv_ZEITZONE_WRITE_DETAILS()\l+ send_ZEITZONE_WRITE_DETAILS_ACK()\l+ recv_ZEITZONE_WRITE_DETAILS_ACK()\l+ send_ZEITZONE_TEST_MATCH_REQUERST()\l+ recv_ZEITZONE_TEST_MATCH_REQUERST()\l+ send_ZEITZONE_TEST_MATCH_REPLAY()\l+ recv_ZEITZONE_TEST_MATCH_REPLAY()\l+ send_TIME_INFO()\l+ recv_TIME_INFO()\l+ send_DATE_INFO()\l+ recv_DATE_INFO()\l+ send_TIME_REQUEST()\l+ recv_TIME_REQUEST()\l+ send_DATE_REQUEST()\l+ recv_DATE_REQUEST()\l+ send_GET_NEXT_BLOCK()\l+ recv_GET_NEXT_BLOCK()\l+ send_GET_NEXT_BLOCK_REPLAY()\l+ recv_GET_NEXT_BLOCK_REPLAY()\l+ send_DEFRAGMENT()\l+ recv_DEFRAGMENT()\l+ send_ALLOCATE_BLOCK()\l+ recv_ALLOCATE_BLOCK()\l+ send_ALLOCATE_BLOCK_REPLAY()\l+ recv_ALLOCATE_BLOCK_REPLAY()\l+ send_FREE_BLOCK()\l+ recv_FREE_BLOCK()\l+ send_FREE_BLOCK_REPLAY()\l+ recv_FREE_BLOCK_REPLAY()\l+ send_READ_FROM_BLOCK()\l+ recv_READ_FROM_BLOCK()\l+ send_READ_FROM_BLOCK_REPLAY()\l+ recv_READ_FROM_BLOCK_REPLAY()\l+ send_WRITE_TO_BLOCK()\l+ recv_WRITE_TO_BLOCK()\l+ send_WRITE_TO_BLOCK_REPLAY()\l+ recv_WRITE_TO_BLOCK_REPLAY()\l+ send_FORMAT()\l+ recv_FORMAT()\l+ send_STATE_REQUEST()\l+ recv_STATE_REQUEST()\l+ send_STATE_INFO()\l+ recv_STATE_INFO()\l+ send_VOLTAGE_REQUEST()\l+ recv_VOLTAGE_REQUEST()\l+ send_VOLTAGE_REPLAY()\l+ recv_VOLTAGE_REPLAY()\l+ send_VOLTAGE_STATS_REQUEST()\l+ recv_VOLTAGE_STATS_REQUEST()\l+ send_VOLTAGE_STATS_REPLAY()\l+ recv_VOLTAGE_STATS_REPLAY()\l+ send_VOLTAGE_STATS_RESET()\l+ recv_VOLTAGE_STATS_RESET()\l+ send_FA_BLOCK1_INFO()\l+ recv_FA_BLOCK1_INFO()\l+ send_REGLER_DATEN_INFO_FRG1()\l+ recv_REGLER_DATEN_INFO_FRG1()\l+ send_REGLER_DATEN_INFO_FRG2()\l+ recv_REGLER_DATEN_INFO_FRG2()\l+ send_WETTER_INFO()\l+ recv_WETTER_INFO()\l+ send_LICHT_STATS_5MIN()\l+ recv_LICHT_STATS_5MIN()\l+ send_WIND_STATS_5MIN()\l+ recv_WIND_STATS_5MIN()\l+ send_OBJECT_COUNT_REQUEST()\l+ recv_OBJECT_COUNT_REQUEST()\l+ send_OBJECT_COUNT_REPLAY()\l+ recv_OBJECT_COUNT_REPLAY()\l+ send_OBJECT_ATTRIBUTE_REQUEST()\l+ recv_OBJECT_ATTRIBUTE_REQUEST()\l+ send_OBJECT_ATTRIBUTE_REPLAY()\l+ recv_OBJECT_ATTRIBUTE_REPLAY()\l+ send_FIELD_COUNT_REQUEST()\l+ recv_FIELD_COUNT_REQUEST()\l+ send_FIELD_COUNT_REPLAY()\l+ recv_FIELD_COUNT_REPLAY()\l+ send_FIELD_ATTRIBUTE_REQUEST()\l+ recv_FIELD_ATTRIBUTE_REQUEST()\l+ send_FIELD_ATTRIBUTE_REPLAY()\l+ recv_FIELD_ATTRIBUTE_REPLAY()\l+ send_FIELD_READ_REQUEST()\l+ recv_FIELD_READ_REQUEST()\l+ send_FIELD_READ_REPLAY()\l+ recv_FIELD_READ_REPLAY()\l+ send_FIELD_WRITE_REQUEST()\l+ recv_FIELD_WRITE_REQUEST()\l+ send_FIELD_WRITE_REPLAY()\l+ recv_FIELD_WRITE_REPLAY()\l# socket()\l# recv_frame()\l# recv_frame_with_timeout()\l# hcan_transport()\l}" alt="" coords="53,7,424,5116"></map>
+<center><font size="2">[<a href="graph_legend.html">Legende</a>]</font></center></div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Öffentliche Methoden</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1userpanel__driver.html#12f9907955823049bc53b499065ed249">userpanel_driver</a> (<a class="el" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1userpanel__driver.html#4301148e4b3da09cf319212215d156c0">~userpanel_driver</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1userpanel__driver.html#8d5b8957dd6ed7a02830dd4e4d85f4f1">exec_command</a> (<a class="el" href="structhcan_1_1context.html">context</a> &amp;c, const string &amp;)</td></tr>
+
+<tr><td colspan="2"><br><h2>Geschützte Methoden</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1userpanel__driver.html#aa1ca54a8e65174749d36f1edc22c83c">show_help</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#6685e6263d14eff894c311b91f39ee74">read_eeprom_byte</a> (const uint16_t address)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#97bf9d98e395083878bf511f2d1cf864">read_eeprom_word_le</a> (const uint16_t address)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#3d486151eb69ee558b44cd87aeb7a360">read_eeprom_word_be</a> (const uint16_t address)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#00f1a530c7764fef98129a90df514d97">write_eeprom_byte</a> (const uint16_t address, const uint8_t data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#98432dc27020af2fd5084cecd006be47">write_eeprom_word_le</a> (const uint16_t address, const uint16_t data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#cfd9c662344c504dfbd50ba653d005e8">write_eeprom_word_be</a> (const uint16_t address, const uint16_t data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#8f25cead4560d601b7afb0d80c2ceeba">cmd_flash</a> (const string &amp;filename)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#563f3fb84df6cc10b39e65505d3420f7">cmd_getaddress</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#acfbc823a529f0c0ba4a0a9a2da5eca0">cmd_setaddress</a> (const uint16_t address)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#10318a64a0e599689c5e29645369ae96">cmd_reset</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#d85a56a6c4a0e2daee7f170f44881377">cmd_getuptime</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#3b0cdff6199a3965e5e30b6ffc62f56b">cmd_getstate</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#7b52d23a836c9a3e0e3da936f8aa5ada">cmd_dump_ee</a> (uint16_t address)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#c3db1a228d0b4198db2b84f70880f10b">cmd_setsysloglevel</a> (uint16_t level)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#b83e920bb45affa9d3313fb80c24cb03">cmd_loadapp</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#99ce9ed441b270e1e0ef294578552803">cmd_bootloader</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#15c50a808307b7bce15166961c79a3d5">cmd_show_system</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#0f45b107f9b719aa249afdf174b8c2a9">cmd_show_time</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#2072564d0cc87e96af1891016eb69361">cached_filename</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#231e586b2fc5e0947aa5db48bf82bebe">load_crc16_from_board</a> (uint16_t size) const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#61ed709e97aa2d8a0e78277621eb6d52">save_crc16_to_board</a> (uint16_t crc16, uint16_t size)</td></tr>
+
+<tr><td colspan="2"><br><h2>Geschützte Attribute</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1board__connection.html">board_connection</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#ed5c5ebb0dd033e4bd0ad83d6f7ed30c">m_bcon</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#851f4a319f7dd0637e353e1acba8db6b">m_tcon</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__driver.html#f05595f07110f0d67624ccd04a1e1ca6">m_page_size</a></td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+
+<p>Definiert in Zeile <a class="el" href="userpanel__driver_8h-source.html#l00016">16</a> der Datei <a class="el" href="userpanel__driver_8h-source.html">userpanel_driver.h</a>.</p>
+<hr><h2>Beschreibung der Konstruktoren und Destruktoren</h2>
+<a class="anchor" name="12f9907955823049bc53b499065ed249"></a><!-- doxytag: member="hcan::userpanel_driver::userpanel_driver" ref="12f9907955823049bc53b499065ed249" args="(board_connection &amp;bcon)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">userpanel_driver::userpanel_driver           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhcan_1_1board__connection.html">board_connection</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>bcon</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="userpanel__driver_8cc-source.html#l00021">21</a> der Datei <a class="el" href="userpanel__driver_8cc-source.html">userpanel_driver.cc</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="4301148e4b3da09cf319212215d156c0"></a><!-- doxytag: member="hcan::userpanel_driver::~userpanel_driver" ref="4301148e4b3da09cf319212215d156c0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">userpanel_driver::~userpanel_driver           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="userpanel__driver_8cc-source.html#l00027">27</a> der Datei <a class="el" href="userpanel__driver_8cc-source.html">userpanel_driver.cc</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Elementfunktionen</h2>
+<a class="anchor" name="aa1ca54a8e65174749d36f1edc22c83c"></a><!-- doxytag: member="hcan::userpanel_driver::show_help" ref="aa1ca54a8e65174749d36f1edc22c83c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool userpanel_driver::show_help           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Erneute Implementation von <a class="el" href="classhcan_1_1atmega32__board__driver.html#ba60dec3bf7276e1e7f7653adcd4f0ec">hcan::atmega32_board_driver</a>.</p>
+
+<p>Definiert in Zeile <a class="el" href="userpanel__driver_8cc-source.html#l00031">31</a> der Datei <a class="el" href="userpanel__driver_8cc-source.html">userpanel_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="eds__commands_8cc-source.html#l00245">hcan::eds_show_help()</a> und <a class="el" href="atmega32__board__driver_8cc-source.html#l00025">hcan::atmega32_board_driver::show_help()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1userpanel__driver_aa1ca54a8e65174749d36f1edc22c83c_cgraph.png" border="0" usemap="#classhcan_1_1userpanel__driver_aa1ca54a8e65174749d36f1edc22c83c_cgraph_map" alt=""></center>
+<map name="classhcan_1_1userpanel__driver_aa1ca54a8e65174749d36f1edc22c83c_cgraph_map">
+<area shape="rect" href="namespacehcan.html#a77ace1e5abf3476c0bf92316b11d6b2" title="hcan::eds_show_help" alt="" coords="360,5,515,32"><area shape="rect" href="classhcan_1_1atmega32__board__driver.html#ba60dec3bf7276e1e7f7653adcd4f0ec" title="hcan::atmega32_board_driver::show_help" alt="" coords="293,56,581,83"><area shape="rect" href="classhcan_1_1board__driver.html#776fdf66f44ce5bec1e8cb418b3d3ce7" title="hcan::board_driver::show_help" alt="" coords="631,56,844,83"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="8d5b8957dd6ed7a02830dd4e4d85f4f1"></a><!-- doxytag: member="hcan::userpanel_driver::exec_command" ref="8d5b8957dd6ed7a02830dd4e4d85f4f1" args="(context &amp;c, const string &amp;)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool userpanel_driver::exec_command           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhcan_1_1context.html">context</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&nbsp;</td>
+          <td class="paramname"> <em>command</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Erneute Implementation von <a class="el" href="classhcan_1_1atmega32__board__driver.html#18a1c1d56751098f46fd2017b6aba098">hcan::atmega32_board_driver</a>.</p>
+
+<p>Definiert in Zeile <a class="el" href="userpanel__driver_8cc-source.html#l00038">38</a> der Datei <a class="el" href="userpanel__driver_8cc-source.html">userpanel_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="eds__commands_8cc-source.html#l00149">hcan::eds_exec_cmd()</a>, <a class="el" href="atmega32__board__driver_8cc-source.html#l00035">hcan::atmega32_board_driver::exec_command()</a> und <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1userpanel__driver_8d5b8957dd6ed7a02830dd4e4d85f4f1_cgraph.png" border="0" usemap="#classhcan_1_1userpanel__driver_8d5b8957dd6ed7a02830dd4e4d85f4f1_cgraph_map" alt=""></center>
+<map name="classhcan_1_1userpanel__driver_8d5b8957dd6ed7a02830dd4e4d85f4f1_cgraph_map">
+<area shape="rect" href="namespacehcan.html#0303c12b76f9664c59973c296dd547b7" title="hcan::eds_exec_cmd" alt="" coords="416,659,571,685"><area shape="rect" href="classhcan_1_1atmega32__board__driver.html#18a1c1d56751098f46fd2017b6aba098" title="hcan::atmega32_board_driver::exec_command" alt="" coords="332,1469,655,1496"><area shape="rect" href="classhcan_1_1eds__connection.html#e301ff324b1f11e3a3505dbc50dc3d1d" title="hcan::eds_connection::defragment" alt="" coords="708,684,951,711"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="1511,1343,1713,1369"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="1512,1089,1712,1116"><area shape="rect" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048" title="hcan::eds_connection::update" alt="" coords="1084,583,1297,609"><area shape="rect" href="namespacehcan.html#3db58084b75373aa436458df1f5b131e" title="hcan::eds_cmd_create" alt="" coords="747,380,912,407"><area shape="rect" href="namespacehcan.html#802f4d4d4405482737ac819811e22c64" title="hcan::eds_cmd_delete" alt="" coords="747,532,912,559"><area shape="rect" href="namespacehcan.html#39c5a5670c3fe49e49b00fda5de0c7bd" title="hcan::eds_cmd_edit" alt="" coords="755,177,904,204"><area shape="rect" href="namespacehcan.html#de293f02631b9ff24d26310597fec497" title="hcan::eds_cmd_list" alt="" coords="757,1115,901,1141"><area shape="rect" href="namespacehcan.html#fc697055a1e11fd9565f99a04425f324" title="hcan::eds_cmd_set_field" alt="" coords="740,861,919,888"><area shape="rect" href="namespacehcan.html#8b154bf647360c7097d64079e314d3f3" title="hcan::eds_cmd_show_conf" alt="" coords="733,988,925,1015"><area shape="rect" href="structhcan_1_1context.html#d5f3402c26ce04682ce567202e0fc30d" title="hcan::context::reset" alt="" coords="755,329,904,356"><area shape="rect" href="classhcan_1_1hcan__transport.html#26eb13a3637ae871edb858a65fb10dea" title="hcan::hcan_transport::send_FORMAT" alt="" coords="1485,343,1739,369"><area shape="rect" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47" title="hcan::board_connection::tcon" alt="" coords="724,583,935,609"><area shape="rect" href="classhcan_1_1hcan__transport.html#f01561e3c069da9090e128920da5b5e2" title="hcan::hcan_transport::send_DEFRAGMENT" alt="" coords="1467,633,1757,660"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1845,557,2053,584"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1872,507,2027,533"><area shape="rect" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935" title="hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY" alt="" coords="1428,583,1796,609"><area shape="rect" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677" title="hcan::hcan_transport::send_GET_NEXT_BLOCK" alt="" coords="1452,532,1772,559"><area shape="rect" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b" title="hcan::eds_block::address" alt="" coords="1521,456,1703,483"><area shape="rect" href="classhcan_1_1eds__connection.html#8f674468e5ea4235480f84c54fa674bc" title="hcan::eds_connection::create_block" alt="" coords="1067,481,1315,508"><area shape="rect" href="classhcan_1_1eds__block.html#7b849f2c7072a95dab2081070a0f026c" title="hcan::eds_block::type" alt="" coords="1111,279,1271,305"><area shape="rect" href="classhcan_1_1eds__block.html#58655ce4e5f09a6833384d720ed45c06" title="hcan::eds_block::type_name" alt="" coords="1089,177,1292,204"><area shape="rect" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d" title="hcan::eds_connection::block_by_address" alt="" coords="1472,393,1752,420"><area shape="rect" href="classhcan_1_1eds__connection.html#e7f68b11d62a9ac9dc08da2ffb1ca8a2" title="hcan::eds_connection::delete_block" alt="" coords="1067,532,1315,559"><area shape="rect" href="classhcan_1_1eds__connection.html#68312d4d37395014849696321489b93a" title="hcan::eds_connection::blocks" alt="" coords="1087,1039,1295,1065"><area shape="rect" href="classhcan_1_1eds__block.html#06434d1ee09d11e711fba0689616383c" title="hcan::eds_block::field" alt="" coords="1112,1343,1269,1369"><area shape="rect" href="classhcan_1_1eds__block.html#36c9419cc70dc4b19b4ace0713591d76" title="hcan::eds_block::fields" alt="" coords="1109,1089,1272,1116"><area shape="rect" href="classhcan_1_1eds__block.html#d0e51b474ec22ffb7c56efe4cdf7ce1e" title="hcan::eds_block::size" alt="" coords="1113,1140,1268,1167"><area shape="rect" href="classhcan_1_1eds__block.html#b6e52382fc6c2be423fa78b9d2cae65e" title="hcan::eds_block::strfield" alt="" coords="1104,1393,1277,1420"><area shape="rect" href="classhcan_1_1eds__block.html#164bcb7df3fdb8625f0e663a4f4a7d22" title="hcan::eds_block::uint16_field" alt="" coords="1089,1191,1292,1217"><area shape="rect" href="classhcan_1_1eds__block.html#da1c236e1901db66820065283471bd23" title="hcan::eds_block::field_datatype" alt="" coords="1080,836,1301,863"><area shape="rect" href="classhcan_1_1eds__block.html#b7a9e79c7095fe46291d507132f2c87e" title="hcan::eds_block::set_field_str" alt="" coords="1087,887,1295,913"><area shape="rect" href="classhcan_1_1eds__block.html#2300eb17177ead03b2be2859d493209e" title="hcan::eds_block::set_field_uint16" alt="" coords="1075,937,1307,964"><area shape="rect" href="classhcan_1_1eds__block.html#0fa0660d4974f65834754ded3dde3018" title="hcan::eds_block::set_field_uint8" alt="" coords="1079,988,1303,1015"><area shape="rect" href="classhcan_1_1board__driver.html#8f25cead4560d601b7afb0d80c2ceeba" title="hcan::board_driver::cmd_flash" alt="" coords="723,1773,936,1800"><area shape="rect" href="classhcan_1_1board__driver.html#ff0b594b943d1106ebbe1dd46669c8ec" title="hcan::board_driver::exec_command" alt="" coords="704,1469,955,1496"><area shape="rect" href="classhcan_1_1board__driver.html#2072564d0cc87e96af1891016eb69361" title="hcan::board_driver::cached_filename" alt="" coords="1063,2001,1319,2028"><area shape="rect" href="classhcan_1_1board__driver.html#3b0cdff6199a3965e5e30b6ffc62f56b" title="hcan::board_driver::cmd_getstate" alt="" coords="1072,1444,1309,1471"><area shape="rect" href="classhcan_1_1board__driver.html#10318a64a0e599689c5e29645369ae96" title="hcan::board_driver::cmd_reset" alt="" coords="1083,1495,1299,1521"><area shape="rect" href="classihexfile.html#20ca5440de670c8e4dc550f234bc5e90" title="ihexfile::copy_original_to" alt="" coords="1103,1849,1279,1876"><area shape="rect" href="classihexfile.html#9c35d964bedfd00c772adb00ffd0bab9" title="ihexfile::crc16" alt="" coords="1137,1900,1244,1927"><area shape="rect" href="classihexfile.html#bb3995c709c908a590a90429c36dea59" title="ihexfile::data" alt="" coords="1140,1951,1241,1977"><area shape="rect" href="classihexfile.html#fb08f99a4d4572d233e606de2ec61f5e" title="ihexfile::load" alt="" coords="1141,2052,1240,2079"><area shape="rect" href="classhcan_1_1board__driver.html#231e586b2fc5e0947aa5db48bf82bebe" title="hcan::board_driver::load_crc16_from_board" alt="" coords="1041,1545,1340,1572"><area shape="rect" href="classhcan_1_1hcan__transport.html#cb461e348f34327424af9ecb28a7bf52" title="hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK" alt="" coords="1009,1697,1372,1724"><area shape="rect" href="classhcan_1_1hcan__transport.html#af2e0e25286d4d208affdbdd72b36be2" title="hcan::hcan_transport::recv_FLASH_BUFFER_FILL_ACK" alt="" coords="1011,1748,1371,1775"><area shape="rect" href="classhcan_1_1hcan__transport.html#17ba9342e3ef7bf464c0e1f712df1db0" title="hcan::hcan_transport::recv_FLASH_BUFFER_WRITE_ACK" alt="" coords="1004,1799,1377,1825"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="6685e6263d14eff894c311b91f39ee74"></a><!-- doxytag: member="hcan::userpanel_driver::read_eeprom_byte" ref="6685e6263d14eff894c311b91f39ee74" args="(const uint16_t address)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t board_driver::read_eeprom_byte           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00246">246</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l01191">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01088">hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REQUEST()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00615">hcan::board_driver::cmd_dump_ee()</a>, <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>, <a class="el" href="board__driver_8cc-source.html#l00265">hcan::board_driver::read_eeprom_word_be()</a> und <a class="el" href="board__driver_8cc-source.html#l00258">hcan::board_driver::read_eeprom_word_le()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_6685e6263d14eff894c311b91f39ee74_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_6685e6263d14eff894c311b91f39ee74_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_6685e6263d14eff894c311b91f39ee74_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="439,69,641,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#813ac8e23a00a06435f4073b2a908cc3" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY" alt="" coords="332,120,748,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#dd904d519e99d4ce89a4fa1f090264a7" title="hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REQUEST" alt="" coords="323,196,757,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="440,247,640,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="856,5,992,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="805,56,1043,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="859,107,989,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="861,157,987,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="820,208,1028,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="847,259,1001,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="97bf9d98e395083878bf511f2d1cf864"></a><!-- doxytag: member="hcan::userpanel_driver::read_eeprom_word_le" ref="97bf9d98e395083878bf511f2d1cf864" args="(const uint16_t address)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t board_driver::read_eeprom_word_le           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00258">258</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00246">hcan::board_driver::read_eeprom_byte()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00569">hcan::board_driver::cmd_getaddress()</a> und <a class="el" href="board__driver_8cc-source.html#l00575">hcan::board_driver::cmd_setaddress()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_97bf9d98e395083878bf511f2d1cf864_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_97bf9d98e395083878bf511f2d1cf864_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_97bf9d98e395083878bf511f2d1cf864_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#6685e6263d14eff894c311b91f39ee74" title="hcan::board_driver::read_eeprom_byte" alt="" coords="344,159,613,185"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="777,69,980,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#813ac8e23a00a06435f4073b2a908cc3" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY" alt="" coords="671,120,1087,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#dd904d519e99d4ce89a4fa1f090264a7" title="hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REQUEST" alt="" coords="661,196,1096,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="779,247,979,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1195,5,1331,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1144,56,1381,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1197,107,1328,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1200,157,1325,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1159,208,1367,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1185,259,1340,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="3d486151eb69ee558b44cd87aeb7a360"></a><!-- doxytag: member="hcan::userpanel_driver::read_eeprom_word_be" ref="3d486151eb69ee558b44cd87aeb7a360" args="(const uint16_t address)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t board_driver::read_eeprom_word_be           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00265">265</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00246">hcan::board_driver::read_eeprom_byte()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_3d486151eb69ee558b44cd87aeb7a360_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_3d486151eb69ee558b44cd87aeb7a360_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_3d486151eb69ee558b44cd87aeb7a360_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#6685e6263d14eff894c311b91f39ee74" title="hcan::board_driver::read_eeprom_byte" alt="" coords="349,159,619,185"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="783,69,985,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#813ac8e23a00a06435f4073b2a908cc3" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY" alt="" coords="676,120,1092,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#dd904d519e99d4ce89a4fa1f090264a7" title="hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REQUEST" alt="" coords="667,196,1101,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="784,247,984,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1200,5,1336,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1149,56,1387,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1203,107,1333,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1205,157,1331,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1164,208,1372,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1191,259,1345,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="00f1a530c7764fef98129a90df514d97"></a><!-- doxytag: member="hcan::userpanel_driver::write_eeprom_byte" ref="00f1a530c7764fef98129a90df514d97" args="(const uint16_t address, const uint8_t data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::write_eeprom_byte           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00272">272</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l01045">hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00940">hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>, <a class="el" href="board__driver_8cc-source.html#l00288">hcan::board_driver::write_eeprom_word_be()</a> und <a class="el" href="board__driver_8cc-source.html#l00281">hcan::board_driver::write_eeprom_word_le()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_00f1a530c7764fef98129a90df514d97_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_00f1a530c7764fef98129a90df514d97_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_00f1a530c7764fef98129a90df514d97_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="424,69,627,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#6c8e5201fcd3044cf7b07ee7485ccf63" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK" alt="" coords="327,120,724,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#e5e84723b6cf2c6eaacfc6ea1a0dc201" title="hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE" alt="" coords="341,196,709,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="425,247,625,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="824,5,960,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="773,56,1011,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="827,107,957,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="829,157,955,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="788,208,996,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="815,259,969,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="98432dc27020af2fd5084cecd006be47"></a><!-- doxytag: member="hcan::userpanel_driver::write_eeprom_word_le" ref="98432dc27020af2fd5084cecd006be47" args="(const uint16_t address, const uint16_t data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::write_eeprom_word_le           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00281">281</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00272">hcan::board_driver::write_eeprom_byte()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00575">hcan::board_driver::cmd_setaddress()</a> und <a class="el" href="board__driver_8cc-source.html#l00562">hcan::board_driver::save_crc16_to_board()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_98432dc27020af2fd5084cecd006be47_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_98432dc27020af2fd5084cecd006be47_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_98432dc27020af2fd5084cecd006be47_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#00f1a530c7764fef98129a90df514d97" title="hcan::board_driver::write_eeprom_byte" alt="" coords="345,159,615,185"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="763,69,965,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#6c8e5201fcd3044cf7b07ee7485ccf63" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK" alt="" coords="665,120,1063,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#e5e84723b6cf2c6eaacfc6ea1a0dc201" title="hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE" alt="" coords="680,196,1048,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="764,247,964,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1163,5,1299,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1112,56,1349,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1165,107,1296,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1168,157,1293,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1127,208,1335,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1153,259,1308,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="cfd9c662344c504dfbd50ba653d005e8"></a><!-- doxytag: member="hcan::userpanel_driver::write_eeprom_word_be" ref="cfd9c662344c504dfbd50ba653d005e8" args="(const uint16_t address, const uint16_t data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::write_eeprom_word_be           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00288">288</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00272">hcan::board_driver::write_eeprom_byte()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_cfd9c662344c504dfbd50ba653d005e8_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_cfd9c662344c504dfbd50ba653d005e8_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_cfd9c662344c504dfbd50ba653d005e8_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#00f1a530c7764fef98129a90df514d97" title="hcan::board_driver::write_eeprom_byte" alt="" coords="351,159,620,185"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="768,69,971,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#6c8e5201fcd3044cf7b07ee7485ccf63" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK" alt="" coords="671,120,1068,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#e5e84723b6cf2c6eaacfc6ea1a0dc201" title="hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE" alt="" coords="685,196,1053,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="769,247,969,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1168,5,1304,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1117,56,1355,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1171,107,1301,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1173,157,1299,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1132,208,1340,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1159,259,1313,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="8f25cead4560d601b7afb0d80c2ceeba"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_flash" ref="8f25cead4560d601b7afb0d80c2ceeba" args="(const string &amp;filename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_flash           </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&nbsp;</td>
+          <td class="paramname"> <em>filename</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Inkrementelles Flashen:<p>
+Es werden nur die seit dem letzten Flashen geaenderten Bloecke uebertragen und in den Flash geschrieben:<p>
+<ul>
+<li>nach jedem erfolgreichen Flashen wird das Hexfile im Flash-Cache gespeichert</li><li>vor jedem Flashen wird die CRC16 Checksumme des Cache-Files mit der CRC16 Checksumme der Firmware auf dem Board, ebenso die (padded) Groessen verglichen</li><li>stimmen sie ueberein, so ist die Wahrscheinlichkeit sehr sehr gross, dass die Firmware auf dem Board die gecachete Firmware ist</li><li>beim Flashen wird nun jeder Block vor der Uebertragung geprueft; ist er gleich, wird er uebersprungen</li><li>am Ende werden nochmals die CRC16 Summen verglichen </li></ul>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00342">342</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00295">hcan::board_driver::cached_filename()</a>, <a class="el" href="board__driver_8cc-source.html#l00605">hcan::board_driver::cmd_getstate()</a>, <a class="el" href="board__driver_8cc-source.html#l00589">hcan::board_driver::cmd_reset()</a>, <a class="el" href="ihexfile_8cc-source.html#l00074">ihexfile::copy_original_to()</a>, <a class="el" href="ihexfile_8cc-source.html#l00129">ihexfile::crc16()</a>, <a class="el" href="ihexfile_8cc-source.html#l00102">ihexfile::data()</a>, <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8cc-source.html#l00021">incremental_flash</a>, <a class="el" href="ihexfile_8cc-source.html#l00029">ihexfile::load()</a>, <a class="el" href="board__driver_8cc-source.html#l00551">hcan::board_driver::load_crc16_from_board()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00042">hcan::board_driver::m_page_size</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l00390">hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00756">hcan::hcan_transport::recv_FLASH_BUFFER_FILL_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00894">hcan::hcan_transport::recv_FLASH_BUFFER_WRITE_ACK()</a>, <a class="el" href="board__driver_8cc-source.html#l00562">hcan::board_driver::save_crc16_to_board()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00315">hcan::hcan_transport::send_DEVICE_BOOT_STOP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00427">hcan::hcan_transport::send_DEVICE_LOAD_APP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00634">hcan::hcan_transport::send_FLASH_BUFFER_FILL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00799">hcan::hcan_transport::send_FLASH_BUFFER_WRITE()</a>, <a class="el" href="ihexfile_8cc-source.html#l00107">ihexfile::size()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="atmega8__board__driver_8cc-source.html#l00034">hcan::atmega8_board_driver::exec_command()</a> und <a class="el" href="atmega32__board__driver_8cc-source.html#l00035">hcan::atmega32_board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_8f25cead4560d601b7afb0d80c2ceeba_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_8f25cead4560d601b7afb0d80c2ceeba_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_8f25cead4560d601b7afb0d80c2ceeba_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#2072564d0cc87e96af1891016eb69361" title="hcan::board_driver::cached_filename" alt="" coords="617,221,873,248"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="1384,373,1587,400"><area shape="rect" href="classhcan_1_1board__driver.html#3b0cdff6199a3965e5e30b6ffc62f56b" title="hcan::board_driver::cmd_getstate" alt="" coords="969,576,1207,603"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="1385,728,1585,755"><area shape="rect" href="classhcan_1_1board__driver.html#10318a64a0e599689c5e29645369ae96" title="hcan::board_driver::cmd_reset" alt="" coords="980,728,1196,755"><area shape="rect" href="classihexfile.html#20ca5440de670c8e4dc550f234bc5e90" title="ihexfile::copy_original_to" alt="" coords="321,323,497,349"><area shape="rect" href="classihexfile.html#9c35d964bedfd00c772adb00ffd0bab9" title="ihexfile::crc16" alt="" coords="356,373,463,400"><area shape="rect" href="classihexfile.html#bb3995c709c908a590a90429c36dea59" title="ihexfile::data" alt="" coords="359,424,460,451"><area shape="rect" href="classihexfile.html#fb08f99a4d4572d233e606de2ec61f5e" title="ihexfile::load" alt="" coords="360,525,459,552"><area shape="rect" href="classihexfile.html#90f14441556cbd969dbf93509295cbc7" title="ihexfile::size" alt="" coords="696,475,795,501"><area shape="rect" href="classhcan_1_1board__driver.html#231e586b2fc5e0947aa5db48bf82bebe" title="hcan::board_driver::load_crc16_from_board" alt="" coords="939,373,1237,400"><area shape="rect" href="classhcan_1_1hcan__transport.html#cb461e348f34327424af9ecb28a7bf52" title="hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK" alt="" coords="1304,221,1667,248"><area shape="rect" href="classhcan_1_1hcan__transport.html#af2e0e25286d4d208affdbdd72b36be2" title="hcan::hcan_transport::recv_FLASH_BUFFER_FILL_ACK" alt="" coords="1305,272,1665,299"><area shape="rect" href="classhcan_1_1hcan__transport.html#17ba9342e3ef7bf464c0e1f712df1db0" title="hcan::hcan_transport::recv_FLASH_BUFFER_WRITE_ACK" alt="" coords="1299,525,1672,552"><area shape="rect" href="classhcan_1_1board__driver.html#61ed709e97aa2d8a0e78277621eb6d52" title="hcan::board_driver::save_crc16_to_board" alt="" coords="268,627,551,653"><area shape="rect" href="classhcan_1_1hcan__transport.html#2b586924333338ea4e920fc1bbcfd92e" title="hcan::hcan_transport::send_DEVICE_BOOT_STOP" alt="" coords="1319,981,1652,1008"><area shape="rect" href="classhcan_1_1hcan__transport.html#f247934136110a42671fc12114e4e98c" title="hcan::hcan_transport::send_DEVICE_LOAD_APP" alt="" coords="1323,829,1648,856"><area shape="rect" href="classhcan_1_1hcan__transport.html#abde9b7ccf9ee993654daed9cfdd6130" title="hcan::hcan_transport::send_FLASH_BUFFER_FILL" alt="" coords="1320,880,1651,907"><area shape="rect" href="classhcan_1_1hcan__transport.html#0c3f6b230fa9b87a71c1fd511fd05964" title="hcan::hcan_transport::send_FLASH_BUFFER_WRITE" alt="" coords="1313,931,1657,957"><area shape="rect" href="classhcan_1_1hcan__transport.html#78fb1a82f40ef597da1a88a2e6bad0c3" title="hcan::hcan_transport::recv_DEVICE_STATE_REPLAY" alt="" coords="1313,424,1657,451"><area shape="rect" href="classhcan_1_1hcan__transport.html#6dbdef3d17d46d41f5732d19f80fdbb7" title="hcan::hcan_transport::send_DEVICE_STATE_REQUEST" alt="" coords="1304,627,1667,653"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1784,399,1920,425"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1733,449,1971,476"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1787,297,1917,324"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1789,348,1915,375"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1748,779,1956,805"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1775,829,1929,856"><area shape="rect" href="classhcan_1_1hcan__transport.html#70999ffdae95b2718551d18162654cd5" title="hcan::hcan_transport::send_DEVICE_RESET" alt="" coords="1337,779,1633,805"><area shape="rect" href="ihexfile_8cc.html#643d7d1e45bad20a20ddd3179ee5c9a0" title="str2hex" alt="" coords="711,525,780,552"><area shape="rect" href="classhcan_1_1hcan__transport.html#e610cf159bec6a38f34080385364999b" title="hcan::hcan_transport::recv_FLASH_CRC16_REPLAY" alt="" coords="1313,323,1657,349"><area shape="rect" href="classhcan_1_1hcan__transport.html#be7a78f130cddf3f7c2391ac2c0d24df" title="hcan::hcan_transport::send_FLASH_CRC16_QUERY" alt="" coords="1313,576,1657,603"><area shape="rect" href="classhcan_1_1board__driver.html#98432dc27020af2fd5084cecd006be47" title="hcan::board_driver::write_eeprom_word_le" alt="" coords="600,627,891,653"><area shape="rect" href="classhcan_1_1board__driver.html#00f1a530c7764fef98129a90df514d97" title="hcan::board_driver::write_eeprom_byte" alt="" coords="953,627,1223,653"><area shape="rect" href="classhcan_1_1hcan__transport.html#6c8e5201fcd3044cf7b07ee7485ccf63" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK" alt="" coords="1287,475,1684,501"><area shape="rect" href="classhcan_1_1hcan__transport.html#e5e84723b6cf2c6eaacfc6ea1a0dc201" title="hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE" alt="" coords="1301,677,1669,704"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="563f3fb84df6cc10b39e65505d3420f7"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_getaddress" ref="563f3fb84df6cc10b39e65505d3420f7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t board_driver::cmd_getaddress           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00569">569</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00258">hcan::board_driver::read_eeprom_word_le()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_563f3fb84df6cc10b39e65505d3420f7_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_563f3fb84df6cc10b39e65505d3420f7_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_563f3fb84df6cc10b39e65505d3420f7_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#97bf9d98e395083878bf511f2d1cf864" title="hcan::board_driver::read_eeprom_word_le" alt="" coords="311,159,599,185"><area shape="rect" href="classhcan_1_1board__driver.html#6685e6263d14eff894c311b91f39ee74" title="hcan::board_driver::read_eeprom_byte" alt="" coords="648,159,917,185"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="1081,69,1284,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#813ac8e23a00a06435f4073b2a908cc3" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY" alt="" coords="975,120,1391,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#dd904d519e99d4ce89a4fa1f090264a7" title="hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REQUEST" alt="" coords="965,196,1400,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="1083,247,1283,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1499,5,1635,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1448,56,1685,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1501,107,1632,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1504,157,1629,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1463,208,1671,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1489,259,1644,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="acfbc823a529f0c0ba4a0a9a2da5eca0"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_setaddress" ref="acfbc823a529f0c0ba4a0a9a2da5eca0" args="(const uint16_t address)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_setaddress           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00575">575</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00258">hcan::board_driver::read_eeprom_word_le()</a> und <a class="el" href="board__driver_8cc-source.html#l00281">hcan::board_driver::write_eeprom_word_le()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_acfbc823a529f0c0ba4a0a9a2da5eca0_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_acfbc823a529f0c0ba4a0a9a2da5eca0_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_acfbc823a529f0c0ba4a0a9a2da5eca0_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#97bf9d98e395083878bf511f2d1cf864" title="hcan::board_driver::read_eeprom_word_le" alt="" coords="311,183,599,209"><area shape="rect" href="classhcan_1_1board__driver.html#98432dc27020af2fd5084cecd006be47" title="hcan::board_driver::write_eeprom_word_le" alt="" coords="309,233,600,260"><area shape="rect" href="classhcan_1_1board__driver.html#6685e6263d14eff894c311b91f39ee74" title="hcan::board_driver::read_eeprom_byte" alt="" coords="649,183,919,209"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="1084,208,1287,235"><area shape="rect" href="classhcan_1_1hcan__transport.html#813ac8e23a00a06435f4073b2a908cc3" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY" alt="" coords="977,56,1393,83"><area shape="rect" href="classhcan_1_1hcan__transport.html#dd904d519e99d4ce89a4fa1f090264a7" title="hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REQUEST" alt="" coords="968,157,1403,184"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="1085,259,1285,285"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1501,5,1637,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1451,56,1688,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1504,107,1635,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1507,157,1632,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1465,221,1673,248"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1492,297,1647,324"><area shape="rect" href="classhcan_1_1board__driver.html#00f1a530c7764fef98129a90df514d97" title="hcan::board_driver::write_eeprom_byte" alt="" coords="649,233,919,260"><area shape="rect" href="classhcan_1_1hcan__transport.html#6c8e5201fcd3044cf7b07ee7485ccf63" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK" alt="" coords="987,107,1384,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#e5e84723b6cf2c6eaacfc6ea1a0dc201" title="hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE" alt="" coords="1001,309,1369,336"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="10318a64a0e599689c5e29645369ae96"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_reset" ref="10318a64a0e599689c5e29645369ae96" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_reset           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00589">589</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l00261">hcan::hcan_transport::send_DEVICE_RESET()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00640">hcan::board_driver::cmd_bootloader()</a>, <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a> und <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_10318a64a0e599689c5e29645369ae96_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_10318a64a0e599689c5e29645369ae96_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_10318a64a0e599689c5e29645369ae96_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="317,5,520,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#70999ffdae95b2718551d18162654cd5" title="hcan::hcan_transport::send_DEVICE_RESET" alt="" coords="271,56,567,83"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="319,107,519,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="616,31,824,57"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="643,81,797,108"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="d85a56a6c4a0e2daee7f170f44881377"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_getuptime" ref="d85a56a6c4a0e2daee7f170f44881377" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t board_driver::cmd_getuptime           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00595">595</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l01552">hcan::hcan_transport::recv_UPTIME_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01449">hcan::hcan_transport::send_UPTIME_QUERY()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_d85a56a6c4a0e2daee7f170f44881377_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_d85a56a6c4a0e2daee7f170f44881377_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_d85a56a6c4a0e2daee7f170f44881377_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="353,69,556,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#999d1da90060691942802f8dfde1bd30" title="hcan::hcan_transport::recv_UPTIME_REPLAY" alt="" coords="305,120,604,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#78921fd76e5fa8537b038225d8381bab" title="hcan::hcan_transport::send_UPTIME_QUERY" alt="" coords="305,196,604,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="355,247,555,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="704,5,840,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="653,56,891,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="707,107,837,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="709,157,835,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="668,208,876,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="695,259,849,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="3b0cdff6199a3965e5e30b6ffc62f56b"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_getstate" ref="3b0cdff6199a3965e5e30b6ffc62f56b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t board_driver::cmd_getstate           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00605">605</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l00219">hcan::hcan_transport::recv_DEVICE_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00136">hcan::hcan_transport::send_DEVICE_STATE_REQUEST()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a> und <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_3b0cdff6199a3965e5e30b6ffc62f56b_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_3b0cdff6199a3965e5e30b6ffc62f56b_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_3b0cdff6199a3965e5e30b6ffc62f56b_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="371,69,573,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#78fb1a82f40ef597da1a88a2e6bad0c3" title="hcan::hcan_transport::recv_DEVICE_STATE_REPLAY" alt="" coords="300,120,644,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#6dbdef3d17d46d41f5732d19f80fdbb7" title="hcan::hcan_transport::send_DEVICE_STATE_REQUEST" alt="" coords="291,196,653,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="372,247,572,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="752,5,888,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="701,56,939,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="755,107,885,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="757,157,883,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="716,208,924,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="743,259,897,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="7b52d23a836c9a3e0e3da936f8aa5ada"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_dump_ee" ref="7b52d23a836c9a3e0e3da936f8aa5ada" args="(uint16_t address)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_dump_ee           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00615">615</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00246">hcan::board_driver::read_eeprom_byte()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_7b52d23a836c9a3e0e3da936f8aa5ada_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_7b52d23a836c9a3e0e3da936f8aa5ada_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_7b52d23a836c9a3e0e3da936f8aa5ada_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#6685e6263d14eff894c311b91f39ee74" title="hcan::board_driver::read_eeprom_byte" alt="" coords="299,159,568,185"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="732,69,935,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#813ac8e23a00a06435f4073b2a908cc3" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY" alt="" coords="625,120,1041,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#dd904d519e99d4ce89a4fa1f090264a7" title="hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REQUEST" alt="" coords="616,196,1051,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="733,247,933,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1149,5,1285,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1099,56,1336,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1152,107,1283,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1155,157,1280,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1113,208,1321,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1140,259,1295,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="c3db1a228d0b4198db2b84f70880f10b"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_setsysloglevel" ref="c3db1a228d0b4198db2b84f70880f10b" args="(uint16_t level)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_setsysloglevel           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>level</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00584">584</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l01611">hcan::hcan_transport::send_SYSLOG_LEVEL_SET()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_c3db1a228d0b4198db2b84f70880f10b_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_c3db1a228d0b4198db2b84f70880f10b_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_c3db1a228d0b4198db2b84f70880f10b_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="391,5,593,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#01c59630522dfb5a4feff22bd50a681b" title="hcan::hcan_transport::send_SYSLOG_LEVEL_SET" alt="" coords="327,56,657,83"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="392,107,592,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="707,31,915,57"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="733,81,888,108"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="b83e920bb45affa9d3313fb80c24cb03"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_loadapp" ref="b83e920bb45affa9d3313fb80c24cb03" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_loadapp           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00635">635</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l00427">hcan::hcan_transport::send_DEVICE_LOAD_APP()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_b83e920bb45affa9d3313fb80c24cb03_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_b83e920bb45affa9d3313fb80c24cb03_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_b83e920bb45affa9d3313fb80c24cb03_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="349,5,552,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#f247934136110a42671fc12114e4e98c" title="hcan::hcan_transport::send_DEVICE_LOAD_APP" alt="" coords="288,56,613,83"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="351,107,551,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="661,31,869,57"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="688,81,843,108"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="99ce9ed441b270e1e0ef294578552803"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_bootloader" ref="99ce9ed441b270e1e0ef294578552803" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_bootloader           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00640">640</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00589">hcan::board_driver::cmd_reset()</a>, <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l00390">hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00315">hcan::hcan_transport::send_DEVICE_BOOT_STOP()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_99ce9ed441b270e1e0ef294578552803_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_99ce9ed441b270e1e0ef294578552803_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_99ce9ed441b270e1e0ef294578552803_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#10318a64a0e599689c5e29645369ae96" title="hcan::board_driver::cmd_reset" alt="" coords="381,56,597,83"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="787,5,989,32"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="788,107,988,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#cb461e348f34327424af9ecb28a7bf52" title="hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK" alt="" coords="308,259,671,285"><area shape="rect" href="classhcan_1_1hcan__transport.html#2b586924333338ea4e920fc1bbcfd92e" title="hcan::hcan_transport::send_DEVICE_BOOT_STOP" alt="" coords="721,157,1055,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#70999ffdae95b2718551d18162654cd5" title="hcan::hcan_transport::send_DEVICE_RESET" alt="" coords="740,56,1036,83"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1104,69,1312,96"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1131,145,1285,172"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="820,208,956,235"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="769,259,1007,285"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="823,309,953,336"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="825,360,951,387"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="15c50a808307b7bce15166961c79a3d5"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_show_system" ref="15c50a808307b7bce15166961c79a3d5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_show_system           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00648">648</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l01765">hcan::hcan_transport::recv_BUILD_VERSION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00573">hcan::hcan_transport::recv_DEVICE_TYPE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01675">hcan::hcan_transport::send_BUILD_VERSION_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00483">hcan::hcan_transport::send_DEVICE_TYPE_REQUEST()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_15c50a808307b7bce15166961c79a3d5_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_15c50a808307b7bce15166961c79a3d5_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_15c50a808307b7bce15166961c79a3d5_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="400,31,603,57"><area shape="rect" href="classhcan_1_1hcan__transport.html#bf6553585190209195aa4b9e7316f25f" title="hcan::hcan_transport::recv_BUILD_VERSION_REPLAY" alt="" coords="324,81,679,108"><area shape="rect" href="classhcan_1_1hcan__transport.html#6534aced9169871e8f6ee48407aa5e9c" title="hcan::hcan_transport::recv_DEVICE_TYPE_REPLAY" alt="" coords="333,132,669,159"><area shape="rect" href="classhcan_1_1hcan__transport.html#42e877649cebe60a79db69384c93ff7b" title="hcan::hcan_transport::send_BUILD_VERSION_QUERY" alt="" coords="324,183,679,209"><area shape="rect" href="classhcan_1_1hcan__transport.html#c726d888becb5c9a4b1f7fce65d0d64b" title="hcan::hcan_transport::send_DEVICE_TYPE_REQUEST" alt="" coords="324,233,679,260"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="401,284,601,311"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="779,5,915,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="728,56,965,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="781,107,912,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="784,157,909,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="743,208,951,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="769,259,924,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="0f45b107f9b719aa249afdf174b8c2a9"></a><!-- doxytag: member="hcan::userpanel_driver::cmd_show_time" ref="0f45b107f9b719aa249afdf174b8c2a9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::cmd_show_time           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00683">683</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l08348">hcan::hcan_transport::recv_DATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08237">hcan::hcan_transport::recv_TIME_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08458">hcan::hcan_transport::send_DATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08404">hcan::hcan_transport::send_TIME_REQUEST()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_0f45b107f9b719aa249afdf174b8c2a9_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_0f45b107f9b719aa249afdf174b8c2a9_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_0f45b107f9b719aa249afdf174b8c2a9_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="357,31,560,57"><area shape="rect" href="classhcan_1_1hcan__transport.html#8ed0045267ccb0f0fa908f9492988739" title="hcan::hcan_transport::recv_DATE_INFO" alt="" coords="324,81,593,108"><area shape="rect" href="classhcan_1_1hcan__transport.html#5db68c9b1dc2b641b79e99e164070d15" title="hcan::hcan_transport::recv_TIME_INFO" alt="" coords="327,132,591,159"><area shape="rect" href="classhcan_1_1hcan__transport.html#9f9b79b1a5e0bbf490b5bf094f00c3ed" title="hcan::hcan_transport::send_DATE_REQUEST" alt="" coords="307,183,611,209"><area shape="rect" href="classhcan_1_1hcan__transport.html#5dca6ecdc3b5d8dc038cf6fba9af076b" title="hcan::hcan_transport::send_TIME_REQUEST" alt="" coords="309,233,608,260"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="359,284,559,311"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="709,5,845,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="659,56,896,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="712,107,843,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="715,157,840,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="673,208,881,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="700,259,855,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="2072564d0cc87e96af1891016eb69361"></a><!-- doxytag: member="hcan::userpanel_driver::cached_filename" ref="2072564d0cc87e96af1891016eb69361" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string board_driver::cached_filename           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [protected, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00295">295</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a> und <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_2072564d0cc87e96af1891016eb69361_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_2072564d0cc87e96af1891016eb69361_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_2072564d0cc87e96af1891016eb69361_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="309,5,512,32"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="231e586b2fc5e0947aa5db48bf82bebe"></a><!-- doxytag: member="hcan::userpanel_driver::load_crc16_from_board" ref="231e586b2fc5e0947aa5db48bf82bebe" args="(uint16_t size) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t board_driver::load_crc16_from_board           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>size</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [protected, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00551">551</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="board__driver_8h-source.html#l00040">hcan::board_driver::m_bcon</a>, <a class="el" href="board__driver_8h-source.html#l00041">hcan::board_driver::m_tcon</a>, <a class="el" href="hcan__transport_8cc-source.html#l02059">hcan::hcan_transport::recv_FLASH_CRC16_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01951">hcan::hcan_transport::send_FLASH_CRC16_QUERY()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_231e586b2fc5e0947aa5db48bf82bebe_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_231e586b2fc5e0947aa5db48bf82bebe_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_231e586b2fc5e0947aa5db48bf82bebe_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="423,69,625,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#e610cf159bec6a38f34080385364999b" title="hcan::hcan_transport::recv_FLASH_CRC16_REPLAY" alt="" coords="352,120,696,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#be7a78f130cddf3f7c2391ac2c0d24df" title="hcan::hcan_transport::send_FLASH_CRC16_QUERY" alt="" coords="352,196,696,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="424,247,624,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="795,5,931,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="744,56,981,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="797,107,928,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="800,157,925,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="759,208,967,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="785,259,940,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="61ed709e97aa2d8a0e78277621eb6d52"></a><!-- doxytag: member="hcan::userpanel_driver::save_crc16_to_board" ref="61ed709e97aa2d8a0e78277621eb6d52" args="(uint16_t crc16, uint16_t size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_driver::save_crc16_to_board           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>crc16</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>size</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [protected, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8cc-source.html#l00562">562</a> der Datei <a class="el" href="board__driver_8cc-source.html">board_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__driver_8cc-source.html#l00281">hcan::board_driver::write_eeprom_word_le()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__driver_61ed709e97aa2d8a0e78277621eb6d52_cgraph.png" border="0" usemap="#classhcan_1_1board__driver_61ed709e97aa2d8a0e78277621eb6d52_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__driver_61ed709e97aa2d8a0e78277621eb6d52_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__driver.html#98432dc27020af2fd5084cecd006be47" title="hcan::board_driver::write_eeprom_word_le" alt="" coords="339,159,629,185"><area shape="rect" href="classhcan_1_1board__driver.html#00f1a530c7764fef98129a90df514d97" title="hcan::board_driver::write_eeprom_byte" alt="" coords="679,159,948,185"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="1096,69,1299,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#6c8e5201fcd3044cf7b07ee7485ccf63" title="hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK" alt="" coords="999,120,1396,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#e5e84723b6cf2c6eaacfc6ea1a0dc201" title="hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE" alt="" coords="1013,196,1381,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="1097,247,1297,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1496,5,1632,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1445,56,1683,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1499,107,1629,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1501,157,1627,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1460,208,1668,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1487,259,1641,285"></map>
+</div>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Datenelemente</h2>
+<a class="anchor" name="ed5c5ebb0dd033e4bd0ad83d6f7ed30c"></a><!-- doxytag: member="hcan::userpanel_driver::m_bcon" ref="ed5c5ebb0dd033e4bd0ad83d6f7ed30c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1board__connection.html">board_connection</a>&amp; <a class="el" href="classhcan_1_1board__driver.html#ed5c5ebb0dd033e4bd0ad83d6f7ed30c">hcan::board_driver::m_bcon</a><code> [protected, inherited]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8h-source.html#l00040">40</a> der Datei <a class="el" href="board__driver_8h-source.html">board_driver.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00295">hcan::board_driver::cached_filename()</a>, <a class="el" href="board__driver_8cc-source.html#l00640">hcan::board_driver::cmd_bootloader()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00140">hcan::controller1612_driver::cmd_config_reload()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00095">hcan::controller1612_driver::cmd_discover_1wire()</a>, <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a>, <a class="el" href="board__driver_8cc-source.html#l00605">hcan::board_driver::cmd_getstate()</a>, <a class="el" href="board__driver_8cc-source.html#l00595">hcan::board_driver::cmd_getuptime()</a>, <a class="el" href="board__driver_8cc-source.html#l00635">hcan::board_driver::cmd_loadapp()</a>, <a class="el" href="board__driver_8cc-source.html#l00589">hcan::board_driver::cmd_reset()</a>, <a class="el" href="board__driver_8cc-source.html#l00584">hcan::board_driver::cmd_setsysloglevel()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00129">hcan::controller1612_driver::cmd_show_ram_usage()</a>, <a class="el" href="board__driver_8cc-source.html#l00648">hcan::board_driver::cmd_show_system()</a>, <a class="el" href="board__driver_8cc-source.html#l00683">hcan::board_driver::cmd_show_time()</a>, <a class="el" href="usv__driver_8cc-source.html#l00070">hcan::usv_driver::exec_command()</a>, <a class="el" href="userpanel__driver_8cc-source.html#l00038">exec_command()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00049">hcan::controller1612_driver::exec_command()</a>, <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>, <a class="el" href="board__driver_8cc-source.html#l00551">hcan::board_driver::load_crc16_from_board()</a>, <a class="el" href="board__driver_8cc-source.html#l00246">hcan::board_driver::read_eeprom_byte()</a> und <a class="el" href="board__driver_8cc-source.html#l00272">hcan::board_driver::write_eeprom_byte()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="851f4a319f7dd0637e353e1acba8db6b"></a><!-- doxytag: member="hcan::userpanel_driver::m_tcon" ref="851f4a319f7dd0637e353e1acba8db6b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a>&amp; <a class="el" href="classhcan_1_1board__driver.html#851f4a319f7dd0637e353e1acba8db6b">hcan::board_driver::m_tcon</a><code> [protected, inherited]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8h-source.html#l00041">41</a> der Datei <a class="el" href="board__driver_8h-source.html">board_driver.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00640">hcan::board_driver::cmd_bootloader()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00140">hcan::controller1612_driver::cmd_config_reload()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00095">hcan::controller1612_driver::cmd_discover_1wire()</a>, <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a>, <a class="el" href="board__driver_8cc-source.html#l00605">hcan::board_driver::cmd_getstate()</a>, <a class="el" href="board__driver_8cc-source.html#l00595">hcan::board_driver::cmd_getuptime()</a>, <a class="el" href="board__driver_8cc-source.html#l00635">hcan::board_driver::cmd_loadapp()</a>, <a class="el" href="board__driver_8cc-source.html#l00589">hcan::board_driver::cmd_reset()</a>, <a class="el" href="board__driver_8cc-source.html#l00584">hcan::board_driver::cmd_setsysloglevel()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00129">hcan::controller1612_driver::cmd_show_ram_usage()</a>, <a class="el" href="board__driver_8cc-source.html#l00648">hcan::board_driver::cmd_show_system()</a>, <a class="el" href="board__driver_8cc-source.html#l00683">hcan::board_driver::cmd_show_time()</a>, <a class="el" href="usv__driver_8cc-source.html#l00070">hcan::usv_driver::exec_command()</a>, <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>, <a class="el" href="board__driver_8cc-source.html#l00551">hcan::board_driver::load_crc16_from_board()</a>, <a class="el" href="board__driver_8cc-source.html#l00246">hcan::board_driver::read_eeprom_byte()</a> und <a class="el" href="board__driver_8cc-source.html#l00272">hcan::board_driver::write_eeprom_byte()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="f05595f07110f0d67624ccd04a1e1ca6"></a><!-- doxytag: member="hcan::userpanel_driver::m_page_size" ref="f05595f07110f0d67624ccd04a1e1ca6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t <a class="el" href="classhcan_1_1board__driver.html#f05595f07110f0d67624ccd04a1e1ca6">hcan::board_driver::m_page_size</a><code> [protected, inherited]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__driver_8h-source.html#l00042">42</a> der Datei <a class="el" href="board__driver_8h-source.html">board_driver.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="atmega32__board__driver_8cc-source.html#l00015">hcan::atmega32_board_driver::atmega32_board_driver()</a>, <a class="el" href="atmega8__board__driver_8cc-source.html#l00014">hcan::atmega8_board_driver::atmega8_board_driver()</a> und <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a>.</p>
+
+</div>
+</div><p>
+<hr>Die Dokumentation für diese Klasse wurde erzeugt aufgrund der Dateien:<ul>
+<li><a class="el" href="userpanel__driver_8h-source.html">userpanel_driver.h</a><li><a class="el" href="userpanel__driver_8cc-source.html">userpanel_driver.cc</a></ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:40:20 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

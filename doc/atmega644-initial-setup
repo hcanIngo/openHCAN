@@ -1,0 +1,22 @@
+
+Wie wird ein Atmega644 initialisiert ?
+-------------------------------------
+
+- externen Osz einschalten
+- Bootloader auf 4k
+- Jump-to-Bootloader on reset
+- Bootload Speicher schuetzen
+- WD Enabled
+- Brownout Detection enabled
+
+dazu Fuse Hi Bits wie folgt programmieren (von Bit 7 zu bit 0):
+-> fuse hi byte = 0xd0
+
+Fuse Lo Byte:
+-> fuse lo byte = 0xe6
+
+
+sudo 'avrdude -c avrispmkII -p m644 -P usb -e -U flash:w:"./hcan/hcanbl32/hcanBL_atmega644/main.hex" -U hfuse:w:0xd0:m -U lfuse:w:0xe6:m'
+
+sudo, da "su" für die Nutzung von avrdude erfrderlich ist.
+

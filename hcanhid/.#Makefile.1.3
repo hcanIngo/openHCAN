@@ -1,0 +1,19 @@
+OBJ = main.o unix_uart.o
+
+CFLAGS = -O2 -I. -Wall -g #-DDEBUG0
+LDFLAGS = -lpopt -static
+
+all: hcand
+
+hcand: $(OBJ)
+	gcc -o hcanhid $(OBJ) $(LDFLAGS)
+	
+clean:
+	rm -f *.o hcanhid
+
+ctags:
+	ctags *.c *.h
+
+install:
+	install hcanhid /usr/sbin
+

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: led.h-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>led.h-Dateireferenz</h1>
+<p>
+<div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dynsection">
+<p><center><img src="led_8h__dep__incl.png" border="0" usemap="#led.hdep_map" alt=""></center>
+</div>
+
+<p>
+<a href="led_8h-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="led_8h.html#662094075134c6484b573b07364c1cff">canix_led_enable</a>(LED)&nbsp;&nbsp;&nbsp;{ LED_PORT &amp;= ~ (1&lt;&lt; LED); }</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="led_8h.html#e6d79165496da2ac6feb7b069ea91f89">canix_led_disable</a>(LED)&nbsp;&nbsp;&nbsp;{ LED_PORT |=  1&lt;&lt; LED; }</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="led_8h.html#5b54a14cf75ba910939a31519286c007">canix_led_init_ports</a>()</td></tr>
+
+</table>
+<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="e6d79165496da2ac6feb7b069ea91f89"></a><!-- doxytag: member="led.h::canix_led_disable" ref="e6d79165496da2ac6feb7b069ea91f89" args="(LED)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canix_led_disable          </td>
+          <td>(</td>
+          <td class="paramtype">LED&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;{ LED_PORT |=  1&lt;&lt; LED; }</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="led_8h-source.html#l00056">56</a> der Datei <a class="el" href="led_8h-source.html">led.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="662094075134c6484b573b07364c1cff"></a><!-- doxytag: member="led.h::canix_led_enable" ref="662094075134c6484b573b07364c1cff" args="(LED)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canix_led_enable          </td>
+          <td>(</td>
+          <td class="paramtype">LED&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;{ LED_PORT &amp;= ~ (1&lt;&lt; LED); }</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="led_8h-source.html#l00055">55</a> der Datei <a class="el" href="led_8h-source.html">led.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="5b54a14cf75ba910939a31519286c007"></a><!-- doxytag: member="led.h::canix_led_init_ports" ref="5b54a14cf75ba910939a31519286c007" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canix_led_init_ports          </td>
+          <td>(</td>
+&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+<b>Wert:</b><div class="fragment"><pre class="fragment">{ \
+    LED_PORT_DDR |=  (1&lt;&lt; CANIX_LED_RED) | (1&lt;&lt; CANIX_LED_YELLOW); \
+    LED_PORT |= (1&lt;&lt; CANIX_LED_RED) | (1&lt;&lt; CANIX_LED_YELLOW); \
+}
+</pre></div>
+<p>Definiert in Zeile <a class="el" href="led_8h-source.html#l00057">57</a> der Datei <a class="el" href="led_8h-source.html">led.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

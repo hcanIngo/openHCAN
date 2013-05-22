@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: canix_rtc_clock_t Strukturreferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="functions.html"><span>Datenstruktur-Elemente</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>canix_rtc_clock_t Strukturreferenz</h1><!-- doxytag: class="canix_rtc_clock_t" --><code>#include &lt;<a class="el" href="rtc_8h-source.html">rtc.h</a>&gt;</code>
+<p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Datenfelder</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#4b435c087c472fc183b9cbb3eedc265f">uptime_sec</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#220d96eed64c90a1e8ca5f32fe9c719f">uptime_sec_100th</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#da3307245c314efcffa7d9834ecfdc9f">day_of_week</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#047109724cdb05a49852b54d5d0f56bb">hour</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#0e3a8e887acdce1255d0810db0a30875">minute</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#2a1f1d513a296d32faa0a3af8037de1d">second</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#9d0941e68ee221a1572618ffea5a8c65">last_date_update</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#6c456b64a4516b8d34ab0ba329ea15e3">day_of_month</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#70983fb2cf241b7813c50026f87bb764">month_of_year</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html#cd2066667d9b2571f0ba93c7947f36b5">year</a></td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+Diese Struktur haelt alle Felder, die zur RTC gehoeren. 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00010">10</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+<hr><h2>Dokumentation der Datenelemente</h2>
+<a class="anchor" name="4b435c087c472fc183b9cbb3eedc265f"></a><!-- doxytag: member="canix_rtc_clock_t::uptime_sec" ref="4b435c087c472fc183b9cbb3eedc265f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t <a class="el" href="structcanix__rtc__clock__t.html#4b435c087c472fc183b9cbb3eedc265f">canix_rtc_clock_t::uptime_sec</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Uptime Sekunden seit Boot 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00013">13</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a> und <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="220d96eed64c90a1e8ca5f32fe9c719f"></a><!-- doxytag: member="canix_rtc_clock_t::uptime_sec_100th" ref="220d96eed64c90a1e8ca5f32fe9c719f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#220d96eed64c90a1e8ca5f32fe9c719f">canix_rtc_clock_t::uptime_sec_100th</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+100tel Sekunden seit letztder uptime_sec Inkrementierung 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00015">15</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a> und <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="da3307245c314efcffa7d9834ecfdc9f"></a><!-- doxytag: member="canix_rtc_clock_t::day_of_week" ref="da3307245c314efcffa7d9834ecfdc9f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#da3307245c314efcffa7d9834ecfdc9f">canix_rtc_clock_t::day_of_week</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Wochentag; 1 = Montag, ... 7 = Sonntag 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00018">18</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="canix_8c-source.html#l00193">canix_update_datetime()</a> und <a class="el" href="tools_8c-source.html#l00049">time_matches()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="047109724cdb05a49852b54d5d0f56bb"></a><!-- doxytag: member="canix_rtc_clock_t::hour" ref="047109724cdb05a49852b54d5d0f56bb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#047109724cdb05a49852b54d5d0f56bb">canix_rtc_clock_t::hour</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Stunde: 0..23 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00020">20</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="canix_8c-source.html#l00193">canix_update_datetime()</a> und <a class="el" href="tools_8c-source.html#l00049">time_matches()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="0e3a8e887acdce1255d0810db0a30875"></a><!-- doxytag: member="canix_rtc_clock_t::minute" ref="0e3a8e887acdce1255d0810db0a30875" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#0e3a8e887acdce1255d0810db0a30875">canix_rtc_clock_t::minute</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Minute: 0..59 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00022">22</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="canix_8c-source.html#l00193">canix_update_datetime()</a> und <a class="el" href="tools_8c-source.html#l00049">time_matches()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="2a1f1d513a296d32faa0a3af8037de1d"></a><!-- doxytag: member="canix_rtc_clock_t::second" ref="2a1f1d513a296d32faa0a3af8037de1d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#2a1f1d513a296d32faa0a3af8037de1d">canix_rtc_clock_t::second</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Sekunde: 0..59 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00024">24</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a> und <a class="el" href="canix_8c-source.html#l00193">canix_update_datetime()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="9d0941e68ee221a1572618ffea5a8c65"></a><!-- doxytag: member="canix_rtc_clock_t::last_date_update" ref="9d0941e68ee221a1572618ffea5a8c65" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#9d0941e68ee221a1572618ffea5a8c65">canix_rtc_clock_t::last_date_update</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+vergangene Sekunden seit dem letzten empfangenen Zeitframe 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00027">27</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00251">canix_is_date_valid()</a>, <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a> und <a class="el" href="canix_8c-source.html#l00193">canix_update_datetime()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="6c456b64a4516b8d34ab0ba329ea15e3"></a><!-- doxytag: member="canix_rtc_clock_t::day_of_month" ref="6c456b64a4516b8d34ab0ba329ea15e3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#6c456b64a4516b8d34ab0ba329ea15e3">canix_rtc_clock_t::day_of_month</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Tag des Monats: [1..31] 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00030">30</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a> und <a class="el" href="canix_8c-source.html#l00193">canix_update_datetime()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="70983fb2cf241b7813c50026f87bb764"></a><!-- doxytag: member="canix_rtc_clock_t::month_of_year" ref="70983fb2cf241b7813c50026f87bb764" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#70983fb2cf241b7813c50026f87bb764">canix_rtc_clock_t::month_of_year</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Monat: [1..12] 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00032">32</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a> und <a class="el" href="canix_8c-source.html#l00193">canix_update_datetime()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="cd2066667d9b2571f0ba93c7947f36b5"></a><!-- doxytag: member="canix_rtc_clock_t::year" ref="cd2066667d9b2571f0ba93c7947f36b5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__rtc__clock__t.html#cd2066667d9b2571f0ba93c7947f36b5">canix_rtc_clock_t::year</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Jahr: Das Yahr wird errechnet durch: 2000 + year; 1 = 2001, 2 = 2002 
+<p>Definiert in Zeile <a class="el" href="rtc_8h-source.html#l00036">36</a> der Datei <a class="el" href="rtc_8h-source.html">rtc.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a> und <a class="el" href="canix_8c-source.html#l00193">canix_update_datetime()</a>.</p>
+
+</div>
+</div><p>
+<hr>Die Dokumentation für diese Struktur wurde erzeugt aufgrund der Datei:<ul>
+<li><a class="el" href="rtc_8h-source.html">rtc.h</a></ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

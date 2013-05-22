@@ -1,0 +1,864 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: mcp2515.c-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>mcp2515.c-Dateireferenz</h1><code>#include &lt;avr/io.h&gt;</code><br>
+<code>#include &lt;avr/interrupt.h&gt;</code><br>
+<code>#include &lt;avr/wdt.h&gt;</code><br>
+<code>#include &quot;<a class="el" href="chipdef_8h-source.html">chipdef.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="mcp2515_8h-source.html">mcp2515.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="mcp2515__defs_8h-source.html">mcp2515_defs.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="canix_8h-source.html">canix.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="tools_8h-source.html">tools.h</a>&quot;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für mcp2515.c:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c__incl.png" border="0" usemap="#mcp2515.c_map" alt=""></center>
+</div>
+
+<p>
+<a href="mcp2515_8c-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#1446a350fed7e8499e7552e09b3a693a">MCP2515_OK</a>&nbsp;&nbsp;&nbsp;(0)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#2a82e7191eb924b27a294e3c05da1d27">MCP2515_FAIL</a>&nbsp;&nbsp;&nbsp;(1)</td></tr>
+
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#e909944aa85ae98323073c628be541aa">spi_init</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#c4133801d9adaaf42e7a43018c159127">spi_putc</a> (uint8_t data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#dd760b5484c2e63c5fb18517c99ac4e2">spi_getc</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#3a8f74fe3bd4f29605b436766454068d">can_enable_mcp2515</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#015d544bf187e6d6e006944490eef7ee">can_disable_mcp2515</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#29ca95ce06b46820080e6bf39aca3f5d">mcp2515_bit_modify</a> (uint8_t adress, uint8_t mask, uint8_t data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#5095786f257c2eea8e53779c5e3e359d">mcp2515_read_register</a> (const uint8_t address)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#f18f4716d0060c65756daf517d339968">mcp2515_write_register</a> (uint8_t adress, uint8_t data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#bf618497810858c05e3ba0e0c9116e06">mcp2515_set_mode</a> (uint8_t mode)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#8c0789663a645eb8b4ba3f1d6da70dcb">mcp2515_write_register_p</a> (uint8_t adress, const uint8_t *data, uint8_t length)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#675c6e6ffc36623476ec755584f489e5">mcp2515_read_register_p</a> (uint8_t adress, uint8_t *data, uint8_t length)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#1b4158391bfdcac1aefbd938d06c8088">can_open_interface</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#e6a36cd613b7883e009e15593659ddb0">can_send_message</a> (uint32_t id, const uint8_t *data, uint8_t length)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#6405532f26a18d966234892a6c686ec6">can_sendable</a> (const uint8_t tx_index)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#bb23769377168fdb7bab1fcef622ae14">can_any_sendable</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#7b0154fa9ea85867b0525553a21ab2eb">can_message_available</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#5f9e303ac32c4de236cc2cc3d9ae8279">mcp2515_message_available</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#4db5901f843993e77c3e68d6060fc4cc">mcp2515_read_message</a> (uint32_t *extended, char *data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#a183b5fb18c10fd1aaca12aba217eab4">can_read_message</a> (uint32_t *extended, char *data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mcp2515_8c.html#26c8c1d32287cf512a633f8878ed5c0e">can_error_counters</a> (void)</td></tr>
+
+</table>
+<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="2a82e7191eb924b27a294e3c05da1d27"></a><!-- doxytag: member="mcp2515.c::MCP2515_FAIL" ref="2a82e7191eb924b27a294e3c05da1d27" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MCP2515_FAIL&nbsp;&nbsp;&nbsp;(1)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00093">93</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a> und <a class="el" href="mcp2515_8c-source.html#l00170">mcp2515_set_mode()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="1446a350fed7e8499e7552e09b3a693a"></a><!-- doxytag: member="mcp2515.c::MCP2515_OK" ref="1446a350fed7e8499e7552e09b3a693a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MCP2515_OK&nbsp;&nbsp;&nbsp;(0)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00092">92</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a> und <a class="el" href="mcp2515_8c-source.html#l00170">mcp2515_set_mode()</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="bb23769377168fdb7bab1fcef622ae14"></a><!-- doxytag: member="mcp2515.c::can_any_sendable" ref="bb23769377168fdb7bab1fcef622ae14" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool can_any_sendable           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00350">350</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00339">can_sendable()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_bb23769377168fdb7bab1fcef622ae14_cgraph.png" border="0" usemap="#mcp2515_8c_bb23769377168fdb7bab1fcef622ae14_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="015d544bf187e6d6e006944490eef7ee"></a><!-- doxytag: member="mcp2515.c::can_disable_mcp2515" ref="015d544bf187e6d6e006944490eef7ee" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void can_disable_mcp2515           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Deaktiviert den MCP2515 ueber das CS Signal 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00133">133</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00221">can_open_interface()</a>, <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a>, <a class="el" href="mcp2515_8c-source.html#l00138">mcp2515_bit_modify()</a>, <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a>, <a class="el" href="mcp2515_8c-source.html#l00205">mcp2515_read_register_p()</a>, <a class="el" href="mcp2515_8c-source.html#l00161">mcp2515_write_register()</a> und <a class="el" href="mcp2515_8c-source.html#l00188">mcp2515_write_register_p()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="3a8f74fe3bd4f29605b436766454068d"></a><!-- doxytag: member="mcp2515.c::can_enable_mcp2515" ref="3a8f74fe3bd4f29605b436766454068d" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void can_enable_mcp2515           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Aktiviert den MCP2515 ueber das CS Signal 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00128">128</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00221">can_open_interface()</a>, <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a>, <a class="el" href="mcp2515_8c-source.html#l00138">mcp2515_bit_modify()</a>, <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a>, <a class="el" href="mcp2515_8c-source.html#l00205">mcp2515_read_register_p()</a>, <a class="el" href="mcp2515_8c-source.html#l00161">mcp2515_write_register()</a> und <a class="el" href="mcp2515_8c-source.html#l00188">mcp2515_write_register_p()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="26c8c1d32287cf512a633f8878ed5c0e"></a><!-- doxytag: member="mcp2515.c::can_error_counters" ref="26c8c1d32287cf512a633f8878ed5c0e" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t can_error_counters           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert die beiden Error Counter (REC und TEC, siehe MCP2515 Datenblatt) REC ist im MSB, TEC im LSB. Werte ueber 128 bedeuten, dass der MCP2515 im Passive Error State ist 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00421">421</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a>, <a class="el" href="mcp2515_8h-source.html#l00127">REC</a> und <a class="el" href="mcp2515_8h-source.html#l00126">TEC</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_26c8c1d32287cf512a633f8878ed5c0e_cgraph.png" border="0" usemap="#mcp2515_8c_26c8c1d32287cf512a633f8878ed5c0e_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="7b0154fa9ea85867b0525553a21ab2eb"></a><!-- doxytag: member="mcp2515.c::can_message_available" ref="7b0154fa9ea85867b0525553a21ab2eb" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool can_message_available           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert != 0, wenn in der RX Queue mindestens ein Frame ist 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00355">355</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00107">canix_rxq_size()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_7b0154fa9ea85867b0525553a21ab2eb_cgraph.png" border="0" usemap="#mcp2515_8c_7b0154fa9ea85867b0525553a21ab2eb_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="1b4158391bfdcac1aefbd938d06c8088"></a><!-- doxytag: member="mcp2515.c::can_open_interface" ref="1b4158391bfdcac1aefbd938d06c8088" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t can_open_interface           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Initialisiert das MCP2515 CAN Interface. Dazu wird:<ul>
+<li>das SPI Interface aktiviert</li><li>der MCP Modus auf Config gesetzt</li><li>die Bit-Rate-Prescaler gesetzt (z.Z. 125kbit)</li><li>RX0 und TX0 aktiviert</li><li>alle Filter deaktiviert</li><li>in den Normal-Modus zurueckgeschaltet</li></ul>
+<p>
+<dl class="return" compact><dt><b>Rückgabe:</b></dt><dd>MCP2515_OK oder MCP2515_FAIL </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00221">221</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8h-source.html#l00109">BFPCTRL</a>, <a class="el" href="mcp2515_8h-source.html#l00407">BTLMODE</a>, <a class="el" href="mcp2515_8c-source.html#l00133">can_disable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00128">can_enable_mcp2515()</a>, <a class="el" href="mcp2515_8h-source.html#l00431">CANINTE</a>, <a class="el" href="mcp2515_8h-source.html#l00430">CNF1</a>, <a class="el" href="mcp2515_8h-source.html#l00429">CNF2</a>, <a class="el" href="mcp2515_8h-source.html#l00428">CNF3</a>, <a class="el" href="tools_8c-source.html#l00024">delay()</a>, <a class="el" href="mcp2515_8c-source.html#l00170">mcp2515_set_mode()</a>, <a class="el" href="mcp2515_8c-source.html#l00161">mcp2515_write_register()</a>, <a class="el" href="mcp2515_8h-source.html#l00086">MODE_CONFIG</a>, <a class="el" href="mcp2515_8h-source.html#l00082">MODE_NORMAL</a>, <a class="el" href="mcp2515_8h-source.html#l00410">PHSEG11</a>, <a class="el" href="mcp2515_8h-source.html#l00401">PHSEG21</a>, <a class="el" href="mcp2515_8h-source.html#l00189">RXB0CTRL</a>, <a class="el" href="mcp2515_8h-source.html#l00345">RXM0</a>, <a class="el" href="mcp2515_8h-source.html#l00344">RXM1</a>, <a class="el" href="mcp2515_8c-source.html#l00111">spi_putc()</a>, <a class="el" href="mcp2515_8h-source.html#l00072">SPI_RESET</a> und <a class="el" href="mcp2515_8h-source.html#l00110">TXRTSCTRL</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_1b4158391bfdcac1aefbd938d06c8088_cgraph.png" border="0" usemap="#mcp2515_8c_1b4158391bfdcac1aefbd938d06c8088_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="a183b5fb18c10fd1aaca12aba217eab4"></a><!-- doxytag: member="mcp2515.c::can_read_message" ref="a183b5fb18c10fd1aaca12aba217eab4" args="(uint32_t *extended, char *data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t can_read_message           </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&nbsp;</td>
+          <td class="paramname"> <em>extended</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liest ein Frame aus der RX Queue.<p>
+return Anzahl der Datenbytes 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00398">398</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00105">canix_rx_queue</a>, <a class="el" href="canix_8c-source.html#l00123">canix_rxq_fetch_one()</a>, <a class="el" href="canix_8c-source.html#l00107">canix_rxq_size()</a>, <a class="el" href="canix_8h-source.html#l00292">canix_rx_queue_entry_t::extended</a>, <a class="el" href="canix_8h-source.html#l00293">canix_rx_queue_entry_t::size</a> und <a class="el" href="canix_8h-source.html#l00291">canix_rx_queue_entry_t::used</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_a183b5fb18c10fd1aaca12aba217eab4_cgraph.png" border="0" usemap="#mcp2515_8c_a183b5fb18c10fd1aaca12aba217eab4_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="e6a36cd613b7883e009e15593659ddb0"></a><!-- doxytag: member="mcp2515.c::can_send_message" ref="e6a36cd613b7883e009e15593659ddb0" args="(uint32_t id, const uint8_t *data, uint8_t length)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t can_send_message           </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&nbsp;</td>
+          <td class="paramname"> <em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&nbsp;</td>
+          <td class="paramname"> <em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>length</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+sendet ein CAN Frame; falls der MCP2515 nicht in 1 Sekunde frei ist bricht er mit MCP2515_FAIL ab.<p>
+<dl class="return" compact><dt><b>Rückgabe:</b></dt><dd>MCP2515_OK (0) oder MCP2515_FAIL (1) </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00286">286</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00133">can_disable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00128">can_enable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00339">can_sendable()</a>, <a class="el" href="canix_8c-source.html#l00103">canix_tx_dropped</a>, <a class="el" href="canix_8c-source.html#l00102">canix_tx_sent</a>, <a class="el" href="mcp2515_8h-source.html#l00354">EXIDE</a>, <a class="el" href="mcp2515_8c-source.html#l00138">mcp2515_bit_modify()</a>, <a class="el" href="mcp2515_8c-source.html#l00093">MCP2515_FAIL</a>, <a class="el" href="mcp2515_8c-source.html#l00092">MCP2515_OK</a>, <a class="el" href="mcp2515_8c-source.html#l00161">mcp2515_write_register()</a>, <a class="el" href="mcp2515_8c-source.html#l00188">mcp2515_write_register_p()</a>, <a class="el" href="mcp2515_8c-source.html#l00111">spi_putc()</a>, <a class="el" href="mcp2515_8h-source.html#l00077">SPI_RTS</a>, <a class="el" href="mcp2515_8h-source.html#l00144">TXB0CTRL</a>, <a class="el" href="mcp2515_8h-source.html#l00150">TXB0D0</a>, <a class="el" href="mcp2515_8h-source.html#l00149">TXB0DLC</a>, <a class="el" href="mcp2515_8h-source.html#l00145">TXB0SIDH</a> und <a class="el" href="mcp2515_8h-source.html#l00337">TXREQ</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_e6a36cd613b7883e009e15593659ddb0_cgraph.png" border="0" usemap="#mcp2515_8c_e6a36cd613b7883e009e15593659ddb0_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="6405532f26a18d966234892a6c686ec6"></a><!-- doxytag: member="mcp2515.c::can_sendable" ref="6405532f26a18d966234892a6c686ec6" args="(const uint8_t tx_index)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool can_sendable           </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t&nbsp;</td>
+          <td class="paramname"> <em>tx_index</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert != 0, wenn der MCP2515 einen TX Buffer zum Senden frei hat 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00339">339</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a>, <a class="el" href="mcp2515_8h-source.html#l00144">TXB0CTRL</a> und <a class="el" href="mcp2515_8h-source.html#l00337">TXREQ</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00350">can_any_sendable()</a> und <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_6405532f26a18d966234892a6c686ec6_cgraph.png" border="0" usemap="#mcp2515_8c_6405532f26a18d966234892a6c686ec6_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="29ca95ce06b46820080e6bf39aca3f5d"></a><!-- doxytag: member="mcp2515.c::mcp2515_bit_modify" ref="29ca95ce06b46820080e6bf39aca3f5d" args="(uint8_t adress, uint8_t mask, uint8_t data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mcp2515_bit_modify           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>adress</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Modifiziert ein Register im MCP2515:<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>address</em>&nbsp;</td><td>die Adresse des MCP Registers </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>mask</em>&nbsp;</td><td>die Maske der zu aendernden Bits </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>data</em>&nbsp;</td><td>die neuen Bits, die gesetzt/geloescht werden sollen</td></tr>
+  </table>
+</dl>
+Alle Bits, die in mask gesetzt sind, werden aus data uebernommen. 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00138">138</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00133">can_disable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00128">can_enable_mcp2515()</a>, <a class="el" href="mcp2515_8h-source.html#l00080">SPI_BIT_MODIFY</a> und <a class="el" href="mcp2515_8c-source.html#l00111">spi_putc()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a>, <a class="el" href="mcp2515_8c-source.html#l00374">mcp2515_read_message()</a> und <a class="el" href="mcp2515_8c-source.html#l00170">mcp2515_set_mode()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_29ca95ce06b46820080e6bf39aca3f5d_cgraph.png" border="0" usemap="#mcp2515_8c_29ca95ce06b46820080e6bf39aca3f5d_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="5f9e303ac32c4de236cc2cc3d9ae8279"></a><!-- doxytag: member="mcp2515.c::mcp2515_message_available" ref="5f9e303ac32c4de236cc2cc3d9ae8279" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool mcp2515_message_available           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert != 0, wenn der MCP2515 einen Frame emfpangen hat und dieser auslesebereit ist 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00366">366</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8h-source.html#l00432">CANINTF</a>, <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a> und <a class="el" href="mcp2515_8h-source.html#l00317">RX0IF</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_5f9e303ac32c4de236cc2cc3d9ae8279_cgraph.png" border="0" usemap="#mcp2515_8c_5f9e303ac32c4de236cc2cc3d9ae8279_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="4db5901f843993e77c3e68d6060fc4cc"></a><!-- doxytag: member="mcp2515.c::mcp2515_read_message" ref="4db5901f843993e77c3e68d6060fc4cc" args="(uint32_t *extended, char *data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t mcp2515_read_message           </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&nbsp;</td>
+          <td class="paramname"> <em>extended</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liest das Frame in die extended und data Variablen und loescht es auf dem MCP2515. Im data[] Array muessen mind. 8 Bytes frei sein<p>
+return Anzahl der Datenbytes 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00374">374</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8h-source.html#l00432">CANINTF</a>, <a class="el" href="mcp2515_8c-source.html#l00138">mcp2515_bit_modify()</a>, <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a>, <a class="el" href="mcp2515_8c-source.html#l00205">mcp2515_read_register_p()</a>, <a class="el" href="mcp2515_8h-source.html#l00195">RXB0D0</a>, <a class="el" href="mcp2515_8h-source.html#l00194">RXB0DLC</a> und <a class="el" href="mcp2515_8h-source.html#l00190">RXB0SIDH</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_4db5901f843993e77c3e68d6060fc4cc_cgraph.png" border="0" usemap="#mcp2515_8c_4db5901f843993e77c3e68d6060fc4cc_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="5095786f257c2eea8e53779c5e3e359d"></a><!-- doxytag: member="mcp2515.c::mcp2515_read_register" ref="5095786f257c2eea8e53779c5e3e359d" args="(const uint8_t address)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t mcp2515_read_register           </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liest ein Byte aus einem Register des MCP2515. 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00148">148</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00133">can_disable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00128">can_enable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00123">spi_getc()</a>, <a class="el" href="mcp2515_8c-source.html#l00111">spi_putc()</a> und <a class="el" href="mcp2515_8h-source.html#l00073">SPI_READ</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00421">can_error_counters()</a>, <a class="el" href="mcp2515_8c-source.html#l00339">can_sendable()</a>, <a class="el" href="mcp2515_8c-source.html#l00366">mcp2515_message_available()</a>, <a class="el" href="mcp2515_8c-source.html#l00374">mcp2515_read_message()</a> und <a class="el" href="mcp2515_8c-source.html#l00170">mcp2515_set_mode()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_5095786f257c2eea8e53779c5e3e359d_cgraph.png" border="0" usemap="#mcp2515_8c_5095786f257c2eea8e53779c5e3e359d_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="675c6e6ffc36623476ec755584f489e5"></a><!-- doxytag: member="mcp2515.c::mcp2515_read_register_p" ref="675c6e6ffc36623476ec755584f489e5" args="(uint8_t adress, uint8_t *data, uint8_t length)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mcp2515_read_register_p           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>adress</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&nbsp;</td>
+          <td class="paramname"> <em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>length</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00205">205</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00133">can_disable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00128">can_enable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00111">spi_putc()</a> und <a class="el" href="mcp2515_8h-source.html#l00073">SPI_READ</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00374">mcp2515_read_message()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_675c6e6ffc36623476ec755584f489e5_cgraph.png" border="0" usemap="#mcp2515_8c_675c6e6ffc36623476ec755584f489e5_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="bf618497810858c05e3ba0e0c9116e06"></a><!-- doxytag: member="mcp2515.c::mcp2515_set_mode" ref="bf618497810858c05e3ba0e0c9116e06" args="(uint8_t mode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t mcp2515_set_mode           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>mode</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Versetzt den MCP2515 in den gegebenen Modus. <dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>mode</em>&nbsp;</td><td>MODE_NORMAL,MODE_SLEEP, MODE_LOOPBACK, MODE_LISTENONLY, MODE_CONFIG, MODE_POWERUP</td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Rückgabe:</b></dt><dd>MCP2515_OK, falls erfolgreich, oder MCP2515_FAIL, falls fehlgeschlagen </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00170">170</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00138">mcp2515_bit_modify()</a>, <a class="el" href="mcp2515_8c-source.html#l00093">MCP2515_FAIL</a>, <a class="el" href="mcp2515_8c-source.html#l00092">MCP2515_OK</a>, <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a>, <a class="el" href="mcp2515__defs_8h-source.html#l00087">MCP_CANCTRL</a> und <a class="el" href="mcp2515_8h-source.html#l00088">MODE_MASK</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00221">can_open_interface()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_bf618497810858c05e3ba0e0c9116e06_cgraph.png" border="0" usemap="#mcp2515_8c_bf618497810858c05e3ba0e0c9116e06_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="f18f4716d0060c65756daf517d339968"></a><!-- doxytag: member="mcp2515.c::mcp2515_write_register" ref="f18f4716d0060c65756daf517d339968" args="(uint8_t adress, uint8_t data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mcp2515_write_register           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>adress</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Schreibt ein Byte in ein Register des MCP2515. 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00161">161</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00133">can_disable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00128">can_enable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00111">spi_putc()</a> und <a class="el" href="mcp2515_8h-source.html#l00075">SPI_WRITE</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00221">can_open_interface()</a> und <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_f18f4716d0060c65756daf517d339968_cgraph.png" border="0" usemap="#mcp2515_8c_f18f4716d0060c65756daf517d339968_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="8c0789663a645eb8b4ba3f1d6da70dcb"></a><!-- doxytag: member="mcp2515.c::mcp2515_write_register_p" ref="8c0789663a645eb8b4ba3f1d6da70dcb" args="(uint8_t adress, const uint8_t *data, uint8_t length)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mcp2515_write_register_p           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>adress</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&nbsp;</td>
+          <td class="paramname"> <em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>length</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00188">188</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00133">can_disable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00128">can_enable_mcp2515()</a>, <a class="el" href="mcp2515_8c-source.html#l00111">spi_putc()</a> und <a class="el" href="mcp2515_8h-source.html#l00075">SPI_WRITE</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_8c0789663a645eb8b4ba3f1d6da70dcb_cgraph.png" border="0" usemap="#mcp2515_8c_8c0789663a645eb8b4ba3f1d6da70dcb_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="dd760b5484c2e63c5fb18517c99ac4e2"></a><!-- doxytag: member="mcp2515.c::spi_getc" ref="dd760b5484c2e63c5fb18517c99ac4e2" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t spi_getc           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liest ein Byte ein und schreibt zeitgleich 0 <dl class="return" compact><dt><b>Rückgabe:</b></dt><dd>das gelesene Byte </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00123">123</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00111">spi_putc()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="mcp2515_8c_dd760b5484c2e63c5fb18517c99ac4e2_cgraph.png" border="0" usemap="#mcp2515_8c_dd760b5484c2e63c5fb18517c99ac4e2_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="e909944aa85ae98323073c628be541aa"></a><!-- doxytag: member="mcp2515.c::spi_init" ref="e909944aa85ae98323073c628be541aa" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void spi_init           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Initialisiert das SPI Interface des Atmega; z.Z. ist f(spi) = f(cpu) / 4 
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00095">95</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c4133801d9adaaf42e7a43018c159127"></a><!-- doxytag: member="mcp2515.c::spi_putc" ref="c4133801d9adaaf42e7a43018c159127" args="(uint8_t data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t spi_putc           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>data</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+schreibt ein Byte an den SPI Ausgang und liest zeitgleich eines ein. <dl class="return" compact><dt><b>Rückgabe:</b></dt><dd>das gelesene Byte </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="mcp2515_8c-source.html#l00111">111</a> der Datei <a class="el" href="mcp2515_8c-source.html">mcp2515.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00221">can_open_interface()</a>, <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a>, <a class="el" href="mcp2515_8c-source.html#l00138">mcp2515_bit_modify()</a>, <a class="el" href="mcp2515_8c-source.html#l00148">mcp2515_read_register()</a>, <a class="el" href="mcp2515_8c-source.html#l00205">mcp2515_read_register_p()</a>, <a class="el" href="mcp2515_8c-source.html#l00161">mcp2515_write_register()</a>, <a class="el" href="mcp2515_8c-source.html#l00188">mcp2515_write_register_p()</a> und <a class="el" href="mcp2515_8c-source.html#l00123">spi_getc()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

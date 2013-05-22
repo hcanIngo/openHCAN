@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: eds_desc.cc Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>eds_desc.cc</h1><a href="eds__desc_8cc.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;sstream&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="traceable__error_8h.html">traceable_error.h</a>&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="frame__message__description_8h.html">frame_message_description.h</a>&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;libxml++/parsers/domparser.h&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;libxml++/nodes/node.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;stdexcept&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;assert.h&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;<a class="code" href="eds__desc_8h.html">eds_desc.h</a>&gt;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;<a class="code" href="utils_8h.html">utils.h</a>&gt;</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="keyword">using namespace </span>std;
+<a name="l00017"></a>00017 <span class="keyword">using namespace </span>xmlpp;
+<a name="l00018"></a>00018 
+<a name="l00019"></a><a class="code" href="eds__desc_8h.html#8db79d1a331f0bbc740d81deba8b5876">00019</a> vector &lt; eds_block_desc_t &gt; <a class="code" href="eds__desc_8cc.html#f6bc343d28b136b4fbe54f737b53f3f1">eds_get_block_descriptions</a>()
+<a name="l00020"></a>00020 {
+<a name="l00021"></a>00021     vector &lt; eds_block_desc_t &gt; blocks;
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023     DomParser p;
+<a name="l00024"></a>00024     p.parse_file(<span class="stringliteral">"/usr/share/hcan/eds.xml"</span>);
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026     <span class="keywordflow">if</span> (p)
+<a name="l00027"></a>00027     {
+<a name="l00028"></a>00028         Element *rn = p.get_document()-&gt;get_root_node();
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030         Node::NodeList nl = rn-&gt;get_children();
+<a name="l00031"></a>00031         <span class="keywordflow">for</span> (Node::NodeList::const_iterator block = nl.begin();
+<a name="l00032"></a>00032                 block != nl.end(); block++)
+<a name="l00033"></a>00033         {
+<a name="l00034"></a>00034             <span class="keyword">const</span> Element *block_e = (<span class="keyword">const</span> Element *)(*block);
+<a name="l00035"></a>00035             assert(block_e);
+<a name="l00036"></a>00036             <span class="keywordflow">if</span> ( block_e-&gt;get_name() == <span class="stringliteral">"block"</span>)
+<a name="l00037"></a>00037             {
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040                 <span class="keyword">const</span> uint16_t type = <a class="code" href="utils_8cc.html#d16b6191ff6bf984072db394adebf076">glib_ustring2uint16</a>(
+<a name="l00041"></a>00041                     block_e-&gt;get_attribute(<span class="stringliteral">"type"</span>)-&gt;get_value());
+<a name="l00042"></a>00042                 <span class="keyword">const</span> <span class="keywordtype">string</span> name = block_e-&gt;get_attribute(<span class="stringliteral">"name"</span>)-&gt;get_value();
+<a name="l00043"></a>00043                 <span class="keyword">const</span> uint16_t size = <a class="code" href="utils_8cc.html#d16b6191ff6bf984072db394adebf076">glib_ustring2uint16</a>(
+<a name="l00044"></a>00044                     block_e-&gt;get_attribute(<span class="stringliteral">"size"</span>)-&gt;get_value());
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046                 <a class="code" href="structeds__block__desc__t.html">eds_block_desc_t</a> block(type,name,size);
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048                 Node::NodeList nl = block_e-&gt;get_children();
+<a name="l00049"></a>00049                 <span class="keywordflow">for</span> (Node::NodeList::const_iterator field = nl.begin();
+<a name="l00050"></a>00050                         field != nl.end(); field++)
+<a name="l00051"></a>00051                 {
+<a name="l00052"></a>00052                     <span class="keyword">const</span> Element *field_e= (<span class="keyword">const</span> Element *)(*field);
+<a name="l00053"></a>00053                     assert(field_e);
+<a name="l00054"></a>00054                     <span class="keywordflow">if</span> ( field_e-&gt;get_name() == <span class="stringliteral">"field"</span>)
+<a name="l00055"></a>00055                     {
+<a name="l00056"></a>00056                         <span class="keyword">const</span> <span class="keywordtype">string</span> datatype = 
+<a name="l00057"></a>00057                             field_e-&gt;get_attribute(<span class="stringliteral">"datatype"</span>)-&gt;get_value();
+<a name="l00058"></a>00058                         <span class="keyword">const</span> <span class="keywordtype">string</span> name = 
+<a name="l00059"></a>00059                             field_e-&gt;get_attribute(<span class="stringliteral">"name"</span>)-&gt;get_value();
+<a name="l00060"></a>00060                         <span class="keyword">const</span> uint16_t pos = <a class="code" href="utils_8cc.html#d16b6191ff6bf984072db394adebf076">glib_ustring2uint16</a>(
+<a name="l00061"></a>00061                                 field_e-&gt;get_attribute(<span class="stringliteral">"pos"</span>)-&gt;get_value());
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063                         uint16_t size = 0;
+<a name="l00064"></a>00064                         <span class="keywordflow">if</span> (datatype == <span class="stringliteral">"char"</span>)
+<a name="l00065"></a>00065                         {
+<a name="l00066"></a>00066                             size = <a class="code" href="utils_8cc.html#d16b6191ff6bf984072db394adebf076">glib_ustring2uint16</a>(field_e-&gt;
+<a name="l00067"></a>00067                                     get_attribute(<span class="stringliteral">"size"</span>)-&gt;get_value());
+<a name="l00068"></a>00068                         }
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070                         block.fields.push_back(<a class="code" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a>(
+<a name="l00071"></a>00071                                     datatype, name, pos,size));
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073                     }
+<a name="l00074"></a>00074                 }
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076                 blocks.push_back(block);
+<a name="l00077"></a>00077             }
+<a name="l00078"></a>00078         }
+<a name="l00079"></a>00079     }
+<a name="l00080"></a>00080     <span class="keywordflow">else</span>
+<a name="l00081"></a>00081         <span class="keywordflow">throw</span> <a class="code" href="classtraceable__error.html">traceable_error</a>(
+<a name="l00082"></a>00082             <span class="stringliteral">"could not parse /usr/share/hcan/eds-local.xml"</span>);
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084     <span class="keywordflow">return</span> blocks;
+<a name="l00085"></a>00085 }
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

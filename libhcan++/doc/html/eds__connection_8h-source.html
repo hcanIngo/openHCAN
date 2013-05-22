@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: eds_connection.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>eds_connection.h</h1><a href="eds__connection_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef EDS_CONNECTION_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define EDS_CONNECTION_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="board__connection_8h.html">libhcan++/board_connection.h</a>&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="traceable__error_8h.html">libhcan++/traceable_error.h</a>&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;<a class="code" href="eds__desc_8h.html">eds_desc.h</a>&gt;</span>
+<a name="l00008"></a>00008 <span class="comment">//#include &lt;boost/variant.hpp&gt;</span>
+<a name="l00009"></a>00009 <span class="comment">//#include &lt;boost/smart_ptr.hpp&gt;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="keyword">namespace </span>hcan
+<a name="l00012"></a>00012 {
+<a name="l00013"></a><a class="code" href="classhcan_1_1eds__error.html">00013</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1eds__error.html">eds_error</a> : <span class="keyword">public</span> <a class="code" href="classtraceable__error.html">traceable_error</a>
+<a name="l00014"></a>00014     {
+<a name="l00015"></a>00015         <span class="keyword">public</span>:
+<a name="l00016"></a><a class="code" href="classhcan_1_1eds__error.html#56e29edeac98930bb4d7adb8eff2ba24">00016</a>             <a class="code" href="classhcan_1_1eds__error.html#56e29edeac98930bb4d7adb8eff2ba24">eds_error</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;s) : <a class="code" href="classtraceable__error.html">traceable_error</a>(s) {};
+<a name="l00017"></a>00017     };
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019     <span class="keyword">class </span>eds_connection;
+<a name="l00020"></a>00020 
+<a name="l00030"></a><a class="code" href="classhcan_1_1eds__block.html">00030</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1eds__block.html">eds_block</a>
+<a name="l00031"></a>00031     {
+<a name="l00032"></a>00032         <span class="keyword">private</span>:
+<a name="l00036"></a>00036             <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;m_econ;
+<a name="l00037"></a>00037             <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;m_bcon;
+<a name="l00038"></a>00038             <a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;m_tcon;
+<a name="l00044"></a>00044             uint16_t m_address;
+<a name="l00045"></a>00045             uint8_t m_type;
+<a name="l00046"></a>00046             uint8_t m_size;
+<a name="l00047"></a>00047             <span class="keyword">const</span> <a class="code" href="structeds__block__desc__t.html">eds_block_desc_t</a> m_desc;
+<a name="l00048"></a>00048         <span class="keyword">private</span>:
+<a name="l00049"></a><a class="code" href="classhcan_1_1eds__block.html#08f176fe121229943b1069692bd1225b">00049</a>             <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a>;
+<a name="l00050"></a>00050             <a class="code" href="classhcan_1_1eds__block.html">eds_block</a>(<a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ, uint16_t <a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>);
+<a name="l00051"></a>00051         <span class="keyword">public</span>:
+<a name="l00052"></a>00052             <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;<a class="code" href="classhcan_1_1eds__block.html#4ee96e97362ba8591d5e0aedce8d7261">operator = </a>(<span class="keyword">const</span> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;b);
+<a name="l00053"></a>00053             <a class="code" href="classhcan_1_1eds__block.html">eds_block</a>(<span class="keyword">const</span> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;b);
+<a name="l00054"></a>00054             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1eds__block.html#07c4de2d7586acaf90f6c96a6a703c88">~eds_block</a>();
+<a name="l00055"></a>00055             <span class="keyword">const</span> <a class="code" href="structeds__block__desc__t.html">eds_block_desc_t</a> <a class="code" href="classhcan_1_1eds__block.html#123da5de700597099c7b50a35d029b05">init</a>();
+<a name="l00056"></a>00056             <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classhcan_1_1eds__block.html#58655ce4e5f09a6833384d720ed45c06">type_name</a>() <span class="keyword">const</span>;
+<a name="l00057"></a><a class="code" href="classhcan_1_1eds__block.html#7b849f2c7072a95dab2081070a0f026c">00057</a>             uint8_t <a class="code" href="classhcan_1_1eds__block.html#7b849f2c7072a95dab2081070a0f026c">type</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_type; }
+<a name="l00058"></a><a class="code" href="classhcan_1_1eds__block.html#d0e51b474ec22ffb7c56efe4cdf7ce1e">00058</a>             uint8_t <a class="code" href="classhcan_1_1eds__block.html#d0e51b474ec22ffb7c56efe4cdf7ce1e">size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_size; }
+<a name="l00059"></a><a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">00059</a>             uint16_t <a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_address; }
+<a name="l00060"></a>00060             uint8_t <a class="code" href="classhcan_1_1eds__block.html#06434d1ee09d11e711fba0689616383c">field</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key);
+<a name="l00061"></a>00061             uint16_t <a class="code" href="classhcan_1_1eds__block.html#164bcb7df3fdb8625f0e663a4f4a7d22">uint16_field</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key);
+<a name="l00062"></a>00062             <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1eds__block.html#b6e52382fc6c2be423fa78b9d2cae65e">strfield</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key);
+<a name="l00063"></a>00063             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__block.html#0fa0660d4974f65834754ded3dde3018">set_field_uint8</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key, uint8_t v);
+<a name="l00064"></a>00064             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__block.html#2300eb17177ead03b2be2859d493209e">set_field_uint16</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key, uint16_t v);
+<a name="l00065"></a>00065             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__block.html#b7a9e79c7095fe46291d507132f2c87e">set_field_str</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;v);
+<a name="l00066"></a>00066             <span class="keyword">const</span> <a class="code" href="eds__desc_8h.html#a9d6a2a7f0c697f8e6db1f2f6d878f3b">eds_block_fields_t</a> &amp;<a class="code" href="classhcan_1_1eds__block.html#36c9419cc70dc4b19b4ace0713591d76">fields</a>() <span class="keyword">const</span>;
+<a name="l00067"></a>00067             <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classhcan_1_1eds__block.html#da1c236e1901db66820065283471bd23">field_datatype</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key) <span class="keyword">const</span>;
+<a name="l00068"></a>00068     };
+<a name="l00069"></a>00069 
+<a name="l00078"></a><a class="code" href="classhcan_1_1eds__connection.html">00078</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a>
+<a name="l00079"></a>00079     {
+<a name="l00080"></a>00080         <span class="keyword">public</span>:
+<a name="l00084"></a><a class="code" href="classhcan_1_1eds__connection.html#8cb7833abbf57a69c06d2ea6ed40a948">00084</a>             <span class="keyword">typedef</span> std::vector&lt;eds_block&gt; <a class="code" href="classhcan_1_1eds__connection.html#8cb7833abbf57a69c06d2ea6ed40a948">eds_blocks</a>;
+<a name="l00085"></a>00085         <span class="keyword">private</span>:
+<a name="l00086"></a>00086             <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;m_bcon;
+<a name="l00087"></a>00087             <a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;m_tcon;
+<a name="l00088"></a>00088             <a class="code" href="classhcan_1_1eds__connection.html#8cb7833abbf57a69c06d2ea6ed40a948">eds_blocks</a> m_blocks;
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090         <span class="keyword">public</span>:
+<a name="l00091"></a>00091             <a class="code" href="classhcan_1_1eds__connection.html#4d826c83f695cdfee9f66cfb59d38503">eds_connection</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;<a class="code" href="classhcan_1_1eds__connection.html#e669a4bf2304d3b20cfa58ef8835cfb4">bcon</a>);
+<a name="l00092"></a>00092             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1eds__connection.html#6398f28c1f2f1e5e8eb3696818b3685d">~eds_connection</a>();
+<a name="l00098"></a>00098             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">update</a>();
+<a name="l00104"></a>00104             <span class="keywordtype">size_t</span> <a class="code" href="classhcan_1_1eds__connection.html#027276a56b0aa4acb505fb18d9fcbd0e">space_free</a>() <span class="keyword">const</span>;
+<a name="l00105"></a>00105             <span class="keywordtype">size_t</span> <a class="code" href="classhcan_1_1eds__connection.html#10dc396906f96cf0541d4f4de2780434">space_used</a>() <span class="keyword">const</span>;
+<a name="l00106"></a><a class="code" href="classhcan_1_1eds__connection.html#e669a4bf2304d3b20cfa58ef8835cfb4">00106</a>             <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;<a class="code" href="classhcan_1_1eds__connection.html#e669a4bf2304d3b20cfa58ef8835cfb4">bcon</a>() { <span class="keywordflow">return</span> m_bcon; };
+<a name="l00112"></a><a class="code" href="classhcan_1_1eds__connection.html#68312d4d37395014849696321489b93a">00112</a>             <a class="code" href="classhcan_1_1eds__connection.html#8cb7833abbf57a69c06d2ea6ed40a948">eds_blocks</a> &amp;<a class="code" href="classhcan_1_1eds__connection.html#68312d4d37395014849696321489b93a">blocks</a>() { <span class="keywordflow">return</span> m_blocks; };
+<a name="l00113"></a>00113             <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;<a class="code" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">block_by_address</a>(uint16_t address);
+<a name="l00114"></a>00114             <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;<a class="code" href="classhcan_1_1eds__connection.html#8f674468e5ea4235480f84c54fa674bc">create_block</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type_name);
+<a name="l00115"></a>00115             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__connection.html#e7f68b11d62a9ac9dc08da2ffb1ca8a2">delete_block</a>(<span class="keyword">const</span> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;block);
+<a name="l00116"></a>00116             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__connection.html#e301ff324b1f11e3a3505dbc50dc3d1d">defragment</a>();
+<a name="l00117"></a>00117             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1eds__connection.html#9a2de00c965afb707e23f152fb5c87de">format</a>();
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119     };
+<a name="l00120"></a>00120 };
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

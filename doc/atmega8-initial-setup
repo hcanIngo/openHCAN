@@ -1,0 +1,48 @@
+
+Wie wird ein Atmega8 initialisiert ?
+------------------------------------
+
+- externen Osz einschalten
+- Bootloader auf 2k
+- Jump-to-Bootloader on reset
+- Bootload Speicher schuetzen
+- WD Enabled
+- Brownout Detection enabled
+- Brownout Level = 1 (fuer 3.3 Vcc)
+
+dazu Fuse Hi Bits wie folgt programmieren (von Bit 7 zu bit 0):
+- RESET pin active: 1
+- WDTON:            0 (active)
+- SPIEN:            0 (active)
+- CKOPT:            0 (noisy env)
+- EESAVE:           0 (save EE von chip erase)
+- BOOTSZ1:          0
+- BOOTSZ0:          0
+- BOOTRST:          0
+
+Low-Byte:
+--------
+- BODLEVEL          1 (fuer 3.3V)
+- BODEN             0 (enabled)
+- SUT1              0 (startuptime)
+- SUT0              0
+- CLSEL3            1
+- CLSEL2            1
+- CLSEL1            1
+- CLSEL0            0
+
+CLSEL: externer Oszi.
+
+-> fuse hi byte = 0x90
+-> fuse lo byte = 0x8e
+-> meme lock byte = 0x2f
+
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_fuse_h=0x90
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_fuse_l=0x8e
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_lock=0x2f
+
+mah, Fri Jan 20 10:55:11 CET 2006
+- fuer Brown-out-Detection disabled:
+  uisp -dlpt=/dev/parport0 -dprog=dapa --wr_fuse_l=0x4f
+- wollen wir aber std maessig anlassen
+

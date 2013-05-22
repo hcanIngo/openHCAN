@@ -1,0 +1,43 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+CANFrame	frame.h	/^} CANFrame;$/;"	t
+CANFrame	main.c	/^} CANFrame;$/;"	t	file:
+FRAME_H	frame.h	2;"	d
+HOSTIFACEHANDLER_H	hostifacehandler.h	2;"	d
+MAX_CONNECTIONS	main.c	44;"	d	file:
+MAX_POOL	main.c	43;"	d	file:
+SOCKET_H	socket.h	2;"	d
+UNIX_UART_H	unix_uart.h	2;"	d
+add_frame_to_pool	main.c	/^void add_frame_to_pool(int dst_fd, CANFrame *f)$/;"	f
+char_available	unix_uart.c	/^int char_available(int uart_fd)$/;"	f
+connections	main.c	/^int connections[MAX_CONNECTIONS];$/;"	v
+convert_hexstr2int	hostifacehandler.c	/^uint8_t convert_hexstr2int(char msb, char lsb)$/;"	f
+data	frame.h	/^	uint8_t  data[8];$/;"	m
+data	main.c	/^	uint8_t  data[8];$/;"	m	file:
+deliver_frame	main.c	/^void deliver_frame(CANFrame *f, int src_fd)$/;"	f
+dest_fd	main.c	/^	int dest_fd;$/;"	m	file:
+firstBitsChar	hostifacehandler.c	/^int firstBitsChar = -1;$/;"	v
+frame	main.c	/^	CANFrame frame;$/;"	m	file:
+handle_HI_io	hostifacehandler.c	/^void handle_HI_io(HCAN_Queue *queue, fd_set *fdset)$/;"	f
+handle_serial_command	hostifacehandler.c	/^void handle_serial_command(HCAN_Queue *queue, uint8_t command)$/;"	f
+hexchars	hostifacehandler.c	/^char hexchars[] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d',$/;"	v
+ibuffer	hostifacehandler.c	/^volatile uint8_t ibuffer[64];$/;"	v
+id	frame.h	/^	uint32_t id;$/;"	m
+id	main.c	/^	uint32_t id;$/;"	m	file:
+iindex	hostifacehandler.c	/^volatile uint8_t iindex = 0;$/;"	v
+init_fd_set	socket.c	/^void init_fd_set(fd_set *fdset, int *max_fds, int sock_fd, $/;"	f
+main	main.c	/^int main()$/;"	f
+open_server_socket	socket.c	/^int open_server_socket(int port)$/;"	f
+pool	main.c	/^pool_entry pool[MAX_POOL];$/;"	v
+pool_entry	main.c	/^} pool_entry;$/;"	t	file:
+recchar	unix_uart.c	/^char recchar(int uart_fd)$/;"	f
+send_char_to_HT	hostifacehandler.c	/^void send_char_to_HT(int uart_fd, uint8_t c)$/;"	f
+send_command_to_HT	hostifacehandler.c	/^void send_command_to_HT(int uart_fd, uint8_t command)$/;"	f
+sendchar	unix_uart.c	/^void sendchar(int uart_fd, char c)$/;"	f
+size	frame.h	/^	uint32_t  size;$/;"	m
+size	main.c	/^	uint32_t  size;$/;"	m	file:
+uart_init	unix_uart.c	/^int uart_init()$/;"	f

@@ -1,0 +1,12 @@
+<area shape="rect" href="$classhcan_1_1board__driver.html#10318a64a0e599689c5e29645369ae96" title="hcan::board_driver::cmd_reset" alt="" coords="381,56,597,83">
+<area shape="rect" href="$classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="787,5,989,32">
+<area shape="rect" href="$classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="788,107,988,133">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#cb461e348f34327424af9ecb28a7bf52" title="hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK" alt="" coords="308,259,671,285">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#2b586924333338ea4e920fc1bbcfd92e" title="hcan::hcan_transport::send_DEVICE_BOOT_STOP" alt="" coords="721,157,1055,184">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#70999ffdae95b2718551d18162654cd5" title="hcan::hcan_transport::send_DEVICE_RESET" alt="" coords="740,56,1036,83">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1104,69,1312,96">
+<area shape="rect" href="$classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1131,145,1285,172">
+<area shape="rect" href="$classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="820,208,956,235">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="769,259,1007,285">
+<area shape="rect" href="$classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="823,309,953,336">
+<area shape="rect" href="$classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="825,360,951,387">

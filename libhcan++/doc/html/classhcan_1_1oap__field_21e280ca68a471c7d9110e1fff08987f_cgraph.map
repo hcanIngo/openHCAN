@@ -1,0 +1,13 @@
+<area shape="rect" href="$classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4" title="hcan::oap_field::value" alt="" coords="544,195,704,221">
+<area shape="rect" href="$classhcan_1_1oap__field.html#505456ee723ebd939ef6ffd7c2e6a764" title="hcan::oap_field::value_as_time" alt="" coords="279,220,495,247">
+<area shape="rect" href="$classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="825,68,1028,95">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#627e386d27e3c39b67b995f65044e9ac" title="hcan::hcan_transport::recv_FIELD_READ_REPLAY" alt="" coords="763,119,1091,145">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#c25d5620b81ebe58da48f291d726fa8c" title="hcan::hcan_transport::send_FIELD_READ_REQUEST" alt="" coords="753,195,1100,221">
+<area shape="rect" href="$classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="827,245,1027,272">
+<area shape="rect" href="$classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47" title="hcan::board_connection::tcon" alt="" coords="821,296,1032,323">
+<area shape="rect" href="$classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1200,5,1336,32">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1149,56,1387,83">
+<area shape="rect" href="$classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1203,107,1333,133">
+<area shape="rect" href="$classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1205,157,1331,184">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1164,208,1372,235">
+<area shape="rect" href="$classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1191,259,1345,285">

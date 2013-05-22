@@ -1,0 +1,780 @@
+<eds-definitions>
+
+	<block type="10" name="taster" size="3">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="gruppe" pos="2" />
+		Ein Taster-Device kann z.Z. zum Schalten von
+		Powerports (Lampen,Steckdosen) oder Steuern von Roll"aden
+		verwendet werden.
+		Feature Bits (Aktivierung durch Setzen):
+		Bit 0: 	Anstelle der normalen Entprellzeit von 30msec wird
+			eine Entprellzeit von einer Sekunde verwendet.
+		Bit 1: 	Konfiguration als Rollladentaster auf.
+		Bit 2: 	Konfiguration als Rollladentaster ab.
+	</block>
+
+	<block type="11" name="powerport" size="6">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="gruppe0" pos="2" />
+		<field datatype="uint8_t" name="gruppe1" pos="3" />
+		<field datatype="uint8_t" name="gruppe2" pos="4" />
+		<field datatype="uint8_t" name="gruppe3" pos="5" />
+		Ein Powerport schaltet ein Relais, das wiederum 230V
+		Verbraucher schaltet. Im Normalfall ist das entweder
+		eine Lampe oder eine Steckdose. 
+		Feature Bits (Aktivierung durch Setzen):
+		Bit 0:	Impulsausgang (zur Ansteuerung bistabiler Relais)
+		Bit 1:	Verz"ogert ein (z.B. Badzimmerl"ufter)
+		Bit 2:	Automatisch aus (z.B. Speisekammerl"ufter, Haust"urklingel, Treppenhausbeleuchtung)
+		Bit 3:	Nachlauf (z.B. Beamersteckdose)
+			Fuer Bits 1-3 ist in gruppe3 ist die Nachlaufzeit
+			in Sekunden einzutragen (max. 255 Sekunden).
+		Bit 4 und 5: Benoetigt fuer Wecker (weck_page) und frei zu halten.
+	</block>
+
+	<block type="12" name="rolladen" size="13">
+		<field datatype="uint8_t" name="port_power" pos="0" />
+		<field datatype="uint8_t" name="port_dir" pos="1" />
+		<field datatype="uint8_t" name="taster" pos="2" />
+		<field datatype="uint8_t" name="dummy" pos="3" />
+		<field datatype="uint8_t" name="feature" pos="4" />
+		<field datatype="uint16_t" name="laufzeit" pos="5" />
+		<field datatype="uint16_t" name="max_rekalib" pos="7" />
+		<field datatype="uint8_t" name="gruppe0" pos="9" />
+		<field datatype="uint8_t" name="gruppe1" pos="10" />
+		<field datatype="uint8_t" name="gruppe2" pos="11" />
+		<field datatype="uint8_t" name="gruppe3" pos="12" />
+		Ein Rolladen wird "uber zwei Relais gesteuert 
+		(port_power, port_dir). Der Powerport schaltet den Motor ein/aus,
+		der Dirport (Direction Port) schaltet zwischen den Laufrichtungen
+		um. 
+		Der Rolladen reagiert auf Botschaften einer
+		Tastergruppe(n). "Uber den Parameter \emph{laufzeit} wird
+		die Gesamtlaufzeit in 10tel Sekunden angegeben.
+		\emph{max_rekalib} gibt an, nach wievielen zur"uckgelegten
+		10tel Sekunden der Rolladen sich neu kalibrien (d.h. ganz hoch oder 
+		runter fahren) muss. 
+	</block>
+
+
+	<block type="13" name="heizung" size="38">
+		<field datatype="uint8_t" name="id" pos="0" />
+		<field datatype="uint8_t" name="port" pos="1" />
+		<field datatype="uint8_t" name="pwm_periode" pos="2" />
+		<field datatype="uint8_t" name="sensor_id" pos="3" />
+		<field datatype="uint8_t" name="zeitzone0_id" pos="4" />
+		<field datatype="uint16_t" name="zeitzone0_temp" pos="5" />
+		<field datatype="uint8_t" name="zeitzone1_id" pos="7" />
+		<field datatype="uint16_t" name="zeitzone1_temp" pos="8" />
+		<field datatype="uint8_t" name="zeitzone2_id" pos="10" />
+		<field datatype="uint16_t" name="zeitzone2_temp" pos="11" />
+		<field datatype="uint8_t" name="zeitzone3_id" pos="13" />
+		<field datatype="uint16_t" name="zeitzone3_temp" pos="14" />
+		<field datatype="uint8_t" name="zeitzone4_id" pos="16" />
+		<field datatype="uint16_t" name="zeitzone4_temp" pos="17" />
+		<field datatype="uint8_t" name="zeitzone5_id" pos="19" />
+		<field datatype="uint16_t" name="zeitzone5_temp" pos="20" />
+		<field datatype="uint8_t" name="zeitzone6_id" pos="22" />
+		<field datatype="uint16_t" name="zeitzone6_temp" pos="23" />
+		<field datatype="uint8_t" name="zeitzone7_id" pos="25" />
+		<field datatype="uint16_t" name="zeitzone7_temp" pos="26" />
+		<field datatype="uint8_t" name="feature" pos="28" />
+		<field datatype="uint8_t" name="hysterese" pos="29" />
+		<field datatype="uint8_t" name="reed0" pos="30" />
+		<field datatype="uint8_t" name="reed1" pos="31" />
+		<field datatype="uint8_t" name="reed2" pos="32" />
+		<field datatype="uint8_t" name="reed3" pos="33" />
+		<field datatype="uint8_t" name="reed4" pos="34" />
+		<field datatype="uint8_t" name="reed5" pos="35" />
+		<field datatype="uint8_t" name="reed6" pos="36" />
+		<field datatype="uint8_t" name="reed7" pos="37" />
+		Das Heizungsdevice, definiert "uber die \emph(id), steuert
+		einen Ausgang mit 24V PWM (Pulsweitenmodulation). Es wird mit
+		\emph{pwm_periode} die Periode in Sekunden eingestellt. Die
+		Ist-Temperatur wird vom \emph{sensor_id} Sensor verwendet, die
+		Soll-Temperatur kann je nach Zeitzone anders vorgegeben werden.
+		Die \emph{reed0..7} Felder werden verwendet, um einen Heiz-Stop
+		bei offenen Fenster zu konfigurieren. Die Heizung kann auf
+		bis zu 8 Fenster/Tueren reagieren und ggfls. das Heizen unterbrechen.
+		Ist das Feature-Bit 0 gesetzt, so meldet die Heizung bei Waermebedarf
+		200% anstatt 100%. Dies kann verwendet werden, wenn in einem Zimmer
+		2 Heizkoerper parallel geschaltet sind.
+	</block>
+
+	<block type="14" name="tempsensor" size="21">
+		<field datatype="uint8_t" name="io_pin" pos="0" />
+		<field datatype="uint8_t" name="gruppe" pos="1" />
+		<field datatype="uint8_t" name="modus" pos="2" />
+		<field datatype="uint8_t" name="interval" pos="3" />
+		<field datatype="char" name="ow_id" pos="4" size="17"/>
+		Ein Temperatur-Sensor vom Typ Dallas DS18B20 ist an Pin/Port
+		\emph{io_pin} angeschlossen. Die Sensor Gruppe ist \emph{gruppe}.
+		Der Modus kann entweder 0 (d.h. deaktiviert) oder 1 (automatisch
+		senden) sein. Im Automatik-Modus gibt \emph{interval} das Interval
+		in Sekunden an, in dem die Messwerte versendet werden sollen.
+		Da mehrere DS18B20 an einem 1Wire Bus h"angen k"onnen, ist in
+		\emph{ow_id} die 1Wire-ID zu hinterlegen. Diese ID kann "uber den
+		TELICAN Befehl \emph{discover-1wire} herausgefunden werden.
+	</block>
+
+	<block type="15" name="reedkontakt" size="4">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="gruppe" pos="1" />
+		<field datatype="uint8_t" name="modus" pos="2" />
+		<field datatype="uint8_t" name="feature" pos="3" />
+		Ein Reedkontakt wird zum Erkennen von offenen T"uren und Fenstern
+		verwendet. Wenn der Kontakt offen ist, so sendet das Device in
+		regelm"assigen Abst"anden mit der Reedkontakt-Gruppen ID
+		\emph{gruppe}, sofern \emph{modus} 1 ist (siehe \emph{modus} beim
+		\emph{temp_sensor}).
+	</block>
+
+	<block type="16" name="timeservice" size="3">
+		<field datatype="uint8_t" name="level" pos="0" />
+		<field datatype="uint8_t" name="takeover_time" pos="1" />
+		<field datatype="uint8_t" name="interval" pos="2" />
+		Ein Time Service Device sendet Zeit- und Datumsinformationen,
+		damit alle Boards mit der gleichen Zeit arbeiten. Die Details
+		zum Zeit-Dienst k"onnen im Kapitel ''Time Services'' nachgelesen
+		werden.
+	</block>
+
+	<block type="17" name="lichtzone" size="11">
+		<field datatype="uint8_t" name="toggle_gruppe0" pos="0" />
+		<field datatype="uint8_t" name="toggle_gruppe1" pos="1" />
+		<field datatype="uint8_t" name="toggle_gruppe2" pos="2" />
+		<field datatype="uint8_t" name="toggle_gruppe3" pos="3" />
+		<field datatype="uint8_t" name="off_gruppe0" pos="4" />
+		<field datatype="uint8_t" name="off_gruppe1" pos="5" />
+		<field datatype="uint8_t" name="on_gruppe0" pos="6" />
+		<field datatype="uint8_t" name="on_gruppe1" pos="7" />
+		<field datatype="uint8_t" name="timer_delay" pos="8" />
+		<field datatype="uint8_t" name="action_gruppe0" pos="9" />
+		<field datatype="uint8_t" name="action_gruppe1" pos="10" />
+	</block>
+
+	<block type="18" name="zeitzone" size="6">
+		<field datatype="uint8_t" name="gruppe" pos="0" />
+		<field datatype="uint8_t" name="day_pattern" pos="1" />
+		<field datatype="uint8_t" name="from_hour" pos="2" />
+		<field datatype="uint8_t" name="from_minute" pos="3" />
+		<field datatype="uint8_t" name="to_hour" pos="4" />
+		<field datatype="uint8_t" name="to_minute" pos="5" />
+		Eine Zeitzone ist eine allgemein gehaltene Information; sie
+		wird z.B. von den Heizungen verwendet, um festzulegen, wann
+		welche Soll-Temperatur gilt. Wichtig ist: Die Zeitzone
+		\textbf{muss} auf dem Board konfiguriert sein, auf dem auch
+		die Devices konfiguriert sind, die sie verwenden. Die
+		\emph{gruppe} wird als Zeitzonen-ID verwendet und macht im
+		Moment nur als ID (eindeutig) Sinn.
+
+		Das \emph{day_pattern} ist eine 8Bit breite Zahl, deren
+		Bits f"ur die Wochentage stehen: Ist ein Bit gesetzt, so
+		gilt die Zeitzone an diesem Wochentag, andernfalls nicht.
+		Bit1 = Montag, Bit7 = Sonntag; Achtung: Bit 0 wird nicht
+		verwendet. Beispiel:
+		\begin{verbatim}
+			Mo,Mi => 0x0a
+			Di,Do => 0x14
+			Mo,Do,Mi,Do,Fr,Sa,So => 0xfe
+			Sa,So => 0xc0
+		\end{verbatim}
+	</block>
+
+	<block type="19" name="dunstabzugport" size="5">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="reed_gruppe0" pos="1" />
+		<field datatype="uint8_t" name="freischalt_taster" pos="2" />
+		<field datatype="uint8_t" name="freischalt_zeit" pos="3" />
+		<field datatype="uint8_t" name="reed_gruppe1" pos="4" />
+		Ein Dunstabzug-Port lauscht auf Meldungen des gegebenen Reedkontakts
+		und schaltet ein Relais, wenn mindestens eines dieser Reedkontakte
+		offen ist.
+		Dies ist bei einem offenden Kamin Vorschrift.
+		Ueber den Taster, der ueber taster_gruppe definiert ist, wird der
+		Dunstabzug fuer freischalt_zeit Minuten freigeschaltet.
+	</block>
+
+	<block type="20" name="zeitschaltuhr" size="10">
+		<field datatype="uint8_t" name="power_gruppe" pos="0" />
+		<field datatype="uint8_t" name="automatikEin_schalter_gruppe" pos="1" />
+		<field datatype="uint8_t" name="zeitzone0_id" pos="2" />
+		<field datatype="uint8_t" name="zeitzone1_id" pos="3" />
+		<field datatype="uint8_t" name="zeitzone2_id" pos="4" />
+		<field datatype="uint8_t" name="zeitzone3_id" pos="5" />
+		<field datatype="uint8_t" name="zeitzone4_id" pos="6" />
+		<field datatype="uint8_t" name="zeitzone5_id" pos="7" />
+		<field datatype="uint8_t" name="zeitzone6_id" pos="8" />
+		<field datatype="uint8_t" name="zeitzone7_id" pos="9" />
+		Die Zeitschaltuhr schaltet die Verbraucher der power_gruppe
+		in den konfigurierten Zeitzonen ein. Mit dem automatikEin-Schalter
+		kann die Automatik deaktiviert werden.
+	</block>
+
+	<block type="21" name="poti" size="3">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="gruppe" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="2" />
+		Der Mittelabgriff eines Potis wird an einem der AD Ports (IN8-IN15)
+		angeschlossen. "Andert sich die Einstellung des Potis signifikant,
+		wird ein HCAN_HES_POTI_POS_CHANGED gesendet. 
+		Eine m"ogliche Verwendung ist im Zusammenspiel mit dem Multitaster.
+		Mit dem Multitaster k"onnen dann viele Tast-Events auch mit nur 
+		1-2 Tastern realisiert werden. Genauso k"onnte ein Dimmer per 
+		Drehgeber (Poti) gesteuert werden.
+	</block>
+
+	<block type="25" name="schalter" size="3">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="gruppe" pos="2" />
+		Ein Schalter-Device kann z.Z. zum Schalten von
+		Powerports (Lampen,Steckdosen) verwendet werden.
+		Ist Bit 0 des feature Bytes gesetzt, so wird der am
+		port gelesene Zustand invertiert.
+		Ist Bit 1 des feature Bytes gesetzt, so ist der internen Pullup
+		am port deaktiviert.
+	</block>
+
+	<block type="28" name="zentralheizungspumpe" size="3">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="gruppe" pos="2" />
+		Ein zentralheizungspumpe-Device wird zum Schalten 
+		der Zentralheizungspumpe u"ber Powerport verwendet.
+	</block>
+
+	<block type="22" name="tastdimmer" size="11">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="feedback_guppe" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="2" />
+		<field datatype="uint8_t" name="gruppe0" pos="3" />
+		<field datatype="uint8_t" name="gruppe1" pos="4" />
+		<field datatype="uint8_t" name="gruppe2" pos="5" />
+		<field datatype="uint8_t" name="gruppe3" pos="6" />
+		<field datatype="uint8_t" name="gruppe4" pos="7" />
+		<field datatype="uint8_t" name="gruppe5" pos="8" />
+		<field datatype="uint8_t" name="gruppe6" pos="9" />
+		<field datatype="uint8_t" name="gruppe7" pos="10" />
+		Ein tastdimmer Device steuert einen Tast-Dimmer, welcher
+		an Port 'port' angeschlossen ist. Der Zustand des Dimmers
+		kann ueber einen Feedback Port (feedback_gruppe) verarbeitet
+		werden.
+	</block>
+
+	<block type="24" name="rolladenSchlitzpos" size="3">
+		<field datatype="uint8_t" name="reed0" pos="0" />
+		<field datatype="uint8_t" name="reed1" pos="1" />
+		<field datatype="uint8_t" name="rolladen" pos="2" />
+		Ein RolladenSchlitzpos-Objekt managt die 
+		Schlitzpositionsauftr"age, wenn: 
+		- ein Fensterreedkontakt einem Rolladen zugeordnet ist  oder
+		- zwei Einzelfensterreedkontakte einem Rolladen zugeordnet sind.
+	</block>
+
+	<block type="26" name="helligkeitssensor" size="4">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="gruppe" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="2" />
+		<field datatype="uint8_t" name="sendCycleMins" pos="3" />
+		Ein Spannungsteiler aus einen SFH300 und 47kOhm Widerstand 
+		wird an einem der AD Ports (IN8-IN15) angeschlossen:  
+		SFH300-Emitter an Masse und den Kollektor an den AD Port.
+		47kOhm Widerstand an +5V und an den AD Port.
+		Helligkeitsnachrichten werden zyklisch verschickt. Die La"nge
+		dieser Zyklen wird in sendCycleMins festgelegt.
+		
+	</block>
+
+	<block type="27" name="rolladenAutomat" size="10">
+		<field datatype="uint8_t" name="rolladen_gruppe" pos="0" />
+		<field datatype="uint8_t" name="rolladen_soll_position" pos="1" />
+		<field datatype="uint8_t" name="automatikEin_schalter_gruppe" pos="2" />
+		<field datatype="uint8_t" name="feature" pos="3" />
+		<field datatype="uint8_t" name="zeitzone0_id" pos="4" />
+		<field datatype="uint8_t" name="zeitzone1_id" pos="5" />
+		<field datatype="uint8_t" name="helligkeits_gruppe" pos="6" />
+		<field datatype="uint16_t" name="helligkeitsschwelle" pos="7" />
+		<field datatype="uint8_t" name="helligkeitswertueberschreitung" pos="9" />
+		Helligkeitswertueberschreitung=1: Reaktion auf U"berschreitung der helligkeitsschwelle
+		Helligkeitswertueberschreitung=0: Reaktion auf Unterschreitung der helligkeitsschwelle
+		rolladen_soll_position =   0 (Rollladen schliessen)
+		rolladen_soll_position = 100 (Rollladen o"ffnen)
+		rolladen_soll_position =  40 (Rollladen Sonnenschutzposition)
+	</block>
+
+	<block type="29" name="powerportAutomat" size="8">
+		<field datatype="uint8_t" name="powerport_gruppe" pos="0" />
+		<field datatype="uint8_t" name="steller_gruppe" pos="1" />	
+		<field datatype="uint8_t" name="automatikEin_schalter_gruppe" pos="2" />
+		<field datatype="uint8_t" name="feature" pos="3" />
+		<field datatype="uint8_t" name="helligkeits_gruppe" pos="4" />
+		<field datatype="uint16_t" name="helligkeitsschwelle" pos="5" />
+		<field datatype="uint8_t" name="helligkeitswertueberschreitung" pos="7" />
+		Helligkeitswertueberschreitung=1: Reaktion auf U"berschreitung der helligkeitsschwelle
+		Helligkeitswertueberschreitung=0: Reaktion auf Unterschreitung der helligkeitsschwelle
+	</block>
+
+	<block type="23" name="multitaster" size="13">
+		<field datatype="uint8_t" name="poti_gruppe" pos="0" />
+		<field datatype="uint8_t" name="taster_port" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="2" />
+		<field datatype="uint8_t" name="gruppe0" pos="3" />
+		<field datatype="uint8_t" name="gruppe1" pos="4" />
+		<field datatype="uint8_t" name="gruppe2" pos="5" />
+		<field datatype="uint8_t" name="gruppe3" pos="6" />
+		<field datatype="uint8_t" name="gruppe4" pos="7" />
+		<field datatype="uint8_t" name="gruppe5" pos="8" />
+		<field datatype="uint8_t" name="gruppe6" pos="9" />
+		<field datatype="uint8_t" name="gruppe7" pos="10" />
+		<field datatype="uint8_t" name="gruppe8" pos="11" />
+		<field datatype="uint8_t" name="gruppe9" pos="12" />
+		Der Multitaster sendet, wenn der Taster (taster_port) 
+		gedr"uckt werden, je nach Stellung der Potis
+		(welches in der poti_gruppe definiert ist)
+		mit einer seiner Gruppen (gruppe0 .. gruppe9). Die Skaleneinteilung
+		ergibt sich aus den konfigurierten Gruppen (d.h. gruppen, die != 255
+		sind).
+		Feature Bits (Aktivierung durch Setzen):
+		Bit 0: 	Anstelle der normalen Entprellzeit von 30msec wird
+			eine Entprellzeit von einer Sekunde verwendet.
+		Bit 1: 	Konfiguration als Rollladentaster auf.
+		Bit 2: 	Konfiguration als Rollladentaster ab.
+	</block>
+
+	<block type="30" name="rolladen_id_assignment" size="20">
+		<field datatype="uint8_t" name="roll_id_0" pos="0" />
+		<field datatype="uint8_t" name="roll_id_1" pos="1" />
+		<field datatype="uint8_t" name="roll_id_2" pos="2" />
+		<field datatype="uint8_t" name="roll_id_3" pos="3" />
+		<field datatype="uint8_t" name="roll_id_4" pos="4" />
+		<field datatype="uint8_t" name="roll_id_5" pos="5" />
+		<field datatype="uint8_t" name="roll_id_6" pos="6" />
+		<field datatype="uint8_t" name="roll_id_7" pos="7" />
+		<field datatype="uint8_t" name="roll_id_8" pos="8" />
+		<field datatype="uint8_t" name="roll_id_9" pos="9" />
+		<field datatype="uint8_t" name="roll_id_10" pos="10" />
+		<field datatype="uint8_t" name="roll_id_11" pos="11" />
+		<field datatype="uint8_t" name="roll_id_12" pos="12" />
+		<field datatype="uint8_t" name="roll_id_13" pos="13" />
+		<field datatype="uint8_t" name="roll_id_14" pos="14" />
+		<field datatype="uint8_t" name="roll_id_15" pos="15" />
+		<field datatype="uint8_t" name="roll_id_16" pos="16" />
+		<field datatype="uint8_t" name="roll_id_17" pos="17" />
+		<field datatype="uint8_t" name="roll_id_18" pos="18" />
+		<field datatype="uint8_t" name="roll_id_19" pos="19" />
+		robot: Globaler Datensatz, in dem die Rolladen-Gruppen-IDs
+		den Indizies zugewiesen werden: roll_id_0 ist die
+		Rolladen-Gruppe des Index 0, roll_id_1 des Index 1 etc.
+		Die verschiedenen Agenten verwenden nur noch die Indizes, somit
+		wird EEPROM Platz gespart.
+	</block>
+
+	<block type="31" name="tag_nacht_agent" size="29">
+		<field datatype="uint8_t" name="out0" pos="0" />
+		<field datatype="uint8_t" name="process_order" pos="1" />
+		<field datatype="uint8_t" name="roll_conf_0" pos="2" />
+		<field datatype="uint8_t" name="roll_conf_1" pos="3" />
+		<field datatype="uint8_t" name="roll_conf_2" pos="4" />
+		<field datatype="uint8_t" name="roll_conf_3" pos="5" />
+		<field datatype="uint8_t" name="roll_conf_4" pos="6" />
+		<field datatype="uint8_t" name="roll_conf_5" pos="7" />
+		<field datatype="uint8_t" name="roll_conf_6" pos="8" />
+		<field datatype="uint8_t" name="roll_conf_7" pos="9" />
+		<field datatype="uint8_t" name="roll_conf_8" pos="10" />
+		<field datatype="uint8_t" name="roll_conf_9" pos="11" />
+		<field datatype="uint8_t" name="roll_conf_10" pos="12" />
+		<field datatype="uint8_t" name="roll_conf_11" pos="13" />
+		<field datatype="uint8_t" name="roll_conf_12" pos="14" />
+		<field datatype="uint8_t" name="roll_conf_13" pos="15" />
+		<field datatype="uint8_t" name="roll_conf_14" pos="16" />
+		<field datatype="uint8_t" name="roll_conf_15" pos="17" />
+		<field datatype="uint8_t" name="roll_conf_16" pos="18" />
+		<field datatype="uint8_t" name="roll_conf_17" pos="19" />
+		<field datatype="uint8_t" name="roll_conf_18" pos="20" />
+		<field datatype="uint8_t" name="roll_conf_19" pos="21" />
+		<field datatype="uint8_t" name="hell_grenze" pos="22" />
+		<field datatype="uint8_t" name="dunkel_grenze" pos="23" />
+		<field datatype="uint8_t" name="dummy0" pos="24" />
+		<field datatype="uint8_t" name="dummy1" pos="25" />
+		<field datatype="uint8_t" name="dummy2" pos="26" />
+		<field datatype="uint8_t" name="dummy3" pos="27" />
+		<field datatype="uint8_t" name="active" pos="28" />
+
+		roll_conf byte:
+		bit0 = Tagpos aktiv, bit1 = Nachtpos aktiv, 
+		bit2:bit4 = Nachtpos (von 0..7 = 0..70%)
+		active:
+		bit0 = enabled/disabled
+	</block>
+
+	<block type="32" name="sonnenschutz_agent" size="36">
+		<field datatype="uint8_t" name="out0" pos="0" />
+		<field datatype="uint8_t" name="process_order" pos="1" />
+		<field datatype="uint8_t" name="roll_conf_0" pos="2" />
+		<field datatype="uint8_t" name="roll_conf_1" pos="3" />
+		<field datatype="uint8_t" name="roll_conf_2" pos="4" />
+		<field datatype="uint8_t" name="roll_conf_3" pos="5" />
+		<field datatype="uint8_t" name="roll_conf_4" pos="6" />
+		<field datatype="uint8_t" name="roll_conf_5" pos="7" />
+		<field datatype="uint8_t" name="roll_conf_6" pos="8" />
+		<field datatype="uint8_t" name="roll_conf_7" pos="9" />
+		<field datatype="uint8_t" name="roll_conf_8" pos="10" />
+		<field datatype="uint8_t" name="roll_conf_9" pos="11" />
+		<field datatype="uint8_t" name="roll_conf_10" pos="12" />
+		<field datatype="uint8_t" name="roll_conf_11" pos="13" />
+		<field datatype="uint8_t" name="roll_conf_12" pos="14" />
+		<field datatype="uint8_t" name="roll_conf_13" pos="15" />
+		<field datatype="uint8_t" name="roll_conf_14" pos="16" />
+		<field datatype="uint8_t" name="roll_conf_15" pos="17" />
+		<field datatype="uint8_t" name="roll_conf_16" pos="18" />
+		<field datatype="uint8_t" name="roll_conf_17" pos="19" />
+		<field datatype="uint8_t" name="roll_conf_18" pos="20" />
+		<field datatype="uint8_t" name="roll_conf_19" pos="21" />
+		<field datatype="uint8_t" name="ost_to_hour" pos="22" />
+		<field datatype="uint8_t" name="ost_to_min" pos="23" />
+		<field datatype="uint8_t" name="ost_schwelle" pos="24" />
+		<field datatype="uint8_t" name="sued_from_hour" pos="25" />
+		<field datatype="uint8_t" name="sued_from_min" pos="26" />
+		<field datatype="uint8_t" name="sued_to_hour" pos="27" />
+		<field datatype="uint8_t" name="sued_to_min" pos="28" />
+		<field datatype="uint8_t" name="sued_schwelle" pos="29" />
+		<field datatype="uint8_t" name="west_from_hour" pos="30" />
+		<field datatype="uint8_t" name="west_from_min" pos="31" />
+		<field datatype="uint8_t" name="west_schwelle" pos="32" />
+		<field datatype="uint8_t" name="hysterese" pos="33" />
+		<field datatype="uint8_t" name="flapinterval" pos="34" />
+		<field datatype="uint8_t" name="active" pos="35" />
+
+		roll_conf byte:
+		bit0 = Ost aktiv, bit1 = Sued aktiv, bit2 = West aktiv
+		bit3:bit5 = Sonnenschutz-Position (von 0..7 = 0..70%)
+
+		active:
+		bit0 = enabled/disabled
+	</block>
+
+	<block type="33" name="wetterschutz_agent" size="2">
+		<field datatype="uint8_t" name="out0" pos="0" />
+		<field datatype="uint8_t" name="process_order" pos="1" />
+	</block>
+
+	<block type="34" name="prio_agent" size="5">
+		<field datatype="uint8_t" name="in0" pos="0" />
+		<field datatype="uint8_t" name="in1" pos="1" />
+		<field datatype="uint8_t" name="in2" pos="2" />
+		<field datatype="uint8_t" name="out0" pos="3" />
+		<field datatype="uint8_t" name="process_order" pos="4" />
+	</block>
+
+	<block type="35" name="state2event_agent" size="3">
+		<field datatype="uint8_t" name="in0" pos="0" />
+		<field datatype="uint8_t" name="out0" pos="1" />
+		<field datatype="uint8_t" name="process_order" pos="2" />
+	</block>
+
+	<block type="36" name="zeitfilter_agent" size="19">
+		<field datatype="uint8_t" name="in0" pos="0" />
+		<field datatype="uint8_t" name="out0" pos="1" />
+		<field datatype="uint8_t" name="process_order" pos="2" />
+		<field datatype="uint8_t" name="roll_idx_0" pos="3" />
+		<field datatype="uint8_t" name="zz_id_0" pos="4" />
+		<field datatype="uint8_t" name="roll_idx_1" pos="5" />
+		<field datatype="uint8_t" name="zz_id_1" pos="6" />
+		<field datatype="uint8_t" name="roll_idx_2" pos="7" />
+		<field datatype="uint8_t" name="zz_id_2" pos="8" />
+		<field datatype="uint8_t" name="roll_idx_3" pos="9" />
+		<field datatype="uint8_t" name="zz_id_3" pos="10" />
+		<field datatype="uint8_t" name="roll_idx_4" pos="11" />
+		<field datatype="uint8_t" name="zz_id_4" pos="12" />
+		<field datatype="uint8_t" name="roll_idx_5" pos="13" />
+		<field datatype="uint8_t" name="zz_id_5" pos="14" />
+		<field datatype="uint8_t" name="roll_idx_6" pos="15" />
+		<field datatype="uint8_t" name="zz_id_6" pos="16" />
+		<field datatype="uint8_t" name="roll_idx_7" pos="17" />
+		<field datatype="uint8_t" name="zz_id_7" pos="18" />
+		roll_idx_X = 255: alle Rollaeden!
+		zz_id_X    = 0:   keine Zeitzone fuer diesen Eintrag.
+	</block>
+
+	<block type="37" name="flappingfilter_agent" size="3">
+		<field datatype="uint8_t" name="in0" pos="0" />
+		<field datatype="uint8_t" name="out0" pos="1" />
+		<field datatype="uint8_t" name="process_order" pos="2" />
+	</block>
+
+	<block type="90" name="heizungssteuerung" size="29">
+		<field datatype="uint8_t" name="pwm0" pos="0" />
+		<field datatype="uint8_t" name="pwm1" pos="1" />
+		<field datatype="uint8_t" name="pwm2" pos="2" />
+		<field datatype="uint8_t" name="pwm3" pos="3" />
+		<field datatype="uint8_t" name="pwm4" pos="4" />
+		<field datatype="uint8_t" name="pwm5" pos="5" />
+		<field datatype="uint8_t" name="pwm6" pos="6" />
+		<field datatype="uint8_t" name="pwm7" pos="7" />
+		<field datatype="uint8_t" name="pwm8" pos="8" />
+		<field datatype="uint8_t" name="pwm9" pos="9" />
+		<field datatype="uint8_t" name="pwm10" pos="10" />
+		<field datatype="uint8_t" name="pwm11" pos="11" />
+		<field datatype="uint8_t" name="pwm12" pos="12" />
+		<field datatype="uint8_t" name="pwm13" pos="13" />
+		<field datatype="uint8_t" name="pwm14" pos="14" />
+		<field datatype="uint8_t" name="pwm15" pos="15" />
+		<field datatype="uint8_t" name="pwm16" pos="16" />
+		<field datatype="uint8_t" name="pwm17" pos="17" />
+		<field datatype="uint8_t" name="pwm18" pos="18" />
+		<field datatype="uint8_t" name="pwm19" pos="19" />
+		<field datatype="uint8_t" name="pwm20" pos="20" />
+		<field datatype="uint8_t" name="pwm21" pos="21" />
+		<field datatype="uint8_t" name="pwm22" pos="22" />
+		<field datatype="uint8_t" name="pwm23" pos="23" />
+		<field datatype="uint8_t" name="pwm_heizung_off" pos="24" />
+		<field datatype="uint8_t" name="a" pos="25" />
+		<field datatype="uint8_t" name="b" pos="26" />
+		<field datatype="uint8_t" name="RL_max" pos="27" />
+		<field datatype="uint8_t" name="VT_min" pos="28" />
+		Speicherbereich fuer die HCAN Heizungssteuerung.
+		pwm_heizung_off ist der PWM Wert, die die Aussentemp so einstellt,
+		dass die Gastherme aus geht (Sommerbetrieb).
+		Fuer den VL Temperatur-Wertebereich von 36..60 Grad Celsius werden
+		die pwmX Werte experimentell ermittelt (Abstand: je 1K).
+
+		Wenn Waermebedarf vorhanden ist, so wird die VLsoll-Temp berechnet:
+		y = -a/16 * x + b;
+
+		Der Wert RL_max ist die maximale RL Temperatur (wegen Brennwert-
+		Nutzung).
+
+		VT_min ist das Minimun an offenen Ventilen, das erforderlich ist,
+		damit die Heizung laufen darf.
+	</block>
+
+	<block type="91" name="wetterstation_data" size="6">
+		<field datatype="uint8_t" name="offset_licht_ost" pos="0" />
+		<field datatype="uint8_t" name="offset_licht_sued" pos="1" />
+		<field datatype="uint8_t" name="offset_licht_west" pos="2" />
+		<field datatype="uint8_t" name="dummy0" pos="3" />
+		<field datatype="uint8_t" name="dummy1" pos="4" />
+		<field datatype="uint8_t" name="dummy2" pos="5" />
+		Dieses EDS Objekt dient der Wetterstation als Ablege der
+		Kalibrierwerte. Die Werte offset_licht_* werden als signed
+		int interpretiert, d.h. Werte von 0..127 sind positiv, werte von
+		255..128 sind negativ (255 => -1)
+	</block>
+
+	<block type="98" name="lcd_light_settings" size="3">
+		<field datatype="uint8_t" name="zeitzone_id" pos="0" />
+		<field datatype="uint8_t" name="backlight" pos="1" />
+		<field datatype="uint8_t" name="contrast" pos="2" />
+		Wenn die inaktive Beleuchtung eines Bedienfeldes z.B. nachts
+		dunkler sein soll, so kann in diesem EDS Objekt die passende
+		Info hinterlegt werden.
+	</block>
+
+	<block type="99" name="userpanel_shortcuts" size="8">
+		<field datatype="uint8_t" name="F1" pos="0" />
+		<field datatype="uint8_t" name="F2" pos="1" />
+		<field datatype="uint8_t" name="F3" pos="2" />
+		<field datatype="uint8_t" name="F4" pos="3" />
+		<field datatype="uint8_t" name="F5" pos="4" />
+		<field datatype="uint8_t" name="F6" pos="5" />
+		<field datatype="uint8_t" name="F7" pos="6" />
+		<field datatype="uint8_t" name="F8" pos="7" />
+		Dieses EDS Objekt dient den Userpanels zur Ablage der
+		Shortcut Page-IDs. Es sind mehr F-Tasten fuer groessere
+		Userpanel vorgesehen.
+	</block>
+
+	<block type="100" name="screensaver_page" size="4">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		Die screensaver_page (''Bildschirmschoner-Seite'') ist die
+		Seite, die normalerweise im inaktiven Betrieb des 
+		Bedienfeldes angezeigt wird. Sie zeigt den Wochentag, das
+		Datum und die Uhrzeit an. 
+
+		Der Parameter \verb#page_id# definiert die ID der Seite, also eine
+		eindeutige Nummer, anhand der sie identifiziert werden kann. Die
+		Parameter \verb#parent_id#,\verb#next_id# und \verb#prev_id#
+		beschreiben, wie die Seite in der Baumstruktur eingeordnet wird.
+		Sie sollte als Wurzel ganz oben stehen.
+	</block>
+
+	<block type="101" name="dir_page" size="17">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="char" name="name" pos="4" size="12" />
+		<field datatype="uint8_t" name="dummy" pos="16" />
+		dir_pages (''Verzeichnis/Menu"-Seiten'') sind Men"useiten, "uber
+		die man zu den verschiedenen Funktionen des Bedienfeldes navigiert.
+
+		Der Parameter \verb#page_id# definiert die ID der Seite, also eine
+		eindeutige Nummer, anhand der sie identifiziert werden kann. Die
+		Parameter \verb#parent_id#,\verb#next_id# und \verb#prev_id#
+		beschreiben, wie die Seite in der Baumstruktur eingeordnet wird.
+		Der Parameter \verb#name# ist der String, der als Men"uintrag 
+		angezeigt wird.
+	</block>
+
+	<block type="102" name="heiz_page" size="13">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="char" name="name" pos="4" size="8" />
+		<field datatype="uint8_t" name="heiz_id" pos="12" />
+		Eine heiz_page (''Heizungssteuerungsseite'') ist eine Seite, mit der
+		eine Heizung/Heizzone gesteuert wird.
+
+		Der Parameter \verb#page_id# definiert die ID der Seite, also eine
+		eindeutige Nummer, anhand der sie identifiziert werden kann. Die
+		Parameter \verb#parent_id#,\verb#next_id# und \verb#prev_id#
+		beschreiben, wie die Seite in der Baumstruktur eingeordnet wird.
+		Der Parameter \verb#name# ist der String, der angezeigt wird. Mit
+		\verb#heiz_id# wird die ID der Heizung angegeben, die die Heiz-Seite
+		steuern soll.
+	</block>
+
+	<block type="103" name="rolladen_page" size="41">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="uint8_t" name="feature" pos="4" />
+		<field datatype="uint8_t" name="gruppe" pos="5" />
+		<field datatype="uint8_t" name="pos" pos="6" />
+		<field datatype="char" name="line0" pos="7" size="17" />
+		<field datatype="char" name="line1" pos="24" size="17" />
+	</block>
+
+	<block type="104" name="taster_page" size="40">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="uint8_t" name="feature" pos="4" />
+		<field datatype="uint8_t" name="gruppe" pos="5" />
+		<field datatype="char" name="line0" pos="6" size="17" />
+		<field datatype="char" name="line1" pos="23" size="17" />
+	</block>
+
+	<block type="105" name="powerport_page" size="32">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="uint8_t" name="feature" pos="4" />
+		<field datatype="uint8_t" name="gruppe" pos="5" />
+		<field datatype="char" name="line0" pos="6" size="17" />
+		<field datatype="char" name="line1" pos="23" size="9" />
+	</block>
+
+	<block type="107" name="fenster_monitor_page" size="28">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="uint8_t" name="reed0" pos="4" />
+		<field datatype="uint8_t" name="reed1" pos="5" />
+		<field datatype="uint8_t" name="reed2" pos="6" />
+		<field datatype="uint8_t" name="reed3" pos="7" />
+		<field datatype="uint8_t" name="reed4" pos="8" />
+		<field datatype="uint8_t" name="reed5" pos="9" />
+		<field datatype="uint8_t" name="reed6" pos="10" />
+		<field datatype="uint8_t" name="reed7" pos="11" />
+		<field datatype="uint8_t" name="reed8" pos="12" />
+		<field datatype="uint8_t" name="reed9" pos="13" />
+		<field datatype="uint8_t" name="reed10" pos="14" />
+		<field datatype="uint8_t" name="reed11" pos="15" />
+		<field datatype="uint8_t" name="reed12" pos="16" />
+		<field datatype="uint8_t" name="reed13" pos="17" />
+		<field datatype="uint8_t" name="reed14" pos="18" />
+		<field datatype="uint8_t" name="reed15" pos="19" />
+		<field datatype="uint8_t" name="reed16" pos="20" />
+		<field datatype="uint8_t" name="reed17" pos="21" />
+		<field datatype="uint8_t" name="reed18" pos="22" />
+		<field datatype="uint8_t" name="reed19" pos="23" />
+		<field datatype="uint8_t" name="reed20" pos="24" />
+		<field datatype="uint8_t" name="reed21" pos="25" />
+		<field datatype="uint8_t" name="reed22" pos="26" />
+		<field datatype="uint8_t" name="reed23" pos="27" />
+		Durch die fenster_monitor_page koennen bis zu 24 Fenster-Reedkontakte
+		ueberpueft werden, ob sie offen sind. Anzeige: bisher aufgrund des
+		geringen Speicherplatzes nur Anzahl der offenen Fenster
+	</block>
+
+	<block type="108" name="temp_anzeige_page" size="23">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="uint8_t" name="feature" pos="4" />
+		<field datatype="uint8_t" name="tempsensor_id" pos="5" />
+		<field datatype="char" name="name" pos="6" size="17" />
+		Zeigt die Temperatur von tempsensor_id an; dazu wird der
+		String name dargestellt.
+	</block>
+
+	<block type="109" name="weck_page" size="14">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="uint8_t" name="feature" pos="4" />
+		<field datatype="uint8_t" name="weck_id" pos="5" />
+		<field datatype="char" name="name" pos="6" size="8" />
+		Eine weck_page (''Weckersteuerungsseite'') ist eine Seite, mit der
+		ein Wecker gesteuert wird. 
+		Der Parameter \verb#page_id# definiert die ID der Seite, also eine
+		eindeutige Nummer, anhand der sie identifiziert werden kann. Die
+		Parameter \verb#parent_id#,\verb#next_id# und \verb#prev_id#
+		beschreiben, wie die Seite in der Baumstruktur eingeordnet wird.
+		Der Parameter \verb#name# ist der String, der angezeigt wird. Mit
+		\verb#weck_id# wird die ID des Weckers angegeben, die die Weck-Seite
+		steuern soll.
+		Feature Bits (Aktivierung durch Setzen):
+		Bit 0-3: frei, da in Anlehnung an die powerport-Features
+		Bit 4: Powerport schaltet verz"ogert ein (z.B. Kurzzeitwecker: verz"ogert ein)
+		Bit 5: Powerport schaltet automatisch aus (z.B. Backofentimer: sofort ein, verz"ogert aus)
+	</block>
+
+	<block type="110" name="gesamt_heiz_page" size="24">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="char" name="name" pos="4" size="8" />
+		<field datatype="uint8_t" name="heiz_id0" pos="12" />
+		<field datatype="uint8_t" name="heiz_id1" pos="13" />
+		<field datatype="uint8_t" name="heiz_id2" pos="14" />
+		<field datatype="uint8_t" name="heiz_id3" pos="15" />
+		<field datatype="uint8_t" name="heiz_id4" pos="16" />
+		<field datatype="uint8_t" name="heiz_id5" pos="17" />
+		<field datatype="uint8_t" name="heiz_id6" pos="18" />
+		<field datatype="uint8_t" name="heiz_id7" pos="19" />
+		<field datatype="uint8_t" name="heiz_id8" pos="20" />
+		<field datatype="uint8_t" name="heiz_id9" pos="21" />
+		<field datatype="uint8_t" name="heiz_id10" pos="22" />
+		<field datatype="uint8_t" name="heiz_id11" pos="23" />
+		Eine gesamt_heiz_page (''Heizungssteuerungsseite'') ist eine Seite, 
+		mit der viele Heizung/Heizzone gleichartig gesteuert werden.
+	</block>
+
+	<block type="200" name="dcf77_receiver" size="8">
+		<field datatype="uint8_t" name="level" pos="0" />
+		<field datatype="uint16_t" name="takeover_time" pos="1" />
+		<field datatype="uint8_t" name="dummy0" pos="3" />
+		<field datatype="uint8_t" name="port" pos="4" />		
+		<field datatype="uint8_t" name="monitor_port" pos="5" />				
+		<field datatype="uint8_t" name="id" pos="6" />				
+		<field datatype="uint8_t" name="enable_error_reporting" pos="7" />				
+		Liefert einmal pro Minute die Zeit mit Hilfe eines angeschlossenen DCF77-Receiver.
+	</block>
+
+</eds-definitions>

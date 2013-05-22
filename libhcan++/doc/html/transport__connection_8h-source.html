@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: transport_connection.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>transport_connection.h</h1><a href="transport__connection_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef HCAN_TRANSPORT_CONNECTION_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define HCAN_TRANSPORT_CONNECTION_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="traceable__error_8h.html">libhcan++/traceable_error.h</a>&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="hcan__transport_8h.html">libhcan++/hcan_transport.h</a>&gt;</span>
+<a name="l00007"></a>00007 
+<a name="l00019"></a>00019 <span class="keyword">namespace </span>hcan
+<a name="l00020"></a>00020 {
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="classhcan_1_1frame__message__description__error.html">00022</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1frame__message__description__error.html">frame_message_description_error</a> : <span class="keyword">public</span> std::exception
+<a name="l00023"></a>00023     {
+<a name="l00024"></a>00024     };
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026     <span class="keyword">class </span><a class="code" href="classhcan_1_1frame.html">frame</a>;
+<a name="l00027"></a>00027 
+<a name="l00028"></a><a class="code" href="classhcan_1_1transport__connection.html">00028</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> : <span class="keyword">public</span> <a class="code" href="classhcan_1_1hcan__transport.html">hcan_transport</a>
+<a name="l00029"></a>00029     {
+<a name="l00030"></a>00030         <span class="keyword">private</span>:
+<a name="l00031"></a>00031             <span class="keywordtype">int</span> m_socket;
+<a name="l00032"></a>00032         <span class="keyword">protected</span>:
+<a name="l00033"></a>00033         <span class="keyword">public</span>:
+<a name="l00034"></a>00034             <a class="code" href="classhcan_1_1transport__connection.html#9e0ce9072214118bc0a46ca3647aec22">transport_connection</a> (<span class="keyword">const</span> in_addr_t hcand_ip = 0);
+<a name="l00035"></a>00035             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1transport__connection.html#8150f8c61794071fbff82fa7ddf710dc">~transport_connection</a>() <span class="keywordflow">throw</span> ();
+<a name="l00036"></a>00036             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1transport__connection.html#efd2679469cdc79846aefbad98ad9e74">keep_connection_alive</a>();
+<a name="l00037"></a>00037             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1transport__connection.html#f906d46b4acfc1f58ac4d90d4f36cf1c">ping</a>(uint16_t src, uint16_t dst);
+<a name="l00038"></a>00038             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1transport__connection.html#16f968df77193c583c53ff8cf3facff8">flood_ping</a>(uint16_t src, uint16_t dst, <span class="keyword">const</span> <span class="keywordtype">int</span> load);
+<a name="l00039"></a>00039             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1transport__connection.html#7c1290f20c4a21ed3e4e8a1d07c61ecf">dump</a>(<span class="keywordtype">bool</span> numeric, <span class="keywordtype">bool</span> color);
+<a name="l00040"></a>00040             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1transport__connection.html#333e18d84a03a84ac19e4fd06614654f">templog</a>();
+<a name="l00041"></a>00041             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1transport__connection.html#557109e1dc087d45bbaafb79e1c3d742">syslog</a>();
+<a name="l00042"></a>00042             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1transport__connection.html#632e7601ecdb5c7315653f8940e52970">send</a>(<span class="keyword">const</span> <a class="code" href="classhcan_1_1frame.html">frame</a> &amp;f);
+<a name="l00043"></a>00043             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1frame.html">frame</a> <a class="code" href="classhcan_1_1transport__connection.html#e06f4f588781f172d5867103484feef5">recv_frame</a> (<span class="keyword">const</span> uint16_t dst);
+<a name="l00047"></a>00047             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1frame.html">frame</a> <a class="code" href="classhcan_1_1transport__connection.html#e5df67fe31134e16abfac65a12381518">recv_frame_with_timeout</a>(<span class="keywordtype">int</span> seconds);
+<a name="l00048"></a><a class="code" href="classhcan_1_1transport__connection.html#c2af159a23a246d0523992d8b2a23cc7">00048</a>             <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classhcan_1_1transport__connection.html#c2af159a23a246d0523992d8b2a23cc7">socket</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_socket; };
+<a name="l00049"></a>00049     };
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051     <span class="keywordtype">void</span> <a class="code" href="namespacehcan.html#aa4c4ae12fd5a2135987e4d049a3ce7f">print_frame</a>(<span class="keyword">const</span> frame &amp;f, <span class="keywordtype">bool</span> numeric, <span class="keywordtype">bool</span> color);
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 };
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <span class="preprocessor">#endif</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

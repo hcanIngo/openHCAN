@@ -1,0 +1,9 @@
+<area shape="rect" href="$atmega8__board__driver_8h.html" title="atmega8_board_driver.h" alt="" coords="5,161,181,188">
+<area shape="rect" href="$board__driver_8h.html" title="board_driver.h" alt="" coords="111,239,223,265">
+<area shape="rect" href="$board__connection_8h.html" title="board_connection.h" alt="" coords="256,161,403,188">
+<area shape="rect" href="$transport__connection_8h.html" title="transport_connection.h" alt="" coords="475,84,643,111">
+<area shape="rect" href="$traceable__error_8h.html" title="libhcan++/traceable_error.h" alt="" coords="261,316,461,343">
+<area shape="rect" href="$hcan__transport_8h.html" title="libhcan++/hcan_transport.h" alt="" coords="528,161,728,188">
+<area shape="rect" href="$frame_8h.html" title="frame.h" alt="" coords="801,239,873,265">
+<area shape="rect" href="$frame__message__description_8h.html" title="frame_message_description.h" alt="" coords="536,316,749,343">
+<area shape="rect" href="$colors_8h.html" title="colors.h" alt="" coords="1067,316,1139,343">

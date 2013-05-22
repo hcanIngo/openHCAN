@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: hcan::board_connection Klassenreferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="hierarchy.html"><span>Klassenhierarchie</span></a></li>
+      <li><a href="functions.html"><span>Datenstruktur-Elemente</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="namespacehcan.html">hcan</a>::<a class="el" href="classhcan_1_1board__connection.html">board_connection</a>
+  </div>
+</div>
+<div class="contents">
+<h1>hcan::board_connection Klassenreferenz</h1><!-- doxytag: class="hcan::board_connection" --><code>#include &lt;<a class="el" href="board__connection_8h-source.html">board_connection.h</a>&gt;</code>
+<p>
+<div class="dynheader">
+Zusammengehörigkeiten von hcan::board_connection:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__connection__coll__graph.png" border="0" usemap="#hcan_1_1board__connection__coll__map" alt="Collaboration graph"></center>
+<map name="hcan_1_1board__connection__coll__map">
+<area shape="rect" href="classhcan_1_1transport__connection.html" title="{hcan::transport_connection\n|&#45; m_socket\l|+ transport_connection()\l+ ~transport_connection()\l+ keep_connection_alive()\l+ ping()\l+ flood_ping()\l+ dump()\l+ templog()\l+ syslog()\l+ send()\l+ recv_frame()\l+ recv_frame_with_timeout()\l+ socket()\l}" alt="" coords="87,5168,295,5443"><area shape="rect" href="classhcan_1_1hcan__transport.html" title="{hcan::hcan_transport\n|# m_hcand_ip\l|+ ~hcan_transport()\l+ send_PING_REQUEST()\l+ recv_PING_REQUEST()\l+ send_PING_REPLAY()\l+ recv_PING_REPLAY()\l+ send_DEVICE_STATE_REQUEST()\l+ recv_DEVICE_STATE_REQUEST()\l+ send_DEVICE_STATE_REPLAY()\l+ recv_DEVICE_STATE_REPLAY()\l+ send_DEVICE_RESET()\l+ recv_DEVICE_RESET()\l+ send_DEVICE_BOOT_STOP()\l+ recv_DEVICE_BOOT_STOP()\l+ send_DEVICE_BOOT_STOP_ACK()\l+ recv_DEVICE_BOOT_STOP_ACK()\l+ send_DEVICE_LOAD_APP()\l+ recv_DEVICE_LOAD_APP()\l+ send_DEVICE_TYPE_REQUEST()\l+ recv_DEVICE_TYPE_REQUEST()\l+ send_DEVICE_TYPE_REPLAY()\l+ recv_DEVICE_TYPE_REPLAY()\l+ send_FLASH_BUFFER_FILL()\l+ recv_FLASH_BUFFER_FILL()\l+ send_FLASH_BUFFER_FILL_ACK()\l+ recv_FLASH_BUFFER_FILL_ACK()\l+ send_FLASH_BUFFER_WRITE()\l+ recv_FLASH_BUFFER_WRITE()\l+ send_FLASH_BUFFER_WRITE_ACK()\l+ recv_FLASH_BUFFER_WRITE_ACK()\l+ send_INTERNAL_EEPROM_WRITE()\l+ recv_INTERNAL_EEPROM_WRITE()\l+ send_INTERNAL_EEPROM_WRITE_ACK()\l+ recv_INTERNAL_EEPROM_WRITE_ACK()\l+ send_INTERNAL_EEPROM_READ_REQUEST()\l+ recv_INTERNAL_EEPROM_READ_REQUEST()\l+ send_INTERNAL_EEPROM_READ_REPLAY()\l+ recv_INTERNAL_EEPROM_READ_REPLAY()\l+ send_INTERNAL_EEPROM_READ_BULK_REQUEST()\l+ recv_INTERNAL_EEPROM_READ_BULK_REQUEST()\l+ send_INTERNAL_EEPROM_READ_BULK_REPLAY()\l+ recv_INTERNAL_EEPROM_READ_BULK_REPLAY()\l+ send_UPTIME_QUERY()\l+ recv_UPTIME_QUERY()\l+ send_UPTIME_REPLAY()\l+ recv_UPTIME_REPLAY()\l+ send_SYSLOG_LEVEL_SET()\l+ recv_SYSLOG_LEVEL_SET()\l+ send_BUILD_VERSION_QUERY()\l+ recv_BUILD_VERSION_QUERY()\l+ send_BUILD_VERSION_REPLAY()\l+ recv_BUILD_VERSION_REPLAY()\l+ send_CAN_EC_QUERY()\l+ recv_CAN_EC_QUERY()\l+ send_CAN_EC_REPLAY()\l+ recv_CAN_EC_REPLAY()\l+ send_FLASH_CRC16_QUERY()\l+ recv_FLASH_CRC16_QUERY()\l+ send_FLASH_CRC16_REPLAY()\l+ recv_FLASH_CRC16_REPLAY()\l+ send_LOOP_THROUGHPUT_QUERY()\l+ recv_LOOP_THROUGHPUT_QUERY()\l+ send_LOOP_THROUGHPUT_REPLAY()\l+ recv_LOOP_THROUGHPUT_REPLAY()\l+ send_RX_RECEIVED_QUERY()\l+ recv_RX_RECEIVED_QUERY()\l+ send_RX_RECEIVED_REPLAY()\l+ recv_RX_RECEIVED_REPLAY()\l+ send_RX_LOST_QUERY()\l+ recv_RX_LOST_QUERY()\l+ send_RX_LOST_REPLAY()\l+ recv_RX_LOST_REPLAY()\l+ send_TX_SENT_QUERY()\l+ recv_TX_SENT_QUERY()\l+ send_TX_SENT_REPLAY()\l+ recv_TX_SENT_REPLAY()\l+ send_TX_DROPPED_QUERY()\l+ recv_TX_DROPPED_QUERY()\l+ send_TX_DROPPED_REPLAY()\l+ recv_TX_DROPPED_REPLAY()\l+ send_RX_TX_STATS_RESET()\l+ recv_RX_TX_STATS_RESET()\l+ send_BOOT_RESETFLAG_LOG()\l+ recv_BOOT_RESETFLAG_LOG()\l+ send_FIRMWARE_CRC16_ERROR()\l+ recv_FIRMWARE_CRC16_ERROR()\l+ send_FIRMWARE_CONFIG_COMPAT_ERROR()\l+ recv_FIRMWARE_CONFIG_COMPAT_ERROR()\l+ send_DUMP_DEBUG_INFO()\l+ recv_DUMP_DEBUG_INFO()\l+ send_TASTER_DOWN()\l+ recv_TASTER_DOWN()\l+ send_TASTER_UP()\l+ recv_TASTER_UP()\l+ send_POWER_GROUP_ON()\l+ recv_POWER_GROUP_ON()\l+ send_POWER_GROUP_OFF()\l+ recv_POWER_GROUP_OFF()\l+ send_POWER_GROUP_STATE_QUERY()\l+ recv_POWER_GROUP_STATE_QUERY()\l+ send_POWER_GROUP_STATE_REPLAY()\l+ recv_POWER_GROUP_STATE_REPLAY()\l+ send_POWER_GROUP_TIMER_QUERY()\l+ recv_POWER_GROUP_TIMER_QUERY()\l+ send_POWER_GROUP_TIMER_REPLAY()\l+ recv_POWER_GROUP_TIMER_REPLAY()\l+ send_POWER_GROUP_SET_TIMER()\l+ recv_POWER_GROUP_SET_TIMER()\l+ send_POWER_GROUP_STATE_INFO()\l+ recv_POWER_GROUP_STATE_INFO()\l+ send_ROLLADEN_POSITION_SET()\l+ recv_ROLLADEN_POSITION_SET()\l+ send_ROLLADEN_POSITION_REQUEST()\l+ recv_ROLLADEN_POSITION_REQUEST()\l+ send_ROLLADEN_POSITION_REPLAY()\l+ recv_ROLLADEN_POSITION_REPLAY()\l+ send_ROLLADEN_DEFINE_POSITION()\l+ recv_ROLLADEN_DEFINE_POSITION()\l+ send_ROLLADEN_POSITION_CHANGED_INFO()\l+ recv_ROLLADEN_POSITION_CHANGED_INFO()\l+ send_1WIRE_DISCOVER()\l+ recv_1WIRE_DISCOVER()\l+ send_1WIRE_DISCOVERED_PART_1()\l+ recv_1WIRE_DISCOVERED_PART_1()\l+ send_1WIRE_DISCOVERED_PART_2()\l+ recv_1WIRE_DISCOVERED_PART_2()\l+ send_1WIRE_ERROR()\l+ recv_1WIRE_ERROR()\l+ send_1WIRE_TEMPERATURE()\l+ recv_1WIRE_TEMPERATURE()\l+ send_1WIRE_TEMPERATURE_QUERY()\l+ recv_1WIRE_TEMPERATURE_QUERY()\l+ send_1WIRE_TEMPERATURE_REPLAY()\l+ recv_1WIRE_TEMPERATURE_REPLAY()\l+ send_REEDKONTAKT_OFFEN()\l+ recv_REEDKONTAKT_OFFEN()\l+ send_REEDKONTAKT_STATE_QUERY()\l+ recv_REEDKONTAKT_STATE_QUERY()\l+ send_REEDKONTAKT_STATE_REPLAY()\l+ recv_REEDKONTAKT_STATE_REPLAY()\l+ send_REEDKONTAKT_STATE_CHANGE()\l+ recv_REEDKONTAKT_STATE_CHANGE()\l+ send_PVSENSOR_STATE_REQUEST()\l+ recv_PVSENSOR_STATE_REQUEST()\l+ send_PVSENSOR_STATE_REPLAY()\l+ recv_PVSENSOR_STATE_REPLAY()\l+ send_PVSENSOR_STATE_CHANGE_INFO()\l+ recv_PVSENSOR_STATE_CHANGE_INFO()\l+ send_HEIZUNG_DETAILS_REQUEST()\l+ recv_HEIZUNG_DETAILS_REQUEST()\l+ send_HEIZUNG_MODE_OFF_DETAILS()\l+ recv_HEIZUNG_MODE_OFF_DETAILS()\l+ send_HEIZUNG_SET_MODE_OFF()\l+ recv_HEIZUNG_SET_MODE_OFF()\l+ send_HEIZUNG_MODE_MANUAL_DETAILS()\l+ recv_HEIZUNG_MODE_MANUAL_DETAILS()\l+ send_HEIZUNG_SET_MODE_MANUAL()\l+ recv_HEIZUNG_SET_MODE_MANUAL()\l+ send_HEIZUNG_MODE_THERMOSTAT_DETAILS()\l+ recv_HEIZUNG_MODE_THERMOSTAT_DETAILS()\l+ send_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()\l+ recv_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()\l+ send_HEIZUNG_MODE_AUTOMATIK_DETAILS()\l+ recv_HEIZUNG_MODE_AUTOMATIK_DETAILS()\l+ send_HEIZUNG_SET_MODE_AUTOMATIK()\l+ recv_HEIZUNG_SET_MODE_AUTOMATIK()\l+ send_HEIZUNG_TIST_REQUEST()\l+ recv_HEIZUNG_TIST_REQUEST()\l+ send_HEIZUNG_TIST_REPLAY()\l+ recv_HEIZUNG_TIST_REPLAY()\l+ send_HEIZUNG_WAERMEBEDARF_INFO()\l+ recv_HEIZUNG_WAERMEBEDARF_INFO()\l+ send_HEIZSTEUERUNG_STATE_REQUEST()\l+ recv_HEIZSTEUERUNG_STATE_REQUEST()\l+ send_HEIZSTEUERUNG_STATE_REPLAY()\l+ recv_HEIZSTEUERUNG_STATE_REPLAY()\l+ send_HEIZSTEUERUNG_STATE_INFO()\l+ recv_HEIZSTEUERUNG_STATE_INFO()\l+ send_HEIZSTEUERUNG_SET_VL()\l+ recv_HEIZSTEUERUNG_SET_VL()\l+ send_HEIZUNG_SOLLTEMP_LINE_REQUEST()\l+ recv_HEIZUNG_SOLLTEMP_LINE_REQUEST()\l+ send_HEIZUNG_SOLLTEMP_LINE_REPLAY()\l+ recv_HEIZUNG_SOLLTEMP_LINE_REPLAY()\l+ send_HEIZUNG_SOLLTEMP_WRITE_LINE()\l+ recv_HEIZUNG_SOLLTEMP_WRITE_LINE()\l+ send_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()\l+ recv_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()\l+ send_CONFIG_RELOAD()\l+ recv_CONFIG_RELOAD()\l+ send_CONFIG_RAM_USAGE_REQUEST()\l+ recv_CONFIG_RAM_USAGE_REQUEST()\l+ send_CONFIG_RAM_USAGE_REPLAY()\l+ recv_CONFIG_RAM_USAGE_REPLAY()\l+ send_ZEITZONE_DETAILS_REQUEST()\l+ recv_ZEITZONE_DETAILS_REQUEST()\l+ send_ZEITZONE_DETAILS_REPLAY()\l+ recv_ZEITZONE_DETAILS_REPLAY()\l+ send_ZEITZONE_WRITE_DETAILS()\l+ recv_ZEITZONE_WRITE_DETAILS()\l+ send_ZEITZONE_WRITE_DETAILS_ACK()\l+ recv_ZEITZONE_WRITE_DETAILS_ACK()\l+ send_ZEITZONE_TEST_MATCH_REQUERST()\l+ recv_ZEITZONE_TEST_MATCH_REQUERST()\l+ send_ZEITZONE_TEST_MATCH_REPLAY()\l+ recv_ZEITZONE_TEST_MATCH_REPLAY()\l+ send_TIME_INFO()\l+ recv_TIME_INFO()\l+ send_DATE_INFO()\l+ recv_DATE_INFO()\l+ send_TIME_REQUEST()\l+ recv_TIME_REQUEST()\l+ send_DATE_REQUEST()\l+ recv_DATE_REQUEST()\l+ send_GET_NEXT_BLOCK()\l+ recv_GET_NEXT_BLOCK()\l+ send_GET_NEXT_BLOCK_REPLAY()\l+ recv_GET_NEXT_BLOCK_REPLAY()\l+ send_DEFRAGMENT()\l+ recv_DEFRAGMENT()\l+ send_ALLOCATE_BLOCK()\l+ recv_ALLOCATE_BLOCK()\l+ send_ALLOCATE_BLOCK_REPLAY()\l+ recv_ALLOCATE_BLOCK_REPLAY()\l+ send_FREE_BLOCK()\l+ recv_FREE_BLOCK()\l+ send_FREE_BLOCK_REPLAY()\l+ recv_FREE_BLOCK_REPLAY()\l+ send_READ_FROM_BLOCK()\l+ recv_READ_FROM_BLOCK()\l+ send_READ_FROM_BLOCK_REPLAY()\l+ recv_READ_FROM_BLOCK_REPLAY()\l+ send_WRITE_TO_BLOCK()\l+ recv_WRITE_TO_BLOCK()\l+ send_WRITE_TO_BLOCK_REPLAY()\l+ recv_WRITE_TO_BLOCK_REPLAY()\l+ send_FORMAT()\l+ recv_FORMAT()\l+ send_STATE_REQUEST()\l+ recv_STATE_REQUEST()\l+ send_STATE_INFO()\l+ recv_STATE_INFO()\l+ send_VOLTAGE_REQUEST()\l+ recv_VOLTAGE_REQUEST()\l+ send_VOLTAGE_REPLAY()\l+ recv_VOLTAGE_REPLAY()\l+ send_VOLTAGE_STATS_REQUEST()\l+ recv_VOLTAGE_STATS_REQUEST()\l+ send_VOLTAGE_STATS_REPLAY()\l+ recv_VOLTAGE_STATS_REPLAY()\l+ send_VOLTAGE_STATS_RESET()\l+ recv_VOLTAGE_STATS_RESET()\l+ send_FA_BLOCK1_INFO()\l+ recv_FA_BLOCK1_INFO()\l+ send_REGLER_DATEN_INFO_FRG1()\l+ recv_REGLER_DATEN_INFO_FRG1()\l+ send_REGLER_DATEN_INFO_FRG2()\l+ recv_REGLER_DATEN_INFO_FRG2()\l+ send_WETTER_INFO()\l+ recv_WETTER_INFO()\l+ send_LICHT_STATS_5MIN()\l+ recv_LICHT_STATS_5MIN()\l+ send_WIND_STATS_5MIN()\l+ recv_WIND_STATS_5MIN()\l+ send_OBJECT_COUNT_REQUEST()\l+ recv_OBJECT_COUNT_REQUEST()\l+ send_OBJECT_COUNT_REPLAY()\l+ recv_OBJECT_COUNT_REPLAY()\l+ send_OBJECT_ATTRIBUTE_REQUEST()\l+ recv_OBJECT_ATTRIBUTE_REQUEST()\l+ send_OBJECT_ATTRIBUTE_REPLAY()\l+ recv_OBJECT_ATTRIBUTE_REPLAY()\l+ send_FIELD_COUNT_REQUEST()\l+ recv_FIELD_COUNT_REQUEST()\l+ send_FIELD_COUNT_REPLAY()\l+ recv_FIELD_COUNT_REPLAY()\l+ send_FIELD_ATTRIBUTE_REQUEST()\l+ recv_FIELD_ATTRIBUTE_REQUEST()\l+ send_FIELD_ATTRIBUTE_REPLAY()\l+ recv_FIELD_ATTRIBUTE_REPLAY()\l+ send_FIELD_READ_REQUEST()\l+ recv_FIELD_READ_REQUEST()\l+ send_FIELD_READ_REPLAY()\l+ recv_FIELD_READ_REPLAY()\l+ send_FIELD_WRITE_REQUEST()\l+ recv_FIELD_WRITE_REQUEST()\l+ send_FIELD_WRITE_REPLAY()\l+ recv_FIELD_WRITE_REPLAY()\l# socket()\l# recv_frame()\l# recv_frame_with_timeout()\l# hcan_transport()\l}" alt="" coords="5,7,376,5116"></map>
+<center><font size="2">[<a href="graph_legend.html">Legende</a>]</font></center></div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Öffentliche Methoden</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__connection.html#7fba6a00c711f71e92c4da1d7fc769b2">board_connection</a> (<a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;tcon, uint16_t src, uint16_t dst, bool ignore_type, uint8_t arch)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__connection.html#54ac476899e5afd92468969d3abd5d78">~board_connection</a> ()  throw ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__connection.html#33f3b8ad9489242ee3804c2fbea34910">get_transport_connection</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="namespacehcan.html#4405ce0eef0494525026215fd1929148">board_driver_p</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__connection.html#48432717c0f0607b662f103b192e325b">get_driver</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a> ()</td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+
+<p>Definiert in Zeile <a class="el" href="board__connection_8h-source.html#l00030">30</a> der Datei <a class="el" href="board__connection_8h-source.html">board_connection.h</a>.</p>
+<hr><h2>Beschreibung der Konstruktoren und Destruktoren</h2>
+<a class="anchor" name="7fba6a00c711f71e92c4da1d7fc769b2"></a><!-- doxytag: member="hcan::board_connection::board_connection" ref="7fba6a00c711f71e92c4da1d7fc769b2" args="(transport_connection &amp;tcon, uint16_t src, uint16_t dst, bool ignore_type, uint8_t arch)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">board_connection::board_connection           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>tcon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>ignore_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>arch</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__connection_8cc-source.html#l00025">25</a> der Datei <a class="el" href="board__connection_8cc-source.html">board_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="driver__factory_8h-source.html#l00021">hcan::HCAN_ARCH_AUTODETECT</a>, <a class="el" href="driver__factory_8cc-source.html#l00019">hcan::driver_factory::make_driver()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00573">hcan::hcan_transport::recv_DEVICE_TYPE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00100">hcan::hcan_transport::recv_PING_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00483">hcan::hcan_transport::send_DEVICE_TYPE_REQUEST()</a> und <a class="el" href="hcan__transport_8cc-source.html#l00028">hcan::hcan_transport::send_PING_REQUEST()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1board__connection_7fba6a00c711f71e92c4da1d7fc769b2_cgraph.png" border="0" usemap="#classhcan_1_1board__connection_7fba6a00c711f71e92c4da1d7fc769b2_cgraph_map" alt=""></center>
+<map name="classhcan_1_1board__connection_7fba6a00c711f71e92c4da1d7fc769b2_cgraph_map">
+<area shape="rect" href="classhcan_1_1driver__factory.html#ad685acfbbd2bc688abf761112c40bef" title="hcan::driver_factory::make_driver" alt="" coords="409,19,644,45"><area shape="rect" href="classhcan_1_1hcan__transport.html#6534aced9169871e8f6ee48407aa5e9c" title="hcan::hcan_transport::recv_DEVICE_TYPE_REPLAY" alt="" coords="359,120,695,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#a341d87b58665fe959b392e83eca7c33" title="hcan::hcan_transport::recv_PING_REPLAY" alt="" coords="385,69,668,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#c726d888becb5c9a4b1f7fce65d0d64b" title="hcan::hcan_transport::send_DEVICE_TYPE_REQUEST" alt="" coords="349,247,704,273"><area shape="rect" href="classhcan_1_1hcan__transport.html#13800387603b964725c1627bf28329d0" title="hcan::hcan_transport::send_PING_REQUEST" alt="" coords="376,196,677,223"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="803,5,939,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="752,56,989,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="805,107,936,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="808,157,933,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="767,208,975,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="793,259,948,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="54ac476899e5afd92468969d3abd5d78"></a><!-- doxytag: member="hcan::board_connection::~board_connection" ref="54ac476899e5afd92468969d3abd5d78" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">board_connection::~board_connection           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__connection_8cc-source.html#l00048">48</a> der Datei <a class="el" href="board__connection_8cc-source.html">board_connection.cc</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Elementfunktionen</h2>
+<a class="anchor" name="33f3b8ad9489242ee3804c2fbea34910"></a><!-- doxytag: member="hcan::board_connection::get_transport_connection" ref="33f3b8ad9489242ee3804c2fbea34910" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a>&amp; hcan::board_connection::get_transport_connection           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__connection_8h-source.html#l00046">46</a> der Datei <a class="el" href="board__connection_8h-source.html">board_connection.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="87c9431f4e6ceee9311fc488adb1f0f7"></a><!-- doxytag: member="hcan::board_connection::src" ref="87c9431f4e6ceee9311fc488adb1f0f7" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t hcan::board_connection::src           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__connection_8h-source.html#l00047">47</a> der Datei <a class="el" href="board__connection_8h-source.html">board_connection.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00640">hcan::board_driver::cmd_bootloader()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00140">hcan::controller1612_driver::cmd_config_reload()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00095">hcan::controller1612_driver::cmd_discover_1wire()</a>, <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a>, <a class="el" href="board__driver_8cc-source.html#l00605">hcan::board_driver::cmd_getstate()</a>, <a class="el" href="board__driver_8cc-source.html#l00595">hcan::board_driver::cmd_getuptime()</a>, <a class="el" href="board__driver_8cc-source.html#l00635">hcan::board_driver::cmd_loadapp()</a>, <a class="el" href="board__driver_8cc-source.html#l00589">hcan::board_driver::cmd_reset()</a>, <a class="el" href="board__driver_8cc-source.html#l00584">hcan::board_driver::cmd_setsysloglevel()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00129">hcan::controller1612_driver::cmd_show_ram_usage()</a>, <a class="el" href="board__driver_8cc-source.html#l00648">hcan::board_driver::cmd_show_system()</a>, <a class="el" href="board__driver_8cc-source.html#l00683">hcan::board_driver::cmd_show_time()</a>, <a class="el" href="eds__connection_8cc-source.html#l00395">hcan::eds_connection::create_block()</a>, <a class="el" href="eds__connection_8cc-source.html#l00449">hcan::eds_connection::defragment()</a>, <a class="el" href="eds__connection_8cc-source.html#l00421">hcan::eds_connection::delete_block()</a>, <a class="el" href="eds__commands_8cc-source.html#l00149">hcan::eds_exec_cmd()</a>, <a class="el" href="usv__driver_8cc-source.html#l00070">hcan::usv_driver::exec_command()</a>, <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>, <a class="el" href="eds__connection_8cc-source.html#l00127">hcan::eds_block::field()</a>, <a class="el" href="eds__connection_8cc-source.html#l00456">hcan::eds_connection::format()</a>, <a class="el" href="eds__connection_8cc-source.html#l00100">hcan::eds_block::init()</a>, <a class="el" href="board__driver_8cc-source.html#l00551">hcan::board_driver::load_crc16_from_board()</a>, <a class="el" href="oap__access_8cc-source.html#l00285">hcan::oap_access::oap_access()</a>, <a class="el" href="oap__access_8cc-source.html#l00210">hcan::oap_object::oap_object()</a>, <a class="el" href="board__driver_8cc-source.html#l00246">hcan::board_driver::read_eeprom_byte()</a>, <a class="el" href="eds__connection_8cc-source.html#l00253">hcan::eds_block::set_field_str()</a>, <a class="el" href="eds__connection_8cc-source.html#l00227">hcan::eds_block::set_field_uint16()</a>, <a class="el" href="eds__connection_8cc-source.html#l00207">hcan::eds_block::set_field_uint8()</a>, <a class="el" href="oap__access_8cc-source.html#l00141">hcan::oap_field::set_value()</a>, <a class="el" href="eds__connection_8cc-source.html#l00339">hcan::eds_connection::space_free()</a>, <a class="el" href="eds__connection_8cc-source.html#l00360">hcan::eds_connection::space_used()</a>, <a class="el" href="eds__connection_8cc-source.html#l00174">hcan::eds_block::strfield()</a>, <a class="el" href="eds__connection_8cc-source.html#l00151">hcan::eds_block::uint16_field()</a>, <a class="el" href="eds__connection_8cc-source.html#l00317">hcan::eds_connection::update()</a>, <a class="el" href="oap__access_8cc-source.html#l00079">hcan::oap_field::value()</a> und <a class="el" href="board__driver_8cc-source.html#l00272">hcan::board_driver::write_eeprom_byte()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="5e4ee03bc38774aea89fc7744b03bb86"></a><!-- doxytag: member="hcan::board_connection::dst" ref="5e4ee03bc38774aea89fc7744b03bb86" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t hcan::board_connection::dst           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__connection_8h-source.html#l00048">48</a> der Datei <a class="el" href="board__connection_8h-source.html">board_connection.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00295">hcan::board_driver::cached_filename()</a>, <a class="el" href="board__driver_8cc-source.html#l00640">hcan::board_driver::cmd_bootloader()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00140">hcan::controller1612_driver::cmd_config_reload()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00095">hcan::controller1612_driver::cmd_discover_1wire()</a>, <a class="el" href="board__driver_8cc-source.html#l00342">hcan::board_driver::cmd_flash()</a>, <a class="el" href="board__driver_8cc-source.html#l00605">hcan::board_driver::cmd_getstate()</a>, <a class="el" href="board__driver_8cc-source.html#l00595">hcan::board_driver::cmd_getuptime()</a>, <a class="el" href="board__driver_8cc-source.html#l00635">hcan::board_driver::cmd_loadapp()</a>, <a class="el" href="board__driver_8cc-source.html#l00589">hcan::board_driver::cmd_reset()</a>, <a class="el" href="board__driver_8cc-source.html#l00584">hcan::board_driver::cmd_setsysloglevel()</a>, <a class="el" href="controller1612__driver_8cc-source.html#l00129">hcan::controller1612_driver::cmd_show_ram_usage()</a>, <a class="el" href="board__driver_8cc-source.html#l00648">hcan::board_driver::cmd_show_system()</a>, <a class="el" href="board__driver_8cc-source.html#l00683">hcan::board_driver::cmd_show_time()</a>, <a class="el" href="eds__connection_8cc-source.html#l00395">hcan::eds_connection::create_block()</a>, <a class="el" href="eds__connection_8cc-source.html#l00449">hcan::eds_connection::defragment()</a>, <a class="el" href="eds__connection_8cc-source.html#l00421">hcan::eds_connection::delete_block()</a>, <a class="el" href="eds__commands_8cc-source.html#l00149">hcan::eds_exec_cmd()</a>, <a class="el" href="usv__driver_8cc-source.html#l00070">hcan::usv_driver::exec_command()</a>, <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>, <a class="el" href="eds__connection_8cc-source.html#l00127">hcan::eds_block::field()</a>, <a class="el" href="eds__connection_8cc-source.html#l00456">hcan::eds_connection::format()</a>, <a class="el" href="eds__connection_8cc-source.html#l00100">hcan::eds_block::init()</a>, <a class="el" href="board__driver_8cc-source.html#l00551">hcan::board_driver::load_crc16_from_board()</a>, <a class="el" href="oap__access_8cc-source.html#l00285">hcan::oap_access::oap_access()</a>, <a class="el" href="oap__access_8cc-source.html#l00210">hcan::oap_object::oap_object()</a>, <a class="el" href="board__driver_8cc-source.html#l00246">hcan::board_driver::read_eeprom_byte()</a>, <a class="el" href="eds__connection_8cc-source.html#l00253">hcan::eds_block::set_field_str()</a>, <a class="el" href="eds__connection_8cc-source.html#l00227">hcan::eds_block::set_field_uint16()</a>, <a class="el" href="eds__connection_8cc-source.html#l00207">hcan::eds_block::set_field_uint8()</a>, <a class="el" href="oap__access_8cc-source.html#l00141">hcan::oap_field::set_value()</a>, <a class="el" href="eds__connection_8cc-source.html#l00339">hcan::eds_connection::space_free()</a>, <a class="el" href="eds__connection_8cc-source.html#l00360">hcan::eds_connection::space_used()</a>, <a class="el" href="eds__connection_8cc-source.html#l00174">hcan::eds_block::strfield()</a>, <a class="el" href="eds__connection_8cc-source.html#l00151">hcan::eds_block::uint16_field()</a>, <a class="el" href="eds__connection_8cc-source.html#l00317">hcan::eds_connection::update()</a>, <a class="el" href="oap__access_8cc-source.html#l00079">hcan::oap_field::value()</a> und <a class="el" href="board__driver_8cc-source.html#l00272">hcan::board_driver::write_eeprom_byte()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="48432717c0f0607b662f103b192e325b"></a><!-- doxytag: member="hcan::board_connection::get_driver" ref="48432717c0f0607b662f103b192e325b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehcan.html#4405ce0eef0494525026215fd1929148">board_driver_p</a>&amp; hcan::board_connection::get_driver           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__connection_8h-source.html#l00049">49</a> der Datei <a class="el" href="board__connection_8h-source.html">board_connection.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="1bb0634172656683440c6859dbffee47"></a><!-- doxytag: member="hcan::board_connection::tcon" ref="1bb0634172656683440c6859dbffee47" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a>&amp; hcan::board_connection::tcon           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="board__connection_8h-source.html#l00050">50</a> der Datei <a class="el" href="board__connection_8h-source.html">board_connection.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__commands_8cc-source.html#l00149">hcan::eds_exec_cmd()</a>, <a class="el" href="oap__access_8cc-source.html#l00285">hcan::oap_access::oap_access()</a>, <a class="el" href="oap__access_8cc-source.html#l00210">hcan::oap_object::oap_object()</a>, <a class="el" href="oap__access_8cc-source.html#l00141">hcan::oap_field::set_value()</a> und <a class="el" href="oap__access_8cc-source.html#l00079">hcan::oap_field::value()</a>.</p>
+
+</div>
+</div><p>
+<hr>Die Dokumentation für diese Klasse wurde erzeugt aufgrund der Dateien:<ul>
+<li><a class="el" href="board__connection_8h-source.html">board_connection.h</a><li><a class="el" href="board__connection_8cc-source.html">board_connection.cc</a></ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:40:00 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

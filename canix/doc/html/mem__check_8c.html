@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: mem_check.c-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>mem_check.c-Dateireferenz</h1><code>#include &lt;<a class="el" href="mem__check_8h-source.html">canix/mem_check.h</a>&gt;</code><br>
+<code>#include &lt;avr/io.h&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für mem_check.c:</div>
+<div class="dynsection">
+<p><center><img src="mem__check_8c__incl.png" border="0" usemap="#mem_check.c_map" alt=""></center>
+</div>
+
+<p>
+<a href="mem__check_8c-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mem__check_8c.html#e7520c5477c11965aabeedc033c9862b">MASK</a>&nbsp;&nbsp;&nbsp;0xaa</td></tr>
+
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mem__check_8c.html#06f6d68bbac025a9dd4dc5046905648e">get_mem_unused</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mem__check_8c.html#5190fc37a1a1525ccc0841a86e2d1b4e">__init8_mem</a> (void)</td></tr>
+
+<tr><td colspan="2"><br><h2>Variablen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="mem__check_8c.html#8df5687976d9b998aa0486549fffc623">__heap_start</a></td></tr>
+
+</table>
+<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="e7520c5477c11965aabeedc033c9862b"></a><!-- doxytag: member="mem_check.c::MASK" ref="e7520c5477c11965aabeedc033c9862b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MASK&nbsp;&nbsp;&nbsp;0xaa          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="mem__check_8c-source.html#l00004">4</a> der Datei <a class="el" href="mem__check_8c-source.html">mem_check.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mem__check_8c-source.html#l00027">__init8_mem()</a> und <a class="el" href="mem__check_8c-source.html#l00008">get_mem_unused()</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="5190fc37a1a1525ccc0841a86e2d1b4e"></a><!-- doxytag: member="mem_check.c::__init8_mem" ref="5190fc37a1a1525ccc0841a86e2d1b4e" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void __init8_mem           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="mem__check_8c-source.html#l00027">27</a> der Datei <a class="el" href="mem__check_8c-source.html">mem_check.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mem__check_8c-source.html#l00004">MASK</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="06f6d68bbac025a9dd4dc5046905648e"></a><!-- doxytag: member="mem_check.c::get_mem_unused" ref="06f6d68bbac025a9dd4dc5046905648e" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t get_mem_unused           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="mem__check_8c-source.html#l00008">8</a> der Datei <a class="el" href="mem__check_8c-source.html">mem_check.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mem__check_8c.html#8df5687976d9b998aa0486549fffc623">__heap_start</a> und <a class="el" href="mem__check_8c-source.html#l00004">MASK</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Variablen-Dokumentation</h2>
+<a class="anchor" name="8df5687976d9b998aa0486549fffc623"></a><!-- doxytag: member="mem_check.c::__heap_start" ref="8df5687976d9b998aa0486549fffc623" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="mem__check_8c.html#8df5687976d9b998aa0486549fffc623">__heap_start</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Wird benutzt von <a class="el" href="mem__check_8c-source.html#l00008">get_mem_unused()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

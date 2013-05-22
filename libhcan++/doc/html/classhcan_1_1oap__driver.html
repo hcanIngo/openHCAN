@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: hcan::oap_driver Klassenreferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="hierarchy.html"><span>Klassenhierarchie</span></a></li>
+      <li><a href="functions.html"><span>Datenstruktur-Elemente</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="namespacehcan.html">hcan</a>::<a class="el" href="classhcan_1_1oap__driver.html">oap_driver</a>
+  </div>
+</div>
+<div class="contents">
+<h1>hcan::oap_driver Klassenreferenz</h1><!-- doxytag: class="hcan::oap_driver" --><code>#include &lt;<a class="el" href="oap__driver_8h-source.html">oap_driver.h</a>&gt;</code>
+<p>
+<div class="dynheader">
+Zusammengehörigkeiten von hcan::oap_driver:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1oap__driver__coll__graph.png" border="0" usemap="#hcan_1_1oap__driver__coll__map" alt="Collaboration graph"></center>
+<map name="hcan_1_1oap__driver__coll__map">
+<area shape="rect" href="classhcan_1_1oap__access.html" title="{hcan::oap_access\n|&#45; m_bcon\l&#45; m_objects\l&#45; m_oap_xml\l|+ oap_access()\l+ ~oap_access()\l+ object_count()\l+ object()\l}" alt="" coords="123,5816,259,5987"><area shape="rect" href="classhcan_1_1board__connection.html" title="{hcan::board_connection\n|&#45; m_tcon\l&#45; m_driver\l&#45; m_src\l&#45; m_dst\l|+ board_connection()\l+ ~board_connection()\l+ get_transport_connection()\l+ src()\l+ dst()\l+ get_driver()\l+ tcon()\l}" alt="" coords="85,5509,296,5749"><area shape="rect" href="classhcan_1_1transport__connection.html" title="{hcan::transport_connection\n|&#45; m_socket\l|+ transport_connection()\l+ ~transport_connection()\l+ keep_connection_alive()\l+ ping()\l+ flood_ping()\l+ dump()\l+ templog()\l+ syslog()\l+ send()\l+ recv_frame()\l+ recv_frame_with_timeout()\l+ socket()\l}" alt="" coords="87,5168,295,5443"><area shape="rect" href="classhcan_1_1hcan__transport.html" title="{hcan::hcan_transport\n|# m_hcand_ip\l|+ ~hcan_transport()\l+ send_PING_REQUEST()\l+ recv_PING_REQUEST()\l+ send_PING_REPLAY()\l+ recv_PING_REPLAY()\l+ send_DEVICE_STATE_REQUEST()\l+ recv_DEVICE_STATE_REQUEST()\l+ send_DEVICE_STATE_REPLAY()\l+ recv_DEVICE_STATE_REPLAY()\l+ send_DEVICE_RESET()\l+ recv_DEVICE_RESET()\l+ send_DEVICE_BOOT_STOP()\l+ recv_DEVICE_BOOT_STOP()\l+ send_DEVICE_BOOT_STOP_ACK()\l+ recv_DEVICE_BOOT_STOP_ACK()\l+ send_DEVICE_LOAD_APP()\l+ recv_DEVICE_LOAD_APP()\l+ send_DEVICE_TYPE_REQUEST()\l+ recv_DEVICE_TYPE_REQUEST()\l+ send_DEVICE_TYPE_REPLAY()\l+ recv_DEVICE_TYPE_REPLAY()\l+ send_FLASH_BUFFER_FILL()\l+ recv_FLASH_BUFFER_FILL()\l+ send_FLASH_BUFFER_FILL_ACK()\l+ recv_FLASH_BUFFER_FILL_ACK()\l+ send_FLASH_BUFFER_WRITE()\l+ recv_FLASH_BUFFER_WRITE()\l+ send_FLASH_BUFFER_WRITE_ACK()\l+ recv_FLASH_BUFFER_WRITE_ACK()\l+ send_INTERNAL_EEPROM_WRITE()\l+ recv_INTERNAL_EEPROM_WRITE()\l+ send_INTERNAL_EEPROM_WRITE_ACK()\l+ recv_INTERNAL_EEPROM_WRITE_ACK()\l+ send_INTERNAL_EEPROM_READ_REQUEST()\l+ recv_INTERNAL_EEPROM_READ_REQUEST()\l+ send_INTERNAL_EEPROM_READ_REPLAY()\l+ recv_INTERNAL_EEPROM_READ_REPLAY()\l+ send_INTERNAL_EEPROM_READ_BULK_REQUEST()\l+ recv_INTERNAL_EEPROM_READ_BULK_REQUEST()\l+ send_INTERNAL_EEPROM_READ_BULK_REPLAY()\l+ recv_INTERNAL_EEPROM_READ_BULK_REPLAY()\l+ send_UPTIME_QUERY()\l+ recv_UPTIME_QUERY()\l+ send_UPTIME_REPLAY()\l+ recv_UPTIME_REPLAY()\l+ send_SYSLOG_LEVEL_SET()\l+ recv_SYSLOG_LEVEL_SET()\l+ send_BUILD_VERSION_QUERY()\l+ recv_BUILD_VERSION_QUERY()\l+ send_BUILD_VERSION_REPLAY()\l+ recv_BUILD_VERSION_REPLAY()\l+ send_CAN_EC_QUERY()\l+ recv_CAN_EC_QUERY()\l+ send_CAN_EC_REPLAY()\l+ recv_CAN_EC_REPLAY()\l+ send_FLASH_CRC16_QUERY()\l+ recv_FLASH_CRC16_QUERY()\l+ send_FLASH_CRC16_REPLAY()\l+ recv_FLASH_CRC16_REPLAY()\l+ send_LOOP_THROUGHPUT_QUERY()\l+ recv_LOOP_THROUGHPUT_QUERY()\l+ send_LOOP_THROUGHPUT_REPLAY()\l+ recv_LOOP_THROUGHPUT_REPLAY()\l+ send_RX_RECEIVED_QUERY()\l+ recv_RX_RECEIVED_QUERY()\l+ send_RX_RECEIVED_REPLAY()\l+ recv_RX_RECEIVED_REPLAY()\l+ send_RX_LOST_QUERY()\l+ recv_RX_LOST_QUERY()\l+ send_RX_LOST_REPLAY()\l+ recv_RX_LOST_REPLAY()\l+ send_TX_SENT_QUERY()\l+ recv_TX_SENT_QUERY()\l+ send_TX_SENT_REPLAY()\l+ recv_TX_SENT_REPLAY()\l+ send_TX_DROPPED_QUERY()\l+ recv_TX_DROPPED_QUERY()\l+ send_TX_DROPPED_REPLAY()\l+ recv_TX_DROPPED_REPLAY()\l+ send_RX_TX_STATS_RESET()\l+ recv_RX_TX_STATS_RESET()\l+ send_BOOT_RESETFLAG_LOG()\l+ recv_BOOT_RESETFLAG_LOG()\l+ send_FIRMWARE_CRC16_ERROR()\l+ recv_FIRMWARE_CRC16_ERROR()\l+ send_FIRMWARE_CONFIG_COMPAT_ERROR()\l+ recv_FIRMWARE_CONFIG_COMPAT_ERROR()\l+ send_DUMP_DEBUG_INFO()\l+ recv_DUMP_DEBUG_INFO()\l+ send_TASTER_DOWN()\l+ recv_TASTER_DOWN()\l+ send_TASTER_UP()\l+ recv_TASTER_UP()\l+ send_POWER_GROUP_ON()\l+ recv_POWER_GROUP_ON()\l+ send_POWER_GROUP_OFF()\l+ recv_POWER_GROUP_OFF()\l+ send_POWER_GROUP_STATE_QUERY()\l+ recv_POWER_GROUP_STATE_QUERY()\l+ send_POWER_GROUP_STATE_REPLAY()\l+ recv_POWER_GROUP_STATE_REPLAY()\l+ send_POWER_GROUP_TIMER_QUERY()\l+ recv_POWER_GROUP_TIMER_QUERY()\l+ send_POWER_GROUP_TIMER_REPLAY()\l+ recv_POWER_GROUP_TIMER_REPLAY()\l+ send_POWER_GROUP_SET_TIMER()\l+ recv_POWER_GROUP_SET_TIMER()\l+ send_POWER_GROUP_STATE_INFO()\l+ recv_POWER_GROUP_STATE_INFO()\l+ send_ROLLADEN_POSITION_SET()\l+ recv_ROLLADEN_POSITION_SET()\l+ send_ROLLADEN_POSITION_REQUEST()\l+ recv_ROLLADEN_POSITION_REQUEST()\l+ send_ROLLADEN_POSITION_REPLAY()\l+ recv_ROLLADEN_POSITION_REPLAY()\l+ send_ROLLADEN_DEFINE_POSITION()\l+ recv_ROLLADEN_DEFINE_POSITION()\l+ send_ROLLADEN_POSITION_CHANGED_INFO()\l+ recv_ROLLADEN_POSITION_CHANGED_INFO()\l+ send_1WIRE_DISCOVER()\l+ recv_1WIRE_DISCOVER()\l+ send_1WIRE_DISCOVERED_PART_1()\l+ recv_1WIRE_DISCOVERED_PART_1()\l+ send_1WIRE_DISCOVERED_PART_2()\l+ recv_1WIRE_DISCOVERED_PART_2()\l+ send_1WIRE_ERROR()\l+ recv_1WIRE_ERROR()\l+ send_1WIRE_TEMPERATURE()\l+ recv_1WIRE_TEMPERATURE()\l+ send_1WIRE_TEMPERATURE_QUERY()\l+ recv_1WIRE_TEMPERATURE_QUERY()\l+ send_1WIRE_TEMPERATURE_REPLAY()\l+ recv_1WIRE_TEMPERATURE_REPLAY()\l+ send_REEDKONTAKT_OFFEN()\l+ recv_REEDKONTAKT_OFFEN()\l+ send_REEDKONTAKT_STATE_QUERY()\l+ recv_REEDKONTAKT_STATE_QUERY()\l+ send_REEDKONTAKT_STATE_REPLAY()\l+ recv_REEDKONTAKT_STATE_REPLAY()\l+ send_REEDKONTAKT_STATE_CHANGE()\l+ recv_REEDKONTAKT_STATE_CHANGE()\l+ send_PVSENSOR_STATE_REQUEST()\l+ recv_PVSENSOR_STATE_REQUEST()\l+ send_PVSENSOR_STATE_REPLAY()\l+ recv_PVSENSOR_STATE_REPLAY()\l+ send_PVSENSOR_STATE_CHANGE_INFO()\l+ recv_PVSENSOR_STATE_CHANGE_INFO()\l+ send_HEIZUNG_DETAILS_REQUEST()\l+ recv_HEIZUNG_DETAILS_REQUEST()\l+ send_HEIZUNG_MODE_OFF_DETAILS()\l+ recv_HEIZUNG_MODE_OFF_DETAILS()\l+ send_HEIZUNG_SET_MODE_OFF()\l+ recv_HEIZUNG_SET_MODE_OFF()\l+ send_HEIZUNG_MODE_MANUAL_DETAILS()\l+ recv_HEIZUNG_MODE_MANUAL_DETAILS()\l+ send_HEIZUNG_SET_MODE_MANUAL()\l+ recv_HEIZUNG_SET_MODE_MANUAL()\l+ send_HEIZUNG_MODE_THERMOSTAT_DETAILS()\l+ recv_HEIZUNG_MODE_THERMOSTAT_DETAILS()\l+ send_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()\l+ recv_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()\l+ send_HEIZUNG_MODE_AUTOMATIK_DETAILS()\l+ recv_HEIZUNG_MODE_AUTOMATIK_DETAILS()\l+ send_HEIZUNG_SET_MODE_AUTOMATIK()\l+ recv_HEIZUNG_SET_MODE_AUTOMATIK()\l+ send_HEIZUNG_TIST_REQUEST()\l+ recv_HEIZUNG_TIST_REQUEST()\l+ send_HEIZUNG_TIST_REPLAY()\l+ recv_HEIZUNG_TIST_REPLAY()\l+ send_HEIZUNG_WAERMEBEDARF_INFO()\l+ recv_HEIZUNG_WAERMEBEDARF_INFO()\l+ send_HEIZSTEUERUNG_STATE_REQUEST()\l+ recv_HEIZSTEUERUNG_STATE_REQUEST()\l+ send_HEIZSTEUERUNG_STATE_REPLAY()\l+ recv_HEIZSTEUERUNG_STATE_REPLAY()\l+ send_HEIZSTEUERUNG_STATE_INFO()\l+ recv_HEIZSTEUERUNG_STATE_INFO()\l+ send_HEIZSTEUERUNG_SET_VL()\l+ recv_HEIZSTEUERUNG_SET_VL()\l+ send_HEIZUNG_SOLLTEMP_LINE_REQUEST()\l+ recv_HEIZUNG_SOLLTEMP_LINE_REQUEST()\l+ send_HEIZUNG_SOLLTEMP_LINE_REPLAY()\l+ recv_HEIZUNG_SOLLTEMP_LINE_REPLAY()\l+ send_HEIZUNG_SOLLTEMP_WRITE_LINE()\l+ recv_HEIZUNG_SOLLTEMP_WRITE_LINE()\l+ send_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()\l+ recv_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()\l+ send_CONFIG_RELOAD()\l+ recv_CONFIG_RELOAD()\l+ send_CONFIG_RAM_USAGE_REQUEST()\l+ recv_CONFIG_RAM_USAGE_REQUEST()\l+ send_CONFIG_RAM_USAGE_REPLAY()\l+ recv_CONFIG_RAM_USAGE_REPLAY()\l+ send_ZEITZONE_DETAILS_REQUEST()\l+ recv_ZEITZONE_DETAILS_REQUEST()\l+ send_ZEITZONE_DETAILS_REPLAY()\l+ recv_ZEITZONE_DETAILS_REPLAY()\l+ send_ZEITZONE_WRITE_DETAILS()\l+ recv_ZEITZONE_WRITE_DETAILS()\l+ send_ZEITZONE_WRITE_DETAILS_ACK()\l+ recv_ZEITZONE_WRITE_DETAILS_ACK()\l+ send_ZEITZONE_TEST_MATCH_REQUERST()\l+ recv_ZEITZONE_TEST_MATCH_REQUERST()\l+ send_ZEITZONE_TEST_MATCH_REPLAY()\l+ recv_ZEITZONE_TEST_MATCH_REPLAY()\l+ send_TIME_INFO()\l+ recv_TIME_INFO()\l+ send_DATE_INFO()\l+ recv_DATE_INFO()\l+ send_TIME_REQUEST()\l+ recv_TIME_REQUEST()\l+ send_DATE_REQUEST()\l+ recv_DATE_REQUEST()\l+ send_GET_NEXT_BLOCK()\l+ recv_GET_NEXT_BLOCK()\l+ send_GET_NEXT_BLOCK_REPLAY()\l+ recv_GET_NEXT_BLOCK_REPLAY()\l+ send_DEFRAGMENT()\l+ recv_DEFRAGMENT()\l+ send_ALLOCATE_BLOCK()\l+ recv_ALLOCATE_BLOCK()\l+ send_ALLOCATE_BLOCK_REPLAY()\l+ recv_ALLOCATE_BLOCK_REPLAY()\l+ send_FREE_BLOCK()\l+ recv_FREE_BLOCK()\l+ send_FREE_BLOCK_REPLAY()\l+ recv_FREE_BLOCK_REPLAY()\l+ send_READ_FROM_BLOCK()\l+ recv_READ_FROM_BLOCK()\l+ send_READ_FROM_BLOCK_REPLAY()\l+ recv_READ_FROM_BLOCK_REPLAY()\l+ send_WRITE_TO_BLOCK()\l+ recv_WRITE_TO_BLOCK()\l+ send_WRITE_TO_BLOCK_REPLAY()\l+ recv_WRITE_TO_BLOCK_REPLAY()\l+ send_FORMAT()\l+ recv_FORMAT()\l+ send_STATE_REQUEST()\l+ recv_STATE_REQUEST()\l+ send_STATE_INFO()\l+ recv_STATE_INFO()\l+ send_VOLTAGE_REQUEST()\l+ recv_VOLTAGE_REQUEST()\l+ send_VOLTAGE_REPLAY()\l+ recv_VOLTAGE_REPLAY()\l+ send_VOLTAGE_STATS_REQUEST()\l+ recv_VOLTAGE_STATS_REQUEST()\l+ send_VOLTAGE_STATS_REPLAY()\l+ recv_VOLTAGE_STATS_REPLAY()\l+ send_VOLTAGE_STATS_RESET()\l+ recv_VOLTAGE_STATS_RESET()\l+ send_FA_BLOCK1_INFO()\l+ recv_FA_BLOCK1_INFO()\l+ send_REGLER_DATEN_INFO_FRG1()\l+ recv_REGLER_DATEN_INFO_FRG1()\l+ send_REGLER_DATEN_INFO_FRG2()\l+ recv_REGLER_DATEN_INFO_FRG2()\l+ send_WETTER_INFO()\l+ recv_WETTER_INFO()\l+ send_LICHT_STATS_5MIN()\l+ recv_LICHT_STATS_5MIN()\l+ send_WIND_STATS_5MIN()\l+ recv_WIND_STATS_5MIN()\l+ send_OBJECT_COUNT_REQUEST()\l+ recv_OBJECT_COUNT_REQUEST()\l+ send_OBJECT_COUNT_REPLAY()\l+ recv_OBJECT_COUNT_REPLAY()\l+ send_OBJECT_ATTRIBUTE_REQUEST()\l+ recv_OBJECT_ATTRIBUTE_REQUEST()\l+ send_OBJECT_ATTRIBUTE_REPLAY()\l+ recv_OBJECT_ATTRIBUTE_REPLAY()\l+ send_FIELD_COUNT_REQUEST()\l+ recv_FIELD_COUNT_REQUEST()\l+ send_FIELD_COUNT_REPLAY()\l+ recv_FIELD_COUNT_REPLAY()\l+ send_FIELD_ATTRIBUTE_REQUEST()\l+ recv_FIELD_ATTRIBUTE_REQUEST()\l+ send_FIELD_ATTRIBUTE_REPLAY()\l+ recv_FIELD_ATTRIBUTE_REPLAY()\l+ send_FIELD_READ_REQUEST()\l+ recv_FIELD_READ_REQUEST()\l+ send_FIELD_READ_REPLAY()\l+ recv_FIELD_READ_REPLAY()\l+ send_FIELD_WRITE_REQUEST()\l+ recv_FIELD_WRITE_REQUEST()\l+ send_FIELD_WRITE_REPLAY()\l+ recv_FIELD_WRITE_REPLAY()\l# socket()\l# recv_frame()\l# recv_frame_with_timeout()\l# hcan_transport()\l}" alt="" coords="5,7,376,5116"></map>
+<center><font size="2">[<a href="graph_legend.html">Legende</a>]</font></center></div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Öffentliche Methoden</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1oap__driver.html#03b13d2b29caa850b853d61d22ca04c6">oap_driver</a> (<a class="el" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1oap__driver.html#f2804ebf7579b83b6fdbb28a1486ecbb">~oap_driver</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1oap__driver.html#70b2675e2245ef8128dc4820397161af">show_help</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1oap__driver.html#ebd8cecbcdec641646ec445c74025578">exec_command</a> (<a class="el" href="structhcan_1_1context.html">context</a> &amp;c, const string &amp;)</td></tr>
+
+<tr><td colspan="2"><br><h2>Geschützte Methoden</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1oap__driver.html#aa912dfe529b09bed90bf9ff7135d3d2">cmd_walk</a> ()</td></tr>
+
+<tr><td colspan="2"><br><h2>Geschützte Attribute</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1oap__access.html">oap_access</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1oap__driver.html#87484e243c2adb9f38b11b2725424c17">m_oap</a></td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+
+<p>Definiert in Zeile <a class="el" href="oap__driver_8h-source.html#l00017">17</a> der Datei <a class="el" href="oap__driver_8h-source.html">oap_driver.h</a>.</p>
+<hr><h2>Beschreibung der Konstruktoren und Destruktoren</h2>
+<a class="anchor" name="03b13d2b29caa850b853d61d22ca04c6"></a><!-- doxytag: member="hcan::oap_driver::oap_driver" ref="03b13d2b29caa850b853d61d22ca04c6" args="(board_connection &amp;bcon)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oap_driver::oap_driver           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhcan_1_1board__connection.html">board_connection</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>bcon</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="oap__driver_8cc-source.html#l00028">28</a> der Datei <a class="el" href="oap__driver_8cc-source.html">oap_driver.cc</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="f2804ebf7579b83b6fdbb28a1486ecbb"></a><!-- doxytag: member="hcan::oap_driver::~oap_driver" ref="f2804ebf7579b83b6fdbb28a1486ecbb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oap_driver::~oap_driver           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="oap__driver_8cc-source.html#l00034">34</a> der Datei <a class="el" href="oap__driver_8cc-source.html">oap_driver.cc</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Elementfunktionen</h2>
+<a class="anchor" name="aa912dfe529b09bed90bf9ff7135d3d2"></a><!-- doxytag: member="hcan::oap_driver::cmd_walk" ref="aa912dfe529b09bed90bf9ff7135d3d2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oap_driver::cmd_walk           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="oap__driver_8cc-source.html#l00065">65</a> der Datei <a class="el" href="oap__driver_8cc-source.html">oap_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="oap__access_8cc-source.html#l00073">hcan::oap_field::arraysize()</a>, <a class="el" href="oap__access_8cc-source.html#l00254">hcan::oap_object::field()</a>, <a class="el" href="oap__access_8cc-source.html#l00249">hcan::oap_object::field_count()</a>, <a class="el" href="oap__driver_8cc-source.html#l00048">field_to_path()</a>, <a class="el" href="oap__driver_8h-source.html#l00021">m_oap</a>, <a class="el" href="oap__access_8cc-source.html#l00319">hcan::oap_access::object()</a>, <a class="el" href="oap__access_8cc-source.html#l00314">hcan::oap_access::object_count()</a> und <a class="el" href="oap__access_8cc-source.html#l00105">hcan::oap_field::value_as_string()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="oap__driver_8cc-source.html#l00095">exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1oap__driver_aa912dfe529b09bed90bf9ff7135d3d2_cgraph.png" border="0" usemap="#classhcan_1_1oap__driver_aa912dfe529b09bed90bf9ff7135d3d2_cgraph_map" alt=""></center>
+<map name="classhcan_1_1oap__driver_aa912dfe529b09bed90bf9ff7135d3d2_cgraph_map">
+<area shape="rect" href="classhcan_1_1oap__field.html#4cfd37eb6ebe0651f0ddf702e28d5e4d" title="hcan::oap_field::arraysize" alt="" coords="543,24,727,51"><area shape="rect" href="classhcan_1_1oap__object.html#1370cda7e48ddcf3f4bdee8c8ef4d655" title="hcan::oap_object::field" alt="" coords="283,49,445,76"><area shape="rect" href="classhcan_1_1oap__object.html#42fb6717d965718b0a48d47670b667c1" title="hcan::oap_object::field_count" alt="" coords="260,100,468,127"><area shape="rect" href="oap__driver_8cc.html#05880dc76b8375a89da87fb539715f16" title="field_to_path" alt="" coords="312,151,416,177"><area shape="rect" href="classhcan_1_1oap__access.html#311cb2907c56f23fcca25737338e5c9f" title="hcan::oap_access::object" alt="" coords="273,201,455,228"><area shape="rect" href="classhcan_1_1oap__access.html#cfd484c63952eb7b107417a08219f2f8" title="hcan::oap_access::object_count" alt="" coords="252,252,476,279"><area shape="rect" href="classhcan_1_1oap__field.html#21e280ca68a471c7d9110e1fff08987f" title="hcan::oap_field::value_as_string" alt="" coords="252,303,476,329"><area shape="rect" href="classhcan_1_1oap__object.html#f4506e1a04de61e0df0828e5a2e5ac1f" title="hcan::oap_object::class_name" alt="" coords="528,100,741,127"><area shape="rect" href="classhcan_1_1oap__field.html#15168a145f1ee98272b2ac8812516905" title="hcan::oap_field::name" alt="" coords="553,151,716,177"><area shape="rect" href="classhcan_1_1oap__object.html#23addfa97af315a02d6b5b9a9be59375" title="hcan::oap_object::oid" alt="" coords="556,201,713,228"><area shape="rect" href="classhcan_1_1oap__desc.html#8ec0c6c29a4c6c0b20a279d1600cfbad" title="hcan::oap_desc::class_name" alt="" coords="792,100,997,127"><area shape="rect" href="classhcan_1_1oap__desc.html#ee0e1e16888f8e23facc45dc79dfe62e" title="hcan::oap_desc::field_name" alt="" coords="795,151,995,177"><area shape="rect" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4" title="hcan::oap_field::value" alt="" coords="815,303,975,329"><area shape="rect" href="classhcan_1_1oap__field.html#505456ee723ebd939ef6ffd7c2e6a764" title="hcan::oap_field::value_as_time" alt="" coords="527,328,743,355"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="1119,176,1321,203"><area shape="rect" href="classhcan_1_1hcan__transport.html#627e386d27e3c39b67b995f65044e9ac" title="hcan::hcan_transport::recv_FIELD_READ_REPLAY" alt="" coords="1056,227,1384,253"><area shape="rect" href="classhcan_1_1hcan__transport.html#c25d5620b81ebe58da48f291d726fa8c" title="hcan::hcan_transport::send_FIELD_READ_REQUEST" alt="" coords="1047,303,1393,329"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="1120,353,1320,380"><area shape="rect" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47" title="hcan::board_connection::tcon" alt="" coords="1115,404,1325,431"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1493,113,1629,140"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1443,164,1680,191"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1496,215,1627,241"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1499,265,1624,292"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1457,316,1665,343"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1484,367,1639,393"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="70b2675e2245ef8128dc4820397161af"></a><!-- doxytag: member="hcan::oap_driver::show_help" ref="70b2675e2245ef8128dc4820397161af" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oap_driver::show_help           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="oap__driver_8cc-source.html#l00038">38</a> der Datei <a class="el" href="oap__driver_8cc-source.html">oap_driver.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="controller1612__driver_8cc-source.html#l00032">hcan::controller1612_driver::show_help()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="ebd8cecbcdec641646ec445c74025578"></a><!-- doxytag: member="hcan::oap_driver::exec_command" ref="ebd8cecbcdec641646ec445c74025578" args="(context &amp;c, const string &amp;)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oap_driver::exec_command           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhcan_1_1context.html">context</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&nbsp;</td>
+          <td class="paramname"> <em>command</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="oap__driver_8cc-source.html#l00095">95</a> der Datei <a class="el" href="oap__driver_8cc-source.html">oap_driver.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="oap__access_8cc-source.html#l00073">hcan::oap_field::arraysize()</a>, <a class="el" href="oap__access_8cc-source.html#l00126">hcan::oap_field::class_as_string()</a>, <a class="el" href="oap__access_8cc-source.html#l00244">hcan::oap_object::class_name()</a>, <a class="el" href="oap__driver_8cc-source.html#l00065">cmd_walk()</a>, <a class="el" href="oap__access_8cc-source.html#l00254">hcan::oap_object::field()</a>, <a class="el" href="oap__access_8cc-source.html#l00272">hcan::oap_object::field_by_name()</a>, <a class="el" href="oap__access_8cc-source.html#l00249">hcan::oap_object::field_count()</a>, <a class="el" href="oap__driver_8h-source.html#l00021">m_oap</a>, <a class="el" href="board__driver_8h-source.html#l00019">hcan::context::mode</a>, <a class="el" href="oap__access_8cc-source.html#l00033">hcan::oap_field::name()</a>, <a class="el" href="board__driver_8h-source.html#l00022">hcan::context::oap</a>, <a class="el" href="board__driver_8h-source.html#l00021">hcan::context::oap_oid</a>, <a class="el" href="oap__access_8cc-source.html#l00319">hcan::oap_access::object()</a>, <a class="el" href="oap__access_8cc-source.html#l00314">hcan::oap_access::object_count()</a>, <a class="el" href="board__driver_8h-source.html#l00017">hcan::context::prompt</a>, <a class="el" href="board__driver_8h-source.html#l00030">hcan::context::reset()</a>, <a class="el" href="oap__access_8cc-source.html#l00141">hcan::oap_field::set_value()</a>, <a class="el" href="oap__access_8cc-source.html#l00105">hcan::oap_field::value_as_string()</a> und <a class="el" href="traceable__error_8cc-source.html#l00052">traceable_error::what()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="controller1612__driver_8cc-source.html#l00049">hcan::controller1612_driver::exec_command()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1oap__driver_ebd8cecbcdec641646ec445c74025578_cgraph.png" border="0" usemap="#classhcan_1_1oap__driver_ebd8cecbcdec641646ec445c74025578_cgraph_map" alt=""></center>
+<map name="classhcan_1_1oap__driver_ebd8cecbcdec641646ec445c74025578_cgraph_map">
+<area shape="rect" href="classhcan_1_1oap__field.html#4cfd37eb6ebe0651f0ddf702e28d5e4d" title="hcan::oap_field::arraysize" alt="" coords="863,197,1047,224"><area shape="rect" href="classhcan_1_1oap__field.html#1e16b5f29635b92fef1201c4f2a99a15" title="hcan::oap_field::class_as_string" alt="" coords="296,603,517,629"><area shape="rect" href="classhcan_1_1oap__object.html#f4506e1a04de61e0df0828e5a2e5ac1f" title="hcan::oap_object::class_name" alt="" coords="848,312,1061,339"><area shape="rect" href="classhcan_1_1oap__driver.html#aa912dfe529b09bed90bf9ff7135d3d2" title="hcan::oap_driver::cmd_walk" alt="" coords="308,248,505,275"><area shape="rect" href="classhcan_1_1oap__object.html#1370cda7e48ddcf3f4bdee8c8ef4d655" title="hcan::oap_object::field" alt="" coords="603,96,765,123"><area shape="rect" href="classhcan_1_1oap__object.html#42fb6717d965718b0a48d47670b667c1" title="hcan::oap_object::field_count" alt="" coords="580,147,788,173"><area shape="rect" href="classhcan_1_1oap__field.html#15168a145f1ee98272b2ac8812516905" title="hcan::oap_field::name" alt="" coords="873,375,1036,401"><area shape="rect" href="classhcan_1_1oap__access.html#311cb2907c56f23fcca25737338e5c9f" title="hcan::oap_access::object" alt="" coords="593,299,775,325"><area shape="rect" href="classhcan_1_1oap__access.html#cfd484c63952eb7b107417a08219f2f8" title="hcan::oap_access::object_count" alt="" coords="572,349,796,376"><area shape="rect" href="classhcan_1_1oap__field.html#21e280ca68a471c7d9110e1fff08987f" title="hcan::oap_field::value_as_string" alt="" coords="572,501,796,528"><area shape="rect" href="classhcan_1_1oap__object.html#b0a1d5dfc5b74ae90a4d7ed918a31aae" title="hcan::oap_object::field_by_name" alt="" coords="292,653,521,680"><area shape="rect" href="structhcan_1_1context.html#d5f3402c26ce04682ce567202e0fc30d" title="hcan::context::reset" alt="" coords="332,704,481,731"><area shape="rect" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba" title="hcan::oap_field::set_value" alt="" coords="1121,552,1308,579"><area shape="rect" href="classtraceable__error.html#b234163420719b916db10ee69670a7ac" title="traceable_error::what" alt="" coords="328,755,485,781"><area shape="rect" href="classhcan_1_1oap__desc.html#8ec0c6c29a4c6c0b20a279d1600cfbad" title="hcan::oap_desc::class_name" alt="" coords="1112,312,1317,339"><area shape="rect" href="oap__driver_8cc.html#05880dc76b8375a89da87fb539715f16" title="field_to_path" alt="" coords="632,248,736,275"><area shape="rect" href="classhcan_1_1oap__object.html#23addfa97af315a02d6b5b9a9be59375" title="hcan::oap_object::oid" alt="" coords="876,248,1033,275"><area shape="rect" href="classhcan_1_1oap__desc.html#ee0e1e16888f8e23facc45dc79dfe62e" title="hcan::oap_desc::field_name" alt="" coords="1115,375,1315,401"><area shape="rect" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4" title="hcan::oap_field::value" alt="" coords="1135,501,1295,528"><area shape="rect" href="classhcan_1_1oap__field.html#505456ee723ebd939ef6ffd7c2e6a764" title="hcan::oap_field::value_as_time" alt="" coords="847,501,1063,528"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="1439,552,1641,579"><area shape="rect" href="classhcan_1_1hcan__transport.html#627e386d27e3c39b67b995f65044e9ac" title="hcan::hcan_transport::recv_FIELD_READ_REPLAY" alt="" coords="1376,349,1704,376"><area shape="rect" href="classhcan_1_1hcan__transport.html#c25d5620b81ebe58da48f291d726fa8c" title="hcan::hcan_transport::send_FIELD_READ_REQUEST" alt="" coords="1367,451,1713,477"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="1440,603,1640,629"><area shape="rect" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47" title="hcan::board_connection::tcon" alt="" coords="1435,501,1645,528"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1813,451,1949,477"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1763,299,2000,325"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1816,349,1947,376"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1819,400,1944,427"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1777,628,1985,655"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1804,527,1959,553"><area shape="rect" href="classhcan_1_1hcan__transport.html#cfccd5575ab96eefe562921a93bc90e0" title="hcan::hcan_transport::recv_FIELD_WRITE_REPLAY" alt="" coords="1375,400,1705,427"><area shape="rect" href="classhcan_1_1hcan__transport.html#dde24ca51fbb27a9d5ac0bae5915568b" title="hcan::hcan_transport::send_FIELD_WRITE_REQUEST" alt="" coords="1365,653,1715,680"></map>
+</div>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Datenelemente</h2>
+<a class="anchor" name="87484e243c2adb9f38b11b2725424c17"></a><!-- doxytag: member="hcan::oap_driver::m_oap" ref="87484e243c2adb9f38b11b2725424c17" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1oap__access.html">oap_access</a> <a class="el" href="classhcan_1_1oap__driver.html#87484e243c2adb9f38b11b2725424c17">hcan::oap_driver::m_oap</a><code> [protected]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="oap__driver_8h-source.html#l00021">21</a> der Datei <a class="el" href="oap__driver_8h-source.html">oap_driver.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="oap__driver_8cc-source.html#l00065">cmd_walk()</a> und <a class="el" href="oap__driver_8cc-source.html#l00095">exec_command()</a>.</p>
+
+</div>
+</div><p>
+<hr>Die Dokumentation für diese Klasse wurde erzeugt aufgrund der Dateien:<ul>
+<li><a class="el" href="oap__driver_8h-source.html">oap_driver.h</a><li><a class="el" href="oap__driver_8cc-source.html">oap_driver.cc</a></ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:40:18 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<area shape="rect" href="$classhcan_1_1transport__connection.html" title="{hcan::transport_connection\n|&#45; m_socket\l|+ transport_connection()\l+ ~transport_connection()\l+ keep_connection_alive()\l+ ping()\l+ flood_ping()\l+ dump()\l+ templog()\l+ syslog()\l+ send()\l+ recv_frame()\l+ recv_frame_with_timeout()\l+ socket()\l}" alt="" coords="87,5165,295,5440">

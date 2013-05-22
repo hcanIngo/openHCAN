@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: board_connection.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>board_connection.h</h1><a href="board__connection_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef HCAN_BOARD_CONNECTION_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define HCAN_BOARD_CONNECTION_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="traceable__error_8h.html">libhcan++/traceable_error.h</a>&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="board__driver_8h.html">board_driver.h</a>&gt;</span>
+<a name="l00007"></a>00007 
+<a name="l00019"></a>00019 <span class="keyword">namespace </span>hcan
+<a name="l00020"></a>00020 {
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="classhcan_1_1board__error.html">00022</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1board__error.html">board_error</a> : <span class="keyword">public</span> <a class="code" href="classtraceable__error.html">traceable_error</a>
+<a name="l00023"></a>00023     {
+<a name="l00024"></a>00024         <span class="keyword">public</span>:
+<a name="l00025"></a>00025             <a class="code" href="classhcan_1_1board__error.html#45ff898b9be9d3ea56f92fa84c569b68">board_error</a> (<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;s);
+<a name="l00026"></a>00026     };
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028     <span class="keyword">class </span><a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a>;
+<a name="l00029"></a>00029 
+<a name="l00030"></a><a class="code" href="classhcan_1_1board__connection.html">00030</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1board__connection.html">board_connection</a>
+<a name="l00031"></a>00031     {
+<a name="l00032"></a>00032         <span class="keyword">private</span>:
+<a name="l00034"></a>00034             <a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;m_tcon;
+<a name="l00036"></a>00036             <a class="code" href="namespacehcan.html#4405ce0eef0494525026215fd1929148">board_driver_p</a> m_driver;
+<a name="l00038"></a>00038             uint16_t m_src;
+<a name="l00040"></a>00040             uint16_t m_dst;
+<a name="l00041"></a>00041         <span class="keyword">public</span>:
+<a name="l00042"></a>00042             <a class="code" href="classhcan_1_1board__connection.html#7fba6a00c711f71e92c4da1d7fc769b2">board_connection</a> (<a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>, 
+<a name="l00043"></a>00043                     uint16_t <a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>, uint16_t <a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>, <span class="keywordtype">bool</span> ignore_type, 
+<a name="l00044"></a>00044                     uint8_t arch);
+<a name="l00045"></a>00045             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1board__connection.html#54ac476899e5afd92468969d3abd5d78">~board_connection</a>() <span class="keywordflow">throw</span> ();
+<a name="l00046"></a><a class="code" href="classhcan_1_1board__connection.html#33f3b8ad9489242ee3804c2fbea34910">00046</a>             <a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;<a class="code" href="classhcan_1_1board__connection.html#33f3b8ad9489242ee3804c2fbea34910">get_transport_connection</a> () { <span class="keywordflow">return</span> m_tcon; }
+<a name="l00047"></a><a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">00047</a>             uint16_t <a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a> ()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_src; }
+<a name="l00048"></a><a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">00048</a>             uint16_t <a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a> ()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dst; }
+<a name="l00049"></a><a class="code" href="classhcan_1_1board__connection.html#48432717c0f0607b662f103b192e325b">00049</a>             <a class="code" href="namespacehcan.html#4405ce0eef0494525026215fd1929148">board_driver_p</a> &amp;<a class="code" href="classhcan_1_1board__connection.html#48432717c0f0607b662f103b192e325b">get_driver</a> () { <span class="keywordflow">return</span> m_driver; }
+<a name="l00050"></a><a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">00050</a>             <a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>() { <span class="keywordflow">return</span> m_tcon; }
+<a name="l00051"></a>00051     };
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 };
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <span class="preprocessor">#endif</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:50 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

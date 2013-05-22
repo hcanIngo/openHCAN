@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: rtc.h-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>rtc.h-Dateireferenz</h1><code>#include &lt;avr/io.h&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für rtc.h:</div>
+<div class="dynsection">
+<p><center><img src="rtc_8h__incl.png" border="0" usemap="#rtc.h_map" alt=""></center>
+</div>
+
+<p>
+<div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dynsection">
+<p><center><img src="rtc_8h__dep__incl.png" border="0" usemap="#rtc.hdep_map" alt=""></center>
+</div>
+
+<p>
+<a href="rtc_8h-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Datenstrukturen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rtc__clock__t.html">canix_rtc_clock_t</a></td></tr>
+
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtc_8h.html#e0d77fda8ce55ebbf9060189b8693d2c">canix_is_date_valid</a> (void)</td></tr>
+
+<tr><td colspan="2"><br><h2>Variablen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">volatile <a class="el" href="structcanix__rtc__clock__t.html">canix_rtc_clock_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtc_8h.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a></td></tr>
+
+</table>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="e0d77fda8ce55ebbf9060189b8693d2c"></a><!-- doxytag: member="rtc.h::canix_is_date_valid" ref="e0d77fda8ce55ebbf9060189b8693d2c" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t canix_is_date_valid           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert zurueck, ob das Datum valide ist. Das Datum ist valide, wenn in den letzten 254 Minuten ein Datumsframe empfangen wurde.<p>
+<dl class="return" compact><dt><b>Rückgabe:</b></dt><dd>0 wenn invalide, 1 wenn valide</dd></dl>
+Liefert zurueck, ob die Zeit / das Datum "frisch" ist, d.h. ob innerhalb des erlaubten Intervals (254 Sekunden) ein Zeitframe empfangen wurde. Falls die Zeit nicht frisch ist, haengt die Praezession allein von der Genauigkeit des Quarzes ab. 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00251">251</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="rtc_8h-source.html#l00027">canix_rtc_clock_t::last_date_update</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Variablen-Dokumentation</h2>
+<a class="anchor" name="fbd61373f4655cc6a0f2abecb4bff330"></a><!-- doxytag: member="rtc.h::canix_rtc_clock" ref="fbd61373f4655cc6a0f2abecb4bff330" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile <a class="el" href="structcanix__rtc__clock__t.html">canix_rtc_clock_t</a> <a class="el" href="rtc_8h.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Hier sind die privaten Daten der RTC abgelegt. 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00093">93</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a> und <a class="el" href="tools_8c-source.html#l00049">time_matches()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcandata: file_format_v1.h-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>file_format_v1.h-Dateireferenz</h1><code>#include &lt;iostream&gt;</code><br>
+<code>#include &lt;string&gt;</code><br>
+<code>#include &lt;inttypes.h&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für file_format_v1.h:</div>
+<div class="dynsection">
+<p><center><img src="file__format__v1_8h__incl.png" border="0" usemap="#file_format_v1.h_map" alt=""></center>
+</div>
+
+<p>
+<div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dynsection">
+<p><center><img src="file__format__v1_8h__dep__incl.png" border="0" usemap="#file_format_v1.hdep_map" alt=""></center>
+<map name="file_format_v1.hdep_map">
+<area shape="rect" href="data__file_8cc.html" title="data_file.cc" alt="" coords="5,316,99,343"><area shape="rect" href="data__file__writer_8h.html" title="data_file_writer.h" alt="" coords="79,84,207,111"><area shape="rect" href="data__file__writer_8cc.html" title="data_file_writer.cc" alt="" coords="28,161,161,188"><area shape="rect" href="data__query_8h.html" title="data_query.h" alt="" coords="231,84,335,111"><area shape="rect" href="file__format__v1_8cc.html" title="file_format_v1.cc" alt="" coords="359,84,487,111"><area shape="rect" href="data__query_8cc.html" title="data_query.cc" alt="" coords="204,316,313,343"><area shape="rect" href="data__storage_8h.html" title="data_storage.h" alt="" coords="185,161,303,188"><area shape="rect" href="data__file_8h.html" title="data_file.h" alt="" coords="69,239,157,265"><area shape="rect" href="data__storage_8cc.html" title="data_storage.cc" alt="" coords="181,239,304,265"></map>
+</div>
+
+<p>
+<a href="file__format__v1_8h-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Namensbereiche</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">namespace &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehcan.html">hcan</a></td></tr>
+
+<tr><td colspan="2"><br><h2>Datenstrukturen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhcan_1_1data__file__block__t.html">hcan::data_file_block_t</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhcan_1_1data__file__header__block__v1__t.html">hcan::data_file_header_block_v1_t</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhcan_1_1data__file__data__block__t.html">hcan::data_file_data_block_t</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhcan_1_1data__file__frame__entry.html">hcan::data_file_frame_entry</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1file__format__v1.html">hcan::file_format_v1</a></td></tr>
+
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="file__format__v1_8h.html#d52d475f3b8079b6e7f6c1d5210b4034">DATA_FILE_MAGIC_1</a>&nbsp;&nbsp;&nbsp;0x12345678</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="file__format__v1_8h.html#e824c65b25f9df68be87a4448c7bfd3e">DATA_FILE_MAGIC_2</a>&nbsp;&nbsp;&nbsp;0x20080404</td></tr>
+
+<tr><td colspan="2"><br><h2>Aufzählungen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec0">hcan::data_file_type</a> { <a class="el" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec00a7a0e871e0b244e70a05cd9e4818b9e">hcan::data_file_type_header</a> =  1, 
+<a class="el" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec09fc5c719a41014ffacc30b4ceee147fb">hcan::data_file_type_data</a> =  2
+ }</td></tr>
+
+</table>
+<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="d52d475f3b8079b6e7f6c1d5210b4034"></a><!-- doxytag: member="file_format_v1.h::DATA_FILE_MAGIC_1" ref="d52d475f3b8079b6e7f6c1d5210b4034" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DATA_FILE_MAGIC_1&nbsp;&nbsp;&nbsp;0x12345678          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="file__format__v1_8h-source.html#l00017">17</a> der Datei <a class="el" href="file__format__v1_8h-source.html">file_format_v1.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__file_8cc-source.html#l00015">hcan::data_file::data_file()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="e824c65b25f9df68be87a4448c7bfd3e"></a><!-- doxytag: member="file_format_v1.h::DATA_FILE_MAGIC_2" ref="e824c65b25f9df68be87a4448c7bfd3e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DATA_FILE_MAGIC_2&nbsp;&nbsp;&nbsp;0x20080404          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="file__format__v1_8h-source.html#l00018">18</a> der Datei <a class="el" href="file__format__v1_8h-source.html">file_format_v1.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__file_8cc-source.html#l00015">hcan::data_file::data_file()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:41:32 2009 für libhcandata von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

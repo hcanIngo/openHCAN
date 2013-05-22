@@ -1,0 +1,855 @@
+   1               		.file	"mcp2515.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__ = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.text
+   9               	.global	spi_init
+  11               	spi_init:
+  12               	/* prologue: function */
+  13               	/* frame size = 0 */
+  14               	/* stack size = 0 */
+  15               	.L__stack_usage = 0
+  16 0000 84B1      		in r24,36-32
+  17 0002 806A      		ori r24,lo8(-96)
+  18 0004 84B9      		out 36-32,r24
+  19 0006 2F98      		cbi 37-32,7
+  20 0008 80E5      		ldi r24,lo8(80)
+  21 000a 8CBD      		out 76-32,r24
+  22 000c 81E0      		ldi r24,lo8(1)
+  23 000e 8DBD      		out 77-32,r24
+  24               	/* epilogue start */
+  25 0010 0895      		ret
+  27               	.global	spi_putc
+  29               	spi_putc:
+  30               	/* prologue: function */
+  31               	/* frame size = 0 */
+  32               	/* stack size = 0 */
+  33               	.L__stack_usage = 0
+  34 0012 8EBD      		out 78-32,r24
+  35               	.L3:
+  36 0014 0DB4      		in __tmp_reg__,77-32
+  37 0016 07FE      		sbrs __tmp_reg__,7
+  38 0018 00C0      		rjmp .L3
+  39 001a 8EB5      		in r24,78-32
+  40               	/* epilogue start */
+  41 001c 0895      		ret
+  43               	.global	spi_getc
+  45               	spi_getc:
+  46               	/* prologue: function */
+  47               	/* frame size = 0 */
+  48               	/* stack size = 0 */
+  49               	.L__stack_usage = 0
+  50 001e 80E0      		ldi r24,lo8(0)
+  51 0020 0E94 0000 		call spi_putc
+  52               	/* epilogue start */
+  53 0024 0895      		ret
+  55               	.global	can_enable_mcp2515
+  57               	can_enable_mcp2515:
+  58               	/* prologue: function */
+  59               	/* frame size = 0 */
+  60               	/* stack size = 0 */
+  61               	.L__stack_usage = 0
+  62 0026 2C98      		cbi 37-32,4
+  63               	/* epilogue start */
+  64 0028 0895      		ret
+  66               	.global	can_disable_mcp2515
+  68               	can_disable_mcp2515:
+  69               	/* prologue: function */
+  70               	/* frame size = 0 */
+  71               	/* stack size = 0 */
+  72               	.L__stack_usage = 0
+  73 002a 2C9A      		sbi 37-32,4
+  74               	/* epilogue start */
+  75 002c 0895      		ret
+  77               	.global	mcp2515_bit_modify
+  79               	mcp2515_bit_modify:
+  80 002e A2E0      		ldi r26,lo8(2)
+  81 0030 B0E0      		ldi r27,hi8(2)
+  82 0032 E0E0      		ldi r30,lo8(gs(1f))
+  83 0034 F0E0      		ldi r31,hi8(gs(1f))
+  84 0036 0C94 0000 		jmp __prologue_saves__+((18 - 3) * 2)
+  85               	1:
+  86               	/* prologue: function */
+  87               	/* frame size = 2 */
+  88               	/* stack size = 5 */
+  89               	.L__stack_usage = 5
+  90 003a 182F      		mov r17,r24
+  91 003c 4A83      		std Y+2,r20
+  92 003e 6983      		std Y+1,r22
+  93 0040 0E94 0000 		call can_enable_mcp2515
+  94 0044 85E0      		ldi r24,lo8(5)
+  95 0046 0E94 0000 		call spi_putc
+  96 004a 812F      		mov r24,r17
+  97 004c 0E94 0000 		call spi_putc
+  98 0050 6981      		ldd r22,Y+1
+  99 0052 862F      		mov r24,r22
+ 100 0054 0E94 0000 		call spi_putc
+ 101 0058 4A81      		ldd r20,Y+2
+ 102 005a 842F      		mov r24,r20
+ 103 005c 0E94 0000 		call spi_putc
+ 104 0060 0E94 0000 		call can_disable_mcp2515
+ 105               	/* epilogue start */
+ 106 0064 2296      		adiw r28,2
+ 107 0066 E3E0      		ldi r30, lo8(3)
+ 108 0068 0C94 0000 		jmp __epilogue_restores__ + ((18 - 3) * 2)
+ 110               	.global	mcp2515_read_register
+ 112               	mcp2515_read_register:
+ 113 006c A1E0      		ldi r26,lo8(1)
+ 114 006e B0E0      		ldi r27,hi8(1)
+ 115 0070 E0E0      		ldi r30,lo8(gs(1f))
+ 116 0072 F0E0      		ldi r31,hi8(gs(1f))
+ 117 0074 0C94 0000 		jmp __prologue_saves__+((18 - 3) * 2)
+ 118               	1:
+ 119               	/* prologue: function */
+ 120               	/* frame size = 1 */
+ 121               	/* stack size = 4 */
+ 122               	.L__stack_usage = 4
+ 123 0078 182F      		mov r17,r24
+ 124 007a 0E94 0000 		call can_enable_mcp2515
+ 125 007e 83E0      		ldi r24,lo8(3)
+ 126 0080 0E94 0000 		call spi_putc
+ 127 0084 812F      		mov r24,r17
+ 128 0086 0E94 0000 		call spi_putc
+ 129 008a 0E94 0000 		call spi_getc
+ 130 008e 8983      		std Y+1,r24
+ 131 0090 0E94 0000 		call can_disable_mcp2515
+ 132 0094 8981      		ldd r24,Y+1
+ 133               	/* epilogue start */
+ 134 0096 2196      		adiw r28,1
+ 135 0098 E3E0      		ldi r30, lo8(3)
+ 136 009a 0C94 0000 		jmp __epilogue_restores__ + ((18 - 3) * 2)
+ 138               	.global	mcp2515_write_register
+ 140               	mcp2515_write_register:
+ 141 009e A1E0      		ldi r26,lo8(1)
+ 142 00a0 B0E0      		ldi r27,hi8(1)
+ 143 00a2 E0E0      		ldi r30,lo8(gs(1f))
+ 144 00a4 F0E0      		ldi r31,hi8(gs(1f))
+ 145 00a6 0C94 0000 		jmp __prologue_saves__+((18 - 3) * 2)
+ 146               	1:
+ 147               	/* prologue: function */
+ 148               	/* frame size = 1 */
+ 149               	/* stack size = 4 */
+ 150               	.L__stack_usage = 4
+ 151 00aa 182F      		mov r17,r24
+ 152 00ac 6983      		std Y+1,r22
+ 153 00ae 0E94 0000 		call can_enable_mcp2515
+ 154 00b2 82E0      		ldi r24,lo8(2)
+ 155 00b4 0E94 0000 		call spi_putc
+ 156 00b8 812F      		mov r24,r17
+ 157 00ba 0E94 0000 		call spi_putc
+ 158 00be 6981      		ldd r22,Y+1
+ 159 00c0 862F      		mov r24,r22
+ 160 00c2 0E94 0000 		call spi_putc
+ 161 00c6 0E94 0000 		call can_disable_mcp2515
+ 162               	/* epilogue start */
+ 163 00ca 2196      		adiw r28,1
+ 164 00cc E3E0      		ldi r30, lo8(3)
+ 165 00ce 0C94 0000 		jmp __epilogue_restores__ + ((18 - 3) * 2)
+ 167               	.global	mcp2515_set_mode
+ 169               	mcp2515_set_mode:
+ 170 00d2 1F93      		push r17
+ 171               	/* prologue: function */
+ 172               	/* frame size = 0 */
+ 173               	/* stack size = 1 */
+ 174               	.L__stack_usage = 1
+ 175 00d4 182F      		mov r17,r24
+ 176 00d6 8FE0      		ldi r24,lo8(15)
+ 177 00d8 60EE      		ldi r22,lo8(-32)
+ 178 00da 412F      		mov r20,r17
+ 179 00dc 0E94 0000 		call mcp2515_bit_modify
+ 180 00e0 8FE0      		ldi r24,lo8(15)
+ 181 00e2 0E94 0000 		call mcp2515_read_register
+ 182 00e6 982F      		mov r25,r24
+ 183 00e8 907E      		andi r25,lo8(-32)
+ 184 00ea 81E0      		ldi r24,lo8(1)
+ 185 00ec 9117      		cp r25,r17
+ 186 00ee 01F4      		brne .L12
+ 187 00f0 80E0      		ldi r24,lo8(0)
+ 188               	.L12:
+ 189               	/* epilogue start */
+ 190 00f2 1F91      		pop r17
+ 191 00f4 0895      		ret
+ 193               	.global	mcp2515_write_register_p
+ 195               	mcp2515_write_register_p:
+ 196 00f6 CF92      		push r12
+ 197 00f8 DF92      		push r13
+ 198 00fa FF92      		push r15
+ 199 00fc 0F93      		push r16
+ 200 00fe 1F93      		push r17
+ 201 0100 DF93      		push r29
+ 202 0102 CF93      		push r28
+ 203 0104 0F92      		push __tmp_reg__
+ 204 0106 CDB7      		in r28,__SP_L__
+ 205 0108 DEB7      		in r29,__SP_H__
+ 206               	/* prologue: function */
+ 207               	/* frame size = 1 */
+ 208               	/* stack size = 8 */
+ 209               	.L__stack_usage = 8
+ 210 010a 182F      		mov r17,r24
+ 211 010c 062F      		mov r16,r22
+ 212 010e F42E      		mov r15,r20
+ 213 0110 7983      		std Y+1,r23
+ 214 0112 0E94 0000 		call can_enable_mcp2515
+ 215 0116 82E0      		ldi r24,lo8(2)
+ 216 0118 0E94 0000 		call spi_putc
+ 217 011c 812F      		mov r24,r17
+ 218 011e 0E94 0000 		call spi_putc
+ 219 0122 7981      		ldd r23,Y+1
+ 220 0124 402F      		mov r20,r16
+ 221 0126 572F      		mov r21,r23
+ 222 0128 6A01      		movw r12,r20
+ 223 012a 00C0      		rjmp .L14
+ 224               	.L15:
+ 225 012c F601      		movw r30,r12
+ 226 012e 8191      		ld r24,Z+
+ 227 0130 6F01      		movw r12,r30
+ 228 0132 0E94 0000 		call spi_putc
+ 229               	.L14:
+ 230 0136 8C2D      		mov r24,r12
+ 231 0138 801B      		sub r24,r16
+ 232 013a 8F15      		cp r24,r15
+ 233 013c 00F0      		brlo .L15
+ 234 013e 0E94 0000 		call can_disable_mcp2515
+ 235               	/* epilogue start */
+ 236 0142 0F90      		pop __tmp_reg__
+ 237 0144 CF91      		pop r28
+ 238 0146 DF91      		pop r29
+ 239 0148 1F91      		pop r17
+ 240 014a 0F91      		pop r16
+ 241 014c FF90      		pop r15
+ 242 014e DF90      		pop r13
+ 243 0150 CF90      		pop r12
+ 244 0152 0895      		ret
+ 246               	.global	mcp2515_read_register_p
+ 248               	mcp2515_read_register_p:
+ 249 0154 CF92      		push r12
+ 250 0156 DF92      		push r13
+ 251 0158 FF92      		push r15
+ 252 015a 0F93      		push r16
+ 253 015c 1F93      		push r17
+ 254 015e DF93      		push r29
+ 255 0160 CF93      		push r28
+ 256 0162 0F92      		push __tmp_reg__
+ 257 0164 CDB7      		in r28,__SP_L__
+ 258 0166 DEB7      		in r29,__SP_H__
+ 259               	/* prologue: function */
+ 260               	/* frame size = 1 */
+ 261               	/* stack size = 8 */
+ 262               	.L__stack_usage = 8
+ 263 0168 182F      		mov r17,r24
+ 264 016a 062F      		mov r16,r22
+ 265 016c F42E      		mov r15,r20
+ 266 016e 7983      		std Y+1,r23
+ 267 0170 0E94 0000 		call can_enable_mcp2515
+ 268 0174 83E0      		ldi r24,lo8(3)
+ 269 0176 0E94 0000 		call spi_putc
+ 270 017a 812F      		mov r24,r17
+ 271 017c 0E94 0000 		call spi_putc
+ 272 0180 7981      		ldd r23,Y+1
+ 273 0182 402F      		mov r20,r16
+ 274 0184 572F      		mov r21,r23
+ 275 0186 6A01      		movw r12,r20
+ 276 0188 00C0      		rjmp .L17
+ 277               	.L18:
+ 278 018a 8FEF      		ldi r24,lo8(-1)
+ 279 018c 0E94 0000 		call spi_putc
+ 280 0190 F601      		movw r30,r12
+ 281 0192 8193      		st Z+,r24
+ 282 0194 6F01      		movw r12,r30
+ 283               	.L17:
+ 284 0196 8C2D      		mov r24,r12
+ 285 0198 801B      		sub r24,r16
+ 286 019a 8F15      		cp r24,r15
+ 287 019c 00F0      		brlo .L18
+ 288 019e 0E94 0000 		call can_disable_mcp2515
+ 289               	/* epilogue start */
+ 290 01a2 0F90      		pop __tmp_reg__
+ 291 01a4 CF91      		pop r28
+ 292 01a6 DF91      		pop r29
+ 293 01a8 1F91      		pop r17
+ 294 01aa 0F91      		pop r16
+ 295 01ac FF90      		pop r15
+ 296 01ae DF90      		pop r13
+ 297 01b0 CF90      		pop r12
+ 298 01b2 0895      		ret
+ 300               	.global	can_open_interface
+ 302               	can_open_interface:
+ 303               	/* prologue: function */
+ 304               	/* frame size = 0 */
+ 305               	/* stack size = 0 */
+ 306               	.L__stack_usage = 0
+ 307 01b4 249A      		sbi 36-32,4
+ 308 01b6 2C9A      		sbi 37-32,4
+ 309 01b8 0E94 0000 		call can_enable_mcp2515
+ 310 01bc 80EC      		ldi r24,lo8(-64)
+ 311 01be 0E94 0000 		call spi_putc
+ 312 01c2 0E94 0000 		call can_disable_mcp2515
+ 313 01c6 8FEF      		ldi r24,lo8(255)
+ 314 01c8 90E0      		ldi r25,hi8(255)
+ 315 01ca 0E94 0000 		call delay
+ 316 01ce 80E8      		ldi r24,lo8(-128)
+ 317 01d0 0E94 0000 		call mcp2515_set_mode
+ 318 01d4 8823      		tst r24
+ 319 01d6 01F4      		brne .L20
+ 320 01d8 8AE2      		ldi r24,lo8(42)
+ 321 01da 63E0      		ldi r22,lo8(3)
+ 322 01dc 0E94 0000 		call mcp2515_write_register
+ 323 01e0 89E2      		ldi r24,lo8(41)
+ 324 01e2 60E9      		ldi r22,lo8(-112)
+ 325 01e4 0E94 0000 		call mcp2515_write_register
+ 326 01e8 88E2      		ldi r24,lo8(40)
+ 327 01ea 62E0      		ldi r22,lo8(2)
+ 328 01ec 0E94 0000 		call mcp2515_write_register
+ 329 01f0 8BE2      		ldi r24,lo8(43)
+ 330 01f2 60E0      		ldi r22,lo8(0)
+ 331 01f4 0E94 0000 		call mcp2515_write_register
+ 332 01f8 80E6      		ldi r24,lo8(96)
+ 333 01fa 60E6      		ldi r22,lo8(96)
+ 334 01fc 0E94 0000 		call mcp2515_write_register
+ 335 0200 8CE0      		ldi r24,lo8(12)
+ 336 0202 60E0      		ldi r22,lo8(0)
+ 337 0204 0E94 0000 		call mcp2515_write_register
+ 338 0208 8DE0      		ldi r24,lo8(13)
+ 339 020a 60E0      		ldi r22,lo8(0)
+ 340 020c 0E94 0000 		call mcp2515_write_register
+ 341 0210 80E0      		ldi r24,lo8(0)
+ 342 0212 0E94 0000 		call mcp2515_set_mode
+ 343               	.L20:
+ 344 0216 0895      		ret
+ 346               	.global	can_sendable
+ 348               	can_sendable:
+ 349               	/* prologue: function */
+ 350               	/* frame size = 0 */
+ 351               	/* stack size = 0 */
+ 352               	.L__stack_usage = 0
+ 353               	/* #APP */
+ 354               	 ;  343 "../../canix/mcp2515.c" 1
+ 355 0218 F894      		cli
+ 356               	 ;  0 "" 2
+ 357               	/* #NOAPP */
+ 358 021a 8295      		swap r24
+ 359 021c 807F      		andi r24,lo8(-16)
+ 360 021e 805D      		subi r24,lo8(-(48))
+ 361 0220 0E94 0000 		call mcp2515_read_register
+ 362 0224 982F      		mov r25,r24
+ 363               	/* #APP */
+ 364               	 ;  345 "../../canix/mcp2515.c" 1
+ 365 0226 7894      		sei
+ 366               	 ;  0 "" 2
+ 367               	/* #NOAPP */
+ 368 0228 81E0      		ldi r24,lo8(1)
+ 369 022a 93FD      		sbrc r25,3
+ 370 022c 80E0      		ldi r24,lo8(0)
+ 371               	.L22:
+ 372 022e 0895      		ret
+ 374               	.global	can_send_message
+ 376               	can_send_message:
+ 377 0230 A5E0      		ldi r26,lo8(5)
+ 378 0232 B0E0      		ldi r27,hi8(5)
+ 379 0234 E0E0      		ldi r30,lo8(gs(1f))
+ 380 0236 F0E0      		ldi r31,hi8(gs(1f))
+ 381 0238 0C94 0000 		jmp __prologue_saves__+((18 - 9) * 2)
+ 382               	1:
+ 383               	/* prologue: function */
+ 384               	/* frame size = 5 */
+ 385               	/* stack size = 14 */
+ 386               	.L__stack_usage = 14
+ 387 023c 7B01      		movw r14,r22
+ 388 023e 8C01      		movw r16,r24
+ 389 0240 6A01      		movw r12,r20
+ 390 0242 B22E      		mov r11,r18
+ 391 0244 80E0      		ldi r24,lo8(0)
+ 392 0246 0E94 0000 		call can_sendable
+ 393 024a 8823      		tst r24
+ 394 024c 01F4      		brne .L26
+ 395 024e 81E0      		ldi r24,lo8(1)
+ 396 0250 0E94 0000 		call can_sendable
+ 397 0254 8823      		tst r24
+ 398 0256 01F4      		brne .L27
+ 399 0258 82E0      		ldi r24,lo8(2)
+ 400 025a 0E94 0000 		call can_sendable
+ 401 025e 8823      		tst r24
+ 402 0260 01F4      		brne .L28
+ 403 0262 8091 0000 		lds r24,canix_tx_dropped
+ 404 0266 9091 0000 		lds r25,canix_tx_dropped+1
+ 405 026a A091 0000 		lds r26,canix_tx_dropped+2
+ 406 026e B091 0000 		lds r27,canix_tx_dropped+3
+ 407 0272 0196      		adiw r24,1
+ 408 0274 A11D      		adc r26,__zero_reg__
+ 409 0276 B11D      		adc r27,__zero_reg__
+ 410 0278 8093 0000 		sts canix_tx_dropped,r24
+ 411 027c 9093 0000 		sts canix_tx_dropped+1,r25
+ 412 0280 A093 0000 		sts canix_tx_dropped+2,r26
+ 413 0284 B093 0000 		sts canix_tx_dropped+3,r27
+ 414 0288 81E0      		ldi r24,lo8(1)
+ 415 028a 00C0      		rjmp .L25
+ 416               	.L26:
+ 417 028c 30E0      		ldi r19,lo8(0)
+ 418 028e 00C0      		rjmp .L24
+ 419               	.L27:
+ 420 0290 31E0      		ldi r19,lo8(1)
+ 421 0292 00C0      		rjmp .L24
+ 422               	.L28:
+ 423 0294 32E0      		ldi r19,lo8(2)
+ 424               	.L24:
+ 425               	/* #APP */
+ 426               	 ;  305 "../../canix/mcp2515.c" 1
+ 427 0296 F894      		cli
+ 428               	 ;  0 "" 2
+ 429               	/* #NOAPP */
+ 430 0298 D801      		movw r26,r16
+ 431 029a C701      		movw r24,r14
+ 432 029c 55E1      		ldi r21,21
+ 433 029e B695      	1:	lsr r27
+ 434 02a0 A795      		ror r26
+ 435 02a2 9795      		ror r25
+ 436 02a4 8795      		ror r24
+ 437 02a6 5A95      		dec r21
+ 438 02a8 01F4      		brne 1b
+ 439 02aa 8983      		std Y+1,r24
+ 440 02ac 202F      		mov r18,r16
+ 441 02ae 2370      		andi r18,lo8(3)
+ 442 02b0 D801      		movw r26,r16
+ 443 02b2 C701      		movw r24,r14
+ 444 02b4 4DE0      		ldi r20,13
+ 445 02b6 B695      	1:	lsr r27
+ 446 02b8 A795      		ror r26
+ 447 02ba 9795      		ror r25
+ 448 02bc 8795      		ror r24
+ 449 02be 4A95      		dec r20
+ 450 02c0 01F4      		brne 1b
+ 451 02c2 807E      		andi r24,lo8(-32)
+ 452 02c4 282B      		or r18,r24
+ 453 02c6 2860      		ori r18,lo8(8)
+ 454 02c8 2A83      		std Y+2,r18
+ 455 02ca FB82      		std Y+3,r15
+ 456 02cc EC82      		std Y+4,r14
+ 457 02ce 132F      		mov r17,r19
+ 458 02d0 1295      		swap r17
+ 459 02d2 107F      		andi r17,lo8(-16)
+ 460 02d4 812F      		mov r24,r17
+ 461 02d6 8F5C      		subi r24,lo8(-(49))
+ 462 02d8 BE01      		movw r22,r28
+ 463 02da 6F5F      		subi r22,lo8(-(1))
+ 464 02dc 7F4F      		sbci r23,hi8(-(1))
+ 465 02de 44E0      		ldi r20,lo8(4)
+ 466 02e0 3D83      		std Y+5,r19
+ 467 02e2 0E94 0000 		call mcp2515_write_register_p
+ 468 02e6 812F      		mov r24,r17
+ 469 02e8 8B5C      		subi r24,lo8(-(53))
+ 470 02ea 6B2D      		mov r22,r11
+ 471 02ec 0E94 0000 		call mcp2515_write_register
+ 472 02f0 812F      		mov r24,r17
+ 473 02f2 8A5C      		subi r24,lo8(-(54))
+ 474 02f4 B601      		movw r22,r12
+ 475 02f6 4B2D      		mov r20,r11
+ 476 02f8 0E94 0000 		call mcp2515_write_register_p
+ 477 02fc 812F      		mov r24,r17
+ 478 02fe 805D      		subi r24,lo8(-(48))
+ 479 0300 68E0      		ldi r22,lo8(8)
+ 480 0302 48E0      		ldi r20,lo8(8)
+ 481 0304 0E94 0000 		call mcp2515_bit_modify
+ 482 0308 0E94 0000 		call can_enable_mcp2515
+ 483 030c 81E0      		ldi r24,lo8(1)
+ 484 030e 90E0      		ldi r25,hi8(1)
+ 485 0310 3D81      		ldd r19,Y+5
+ 486 0312 00C0      		rjmp 2f
+ 487 0314 880F      	1:	lsl r24
+ 488 0316 991F      		rol r25
+ 489 0318 3A95      	2:	dec r19
+ 490 031a 02F4      		brpl 1b
+ 491 031c 8068      		ori r24,lo8(-128)
+ 492 031e 0E94 0000 		call spi_putc
+ 493 0322 0E94 0000 		call can_disable_mcp2515
+ 494               	/* #APP */
+ 495               	 ;  332 "../../canix/mcp2515.c" 1
+ 496 0326 7894      		sei
+ 497               	 ;  0 "" 2
+ 498               	/* #NOAPP */
+ 499 0328 8091 0000 		lds r24,canix_tx_sent
+ 500 032c 9091 0000 		lds r25,canix_tx_sent+1
+ 501 0330 A091 0000 		lds r26,canix_tx_sent+2
+ 502 0334 B091 0000 		lds r27,canix_tx_sent+3
+ 503 0338 0196      		adiw r24,1
+ 504 033a A11D      		adc r26,__zero_reg__
+ 505 033c B11D      		adc r27,__zero_reg__
+ 506 033e 8093 0000 		sts canix_tx_sent,r24
+ 507 0342 9093 0000 		sts canix_tx_sent+1,r25
+ 508 0346 A093 0000 		sts canix_tx_sent+2,r26
+ 509 034a B093 0000 		sts canix_tx_sent+3,r27
+ 510 034e 80E0      		ldi r24,lo8(0)
+ 511               	.L25:
+ 512               	/* epilogue start */
+ 513 0350 2596      		adiw r28,5
+ 514 0352 E9E0      		ldi r30, lo8(9)
+ 515 0354 0C94 0000 		jmp __epilogue_restores__ + ((18 - 9) * 2)
+ 517               	.global	can_any_sendable
+ 519               	can_any_sendable:
+ 520               	/* prologue: function */
+ 521               	/* frame size = 0 */
+ 522               	/* stack size = 0 */
+ 523               	.L__stack_usage = 0
+ 524 0358 80E0      		ldi r24,lo8(0)
+ 525 035a 0E94 0000 		call can_sendable
+ 526 035e 8823      		tst r24
+ 527 0360 01F4      		brne .L33
+ 528 0362 81E0      		ldi r24,lo8(1)
+ 529 0364 0E94 0000 		call can_sendable
+ 530 0368 8823      		tst r24
+ 531 036a 01F4      		brne .L33
+ 532 036c 82E0      		ldi r24,lo8(2)
+ 533 036e 0E94 0000 		call can_sendable
+ 534 0372 21E0      		ldi r18,lo8(1)
+ 535 0374 30E0      		ldi r19,hi8(1)
+ 536 0376 8823      		tst r24
+ 537 0378 01F4      		brne .L30
+ 538 037a 20E0      		ldi r18,lo8(0)
+ 539 037c 30E0      		ldi r19,hi8(0)
+ 540 037e 00C0      		rjmp .L30
+ 541               	.L33:
+ 542 0380 21E0      		ldi r18,lo8(1)
+ 543 0382 30E0      		ldi r19,hi8(1)
+ 544               	.L30:
+ 545 0384 822F      		mov r24,r18
+ 546               	/* epilogue start */
+ 547 0386 0895      		ret
+ 549               	.global	can_message_available
+ 551               	can_message_available:
+ 552               	/* prologue: function */
+ 553               	/* frame size = 0 */
+ 554               	/* stack size = 0 */
+ 555               	.L__stack_usage = 0
+ 556               	/* #APP */
+ 557               	 ;  359 "../../canix/mcp2515.c" 1
+ 558 0388 F894      		cli
+ 559               	 ;  0 "" 2
+ 560               	/* #NOAPP */
+ 561 038a 0E94 0000 		call canix_rxq_size
+ 562 038e 982F      		mov r25,r24
+ 563               	/* #APP */
+ 564               	 ;  361 "../../canix/mcp2515.c" 1
+ 565 0390 7894      		sei
+ 566               	 ;  0 "" 2
+ 567               	/* #NOAPP */
+ 568 0392 81E0      		ldi r24,lo8(1)
+ 569 0394 9923      		tst r25
+ 570 0396 01F4      		brne .L35
+ 571 0398 80E0      		ldi r24,lo8(0)
+ 572               	.L35:
+ 573 039a 0895      		ret
+ 575               	.global	mcp2515_message_available
+ 577               	mcp2515_message_available:
+ 578               	/* prologue: function */
+ 579               	/* frame size = 0 */
+ 580               	/* stack size = 0 */
+ 581               	.L__stack_usage = 0
+ 582 039c 8CE2      		ldi r24,lo8(44)
+ 583 039e 0E94 0000 		call mcp2515_read_register
+ 584 03a2 8170      		andi r24,lo8(1)
+ 585               	/* epilogue start */
+ 586 03a4 0895      		ret
+ 588               	.global	mcp2515_read_message
+ 590               	mcp2515_read_message:
+ 591 03a6 A4E0      		ldi r26,lo8(4)
+ 592 03a8 B0E0      		ldi r27,hi8(4)
+ 593 03aa E0E0      		ldi r30,lo8(gs(1f))
+ 594 03ac F0E0      		ldi r31,hi8(gs(1f))
+ 595 03ae 0C94 0000 		jmp __prologue_saves__+((18 - 10) * 2)
+ 596               	1:
+ 597               	/* prologue: function */
+ 598               	/* frame size = 4 */
+ 599               	/* stack size = 14 */
+ 600               	.L__stack_usage = 14
+ 601 03b2 6C01      		movw r12,r24
+ 602 03b4 5B01      		movw r10,r22
+ 603 03b6 81E6      		ldi r24,lo8(97)
+ 604 03b8 BE01      		movw r22,r28
+ 605 03ba 6F5F      		subi r22,lo8(-(1))
+ 606 03bc 7F4F      		sbci r23,hi8(-(1))
+ 607 03be 44E0      		ldi r20,lo8(4)
+ 608 03c0 0E94 0000 		call mcp2515_read_register_p
+ 609 03c4 EA80      		ldd r14,Y+2
+ 610 03c6 FF24      		clr r15
+ 611 03c8 00E0      		ldi r16,lo8(0)
+ 612 03ca 10E0      		ldi r17,hi8(0)
+ 613 03cc 8B81      		ldd r24,Y+3
+ 614 03ce 90E0      		ldi r25,lo8(0)
+ 615 03d0 A0E0      		ldi r26,lo8(0)
+ 616 03d2 B0E0      		ldi r27,hi8(0)
+ 617 03d4 BA2F      		mov r27,r26
+ 618 03d6 A92F      		mov r26,r25
+ 619 03d8 982F      		mov r25,r24
+ 620 03da 8827      		clr r24
+ 621 03dc 2981      		ldd r18,Y+1
+ 622 03de 30E0      		ldi r19,lo8(0)
+ 623 03e0 40E0      		ldi r20,lo8(0)
+ 624 03e2 50E0      		ldi r21,hi8(0)
+ 625 03e4 E5E1      		ldi r30,21
+ 626 03e6 220F      	1:	lsl r18
+ 627 03e8 331F      		rol r19
+ 628 03ea 441F      		rol r20
+ 629 03ec 551F      		rol r21
+ 630 03ee EA95      		dec r30
+ 631 03f0 01F4      		brne 1b
+ 632 03f2 822B      		or r24,r18
+ 633 03f4 932B      		or r25,r19
+ 634 03f6 A42B      		or r26,r20
+ 635 03f8 B52B      		or r27,r21
+ 636 03fa 2C81      		ldd r18,Y+4
+ 637 03fc 30E0      		ldi r19,lo8(0)
+ 638 03fe 40E0      		ldi r20,lo8(0)
+ 639 0400 50E0      		ldi r21,hi8(0)
+ 640 0402 822B      		or r24,r18
+ 641 0404 932B      		or r25,r19
+ 642 0406 A42B      		or r26,r20
+ 643 0408 B52B      		or r27,r21
+ 644 040a A801      		movw r20,r16
+ 645 040c 9701      		movw r18,r14
+ 646 040e 2370      		andi r18,lo8(3)
+ 647 0410 3070      		andi r19,hi8(3)
+ 648 0412 4070      		andi r20,hlo8(3)
+ 649 0414 5070      		andi r21,hhi8(3)
+ 650 0416 A901      		movw r20,r18
+ 651 0418 3327      		clr r19
+ 652 041a 2227      		clr r18
+ 653 041c 822B      		or r24,r18
+ 654 041e 932B      		or r25,r19
+ 655 0420 A42B      		or r26,r20
+ 656 0422 B52B      		or r27,r21
+ 657 0424 A801      		movw r20,r16
+ 658 0426 9701      		movw r18,r14
+ 659 0428 207E      		andi r18,lo8(224)
+ 660 042a 3070      		andi r19,hi8(224)
+ 661 042c 4070      		andi r20,hlo8(224)
+ 662 042e 5070      		andi r21,hhi8(224)
+ 663 0430 6DE0      		ldi r22,13
+ 664 0432 220F      	1:	lsl r18
+ 665 0434 331F      		rol r19
+ 666 0436 441F      		rol r20
+ 667 0438 551F      		rol r21
+ 668 043a 6A95      		dec r22
+ 669 043c 01F4      		brne 1b
+ 670 043e 822B      		or r24,r18
+ 671 0440 932B      		or r25,r19
+ 672 0442 A42B      		or r26,r20
+ 673 0444 B52B      		or r27,r21
+ 674 0446 F601      		movw r30,r12
+ 675 0448 8083      		st Z,r24
+ 676 044a 9183      		std Z+1,r25
+ 677 044c A283      		std Z+2,r26
+ 678 044e B383      		std Z+3,r27
+ 679 0450 85E6      		ldi r24,lo8(101)
+ 680 0452 0E94 0000 		call mcp2515_read_register
+ 681 0456 182F      		mov r17,r24
+ 682 0458 1F70      		andi r17,lo8(15)
+ 683 045a 86E6      		ldi r24,lo8(102)
+ 684 045c B501      		movw r22,r10
+ 685 045e 412F      		mov r20,r17
+ 686 0460 0E94 0000 		call mcp2515_read_register_p
+ 687 0464 8CE2      		ldi r24,lo8(44)
+ 688 0466 61E0      		ldi r22,lo8(1)
+ 689 0468 40E0      		ldi r20,lo8(0)
+ 690 046a 0E94 0000 		call mcp2515_bit_modify
+ 691 046e 812F      		mov r24,r17
+ 692               	/* epilogue start */
+ 693 0470 2496      		adiw r28,4
+ 694 0472 EAE0      		ldi r30, lo8(10)
+ 695 0474 0C94 0000 		jmp __epilogue_restores__ + ((18 - 10) * 2)
+ 697               	.global	can_read_message
+ 699               	can_read_message:
+ 700 0478 0F93      		push r16
+ 701 047a 1F93      		push r17
+ 702 047c CF93      		push r28
+ 703 047e DF93      		push r29
+ 704               	/* prologue: function */
+ 705               	/* frame size = 0 */
+ 706               	/* stack size = 4 */
+ 707               	.L__stack_usage = 4
+ 708 0480 EC01      		movw r28,r24
+ 709 0482 8B01      		movw r16,r22
+ 710               	/* #APP */
+ 711               	 ;  403 "../../canix/mcp2515.c" 1
+ 712 0484 F894      		cli
+ 713               	 ;  0 "" 2
+ 714               	/* #NOAPP */
+ 715 0486 0E94 0000 		call canix_rxq_size
+ 716 048a 8823      		tst r24
+ 717 048c 01F4      		brne .+2
+ 718 048e 00C0      		rjmp .L42
+ 719 0490 0E94 0000 		call canix_rxq_fetch_one
+ 720 0494 282F      		mov r18,r24
+ 721 0496 30E0      		ldi r19,lo8(0)
+ 722 0498 220F      		lsl r18
+ 723 049a 331F      		rol r19
+ 724 049c F901      		movw r30,r18
+ 725 049e A3E0      		ldi r26,3
+ 726 04a0 EE0F      	1:	lsl r30
+ 727 04a2 FF1F      		rol r31
+ 728 04a4 AA95      		dec r26
+ 729 04a6 01F4      		brne 1b
+ 730 04a8 E21B      		sub r30,r18
+ 731 04aa F30B      		sbc r31,r19
+ 732 04ac E050      		subi r30,lo8(-(canix_rx_queue))
+ 733 04ae F040      		sbci r31,hi8(-(canix_rx_queue))
+ 734 04b0 2181      		ldd r18,Z+1
+ 735 04b2 3281      		ldd r19,Z+2
+ 736 04b4 4381      		ldd r20,Z+3
+ 737 04b6 5481      		ldd r21,Z+4
+ 738 04b8 2883      		st Y,r18
+ 739 04ba 3983      		std Y+1,r19
+ 740 04bc 4A83      		std Y+2,r20
+ 741 04be 5B83      		std Y+3,r21
+ 742 04c0 90E0      		ldi r25,lo8(0)
+ 743 04c2 00C0      		rjmp .L40
+ 744               	.L41:
+ 745 04c4 492F      		mov r20,r25
+ 746 04c6 50E0      		ldi r21,lo8(0)
+ 747 04c8 282F      		mov r18,r24
+ 748 04ca 30E0      		ldi r19,lo8(0)
+ 749 04cc 220F      		lsl r18
+ 750 04ce 331F      		rol r19
+ 751 04d0 F901      		movw r30,r18
+ 752 04d2 63E0      		ldi r22,3
+ 753 04d4 EE0F      	1:	lsl r30
+ 754 04d6 FF1F      		rol r31
+ 755 04d8 6A95      		dec r22
+ 756 04da 01F4      		brne 1b
+ 757 04dc E21B      		sub r30,r18
+ 758 04de F30B      		sbc r31,r19
+ 759 04e0 E050      		subi r30,lo8(-(canix_rx_queue))
+ 760 04e2 F040      		sbci r31,hi8(-(canix_rx_queue))
+ 761 04e4 E40F      		add r30,r20
+ 762 04e6 F51F      		adc r31,r21
+ 763 04e8 2681      		ldd r18,Z+6
+ 764 04ea 400F      		add r20,r16
+ 765 04ec 511F      		adc r21,r17
+ 766 04ee FA01      		movw r30,r20
+ 767 04f0 2083      		st Z,r18
+ 768 04f2 9F5F      		subi r25,lo8(-(1))
+ 769               	.L40:
+ 770 04f4 282F      		mov r18,r24
+ 771 04f6 30E0      		ldi r19,lo8(0)
+ 772 04f8 220F      		lsl r18
+ 773 04fa 331F      		rol r19
+ 774 04fc F901      		movw r30,r18
+ 775 04fe 43E0      		ldi r20,3
+ 776 0500 EE0F      	1:	lsl r30
+ 777 0502 FF1F      		rol r31
+ 778 0504 4A95      		dec r20
+ 779 0506 01F4      		brne 1b
+ 780 0508 E21B      		sub r30,r18
+ 781 050a F30B      		sbc r31,r19
+ 782 050c E050      		subi r30,lo8(-(canix_rx_queue))
+ 783 050e F040      		sbci r31,hi8(-(canix_rx_queue))
+ 784 0510 2581      		ldd r18,Z+5
+ 785 0512 9217      		cp r25,r18
+ 786 0514 00F0      		brlo .L41
+ 787 0516 282F      		mov r18,r24
+ 788 0518 30E0      		ldi r19,lo8(0)
+ 789 051a 220F      		lsl r18
+ 790 051c 331F      		rol r19
+ 791 051e F901      		movw r30,r18
+ 792 0520 13E0      		ldi r17,3
+ 793 0522 EE0F      	1:	lsl r30
+ 794 0524 FF1F      		rol r31
+ 795 0526 1A95      		dec r17
+ 796 0528 01F4      		brne 1b
+ 797 052a E21B      		sub r30,r18
+ 798 052c F30B      		sbc r31,r19
+ 799 052e E050      		subi r30,lo8(-(canix_rx_queue))
+ 800 0530 F040      		sbci r31,hi8(-(canix_rx_queue))
+ 801 0532 9581      		ldd r25,Z+5
+ 802 0534 282F      		mov r18,r24
+ 803 0536 30E0      		ldi r19,lo8(0)
+ 804 0538 220F      		lsl r18
+ 805 053a 331F      		rol r19
+ 806 053c F901      		movw r30,r18
+ 807 053e A3E0      		ldi r26,3
+ 808 0540 EE0F      	1:	lsl r30
+ 809 0542 FF1F      		rol r31
+ 810 0544 AA95      		dec r26
+ 811 0546 01F4      		brne 1b
+ 812 0548 E21B      		sub r30,r18
+ 813 054a F30B      		sbc r31,r19
+ 814 054c E050      		subi r30,lo8(-(canix_rx_queue))
+ 815 054e F040      		sbci r31,hi8(-(canix_rx_queue))
+ 816 0550 1082      		st Z,__zero_reg__
+ 817 0552 00C0      		rjmp .L39
+ 818               	.L42:
+ 819 0554 90E0      		ldi r25,lo8(0)
+ 820               	.L39:
+ 821               	/* #APP */
+ 822               	 ;  416 "../../canix/mcp2515.c" 1
+ 823 0556 7894      		sei
+ 824               	 ;  0 "" 2
+ 825               	/* #NOAPP */
+ 826 0558 892F      		mov r24,r25
+ 827               	/* epilogue start */
+ 828 055a DF91      		pop r29
+ 829 055c CF91      		pop r28
+ 830 055e 1F91      		pop r17
+ 831 0560 0F91      		pop r16
+ 832 0562 0895      		ret
+ 834               	.global	can_error_counters
+ 836               	can_error_counters:
+ 837 0564 1F93      		push r17
+ 838               	/* prologue: function */
+ 839               	/* frame size = 0 */
+ 840               	/* stack size = 1 */
+ 841               	.L__stack_usage = 1
+ 842 0566 8DE1      		ldi r24,lo8(29)
+ 843 0568 0E94 0000 		call mcp2515_read_register
+ 844 056c 182F      		mov r17,r24
+ 845 056e 8CE1      		ldi r24,lo8(28)
+ 846 0570 0E94 0000 		call mcp2515_read_register
+ 847 0574 512F      		mov r21,r17
+ 848 0576 40E0      		ldi r20,lo8(0)
+ 849 0578 282F      		mov r18,r24
+ 850 057a 30E0      		ldi r19,lo8(0)
+ 851 057c 242B      		or r18,r20
+ 852 057e 352B      		or r19,r21
+ 853 0580 C901      		movw r24,r18
+ 854               	/* epilogue start */
+ 855 0582 1F91      		pop r17
+ 856 0584 0895      		ret
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515.c
+     /tmp/cczPVBOg.s:2      *ABS*:0000003f __SREG__
+     /tmp/cczPVBOg.s:3      *ABS*:0000003e __SP_H__
+     /tmp/cczPVBOg.s:4      *ABS*:0000003d __SP_L__
+     /tmp/cczPVBOg.s:5      *ABS*:00000034 __CCP__
+     /tmp/cczPVBOg.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/cczPVBOg.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/cczPVBOg.s:11     .text:00000000 spi_init
+     /tmp/cczPVBOg.s:29     .text:00000012 spi_putc
+     /tmp/cczPVBOg.s:45     .text:0000001e spi_getc
+     /tmp/cczPVBOg.s:57     .text:00000026 can_enable_mcp2515
+     /tmp/cczPVBOg.s:68     .text:0000002a can_disable_mcp2515
+     /tmp/cczPVBOg.s:79     .text:0000002e mcp2515_bit_modify
+     /tmp/cczPVBOg.s:112    .text:0000006c mcp2515_read_register
+     /tmp/cczPVBOg.s:140    .text:0000009e mcp2515_write_register
+     /tmp/cczPVBOg.s:169    .text:000000d2 mcp2515_set_mode
+     /tmp/cczPVBOg.s:195    .text:000000f6 mcp2515_write_register_p
+     /tmp/cczPVBOg.s:248    .text:00000154 mcp2515_read_register_p
+     /tmp/cczPVBOg.s:302    .text:000001b4 can_open_interface
+     /tmp/cczPVBOg.s:348    .text:00000218 can_sendable
+     /tmp/cczPVBOg.s:376    .text:00000230 can_send_message
+     /tmp/cczPVBOg.s:519    .text:00000358 can_any_sendable
+     /tmp/cczPVBOg.s:551    .text:00000388 can_message_available
+     /tmp/cczPVBOg.s:577    .text:0000039c mcp2515_message_available
+     /tmp/cczPVBOg.s:590    .text:000003a6 mcp2515_read_message
+     /tmp/cczPVBOg.s:699    .text:00000478 can_read_message
+     /tmp/cczPVBOg.s:836    .text:00000564 can_error_counters
+
+UNDEFINED SYMBOLS
+__prologue_saves__
+__epilogue_restores__
+delay
+canix_tx_dropped
+canix_tx_sent
+canix_rxq_size
+canix_rxq_fetch_one
+canix_rx_queue

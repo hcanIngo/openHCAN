@@ -1,0 +1,32 @@
+	$Id: uart-commands,v 1.2 2005/11/05 10:26:45 mah Exp $
+
+	UART Protokoll Befehle
+	----------------------
+
+	Diese Befehle werden beim UART Bootloader und beim darauf aufsetzenden
+	Hostinterface verwendet. Alle Befehle sind Buchstaben von 'A' bis 'Z'.
+	Parameter werden als Hexcode uebertragen.
+
+	'P' :     Ping; wird mit 'P' bestaetigt
+	'S' :     Device State; antwort mit State hexbyte
+	'R' :     Reset
+	'Y' :     Gibt Bootflags aus, gefolgt von einer Ziffer, Wert: 0-7
+	'T' : BL: Boot Stop, ACK mit 'T'
+	'L' : BL: Load app
+	'U' : BL: Empfangsbuffer zuruecksetzen
+	'V' : BL: - Host sendet 'U'
+			  - Host sendet Adresse als 2 Hexbytes
+              - Host sendet 'V'
+			  - Host sendet 64 hexbytes Daten
+			  - Host sendet 'W'
+			  - Wenn alles ok, flashen und mit 
+			    'W' bestaetigen, oder 'B', falls out of sync
+	'V','W', siehe oben
+	'D' : BL: EEPROM Write, zuvor muessen lo,hi,v uebertragen sein
+	'E' : BL: EEPROM Read, zuvor muessen lo,hi uebertragen sein. Es wird
+	          dann der Wert als Hexbyte gesendet
+
+	'B' : HI: Resync; wird mit 'B' bestaetigt
+	'C' : HI: Frame start
+	'F' : HI: Frame end + Frame Send !
+

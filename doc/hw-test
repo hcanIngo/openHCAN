@@ -1,0 +1,20 @@
+
+mah, Thu Apr 20 09:54:14 CEST 2006
+- Testablauf fuer Controllerboard-1612:
+- Firmware drauf flashen
+- Einspielen der Test-Config
+- es werden 16 Tasterports definiert, die alle Ausgaenge
+  ein- und ausschalten
+- Ablauf:
+	o LED mit Vorwiderstand 220 Ohm von 5V an out0 anschliessen
+	o dann alle Eingaenge per Kabel-Tip tasten, LED muesste an/ausgehen
+	o 2. LED-Kette auf allen Ausgaengen durchtasten
+
+
+mah, Thu Apr 20 10:03:47 CEST 2006
+- Testablauf fuer Userpanel:
+- Firmware drauf flashen
+- Einspielen der Test-Config
+- Auf dem Display die Navigation testen
+- TODO: wie alle Tasten inkl. F1-F4 testen ?
+

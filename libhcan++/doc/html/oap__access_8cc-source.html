@@ -1,0 +1,348 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: oap_access.cc Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>oap_access.cc</h1><a href="oap__access_8cc.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include "<a class="code" href="oap__access_8h.html">oap_access.h</a>"</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;oap-def.h&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;assert.h&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="transport__connection_8h.html">libhcan++/transport_connection.h</a>&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="board__connection_8h.html">libhcan++/board_connection.h</a>&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="oap__desc_8h.html">libhcan++/oap_desc.h</a>&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;boost/lexical_cast.hpp&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;boost/regex.hpp&gt;</span>
+<a name="l00009"></a>00009 
+<a name="l00010"></a>00010 <span class="keyword">using namespace </span>hcan;
+<a name="l00011"></a>00011 <span class="keyword">using namespace </span>boost;
+<a name="l00012"></a>00012 <span class="keyword">using namespace </span>std;
+<a name="l00013"></a>00013 
+<a name="l00014"></a><a class="code" href="classhcan_1_1oap__field.html#b3aa52547f349a47a20308f13fdfc207">00014</a> oap_field::oap_field() :
+<a name="l00015"></a>00015     m_bcon(0), m_oid(0),m_fid(0)
+<a name="l00016"></a>00016 {
+<a name="l00017"></a>00017 }
+<a name="l00018"></a>00018 
+<a name="l00019"></a><a class="code" href="classhcan_1_1oap__field.html#7d97ea82532dba4b8e90c72dcb2fefe4">00019</a> <a class="code" href="classhcan_1_1oap__field.html#b3aa52547f349a47a20308f13fdfc207">oap_field::oap_field</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> *<a class="code" href="classhcan_1_1oap__field.html#5e805f6e45289b146beac3e28126dd6e">bcon</a>, uint8_t <a class="code" href="classhcan_1_1oap__field.html#a20bb23e2bf37246751ec909d33f2b18">oid</a>, uint8_t ocid,
+<a name="l00020"></a>00020         uint8_t <a class="code" href="classhcan_1_1oap__field.html#67e752e31105b205c423710197ef9d33">fid</a>) :
+<a name="l00021"></a>00021     m_bcon(bcon), m_oid(oid),m_ocid(ocid), m_fid(fid)
+<a name="l00022"></a>00022 {
+<a name="l00023"></a>00023     m_details_loaded = <span class="keyword">false</span>; <span class="comment">// Lazy fetching</span>
+<a name="l00024"></a>00024     m_fcid = 255;
+<a name="l00025"></a>00025     m_flags = 255;
+<a name="l00026"></a>00026     m_arraysize = 0; <span class="comment">// Default, d.h. im Normalfall ist es kein array</span>
+<a name="l00027"></a>00027 }
+<a name="l00028"></a>00028 
+<a name="l00029"></a><a class="code" href="classhcan_1_1oap__field.html#fba646da5b3e95d590d1190b43e4c37d">00029</a> <a class="code" href="classhcan_1_1oap__field.html#fba646da5b3e95d590d1190b43e4c37d">oap_field::~oap_field</a>()
+<a name="l00030"></a>00030 {
+<a name="l00031"></a>00031 }
+<a name="l00032"></a>00032 
+<a name="l00033"></a><a class="code" href="classhcan_1_1oap__field.html#15168a145f1ee98272b2ac8812516905">00033</a> <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1oap__field.html#15168a145f1ee98272b2ac8812516905">oap_field::name</a>()<span class="keyword"> const</span>
+<a name="l00034"></a>00034 <span class="keyword"></span>{
+<a name="l00035"></a>00035     load_details();
+<a name="l00036"></a>00036     <span class="keywordflow">return</span> <a class="code" href="oap__desc_8cc.html#929b2d41bfb49bb2b396b510289224ed">oap_description</a>.<a class="code" href="classhcan_1_1oap__desc.html#ee0e1e16888f8e23facc45dc79dfe62e">field_name</a>(m_ocid, m_fid);
+<a name="l00037"></a>00037 }
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keywordtype">void</span> oap_field::load_details()<span class="keyword"> const</span>
+<a name="l00040"></a>00040 <span class="keyword"></span>{
+<a name="l00041"></a>00041     <span class="keywordflow">if</span> (! m_details_loaded)
+<a name="l00042"></a>00042     {
+<a name="l00043"></a>00043         assert(m_bcon);
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045         m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#85d9b620fef5fcc14485ac9096854ab1">send_FIELD_ATTRIBUTE_REQUEST</a>(
+<a name="l00046"></a>00046                 m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_oid, m_fid);
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048         uint8_t dummy;
+<a name="l00049"></a>00049         m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#6a4d494878ca2535db7339f8fca5cbc8">recv_FIELD_ATTRIBUTE_REPLAY</a>(
+<a name="l00050"></a>00050                 m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), &amp;dummy, &amp;dummy, 
+<a name="l00051"></a>00051                 &amp;m_fcid, &amp;m_flags, &amp;m_arraysize);
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053         m_details_loaded = <span class="keyword">true</span>;
+<a name="l00054"></a>00054     }
+<a name="l00055"></a>00055 }
+<a name="l00056"></a>00056 
+<a name="l00057"></a><a class="code" href="classhcan_1_1oap__field.html#a20bb23e2bf37246751ec909d33f2b18">00057</a> uint8_t <a class="code" href="classhcan_1_1oap__field.html#a20bb23e2bf37246751ec909d33f2b18">oap_field::oid</a>()<span class="keyword"> const</span>
+<a name="l00058"></a>00058 <span class="keyword"></span>{
+<a name="l00059"></a>00059     <span class="keywordflow">return</span> m_oid;
+<a name="l00060"></a>00060 }
+<a name="l00061"></a>00061 
+<a name="l00062"></a><a class="code" href="classhcan_1_1oap__field.html#67e752e31105b205c423710197ef9d33">00062</a> uint8_t <a class="code" href="classhcan_1_1oap__field.html#67e752e31105b205c423710197ef9d33">oap_field::fid</a>()<span class="keyword"> const</span>
+<a name="l00063"></a>00063 <span class="keyword"></span>{
+<a name="l00064"></a>00064     <span class="keywordflow">return</span> m_fid;
+<a name="l00065"></a>00065 }
+<a name="l00066"></a>00066 
+<a name="l00067"></a><a class="code" href="classhcan_1_1oap__field.html#c9d171803062eeecf89f4c218665d684">00067</a> uint8_t <a class="code" href="classhcan_1_1oap__field.html#c9d171803062eeecf89f4c218665d684">oap_field::fcid</a>()<span class="keyword"> const</span>
+<a name="l00068"></a>00068 <span class="keyword"></span>{
+<a name="l00069"></a>00069     load_details();
+<a name="l00070"></a>00070     <span class="keywordflow">return</span> m_fcid;
+<a name="l00071"></a>00071 }
+<a name="l00072"></a>00072 
+<a name="l00073"></a><a class="code" href="classhcan_1_1oap__field.html#4cfd37eb6ebe0651f0ddf702e28d5e4d">00073</a> uint8_t <a class="code" href="classhcan_1_1oap__field.html#4cfd37eb6ebe0651f0ddf702e28d5e4d">oap_field::arraysize</a>()<span class="keyword"> const</span>
+<a name="l00074"></a>00074 <span class="keyword"></span>{
+<a name="l00075"></a>00075     load_details();
+<a name="l00076"></a>00076     <span class="keywordflow">return</span> m_arraysize;
+<a name="l00077"></a>00077 }
+<a name="l00078"></a>00078 
+<a name="l00079"></a><a class="code" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4">00079</a> uint16_t <a class="code" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4">oap_field::value</a>(uint8_t idx)<span class="keyword"> const</span>
+<a name="l00080"></a>00080 <span class="keyword"></span>{
+<a name="l00081"></a>00081     assert(m_bcon);
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083     m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#c25d5620b81ebe58da48f291d726fa8c">send_FIELD_READ_REQUEST</a>(
+<a name="l00084"></a>00084             m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_oid, m_fid, idx);
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086     uint8_t dummy, hi, lo;
+<a name="l00087"></a>00087     m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#627e386d27e3c39b67b995f65044e9ac">recv_FIELD_READ_REPLAY</a>(
+<a name="l00088"></a>00088             m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), &amp;dummy, &amp;dummy, 
+<a name="l00089"></a>00089             &amp;dummy, &amp;hi, &amp;lo);
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091     <span class="keywordflow">return</span> (hi &lt;&lt; 8) | lo;
+<a name="l00092"></a>00092 }
+<a name="l00093"></a>00093 
+<a name="l00094"></a><a class="code" href="classhcan_1_1oap__field.html#505456ee723ebd939ef6ffd7c2e6a764">00094</a> <a class="code" href="structhcan_1_1oap__time.html">oap_time</a> <a class="code" href="classhcan_1_1oap__field.html#505456ee723ebd939ef6ffd7c2e6a764">oap_field::value_as_time</a>(uint8_t idx)<span class="keyword"> const</span>
+<a name="l00095"></a>00095 <span class="keyword"></span>{
+<a name="l00096"></a>00096     <a class="code" href="structhcan_1_1oap__time.html">oap_time</a> t;
+<a name="l00097"></a>00097     uint16_t v = <a class="code" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4">value</a>(idx);
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099     t.<a class="code" href="structhcan_1_1oap__time.html#7811403f8d9a24720c6730c012c0e300">hour</a> = v &gt;&gt; 8;
+<a name="l00100"></a>00100     t.<a class="code" href="structhcan_1_1oap__time.html#ca77f9bba421023d1178f32cac80d2b1">minute</a> = v &amp; 0xff;
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102     <span class="keywordflow">return</span> t;
+<a name="l00103"></a>00103 }
+<a name="l00104"></a>00104 
+<a name="l00105"></a><a class="code" href="classhcan_1_1oap__field.html#21e280ca68a471c7d9110e1fff08987f">00105</a> <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1oap__field.html#21e280ca68a471c7d9110e1fff08987f">oap_field::value_as_string</a>(uint8_t idx)<span class="keyword"> const</span>
+<a name="l00106"></a>00106 <span class="keyword"></span>{
+<a name="l00107"></a>00107     <span class="keywordflow">switch</span> (m_fcid)
+<a name="l00108"></a>00108     {
+<a name="l00109"></a>00109         <span class="keywordflow">case</span> OAP_TYPE_BOOL :
+<a name="l00110"></a>00110             <span class="keywordflow">return</span> <a class="code" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4">value</a>(idx) &gt; 0 ? <span class="stringliteral">"true"</span> : <span class="stringliteral">"false"</span>;
+<a name="l00111"></a>00111         <span class="keywordflow">case</span> OAP_TYPE_INT :
+<a name="l00112"></a>00112             <span class="keywordflow">return</span> lexical_cast&lt;<span class="keywordtype">string</span>&gt;((int)<a class="code" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4">value</a>(idx));
+<a name="l00113"></a>00113         <span class="keywordflow">case</span> OAP_TYPE_TIME :
+<a name="l00114"></a>00114             {
+<a name="l00115"></a>00115                 <a class="code" href="structhcan_1_1oap__time.html">oap_time</a> t = <a class="code" href="classhcan_1_1oap__field.html#505456ee723ebd939ef6ffd7c2e6a764">value_as_time</a>(idx);
+<a name="l00116"></a>00116                 stringstream ss;
+<a name="l00117"></a>00117                 ss &lt;&lt;  setw(2) &lt;&lt; setfill(<span class="charliteral">'0'</span>) &lt;&lt; (int)t.<a class="code" href="structhcan_1_1oap__time.html#7811403f8d9a24720c6730c012c0e300">hour</a> &lt;&lt; <span class="stringliteral">":"</span> &lt;&lt; setw(2)
+<a name="l00118"></a>00118                     &lt;&lt; setfill(<span class="charliteral">'0'</span>) &lt;&lt; (int)t.<a class="code" href="structhcan_1_1oap__time.html#ca77f9bba421023d1178f32cac80d2b1">minute</a>;
+<a name="l00119"></a>00119                 <span class="keywordflow">return</span> ss.str();
+<a name="l00120"></a>00120             }
+<a name="l00121"></a>00121     }
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123     <span class="keywordflow">throw</span> <a class="code" href="classtraceable__error.html">traceable_error</a>(<span class="stringliteral">"oap_field::value_as_string: unknown field class"</span>);
+<a name="l00124"></a>00124 }
+<a name="l00125"></a>00125 
+<a name="l00126"></a><a class="code" href="classhcan_1_1oap__field.html#1e16b5f29635b92fef1201c4f2a99a15">00126</a> <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1oap__field.html#1e16b5f29635b92fef1201c4f2a99a15">oap_field::class_as_string</a>()<span class="keyword"> const</span>
+<a name="l00127"></a>00127 <span class="keyword"></span>{
+<a name="l00128"></a>00128     <span class="keywordflow">switch</span> (m_fcid)
+<a name="l00129"></a>00129     {
+<a name="l00130"></a>00130         <span class="keywordflow">case</span> OAP_TYPE_BOOL :
+<a name="l00131"></a>00131             <span class="keywordflow">return</span> <span class="stringliteral">"bool"</span>;
+<a name="l00132"></a>00132         <span class="keywordflow">case</span> OAP_TYPE_INT :
+<a name="l00133"></a>00133             <span class="keywordflow">return</span> <span class="stringliteral">"int"</span>;
+<a name="l00134"></a>00134         <span class="keywordflow">case</span> OAP_TYPE_TIME :
+<a name="l00135"></a>00135             <span class="keywordflow">return</span> <span class="stringliteral">"time"</span>;
+<a name="l00136"></a>00136     }
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138     <span class="keywordflow">throw</span> <a class="code" href="classtraceable__error.html">traceable_error</a>(<span class="stringliteral">"oap_field::class_as_string: unknown field class"</span>);
+<a name="l00139"></a>00139 }
+<a name="l00140"></a>00140 
+<a name="l00141"></a><a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">00141</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">oap_field::set_value</a>(uint16_t <a class="code" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4">value</a>, uint8_t idx)
+<a name="l00142"></a>00142 {
+<a name="l00143"></a>00143     assert(m_bcon);
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145     uint8_t dummy, hi, lo;
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147     hi = value &gt;&gt; 8;
+<a name="l00148"></a>00148     lo = value &amp; 0xff;
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150     m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#dde24ca51fbb27a9d5ac0bae5915568b">send_FIELD_WRITE_REQUEST</a>(
+<a name="l00151"></a>00151             m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_oid, m_fid, idx, hi, lo);
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153     m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#cfccd5575ab96eefe562921a93bc90e0">recv_FIELD_WRITE_REPLAY</a>(
+<a name="l00154"></a>00154             m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), &amp;dummy, &amp;dummy, 
+<a name="l00155"></a>00155             &amp;dummy);
+<a name="l00156"></a>00156 }
+<a name="l00157"></a>00157 
+<a name="l00158"></a><a class="code" href="classhcan_1_1oap__field.html#2e15d1f5e7c9d8dc22204a8f5b952a85">00158</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">oap_field::set_value</a>(<a class="code" href="structhcan_1_1oap__time.html">oap_time</a> &amp;time, uint8_t idx)
+<a name="l00159"></a>00159 {
+<a name="l00160"></a>00160     uint16_t v;
+<a name="l00161"></a>00161     v = (time.<a class="code" href="structhcan_1_1oap__time.html#7811403f8d9a24720c6730c012c0e300">hour</a> &lt;&lt; 8) | (time.<a class="code" href="structhcan_1_1oap__time.html#ca77f9bba421023d1178f32cac80d2b1">minute</a> &amp; 0xff);
+<a name="l00162"></a>00162     <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">set_value</a>(v);
+<a name="l00163"></a>00163 }
+<a name="l00164"></a>00164 
+<a name="l00165"></a><a class="code" href="classhcan_1_1oap__field.html#b34865d8bcbc63ba4aa6e9ca9ce28ef3">00165</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">oap_field::set_value</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4">value</a>, uint8_t idx)
+<a name="l00166"></a>00166 {
+<a name="l00167"></a>00167     <span class="comment">// Unterscheiden: bool, int oder time?</span>
+<a name="l00168"></a>00168     
+<a name="l00169"></a>00169     boost::regex re_bool(<span class="stringliteral">"true|false"</span>);
+<a name="l00170"></a>00170     boost::regex re_time(<span class="stringliteral">"(\\d+):(\\d+)"</span>);
+<a name="l00171"></a>00171     boost::regex re_int(<span class="stringliteral">"(\\d+)"</span>);
+<a name="l00172"></a>00172     boost::cmatch matches;
+<a name="l00173"></a>00173 
+<a name="l00174"></a>00174     <span class="keywordflow">if</span> (boost::regex_match(value.c_str(), matches, re_bool))
+<a name="l00175"></a>00175     {
+<a name="l00176"></a>00176         <span class="keywordflow">if</span> (matches[0] == <span class="stringliteral">"true"</span>)
+<a name="l00177"></a>00177             <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">set_value</a>(1,idx);
+<a name="l00178"></a>00178         <span class="keywordflow">else</span>
+<a name="l00179"></a>00179             <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">set_value</a>(0,idx);
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181         <span class="keywordflow">return</span>;
+<a name="l00182"></a>00182     }
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184     <span class="keywordflow">if</span> (boost::regex_match(value.c_str(), matches, re_time))
+<a name="l00185"></a>00185     {
+<a name="l00186"></a>00186         <a class="code" href="structhcan_1_1oap__time.html">oap_time</a> t;
+<a name="l00187"></a>00187         t.<a class="code" href="structhcan_1_1oap__time.html#7811403f8d9a24720c6730c012c0e300">hour</a> = lexical_cast&lt;uint16_t&gt;(matches[1]);
+<a name="l00188"></a>00188         t.<a class="code" href="structhcan_1_1oap__time.html#ca77f9bba421023d1178f32cac80d2b1">minute</a> = lexical_cast&lt;uint16_t&gt;(matches[2]);
+<a name="l00189"></a>00189         <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">set_value</a>(t,idx);
+<a name="l00190"></a>00190         <span class="keywordflow">return</span>;
+<a name="l00191"></a>00191     }
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193     <span class="keywordflow">if</span> (boost::regex_match(value.c_str(), matches, re_int))
+<a name="l00194"></a>00194     {
+<a name="l00195"></a>00195         <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">set_value</a>(lexical_cast&lt;uint16_t&gt;(matches[0]), idx);
+<a name="l00196"></a>00196         <span class="keywordflow">return</span>;
+<a name="l00197"></a>00197     }
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199     <span class="keywordflow">throw</span> <a class="code" href="classtraceable__error.html">traceable_error</a>(<span class="stringliteral">"oap_field::set_value: invalid value format:'"</span> +
+<a name="l00200"></a>00200             value +<span class="stringliteral">"'"</span>);
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202 }
+<a name="l00203"></a>00203 
+<a name="l00204"></a><a class="code" href="classhcan_1_1oap__field.html#5e805f6e45289b146beac3e28126dd6e">00204</a> <span class="keyword">const</span> <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;<a class="code" href="classhcan_1_1oap__field.html#5e805f6e45289b146beac3e28126dd6e">oap_field::bcon</a>()<span class="keyword"> const</span>
+<a name="l00205"></a>00205 <span class="keyword"></span>{
+<a name="l00206"></a>00206     assert(m_bcon);
+<a name="l00207"></a>00207     <span class="keywordflow">return</span> *m_bcon;
+<a name="l00208"></a>00208 }
+<a name="l00209"></a>00209 
+<a name="l00210"></a><a class="code" href="classhcan_1_1oap__object.html#a224b0cbaeb3db851819fe7a8b4ae476">00210</a> <a class="code" href="classhcan_1_1oap__object.html#a224b0cbaeb3db851819fe7a8b4ae476">oap_object::oap_object</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> *<a class="code" href="classhcan_1_1oap__field.html#5e805f6e45289b146beac3e28126dd6e">bcon</a>, uint8_t <a class="code" href="classhcan_1_1oap__field.html#a20bb23e2bf37246751ec909d33f2b18">oid</a>) :
+<a name="l00211"></a>00211     m_bcon(bcon),
+<a name="l00212"></a>00212     m_oid(oid)
+<a name="l00213"></a>00213 {
+<a name="l00214"></a>00214     assert(m_bcon);
+<a name="l00215"></a>00215 
+<a name="l00216"></a>00216     m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#0b451ba1f1eacfa66ce823ab60ed0fb7">send_OBJECT_ATTRIBUTE_REQUEST</a>(
+<a name="l00217"></a>00217             m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_oid);
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219     uint8_t dummy;
+<a name="l00220"></a>00220     m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#2ea4fbf12c712616c1ae9ce84a1773c6">recv_OBJECT_ATTRIBUTE_REPLAY</a>(
+<a name="l00221"></a>00221             m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), &amp;dummy, &amp;m_cid, 
+<a name="l00222"></a>00222             &amp;m_param1,
+<a name="l00223"></a>00223             &amp;m_param2,
+<a name="l00224"></a>00224             &amp;m_param3,
+<a name="l00225"></a>00225             &amp;m_param4);
+<a name="l00226"></a>00226 
+<a name="l00227"></a>00227     m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#53ed7afb03009aa04846a5b2b97d300c">send_FIELD_COUNT_REQUEST</a>(
+<a name="l00228"></a>00228             m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_oid);
+<a name="l00229"></a>00229 
+<a name="l00230"></a>00230     uint8_t count;
+<a name="l00231"></a>00231     m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#15076e2c0975030d493dccda42f4a3e7">recv_FIELD_COUNT_REPLAY</a>(
+<a name="l00232"></a>00232             m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon-&gt;<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), &amp;dummy, &amp;count);
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234     <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; count; i++)
+<a name="l00235"></a>00235     {
+<a name="l00236"></a>00236         m_fields.push_back(<a class="code" href="classhcan_1_1oap__field.html">oap_field</a>(m_bcon, m_oid, m_cid, i));
+<a name="l00237"></a>00237     }
+<a name="l00238"></a>00238 }
+<a name="l00239"></a>00239 
+<a name="l00240"></a><a class="code" href="classhcan_1_1oap__object.html#6d4011e63fd4dc47b5cb3220136b65bf">00240</a> <a class="code" href="classhcan_1_1oap__object.html#6d4011e63fd4dc47b5cb3220136b65bf">oap_object::~oap_object</a>()
+<a name="l00241"></a>00241 {
+<a name="l00242"></a>00242 }
+<a name="l00243"></a>00243 
+<a name="l00244"></a><a class="code" href="classhcan_1_1oap__object.html#f4506e1a04de61e0df0828e5a2e5ac1f">00244</a> <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1oap__object.html#f4506e1a04de61e0df0828e5a2e5ac1f">oap_object::class_name</a>()<span class="keyword"> const</span>
+<a name="l00245"></a>00245 <span class="keyword"></span>{
+<a name="l00246"></a>00246     <span class="keywordflow">return</span> <a class="code" href="oap__desc_8cc.html#929b2d41bfb49bb2b396b510289224ed">oap_description</a>.<a class="code" href="classhcan_1_1oap__desc.html#8ec0c6c29a4c6c0b20a279d1600cfbad">class_name</a>(m_cid);
+<a name="l00247"></a>00247 }
+<a name="l00248"></a>00248 
+<a name="l00249"></a><a class="code" href="classhcan_1_1oap__object.html#42fb6717d965718b0a48d47670b667c1">00249</a> uint8_t <a class="code" href="classhcan_1_1oap__object.html#42fb6717d965718b0a48d47670b667c1">oap_object::field_count</a>()<span class="keyword"> const</span>
+<a name="l00250"></a>00250 <span class="keyword"></span>{
+<a name="l00251"></a>00251     <span class="keywordflow">return</span> m_fields.size();
+<a name="l00252"></a>00252 }
+<a name="l00253"></a>00253 
+<a name="l00254"></a><a class="code" href="classhcan_1_1oap__object.html#1370cda7e48ddcf3f4bdee8c8ef4d655">00254</a> <span class="keyword">const</span> <a class="code" href="classhcan_1_1oap__field.html">oap_field</a> &amp;<a class="code" href="classhcan_1_1oap__object.html#1370cda7e48ddcf3f4bdee8c8ef4d655">oap_object::field</a>(uint8_t fid)<span class="keyword"> const</span>
+<a name="l00255"></a>00255 <span class="keyword"></span>{
+<a name="l00256"></a>00256     <span class="keywordflow">if</span> (fid &gt; m_fields.size() -1)
+<a name="l00257"></a>00257         <span class="keywordflow">throw</span> <a class="code" href="classtraceable__error.html">traceable_error</a>(<span class="stringliteral">"oap_object::field: index &gt; size -1"</span>);
+<a name="l00258"></a>00258 
+<a name="l00259"></a>00259     <span class="keywordflow">return</span> m_fields[fid];
+<a name="l00260"></a>00260 }
+<a name="l00261"></a>00261 
+<a name="l00262"></a><a class="code" href="classhcan_1_1oap__object.html#23addfa97af315a02d6b5b9a9be59375">00262</a> uint8_t <a class="code" href="classhcan_1_1oap__object.html#23addfa97af315a02d6b5b9a9be59375">oap_object::oid</a>()<span class="keyword"> const</span>
+<a name="l00263"></a>00263 <span class="keyword"></span>{
+<a name="l00264"></a>00264     <span class="keywordflow">return</span> m_oid;
+<a name="l00265"></a>00265 }
+<a name="l00266"></a>00266 
+<a name="l00267"></a><a class="code" href="classhcan_1_1oap__object.html#821825642a2bf03732c8c249d3711a46">00267</a> uint8_t <a class="code" href="classhcan_1_1oap__object.html#821825642a2bf03732c8c249d3711a46">oap_object::cid</a>()<span class="keyword"> const</span>
+<a name="l00268"></a>00268 <span class="keyword"></span>{
+<a name="l00269"></a>00269     <span class="keywordflow">return</span> m_cid;
+<a name="l00270"></a>00270 }
+<a name="l00271"></a>00271 
+<a name="l00272"></a><a class="code" href="classhcan_1_1oap__object.html#b0a1d5dfc5b74ae90a4d7ed918a31aae">00272</a> <span class="keyword">const</span> <a class="code" href="classhcan_1_1oap__field.html">oap_field</a> &amp;<a class="code" href="classhcan_1_1oap__object.html#b0a1d5dfc5b74ae90a4d7ed918a31aae">oap_object::field_by_name</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name)<span class="keyword"> const</span>
+<a name="l00273"></a>00273 <span class="keyword"></span>{
+<a name="l00274"></a>00274     <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; m_fields.size(); i++)
+<a name="l00275"></a>00275     {
+<a name="l00276"></a>00276         <span class="keywordflow">if</span> (m_fields[i].name() == name)
+<a name="l00277"></a>00277             <span class="keywordflow">return</span> m_fields[i];
+<a name="l00278"></a>00278     }
+<a name="l00279"></a>00279 
+<a name="l00280"></a>00280     <span class="keywordflow">throw</span> <a class="code" href="classtraceable__error.html">traceable_error</a>(<span class="stringliteral">"oap_object::field_by_name: field by name '"</span> +
+<a name="l00281"></a>00281             name + <span class="stringliteral">"' not found"</span>);
+<a name="l00282"></a>00282 }
+<a name="l00283"></a>00283 
+<a name="l00284"></a>00284 
+<a name="l00285"></a><a class="code" href="classhcan_1_1oap__access.html#5b1b7d70336ed73947b536ede2b4a307">00285</a> <a class="code" href="classhcan_1_1oap__access.html#5b1b7d70336ed73947b536ede2b4a307">oap_access::oap_access</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon) :
+<a name="l00286"></a>00286     m_bcon(bcon)
+<a name="l00287"></a>00287 {
+<a name="l00288"></a>00288     <span class="comment">// Falls das Board kein OAP unterstuetzt, so ist</span>
+<a name="l00289"></a>00289     <span class="comment">// m_objects.size() immer 0; damit sollte sich</span>
+<a name="l00290"></a>00290     <span class="comment">// das oap_access Objekt so verhalten, als ob keine OAP</span>
+<a name="l00291"></a>00291     <span class="comment">// Objekte auf dem Board vorhanden sind.</span>
+<a name="l00292"></a>00292     <span class="keywordflow">try</span>
+<a name="l00293"></a>00293     {
+<a name="l00294"></a>00294         m_bcon.<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#8887fafa2e90609bf07f7dbc60722bbd">send_OBJECT_COUNT_REQUEST</a>(
+<a name="l00295"></a>00295                 m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>());
+<a name="l00296"></a>00296 
+<a name="l00297"></a>00297         uint8_t count;
+<a name="l00298"></a>00298         m_bcon.<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#da2117893eee33a00f148db237747c3f">recv_OBJECT_COUNT_REPLAY</a>(
+<a name="l00299"></a>00299                 m_bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>(), m_bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), &amp;count);
+<a name="l00300"></a>00300         <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; count; i++)
+<a name="l00301"></a>00301         {
+<a name="l00302"></a>00302             m_objects.push_back(<a class="code" href="classhcan_1_1oap__object.html">oap_object</a>(&amp;m_bcon,i));
+<a name="l00303"></a>00303         }
+<a name="l00304"></a>00304     }
+<a name="l00305"></a>00305     <span class="keywordflow">catch</span> (<a class="code" href="classhcan_1_1transport__error.html">transport_error</a> &amp;e)
+<a name="l00306"></a>00306     {
+<a name="l00307"></a>00307     }
+<a name="l00308"></a>00308 }
+<a name="l00309"></a>00309 
+<a name="l00310"></a><a class="code" href="classhcan_1_1oap__access.html#2a39790ef0b83d9d63bca3c435f567de">00310</a> <a class="code" href="classhcan_1_1oap__access.html#2a39790ef0b83d9d63bca3c435f567de">oap_access::~oap_access</a>()
+<a name="l00311"></a>00311 {
+<a name="l00312"></a>00312 }
+<a name="l00313"></a>00313 
+<a name="l00314"></a><a class="code" href="classhcan_1_1oap__access.html#cfd484c63952eb7b107417a08219f2f8">00314</a> uint8_t <a class="code" href="classhcan_1_1oap__access.html#cfd484c63952eb7b107417a08219f2f8">oap_access::object_count</a>()
+<a name="l00315"></a>00315 {
+<a name="l00316"></a>00316     <span class="keywordflow">return</span> m_objects.size();
+<a name="l00317"></a>00317 }
+<a name="l00318"></a>00318 
+<a name="l00319"></a><a class="code" href="classhcan_1_1oap__access.html#311cb2907c56f23fcca25737338e5c9f">00319</a> <a class="code" href="classhcan_1_1oap__object.html">oap_object</a> &amp;<a class="code" href="classhcan_1_1oap__access.html#311cb2907c56f23fcca25737338e5c9f">oap_access::object</a>(uint8_t oid)
+<a name="l00320"></a>00320 {
+<a name="l00321"></a>00321     <span class="keywordflow">if</span> (oid &gt; m_objects.size() -1)
+<a name="l00322"></a>00322         <span class="keywordflow">throw</span> <a class="code" href="classtraceable__error.html">traceable_error</a>(<span class="stringliteral">"oap_access::object: index &gt; size -1"</span>);
+<a name="l00323"></a>00323 
+<a name="l00324"></a>00324     <span class="keywordflow">return</span> m_objects[oid];
+<a name="l00325"></a>00325 }
+<a name="l00326"></a>00326 
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

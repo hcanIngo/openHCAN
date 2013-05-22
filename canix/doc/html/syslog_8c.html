@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: syslog.c-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>syslog.c-Dateireferenz</h1><code>#include &lt;avr/wdt.h&gt;</code><br>
+<code>#include &lt;<a class="el" href="syslog_8h-source.html">canix/syslog.h</a>&gt;</code><br>
+<code>#include &lt;<a class="el" href="canix_8h-source.html">canix/canix.h</a>&gt;</code><br>
+<code>#include &lt;hcan.h&gt;</code><br>
+<code>#include &lt;stdio.h&gt;</code><br>
+<code>#include &lt;stdarg.h&gt;</code><br>
+<code>#include &lt;string.h&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für syslog.c:</div>
+<div class="dynsection">
+<p><center><img src="syslog_8c__incl.png" border="0" usemap="#syslog.c_map" alt=""></center>
+</div>
+
+<p>
+<a href="syslog_8c-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syslog_8c.html#e878145d123e9d059486b519c7ad0285">canix_set_syslog_level</a> (uint8_t level)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syslog_8c.html#326f44be49c68907457db61f9d1e63e1">canix_syslog_P</a> (uint8_t prio, const char *fmt,...)</td></tr>
+
+<tr><td colspan="2"><br><h2>Variablen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syslog_8c.html#6fdca49b9d5ea18e0693fb029ca3173c">canix_debug_level</a> = 0</td></tr>
+
+</table>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="e878145d123e9d059486b519c7ad0285"></a><!-- doxytag: member="syslog.c::canix_set_syslog_level" ref="e878145d123e9d059486b519c7ad0285" args="(uint8_t level)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_set_syslog_level           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>level</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Setzt den Syslog Level; alle Meldungen, deren Prioritaet die kleiner oder gleich (zahlenmaesig) diesem Wert sind, werden geloggt, alle anderen werden verworfen.<p>
+Beispiel:<p>
+canix_set_syslog_level (SYSLOG_PRIO_ERROR);<p>
+// wird geloggt, da SYSLOG_PRIO_CRITICAL &lt;= SYSLOG_PRIO_ERROR canix_syslog_P(SYSLOG_PRIO_CRITICAL, PSTR("Test1"));<p>
+// wird nicht geloggt, da SYSLOG_PRIO_DEBUG &gt; SYSLOG_PRIO_ERROR canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Test2")); 
+<p>Definiert in Zeile <a class="el" href="syslog_8c-source.html#l00035">35</a> der Datei <a class="el" href="syslog_8c-source.html">syslog.c</a>.</p>
+
+<p>Benutzt <a class="el" href="syslog_8c-source.html#l00033">canix_debug_level</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a> und <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="326f44be49c68907457db61f9d1e63e1"></a><!-- doxytag: member="syslog.c::canix_syslog_P" ref="326f44be49c68907457db61f9d1e63e1" args="(uint8_t prio, const char *fmt,...)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_syslog_P           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>prio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>...</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Loggt eine Meldung ueber das HCAN-Syslog Protokoll. <dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>prio</em>&nbsp;</td><td>die Syslog Prioritaet (SYSLOG_PRIO_CRITICAL | SYSLOG_PRIO_ERROR | SYSLOG_PRIO_WARNING | SYSLOG_PRIO_DEBUG) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>fmt</em>&nbsp;</td><td>der Format-String (muss mit PSTR(..) uebergeben werden !!) </td></tr>
+  </table>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="syslog_8c-source.html#l00040">40</a> der Datei <a class="el" href="syslog_8c-source.html">syslog.c</a>.</p>
+
+<p>Benutzt <a class="el" href="syslog_8c-source.html#l00033">canix_debug_level</a>, <a class="el" href="canix_8c-source.html#l00472">canix_frame_send()</a>, <a class="el" href="canix_8c-source.html#l00408">canix_selfaddr()</a>, <a class="el" href="canix_8c-source.html#l00566">canix_sleep_100th()</a>, <a class="el" href="canix_8h-source.html#l00147">canix_frame::data</a>, <a class="el" href="canix_8h-source.html#l00131">canix_frame::dst</a>, <a class="el" href="canix_8h-source.html#l00136">canix_frame::proto</a>, <a class="el" href="canix_8h-source.html#l00142">canix_frame::size</a> und <a class="el" href="canix_8h-source.html#l00126">canix_frame::src</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00014">eds_format()</a> und <a class="el" href="eds_8c-source.html#l00050">eds_init()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="syslog_8c_326f44be49c68907457db61f9d1e63e1_cgraph.png" border="0" usemap="#syslog_8c_326f44be49c68907457db61f9d1e63e1_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<hr><h2>Variablen-Dokumentation</h2>
+<a class="anchor" name="6fdca49b9d5ea18e0693fb029ca3173c"></a><!-- doxytag: member="syslog.c::canix_debug_level" ref="6fdca49b9d5ea18e0693fb029ca3173c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="syslog_8c.html#6fdca49b9d5ea18e0693fb029ca3173c">canix_debug_level</a> = 0          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="syslog_8c-source.html#l00033">33</a> der Datei <a class="el" href="syslog_8c-source.html">syslog.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="syslog_8c-source.html#l00035">canix_set_syslog_level()</a> und <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

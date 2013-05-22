@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: canix_frame_callback_entry Strukturreferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="functions.html"><span>Datenstruktur-Elemente</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>canix_frame_callback_entry Strukturreferenz</h1><!-- doxytag: class="canix_frame_callback_entry" --><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Datenfelder</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="canix_8h.html#6e5d26a3e024074f7058e053d4a33336">canix_frame_callback</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame__callback__entry.html#c95ae4b0ed9bb49607bae3dd76af0950">callback</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame__callback__entry.html#53f4de9892e4fa64b5fc4ebcd24149ed">dst</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame__callback__entry.html#e7f625e68a20ab5ad52d470fb8a3cf15">proto</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame__callback__entry.html#91a506db80528365553beb69bdb99312">srv</a></td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+Canix stellt ein (H)CAN Interface zur Verfuegung. Jeder Client, der HCAN-Frames empfangen moechte, kann einen ueber canix_reg_frame_callback(..) registieren. Die Filter-Daten (Ziel, Protokoll, Service) werden zusammen mit der Adresse der Callback-Funktion in Instanzen dieser Struktur gespeichert. 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00059">59</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+<hr><h2>Dokumentation der Datenelemente</h2>
+<a class="anchor" name="c95ae4b0ed9bb49607bae3dd76af0950"></a><!-- doxytag: member="canix_frame_callback_entry::callback" ref="c95ae4b0ed9bb49607bae3dd76af0950" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canix_8h.html#6e5d26a3e024074f7058e053d4a33336">canix_frame_callback</a> <a class="el" href="structcanix__frame__callback__entry.html#c95ae4b0ed9bb49607bae3dd76af0950">canix_frame_callback_entry::callback</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00061">61</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00420">canix_deliver_frame()</a> und <a class="el" href="canix_8c-source.html#l00477">canix_reg_frame_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="53f4de9892e4fa64b5fc4ebcd24149ed"></a><!-- doxytag: member="canix_frame_callback_entry::dst" ref="53f4de9892e4fa64b5fc4ebcd24149ed" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="structcanix__frame__callback__entry.html#53f4de9892e4fa64b5fc4ebcd24149ed">canix_frame_callback_entry::dst</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00062">62</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00477">canix_reg_frame_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="e7f625e68a20ab5ad52d470fb8a3cf15"></a><!-- doxytag: member="canix_frame_callback_entry::proto" ref="e7f625e68a20ab5ad52d470fb8a3cf15" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__frame__callback__entry.html#e7f625e68a20ab5ad52d470fb8a3cf15">canix_frame_callback_entry::proto</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00063">63</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00477">canix_reg_frame_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="91a506db80528365553beb69bdb99312"></a><!-- doxytag: member="canix_frame_callback_entry::srv" ref="91a506db80528365553beb69bdb99312" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__frame__callback__entry.html#91a506db80528365553beb69bdb99312">canix_frame_callback_entry::srv</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00064">64</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00420">canix_deliver_frame()</a> und <a class="el" href="canix_8c-source.html#l00477">canix_reg_frame_callback()</a>.</p>
+
+</div>
+</div><p>
+<hr>Die Dokumentation für diese Struktur wurde erzeugt aufgrund der Datei:<ul>
+<li><a class="el" href="canix_8c-source.html">canix.c</a></ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: hcan::eds_connection Klassenreferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="hierarchy.html"><span>Klassenhierarchie</span></a></li>
+      <li><a href="functions.html"><span>Datenstruktur-Elemente</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="namespacehcan.html">hcan</a>::<a class="el" href="classhcan_1_1eds__connection.html">eds_connection</a>
+  </div>
+</div>
+<div class="contents">
+<h1>hcan::eds_connection Klassenreferenz</h1><!-- doxytag: class="hcan::eds_connection" --><code>#include &lt;<a class="el" href="eds__connection_8h-source.html">eds_connection.h</a>&gt;</code>
+<p>
+<div class="dynheader">
+Zusammengehörigkeiten von hcan::eds_connection:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection__coll__graph.png" border="0" usemap="#hcan_1_1eds__connection__coll__map" alt="Collaboration graph"></center>
+<map name="hcan_1_1eds__connection__coll__map">
+<area shape="rect" href="classhcan_1_1board__connection.html" title="{hcan::board_connection\n|&#45; m_tcon\l&#45; m_driver\l&#45; m_src\l&#45; m_dst\l|+ board_connection()\l+ ~board_connection()\l+ get_transport_connection()\l+ src()\l+ dst()\l+ get_driver()\l+ tcon()\l}" alt="" coords="241,5509,452,5749"><area shape="rect" href="classhcan_1_1transport__connection.html" title="{hcan::transport_connection\n|&#45; m_socket\l|+ transport_connection()\l+ ~transport_connection()\l+ keep_connection_alive()\l+ ping()\l+ flood_ping()\l+ dump()\l+ templog()\l+ syslog()\l+ send()\l+ recv_frame()\l+ recv_frame_with_timeout()\l+ socket()\l}" alt="" coords="87,5168,295,5443"><area shape="rect" href="classhcan_1_1hcan__transport.html" title="{hcan::hcan_transport\n|# m_hcand_ip\l|+ ~hcan_transport()\l+ send_PING_REQUEST()\l+ recv_PING_REQUEST()\l+ send_PING_REPLAY()\l+ recv_PING_REPLAY()\l+ send_DEVICE_STATE_REQUEST()\l+ recv_DEVICE_STATE_REQUEST()\l+ send_DEVICE_STATE_REPLAY()\l+ recv_DEVICE_STATE_REPLAY()\l+ send_DEVICE_RESET()\l+ recv_DEVICE_RESET()\l+ send_DEVICE_BOOT_STOP()\l+ recv_DEVICE_BOOT_STOP()\l+ send_DEVICE_BOOT_STOP_ACK()\l+ recv_DEVICE_BOOT_STOP_ACK()\l+ send_DEVICE_LOAD_APP()\l+ recv_DEVICE_LOAD_APP()\l+ send_DEVICE_TYPE_REQUEST()\l+ recv_DEVICE_TYPE_REQUEST()\l+ send_DEVICE_TYPE_REPLAY()\l+ recv_DEVICE_TYPE_REPLAY()\l+ send_FLASH_BUFFER_FILL()\l+ recv_FLASH_BUFFER_FILL()\l+ send_FLASH_BUFFER_FILL_ACK()\l+ recv_FLASH_BUFFER_FILL_ACK()\l+ send_FLASH_BUFFER_WRITE()\l+ recv_FLASH_BUFFER_WRITE()\l+ send_FLASH_BUFFER_WRITE_ACK()\l+ recv_FLASH_BUFFER_WRITE_ACK()\l+ send_INTERNAL_EEPROM_WRITE()\l+ recv_INTERNAL_EEPROM_WRITE()\l+ send_INTERNAL_EEPROM_WRITE_ACK()\l+ recv_INTERNAL_EEPROM_WRITE_ACK()\l+ send_INTERNAL_EEPROM_READ_REQUEST()\l+ recv_INTERNAL_EEPROM_READ_REQUEST()\l+ send_INTERNAL_EEPROM_READ_REPLAY()\l+ recv_INTERNAL_EEPROM_READ_REPLAY()\l+ send_INTERNAL_EEPROM_READ_BULK_REQUEST()\l+ recv_INTERNAL_EEPROM_READ_BULK_REQUEST()\l+ send_INTERNAL_EEPROM_READ_BULK_REPLAY()\l+ recv_INTERNAL_EEPROM_READ_BULK_REPLAY()\l+ send_UPTIME_QUERY()\l+ recv_UPTIME_QUERY()\l+ send_UPTIME_REPLAY()\l+ recv_UPTIME_REPLAY()\l+ send_SYSLOG_LEVEL_SET()\l+ recv_SYSLOG_LEVEL_SET()\l+ send_BUILD_VERSION_QUERY()\l+ recv_BUILD_VERSION_QUERY()\l+ send_BUILD_VERSION_REPLAY()\l+ recv_BUILD_VERSION_REPLAY()\l+ send_CAN_EC_QUERY()\l+ recv_CAN_EC_QUERY()\l+ send_CAN_EC_REPLAY()\l+ recv_CAN_EC_REPLAY()\l+ send_FLASH_CRC16_QUERY()\l+ recv_FLASH_CRC16_QUERY()\l+ send_FLASH_CRC16_REPLAY()\l+ recv_FLASH_CRC16_REPLAY()\l+ send_LOOP_THROUGHPUT_QUERY()\l+ recv_LOOP_THROUGHPUT_QUERY()\l+ send_LOOP_THROUGHPUT_REPLAY()\l+ recv_LOOP_THROUGHPUT_REPLAY()\l+ send_RX_RECEIVED_QUERY()\l+ recv_RX_RECEIVED_QUERY()\l+ send_RX_RECEIVED_REPLAY()\l+ recv_RX_RECEIVED_REPLAY()\l+ send_RX_LOST_QUERY()\l+ recv_RX_LOST_QUERY()\l+ send_RX_LOST_REPLAY()\l+ recv_RX_LOST_REPLAY()\l+ send_TX_SENT_QUERY()\l+ recv_TX_SENT_QUERY()\l+ send_TX_SENT_REPLAY()\l+ recv_TX_SENT_REPLAY()\l+ send_TX_DROPPED_QUERY()\l+ recv_TX_DROPPED_QUERY()\l+ send_TX_DROPPED_REPLAY()\l+ recv_TX_DROPPED_REPLAY()\l+ send_RX_TX_STATS_RESET()\l+ recv_RX_TX_STATS_RESET()\l+ send_BOOT_RESETFLAG_LOG()\l+ recv_BOOT_RESETFLAG_LOG()\l+ send_FIRMWARE_CRC16_ERROR()\l+ recv_FIRMWARE_CRC16_ERROR()\l+ send_FIRMWARE_CONFIG_COMPAT_ERROR()\l+ recv_FIRMWARE_CONFIG_COMPAT_ERROR()\l+ send_DUMP_DEBUG_INFO()\l+ recv_DUMP_DEBUG_INFO()\l+ send_TASTER_DOWN()\l+ recv_TASTER_DOWN()\l+ send_TASTER_UP()\l+ recv_TASTER_UP()\l+ send_POWER_GROUP_ON()\l+ recv_POWER_GROUP_ON()\l+ send_POWER_GROUP_OFF()\l+ recv_POWER_GROUP_OFF()\l+ send_POWER_GROUP_STATE_QUERY()\l+ recv_POWER_GROUP_STATE_QUERY()\l+ send_POWER_GROUP_STATE_REPLAY()\l+ recv_POWER_GROUP_STATE_REPLAY()\l+ send_POWER_GROUP_TIMER_QUERY()\l+ recv_POWER_GROUP_TIMER_QUERY()\l+ send_POWER_GROUP_TIMER_REPLAY()\l+ recv_POWER_GROUP_TIMER_REPLAY()\l+ send_POWER_GROUP_SET_TIMER()\l+ recv_POWER_GROUP_SET_TIMER()\l+ send_POWER_GROUP_STATE_INFO()\l+ recv_POWER_GROUP_STATE_INFO()\l+ send_ROLLADEN_POSITION_SET()\l+ recv_ROLLADEN_POSITION_SET()\l+ send_ROLLADEN_POSITION_REQUEST()\l+ recv_ROLLADEN_POSITION_REQUEST()\l+ send_ROLLADEN_POSITION_REPLAY()\l+ recv_ROLLADEN_POSITION_REPLAY()\l+ send_ROLLADEN_DEFINE_POSITION()\l+ recv_ROLLADEN_DEFINE_POSITION()\l+ send_ROLLADEN_POSITION_CHANGED_INFO()\l+ recv_ROLLADEN_POSITION_CHANGED_INFO()\l+ send_1WIRE_DISCOVER()\l+ recv_1WIRE_DISCOVER()\l+ send_1WIRE_DISCOVERED_PART_1()\l+ recv_1WIRE_DISCOVERED_PART_1()\l+ send_1WIRE_DISCOVERED_PART_2()\l+ recv_1WIRE_DISCOVERED_PART_2()\l+ send_1WIRE_ERROR()\l+ recv_1WIRE_ERROR()\l+ send_1WIRE_TEMPERATURE()\l+ recv_1WIRE_TEMPERATURE()\l+ send_1WIRE_TEMPERATURE_QUERY()\l+ recv_1WIRE_TEMPERATURE_QUERY()\l+ send_1WIRE_TEMPERATURE_REPLAY()\l+ recv_1WIRE_TEMPERATURE_REPLAY()\l+ send_REEDKONTAKT_OFFEN()\l+ recv_REEDKONTAKT_OFFEN()\l+ send_REEDKONTAKT_STATE_QUERY()\l+ recv_REEDKONTAKT_STATE_QUERY()\l+ send_REEDKONTAKT_STATE_REPLAY()\l+ recv_REEDKONTAKT_STATE_REPLAY()\l+ send_REEDKONTAKT_STATE_CHANGE()\l+ recv_REEDKONTAKT_STATE_CHANGE()\l+ send_PVSENSOR_STATE_REQUEST()\l+ recv_PVSENSOR_STATE_REQUEST()\l+ send_PVSENSOR_STATE_REPLAY()\l+ recv_PVSENSOR_STATE_REPLAY()\l+ send_PVSENSOR_STATE_CHANGE_INFO()\l+ recv_PVSENSOR_STATE_CHANGE_INFO()\l+ send_HEIZUNG_DETAILS_REQUEST()\l+ recv_HEIZUNG_DETAILS_REQUEST()\l+ send_HEIZUNG_MODE_OFF_DETAILS()\l+ recv_HEIZUNG_MODE_OFF_DETAILS()\l+ send_HEIZUNG_SET_MODE_OFF()\l+ recv_HEIZUNG_SET_MODE_OFF()\l+ send_HEIZUNG_MODE_MANUAL_DETAILS()\l+ recv_HEIZUNG_MODE_MANUAL_DETAILS()\l+ send_HEIZUNG_SET_MODE_MANUAL()\l+ recv_HEIZUNG_SET_MODE_MANUAL()\l+ send_HEIZUNG_MODE_THERMOSTAT_DETAILS()\l+ recv_HEIZUNG_MODE_THERMOSTAT_DETAILS()\l+ send_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()\l+ recv_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()\l+ send_HEIZUNG_MODE_AUTOMATIK_DETAILS()\l+ recv_HEIZUNG_MODE_AUTOMATIK_DETAILS()\l+ send_HEIZUNG_SET_MODE_AUTOMATIK()\l+ recv_HEIZUNG_SET_MODE_AUTOMATIK()\l+ send_HEIZUNG_TIST_REQUEST()\l+ recv_HEIZUNG_TIST_REQUEST()\l+ send_HEIZUNG_TIST_REPLAY()\l+ recv_HEIZUNG_TIST_REPLAY()\l+ send_HEIZUNG_WAERMEBEDARF_INFO()\l+ recv_HEIZUNG_WAERMEBEDARF_INFO()\l+ send_HEIZSTEUERUNG_STATE_REQUEST()\l+ recv_HEIZSTEUERUNG_STATE_REQUEST()\l+ send_HEIZSTEUERUNG_STATE_REPLAY()\l+ recv_HEIZSTEUERUNG_STATE_REPLAY()\l+ send_HEIZSTEUERUNG_STATE_INFO()\l+ recv_HEIZSTEUERUNG_STATE_INFO()\l+ send_HEIZSTEUERUNG_SET_VL()\l+ recv_HEIZSTEUERUNG_SET_VL()\l+ send_HEIZUNG_SOLLTEMP_LINE_REQUEST()\l+ recv_HEIZUNG_SOLLTEMP_LINE_REQUEST()\l+ send_HEIZUNG_SOLLTEMP_LINE_REPLAY()\l+ recv_HEIZUNG_SOLLTEMP_LINE_REPLAY()\l+ send_HEIZUNG_SOLLTEMP_WRITE_LINE()\l+ recv_HEIZUNG_SOLLTEMP_WRITE_LINE()\l+ send_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()\l+ recv_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()\l+ send_CONFIG_RELOAD()\l+ recv_CONFIG_RELOAD()\l+ send_CONFIG_RAM_USAGE_REQUEST()\l+ recv_CONFIG_RAM_USAGE_REQUEST()\l+ send_CONFIG_RAM_USAGE_REPLAY()\l+ recv_CONFIG_RAM_USAGE_REPLAY()\l+ send_ZEITZONE_DETAILS_REQUEST()\l+ recv_ZEITZONE_DETAILS_REQUEST()\l+ send_ZEITZONE_DETAILS_REPLAY()\l+ recv_ZEITZONE_DETAILS_REPLAY()\l+ send_ZEITZONE_WRITE_DETAILS()\l+ recv_ZEITZONE_WRITE_DETAILS()\l+ send_ZEITZONE_WRITE_DETAILS_ACK()\l+ recv_ZEITZONE_WRITE_DETAILS_ACK()\l+ send_ZEITZONE_TEST_MATCH_REQUERST()\l+ recv_ZEITZONE_TEST_MATCH_REQUERST()\l+ send_ZEITZONE_TEST_MATCH_REPLAY()\l+ recv_ZEITZONE_TEST_MATCH_REPLAY()\l+ send_TIME_INFO()\l+ recv_TIME_INFO()\l+ send_DATE_INFO()\l+ recv_DATE_INFO()\l+ send_TIME_REQUEST()\l+ recv_TIME_REQUEST()\l+ send_DATE_REQUEST()\l+ recv_DATE_REQUEST()\l+ send_GET_NEXT_BLOCK()\l+ recv_GET_NEXT_BLOCK()\l+ send_GET_NEXT_BLOCK_REPLAY()\l+ recv_GET_NEXT_BLOCK_REPLAY()\l+ send_DEFRAGMENT()\l+ recv_DEFRAGMENT()\l+ send_ALLOCATE_BLOCK()\l+ recv_ALLOCATE_BLOCK()\l+ send_ALLOCATE_BLOCK_REPLAY()\l+ recv_ALLOCATE_BLOCK_REPLAY()\l+ send_FREE_BLOCK()\l+ recv_FREE_BLOCK()\l+ send_FREE_BLOCK_REPLAY()\l+ recv_FREE_BLOCK_REPLAY()\l+ send_READ_FROM_BLOCK()\l+ recv_READ_FROM_BLOCK()\l+ send_READ_FROM_BLOCK_REPLAY()\l+ recv_READ_FROM_BLOCK_REPLAY()\l+ send_WRITE_TO_BLOCK()\l+ recv_WRITE_TO_BLOCK()\l+ send_WRITE_TO_BLOCK_REPLAY()\l+ recv_WRITE_TO_BLOCK_REPLAY()\l+ send_FORMAT()\l+ recv_FORMAT()\l+ send_STATE_REQUEST()\l+ recv_STATE_REQUEST()\l+ send_STATE_INFO()\l+ recv_STATE_INFO()\l+ send_VOLTAGE_REQUEST()\l+ recv_VOLTAGE_REQUEST()\l+ send_VOLTAGE_REPLAY()\l+ recv_VOLTAGE_REPLAY()\l+ send_VOLTAGE_STATS_REQUEST()\l+ recv_VOLTAGE_STATS_REQUEST()\l+ send_VOLTAGE_STATS_REPLAY()\l+ recv_VOLTAGE_STATS_REPLAY()\l+ send_VOLTAGE_STATS_RESET()\l+ recv_VOLTAGE_STATS_RESET()\l+ send_FA_BLOCK1_INFO()\l+ recv_FA_BLOCK1_INFO()\l+ send_REGLER_DATEN_INFO_FRG1()\l+ recv_REGLER_DATEN_INFO_FRG1()\l+ send_REGLER_DATEN_INFO_FRG2()\l+ recv_REGLER_DATEN_INFO_FRG2()\l+ send_WETTER_INFO()\l+ recv_WETTER_INFO()\l+ send_LICHT_STATS_5MIN()\l+ recv_LICHT_STATS_5MIN()\l+ send_WIND_STATS_5MIN()\l+ recv_WIND_STATS_5MIN()\l+ send_OBJECT_COUNT_REQUEST()\l+ recv_OBJECT_COUNT_REQUEST()\l+ send_OBJECT_COUNT_REPLAY()\l+ recv_OBJECT_COUNT_REPLAY()\l+ send_OBJECT_ATTRIBUTE_REQUEST()\l+ recv_OBJECT_ATTRIBUTE_REQUEST()\l+ send_OBJECT_ATTRIBUTE_REPLAY()\l+ recv_OBJECT_ATTRIBUTE_REPLAY()\l+ send_FIELD_COUNT_REQUEST()\l+ recv_FIELD_COUNT_REQUEST()\l+ send_FIELD_COUNT_REPLAY()\l+ recv_FIELD_COUNT_REPLAY()\l+ send_FIELD_ATTRIBUTE_REQUEST()\l+ recv_FIELD_ATTRIBUTE_REQUEST()\l+ send_FIELD_ATTRIBUTE_REPLAY()\l+ recv_FIELD_ATTRIBUTE_REPLAY()\l+ send_FIELD_READ_REQUEST()\l+ recv_FIELD_READ_REQUEST()\l+ send_FIELD_READ_REPLAY()\l+ recv_FIELD_READ_REPLAY()\l+ send_FIELD_WRITE_REQUEST()\l+ recv_FIELD_WRITE_REQUEST()\l+ send_FIELD_WRITE_REPLAY()\l+ recv_FIELD_WRITE_REPLAY()\l# socket()\l# recv_frame()\l# recv_frame_with_timeout()\l# hcan_transport()\l}" alt="" coords="5,7,376,5116"></map>
+<center><font size="2">[<a href="graph_legend.html">Legende</a>]</font></center></div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Öffentliche Typen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">typedef std::vector&lt; <a class="el" href="classhcan_1_1eds__block.html">eds_block</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#8cb7833abbf57a69c06d2ea6ed40a948">eds_blocks</a></td></tr>
+
+<tr><td colspan="2"><br><h2>Öffentliche Methoden</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#4d826c83f695cdfee9f66cfb59d38503">eds_connection</a> (<a class="el" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#6398f28c1f2f1e5e8eb3696818b3685d">~eds_connection</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">update</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">size_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#027276a56b0aa4acb505fb18d9fcbd0e">space_free</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">size_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#10dc396906f96cf0541d4f4de2780434">space_used</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1board__connection.html">board_connection</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#e669a4bf2304d3b20cfa58ef8835cfb4">bcon</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1eds__connection.html#8cb7833abbf57a69c06d2ea6ed40a948">eds_blocks</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#68312d4d37395014849696321489b93a">blocks</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1eds__block.html">eds_block</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">block_by_address</a> (uint16_t address)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1eds__block.html">eds_block</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#8f674468e5ea4235480f84c54fa674bc">create_block</a> (const string &amp;type_name)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#e7f68b11d62a9ac9dc08da2ffb1ca8a2">delete_block</a> (const <a class="el" href="classhcan_1_1eds__block.html">eds_block</a> &amp;block)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#e301ff324b1f11e3a3505dbc50dc3d1d">defragment</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1eds__connection.html#9a2de00c965afb707e23f152fb5c87de">format</a> ()</td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+Repraesentiert eine Verbindung zu einem EDS Interface eines Boards. Benoetigt wird eine Board-Verbindung (bcon). Diese liefert der <a class="el" href="classhcan_1_1eds__connection.html">eds_connection</a> die src/dst Adressen und die fuer die Kommunikation noetige Transport Verbindung (<a class="el" href="classhcan_1_1transport__connection.html">transport_connection</a>). 
+<p>Definiert in Zeile <a class="el" href="eds__connection_8h-source.html#l00078">78</a> der Datei <a class="el" href="eds__connection_8h-source.html">eds_connection.h</a>.</p>
+<hr><h2>Dokumentation der benutzerdefinierten Datentypen</h2>
+<a class="anchor" name="8cb7833abbf57a69c06d2ea6ed40a948"></a><!-- doxytag: member="hcan::eds_connection::eds_blocks" ref="8cb7833abbf57a69c06d2ea6ed40a948" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::vector&lt;<a class="el" href="classhcan_1_1eds__block.html">eds_block</a>&gt; <a class="el" href="classhcan_1_1eds__connection.html#8cb7833abbf57a69c06d2ea6ed40a948">hcan::eds_connection::eds_blocks</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Container Typ der EDS Bloecke 
+<p>Definiert in Zeile <a class="el" href="eds__connection_8h-source.html#l00084">84</a> der Datei <a class="el" href="eds__connection_8h-source.html">eds_connection.h</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Beschreibung der Konstruktoren und Destruktoren</h2>
+<a class="anchor" name="4d826c83f695cdfee9f66cfb59d38503"></a><!-- doxytag: member="hcan::eds_connection::eds_connection" ref="4d826c83f695cdfee9f66cfb59d38503" args="(board_connection &amp;bcon)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">eds_connection::eds_connection           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhcan_1_1board__connection.html">board_connection</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>bcon</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00306">306</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="eds__connection_8cc-source.html#l00317">update()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection_4d826c83f695cdfee9f66cfb59d38503_cgraph.png" border="0" usemap="#classhcan_1_1eds__connection_4d826c83f695cdfee9f66cfb59d38503_cgraph_map" alt=""></center>
+<map name="classhcan_1_1eds__connection_4d826c83f695cdfee9f66cfb59d38503_cgraph_map">
+<area shape="rect" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048" title="hcan::eds_connection::update" alt="" coords="323,159,536,185"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="668,69,871,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935" title="hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY" alt="" coords="585,120,953,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677" title="hcan::hcan_transport::send_GET_NEXT_BLOCK" alt="" coords="609,196,929,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="669,247,869,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1053,5,1189,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="1003,56,1240,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1056,107,1187,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1059,157,1184,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="1017,208,1225,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1044,259,1199,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="6398f28c1f2f1e5e8eb3696818b3685d"></a><!-- doxytag: member="hcan::eds_connection::~eds_connection" ref="6398f28c1f2f1e5e8eb3696818b3685d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">eds_connection::~eds_connection           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00313">313</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Elementfunktionen</h2>
+<a class="anchor" name="580a52e7314f82648630d66cec87b048"></a><!-- doxytag: member="hcan::eds_connection::update" ref="580a52e7314f82648630d66cec87b048" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void eds_connection::update           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Laed die aktuell auf dem Peer gespeicherte EDS Block Liste. Nach diesem Update kann ueber den blocks-Container auf die Bloecke zugegriffen werden. 
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00317">317</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08643">hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08518">hcan::hcan_transport::send_GET_NEXT_BLOCK()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__connection_8cc-source.html#l00449">defragment()</a>, <a class="el" href="eds__connection_8cc-source.html#l00306">eds_connection()</a>, <a class="el" href="eds__commands_8cc-source.html#l00149">hcan::eds_exec_cmd()</a> und <a class="el" href="eds__connection_8cc-source.html#l00456">format()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection_580a52e7314f82648630d66cec87b048_cgraph.png" border="0" usemap="#classhcan_1_1eds__connection_580a52e7314f82648630d66cec87b048_cgraph_map" alt=""></center>
+<map name="classhcan_1_1eds__connection_580a52e7314f82648630d66cec87b048_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="351,69,553,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935" title="hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY" alt="" coords="268,120,636,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677" title="hcan::hcan_transport::send_GET_NEXT_BLOCK" alt="" coords="292,196,612,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="352,247,552,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="736,5,872,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="685,56,923,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="739,107,869,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="741,157,867,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="700,208,908,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="727,259,881,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="027276a56b0aa4acb505fb18d9fcbd0e"></a><!-- doxytag: member="hcan::eds_connection::space_free" ref="027276a56b0aa4acb505fb18d9fcbd0e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t eds_connection::space_free           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Setzt den Status des EDS Cache auf invalide. Dies ist noetig, wenn sich die Struktur der EDS Objekte geaendert hat 
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00339">339</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08643">hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08518">hcan::hcan_transport::send_GET_NEXT_BLOCK()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection_027276a56b0aa4acb505fb18d9fcbd0e_cgraph.png" border="0" usemap="#classhcan_1_1eds__connection_027276a56b0aa4acb505fb18d9fcbd0e_cgraph_map" alt=""></center>
+<map name="classhcan_1_1eds__connection_027276a56b0aa4acb505fb18d9fcbd0e_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="377,69,580,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935" title="hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY" alt="" coords="295,120,663,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677" title="hcan::hcan_transport::send_GET_NEXT_BLOCK" alt="" coords="319,196,639,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="379,247,579,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="763,5,899,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="712,56,949,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="765,107,896,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="768,157,893,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="727,208,935,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="753,259,908,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="10dc396906f96cf0541d4f4de2780434"></a><!-- doxytag: member="hcan::eds_connection::space_used" ref="10dc396906f96cf0541d4f4de2780434" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t eds_connection::space_used           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00360">360</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08643">hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08518">hcan::hcan_transport::send_GET_NEXT_BLOCK()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection_10dc396906f96cf0541d4f4de2780434_cgraph.png" border="0" usemap="#classhcan_1_1eds__connection_10dc396906f96cf0541d4f4de2780434_cgraph_map" alt=""></center>
+<map name="classhcan_1_1eds__connection_10dc396906f96cf0541d4f4de2780434_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="383,69,585,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935" title="hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY" alt="" coords="300,120,668,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677" title="hcan::hcan_transport::send_GET_NEXT_BLOCK" alt="" coords="324,196,644,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="384,247,584,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="768,5,904,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="717,56,955,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="771,107,901,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="773,157,899,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="732,208,940,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="759,259,913,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="e669a4bf2304d3b20cfa58ef8835cfb4"></a><!-- doxytag: member="hcan::eds_connection::bcon" ref="e669a4bf2304d3b20cfa58ef8835cfb4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1board__connection.html">board_connection</a>&amp; hcan::eds_connection::bcon           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8h-source.html#l00106">106</a> der Datei <a class="el" href="eds__connection_8h-source.html">eds_connection.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="68312d4d37395014849696321489b93a"></a><!-- doxytag: member="hcan::eds_connection::blocks" ref="68312d4d37395014849696321489b93a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1eds__connection.html#8cb7833abbf57a69c06d2ea6ed40a948">eds_blocks</a>&amp; hcan::eds_connection::blocks           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert eine Referenz auf den EDS Block Container. Damit koennen Clients ueber den Container iterieren und mit den <a class="el" href="classhcan_1_1eds__block.html">eds_block</a> Objekten arbeiten. 
+<p>Definiert in Zeile <a class="el" href="eds__connection_8h-source.html#l00112">112</a> der Datei <a class="el" href="eds__connection_8h-source.html">eds_connection.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__commands_8cc-source.html#l00021">hcan::eds_cmd_list()</a> und <a class="el" href="eds__commands_8cc-source.html#l00122">hcan::eds_cmd_show_conf()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="1fee6e054de447c072d2a29d9462987d"></a><!-- doxytag: member="hcan::eds_connection::block_by_address" ref="1fee6e054de447c072d2a29d9462987d" args="(uint16_t address)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1eds__block.html">eds_block</a> &amp; eds_connection::block_by_address           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>address</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00382">382</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__connection_8cc-source.html#l00395">create_block()</a>, <a class="el" href="eds__commands_8cc-source.html#l00076">hcan::eds_cmd_delete()</a>, <a class="el" href="eds__commands_8cc-source.html#l00082">hcan::eds_cmd_edit()</a>, <a class="el" href="eds__commands_8cc-source.html#l00021">hcan::eds_cmd_list()</a> und <a class="el" href="eds__commands_8cc-source.html#l00096">hcan::eds_cmd_set_field()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="8f674468e5ea4235480f84c54fa674bc"></a><!-- doxytag: member="hcan::eds_connection::create_block" ref="8f674468e5ea4235480f84c54fa674bc" args="(const string &amp;type_name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1eds__block.html">eds_block</a> &amp; eds_connection::create_block           </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&nbsp;</td>
+          <td class="paramname"> <em>type_name</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00395">395</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="eds__connection_8cc-source.html#l00382">block_by_address()</a>, <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="eds__connection_8cc-source.html#l00014">eds_block_descriptions</a>, <a class="el" href="hcan__transport_8cc-source.html#l08868">hcan::hcan_transport::recv_ALLOCATE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08759">hcan::hcan_transport::send_ALLOCATE_BLOCK()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__commands_8cc-source.html#l00058">hcan::eds_cmd_create()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection_8f674468e5ea4235480f84c54fa674bc_cgraph.png" border="0" usemap="#classhcan_1_1eds__connection_8f674468e5ea4235480f84c54fa674bc_cgraph_map" alt=""></center>
+<map name="classhcan_1_1eds__connection_8f674468e5ea4235480f84c54fa674bc_cgraph_map">
+<area shape="rect" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d" title="hcan::eds_connection::block_by_address" alt="" coords="348,19,628,45"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="387,69,589,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#445acff7e94e8d24b2660f83f5fa1baa" title="hcan::hcan_transport::recv_ALLOCATE_BLOCK_REPLAY" alt="" coords="304,120,672,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#9efc9bbc8475a79143ddf67a430c3e37" title="hcan::hcan_transport::send_ALLOCATE_BLOCK" alt="" coords="329,196,647,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="388,247,588,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="771,5,907,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="720,56,957,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="773,107,904,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="776,157,901,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="735,208,943,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="761,259,916,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="e7f68b11d62a9ac9dc08da2ffb1ca8a2"></a><!-- doxytag: member="hcan::eds_connection::delete_block" ref="e7f68b11d62a9ac9dc08da2ffb1ca8a2" args="(const eds_block &amp;block)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void eds_connection::delete_block           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhcan_1_1eds__block.html">eds_block</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>block</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00421">421</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="eds__connection_8h-source.html#l00059">hcan::eds_block::address()</a>, <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09021">hcan::hcan_transport::recv_FREE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08921">hcan::hcan_transport::send_FREE_BLOCK()</a> und <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__commands_8cc-source.html#l00076">hcan::eds_cmd_delete()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection_e7f68b11d62a9ac9dc08da2ffb1ca8a2_cgraph.png" border="0" usemap="#classhcan_1_1eds__connection_e7f68b11d62a9ac9dc08da2ffb1ca8a2_cgraph_map" alt=""></center>
+<map name="classhcan_1_1eds__connection_e7f68b11d62a9ac9dc08da2ffb1ca8a2_cgraph_map">
+<area shape="rect" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b" title="hcan::eds_block::address" alt="" coords="377,19,559,45"><area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="367,69,569,96"><area shape="rect" href="classhcan_1_1hcan__transport.html#c82ada597dd93384b42e70de6f4cd2c3" title="hcan::hcan_transport::recv_FREE_BLOCK_REPLAY" alt="" coords="301,120,635,147"><area shape="rect" href="classhcan_1_1hcan__transport.html#391c51c8f9d9700e1544fa26a3d14ede" title="hcan::hcan_transport::send_FREE_BLOCK" alt="" coords="327,196,609,223"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="368,247,568,273"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="733,5,869,32"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="683,56,920,83"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="736,107,867,133"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="739,157,864,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="697,208,905,235"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="724,259,879,285"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="e301ff324b1f11e3a3505dbc50dc3d1d"></a><!-- doxytag: member="hcan::eds_connection::defragment" ref="e301ff324b1f11e3a3505dbc50dc3d1d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void eds_connection::defragment           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00449">449</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08699">hcan::hcan_transport::send_DEFRAGMENT()</a>, <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a> und <a class="el" href="eds__connection_8cc-source.html#l00317">update()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__commands_8cc-source.html#l00149">hcan::eds_exec_cmd()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection_e301ff324b1f11e3a3505dbc50dc3d1d_cgraph.png" border="0" usemap="#classhcan_1_1eds__connection_e301ff324b1f11e3a3505dbc50dc3d1d_cgraph_map" alt=""></center>
+<map name="classhcan_1_1eds__connection_e301ff324b1f11e3a3505dbc50dc3d1d_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="644,56,847,83"><area shape="rect" href="classhcan_1_1hcan__transport.html#f01561e3c069da9090e128920da5b5e2" title="hcan::hcan_transport::send_DEFRAGMENT" alt="" coords="600,259,891,285"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="645,208,845,235"><area shape="rect" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048" title="hcan::eds_connection::update" alt="" coords="299,157,512,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="993,259,1201,285"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="1020,208,1175,235"><area shape="rect" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935" title="hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY" alt="" coords="561,107,929,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677" title="hcan::hcan_transport::send_GET_NEXT_BLOCK" alt="" coords="585,157,905,184"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="1029,107,1165,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="979,157,1216,184"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1032,5,1163,32"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1035,56,1160,83"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="9a2de00c965afb707e23f152fb5c87de"></a><!-- doxytag: member="hcan::eds_connection::format" ref="9a2de00c965afb707e23f152fb5c87de" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void eds_connection::format           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00456">456</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="board__connection_8h-source.html#l00048">hcan::board_connection::dst()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09424">hcan::hcan_transport::send_FORMAT()</a>, <a class="el" href="board__connection_8h-source.html#l00047">hcan::board_connection::src()</a> und <a class="el" href="eds__connection_8cc-source.html#l00317">update()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1eds__connection_9a2de00c965afb707e23f152fb5c87de_cgraph.png" border="0" usemap="#classhcan_1_1eds__connection_9a2de00c965afb707e23f152fb5c87de_cgraph_map" alt=""></center>
+<map name="classhcan_1_1eds__connection_9a2de00c965afb707e23f152fb5c87de_cgraph_map">
+<area shape="rect" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="612,56,815,83"><area shape="rect" href="classhcan_1_1hcan__transport.html#26eb13a3637ae871edb858a65fb10dea" title="hcan::hcan_transport::send_FORMAT" alt="" coords="587,259,840,285"><area shape="rect" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="613,208,813,235"><area shape="rect" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048" title="hcan::eds_connection::update" alt="" coords="267,157,480,184"><area shape="rect" href="classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="961,259,1169,285"><area shape="rect" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="988,208,1143,235"><area shape="rect" href="classhcan_1_1hcan__transport.html#5bb62e3ddd09f304dab48f1d2a13b935" title="hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY" alt="" coords="529,107,897,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#74d5a2e38c40c6513b4aa8489584b677" title="hcan::hcan_transport::send_GET_NEXT_BLOCK" alt="" coords="553,157,873,184"><area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="997,107,1133,133"><area shape="rect" href="classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="947,157,1184,184"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="1000,5,1131,32"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="1003,56,1128,83"></map>
+</div>
+
+</div>
+</div><p>
+<hr>Die Dokumentation für diese Klasse wurde erzeugt aufgrund der Dateien:<ul>
+<li><a class="el" href="eds__connection_8h-source.html">eds_connection.h</a><li><a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a></ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:40:04 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: mcp2515_defs.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>mcp2515_defs.h</h1><a href="mcp2515__defs_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* from Microchip Example */</span>
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="preprocessor">#ifndef MCP2515_DEFS_H_</span>
+<a name="l00004"></a>00004 <span class="preprocessor"></span><span class="preprocessor">#define MCP2515_DEFS_H_</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span>
+<a name="l00006"></a>00006 <span class="comment">/*</span>
+<a name="l00007"></a>00007 <span class="comment">mcp2515_defs.h</span>
+<a name="l00008"></a>00008 <span class="comment"></span>
+<a name="l00009"></a>00009 <span class="comment">This file contains constants that are specific to the MCP2515.</span>
+<a name="l00010"></a>00010 <span class="comment"></span>
+<a name="l00011"></a>00011 <span class="comment">Version     Date        Description</span>
+<a name="l00012"></a>00012 <span class="comment">----------------------------------------------------------------------</span>
+<a name="l00013"></a>00013 <span class="comment">v1.00       2003/12/11  Initial release</span>
+<a name="l00014"></a>00014 <span class="comment">Copyright 2003 Kimberly Otten Software Consulting</span>
+<a name="l00015"></a>00015 <span class="comment"></span>
+<a name="l00016"></a>00016 <span class="comment">Changes M. Thomas:</span>
+<a name="l00017"></a>00017 <span class="comment">- rename to mcp2515_defs.h</span>
+<a name="l00018"></a>00018 <span class="comment">- added handy definitions from kvaser-sample</span>
+<a name="l00019"></a>00019 <span class="comment">- status-bits</span>
+<a name="l00020"></a>00020 <span class="comment"></span>
+<a name="l00021"></a>00021 <span class="comment">*/</span>
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="comment">// Begin mt</span>
+<a name="l00024"></a><a class="code" href="mcp2515__defs_8h.html#1253d918bad50515a17845ded3dfb041">00024</a> <span class="preprocessor">#define MCP_SIDH        0</span>
+<a name="l00025"></a><a class="code" href="mcp2515__defs_8h.html#ebb1817d5c24951ebf398a342a4af650">00025</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_SIDL        1</span>
+<a name="l00026"></a><a class="code" href="mcp2515__defs_8h.html#a6059e32c37e0ca64743c50136dfee4c">00026</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EID8        2</span>
+<a name="l00027"></a><a class="code" href="mcp2515__defs_8h.html#66c75ffbde4e8b677fdbddf13d088bcd">00027</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EID0        3</span>
+<a name="l00028"></a>00028 <span class="preprocessor"></span>
+<a name="l00029"></a><a class="code" href="mcp2515__defs_8h.html#c1d2c859504db3de132548f32b4f4e5e">00029</a> <span class="preprocessor">#define MCP_TXB_EXIDE_M     0x08    </span><span class="comment">/* In TXBnSIDL */</span>
+<a name="l00030"></a><a class="code" href="mcp2515__defs_8h.html#630282e14cd74d1c2785df85585e2592">00030</a> <span class="preprocessor">#define MCP_DLC_MASK        0x0F    </span><span class="comment">/* 4 LSBits */</span>
+<a name="l00031"></a><a class="code" href="mcp2515__defs_8h.html#446f8a40b075ae3d1277cba6628d9d54">00031</a> <span class="preprocessor">#define MCP_RTR_MASK        0x40    </span><span class="comment">/* (1&lt;&lt;6) Bit 6 */</span>
+<a name="l00032"></a>00032 
+<a name="l00033"></a><a class="code" href="mcp2515__defs_8h.html#12561a183e93aa0207ef353517bf2614">00033</a> <span class="preprocessor">#define MCP_RXB_RX_ANY      0x60</span>
+<a name="l00034"></a><a class="code" href="mcp2515__defs_8h.html#2f18687a5ae7de0ccd920091f6f689f5">00034</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB_RX_EXT      0x40</span>
+<a name="l00035"></a><a class="code" href="mcp2515__defs_8h.html#00e3a0df5be34b1604196257cd006b12">00035</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB_RX_STD      0x20</span>
+<a name="l00036"></a><a class="code" href="mcp2515__defs_8h.html#4ed3076511142d0b372f7a3dce0edead">00036</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB_RX_STDEXT   0x00</span>
+<a name="l00037"></a><a class="code" href="mcp2515__defs_8h.html#616f2c08db5827313e5111cf9565676d">00037</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB_RX_MASK     0x60</span>
+<a name="l00038"></a><a class="code" href="mcp2515__defs_8h.html#5c2f5d36953ddbc06a43f77b43d93912">00038</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB_BUKT_MASK   (1&lt;&lt;2)</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span>
+<a name="l00040"></a>00040 <span class="comment">/*</span>
+<a name="l00041"></a>00041 <span class="comment">** Bits in the TXBnCTRL registers.</span>
+<a name="l00042"></a>00042 <span class="comment">*/</span>
+<a name="l00043"></a><a class="code" href="mcp2515__defs_8h.html#e7f95f3f85a175ea45062de90b8ccc4f">00043</a> <span class="preprocessor">#define MCP_TXB_TXBUFE_M    0x80</span>
+<a name="l00044"></a><a class="code" href="mcp2515__defs_8h.html#5bcfb7682407394a460dc4b9ad0b44c0">00044</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB_ABTF_M      0x40</span>
+<a name="l00045"></a><a class="code" href="mcp2515__defs_8h.html#31be6764ba472392b730b9e5d8d3c853">00045</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB_MLOA_M      0x20</span>
+<a name="l00046"></a><a class="code" href="mcp2515__defs_8h.html#7d7ebf6415cef170f111573ef59d89dd">00046</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB_TXERR_M     0x10</span>
+<a name="l00047"></a><a class="code" href="mcp2515__defs_8h.html#cd9c8c8f108353829207f034b618a40e">00047</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB_TXREQ_M     0x08</span>
+<a name="l00048"></a><a class="code" href="mcp2515__defs_8h.html#1a46319b2abb5799ecff6c242c9c704e">00048</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB_TXIE_M      0x04</span>
+<a name="l00049"></a><a class="code" href="mcp2515__defs_8h.html#d25d0a0a423e1f6938ea3e7516101132">00049</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB_TXP10_M     0x03</span>
+<a name="l00050"></a>00050 <span class="preprocessor"></span>
+<a name="l00051"></a><a class="code" href="mcp2515__defs_8h.html#3532deb282aa913b554fcecda1583a68">00051</a> <span class="preprocessor">#define MCP_TXB_RTR_M       0x40    // In TXBnDLC</span>
+<a name="l00052"></a><a class="code" href="mcp2515__defs_8h.html#614bf5a03be4e6201bd287d92f83b89e">00052</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB_IDE_M       0x08    // In RXBnSIDL</span>
+<a name="l00053"></a><a class="code" href="mcp2515__defs_8h.html#1a9ca52d9a7e933b24cd56325228a51a">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB_RTR_M       0x40    // In RXBnDLC</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span>
+<a name="l00055"></a><a class="code" href="mcp2515__defs_8h.html#3c9d49cd1ceddbabbe2d0c0847352675">00055</a> <span class="preprocessor">#define MCP_STAT_RXIF_MASK   (0x03)</span>
+<a name="l00056"></a><a class="code" href="mcp2515__defs_8h.html#43377642fe1721e1fc886ac5ab5da2d8">00056</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_STAT_RX0IF (1&lt;&lt;0)</span>
+<a name="l00057"></a><a class="code" href="mcp2515__defs_8h.html#4b4ab63d7a1081b103cfde05162c9a31">00057</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_STAT_RX1IF (1&lt;&lt;1)</span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span>
+<a name="l00059"></a><a class="code" href="mcp2515__defs_8h.html#523ab39e2acfad157ffc9bfff14ca980">00059</a> <span class="preprocessor">#define MCP_EFLG_RX1OVR (1&lt;&lt;7)</span>
+<a name="l00060"></a><a class="code" href="mcp2515__defs_8h.html#bbc882c0fabdb402921aea4ce7c9954d">00060</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG_RX0OVR (1&lt;&lt;6)</span>
+<a name="l00061"></a><a class="code" href="mcp2515__defs_8h.html#c073daeb7b5e21daa8c88cee36fc0237">00061</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG_TXBO   (1&lt;&lt;5)</span>
+<a name="l00062"></a><a class="code" href="mcp2515__defs_8h.html#47f73eb0471464402400343a6739606b">00062</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG_TXEP   (1&lt;&lt;4)</span>
+<a name="l00063"></a><a class="code" href="mcp2515__defs_8h.html#9d9f6af20e45bb753b94c6359cb89881">00063</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG_RXEP   (1&lt;&lt;3)</span>
+<a name="l00064"></a><a class="code" href="mcp2515__defs_8h.html#305f05174073bd0907c4f1fac9799cf0">00064</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG_TXWAR  (1&lt;&lt;2)</span>
+<a name="l00065"></a><a class="code" href="mcp2515__defs_8h.html#38c03cd84f1a2181fc7d20a8347701f6">00065</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG_RXWAR  (1&lt;&lt;1)</span>
+<a name="l00066"></a><a class="code" href="mcp2515__defs_8h.html#169b388eed0b45a7d16e2ce72268b4a3">00066</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG_EWARN  (1&lt;&lt;0)</span>
+<a name="l00067"></a><a class="code" href="mcp2515__defs_8h.html#955c11c53f26126aea5a355013e1d72d">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG_ERRORMASK  (0xF8) </span><span class="comment">/* 5 MS-Bits */</span>
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 <span class="comment">// End mt</span>
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <span class="comment">// Define MCP2515 register addresses</span>
+<a name="l00073"></a>00073 
+<a name="l00074"></a><a class="code" href="mcp2515__defs_8h.html#e421a063d5c9a67484389eb3eaebebfd">00074</a> <span class="preprocessor">#define MCP_RXF0SIDH    0x00</span>
+<a name="l00075"></a><a class="code" href="mcp2515__defs_8h.html#9c93381116e954e7a310e2dbbd2dbc4e">00075</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF0SIDL    0x01</span>
+<a name="l00076"></a><a class="code" href="mcp2515__defs_8h.html#1ec986ef1512da764c3394f50522b16b">00076</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF0EID8    0x02</span>
+<a name="l00077"></a><a class="code" href="mcp2515__defs_8h.html#3de3114c44a811cbaabf1861ba55a690">00077</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF0EID0    0x03</span>
+<a name="l00078"></a><a class="code" href="mcp2515__defs_8h.html#0e86a1817cd0b31a287b150dd322f972">00078</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF1SIDH    0x04</span>
+<a name="l00079"></a><a class="code" href="mcp2515__defs_8h.html#b57c15509135349cfac67fd74071cf01">00079</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF1SIDL    0x05</span>
+<a name="l00080"></a><a class="code" href="mcp2515__defs_8h.html#ecfcc2d9cddf17106316db150ac56f82">00080</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF1EID8    0x06</span>
+<a name="l00081"></a><a class="code" href="mcp2515__defs_8h.html#00edc9ebc006d15149797e48b82949c6">00081</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF1EID0    0x07</span>
+<a name="l00082"></a><a class="code" href="mcp2515__defs_8h.html#2961fd5700a7ae397d71911f328799e3">00082</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF2SIDH    0x08</span>
+<a name="l00083"></a><a class="code" href="mcp2515__defs_8h.html#7fc1958385a3995ca062fba4ff14cb41">00083</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF2SIDL    0x09</span>
+<a name="l00084"></a><a class="code" href="mcp2515__defs_8h.html#31643cf05e789b655d0bf66c100fc5ae">00084</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF2EID8    0x0A</span>
+<a name="l00085"></a><a class="code" href="mcp2515__defs_8h.html#d9666d49e084c975e49d1f9f7c3df20a">00085</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF2EID0    0x0B</span>
+<a name="l00086"></a><a class="code" href="mcp2515__defs_8h.html#1a470d80ae3644bf02f2cd4a7bb6aa39">00086</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_CANSTAT     0x0E</span>
+<a name="l00087"></a><a class="code" href="mcp2515__defs_8h.html#25864642b445cbfbd85f2a1a22947558">00087</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_CANCTRL     0x0F</span>
+<a name="l00088"></a><a class="code" href="mcp2515__defs_8h.html#21d7a29b957697c7d35f7a6a8ab6fba7">00088</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF3SIDH    0x10</span>
+<a name="l00089"></a><a class="code" href="mcp2515__defs_8h.html#71d3d35f05bf08e68523a9efc61cfbfc">00089</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF3SIDL    0x11</span>
+<a name="l00090"></a><a class="code" href="mcp2515__defs_8h.html#ec6f10e1f16aa75cf9a2c45cbf072c0c">00090</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF3EID8    0x12</span>
+<a name="l00091"></a><a class="code" href="mcp2515__defs_8h.html#e6d1393bf6ade012e9de52ce3f781cc0">00091</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF3EID0    0x13</span>
+<a name="l00092"></a><a class="code" href="mcp2515__defs_8h.html#870788013a5eb433261fb4bbe755b798">00092</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF4SIDH    0x14</span>
+<a name="l00093"></a><a class="code" href="mcp2515__defs_8h.html#26ea2d067a97a328bdb355f5a1f9bcae">00093</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF4SIDL    0x15</span>
+<a name="l00094"></a><a class="code" href="mcp2515__defs_8h.html#3b8889cb0efb5374525dc60f8faa6e35">00094</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF4EID8    0x16</span>
+<a name="l00095"></a><a class="code" href="mcp2515__defs_8h.html#61e6e6a2b3c20e8d900bcb628854a404">00095</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF4EID0    0x17</span>
+<a name="l00096"></a><a class="code" href="mcp2515__defs_8h.html#c7bc37d5b6536d6c4c15d8a36483fe79">00096</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF5SIDH    0x18</span>
+<a name="l00097"></a><a class="code" href="mcp2515__defs_8h.html#d4328ca7028ab38ac270f8547fb59582">00097</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF5SIDL    0x19</span>
+<a name="l00098"></a><a class="code" href="mcp2515__defs_8h.html#c44d4ade53dbe90f58d28d54f3ea4aa0">00098</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF5EID8    0x1A</span>
+<a name="l00099"></a><a class="code" href="mcp2515__defs_8h.html#0dee7fada196f7183e8f709df24e0bc4">00099</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXF5EID0    0x1B</span>
+<a name="l00100"></a><a class="code" href="mcp2515__defs_8h.html#408a3bfd90d57612646979a8b69497c4">00100</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TEC         0x1C</span>
+<a name="l00101"></a><a class="code" href="mcp2515__defs_8h.html#6f032cfd514ddf69f0bc8424cf924c4a">00101</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_REC         0x1D</span>
+<a name="l00102"></a><a class="code" href="mcp2515__defs_8h.html#74a0dc603b68c2ecbb63c3ed29010e17">00102</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXM0SIDH    0x20</span>
+<a name="l00103"></a><a class="code" href="mcp2515__defs_8h.html#cff5cba98baa23236a302a5b678d2899">00103</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXM0SIDL    0x21</span>
+<a name="l00104"></a><a class="code" href="mcp2515__defs_8h.html#0b72079ef3123f9384f8e8767c381086">00104</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXM0EID8    0x22</span>
+<a name="l00105"></a><a class="code" href="mcp2515__defs_8h.html#85951b834260f01b30915e446542d3ef">00105</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXM0EID0    0x23</span>
+<a name="l00106"></a><a class="code" href="mcp2515__defs_8h.html#f33255d20e7adbb274843351676d15bd">00106</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXM1SIDH    0x24</span>
+<a name="l00107"></a><a class="code" href="mcp2515__defs_8h.html#bc4c9f616f34a1adef4dc2526ffeb95b">00107</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXM1SIDL    0x25</span>
+<a name="l00108"></a><a class="code" href="mcp2515__defs_8h.html#ac7b0eb43bfd43104e1876e9d75339b6">00108</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXM1EID8    0x26</span>
+<a name="l00109"></a><a class="code" href="mcp2515__defs_8h.html#e384be8c5a58d1425449b1764ba3fdea">00109</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXM1EID0    0x27</span>
+<a name="l00110"></a><a class="code" href="mcp2515__defs_8h.html#d2e13220f9c51ccd5efda5d3c19761b8">00110</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_CNF3        0x28</span>
+<a name="l00111"></a><a class="code" href="mcp2515__defs_8h.html#2a22ce749e287690e3d85514e2c7cb57">00111</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_CNF2        0x29</span>
+<a name="l00112"></a><a class="code" href="mcp2515__defs_8h.html#0baef095a5a2997db4c75831e55e8e96">00112</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_CNF1        0x2A</span>
+<a name="l00113"></a><a class="code" href="mcp2515__defs_8h.html#778de33d21ab2eb875533a31a2e8ec69">00113</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_CANINTE     0x2B</span>
+<a name="l00114"></a><a class="code" href="mcp2515__defs_8h.html#e82ca28239a27c2f8c4871e654480ee3">00114</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_CANINTF     0x2C</span>
+<a name="l00115"></a><a class="code" href="mcp2515__defs_8h.html#1695d6e956775335641f7f600439919c">00115</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_EFLG        0x2D</span>
+<a name="l00116"></a><a class="code" href="mcp2515__defs_8h.html#8141153ac7a7a40b71f49a3e029c33ac">00116</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB0CTRL    0x30</span>
+<a name="l00117"></a><a class="code" href="mcp2515__defs_8h.html#bc7ef66a386f13da6f893ea2f951693f">00117</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB1CTRL    0x40</span>
+<a name="l00118"></a><a class="code" href="mcp2515__defs_8h.html#c43fb5cf36199d6cd0731d58a6f498c6">00118</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TXB2CTRL    0x50</span>
+<a name="l00119"></a><a class="code" href="mcp2515__defs_8h.html#61b3cd8d6c29ea6abe1db7c566f1d3d0">00119</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB0CTRL    0x60</span>
+<a name="l00120"></a><a class="code" href="mcp2515__defs_8h.html#d6151dfa9b6fee9b65db5bb70f41d4a1">00120</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB0SIDH    0x61</span>
+<a name="l00121"></a><a class="code" href="mcp2515__defs_8h.html#0715576ae1bb6db08da6699fed69b67b">00121</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB1CTRL    0x70</span>
+<a name="l00122"></a><a class="code" href="mcp2515__defs_8h.html#f4bddbf3d95eb41f4217b43c0da67391">00122</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RXB1SIDH    0x71</span>
+<a name="l00123"></a>00123 <span class="preprocessor"></span>
+<a name="l00124"></a>00124 
+<a name="l00125"></a><a class="code" href="mcp2515__defs_8h.html#816cbe8c97b2c24a44425bad397348b9">00125</a> <span class="preprocessor">#define MCP_TX_INT      0x1C        // Enable all transmit interrupts</span>
+<a name="l00126"></a><a class="code" href="mcp2515__defs_8h.html#7b02ec9eead23e76447f5842404f5af7">00126</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TX01_INT    0x0C        // Enable TXB0 and TXB1 interrupts</span>
+<a name="l00127"></a><a class="code" href="mcp2515__defs_8h.html#7b3120302282594f99b9d8b3ff4bd675">00127</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RX_INT      0x03        // Enable receive interrupts</span>
+<a name="l00128"></a><a class="code" href="mcp2515__defs_8h.html#624142fcbb5afc5f20a28118cb4c0b09">00128</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_NO_INT      0x00        // Disable all interrupts</span>
+<a name="l00129"></a>00129 <span class="preprocessor"></span>
+<a name="l00130"></a><a class="code" href="mcp2515__defs_8h.html#b23e4c7ad318b4c22601f710cbdacbaf">00130</a> <span class="preprocessor">#define MCP_TX01_MASK   0x14</span>
+<a name="l00131"></a><a class="code" href="mcp2515__defs_8h.html#495863adad70a6e84ef9aaffc2158f45">00131</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_TX_MASK     0x54</span>
+<a name="l00132"></a>00132 <span class="preprocessor"></span>
+<a name="l00133"></a>00133 <span class="comment">// Define SPI Instruction Set</span>
+<a name="l00134"></a>00134 
+<a name="l00135"></a><a class="code" href="mcp2515__defs_8h.html#a144564452e7a678d00d9727ce35f82f">00135</a> <span class="preprocessor">#define MCP_WRITE       0x02</span>
+<a name="l00136"></a>00136 <span class="preprocessor"></span>
+<a name="l00137"></a><a class="code" href="mcp2515__defs_8h.html#1d9ce2ac1c72654e113298fc1307102a">00137</a> <span class="preprocessor">#define MCP_READ        0x03</span>
+<a name="l00138"></a>00138 <span class="preprocessor"></span>
+<a name="l00139"></a><a class="code" href="mcp2515__defs_8h.html#973305a49ffc6eed476689b0a8dd69e6">00139</a> <span class="preprocessor">#define MCP_BITMOD      0x05</span>
+<a name="l00140"></a>00140 <span class="preprocessor"></span>
+<a name="l00141"></a><a class="code" href="mcp2515__defs_8h.html#22f24df177e60164eed1399565483d29">00141</a> <span class="preprocessor">#define MCP_LOAD_TX0    0x40</span>
+<a name="l00142"></a><a class="code" href="mcp2515__defs_8h.html#39edf0ba0b6b50d37c284a01fc06c234">00142</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_LOAD_TX1    0x42</span>
+<a name="l00143"></a><a class="code" href="mcp2515__defs_8h.html#0b09fb52864d8b5035fd0fae0fbebb06">00143</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_LOAD_TX2    0x44</span>
+<a name="l00144"></a>00144 <span class="preprocessor"></span>
+<a name="l00145"></a><a class="code" href="mcp2515__defs_8h.html#d81495d052d65e3a97a4c2688119ac0e">00145</a> <span class="preprocessor">#define MCP_RTS_TX0     0x81</span>
+<a name="l00146"></a><a class="code" href="mcp2515__defs_8h.html#6cc3f921cb8d7cd9323909466ad4307e">00146</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RTS_TX1     0x82</span>
+<a name="l00147"></a><a class="code" href="mcp2515__defs_8h.html#0fa9efa8755c0ab500fc2e2da56126d0">00147</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RTS_TX2     0x84</span>
+<a name="l00148"></a><a class="code" href="mcp2515__defs_8h.html#de85afe7da126728c581e32c1fb9fb5b">00148</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_RTS_ALL     0x87</span>
+<a name="l00149"></a>00149 <span class="preprocessor"></span>
+<a name="l00150"></a><a class="code" href="mcp2515__defs_8h.html#6d36244d972ea4161783204b65ff75e6">00150</a> <span class="preprocessor">#define MCP_READ_RX0    0x90</span>
+<a name="l00151"></a><a class="code" href="mcp2515__defs_8h.html#3e686dbe40426f42d3d8553171294458">00151</a> <span class="preprocessor"></span><span class="preprocessor">#define MCP_READ_RX1    0x94</span>
+<a name="l00152"></a>00152 <span class="preprocessor"></span>
+<a name="l00153"></a><a class="code" href="mcp2515__defs_8h.html#399014e8231cd5d4acd4bad7a8553bb7">00153</a> <span class="preprocessor">#define MCP_READ_STATUS 0xA0</span>
+<a name="l00154"></a>00154 <span class="preprocessor"></span>
+<a name="l00155"></a><a class="code" href="mcp2515__defs_8h.html#6e47ae0eaa03f32a201ac45f4a755d73">00155</a> <span class="preprocessor">#define MCP_RX_STATUS   0xB0</span>
+<a name="l00156"></a>00156 <span class="preprocessor"></span>
+<a name="l00157"></a><a class="code" href="mcp2515__defs_8h.html#8538419d98eecb32d7b8a6e07e8a256f">00157</a> <span class="preprocessor">#define MCP_RESET       0xC0</span>
+<a name="l00158"></a>00158 <span class="preprocessor"></span>
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160 <span class="comment">// CANCTRL Register Values</span>
+<a name="l00161"></a>00161 
+<a name="l00162"></a><a class="code" href="mcp2515__defs_8h.html#199e55c829920c767a3f1f42a6a7c1d8">00162</a> <span class="preprocessor">#define MODE_NORMAL     0x00</span>
+<a name="l00163"></a><a class="code" href="mcp2515__defs_8h.html#2d957317ff490fa73cd4377d5ebf0b0d">00163</a> <span class="preprocessor"></span><span class="preprocessor">#define MODE_SLEEP      0x20</span>
+<a name="l00164"></a><a class="code" href="mcp2515__defs_8h.html#f45bc9b0ed8edccc1c6c237d83d8ec8d">00164</a> <span class="preprocessor"></span><span class="preprocessor">#define MODE_LOOPBACK   0x40</span>
+<a name="l00165"></a><a class="code" href="mcp2515__defs_8h.html#69067e4f8f3aad92757c47fa9a1edce4">00165</a> <span class="preprocessor"></span><span class="preprocessor">#define MODE_LISTENONLY 0x60</span>
+<a name="l00166"></a><a class="code" href="mcp2515__defs_8h.html#5552a5de9b59914458ab99d568bf2763">00166</a> <span class="preprocessor"></span><span class="preprocessor">#define MODE_CONFIG     0x80</span>
+<a name="l00167"></a><a class="code" href="mcp2515__defs_8h.html#6cba238eaa939c8747d20c8685236ee0">00167</a> <span class="preprocessor"></span><span class="preprocessor">#define MODE_POWERUP    0xE0</span>
+<a name="l00168"></a><a class="code" href="mcp2515__defs_8h.html#ba2b187200eec47c5fc32655e296783d">00168</a> <span class="preprocessor"></span><span class="preprocessor">#define MODE_MASK       0xE0</span>
+<a name="l00169"></a><a class="code" href="mcp2515__defs_8h.html#625b12ba872bf9561838b72e1f1d133f">00169</a> <span class="preprocessor"></span><span class="preprocessor">#define ABORT_TX        0x10</span>
+<a name="l00170"></a><a class="code" href="mcp2515__defs_8h.html#81abe0ed7526093905ddcf168243f233">00170</a> <span class="preprocessor"></span><span class="preprocessor">#define MODE_ONESHOT    0x08</span>
+<a name="l00171"></a><a class="code" href="mcp2515__defs_8h.html#7e4130de16e7b1007a40ca21e2d9ded0">00171</a> <span class="preprocessor"></span><span class="preprocessor">#define CLKOUT_ENABLE   0x04</span>
+<a name="l00172"></a><a class="code" href="mcp2515__defs_8h.html#867e5061e767c13c80906490060a8f3a">00172</a> <span class="preprocessor"></span><span class="preprocessor">#define CLKOUT_DISABLE  0x00</span>
+<a name="l00173"></a><a class="code" href="mcp2515__defs_8h.html#1b3bf6482ad57ae80b7c2106fa0449cf">00173</a> <span class="preprocessor"></span><span class="preprocessor">#define CLKOUT_PS1      0x00</span>
+<a name="l00174"></a><a class="code" href="mcp2515__defs_8h.html#13e70f5589f1f6d303775d88249b32a7">00174</a> <span class="preprocessor"></span><span class="preprocessor">#define CLKOUT_PS2      0x01</span>
+<a name="l00175"></a><a class="code" href="mcp2515__defs_8h.html#bc1f0cc2c03c625d9af22fe7c55482d4">00175</a> <span class="preprocessor"></span><span class="preprocessor">#define CLKOUT_PS4      0x02</span>
+<a name="l00176"></a><a class="code" href="mcp2515__defs_8h.html#dac6f69cc58f518aa7a146e4b7056bab">00176</a> <span class="preprocessor"></span><span class="preprocessor">#define CLKOUT_PS8      0x03</span>
+<a name="l00177"></a>00177 <span class="preprocessor"></span>
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

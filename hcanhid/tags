@@ -1,0 +1,38 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+CANFrame	frame.h	/^} CANFrame;$/;"	t
+FRAME_H	frame.h	22;"	d
+UNIX_UART_H	unix_uart.h	22;"	d
+char_available	unix_uart.c	/^int char_available(int uart_fd)$/;"	f
+convert_hexstr2int	main.c	/^uint8_t convert_hexstr2int(char msb, char lsb)$/;"	f
+data	frame.h	/^	uint8_t  data[8];$/;"	m
+device	main.c	/^char device[128];$/;"	v
+fdset	main.c	/^fd_set fdset;$/;"	v
+firstBitsChar	main.c	/^int firstBitsChar = -1;$/;"	v
+frame_to_hcand	main.c	/^CANFrame frame_to_hcand;$/;"	v
+frame_to_hcand_busy	main.c	/^int frame_to_hcand_busy;$/;"	v
+frame_to_hi	main.c	/^CANFrame frame_to_hi;$/;"	v
+frame_to_hi_busy	main.c	/^int frame_to_hi_busy;$/;"	v
+handle_serial_command	main.c	/^void handle_serial_command(int fd, uint8_t command)$/;"	f
+hcand_ip	main.c	/^char hcand_ip[128];$/;"	v
+hexchars	main.c	/^char hexchars[] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d',$/;"	v
+hi_fd	main.c	/^int hi_fd;$/;"	v
+ibuffer	main.c	/^uint8_t ibuffer[64];$/;"	v
+id	frame.h	/^	uint32_t id;$/;"	m
+iindex	main.c	/^uint8_t iindex = 0;$/;"	v
+main	main.c	/^int main(int argc, char ** argv)$/;"	f
+max_fds	main.c	/^int max_fds;$/;"	v
+parse_options	main.c	/^int parse_options(int argc, char ** argv)$/;"	f
+recchar	unix_uart.c	/^char recchar(int uart_fd)$/;"	f
+reset_HI	main.c	/^void reset_HI(int uart_fd)$/;"	f
+send_char_to_HT	main.c	/^void send_char_to_HT(int uart_fd, uint8_t c)$/;"	f
+send_command_to_HT	main.c	/^void send_command_to_HT(int uart_fd, uint8_t command)$/;"	f
+send_frame_to_HI	main.c	/^void send_frame_to_HI(int fd, const CANFrame *frame)$/;"	f
+sendchar	unix_uart.c	/^void sendchar(int uart_fd, char c)$/;"	f
+size	frame.h	/^	uint32_t  size;$/;"	m
+sock_fd	main.c	/^int sock_fd;$/;"	v
+uart_init	unix_uart.c	/^int uart_init(const char *device)$/;"	f

@@ -1,0 +1,275 @@
+                    Inbetriebnahme eines HCAN Netzes
+                    ================================
+
+Einleitung
+----------
+
+Da einige HCAN-Novizen Probleme bei der Inbetriebnahme hatten, wurde dieses
+HowTo geschrieben. Im Prinzip fasst es einige Dinge des Handbuchs zusammen,
+und gibt an manchen Stellen ein paar Tips.
+
+
+Benoetigte Elektronik und Software
+----------------------------------
+
+- Linux-PC mit USB-Host mit einer aktuellen Distribution (im Folgenden
+  beschreiche ich die Einrichtung unter Debian Etch)
+- das HCAN-Hostinterface-v02 (im Folgenden HI genannt), fertig aufgebaut
+- ein USB-Kabel
+- einen Controller-1612 (im Folgenden Controller genannt), fertig aufgebaut
+- ein Labor- oder sonstiges Netzteil, das 24V von sich gibt
+- Einige Kabel, 2 Stueck 120Ohm Abschlusswiderstaende fuer den CAN-Bus
+- Multimeter und ggfls weiteres Messequipment
+- viel viel Geduld (das ist kein Fertig-EIB-vom-Handwerker-installiert :-))
+
+
+Linux-seitige Vorbereitungen
+----------------------------
+
+Zuerst muss eine Entwicklungsumgebung (womit hier keine IDE gemeint ist)
+exisitieren, dazu gehoeren die gcc/g++ Toolchain mit automake,autoconf fuer die
+PC-seitigen Compilierlaeufe und die avr-gcc Toolchain fuer die Atmega's.
+Erstere kann man sich sparen, wenn man die hcan-tools als Debian Paket
+installiert, wovon im Folgenden ausgegangen wird. Desweiteren werden uisp und
+ein passendes Programmierkabel[1] benoetigt. 
+
+- hcan-tools installieren:
+  $ dpkg -i hcan-tools_xxx.deb
+
+- ein Terminal-Programm (minicom oder kermit) installieren:
+  $ apt-get install minicom
+  oder 
+  $ apt-get install ckermit
+  # kein Schreibfehler, das Paket heisst ckermit !
+
+- Bootloader compilieren:
+  $ cd hcanbl32
+  $ make
+  Hierbei sollte kein Fehler auftreten; es liegt nun eine main.hex Datei im
+  Verzeichnis.
+
+- HI Firmware compilieren:
+  $ cd firmware/hostinterface-v02
+  $ make
+  Hierbei sollte kein Fehler auftreten; es liegt nun eine main.hex Datei im
+  Verzeichnis.
+
+- Controller-1612 Firmware compilieren:
+  $ cd firmware/controller-1612
+  $ make
+  Hierbei sollte kein Fehler auftreten; es liegt nun eine main.hex Datei im
+  Verzeichnis.
+
+
+Hardware-seitige Vorbereitungen
+--------------------------------
+
+Das HI wird ueber das USB Kabel an den Linux-Rechner gesteckt. Ergebnis
+pruefen:
+
+  $ lsusb | grep "Future Technology Devices International"
+  Bus 002 Device 002: ID 0403:6001 Future Technology Devices International, 
+  Ltd 8-bit FIFO
+
+Falls lsusb nicht installiert ist, koennen auch mit
+
+  $ cat /proc/bus/usb/devices
+
+die angeschlossenen Geraete angezeigt werden.
+
+Wenn diese oder eine aenliche Zeile im lsusb Output ist, so ist der USB-IC
+FT245 auf dem HI funktionsfaehig. Alternativ kann im dmesg Output nach
+entsprechenden Zeilen gesucht werden.
+
+Wenn zwar in einem der Logfiles (je nach Distribution z.B. in
+/var/log/messages) nur die Meldung auftaucht, dass ein Fullspeed USB Geraet
+gefunden wurde, jedoch keine Meldung erscheint, welches Geraet es denn genau
+ist, so ist vermutlich der FT245 defekt, schlecht verloetet oder sein Quarz
+schwingt nicht - durch die Widerstaende kann der USB Hostcontroller erkennen,
+um welche Geschwindigkeit es sich handelt - weitere Infos bekommt er nur vom
+FT245 - somit erklaert sich das Verhalten.
+
+Die 24V-Spannungsversorgung an den Controller und das HI anschliessen; Ergebnis
+pruefen: Beim Controller-1612 muss nun die kleine LED leuchten, ebenso die
+Power-LED beim HI.
+
+Danach dann den CAN Bus aufbauen: CAN-Hi und CAN-Lo jeweils verbinden, CAN-Hi
+und CAN-Lo am Controller und am Hostinterface jeweils mit einem 120Ohm
+Widerstand verbinden - das ist die Terminierung. 
+
+
+Inbetriebnahme des HI
+---------------------
+
+Zuerst muessen die Fuses gesetzt und die Firmware auf das HI geflashed werden.
+Dies geschieht mit dem Programmierkabel und uisp: Details dazu finden sich im
+Handbuch im Kapitel 7, "Hostinterface".
+
+Achtung: Die Fuses vom HI und von den Controllern unterscheiden sich, weil beim
+HI im Normalfall kein Bootloader verwendet wird - Details zu den Fuses finden
+sich im atmega32 Datenblatt.
+
+Wenn nun die Fuses gesetzt und die Firmware auf das HI geflashed ist, kann der
+Erfolg bisher ueberprueft werden: Da das HI ueber den USB mit hcanhid ein ASCII
+Protokoll spricht, koennen wir nun kermit oder minicom starten und uns wie der
+hcanhid verhalten - bekommen wir Antwort, so laeuft die frisch geflashte
+Firmware.
+
+Senden wir ein 'P' (was fuer Ping steht), so antwortet das HI auch mit 'P'.
+Senden wir ein 'R', so resettet es sich und sendet nach dem Booten ein 'Y8';
+die 8 steht hier fuer den Grund des Resets, in diesem Falle durch Watchdog
+Timeout (so ist die reset-Funktion im HI implementiert).
+
+Hier ein Beispiel einer Kermit-Session (in diesem Fall muss, falls man als User
+keine Rechte auf das device hat, als root gearbeitet werden):
+
+	$ kermit
+	C-Kermit 8.0.211, 10 Apr 2004, for Linux
+	 Copyright (C) 1985, 2004,
+	  Trustees of Columbia University in the City of New York.
+	Type ? or HELP for help.
+	(/home/mah/) C-Kermit>set line /dev/ttyUSB0
+	(/home/mah/) C-Kermit>set carrier-watch off
+	(/home/mah/) C-Kermit>connect
+	Connecting to /dev/ttyUSB0, speed 38400
+	 Escape character: Ctrl-\ (ASCII 28, FS): enabled
+	Type the escape character followed by C to get back,
+	or followed by ? to see other options.
+	----------------------------------------------------
+	PPPY8PPP
+	(Back at grobi.hamsternet)
+	----------------------------------------------------
+	(/home/mah/) C-Kermit>quit
+	Closing /dev/ttyUSB0...OK
+	$
+
+Sollte hier nichts auf 'P' antworten, so sind entweder die Fuses falsch gesetzt
+(d.h. er findet beim Booten den Anfang der Firmware nicht o.ae.), die Firmware
+ist defekt / nicht geflashed o.ae. oder es liegt ganz einfach ein Loetfehler
+vor, so dass der Atmega nicht laeuft (Quarz?) oder nicht mit dem FT245
+kommunizieren kann. Ab hier kann ich nun keine allgemein gueltigen Tips mehr
+geben!
+
+
+Inbetriebnahme der HCAN Tools auf PC
+------------------------------------
+
+Folgende Tools werden benoetigt:
+
+- hcand: ueber ihn kommunizieren alle hcan Tools
+- hcanhid: er transportiert Frames zwischen dem HI und dem hcand hin und her
+- hcanaddressd: er weist telican dynamisch eine Absender-Adresse zu (es
+  kann auch bei jedem Aufruf manuell eine Absender-Adresse gesetzt werden, das
+  ist reine Bequemlichkeit)
+- telican: das Administrationswerkzeug; es kann unter anderem auch 
+  die PC Uhrzeit auf den Bus schreiben
+
+Die Daemons werden in folgender Reihenfolge gestartet:
+
+$ hcand &
+$ hcanhid &
+$ hcanaddressd &
+$ telican --timed &
+
+In einem zweiten Fenster wird nun mit "telican -d" ein Live-Dump der Frames, die
+ueber hcand laufen, gestartet. Hier sieht man immer, was gerade so los ist.
+Nun kann man mit telican ein erstes Experiment machen:
+
+$ telican -p 1023
+
+Es sollten nun 5 Frames im Dump auftauchen:
+
+ 0512 -> 1023 :SFP HMS PING_REQUEST
+ 0512 -> 1023 :SFP HMS PING_REQUEST
+ 0512 -> 1023 :SFP HMS PING_REQUEST
+ 0512 -> 1023 :SFP HMS PING_REQUEST
+ 0512 -> 1023 :SFP HMS PING_REQUEST
+
+Die Absender-Adresse 512 wurde telican vom hcanaddressd zugewiesen. 
+Da noch keiner mit der Adresse 1023 da ist, antwortet niemand :-)
+
+
+Inbetriebnahme des Controllers
+------------------------------
+
+Zuerst muessen die Fuses gesetzt und der Bootloader auf das HI geflashed
+werden.  Dies geschieht mit dem Programmierkabel und uisp: Details dazu finden
+sich im Handbuch im Kapitel 5, "Inbetriebnahme eines Boards"
+
+Sind nun die Fuses gesetzt und der Bootloader geflashed, so versucht dieser
+vergeblich, eine Firmware zu laden. Das erkennt man an den vielen Frames im
+Dump Fenster:
+
+ 1023 -> 0036 :SFP SLS FIRMWARE CRC16 ERROR
+
+Bei einem jungfraeulichen Atmega stehen in allen EEPROM Zellen der Wert 255.
+Daraus folgt, dass er die Adresse 1023 und den Board-Typ 255 hat. Als erstes
+muss das angepasst werden:
+
+$ telican -c 1023
+# (Warnung ueber den unbekannten Typ ignorieren!)
+> set ee 4 4
+4
+> quit
+$
+
+Nun wird die Adresse gesetzt:
+
+$ telican -c 1023
+> set address 300
+> reset
+> quit
+$
+
+Nachdem der Controller geresetted wurde, ist er unter der neuen Adresse
+erreichbar:
+
+$ telican -p 300
+sending ping packets from 512 to 300...
+ [1] 12 msec
+ [2] 14 msec
+ [3] 17 msec
+ [4] 17 msec
+ [5] 17 msec
+$ 
+
+Jetzt wird die Controller-1612 Firmware ueber den CAN Bus geflashed. Dazu wird
+die main.hex-Datei, die zuvor compiliert wurde, benoetigt.
+
+$ telican -c 300 -e "flash main.hex"
+main.hex read; size = 13242 bytes.
+***************************************************************************
+**************************
+> quit
+$ 
+
+Nun sollten keine CRC16 Meldungen mehr auf dem Bus auftauchen, und der
+Controller die Firmware erfolgreich geladen haben. Ergebnis pruefen:
+
+$ telican -c 300
+> show state
+application is active.
+> show system
+Board :         Controllerboard-1612 v01
+MCU :           AVR Atmega32
+Build #:        34
+> show time
+date: 4.10.2007, Donnerstag, 19:45:16
+> show uptime
+34 days, 21:06
+> quit
+$
+
+Herzlichen Glueckwunsch! 
+
+Wer jetzt noch weiter machen will ;-), der kann im Kapitel 3 "Controller-1612"
+ueber die Konfiguration weiterlesen.
+
+
+--------------------------------------------------------------------------------
+
+[1] http://www.iuse.org/UISPKabel.gif (Danke an Guido fuer die nette Graphik!)
+
+Martin Haller, mah AUF iuse PUNKT org
+
+$Id: hcan-netz-inbetriebnahme-howto,v 1.3 2007-10-17 13:39:37 mah Exp $

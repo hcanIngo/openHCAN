@@ -1,0 +1,394 @@
+   1               		.file	"hcan_hms.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__ = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.text
+   9               	.global	canix_SFP_HMS_handler
+  11               	canix_SFP_HMS_handler:
+  12 0000 AEE0      		ldi r26,lo8(14)
+  13 0002 B0E0      		ldi r27,hi8(14)
+  14 0004 E0E0      		ldi r30,lo8(gs(1f))
+  15 0006 F0E0      		ldi r31,hi8(gs(1f))
+  16 0008 0C94 0000 		jmp __prologue_saves__+((18 - 6) * 2)
+  17               	1:
+  18               	/* prologue: function */
+  19               	/* frame size = 14 */
+  20               	/* stack size = 20 */
+  21               	.L__stack_usage = 20
+  22 000c 8C01      		movw r16,r24
+  23 000e 0E94 0000 		call canix_selfaddr
+  24 0012 9A83      		std Y+2,r25
+  25 0014 8983      		std Y+1,r24
+  26 0016 F801      		movw r30,r16
+  27 0018 8081      		ld r24,Z
+  28 001a 9181      		ldd r25,Z+1
+  29 001c 9C83      		std Y+4,r25
+  30 001e 8B83      		std Y+3,r24
+  31 0020 81E0      		ldi r24,lo8(1)
+  32 0022 8D83      		std Y+5,r24
+  33 0024 8F83      		std Y+7,r24
+  34 0026 8781      		ldd r24,Z+7
+  35 0028 90E0      		ldi r25,lo8(0)
+  36 002a 0197      		sbiw r24,1
+  37 002c 8133      		cpi r24,49
+  38 002e 9105      		cpc r25,__zero_reg__
+  39 0030 00F0      		brlo .+2
+  40 0032 00C0      		rjmp .L1
+  41 0034 8050      		subi r24,lo8(-(gs(.L19)))
+  42 0036 9040      		sbci r25,hi8(-(gs(.L19)))
+  43 0038 FC01      		movw r30,r24
+  44 003a 0C94 0000 		jmp __tablejump2__
+  45               		.data
+  46               		.section .progmem.gcc_sw_table, "a", @progbits
+  47               		.p2align 1
+  48               	.L19:
+  49               		.data
+  50               		.section .progmem.gcc_sw_table, "a", @progbits
+  51               		.p2align 1
+  52 0000 0000      		.word gs(.L3)
+  53 0002 0000      		.word gs(.L1)
+  54 0004 0000      		.word gs(.L4)
+  55 0006 0000      		.word gs(.L1)
+  56 0008 0000      		.word gs(.L5)
+  57 000a 0000      		.word gs(.L1)
+  58 000c 0000      		.word gs(.L1)
+  59 000e 0000      		.word gs(.L1)
+  60 0010 0000      		.word gs(.L6)
+  61 0012 0000      		.word gs(.L1)
+  62 0014 0000      		.word gs(.L1)
+  63 0016 0000      		.word gs(.L1)
+  64 0018 0000      		.word gs(.L1)
+  65 001a 0000      		.word gs(.L1)
+  66 001c 0000      		.word gs(.L1)
+  67 001e 0000      		.word gs(.L1)
+  68 0020 0000      		.word gs(.L1)
+  69 0022 0000      		.word gs(.L1)
+  70 0024 0000      		.word gs(.L1)
+  71 0026 0000      		.word gs(.L7)
+  72 0028 0000      		.word gs(.L1)
+  73 002a 0000      		.word gs(.L8)
+  74 002c 0000      		.word gs(.L1)
+  75 002e 0000      		.word gs(.L9)
+  76 0030 0000      		.word gs(.L1)
+  77 0032 0000      		.word gs(.L1)
+  78 0034 0000      		.word gs(.L1)
+  79 0036 0000      		.word gs(.L1)
+  80 0038 0000      		.word gs(.L1)
+  81 003a 0000      		.word gs(.L10)
+  82 003c 0000      		.word gs(.L1)
+  83 003e 0000      		.word gs(.L11)
+  84 0040 0000      		.word gs(.L12)
+  85 0042 0000      		.word gs(.L1)
+  86 0044 0000      		.word gs(.L13)
+  87 0046 0000      		.word gs(.L1)
+  88 0048 0000      		.word gs(.L1)
+  89 004a 0000      		.word gs(.L1)
+  90 004c 0000      		.word gs(.L1)
+  91 004e 0000      		.word gs(.L1)
+  92 0050 0000      		.word gs(.L14)
+  93 0052 0000      		.word gs(.L1)
+  94 0054 0000      		.word gs(.L15)
+  95 0056 0000      		.word gs(.L1)
+  96 0058 0000      		.word gs(.L16)
+  97 005a 0000      		.word gs(.L1)
+  98 005c 0000      		.word gs(.L17)
+  99 005e 0000      		.word gs(.L1)
+ 100 0060 0000      		.word gs(.L18)
+ 101               		.text
+ 102               	.L3:
+ 103 003e 82E0      		ldi r24,lo8(2)
+ 104 0040 8887      		std Y+8,r24
+ 105 0042 00C0      		rjmp .L22
+ 106               	.L4:
+ 107 0044 84E0      		ldi r24,lo8(4)
+ 108 0046 8887      		std Y+8,r24
+ 109 0048 82E0      		ldi r24,lo8(2)
+ 110 004a 00C0      		rjmp .L25
+ 111               	.L5:
+ 112 004c 0E94 0000 		call canix_reset
+ 113 0050 00C0      		rjmp .L1
+ 114               	.L6:
+ 115 0052 8AE0      		ldi r24,lo8(10)
+ 116 0054 8887      		std Y+8,r24
+ 117 0056 82E0      		ldi r24,lo8(2)
+ 118 0058 8987      		std Y+9,r24
+ 119 005a 84E0      		ldi r24,lo8(4)
+ 120 005c 90E0      		ldi r25,hi8(4)
+ 121 005e 0E94 0000 		call __eerd_byte_m644
+ 122 0062 00C0      		rjmp .L24
+ 123               	.L7:
+ 124 0064 F801      		movw r30,r16
+ 125 0066 9185      		ldd r25,Z+9
+ 126 0068 80E0      		ldi r24,lo8(0)
+ 127 006a E084      		ldd r14,Z+8
+ 128 006c FF24      		clr r15
+ 129 006e E82A      		or r14,r24
+ 130 0070 F92A      		or r15,r25
+ 131 0072 C701      		movw r24,r14
+ 132 0074 0E94 0000 		call __eerd_byte_m644
+ 133 0078 F801      		movw r30,r16
+ 134 007a 6285      		ldd r22,Z+10
+ 135 007c 8617      		cp r24,r22
+ 136 007e 01F0      		breq .L20
+ 137 0080 C701      		movw r24,r14
+ 138 0082 0E94 0000 		call __eewr_byte_m644
+ 139               	.L20:
+ 140 0086 85E1      		ldi r24,lo8(21)
+ 141 0088 8887      		std Y+8,r24
+ 142 008a 82E0      		ldi r24,lo8(2)
+ 143 008c 00C0      		rjmp .L22
+ 144               	.L8:
+ 145 008e 87E1      		ldi r24,lo8(23)
+ 146 0090 8887      		std Y+8,r24
+ 147 0092 F801      		movw r30,r16
+ 148 0094 3185      		ldd r19,Z+9
+ 149 0096 20E0      		ldi r18,lo8(0)
+ 150 0098 8085      		ldd r24,Z+8
+ 151 009a 90E0      		ldi r25,lo8(0)
+ 152 009c 822B      		or r24,r18
+ 153 009e 932B      		or r25,r19
+ 154 00a0 0E94 0000 		call __eerd_byte_m644
+ 155               	.L25:
+ 156 00a4 8987      		std Y+9,r24
+ 157 00a6 83E0      		ldi r24,lo8(3)
+ 158 00a8 00C0      		rjmp .L22
+ 159               	.L9:
+ 160 00aa F801      		movw r30,r16
+ 161 00ac 9185      		ldd r25,Z+9
+ 162 00ae 80E0      		ldi r24,lo8(0)
+ 163 00b0 0085      		ldd r16,Z+8
+ 164 00b2 10E0      		ldi r17,lo8(0)
+ 165 00b4 082B      		or r16,r24
+ 166 00b6 192B      		or r17,r25
+ 167 00b8 89E1      		ldi r24,lo8(25)
+ 168 00ba 8887      		std Y+8,r24
+ 169 00bc C801      		movw r24,r16
+ 170 00be 0E94 0000 		call __eerd_byte_m644
+ 171 00c2 8987      		std Y+9,r24
+ 172 00c4 C801      		movw r24,r16
+ 173 00c6 0196      		adiw r24,1
+ 174 00c8 0E94 0000 		call __eerd_byte_m644
+ 175 00cc 8A87      		std Y+10,r24
+ 176 00ce C801      		movw r24,r16
+ 177 00d0 0296      		adiw r24,2
+ 178 00d2 0E94 0000 		call __eerd_byte_m644
+ 179 00d6 8B87      		std Y+11,r24
+ 180 00d8 C801      		movw r24,r16
+ 181 00da 0396      		adiw r24,3
+ 182 00dc 0E94 0000 		call __eerd_byte_m644
+ 183 00e0 8C87      		std Y+12,r24
+ 184 00e2 C801      		movw r24,r16
+ 185 00e4 0496      		adiw r24,4
+ 186 00e6 0E94 0000 		call __eerd_byte_m644
+ 187 00ea 8D87      		std Y+13,r24
+ 188 00ec C801      		movw r24,r16
+ 189 00ee 0596      		adiw r24,5
+ 190 00f0 0E94 0000 		call __eerd_byte_m644
+ 191 00f4 8E87      		std Y+14,r24
+ 192 00f6 88E0      		ldi r24,lo8(8)
+ 193 00f8 00C0      		rjmp .L22
+ 194               	.L10:
+ 195 00fa 86E0      		ldi r24,lo8(6)
+ 196 00fc 8E83      		std Y+6,r24
+ 197 00fe 8FE1      		ldi r24,lo8(31)
+ 198 0100 8887      		std Y+8,r24
+ 199 0102 8091 0000 		lds r24,canix_rtc_clock
+ 200 0106 9091 0000 		lds r25,canix_rtc_clock+1
+ 201 010a A091 0000 		lds r26,canix_rtc_clock+2
+ 202 010e B091 0000 		lds r27,canix_rtc_clock+3
+ 203 0112 B987      		std Y+9,r27
+ 204 0114 8091 0000 		lds r24,canix_rtc_clock
+ 205 0118 9091 0000 		lds r25,canix_rtc_clock+1
+ 206 011c A091 0000 		lds r26,canix_rtc_clock+2
+ 207 0120 B091 0000 		lds r27,canix_rtc_clock+3
+ 208 0124 AA87      		std Y+10,r26
+ 209 0126 8091 0000 		lds r24,canix_rtc_clock
+ 210 012a 9091 0000 		lds r25,canix_rtc_clock+1
+ 211 012e A091 0000 		lds r26,canix_rtc_clock+2
+ 212 0132 B091 0000 		lds r27,canix_rtc_clock+3
+ 213 0136 9B87      		std Y+11,r25
+ 214 0138 8091 0000 		lds r24,canix_rtc_clock
+ 215 013c 9091 0000 		lds r25,canix_rtc_clock+1
+ 216 0140 A091 0000 		lds r26,canix_rtc_clock+2
+ 217 0144 B091 0000 		lds r27,canix_rtc_clock+3
+ 218 0148 8C87      		std Y+12,r24
+ 219 014a 00C0      		rjmp .L23
+ 220               	.L11:
+ 221 014c F801      		movw r30,r16
+ 222 014e 8085      		ldd r24,Z+8
+ 223 0150 0E94 0000 		call canix_set_syslog_level
+ 224 0154 85E0      		ldi r24,lo8(5)
+ 225 0156 90E0      		ldi r25,hi8(5)
+ 226 0158 F801      		movw r30,r16
+ 227 015a 6085      		ldd r22,Z+8
+ 228 015c 0E94 0000 		call __eewr_byte_m644
+ 229 0160 00C0      		rjmp .L1
+ 230               	.L12:
+ 231 0162 82E2      		ldi r24,lo8(34)
+ 232 0164 8887      		std Y+8,r24
+ 233 0166 1986      		std Y+9,__zero_reg__
+ 234 0168 8DE3      		ldi r24,lo8(61)
+ 235 016a 00C0      		rjmp .L24
+ 236               	.L13:
+ 237 016c 0E94 0000 		call can_error_counters
+ 238 0170 24E2      		ldi r18,lo8(36)
+ 239 0172 2887      		std Y+8,r18
+ 240 0174 9987      		std Y+9,r25
+ 241               	.L24:
+ 242 0176 8A87      		std Y+10,r24
+ 243 0178 84E0      		ldi r24,lo8(4)
+ 244 017a 00C0      		rjmp .L22
+ 245               	.L14:
+ 246 017c 8AE2      		ldi r24,lo8(42)
+ 247 017e 8887      		std Y+8,r24
+ 248 0180 8091 0000 		lds r24,canix_rx_received
+ 249 0184 9091 0000 		lds r25,canix_rx_received+1
+ 250 0188 A091 0000 		lds r26,canix_rx_received+2
+ 251 018c B091 0000 		lds r27,canix_rx_received+3
+ 252 0190 B987      		std Y+9,r27
+ 253 0192 8091 0000 		lds r24,canix_rx_received
+ 254 0196 9091 0000 		lds r25,canix_rx_received+1
+ 255 019a A091 0000 		lds r26,canix_rx_received+2
+ 256 019e B091 0000 		lds r27,canix_rx_received+3
+ 257 01a2 AA87      		std Y+10,r26
+ 258 01a4 8091 0000 		lds r24,canix_rx_received
+ 259 01a8 9091 0000 		lds r25,canix_rx_received+1
+ 260 01ac A091 0000 		lds r26,canix_rx_received+2
+ 261 01b0 B091 0000 		lds r27,canix_rx_received+3
+ 262 01b4 9B87      		std Y+11,r25
+ 263 01b6 8091 0000 		lds r24,canix_rx_received
+ 264 01ba 9091 0000 		lds r25,canix_rx_received+1
+ 265 01be A091 0000 		lds r26,canix_rx_received+2
+ 266 01c2 B091 0000 		lds r27,canix_rx_received+3
+ 267 01c6 00C0      		rjmp .L21
+ 268               	.L15:
+ 269 01c8 8CE2      		ldi r24,lo8(44)
+ 270 01ca 8887      		std Y+8,r24
+ 271 01cc 8091 0000 		lds r24,canix_rx_lost
+ 272 01d0 9091 0000 		lds r25,canix_rx_lost+1
+ 273 01d4 A091 0000 		lds r26,canix_rx_lost+2
+ 274 01d8 B091 0000 		lds r27,canix_rx_lost+3
+ 275 01dc B987      		std Y+9,r27
+ 276 01de 8091 0000 		lds r24,canix_rx_lost
+ 277 01e2 9091 0000 		lds r25,canix_rx_lost+1
+ 278 01e6 A091 0000 		lds r26,canix_rx_lost+2
+ 279 01ea B091 0000 		lds r27,canix_rx_lost+3
+ 280 01ee AA87      		std Y+10,r26
+ 281 01f0 8091 0000 		lds r24,canix_rx_lost
+ 282 01f4 9091 0000 		lds r25,canix_rx_lost+1
+ 283 01f8 A091 0000 		lds r26,canix_rx_lost+2
+ 284 01fc B091 0000 		lds r27,canix_rx_lost+3
+ 285 0200 9B87      		std Y+11,r25
+ 286 0202 8091 0000 		lds r24,canix_rx_lost
+ 287 0206 9091 0000 		lds r25,canix_rx_lost+1
+ 288 020a A091 0000 		lds r26,canix_rx_lost+2
+ 289 020e B091 0000 		lds r27,canix_rx_lost+3
+ 290 0212 00C0      		rjmp .L21
+ 291               	.L16:
+ 292 0214 8EE2      		ldi r24,lo8(46)
+ 293 0216 8887      		std Y+8,r24
+ 294 0218 8091 0000 		lds r24,canix_tx_sent
+ 295 021c 9091 0000 		lds r25,canix_tx_sent+1
+ 296 0220 A091 0000 		lds r26,canix_tx_sent+2
+ 297 0224 B091 0000 		lds r27,canix_tx_sent+3
+ 298 0228 B987      		std Y+9,r27
+ 299 022a 8091 0000 		lds r24,canix_tx_sent
+ 300 022e 9091 0000 		lds r25,canix_tx_sent+1
+ 301 0232 A091 0000 		lds r26,canix_tx_sent+2
+ 302 0236 B091 0000 		lds r27,canix_tx_sent+3
+ 303 023a AA87      		std Y+10,r26
+ 304 023c 8091 0000 		lds r24,canix_tx_sent
+ 305 0240 9091 0000 		lds r25,canix_tx_sent+1
+ 306 0244 A091 0000 		lds r26,canix_tx_sent+2
+ 307 0248 B091 0000 		lds r27,canix_tx_sent+3
+ 308 024c 9B87      		std Y+11,r25
+ 309 024e 8091 0000 		lds r24,canix_tx_sent
+ 310 0252 9091 0000 		lds r25,canix_tx_sent+1
+ 311 0256 A091 0000 		lds r26,canix_tx_sent+2
+ 312 025a B091 0000 		lds r27,canix_tx_sent+3
+ 313 025e 00C0      		rjmp .L21
+ 314               	.L17:
+ 315 0260 80E3      		ldi r24,lo8(48)
+ 316 0262 8887      		std Y+8,r24
+ 317 0264 8091 0000 		lds r24,canix_tx_dropped
+ 318 0268 9091 0000 		lds r25,canix_tx_dropped+1
+ 319 026c A091 0000 		lds r26,canix_tx_dropped+2
+ 320 0270 B091 0000 		lds r27,canix_tx_dropped+3
+ 321 0274 B987      		std Y+9,r27
+ 322 0276 8091 0000 		lds r24,canix_tx_dropped
+ 323 027a 9091 0000 		lds r25,canix_tx_dropped+1
+ 324 027e A091 0000 		lds r26,canix_tx_dropped+2
+ 325 0282 B091 0000 		lds r27,canix_tx_dropped+3
+ 326 0286 AA87      		std Y+10,r26
+ 327 0288 8091 0000 		lds r24,canix_tx_dropped
+ 328 028c 9091 0000 		lds r25,canix_tx_dropped+1
+ 329 0290 A091 0000 		lds r26,canix_tx_dropped+2
+ 330 0294 B091 0000 		lds r27,canix_tx_dropped+3
+ 331 0298 9B87      		std Y+11,r25
+ 332 029a 8091 0000 		lds r24,canix_tx_dropped
+ 333 029e 9091 0000 		lds r25,canix_tx_dropped+1
+ 334 02a2 A091 0000 		lds r26,canix_tx_dropped+2
+ 335 02a6 B091 0000 		lds r27,canix_tx_dropped+3
+ 336               	.L21:
+ 337 02aa 8C87      		std Y+12,r24
+ 338 02ac 86E0      		ldi r24,lo8(6)
+ 339               	.L22:
+ 340 02ae 8E83      		std Y+6,r24
+ 341               	.L23:
+ 342 02b0 CE01      		movw r24,r28
+ 343 02b2 0196      		adiw r24,1
+ 344 02b4 0E94 0000 		call canix_frame_send
+ 345 02b8 00C0      		rjmp .L1
+ 346               	.L18:
+ 347 02ba 1092 0000 		sts canix_rx_received,__zero_reg__
+ 348 02be 1092 0000 		sts canix_rx_received+1,__zero_reg__
+ 349 02c2 1092 0000 		sts canix_rx_received+2,__zero_reg__
+ 350 02c6 1092 0000 		sts canix_rx_received+3,__zero_reg__
+ 351 02ca 1092 0000 		sts canix_rx_lost,__zero_reg__
+ 352 02ce 1092 0000 		sts canix_rx_lost+1,__zero_reg__
+ 353 02d2 1092 0000 		sts canix_rx_lost+2,__zero_reg__
+ 354 02d6 1092 0000 		sts canix_rx_lost+3,__zero_reg__
+ 355 02da 1092 0000 		sts canix_tx_sent,__zero_reg__
+ 356 02de 1092 0000 		sts canix_tx_sent+1,__zero_reg__
+ 357 02e2 1092 0000 		sts canix_tx_sent+2,__zero_reg__
+ 358 02e6 1092 0000 		sts canix_tx_sent+3,__zero_reg__
+ 359 02ea 1092 0000 		sts canix_tx_dropped,__zero_reg__
+ 360 02ee 1092 0000 		sts canix_tx_dropped+1,__zero_reg__
+ 361 02f2 1092 0000 		sts canix_tx_dropped+2,__zero_reg__
+ 362 02f6 1092 0000 		sts canix_tx_dropped+3,__zero_reg__
+ 363               	.L1:
+ 364               	/* epilogue start */
+ 365 02fa 2E96      		adiw r28,14
+ 366 02fc E6E0      		ldi r30, lo8(6)
+ 367 02fe 0C94 0000 		jmp __epilogue_restores__ + ((18 - 6) * 2)
+ 369               	.global __do_copy_data
+DEFINED SYMBOLS
+                            *ABS*:00000000 hcan_hms.c
+     /tmp/ccUiDGlh.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccUiDGlh.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccUiDGlh.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccUiDGlh.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccUiDGlh.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccUiDGlh.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccUiDGlh.s:11     .text:00000000 canix_SFP_HMS_handler
+
+UNDEFINED SYMBOLS
+__prologue_saves__
+canix_selfaddr
+__tablejump2__
+canix_reset
+__eerd_byte_m644
+__eewr_byte_m644
+canix_rtc_clock
+canix_set_syslog_level
+can_error_counters
+canix_rx_received
+canix_rx_lost
+canix_tx_sent
+canix_tx_dropped
+canix_frame_send
+__epilogue_restores__
+__do_copy_data

@@ -1,0 +1,4 @@
+<area shape="rect" href="$classhcan_1_1transport__connection.html#efd2679469cdc79846aefbad98ad9e74" title="hcan::transport_connection::keep_connection_alive" alt="" coords="396,31,743,57">
+<area shape="rect" href="$classhcan_1_1transport__connection.html#c2af159a23a246d0523992d8b2a23cc7" title="hcan::transport_connection::socket" alt="" coords="447,81,692,108">
+<area shape="rect" href="$classhcan_1_1frame.html#2db9e9b6b85cae3911f171d60427cf25" title="hcan::frame::set_prio" alt="" coords="792,5,949,32">
+<area shape="rect" href="$classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="793,56,948,83">

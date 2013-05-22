@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: hcan_rts.c Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>hcan_rts.c</h1><a href="hcan__rts_8c.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> *  This file is part of the HCAN tools suite.</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> *  HCAN is free software; you can redistribute it and/or modify it under</span>
+<a name="l00005"></a>00005 <span class="comment"> *  the terms of the GNU General Public License as published by the Free</span>
+<a name="l00006"></a>00006 <span class="comment"> *  Software Foundation; either version 2 of the License, or (at your</span>
+<a name="l00007"></a>00007 <span class="comment"> *  option) any later version.</span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> *  HCAN is distributed in the hope that it will be useful, but WITHOUT</span>
+<a name="l00010"></a>00010 <span class="comment"> *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<a name="l00011"></a>00011 <span class="comment"> *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<a name="l00012"></a>00012 <span class="comment"> *  for more details.</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> *  You should have received a copy of the GNU General Public License along</span>
+<a name="l00015"></a>00015 <span class="comment"> *  with HCAN; if not, write to the Free Software Foundation, Inc., 51</span>
+<a name="l00016"></a>00016 <span class="comment"> *  Franklin St, Fifth Floor, Boston, MA 02110-1301  USA</span>
+<a name="l00017"></a>00017 <span class="comment"> *</span>
+<a name="l00018"></a>00018 <span class="comment"> *  (c) 2006 by Martin Haller, mah (at) iuse (dot) org</span>
+<a name="l00019"></a>00019 <span class="comment"> */</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="preprocessor">#include &lt;<a class="code" href="hcan__rts_8h.html">hcan_rts.h</a>&gt;</span>
+<a name="l00022"></a>00022 <span class="preprocessor">#include &lt;<a class="code" href="canix_8h.html" title="enth‰lt Funktionen des CANIX Frameworks">canix.h</a>&gt;</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &lt;avr/io.h&gt;</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &lt;avr/wdt.h&gt;</span>
+<a name="l00025"></a>00025 <span class="preprocessor">#include &lt;avr/eeprom.h&gt;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &lt;hcan.h&gt;</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &lt;<a class="code" href="rtc_8h.html">rtc.h</a>&gt;</span>
+<a name="l00028"></a>00028 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 <span class="preprocessor">#ifndef CANIX_RTS</span>
+<a name="l00031"></a>00031 <span class="preprocessor"></span><span class="preprocessor">#error "CANIX_RTS muss definiert werden"</span>
+<a name="l00032"></a>00032 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00033"></a>00033 <span class="preprocessor"></span>
+<a name="l00034"></a><a class="code" href="hcan__rts_8h.html#d214fae0fb99bd7801a0a1ed47cb6613">00034</a> <span class="keywordtype">void</span> <a class="code" href="hcan__rts_8c.html#d214fae0fb99bd7801a0a1ed47cb6613">canix_SFP_RTS_handler</a>(<span class="keyword">const</span> <a class="code" href="structcanix__frame.html">canix_frame</a> *frame)
+<a name="l00035"></a>00035 {
+<a name="l00036"></a>00036     <a class="code" href="structcanix__frame.html">canix_frame</a> answer;
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038     answer.<a class="code" href="structcanix__frame.html#840557141148ee4711699e8e2c169013">src</a> = <a class="code" href="canix_8c.html#6b25751e4e4e70ed76b15097e611704f">canix_selfaddr</a>();
+<a name="l00039"></a>00039     answer.<a class="code" href="structcanix__frame.html#1e1868e00870b0a50b69c1ada950a425">dst</a> = frame-&gt;<a class="code" href="structcanix__frame.html#840557141148ee4711699e8e2c169013">src</a>;
+<a name="l00040"></a>00040     answer.<a class="code" href="structcanix__frame.html#d60b7525c58fdf1fcf02060345239037">proto</a> = HCAN_PROTO_SFP;
+<a name="l00041"></a>00041     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[0] = HCAN_SRV_RTS;
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     <span class="keywordflow">switch</span> (frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[1])
+<a name="l00044"></a>00044     {
+<a name="l00045"></a>00045         <span class="keywordflow">case</span> HCAN_RTS_TIME_INFO :
+<a name="l00046"></a>00046             {
+<a name="l00047"></a>00047                 <span class="comment">/*</span>
+<a name="l00048"></a>00048 <span class="comment">                 * Dieses Frame wird normalerweise auf der HCAN_MULTICAST_RCS</span>
+<a name="l00049"></a>00049 <span class="comment">                 * Adresse empfangen:</span>
+<a name="l00050"></a>00050 <span class="comment">                 *</span>
+<a name="l00051"></a>00051 <span class="comment">                 * data[2] : level</span>
+<a name="l00052"></a>00052 <span class="comment">                 * data[3] : day of week</span>
+<a name="l00053"></a>00053 <span class="comment">                 * data[4] : hour</span>
+<a name="l00054"></a>00054 <span class="comment">                 * data[5] : minute</span>
+<a name="l00055"></a>00055 <span class="comment">                 * data[6] : second</span>
+<a name="l00056"></a>00056 <span class="comment">                 *</span>
+<a name="l00057"></a>00057 <span class="comment">                 */</span>
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059                 int32_t our_time, their_time;
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061                 <span class="comment">// RTC Wartezaehler zuruecksetzen </span>
+<a name="l00062"></a>00062                 <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#9d0941e68ee221a1572618ffea5a8c65">last_date_update</a> = 0;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064                 <span class="comment">// Nun schauen, ob unsere Zeit zu stark von der</span>
+<a name="l00065"></a>00065                 <span class="comment">// empfangenen Zeit abweicht</span>
+<a name="l00066"></a>00066                 our_time = <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#2a1f1d513a296d32faa0a3af8037de1d">second</a> +
+<a name="l00067"></a>00067                     <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#0e3a8e887acdce1255d0810db0a30875">minute</a> * 60 +
+<a name="l00068"></a>00068                     <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#047109724cdb05a49852b54d5d0f56bb">hour</a> * 3600;
+<a name="l00069"></a>00069                 their_time = frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[6] +
+<a name="l00070"></a>00070                     frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[5] * 60 +
+<a name="l00071"></a>00071                     frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[4] * 3600;
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073                 <span class="comment">// Falls sie zu stark abweicht, dann neu setzen</span>
+<a name="l00074"></a>00074                 <span class="keywordflow">if</span> (abs(their_time - our_time) &gt; 3)
+<a name="l00075"></a>00075                 {
+<a name="l00076"></a>00076                     <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#2a1f1d513a296d32faa0a3af8037de1d">second</a> = frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[6];
+<a name="l00077"></a>00077                     <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#0e3a8e887acdce1255d0810db0a30875">minute</a> = frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[5];
+<a name="l00078"></a>00078                     <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#047109724cdb05a49852b54d5d0f56bb">hour</a>   = frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[4];
+<a name="l00079"></a>00079                     <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#da3307245c314efcffa7d9834ecfdc9f">day_of_week</a> = frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[3];
+<a name="l00080"></a>00080                 }
+<a name="l00081"></a>00081             }
+<a name="l00082"></a>00082             <span class="keywordflow">break</span>;
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084         <span class="keywordflow">case</span> HCAN_RTS_DATE_INFO :
+<a name="l00085"></a>00085             {
+<a name="l00086"></a>00086                 <span class="comment">// Das emfpangene Dateum uebernehmen wir auf jeden Fall</span>
+<a name="l00087"></a>00087                 <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#6c456b64a4516b8d34ab0ba329ea15e3">day_of_month</a> = frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[3];
+<a name="l00088"></a>00088                 <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#70983fb2cf241b7813c50026f87bb764">month_of_year</a> = frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[4];
+<a name="l00089"></a>00089                 <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#cd2066667d9b2571f0ba93c7947f36b5">year</a> = frame-&gt;<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[5];
+<a name="l00090"></a>00090             }
+<a name="l00091"></a>00091             <span class="keywordflow">break</span>;
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093         <span class="keywordflow">case</span> HCAN_RTS_TIME_REQUEST : 
+<a name="l00094"></a>00094             {
+<a name="l00095"></a>00095                 <span class="comment">// Achtung: Diese Anfrage beantworten wir nur, wenn sie</span>
+<a name="l00096"></a>00096                 <span class="comment">// an unsere Unicast-Adresse ging</span>
+<a name="l00097"></a>00097                 <span class="keywordflow">if</span> (frame-&gt;<a class="code" href="structcanix__frame.html#1e1868e00870b0a50b69c1ada950a425">dst</a> == <a class="code" href="canix_8c.html#6b25751e4e4e70ed76b15097e611704f">canix_selfaddr</a>())
+<a name="l00098"></a>00098                 {
+<a name="l00099"></a>00099                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[1] = HCAN_RTS_TIME_INFO;
+<a name="l00100"></a>00100                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[2] = 0xff; <span class="comment">// undefined Level</span>
+<a name="l00101"></a>00101                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[3] = <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#da3307245c314efcffa7d9834ecfdc9f">day_of_week</a>;
+<a name="l00102"></a>00102                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[4] = <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#047109724cdb05a49852b54d5d0f56bb">hour</a>;
+<a name="l00103"></a>00103                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[5] = <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#0e3a8e887acdce1255d0810db0a30875">minute</a>;
+<a name="l00104"></a>00104                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[6] = <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#2a1f1d513a296d32faa0a3af8037de1d">second</a>;
+<a name="l00105"></a>00105                     answer.<a class="code" href="structcanix__frame.html#46db003664ef02e4855b2383b3ab280e">size</a> = 7;
+<a name="l00106"></a>00106                     <a class="code" href="canix_8c.html#771938d7adbec51e8b4d9097c12be8a1">canix_frame_send</a>(&amp;answer);
+<a name="l00107"></a>00107                 }
+<a name="l00108"></a>00108             }
+<a name="l00109"></a>00109             <span class="keywordflow">break</span>;
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111         <span class="keywordflow">case</span> HCAN_RTS_DATE_REQUEST :
+<a name="l00112"></a>00112             {
+<a name="l00113"></a>00113                 <span class="comment">// Achtung: Diese Anfrage beantworten wir nur, wenn sie</span>
+<a name="l00114"></a>00114                 <span class="comment">// an unsere Unicast-Adresse ging</span>
+<a name="l00115"></a>00115                 <span class="keywordflow">if</span> (frame-&gt;<a class="code" href="structcanix__frame.html#1e1868e00870b0a50b69c1ada950a425">dst</a> == <a class="code" href="canix_8c.html#6b25751e4e4e70ed76b15097e611704f">canix_selfaddr</a>())
+<a name="l00116"></a>00116                 {
+<a name="l00117"></a>00117                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[1] = HCAN_RTS_DATE_INFO;
+<a name="l00118"></a>00118                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[2] = 0xff; <span class="comment">// undefined Level</span>
+<a name="l00119"></a>00119                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[3] = <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#6c456b64a4516b8d34ab0ba329ea15e3">day_of_month</a>;
+<a name="l00120"></a>00120                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[4] = <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#70983fb2cf241b7813c50026f87bb764">month_of_year</a>;
+<a name="l00121"></a>00121                     answer.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[5] = <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>.<a class="code" href="structcanix__rtc__clock__t.html#cd2066667d9b2571f0ba93c7947f36b5">year</a>;
+<a name="l00122"></a>00122                     answer.<a class="code" href="structcanix__frame.html#46db003664ef02e4855b2383b3ab280e">size</a> = 6;
+<a name="l00123"></a>00123                     <a class="code" href="canix_8c.html#771938d7adbec51e8b4d9097c12be8a1">canix_frame_send</a>(&amp;answer);
+<a name="l00124"></a>00124                 }
+<a name="l00125"></a>00125             }
+<a name="l00126"></a>00126             <span class="keywordflow">break</span>;
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128     };
+<a name="l00129"></a>00129 }
+<a name="l00130"></a>00130 
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 f√ºr canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

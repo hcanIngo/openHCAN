@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: hcan_hms.h-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>hcan_hms.h-Dateireferenz</h1>Implementierung des HMS (HCAN Management Service). <a href="#_details">Mehr ...</a>
+<p>
+
+<p>
+<a href="hcan__hms_8h-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="hcan__hms_8h.html#8759d487c53db90d8bfd132d989dee00">canix_SFP_HMS_handler</a> (const <a class="el" href="structcanix__frame.html">canix_frame</a> *frame)</td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+Implementierung des HMS (HCAN Management Service). 
+<p>
+Implementierung des RTS (Realtime (Clock) Service).<p>
+<dl class="author" compact><dt><b>Autor:</b></dt><dd>Martin Haller </dd></dl>
+<dl class="date" compact><dt><b>Datum:</b></dt><dd>13.3.2006 </dd></dl>
+
+<p>Definiert in Datei <a class="el" href="hcan__hms_8h-source.html">hcan_hms.h</a>.</p>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="8759d487c53db90d8bfd132d989dee00"></a><!-- doxytag: member="hcan_hms.h::canix_SFP_HMS_handler" ref="8759d487c53db90d8bfd132d989dee00" args="(const canix_frame *frame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_SFP_HMS_handler           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcanix__frame.html">canix_frame</a> *&nbsp;</td>
+          <td class="paramname"> <em>frame</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Stellt den HCAN Frame Callback dar. Es werden folgende Frames beantwortet bzw. interpretiert:<p>
+<ul>
+<li>HCAN_HMS_PING_REQUEST</li><li>HCAN_HMS_DEVICE_STATE_REQUEST</li><li>HCAN_HMS_DEVICE_RESET</li><li>HCAN_HMS_DEVICE_TYPE_REQUEST</li><li>HCAN_HMS_INTERNAL_EEPROM_WRITE</li><li>HCAN_HMS_INTERNAL_EEPROM_READ_REQUEST</li><li>HCAN_HMS_UPTIME_QUERY</li><li>HCAN_HMS_DEBUG_LEVEL_SET</li><li>HCAN_HMS_BUILD_VERSION_QUERY </li></ul>
+
+<p>Definiert in Zeile <a class="el" href="hcan__hms_8c-source.html#l00039">39</a> der Datei <a class="el" href="hcan__hms_8c-source.html">hcan_hms.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00421">can_error_counters()</a>, <a class="el" href="canix_8c-source.html#l00472">canix_frame_send()</a>, <a class="el" href="canix_8c-source.html#l00560">canix_reset()</a>, <a class="el" href="canix_8c-source.html#l00093">canix_rtc_clock</a>, <a class="el" href="canix_8c-source.html#l00101">canix_rx_lost</a>, <a class="el" href="canix_8c-source.html#l00100">canix_rx_received</a>, <a class="el" href="canix_8c-source.html#l00408">canix_selfaddr()</a>, <a class="el" href="syslog_8c-source.html#l00035">canix_set_syslog_level()</a>, <a class="el" href="canix_8c-source.html#l00103">canix_tx_dropped</a>, <a class="el" href="canix_8c-source.html#l00102">canix_tx_sent</a>, <a class="el" href="canix_8h-source.html#l00147">canix_frame::data</a>, <a class="el" href="canix_8h-source.html#l00131">canix_frame::dst</a>, <a class="el" href="canix_8h-source.html#l00136">canix_frame::proto</a>, <a class="el" href="canix_8h-source.html#l00142">canix_frame::size</a>, <a class="el" href="canix_8h-source.html#l00126">canix_frame::src</a> und <a class="el" href="rtc_8h-source.html#l00013">canix_rtc_clock_t::uptime_sec</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="hcan__hms_8h_8759d487c53db90d8bfd132d989dee00_cgraph.png" border="0" usemap="#hcan__hms_8h_8759d487c53db90d8bfd132d989dee00_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!DOCTYPE hcan-protocols SYSTEM "hcan-protocol.dtd">
+
+<hcan-protocols>
+
+	<protocol name="SFP" description="Simple Frame Protocol" id="1">
+		
+		<service name="HMS" description="HCAN Management Service" id="1">
+
+			<message name="PING_REQUEST" id="1"
+				description="Zum Testen, ob ein Geraet auf diese Adresse horcht" />
+
+			<message name="PING_REPLAY" id="2"
+				description="Anwort des Geraetes" />
+
+			<message name="DEVICE_STATE_REQUEST" id="3"
+				description="Fragt ein Geraet nach seinem aktuellen Zustand" />
+
+			<message name="DEVICE_STATE_REPLAY" id="4"
+				description="Liefert den aktuellen Zustand zurueck">
+				<param pos="0" name="state" description="0 = booting, 1 = Bootloader, 2 = Application"/>
+			</message>
+
+			<message name="DEVICE_RESET" id="5"
+				description="Loest einen Watchdog Reset aus" />
+
+			<message name="DEVICE_BOOT_STOP" id="6"
+				description="stoppt den Bootvorgang; Geraet geht in den Bootloader-State" />
+
+			<message name="DEVICE_BOOT_STOP_ACK" id="7"
+				description="Wenn Bootvorgang gestoppt, sendet das Geraet diese Bestaetigung" />
+
+			<message name="DEVICE_LOAD_APP" id="8"
+				description="Laed die Applikation, sofern das Geraet im Bootloader State ist" />
+
+			<message name="DEVICE_TYPE_REQUEST" id="9"
+				description="Fragt den Geraetetyp ab" />
+
+			<message name="DEVICE_TYPE_REPLAY" id="10"
+				description="Liefert den Geraete-Typ">
+				<param pos="0" name="arch" description="0 = Atmega8 1 = Atmega32" />
+				<param pos="1" name="type" description="Hardware-Board-Typ" />
+			</message>
+
+			<message name="FLASH_BUFFER_FILL" id="16"
+				description="Sendet 4 Bytes zum Geraet. Details stehen in der Dokumentation zum Flashen">
+				<param pos="0" name="index" description="definiert die Position von d[0] im Zielbuffer auf dem Device" />
+				<param pos="1" name="d0" description="Databyte" />
+				<param pos="2" name="d1" description="Databyte" />
+				<param pos="3" name="d2" description="Databyte" />
+				<param pos="4" name="d3" description="Databyte" />
+			</message>
+
+			<message name="FLASH_BUFFER_FILL_ACK" id="17"
+				description="Geraet bestaetigt damit den Erhalt einer Zeile" />
+
+			<message name="FLASH_BUFFER_WRITE" id="18"
+				description="Geraet schreibt den Puffer an die gegebene Adresse in das Flash">
+				<param pos="0" name="addr_lsb" description="LSB der Adresse im Flash" />
+				<param pos="1" name="addr_msb" description="MSB der Adresse im Flash" />
+			</message>
+
+			<message name="FLASH_BUFFER_WRITE_ACK" id="19"
+				description="Geraet bestaetigt das Schreiben" />
+
+			<message name="INTERNAL_EEPROM_WRITE" id="20"
+				description="Beschreibt eine Speicherzelle des internen EEPROMs (ohne Pruefung!)" >
+				<param pos="0" name="addr_lsb" description="LSB der Adresse im EEPROM" />
+				<param pos="1" name="addr_msb" description="MSB der Adresse im EEPROM" />
+				<param pos="2" name="value" description="der zu schreibende Wert" />
+			</message>
+
+			<message name="INTERNAL_EEPROM_WRITE_ACK" id="21"
+				description="Geraet bestaetigt das Schreiben (ohne Pruefung!)" />
+
+			<message name="INTERNAL_EEPROM_READ_REQUEST" id="22"
+				description="Leseanforderung fuer eine Speicherzelle des internen EEPROMs">
+				<param pos="0" name="addr_lsb" description="LSB der Adresse im EEPROM" />
+				<param pos="1" name="addr_msb" description="MSB der Adresse im EEPROM" />
+			</message>
+
+			<message name="INTERNAL_EEPROM_READ_REPLAY" id="23"
+				description="Geraet sendet den gelesenen Wert">
+				<param pos="0" name="value" description="der Wert aus dem EEPROM" />
+			</message>
+
+			<message name="INTERNAL_EEPROM_READ_BULK_REQUEST" id="24"
+				description="Leseanforderung fuer eine Speicherzelle des internen EEPROMs, Bulkversion">
+				<param pos="0" name="addr_lsb" description="LSB der Adresse im EEPROM" />
+				<param pos="1" name="addr_msb" description="MSB der Adresse im EEPROM" />
+			</message>
+
+			<message name="INTERNAL_EEPROM_READ_BULK_REPLAY" id="25"
+				description="Geraet sendet 6 gelesene Bytes (Bulk) ab addr_msb:addr_lsb">
+				<param pos="0" name="d0" description="Byte an Offset 0" />
+				<param pos="1" name="d1" description="Byte an Offset 1" />
+				<param pos="2" name="d2" description="Byte an Offset 2" />
+				<param pos="3" name="d3" description="Byte an Offset 3" />
+				<param pos="4" name="d4" description="Byte an Offset 4" />
+				<param pos="5" name="d5" description="Byte an Offset 5" />
+			</message>
+
+			<message name="UPTIME_QUERY" id="30"
+				description="Abfrage der Uptime. Das ist die vergangene Zeit seit dem letzten Reboot/Reset" />
+				
+			<message name="UPTIME_REPLAY" id="31"
+				description="Geraet sendet die Uptime als 32Bit Wert in Sekunden" >
+				<param pos="0" name="u3" description="MSB der 32 Bit Uptime" />
+				<param pos="1" name="u2" description="" />
+				<param pos="2" name="u1" description="" />
+				<param pos="3" name="u0" description="LSB der 32 Bit Uptime" />
+			</message>
+
+			<message name="SYSLOG_LEVEL_SET" id="32"
+				description="Setzt den Debug-Level fuer die Syslog Botschaften" >
+				<param pos="0" name="level" description=" 1 = CRITICAL, 2 = ERROR, 3 = WARNING, 4 = DEBUG " />
+			</message>
+
+			<message name="BUILD_VERSION_QUERY" id="33"
+				description="Fragt nach der Build Version" >
+			</message>
+
+			<message name="BUILD_VERSION_REPLAY" id="34"
+				description="Liefert die Build Version" >
+				<param pos="0" name="hi" description="Build Nummer, Hi Teil" />
+				<param pos="1" name="lo" description="Build Nummer, Lo Teil" />
+			</message>
+
+			<message name="CAN_EC_QUERY" id="35"
+				description="Fragt nach den CAN Error Counter Staenden" >
+			</message>
+
+			<message name="CAN_EC_REPLAY" id="36"
+				description="Liefert die CAN Error Counter Staende" >
+				<param pos="0" name="REC" description="RX Error Counter" />
+				<param pos="1" name="TEC" description="TX Error Counter" />
+			</message>
+
+			<message name="FLASH_CRC16_QUERY" id="37"
+				description="Errechnet die CRC16 Pruefsumme ueber den Flash bis zur angegebenen Adresse" >
+				<param pos="0" name="hi" description="Adresse hi" />
+				<param pos="1" name="lo" description="Adresse lo" />
+			</message>
+
+			<message name="FLASH_CRC16_REPLAY" id="38"
+				description="Liefert die errechnete CRC16 Pruefsumme ueber den Flash" >
+				<param pos="0" name="hi" description="CRC16 hi" />
+				<param pos="1" name="lo" description="CRC16 lo" />
+			</message>
+
+			<message name="LOOP_THROUGHPUT_QUERY" id="39"
+				description="Fragt nach der Anzahl der Schleifen/sec" >
+			</message>
+
+			<message name="LOOP_THROUGHPUT_REPLAY" id="40"
+				description="Liefert die Anzahl der Schleifen/sec" >
+				<param pos="0" name="hi" description="MSB" />
+				<param pos="1" name="lo" description="LSB" />
+			</message>
+
+			<message name="RX_RECEIVED_QUERY" id="41"
+				description="Fragt nach der Anzahl der bisher empfangenen Frames" >
+			</message>
+
+			<message name="RX_RECEIVED_REPLAY" id="42"
+				description="Liefert die Anzahl der bisher empfangenen Frames (32bit)" >
+				<param pos="0" name="d0" description="MSB" />
+				<param pos="1" name="d1" description="" />
+				<param pos="2" name="d2" description="" />
+				<param pos="3" name="d3" description="LSB" />
+			</message>
+
+			<message name="RX_LOST_QUERY" id="43"
+				description="Fragt nach der Anzahl der bisher verlorenen Frames" >
+			</message>
+
+			<message name="RX_LOST_REPLAY" id="44"
+				description="Liefert die Anzahl der bisher verlorenen Frames (32bit)" >
+				<param pos="0" name="d0" description="MSB" />
+				<param pos="1" name="d1" description="" />
+				<param pos="2" name="d2" description="" />
+				<param pos="3" name="d3" description="LSB" />
+			</message>
+
+
+			<message name="TX_SENT_QUERY" id="45"
+				description="Fragt nach der Anzahl der bisher gesendeten Frames" >
+			</message>
+
+			<message name="TX_SENT_REPLAY" id="46"
+				description="Liefert die Anzahl der bisher gesendeten Frames (32bit)" >
+				<param pos="0" name="d0" description="MSB" />
+				<param pos="1" name="d1" description="" />
+				<param pos="2" name="d2" description="" />
+				<param pos="3" name="d3" description="LSB" />
+			</message>
+
+			<message name="TX_DROPPED_QUERY" id="47"
+				description="Fragt nach der Anzahl der bisher verworfenen Frames" >
+			</message>
+
+			<message name="TX_DROPPED_REPLAY" id="48"
+				description="Liefert die Anzahl der bisher verworfenen Frames (32bit)" >
+				<param pos="0" name="d0" description="MSB" />
+				<param pos="1" name="d1" description="" />
+				<param pos="2" name="d2" description="" />
+				<param pos="3" name="d3" description="LSB" />
+			</message>
+
+			<message name="RX_TX_STATS_RESET" id="49"
+				description="Setzt alle RX/TX Stats Counter zurueck" >
+			</message>
+
+		</service>
+
+		<service name="SLS" description="Syslog Service" id="4">
+			<message name="BOOT_RESETFLAG_LOG" id="1"
+				description="Meldet den Wert des Resetflag-Registers direkt nach dem Booten"
+				details="1: Power-on Reset 2: External Reset 4: Brown-Out Reset 8: Watchdog Reset">
+				<param pos="0" name="flag" description="siehe Atmega8 Referenz-Handbuch, S.39" />
+			</message>
+			<message name="FIRMWARE_CRC16_ERROR" id="2"
+				description="Meldet eine fehlerhafte CRC16 Firmware Pruefsumme">
+			</message>
+			<message name="FIRMWARE_CONFIG_COMPAT_ERROR" id="3"
+				description="Firmware und Config sind nicht kompatibel">
+				<param pos="0" name="eds_block_type" description="betroffener EDS Block-Typ" />
+				<param pos="1" name="eds_addr_hi" description="EDS Adresse Hi" />
+				<param pos="2" name="eds_addr_lo" description="EDS Adresse Lo" />
+				<param pos="3" name="size_in_config" description="Groesse im EDS" />
+				<param pos="4" name="size_in_firmware" description="Groesse in der Firmware" />
+			</message>
+			<message name="DUMP_DEBUG_INFO" id="4"
+				description="Geraet spuckt Debug-Infos aus">
+				<param pos="0" name="context" description="" />
+			</message>
+		</service>
+
+		<service name="HES" description="Haus-Elektrik Service" id="5">
+
+			<message name="TASTER_DOWN" id="1"
+				description="Sendet ein Taster beim Druecken; Power-Ports reagieren mit Toggle (an -> aus, aus -> an)" >
+				<param pos="0" name="gruppe" description="Taster-Gruppe, auf die der Taster konfiguriert ist" />
+				<param pos="1" name="index" description="Index des Taster-Ports; nur noetig fuer Logging-Zwecke, falls Gruppe nicht eindeutig" />
+			</message>
+
+			<message name="TASTER_UP" id="2"
+				description="Sendet ein Taster beim Druecken; Power-Ports reagieren mit Toggle (an -> aus, aus -> an)" >
+				<param pos="0" name="gruppe" description="Taster-Gruppe" />
+				<param pos="1" name="index" description="Index des Taster-Ports" />
+			</message>
+
+			<message name="SCHALTER_STATE_QUERY" id="4"
+				description="HCAN_HES_SCHALTER_STATE_QUERY kommt immer wenn ein C1612 gerade hochgelaufen ist (reboot)" >
+			</message>
+			
+			<message name="POWER_GROUP_ON" id="10"
+				description="Reaktion: Power-Port(s) schalten sich an" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+
+			<message name="POWER_GROUP_OFF" id="11"
+				description="Power-Port(s) schalten sich aus" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+
+			<message name="POWER_GROUP_STATE_QUERY" id="12"
+				description="Abfrage des Status eines oder mehrerer Power-Ports (ob an oder aus)" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+
+			<message name="POWER_GROUP_STATE_REPLAY" id="13"
+				description="Antwort eines Power-Ports mit dem aktuellen Status" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="status" description="1 = an, 0 = aus" />
+				<param pos="2" name="timer" description="dekrementiert" />
+			</message>
+
+			<message name="POWER_GROUP_TIMER_QUERY" id="14"
+				description="Anfrage an eine Lichtzone o.ae. nach der Timer Stand " >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+
+			<message name="POWER_GROUP_TIMER_REPLAY" id="15"
+				description="Antwort einer Lichtzone mit dem Timer Stand " >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="timer_hi" description="Timer-Stand, High Byte" />
+				<param pos="2" name="timer_lo" description="Timer-Stand, Low Byte" />
+			</message>
+
+			<message name="POWER_GROUP_SET_TIMER" id="16"
+				description="Setzt den aktuellen Timer-Stand einer Lichtzone" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="timer_hi" description="Timer-Stand, High Byte" />
+				<param pos="2" name="timer_lo" description="Timer-Stand, Low Byte" />
+			</message>
+			<message name="POWER_GROUP_STATE_INFO" id="17"
+				description="Power-Port meldet nach Aenderung seinen Status" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="status" description="1 = an, 0 = aus" />
+			</message>
+
+
+			<message name="ROLLADEN_POSITION_SET" id="20"
+				description="Faehrt einen Rolladen auf die gegebene Position" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="position" description="Position im Bereich [0..100]; 2-Taster: 200=0%, 201=100%; 100% = oben" />
+			</message>
+
+			<message name="ROLLADEN_POSITION_REQUEST" id="21"
+				description="Fragt einen Rolladen nach der aktuellen Position" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+
+			<message name="ROLLADEN_POSITION_REPLAY" id="22"
+				description="Der Rolladen antwortet mit der aktuellen Position" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="position" description="Position im Bereich [0..100]; 100% = oben" />
+			</message>
+
+			<message name="ROLLADEN_DEFINE_POSITION" id="23"
+				description="Definiert die aktuelle Position eines Rolladen (!)" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="position" description="Position im Bereich [0..100]; 100% = oben" />
+			</message>
+
+			<message name="ROLLADEN_POSITION_CHANGED_INFO" id="24"
+				description="Besagt, dass sich die Rolladen-Position geaendert hat" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="position" description="Position im Bereich [0..100]; 100% = oben" />
+				<param pos="2" name="cmdsrc_hi" description="Source-Adresse des Befehls (0 = manuell ueber Taster), MSB" />
+				<param pos="3" name="cmdsrc_lo" description="LSB" />
+			</message>
+
+			<message name="1WIRE_DISCOVER" id="30"
+				description="Veranlasst einen 1Wire Scan an gebenen Pin" >
+				<param pos="0" name="pin" description="Pin ID des 1Wire Ports im Bereich [0..7]" />
+			</message>
+
+			<message name="1WIRE_DISCOVERED_PART_1" id="31"
+				description="ein 1Wire Device ist gefunden worden, Message Teil 1" >
+				<param pos="0" name="id0" description="1. Byte der 1Wire id[8] (Checksum dabei)" />
+				<param pos="1" name="id1" description="2. Byte" />
+				<param pos="2" name="id2" description="3. Byte" />
+				<param pos="3" name="id3" description="4. Byte" />
+			</message>
+
+			<message name="1WIRE_DISCOVERED_PART_2" id="32"
+				description="ein 1Wire Device ist gefunden worden, Message Teil 1" >
+				<param pos="0" name="id4" description="5. Byte der 1Wire id[8] (Checksum dabei)" />
+				<param pos="1" name="id5" description="6. Byte" />
+				<param pos="2" name="id6" description="7. Byte" />
+				<param pos="3" name="id7" description="8. Byte" />
+			</message>
+
+			<message name="1WIRE_ERROR" id="33"
+				description="ein 1Wire Fehler trat auf" >
+				<param pos="0" name="error" description="3 = NoSensorFound, 4 = BusError" />
+			</message>
+
+			<message name="1WIRE_TEMPERATURE" id="34"
+				description="Messergebnis (Fixed Point) eines DS18B20 1Wire Temperaturfuehlers" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="temp_hi" description="MSB" />
+				<param pos="2" name="temp_lo" description="LSB; 4 LSB sind Nachkommabits" />
+			</message>
+			<message name="1WIRE_TEMPERATURE_QUERY" id="35"
+				description="fragt einen Temperatursensor nach der aktuellen Temperatur" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+			<message name="1WIRE_TEMPERATURE_REPLAY" id="36"
+				description="Messergebnis (Fixed Point) eines DS18B20 1Wire Temperaturfuehlers als Antwort auf 1WIRE_TEMPERATURE_QUERY" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="temp_hi" description="MSB" />
+				<param pos="2" name="temp_lo" description="LSB; 4 LSB sind Nachkommabits" />
+			</message>
+
+			<message name="REEDKONTAKT_OFFEN" id="40"
+				description="Meldung fuer einen offenen Reedkontakt an Fenster oder Tuer" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+			<message name="REEDKONTAKT_STATE_QUERY" id="41"
+				description="Fragt nach dem Status eines Reedkontakts" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+			<message name="REEDKONTAKT_STATE_REPLAY" id="42"
+				description="Status Antwort eines Reedkontakts" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="state" description="Zustand: 0 = zu, 1 = offen" />
+			</message>
+			<message name="REEDKONTAKT_STATE_CHANGE" id="43"
+				description="Zustandsaenderung eines Reedkontakts" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="state" description="Zustand: 0 = zu, 1 = offen" />
+			</message>
+		
+			<message name="PVSENSOR_STATE_REQUEST" id="44"
+				description="Zustandsaenderung eines PV Sensors" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+			<message name="PVSENSOR_STATE_REPLAY" id="45"
+				description="Zustandsaenderung eines PV Sensors" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="state" description="Zustand: 0 = 0V, 1 = 230V" />
+			</message>
+			<message name="PVSENSOR_STATE_CHANGE_INFO" id="46"
+				description="Zustandsaenderung eines PV Sensors" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="state" description="Zustand: 0 = 0V, 1 = 230V" />
+			</message>
+
+			<message name="HEIZUNG_DETAILS_REQUEST" id="50"
+				description="UserPanel fragt nach Heizungsdetails" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+			</message>
+			<message name="HEIZUNG_MODE_OFF_DETAILS" id="51"
+				description="Heizung ist aus (Off-Mode)" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+			</message>
+			<message name="HEIZUNG_SET_MODE_OFF" id="52"
+				description="Heizung schaltet aus" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+			</message>
+			<message name="HEIZUNG_MODE_MANUAL_DETAILS" id="53"
+				description="Manueller Modus incl Parameter" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="rate" description="Heiz-Rate" />
+				<param pos="2" name="duration_hi" description="Restdauer (MSB), 0 = unbegrenzt" />
+				<param pos="3" name="duration_lo" description="Restdauer (LSB)" />
+			</message>
+			<message name="HEIZUNG_SET_MODE_MANUAL" id="54"
+				description="Manueller Modus incl Parameter" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="rate" description="Heiz-Rate" />
+				<param pos="2" name="duration_hi" description="Restdauer (MSB), 0 = unbegrenzt" />
+				<param pos="3" name="duration_lo" description="Restdauer (LSB)" />
+			</message>
+			<message name="HEIZUNG_MODE_THERMOSTAT_DETAILS" id="55"
+				description="Thermostat Modus incl Parameter" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="temp_hi" description="Soll-Temperatur (MSB)" />
+				<param pos="2" name="temp_lo" description="Soll-Temperatur (LSB)" />
+				<param pos="3" name="duration_hi" description="Restdauer (MSB), 0 = unbegrenzt" />
+				<param pos="4" name="duration_lo" description="Restdauer (LSB)" />
+			</message>
+			<message name="HEIZUNG_SET_MODE_THERMOSTAT_DETAILS" id="56"
+				description="Set Thermostat Modus incl Parameter" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="temp_hi" description="Soll-Temperatur (MSB)" />
+				<param pos="2" name="temp_lo" description="Soll-Temperatur (LSB)" />
+				<param pos="3" name="duration_hi" description="Restdauer (MSB), 0 = unbegrenzt" />
+				<param pos="4" name="duration_lo" description="Restdauer (LSB)" />
+			</message>
+			<message name="HEIZUNG_MODE_AUTOMATIK_DETAILS" id="57"
+				description="Automatik Modus incl Parameter" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="temp_hi" description="Soll-Temperatur (MSB)" />
+				<param pos="2" name="temp_lo" description="Soll-Temperatur (LSB)" />
+				<param pos="3" name="timerange_id" description="Zeitbereichs-ID" />
+			</message>
+			<message name="HEIZUNG_SET_MODE_AUTOMATIK" id="58"
+				description="Set Automatik Modus" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+			</message>
+			<message name="HEIZUNG_TIST_REQUEST" id="59"
+				description="UserPanel fragt nach T(ist)" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+			</message>
+			<message name="HEIZUNG_TIST_REPLAY" id="60"
+				description="Controllerboard liefert T(ist)" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="temp_hi" description="Ist-Temperatur (MSB)" />
+				<param pos="2" name="temp_lo" description="Ist-Temperatur (LSB)" />
+			</message>
+			<message name="HEIZUNG_WAERMEBEDARF_INFO" id="61"
+				description="Heizung braucht Waerme oder nicht" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="value" description="[0..100]: 0 = kein Bedarf" />
+			</message>
+			<message name="HEIZSTEUERUNG_STATE_REQUEST" id="62"
+				description="Fragt die Heizungssteuerung nach ihrem Stand" >
+			</message>
+			<message name="HEIZSTEUERUNG_STATE_REPLAY" id="63"
+				description="die (einzige) Heizungssteuerung antwortet" >
+				<param pos="0" name="VL_soll" description="Vorlauf-Soll" />
+				<param pos="1" name="VL_ist" description="Vorlauf-Ist" />
+				<param pos="2" name="RL_ist" description="Ruecklauf-Ist" />
+				<param pos="3" name="BF" description="Brennerfreigabe" />
+			</message>
+			<message name="HEIZSTEUERUNG_STATE_INFO" id="64"
+				description="Heizungssteuerung liefert den aktuellen Status" >
+				<param pos="0" name="VL_soll" description="Vorlauf-Soll" />
+				<param pos="1" name="GWB_hi" description="Gesamt-Waermebedarf" />
+				<param pos="2" name="GWB_lo" description="Gesamt-Waermebedarf" />
+				<param pos="3" name="BF" description="Brennerfreigabe" />
+			</message>
+			<message name="HEIZSTEUERUNG_SET_VL" id="65"
+				description="gibt die Soll-VL Temperatur vor" >
+				<param pos="0" name="VL_soll" description="Vorlauf-Soll" />
+			</message>
+			<message name="HEIZUNG_SOLLTEMP_LINE_REQUEST" id="66"
+				description="Fragt nach einer Solltemp/Zeitzonen Config Zeile" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="idx" description="Index der Config Zeile [0..7]" />
+			</message>
+			<message name="HEIZUNG_SOLLTEMP_LINE_REPLAY" id="67"
+				description="Controllerboard liefert Zeile" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="idx" description="Index der Config Zeile" />
+				<param pos="2" name="temp_hi" description="Soll-Temperatur (MSB)" />
+				<param pos="3" name="temp_lo" description="Soll-Temperatur (LSB)" />
+				<param pos="4" name="zeitzone_id" description="ID der Zeitzone" />
+			</message>
+			<message name="HEIZUNG_SOLLTEMP_WRITE_LINE" id="68"
+				description="schreibt neue Solltemp Zeile: ACHTUNG: zeitzone_id wird bisher NICHT geschrieben!" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="idx" description="Index der Config Zeile" />
+				<param pos="2" name="temp_hi" description="Soll-Temperatur (MSB)" />
+				<param pos="3" name="temp_lo" description="Soll-Temperatur (LSB)" />
+				<param pos="4" name="zeitzone_id" description="ID der Zeitzone" />
+			</message>
+			<message name="HEIZUNG_SOLLTEMP_WRITE_LINE_ACK" id="69"
+				description="schreibt neue Solltemp Zeile" >
+				<param pos="0" name="id" description="Heizungs-ID" />
+				<param pos="1" name="idx" description="Index der Config Zeile" />
+			</message>
+
+			<message name="WECKER_SET" id="72"
+				description="Wecker incl Parameter" >
+				<param name="id" description="Wecker-ID" />
+				<param name="duration_hi" description="Timer in x Sekunden (MSB)" />
+				<param name="duration_lo" description="Timer in x Sekunden (LSB)" />				
+			</message>
+			<message name="WECKER_DETAILS_REQUEST" id="73"
+				description="Wecker incl Parameter" >
+				<param name="id" description="Wecker-ID" />
+			</message>
+			<message name="WECKER_DETAILS" id="74"
+				description="Wecker incl Parameter" >
+				<param name="id" description="Wecker-ID" />
+				<param name="duration_hi" description="Timer in x Sekunden (MSB)" />
+				<param name="duration_lo" description="Timer in x Sekunden (LSB)" />
+			</message>
+
+			<message name="HELLIGKEITS_INFO" id="71"
+				description="Liefert die Helligkeit am ADC (Aufloesung: 10Bit)" >
+				<param name="guppe" description="Helligkeits-Gruppe" />
+				<param name="brightness_hi" description="hi byte der Helligkeit" />
+				<param name="brightness_lo" description="lo hyte der Helligkeit" />
+			</message>
+
+			<message name="POTI_POS_CHANGED" id="70"
+				description="Liefert die Position des Potis (Aufloesung: 10Bit)" >
+				<param name="guppe" description="Poti-Gruppe" />
+				<param name="pos_hi" description="hi byte der Position" />
+				<param name="pos_lo" description="lo hyte der Position" />
+			</message>
+
+			<message name="DCF77_ERROR" id="80"
+				description="Meldet die festgestellten Fehler der letzten Empfangsminute" >
+				<param pos="0" name="id" description="Identifikation des DCF77-Moduls" />
+				<param pos="1" name="error" description="Fehlercode" />
+			</message>
+
+			<message name="CONFIG_RELOAD" id="100"
+				description="Reaktion: Controllerboard laed die Config aus dem EEPROM neu" />
+
+			<message name="CONFIG_RAM_USAGE_REQUEST" id="101"
+				description="Fragt ab, wieviel bytes des Config RAM verwendet werden" />
+
+			<message name="CONFIG_RAM_USAGE_REPLAY" id="102"
+				description="Liefert die Anzahl der verwendeten Bytes im Config RAM">
+				<param pos="0" name="usage_hi" description="MSB des RAM Usage" />
+				<param pos="1" name="usage_lo" description="LSB des RAM Usage" />
+			</message>
+
+			<message name="ZEITZONE_DETAILS_REQUEST" id="110"
+				description="Fragt nach den Zeitzonen-Details" >
+				<param pos="0" name="gruppe" description="Zeitzonen-ID" />
+			</message>
+			<message name="ZEITZONE_DETAILS_REPLAY" id="111"
+				description="Liefert die Zeitzonen Details" >
+				<param pos="0" name="gruppe" description="Zeitzonen-ID" />
+				<param pos="1" name="day_pattern" description="Binaeres Day Pattern" />
+				<param pos="2" name="from_hour" description="" />
+				<param pos="3" name="from_minute" description="" />
+				<param pos="4" name="to_hour" description="" />
+				<param pos="5" name="to_minute" description="" />
+			</message>
+			<message name="ZEITZONE_WRITE_DETAILS" id="112"
+				description="Liefert neue Zeitzonen Details, welche im EEPROM gespeichert werden" >
+				<param pos="0" name="gruppe" description="Zeitzonen-ID" />
+				<param pos="1" name="day_pattern" description="Binaeres Day Pattern" />
+				<param pos="2" name="from_hour" description="" />
+				<param pos="3" name="from_minute" description="" />
+				<param pos="4" name="to_hour" description="" />
+				<param pos="5" name="to_minute" description="" />
+			</message>
+			<message name="ZEITZONE_WRITE_DETAILS_ACK" id="113"
+				description="Liefert ein ACK auf den Schreibvorgang" >
+				<param pos="0" name="gruppe" description="Zeitzonen-ID" />
+			</message>
+			<message name="ZEITZONE_TEST_MATCH_REQUERST" id="114"
+				description="Testet, ob die Zeitzone matched, d.h. zutrifft" >
+				<param pos="0" name="gruppe" description="Zeitzonen-ID" />
+			</message>
+			<message name="ZEITZONE_TEST_MATCH_REPLAY" id="115"
+				description="Liefert die Info, ob die Zeitzone matched" >
+				<param pos="0" name="gruppe" description="Zeitzonen-ID" />
+				<param pos="1" name="match" description="0 = false, 1 = true" />
+			</message>
+
+		</service>
+
+		<service name="RTS" description="Real Time Service" id="6">
+
+			<message name="TIME_INFO" id="1"
+				description="Meldet die aktuelle Zeit" >
+				<param pos="0" name="level" description="Time Level; regelt den Master-/Slave Betrieb" />
+				<param pos="1" name="day_of_week" description="Tag der Woche: [1..7] == [ Montag .. Sonntag ]" /> 
+				<param pos="2" name="hour" description="Stunde [0..23]" /> 
+				<param pos="3" name="minute" description="Minute [0..59]" /> 
+				<param pos="4" name="second" description="Sekunde [0..59]" /> 
+			</message>
+
+			<message name="DATE_INFO" id="2"
+				description="Meldet das aktuelle Datum" >
+				<param pos="0" name="level" description="Date Level; regelt den Master-/Slave Betrieb" />
+				<param pos="1" name="day_of_month" description="Tag des Monats [1..31] " /> 
+				<param pos="2" name="month_of_year" description="Monat [1..12] " /> 
+				<param pos="3" name="year" description="Jahr 2000 + [1..255] = [ 2001..2255 ]" /> 
+			</message>
+
+			<message name="TIME_REQUEST" id="3"
+				description="Fragt die aktuelle Zeit: Replay ist TIME_INFO" >
+			</message>
+
+			<message name="DATE_REQUEST" id="4"
+				description="Fragt das aktuelle Datum: Replay ist DATE_INFO" >
+			</message>
+
+		</service>
+
+		<service name="EDS" description="EEPROM Data System Service" id="7">
+
+			<message name="GET_NEXT_BLOCK" id="1"
+				description="Fragt nach dem naechsten Block" >
+				<param pos="0" name="handle_hi" description="Iterator, hi byte" />
+				<param pos="1" name="handle_lo" description="Iterator, lo byte" />
+			</message>
+
+			<message name="GET_NEXT_BLOCK_REPLAY" id="2"
+				description="Liefert den naechsten Block" >
+				<param pos="0" name="handle_hi" description="Iterator, hi byte" />
+				<param pos="1" name="handle_lo" description="Iterator, lo byte" />
+				<param pos="2" name="type" description="Typ des Blocks" />
+				<param pos="3" name="size" description="Groesse des Blocks" />
+			</message>
+
+			<message name="DEFRAGMENT" id="3"
+				description="Fasst alle freien Bloecke zusammen" >
+			</message>
+
+			<message name="ALLOCATE_BLOCK" id="4"
+				description="Alloziert einen Block" >
+				<param pos="0" name="type" description="Typ des Blocks" />
+				<param pos="1" name="size" description="Groesse des Blocks" />
+			</message>
+
+			<message name="ALLOCATE_BLOCK_REPLAY" id="5"
+				description="Liefert ein Handle auf den allozierten Block, oder 0, falls fehlgeschlagen" >
+				<param pos="0" name="handle_hi" description="hi byte" />
+				<param pos="1" name="handle_lo" description="lo byte" />
+			</message>
+
+			<message name="FREE_BLOCK" id="6"
+				description="Gibt einen Block frei">
+				<param pos="0" name="handle_hi" description="hi byte" />
+				<param pos="1" name="handle_lo" description="lo byte" />
+			</message>
+
+			<message name="FREE_BLOCK_REPLAY" id="7"
+				description="Gibt einen Block frei">
+				<param pos="0" name="result" description="0 = ok, 1 = error" />
+			</message>
+			
+			<message name="READ_FROM_BLOCK" id="8"
+				description="Fordert 4 Bytes aus einem Block an">
+				<param pos="0" name="handle_hi" description="hi byte" />
+				<param pos="1" name="handle_lo" description="lo byte" />
+				<param pos="2" name="index" description="lo byte" />
+			</message>
+
+			<message name="READ_FROM_BLOCK_REPLAY" id="9"
+				description="Liefert 4 Bytes aus einem Block an">
+				<param pos="0" name="d0" description="Byte 0" />
+				<param pos="1" name="d1" description="Byte 1" />
+				<param pos="2" name="d2" description="Byte 2" />
+				<param pos="3" name="d3" description="Byte 3" />
+			</message>
+
+			<message name="WRITE_TO_BLOCK" id="10"
+				description="Schreibt ein Byte in einem Block">
+				<param pos="0" name="handle_hi" description="hi byte" />
+				<param pos="1" name="handle_lo" description="lo byte" />
+				<param pos="2" name="index" description="lo byte" />
+				<param pos="3" name="d0" description="Byte" />
+			</message>
+
+			<message name="WRITE_TO_BLOCK_REPLAY" id="11"
+				description="Anwort auf ein geschriebenes Byte">
+			</message>
+
+			<message name="FORMAT" id="12"
+				description="Formatiert den EDS Bereich des EEPROM" >
+			</message>
+
+		</service>
+
+		<service name="USVS" description="USV Service" id="8">
+
+			<message name="STATE_REQUEST" id="1"
+				description="Fragt den aktuellen USV Zustand" >
+			</message>
+
+			<message name="STATE_INFO" id="2"
+				description="Meldet den aktuellen USV Zustand" >
+				<param pos="0" name="state" description="0 = Netzbetrieb, 1 = Batterie" />
+			</message>
+
+			<message name="VOLTAGE_REQUEST" id="3"
+				description="Fragt nach einer USV Spannung" >
+				<param pos="0" name="Ux" description="1-5" />
+			</message>
+
+ 			<message name="VOLTAGE_REPLAY" id="4" 
+				description="Meldet die USV Spannung" >
+				<param pos="0" name="Ux_hi" description="hi teil" />
+				<param pos="1" name="Ux_lo" description="lo teil" />
+			</message>
+
+			<message name="VOLTAGE_STATS_REQUEST" id="5"
+				description="Fragt nach den Spannungs-Statistiken" >
+				<param pos="0" name="Ux" description="1-5" />
+			</message>
+
+			<message name="VOLTAGE_STATS_REPLAY" id="6"
+				description="Fragt nach den Spannungs-Statistiken" >
+				<param pos="0" name="U" description="1-5" />
+				<param pos="1" name="min_hi" description="Minimum" />
+				<param pos="2" name="min_lo" description="Minimum" />
+				<param pos="3" name="max_hi" description="Maximum" />
+				<param pos="4" name="max_lo" description="Maximum" />
+			</message>
+
+			<message name="VOLTAGE_STATS_RESET" id="7"
+				description="Setzt alle Spannungs-Statistiken zurueck" >
+			</message>
+
+		</service>
+
+		<service name="EBUS" description="eBus Telegramme" id="9">
+
+			<message name="FA_BLOCK1_INFO" id="1"
+				description="Feuerungsautomat Block 1" >
+				<param pos="0" name="status" description="LSB bis MSB: LDW,GDW,WS,Flamme,Ventil1,Ventil2,UWP,Alarm" />
+				<param pos="1" name="stellgrad" description="0-100%" />
+				<param pos="2" name="KT" description="0-100 Grad, (DATA1c)" /> 
+				<param pos="3" name="RT" description="0-100 Grad" />
+				<param pos="4" name="BT" description="0-100 Grad" />
+				<param pos="5" name="AT" description="-30-50 Grad (SIGN CHAR)" />
+			</message>
+
+			<message name="REGLER_DATEN_INFO_FRG1" id="2"
+				description="Regler Daten an FA Fragment 1" >
+				<param pos="0" name="status" description="Waermeanforderung (s.S.24)" />
+				<param pos="1" name="aktion" description="Ein/Ausschalten etc. (s.S.24)" />
+				<param pos="2" name="kesseltemp_soll_lo" description="Grad, DATA2c, lo Byte" />
+				<param pos="3" name="kesseltemp_soll_hi" description="Grad, DATA2c, hi Byte" />
+				<param pos="4" name="kesseldr_soll_lo" description="bar, DATA2b, lo Byte" />
+				<param pos="5" name="kesseldr_soll_hi" description="bar, DATA2b, hi Byte" />
+			</message>
+
+			<message name="REGLER_DATEN_INFO_FRG2" id="3"
+				description="Regler Daten an FA Fragment 2" >
+				<param pos="0" name="stellgrad" description="Modulationsgrad" />
+				<param pos="1" name="ww_soll" description="Brauchwasser-Sollwert" />
+				<param pos="2" name="brennstoff" description="00=?, 01=Gas, 10=Oel, 11=?" />
+			</message>
+
+		</service>
+
+		<service name="WS" description="Wetter Service" id="10">
+			<message name="WETTER_INFO" id="1"
+				description="Wetterdaten" >
+				<param pos="0" name="niederschlag" description="1 = Niederschlag" />
+				<param pos="1" name="wind" description="Impulse pro sec" />
+				<param pos="2" name="licht_ost" description="Sonne/Helligkeit" />
+				<param pos="3" name="licht_sued" description="Sonne/Helligkeit" />
+				<param pos="4" name="licht_west" description="Sonne/Helligkeit" />
+			</message>
+			<message name="LICHT_STATS_5MIN" id="2"
+				description="Licht, ueber 5min gemittelt" >
+				<param pos="0" name="licht_ost" description="Helligkeit" />
+				<param pos="1" name="licht_sued" description="Helligkeit" />
+				<param pos="2" name="licht_west" description="Helligkeit" />
+			</message>
+			<message name="WIND_STATS_5MIN" id="3"
+				description="Wind, ueber 5min gemittelt" >
+				<param pos="0" name="wind" description="Impulse pro sec" />
+			</message>
+		</service>
+
+		<service name="OAPS" description="Object Access Protocol Service" id="11">
+			<message name="OBJECT_COUNT_REQUEST" id="1"
+				description="Fragt nach der Anzahl der Objekte" >
+			</message>
+			<message name="OBJECT_COUNT_REPLAY" id="2"
+				description="Anzahl der Objekte" >
+				<param pos="0" name="count" description="Anzahl der Objekte" />
+			</message>
+			<message name="OBJECT_ATTRIBUTE_REQUEST" id="3"
+				description="Anfrage der Attribute eines Objekts" >
+				<param pos="0" name="oid" description="Objekt ID" />
+			</message>
+			<message name="OBJECT_ATTRIBUTE_REPLAY" id="4"
+				description="Attribute eines Knotens" >
+				<param pos="0" name="oid" description="Objekt ID" />
+				<param pos="1" name="oclass" description="Klasse des Objekts" />
+				<param pos="2" name="p1" description="opt. Parameter" />
+				<param pos="3" name="p2" description="opt. Parameter" />
+				<param pos="4" name="p3" description="opt. Parameter" />
+				<param pos="5" name="p4" description="opt. Parameter" />
+			</message>
+			<message name="FIELD_COUNT_REQUEST" id="5"
+				description="Fragt nach der Anzahl der Felder eines Objekts" >
+				<param pos="0" name="oid" description="Objekt ID" />
+			</message>
+			<message name="FIELD_COUNT_REPLAY" id="6"
+				description="Anzahl der Objekte" >
+				<param pos="0" name="oid" description="Objekt ID" />
+				<param pos="1" name="count" description="Anzahl der Felder" />
+			</message>
+			<message name="FIELD_ATTRIBUTE_REQUEST" id="7"
+				description="Anfrage der Attribute eines Feldes" >
+				<param pos="0" name="oid" description="Objekt ID" />
+				<param pos="1" name="fid" description="Field ID" />
+			</message>
+			<message name="FIELD_ATTRIBUTE_REPLAY" id="8"
+				description="Attribute eines Feldes" >
+				<param pos="0" name="oid" description="Objekt ID" />
+				<param pos="1" name="fid" description="Field ID" />
+				<param pos="2" name="fclass" description="Variablen-Typ bzw. Klasse des Feldes" />
+				<param pos="3" name="flags" description="bit0 = rw, bit1 = persistent, bit2 = array" />
+				<param pos="4" name="arraysize" description="" />
+			</message>
+			<message name="FIELD_READ_REQUEST" id="9"
+				description="Fragt nach dem aktuellen Wert des Feldes" >
+				<param pos="0" name="oid" description="Objekt ID" />
+				<param pos="1" name="fid" description="Field ID" />
+				<param pos="2" name="idx" description="opt. Array Index" />
+			</message>
+			<message name="FIELD_READ_REPLAY" id="10"
+				description="Liefert den Wert des Feldes" >
+				<param pos="0" name="oid" description="Objekt ID" />
+				<param pos="1" name="fid" description="Field ID" />
+				<param pos="2" name="idx" description="opt. Array Index" />
+				<param pos="3" name="value_hi" description="" />
+				<param pos="4" name="value_lo" description="" />
+			</message>
+			<message name="FIELD_WRITE_REQUEST" id="11"
+				description="" >
+				<param pos="0" name="oid" description="Objekt ID" />
+				<param pos="1" name="fid" description="Field ID" />
+				<param pos="2" name="idx" description="opt. Array Index" />
+				<param pos="3" name="value_hi" description="" />
+				<param pos="4" name="value_lo" description="" />
+			</message>
+			<message name="FIELD_WRITE_REPLAY" id="12"
+				description="" >
+				<param pos="0" name="oid" description="Objekt ID" />
+				<param pos="1" name="fid" description="Field ID" />
+				<param pos="2" name="idx" description="opt. Array Index" />
+			</message>
+
+		</service>
+
+	</protocol>
+
+	<protocol name="SYSLOG" description="Syslog Text Protocol" id="3" />
+
+</hcan-protocols>
+

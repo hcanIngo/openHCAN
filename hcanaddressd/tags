@@ -1,0 +1,27 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+CANFrame	frame.h	/^} CANFrame;$/;"	t
+CANFrame	main.h	/^} CANFrame;$/;"	t
+FRAME_H	frame.h	2;"	d
+MAIN_H	main.h	22;"	d
+MAX_PEERS	main.h	31;"	d
+SOCKET_H	socket.h	22;"	d
+TIMEOUT	main.h	34;"	d
+add_peer	main.c	/^int add_peer(struct sockaddr_in *peer)$/;"	f
+addr_cmp	main.c	/^int addr_cmp(const struct sockaddr_in *a, const struct sockaddr_in *b)$/;"	f
+data	frame.h	/^	uint8_t  data[8];$/;"	m
+data	main.h	/^	uint8_t  data[8];$/;"	m
+does_peer_exist	main.c	/^int does_peer_exist(struct sockaddr_in *peer)$/;"	f
+id	frame.h	/^	uint32_t id;$/;"	m
+id	main.h	/^	uint32_t id;$/;"	m
+main	main.c	/^int main()$/;"	f
+open_server_socket	socket.c	/^int open_server_socket(int port)$/;"	f
+peer_addr	main.c	/^struct sockaddr_in peer_addr[MAX_PEERS];$/;"	v
+peer_timeout	main.c	/^int peer_timeout[MAX_PEERS];$/;"	v
+sig_alarm	main.c	/^void sig_alarm(int sig)$/;"	f
+size	frame.h	/^	uint32_t  size;$/;"	m
+size	main.h	/^	uint32_t  size;$/;"	m

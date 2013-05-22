@@ -1,0 +1,19 @@
+<!ELEMENT hcan-protocols (protocol)+>
+<!ELEMENT protocol (service)*>
+	<!ATTLIST protocol id CDATA #REQUIRED>
+	<!ATTLIST protocol name CDATA #REQUIRED>
+	<!ATTLIST protocol description CDATA #REQUIRED>
+	<!ELEMENT service (message)*>
+		<!ATTLIST service id CDATA #REQUIRED>
+		<!ATTLIST service name CDATA #REQUIRED>
+		<!ATTLIST service description CDATA #REQUIRED>
+		<!ELEMENT message (param)*>
+			<!ATTLIST message id CDATA #REQUIRED>
+			<!ATTLIST message name CDATA #REQUIRED>
+			<!ATTLIST message description CDATA #REQUIRED>
+			<!ATTLIST message details CDATA #IMPLIED>
+			<!ELEMENT param (#PCDATA)>
+				<!ATTLIST param pos CDATA #REQUIRED>
+				<!ATTLIST param name CDATA #REQUIRED>
+				<!ATTLIST param description CDATA #REQUIRED>
+

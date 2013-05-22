@@ -1,0 +1,75 @@
+create temp_sensor
+  set io_pin 0
+  set gruppe 1
+  set modus 1
+  set interval 10
+  set ow_id 2832be9b00000005
+exit
+create temp_sensor
+  set io_pin 0
+  set gruppe 2
+  set modus 1
+  set interval 10
+  set ow_id 28d4f0b40000003f
+exit
+create temp_sensor
+  set io_pin 0
+  set gruppe 3
+  set modus 1
+  set interval 10
+  set ow_id 2828d09b00000022
+exit
+create heizung
+  set id 10
+  set port 0
+  set pwm_periode 20
+  set sensor_id 3
+  set zeitzone0_id 1
+  set zeitzone0_temp 80
+  set zeitzone1_id 2
+  set zeitzone1_temp 80
+  set zeitzone2_id 3
+  set zeitzone2_temp 80
+  set zeitzone3_id 4
+  set zeitzone3_temp 0
+  set zeitzone4_id 0
+  set zeitzone4_temp 0
+  set zeitzone5_id 0
+  set zeitzone5_temp 0
+  set zeitzone6_id 0
+  set zeitzone6_temp 0
+  set zeitzone7_id 0
+  set zeitzone7_temp 0
+exit
+create zeit_zone
+  set gruppe 1
+  set day_pattern 31
+  set from_hour 15
+  set from_minute 30
+  set to_hour 20
+  set to_minute 0
+exit
+create zeit_zone
+  set gruppe 2
+  set day_pattern 32
+  set from_hour 6
+  set from_minute 30
+  set to_hour 19
+  set to_minute 30
+exit
+create zeit_zone
+  set gruppe 3
+  set day_pattern 192
+  set from_hour 9
+  set from_minute 0
+  set to_hour 20
+  set to_minute 0
+exit
+create zeit_zone
+  set gruppe 4
+  set day_pattern 254
+  set from_hour 0
+  set from_minute 0
+  set to_hour 23
+  set to_minute 59
+exit

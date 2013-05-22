@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcandata: data_file_writer.cc Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>data_file_writer.cc</h1><a href="data__file__writer_8cc.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include "<a class="code" href="data__file__writer_8h.html">data_file_writer.h</a>"</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;libhcan++/traceable_error.h&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;errno.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;sys/types.h&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;sys/stat.h&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;fcntl.h&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;<a class="code" href="file__format__v1_8h.html">libhcandata/file_format_v1.h</a>&gt;</span>
+<a name="l00009"></a>00009 
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="keyword">using namespace </span>std;
+<a name="l00012"></a>00012 <span class="keyword">using namespace </span>hcan;
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 data_file_writer::data_file_writer(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;filename)
+<a name="l00015"></a>00015 {
+<a name="l00016"></a>00016     <span class="comment">// Datei zum Lesen + Schreiben oeffnen</span>
+<a name="l00017"></a>00017     
+<a name="l00018"></a>00018     <span class="keywordtype">int</span> result = open(filename.c_str(), O_CREAT | O_RDWR, 0640);
+<a name="l00019"></a>00019     <span class="keywordflow">if</span> (result == -1)
+<a name="l00020"></a>00020         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022     m_fd = result;
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024     <span class="comment">// 2 Moeglichkeiten:</span>
+<a name="l00025"></a>00025     <span class="comment">//</span>
+<a name="l00026"></a>00026     <span class="comment">// 1. Die Datei ist eben erzeugt worden; dann ist sie 0 bytes</span>
+<a name="l00027"></a>00027     <span class="comment">// gross</span>
+<a name="l00028"></a>00028     <span class="comment">//</span>
+<a name="l00029"></a>00029     <span class="comment">// 2. Die Datei exisitiert bereits; dann ist die size &gt; 0 bytes.</span>
+<a name="l00030"></a>00030     
+<a name="l00031"></a>00031     <span class="keyword">struct </span>stat statbuf;
+<a name="l00032"></a>00032     result = fstat(m_fd, &amp;statbuf);
+<a name="l00033"></a>00033     <span class="keywordflow">if</span> (result == -1)
+<a name="l00034"></a>00034         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036     <span class="keywordflow">if</span> (statbuf.st_size &gt; 0)
+<a name="l00037"></a>00037     {
+<a name="l00038"></a>00038         <span class="comment">// Datei exisitiert bereits; nun pruefen, ob sie</span>
+<a name="l00039"></a>00039         <span class="comment">// valide ist:</span>
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041         check_if_file_valid();
+<a name="l00042"></a>00042         cerr &lt;&lt; <span class="stringliteral">"file exists and is valid"</span> &lt;&lt; endl;
+<a name="l00043"></a>00043     }
+<a name="l00044"></a>00044     <span class="keywordflow">else</span>
+<a name="l00045"></a>00045     {
+<a name="l00046"></a>00046         <span class="comment">// Datei exisitiert noch nicht - einen Header und</span>
+<a name="l00047"></a>00047         <span class="comment">// einen Datenblock anlegen und zum Schreiben</span>
+<a name="l00048"></a>00048         <span class="comment">// vorbereiten:</span>
+<a name="l00049"></a>00049         
+<a name="l00050"></a>00050         setup_file();
+<a name="l00051"></a>00051     }
+<a name="l00052"></a>00052 }
+<a name="l00053"></a>00053 
+<a name="l00054"></a><a class="code" href="classhcan_1_1data__file__writer.html#a57b6a2a97e0acb579c5f990ee629e4d">00054</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1data__file__writer.html#a57b6a2a97e0acb579c5f990ee629e4d">data_file_writer::write_frame</a>(
+<a name="l00055"></a>00055                     uint16_t src,
+<a name="l00056"></a>00056                     uint16_t dst,
+<a name="l00057"></a>00057                     uint16_t proto,
+<a name="l00058"></a>00058                     uint16_t size,
+<a name="l00059"></a>00059                     uint8_t data[8])
+<a name="l00060"></a>00060 {
+<a name="l00061"></a>00061     <a class="code" href="structhcan_1_1data__file__frame__entry.html">data_file_frame_entry</a> frame;
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     frame.<a class="code" href="structhcan_1_1data__file__frame__entry.html#098fca57ac3e0788b3b0ebacdecac96d">timestamp</a> = time(0);
+<a name="l00064"></a>00064     frame.<a class="code" href="structhcan_1_1data__file__frame__entry.html#f336adde1d114e9326a87664fe5590ed">src</a> = src;
+<a name="l00065"></a>00065     frame.<a class="code" href="structhcan_1_1data__file__frame__entry.html#141e2ce1a28f169188107e5401df7dac">dst</a> = dst;
+<a name="l00066"></a>00066     frame.<a class="code" href="structhcan_1_1data__file__frame__entry.html#b061a32a535c188bfe88b4086dd70008">proto</a> = proto;
+<a name="l00067"></a>00067     frame.<a class="code" href="structhcan_1_1data__file__frame__entry.html#9e9a1dc1428e6f2083aaf639f8ed8dfa">size</a> = size;
+<a name="l00068"></a>00068     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 8; i++)
+<a name="l00069"></a>00069         frame.<a class="code" href="structhcan_1_1data__file__frame__entry.html#a220b0bd7b82b8bdb2d04d691b2e982c">data</a>[i] = data[i];
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071     write(m_fd,&amp;frame,<span class="keyword">sizeof</span>(frame));
+<a name="l00072"></a>00072 }
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 <span class="keywordtype">void</span> data_file_writer::setup_file()
+<a name="l00076"></a>00076 {
+<a name="l00077"></a>00077     <span class="comment">// 1. Header Block schreiben:</span>
+<a name="l00078"></a>00078     
+<a name="l00079"></a>00079     <a class="code" href="structhcan_1_1data__file__header__block__v1__t.html">data_file_header_block_v1_t</a> header;
+<a name="l00080"></a>00080     header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#6557c8d1b060b7d8e7109f3b94d2ba15">type</a> = <a class="code" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec00a7a0e871e0b244e70a05cd9e4818b9e">data_file_type_header</a>;
+<a name="l00081"></a>00081     header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#69342f9638ab7c4b8762241c9b1fd105">size</a> = <span class="keyword">sizeof</span>(header);
+<a name="l00082"></a>00082     header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#4710db82136775be5d943aa2831e713d">magic</a> = <a class="code" href="file__format__v1_8h.html#d52d475f3b8079b6e7f6c1d5210b4034">DATA_FILE_MAGIC_1</a>;
+<a name="l00083"></a>00083     header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#57e38c6b7fe4136f595493f3a5666ef1">magic2</a> = <a class="code" href="file__format__v1_8h.html#e824c65b25f9df68be87a4448c7bfd3e">DATA_FILE_MAGIC_2</a>;
+<a name="l00084"></a>00084     write(m_fd,&amp;header,<span class="keyword">sizeof</span>(header));
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086     <span class="comment">// 2. Data Block anlegen:</span>
+<a name="l00087"></a>00087     
+<a name="l00088"></a>00088     <a class="code" href="structhcan_1_1data__file__data__block__t.html">data_file_data_block_t</a> datablock;
+<a name="l00089"></a>00089     datablock.<a class="code" href="structhcan_1_1data__file__data__block__t.html#e3cf7a442fcd912869cd48e23fd4ee8c">type</a> = <a class="code" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec09fc5c719a41014ffacc30b4ceee147fb">data_file_type_data</a>;
+<a name="l00090"></a>00090     datablock.<a class="code" href="structhcan_1_1data__file__data__block__t.html#cd57ed2d50be502ef91351f65811f77f">size</a> = <span class="keyword">sizeof</span>(datablock);
+<a name="l00091"></a>00091     datablock.<a class="code" href="structhcan_1_1data__file__data__block__t.html#e7e0d8c18bd06c7297a019f91382b90b">first_timestamp</a> = time(0);
+<a name="l00092"></a>00092     datablock.<a class="code" href="structhcan_1_1data__file__data__block__t.html#fa5a0210d58991154f027f16c1abe68a">last_timestamp</a> = 0;
+<a name="l00093"></a>00093     write(m_fd,&amp;datablock,<span class="keyword">sizeof</span>(datablock));
+<a name="l00094"></a>00094 }
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096 <span class="keywordtype">void</span> data_file_writer::write_data_block(<span class="keywordtype">int</span> data_pos,
+<a name="l00097"></a>00097         <span class="keyword">const</span> <a class="code" href="structhcan_1_1data__file__data__block__t.html">data_file_data_block_t</a> *data)
+<a name="l00098"></a>00098 {
+<a name="l00099"></a>00099     <span class="comment">// an Anfang des Daten Blocks spulen</span>
+<a name="l00100"></a>00100     off_t pos = lseek(m_fd,data_pos, SEEK_SET);
+<a name="l00101"></a>00101     <span class="keywordflow">if</span> (pos == 1)
+<a name="l00102"></a>00102         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104     <span class="comment">// Daten Block zurueckschreiben</span>
+<a name="l00105"></a>00105     write(m_fd,data,<span class="keyword">sizeof</span>(<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html">data_file_header_block_v1_t</a>));
+<a name="l00106"></a>00106 }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 <a class="code" href="structhcan_1_1data__file__frame__entry.html">data_file_frame_entry</a> data_file_writer::read_frame()
+<a name="l00109"></a>00109 {
+<a name="l00110"></a>00110     <a class="code" href="structhcan_1_1data__file__frame__entry.html">data_file_frame_entry</a> frame;
+<a name="l00111"></a>00111     read(m_fd,&amp;frame,<span class="keyword">sizeof</span>(frame));
+<a name="l00112"></a>00112     <span class="keywordflow">return</span> frame;
+<a name="l00113"></a>00113 }
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 <span class="keywordtype">void</span> data_file_writer::sync()
+<a name="l00116"></a>00116 {
+<a name="l00117"></a>00117     <span class="comment">// 1. DataBlock Size schreiben:</span>
+<a name="l00118"></a>00118     
+<a name="l00119"></a>00119     <span class="comment">// ans Ende fahren, Position merken:</span>
+<a name="l00120"></a>00120     off_t end_pos = lseek(m_fd, 0, SEEK_END);
+<a name="l00121"></a>00121     <span class="keywordflow">if</span> (end_pos == -1)
+<a name="l00122"></a>00122         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124     <span class="comment">// Zum Anfang spulen</span>
+<a name="l00125"></a>00125     off_t pos = lseek(m_fd, 0, SEEK_SET);
+<a name="l00126"></a>00126     <span class="keywordflow">if</span> (pos == -1)
+<a name="l00127"></a>00127         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00128"></a>00128     
+<a name="l00129"></a>00129     <span class="comment">// Header Block einlesen</span>
+<a name="l00130"></a>00130     <a class="code" href="structhcan_1_1data__file__header__block__v1__t.html">data_file_header_block_v1_t</a> header;
+<a name="l00131"></a>00131     read(m_fd,&amp;header,<span class="keyword">sizeof</span>(header));
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133     <span class="comment">// An den Anfang des Data Blocks spulen</span>
+<a name="l00134"></a>00134     off_t data_pos = lseek(m_fd, header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#69342f9638ab7c4b8762241c9b1fd105">size</a>, SEEK_SET);
+<a name="l00135"></a>00135     <span class="keywordflow">if</span> (data_pos == -1)
+<a name="l00136"></a>00136         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138     <span class="comment">// erste Bytes des Data Blocks einlesen</span>
+<a name="l00139"></a>00139     <a class="code" href="structhcan_1_1data__file__data__block__t.html">data_file_data_block_t</a> data;
+<a name="l00140"></a>00140     read(m_fd,&amp;data,<span class="keyword">sizeof</span>(data));
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142     <span class="comment">// Groesse des Datablocks berechnen</span>
+<a name="l00143"></a>00143     <span class="keywordtype">size_t</span> size = end_pos - data_pos;
+<a name="l00144"></a>00144     data.<a class="code" href="structhcan_1_1data__file__data__block__t.html#cd57ed2d50be502ef91351f65811f77f">size</a> = size;
+<a name="l00145"></a>00145     cerr &lt;&lt; <span class="stringliteral">"data block size: "</span> &lt;&lt; size &lt;&lt; endl;
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147     <span class="comment">// Wenn mindestens 1 Frame im datenblock steht:</span>
+<a name="l00148"></a>00148     <span class="keywordflow">if</span> (size &gt; <span class="keyword">sizeof</span>(data))
+<a name="l00149"></a>00149     {
+<a name="l00150"></a>00150         <span class="comment">// 1. Frame lesen - das ist das aelteste Frame:</span>
+<a name="l00151"></a>00151         <a class="code" href="structhcan_1_1data__file__frame__entry.html">data_file_frame_entry</a> oldest_frame = read_frame();
+<a name="l00152"></a>00152         data.<a class="code" href="structhcan_1_1data__file__data__block__t.html#e7e0d8c18bd06c7297a019f91382b90b">first_timestamp</a> = oldest_frame.<a class="code" href="structhcan_1_1data__file__frame__entry.html#098fca57ac3e0788b3b0ebacdecac96d">timestamp</a>;
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154         pos = lseek(m_fd, -24, SEEK_END);
+<a name="l00155"></a>00155         <span class="keywordflow">if</span> (pos == -1)
+<a name="l00156"></a>00156             <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158         <span class="comment">// letztes Frame lesen - das ist das neuste Frame:</span>
+<a name="l00159"></a>00159         <a class="code" href="structhcan_1_1data__file__frame__entry.html">data_file_frame_entry</a> newest_frame = read_frame();
+<a name="l00160"></a>00160         data.<a class="code" href="structhcan_1_1data__file__data__block__t.html#fa5a0210d58991154f027f16c1abe68a">last_timestamp</a> = newest_frame.<a class="code" href="structhcan_1_1data__file__frame__entry.html#098fca57ac3e0788b3b0ebacdecac96d">timestamp</a>;
+<a name="l00161"></a>00161     }
+<a name="l00162"></a>00162     <span class="keywordflow">else</span>
+<a name="l00163"></a>00163     {
+<a name="l00164"></a>00164         data.<a class="code" href="structhcan_1_1data__file__data__block__t.html#e7e0d8c18bd06c7297a019f91382b90b">first_timestamp</a> = 0;
+<a name="l00165"></a>00165         data.<a class="code" href="structhcan_1_1data__file__data__block__t.html#fa5a0210d58991154f027f16c1abe68a">last_timestamp</a> = 0;
+<a name="l00166"></a>00166     }
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168     <span class="comment">// Datenblock schreiben</span>
+<a name="l00169"></a>00169     write_data_block(data_pos, &amp;data);
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171     <span class="comment">// Zum Ende spulen</span>
+<a name="l00172"></a>00172     pos = lseek(m_fd, 0, SEEK_END);
+<a name="l00173"></a>00173     <span class="keywordflow">if</span> (pos == -1)
+<a name="l00174"></a>00174         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00175"></a>00175 }
+<a name="l00176"></a>00176 
+<a name="l00177"></a>00177 <span class="keywordtype">void</span> data_file_writer::check_if_file_valid()
+<a name="l00178"></a>00178 {
+<a name="l00179"></a>00179     <span class="comment">// Wir akzeptieren nur Format 1:</span>
+<a name="l00180"></a>00180     <span class="comment">// 1. Header Block</span>
+<a name="l00181"></a>00181     <span class="comment">// 2. Data Block</span>
+<a name="l00182"></a>00182     <span class="comment">//</span>
+<a name="l00183"></a>00183     
+<a name="l00184"></a>00184     <span class="comment">// an den Anfang spulen</span>
+<a name="l00185"></a>00185     off_t pos = lseek(m_fd, 0, SEEK_SET);
+<a name="l00186"></a>00186     <span class="keywordflow">if</span> (pos == -1)
+<a name="l00187"></a>00187         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189     <span class="comment">// Header Block einlesen und pruefen:</span>
+<a name="l00190"></a>00190     <a class="code" href="structhcan_1_1data__file__header__block__v1__t.html">data_file_header_block_v1_t</a> header;
+<a name="l00191"></a>00191     read(m_fd,&amp;header,<span class="keyword">sizeof</span>(header));
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193     <span class="keywordflow">if</span> (header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#4710db82136775be5d943aa2831e713d">magic</a> != <a class="code" href="file__format__v1_8h.html#d52d475f3b8079b6e7f6c1d5210b4034">DATA_FILE_MAGIC_1</a>)
+<a name="l00194"></a>00194         <span class="keywordflow">throw</span> traceable_error(<span class="stringliteral">"wrong DATA_FILE_MAGIC_1 value"</span>);
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196     <span class="keywordflow">if</span> (header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#57e38c6b7fe4136f595493f3a5666ef1">magic2</a> != <a class="code" href="file__format__v1_8h.html#e824c65b25f9df68be87a4448c7bfd3e">DATA_FILE_MAGIC_2</a>)
+<a name="l00197"></a>00197         <span class="keywordflow">throw</span> traceable_error(<span class="stringliteral">"wrong DATA_FILE_MAGIC_2 value"</span>);
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199     <span class="keywordflow">if</span> (header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#6557c8d1b060b7d8e7109f3b94d2ba15">type</a> != <a class="code" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec00a7a0e871e0b244e70a05cd9e4818b9e">data_file_type_header</a>)
+<a name="l00200"></a>00200         <span class="keywordflow">throw</span> traceable_error(<span class="stringliteral">"wrong header block type"</span>);
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202     <span class="comment">// Zum Datenblock spulen</span>
+<a name="l00203"></a>00203     pos = lseek(m_fd, header.<a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#69342f9638ab7c4b8762241c9b1fd105">size</a>, SEEK_SET);
+<a name="l00204"></a>00204     <span class="keywordflow">if</span> (pos == -1)
+<a name="l00205"></a>00205         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207     <span class="comment">// Data Block einlesen und pruefen:</span>
+<a name="l00208"></a>00208     <a class="code" href="structhcan_1_1data__file__data__block__t.html">data_file_data_block_t</a> data;
+<a name="l00209"></a>00209     read(m_fd,&amp;data,<span class="keyword">sizeof</span>(data));
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211     <span class="keywordflow">if</span> (data.<a class="code" href="structhcan_1_1data__file__data__block__t.html#e3cf7a442fcd912869cd48e23fd4ee8c">type</a> != <a class="code" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec09fc5c719a41014ffacc30b4ceee147fb">data_file_type_data</a>)
+<a name="l00212"></a>00212         <span class="keywordflow">throw</span> traceable_error(<span class="stringliteral">"wrong data block type"</span>);
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214     <span class="comment">// Zum Ende spulen</span>
+<a name="l00215"></a>00215     pos = lseek(m_fd, 0, SEEK_END);
+<a name="l00216"></a>00216     <span class="keywordflow">if</span> (pos == -1)
+<a name="l00217"></a>00217         <span class="keywordflow">throw</span> traceable_error(strerror(errno));
+<a name="l00218"></a>00218 }
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220 
+<a name="l00221"></a><a class="code" href="classhcan_1_1data__file__writer.html#3e2bb75cb501e70e11781f568934f3d5">00221</a> <a class="code" href="classhcan_1_1data__file__writer.html#3e2bb75cb501e70e11781f568934f3d5">data_file_writer::~data_file_writer</a>()
+<a name="l00222"></a>00222 {
+<a name="l00223"></a>00223     sync();
+<a name="l00224"></a>00224     close(m_fd);
+<a name="l00225"></a>00225 }
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:41:32 2009 für libhcandata von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

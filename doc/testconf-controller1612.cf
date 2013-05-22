@@ -1,0 +1,162 @@
+create taster
+  set port 0
+  set gruppe 1
+exit
+create taster
+  set port 1
+  set gruppe 1
+exit
+create taster
+  set port 2
+  set gruppe 1
+exit
+create taster
+  set port 3
+  set gruppe 1
+exit
+create taster
+  set port 4
+  set gruppe 1
+exit
+create taster
+  set port 5
+  set gruppe 1
+exit
+create taster
+  set port 6
+  set gruppe 1
+exit
+create taster
+  set port 7
+  set gruppe 1
+exit
+create taster
+  set port 8 
+  set gruppe 1
+exit
+create taster
+  set port 9 
+  set gruppe 1
+exit
+create taster
+  set port 10 
+  set gruppe 1
+exit
+create taster
+  set port 11 
+  set gruppe 1
+exit
+create taster
+  set port 12
+  set gruppe 1
+exit
+create taster
+  set port 13
+  set gruppe 1
+exit
+create taster
+  set port 14
+  set gruppe 1
+exit
+create taster
+  set port 15
+  set gruppe 1
+exit
+
+
+create powerport
+  set port 0
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 1
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 2
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 3
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 4
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 5
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 6
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 7
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 8
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 9
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 10
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+
+create powerport
+  set port 11
+  set gruppe0 1
+  set gruppe1 255
+  set gruppe2 255
+  set gruppe3 255
+exit
+

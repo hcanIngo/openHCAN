@@ -1,0 +1,10 @@
+<area shape="rect" href="$classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86" title="hcan::board_connection::dst" alt="" coords="371,69,573,96">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#78fb1a82f40ef597da1a88a2e6bad0c3" title="hcan::hcan_transport::recv_DEVICE_STATE_REPLAY" alt="" coords="300,120,644,147">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#6dbdef3d17d46d41f5732d19f80fdbb7" title="hcan::hcan_transport::send_DEVICE_STATE_REQUEST" alt="" coords="291,196,653,223">
+<area shape="rect" href="$classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7" title="hcan::board_connection::src" alt="" coords="372,247,572,273">
+<area shape="rect" href="$classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="752,5,888,32">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#bd1b8d59d93c69da4e0a0b9c32fbdb5d" title="hcan::hcan_transport::recv_frame" alt="" coords="701,56,939,83">
+<area shape="rect" href="$classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="755,107,885,133">
+<area shape="rect" href="$classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="757,157,883,184">
+<area shape="rect" href="$classhcan_1_1hcan__transport.html#4a7bf6fde4f373e2e0126025d273e206" title="hcan::hcan_transport::socket" alt="" coords="716,208,924,235">
+<area shape="rect" href="$classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="743,259,897,285">

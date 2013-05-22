@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: hcan_rts.h-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>hcan_rts.h-Dateireferenz</h1><code>#include &lt;<a class="el" href="canix_8h-source.html">canix/canix.h</a>&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für hcan_rts.h:</div>
+<div class="dynsection">
+<p><center><img src="hcan__rts_8h__incl.png" border="0" usemap="#hcan_rts.h_map" alt=""></center>
+</div>
+
+<p>
+<div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dynsection">
+<p><center><img src="hcan__rts_8h__dep__incl.png" border="0" usemap="#hcan_rts.hdep_map" alt=""></center>
+</div>
+
+<p>
+<a href="hcan__rts_8h-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="hcan__rts_8h.html#d214fae0fb99bd7801a0a1ed47cb6613">canix_SFP_RTS_handler</a> (const <a class="el" href="structcanix__frame.html">canix_frame</a> *frame)</td></tr>
+
+</table>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="d214fae0fb99bd7801a0a1ed47cb6613"></a><!-- doxytag: member="hcan_rts.h::canix_SFP_RTS_handler" ref="d214fae0fb99bd7801a0a1ed47cb6613" args="(const canix_frame *frame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_SFP_RTS_handler           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcanix__frame.html">canix_frame</a> *&nbsp;</td>
+          <td class="paramname"> <em>frame</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Stellt den HCAN RTS Frame Callback dar. Es werden Zeit-Informationen verarbeitet:<p>
+<ul>
+<li>HCAN_RTS_TIME_INFO</li><li>HCAN_RTS_DATE_INFO</li></ul>
+<p>
+Diese werden vom Time-Master gesendet; jeder RTS Empfaenger synchronisiert sich dazu, sofern die Abweichung einen bestimmten Betrag ueberschreitet.<p>
+<em>Hinweis:</em> Das Datum wird <em>immer</em> uebernommen.<p>
+Es wird aber <em>nicht</em> die Time-Master Funktion uebernommen, wenn eine Weile keine Time-Meldungen mehr kommen. Dieses Feature ist z.Z. nur in der Controller-1612 Firmware implementiert.<p>
+Auch werden Zeit-Anfrage beantwortet:<ul>
+<li>HCAN_RTS_TIME_REQUEST</li><li>HCAN_RTS_DATE_REQUEST</li></ul>
+<p>
+Ueber diese Befehle koennen HCAN Clients die aktuelle Zeit / das Datum auslesen. 
+<p>Definiert in Zeile <a class="el" href="hcan__rts_8c-source.html#l00034">34</a> der Datei <a class="el" href="hcan__rts_8c-source.html">hcan_rts.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00472">canix_frame_send()</a>, <a class="el" href="canix_8c-source.html#l00093">canix_rtc_clock</a>, <a class="el" href="canix_8c-source.html#l00408">canix_selfaddr()</a>, <a class="el" href="canix_8h-source.html#l00147">canix_frame::data</a>, <a class="el" href="rtc_8h-source.html#l00030">canix_rtc_clock_t::day_of_month</a>, <a class="el" href="rtc_8h-source.html#l00018">canix_rtc_clock_t::day_of_week</a>, <a class="el" href="canix_8h-source.html#l00131">canix_frame::dst</a>, <a class="el" href="rtc_8h-source.html#l00020">canix_rtc_clock_t::hour</a>, <a class="el" href="rtc_8h-source.html#l00027">canix_rtc_clock_t::last_date_update</a>, <a class="el" href="rtc_8h-source.html#l00022">canix_rtc_clock_t::minute</a>, <a class="el" href="rtc_8h-source.html#l00032">canix_rtc_clock_t::month_of_year</a>, <a class="el" href="canix_8h-source.html#l00136">canix_frame::proto</a>, <a class="el" href="rtc_8h-source.html#l00024">canix_rtc_clock_t::second</a>, <a class="el" href="canix_8h-source.html#l00142">canix_frame::size</a>, <a class="el" href="canix_8h-source.html#l00126">canix_frame::src</a> und <a class="el" href="rtc_8h-source.html#l00036">canix_rtc_clock_t::year</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="hcan__rts_8h_d214fae0fb99bd7801a0a1ed47cb6613_cgraph.png" border="0" usemap="#hcan__rts_8h_d214fae0fb99bd7801a0a1ed47cb6613_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

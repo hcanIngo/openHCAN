@@ -1,0 +1,1543 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+ABAT	../../canix/mcp2515.h	258;"	d
+ABORT_TX	../../canix/mcp2515_defs.h	169;"	d
+ABTF	../../canix/mcp2515.h	334;"	d
+ADDR_MASK	../../canix/canix.h	77;"	d
+APP_END	../../canix/chipdef.h	111;"	d
+APP_END	../../canix/chipdef.h	115;"	d
+APP_END	../../canix/chipdef.h	119;"	d
+APP_END	../../canix/chipdef.h	123;"	d
+APP_END	../../canix/chipdef.h	127;"	d
+APP_END	../../canix/chipdef.h	142;"	d
+APP_END	../../canix/chipdef.h	146;"	d
+APP_END	../../canix/chipdef.h	150;"	d
+APP_END	../../canix/chipdef.h	154;"	d
+APP_END	../../canix/chipdef.h	21;"	d
+APP_END	../../canix/chipdef.h	25;"	d
+APP_END	../../canix/chipdef.h	29;"	d
+APP_END	../../canix/chipdef.h	33;"	d
+APP_END	../../canix/chipdef.h	51;"	d
+APP_END	../../canix/chipdef.h	55;"	d
+APP_END	../../canix/chipdef.h	59;"	d
+APP_END	../../canix/chipdef.h	63;"	d
+APP_END	../../canix/chipdef.h	81;"	d
+APP_END	../../canix/chipdef.h	85;"	d
+APP_END	../../canix/chipdef.h	89;"	d
+APP_END	../../canix/chipdef.h	93;"	d
+APP_PAGES	../../canix/chipdef.h	110;"	d
+APP_PAGES	../../canix/chipdef.h	114;"	d
+APP_PAGES	../../canix/chipdef.h	118;"	d
+APP_PAGES	../../canix/chipdef.h	122;"	d
+APP_PAGES	../../canix/chipdef.h	126;"	d
+APP_PAGES	../../canix/chipdef.h	141;"	d
+APP_PAGES	../../canix/chipdef.h	145;"	d
+APP_PAGES	../../canix/chipdef.h	149;"	d
+APP_PAGES	../../canix/chipdef.h	153;"	d
+APP_PAGES	../../canix/chipdef.h	20;"	d
+APP_PAGES	../../canix/chipdef.h	24;"	d
+APP_PAGES	../../canix/chipdef.h	28;"	d
+APP_PAGES	../../canix/chipdef.h	32;"	d
+APP_PAGES	../../canix/chipdef.h	50;"	d
+APP_PAGES	../../canix/chipdef.h	54;"	d
+APP_PAGES	../../canix/chipdef.h	58;"	d
+APP_PAGES	../../canix/chipdef.h	62;"	d
+APP_PAGES	../../canix/chipdef.h	80;"	d
+APP_PAGES	../../canix/chipdef.h	84;"	d
+APP_PAGES	../../canix/chipdef.h	88;"	d
+APP_PAGES	../../canix/chipdef.h	92;"	d
+B0BFE	../../canix/mcp2515.h	228;"	d
+B0BFM	../../canix/mcp2515.h	230;"	d
+B0BFS	../../canix/mcp2515.h	226;"	d
+B0RTS	../../canix/mcp2515.h	237;"	d
+B0RTSM	../../canix/mcp2515.h	240;"	d
+B1BFE	../../canix/mcp2515.h	227;"	d
+B1BFM	../../canix/mcp2515.h	229;"	d
+B1BFS	../../canix/mcp2515.h	225;"	d
+B1RTS	../../canix/mcp2515.h	236;"	d
+B1RTSM	../../canix/mcp2515.h	239;"	d
+B2RTS	../../canix/mcp2515.h	235;"	d
+B2RTSM	../../canix/mcp2515.h	238;"	d
+BFPCTRL	../../canix/mcp2515.h	109;"	d
+BRP0	../../canix/mcp2515.h	293;"	d
+BRP0	../../canix/mcp2515.h	393;"	d
+BRP1	../../canix/mcp2515.h	292;"	d
+BRP1	../../canix/mcp2515.h	392;"	d
+BRP2	../../canix/mcp2515.h	291;"	d
+BRP2	../../canix/mcp2515.h	391;"	d
+BRP3	../../canix/mcp2515.h	290;"	d
+BRP3	../../canix/mcp2515.h	390;"	d
+BRP4	../../canix/mcp2515.h	289;"	d
+BRP4	../../canix/mcp2515.h	389;"	d
+BRP5	../../canix/mcp2515.h	288;"	d
+BRP5	../../canix/mcp2515.h	388;"	d
+BTLMODE	../../canix/mcp2515.h	274;"	d
+BTLMODE	../../canix/mcp2515.h	406;"	d
+BUKT	../../canix/mcp2515.h	347;"	d
+BUKT1	../../canix/mcp2515.h	348;"	d
+CANCTRL	../../canix/mcp2515.h	112;"	d
+CANINTE	../../canix/mcp2515.h	140;"	d
+CANINTE	../../canix/mcp2515.h	430;"	d
+CANINTF	../../canix/mcp2515.h	141;"	d
+CANINTF	../../canix/mcp2515.h	431;"	d
+CANIX_H	../../canix/canix.h	22;"	d
+CANIX_LED_H	../../canix/led.h	22;"	d
+CANIX_LED_RED	../../canix/led.h	27;"	d
+CANIX_LED_RED	../../canix/led.h	34;"	d
+CANIX_LED_RED	../../canix/led.h	41;"	d
+CANIX_LED_YELLOW	../../canix/led.h	26;"	d
+CANIX_LED_YELLOW	../../canix/led.h	33;"	d
+CANIX_LED_YELLOW	../../canix/led.h	40;"	d
+CANIX_QUEUE_SIZE	../../canix/canix.h	297;"	d
+CANIX_RTC_H	../../canix/rtc.h	2;"	d
+CANIX_RTC_TCNT0_INIT	../../canix/canix.c	88;"	d	file:
+CANIX_VERSION	../../canix/canix.c	153;"	d	file:
+CANSTAT	../../canix/mcp2515.h	111;"	d
+CAN_EID	../../canix/mcp2515.h	438;"	d
+CAN_RTR	../../canix/mcp2515.h	437;"	d
+CHIPDEF_H	../../canix/chipdef.h	3;"	d
+CLKEN	../../canix/mcp2515.h	259;"	d
+CLKOUT_DISABLE	../../canix/mcp2515_defs.h	172;"	d
+CLKOUT_ENABLE	../../canix/mcp2515_defs.h	171;"	d
+CLKOUT_PS1	../../canix/mcp2515_defs.h	173;"	d
+CLKOUT_PS2	../../canix/mcp2515_defs.h	174;"	d
+CLKOUT_PS4	../../canix/mcp2515_defs.h	175;"	d
+CLKOUT_PS8	../../canix/mcp2515_defs.h	176;"	d
+CLKPRE0	../../canix/mcp2515.h	261;"	d
+CLKPRE1	../../canix/mcp2515.h	260;"	d
+CNF1	../../canix/mcp2515.h	139;"	d
+CNF1	../../canix/mcp2515.h	429;"	d
+CNF2	../../canix/mcp2515.h	138;"	d
+CNF2	../../canix/mcp2515.h	428;"	d
+CNF3	../../canix/mcp2515.h	137;"	d
+CNF3	../../canix/mcp2515.h	427;"	d
+CONVERT_T	onewire.h	13;"	d
+DARLINGTONOUTPUT_H	darlingtonoutput.h	2;"	d
+DATA_ERR	onewire.h	21;"	d
+DEVICES_H	devices.h	2;"	d
+DLC0	../../canix/mcp2515.h	379;"	d
+DLC1	../../canix/mcp2515.h	378;"	d
+DLC2	../../canix/mcp2515.h	377;"	d
+DLC3	../../canix/mcp2515.h	376;"	d
+DUNSTABZUGPORT_H	dunstabzugport.h	2;"	d
+EDS_BLOCKS_H	../../include/eds_blocks.h	22;"	d
+EDS_BLOCK_DATA	../../canix/eds.h	28;"	d
+EDS_BLOCK_DIRECTORY	../../include/eds_blocks.h	27;"	d
+EDS_BLOCK_DIRECTORY_SIZE	../../include/eds_blocks.h	36;"	d
+EDS_BLOCK_EMPTY	../../include/eds_blocks.h	25;"	d
+EDS_BLOCK_IS_FREE	../../canix/eds.h	24;"	d
+EDS_BLOCK_SIZE	../../canix/eds.h	25;"	d
+EDS_BLOCK_STRING	../../include/eds_blocks.h	26;"	d
+EDS_BLOCK_TYPE	../../canix/eds.h	23;"	d
+EDS_DATA_START	../../canix/eds.h	14;"	d
+EDS_DEFINITIONS_H	../../include/eds-structs.h	3;"	d
+EDS_END	../../canix/eds.h	15;"	d
+EDS_H	../../canix/eds.h	2;"	d
+EDS_INVALID_POINTER	../../canix/eds.h	20;"	d
+EDS_MAGIC1	../../canix/eds.c	11;"	d	file:
+EDS_MAGIC2	../../canix/eds.c	12;"	d	file:
+EDS_NOT_FORMATED	../../canix/eds.h	19;"	d
+EDS_OK	../../canix/eds.h	18;"	d
+EDS_PAGE_ID	../../canix/eds.h	39;"	d
+EDS_PAGE_NEXT	../../canix/eds.h	41;"	d
+EDS_PAGE_PARENT	../../canix/eds.h	40;"	d
+EDS_PAGE_PREV	../../canix/eds.h	42;"	d
+EDS_SET_BLOCK_DATA	../../canix/eds.h	29;"	d
+EDS_SET_BLOCK_SIZE	../../canix/eds.h	26;"	d
+EDS_SET_BLOCK_TYPE	../../canix/eds.h	27;"	d
+EDS_START	../../canix/eds.h	13;"	d
+EDS_TYPES_H	../../include/eds_types.h	2;"	d
+EDS_dir_page_BLOCK_ID	../../include/eds-structs.h	440;"	d
+EDS_dunstabzugport_BLOCK_ID	../../include/eds-structs.h	624;"	d
+EDS_fenster_monitor_page_BLOCK_ID	../../include/eds-structs.h	588;"	d
+EDS_flappingfilter_agent_BLOCK_ID	../../include/eds-structs.h	292;"	d
+EDS_foreach_block_between	../../canix/eds.h	34;"	d
+EDS_heiz_page_BLOCK_ID	../../include/eds-structs.h	458;"	d
+EDS_heizung_BLOCK_ID	../../include/eds-structs.h	690;"	d
+EDS_heizungssteuerung_BLOCK_ID	../../include/eds-structs.h	356;"	d
+EDS_lcd_light_settings_BLOCK_ID	../../include/eds-structs.h	386;"	d
+EDS_lichtzone_BLOCK_ID	../../include/eds-structs.h	718;"	d
+EDS_powerport_BLOCK_ID	../../include/eds-structs.h	736;"	d
+EDS_powerport_page_BLOCK_ID	../../include/eds-structs.h	526;"	d
+EDS_prio_agent_BLOCK_ID	../../include/eds-structs.h	224;"	d
+EDS_reedkontakt_BLOCK_ID	../../include/eds-structs.h	750;"	d
+EDS_rolladen_BLOCK_ID	../../include/eds-structs.h	778;"	d
+EDS_rolladen_id_assignment_BLOCK_ID	../../include/eds-structs.h	56;"	d
+EDS_rolladen_page_BLOCK_ID	../../include/eds-structs.h	482;"	d
+EDS_screensaver_page_BLOCK_ID	../../include/eds-structs.h	422;"	d
+EDS_sonnenschutz_agent_BLOCK_ID	../../include/eds-structs.h	198;"	d
+EDS_state2event_agent_BLOCK_ID	../../include/eds-structs.h	236;"	d
+EDS_tag_nacht_agent_BLOCK_ID	../../include/eds-structs.h	120;"	d
+EDS_tastdimmer_BLOCK_ID	../../include/eds-structs.h	806;"	d
+EDS_taster_BLOCK_ID	../../include/eds-structs.h	818;"	d
+EDS_taster_page_BLOCK_ID	../../include/eds-structs.h	504;"	d
+EDS_temp_anzeige_page_BLOCK_ID	../../include/eds-structs.h	608;"	d
+EDS_tempsensor_BLOCK_ID	../../include/eds-structs.h	834;"	d
+EDS_timeservice_BLOCK_ID	../../include/eds-structs.h	846;"	d
+EDS_userpanel_shortcuts_BLOCK_ID	../../include/eds-structs.h	408;"	d
+EDS_wetterschutz_agent_BLOCK_ID	../../include/eds-structs.h	208;"	d
+EDS_wetterstation_data_BLOCK_ID	../../include/eds-structs.h	374;"	d
+EDS_zeitfilter_agent_BLOCK_ID	../../include/eds-structs.h	280;"	d
+EDS_zeitschaltuhr_BLOCK_ID	../../include/eds-structs.h	870;"	d
+EDS_zeitzone_BLOCK_ID	../../include/eds-structs.h	888;"	d
+EEPR_APP_START	../../include/hcan_eeprom.h	49;"	d
+EEPR_BOARD_TYPE	../../include/hcan_eeprom.h	52;"	d
+EEPR_DEBUG_LEVEL	../../include/hcan_eeprom.h	53;"	d
+EEPR_FIRMWARE_CRC16	../../include/hcan_eeprom.h	57;"	d
+EEPR_FIRMWARE_SIZE	../../include/hcan_eeprom.h	59;"	d
+EEPR_SELF_ADDR	../../include/hcan_eeprom.h	50;"	d
+EEPR_SELF_ADDR_HI	../../include/hcan_eeprom.h	51;"	d
+EE_RECALL	onewire.h	17;"	d
+EE_WRITE	onewire.h	16;"	d
+EFLG	../../canix/mcp2515.h	142;"	d
+EFLG	../../canix/mcp2515.h	432;"	d
+ERRIE	../../canix/mcp2515.h	300;"	d
+ERRIE	../../canix/mcp2515.h	420;"	d
+ERRIF	../../canix/mcp2515.h	312;"	d
+EWARN	../../canix/mcp2515.h	329;"	d
+EXIDE	../../canix/mcp2515.h	354;"	d
+F1	../../include/eds-structs.h	/^    uint8_t           F1;$/;"	m	struct:__anon29
+F2	../../include/eds-structs.h	/^    uint8_t           F2;$/;"	m	struct:__anon29
+F3	../../include/eds-structs.h	/^    uint8_t           F3;$/;"	m	struct:__anon29
+F4	../../include/eds-structs.h	/^    uint8_t           F4;$/;"	m	struct:__anon29
+F5	../../include/eds-structs.h	/^    uint8_t           F5;$/;"	m	struct:__anon29
+F6	../../include/eds-structs.h	/^    uint8_t           F6;$/;"	m	struct:__anon29
+F7	../../include/eds-structs.h	/^    uint8_t           F7;$/;"	m	struct:__anon29
+F8	../../include/eds-structs.h	/^    uint8_t           F8;$/;"	m	struct:__anon29
+FILHIT0	../../canix/mcp2515.h	349;"	d
+FILHIT1	../../canix/mcp2515.h	362;"	d
+FILHIT2	../../canix/mcp2515.h	361;"	d
+HCAN_DEF_H	../../include/hcan-def.h	3;"	d
+HCAN_EBUS_FA_BLOCK1_INFO	../../include/hcan-def.h	644;"	d
+HCAN_EBUS_REGLER_DATEN_INFO_FRG1	../../include/hcan-def.h	653;"	d
+HCAN_EBUS_REGLER_DATEN_INFO_FRG2	../../include/hcan-def.h	659;"	d
+HCAN_EDS_ALLOCATE_BLOCK	../../include/hcan-def.h	561;"	d
+HCAN_EDS_ALLOCATE_BLOCK_REPLAY	../../include/hcan-def.h	567;"	d
+HCAN_EDS_DEFRAGMENT	../../include/hcan-def.h	556;"	d
+HCAN_EDS_FORMAT	../../include/hcan-def.h	602;"	d
+HCAN_EDS_FREE_BLOCK	../../include/hcan-def.h	572;"	d
+HCAN_EDS_FREE_BLOCK_REPLAY	../../include/hcan-def.h	576;"	d
+HCAN_EDS_GET_NEXT_BLOCK	../../include/hcan-def.h	546;"	d
+HCAN_EDS_GET_NEXT_BLOCK_REPLAY	../../include/hcan-def.h	553;"	d
+HCAN_EDS_READ_FROM_BLOCK	../../include/hcan-def.h	582;"	d
+HCAN_EDS_READ_FROM_BLOCK_REPLAY	../../include/hcan-def.h	589;"	d
+HCAN_EDS_WRITE_TO_BLOCK	../../include/hcan-def.h	596;"	d
+HCAN_EDS_WRITE_TO_BLOCK_REPLAY	../../include/hcan-def.h	599;"	d
+HCAN_EEPROM_H	../../include/hcan_eeprom.h	22;"	d
+HCAN_H	../../include/hcan.h	22;"	d
+HCAN_HES_1WIRE_DISCOVER	../../include/hcan-def.h	289;"	d
+HCAN_HES_1WIRE_DISCOVERED_PART_1	../../include/hcan-def.h	296;"	d
+HCAN_HES_1WIRE_DISCOVERED_PART_2	../../include/hcan-def.h	303;"	d
+HCAN_HES_1WIRE_ERROR	../../include/hcan-def.h	307;"	d
+HCAN_HES_1WIRE_TEMPERATURE	../../include/hcan-def.h	313;"	d
+HCAN_HES_1WIRE_TEMPERATURE_QUERY	../../include/hcan-def.h	317;"	d
+HCAN_HES_1WIRE_TEMPERATURE_REPLAY	../../include/hcan-def.h	324;"	d
+HCAN_HES_CONFIG_RAM_USAGE_REPLAY	../../include/hcan-def.h	483;"	d
+HCAN_HES_CONFIG_RAM_USAGE_REQUEST	../../include/hcan-def.h	478;"	d
+HCAN_HES_CONFIG_RELOAD	../../include/hcan-def.h	475;"	d
+HCAN_HES_HEIZSTEUERUNG_SET_VL	../../include/hcan-def.h	445;"	d
+HCAN_HES_HEIZSTEUERUNG_STATE_INFO	../../include/hcan-def.h	441;"	d
+HCAN_HES_HEIZSTEUERUNG_STATE_REPLAY	../../include/hcan-def.h	434;"	d
+HCAN_HES_HEIZSTEUERUNG_STATE_REQUEST	../../include/hcan-def.h	427;"	d
+HCAN_HES_HEIZUNG_DETAILS_REQUEST	../../include/hcan-def.h	360;"	d
+HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS	../../include/hcan-def.h	405;"	d
+HCAN_HES_HEIZUNG_MODE_MANUAL_DETAILS	../../include/hcan-def.h	375;"	d
+HCAN_HES_HEIZUNG_MODE_OFF_DETAILS	../../include/hcan-def.h	364;"	d
+HCAN_HES_HEIZUNG_MODE_THERMOSTAT_DETAILS	../../include/hcan-def.h	390;"	d
+HCAN_HES_HEIZUNG_SET_MODE_AUTOMATIK	../../include/hcan-def.h	409;"	d
+HCAN_HES_HEIZUNG_SET_MODE_MANUAL	../../include/hcan-def.h	382;"	d
+HCAN_HES_HEIZUNG_SET_MODE_OFF	../../include/hcan-def.h	368;"	d
+HCAN_HES_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS	../../include/hcan-def.h	398;"	d
+HCAN_HES_HEIZUNG_SOLLTEMP_LINE_REPLAY	../../include/hcan-def.h	458;"	d
+HCAN_HES_HEIZUNG_SOLLTEMP_LINE_REQUEST	../../include/hcan-def.h	450;"	d
+HCAN_HES_HEIZUNG_SOLLTEMP_WRITE_LINE	../../include/hcan-def.h	467;"	d
+HCAN_HES_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK	../../include/hcan-def.h	472;"	d
+HCAN_HES_HEIZUNG_TIST_REPLAY	../../include/hcan-def.h	419;"	d
+HCAN_HES_HEIZUNG_TIST_REQUEST	../../include/hcan-def.h	413;"	d
+HCAN_HES_HEIZUNG_WAERMEBEDARF_INFO	../../include/hcan-def.h	424;"	d
+HCAN_HES_POWER_GROUP_OFF	../../include/hcan-def.h	229;"	d
+HCAN_HES_POWER_GROUP_ON	../../include/hcan-def.h	225;"	d
+HCAN_HES_POWER_GROUP_SET_TIMER	../../include/hcan-def.h	254;"	d
+HCAN_HES_POWER_GROUP_STATE_INFO	../../include/hcan-def.h	259;"	d
+HCAN_HES_POWER_GROUP_STATE_QUERY	../../include/hcan-def.h	233;"	d
+HCAN_HES_POWER_GROUP_STATE_REPLAY	../../include/hcan-def.h	238;"	d
+HCAN_HES_POWER_GROUP_TIMER_QUERY	../../include/hcan-def.h	242;"	d
+HCAN_HES_POWER_GROUP_TIMER_REPLAY	../../include/hcan-def.h	248;"	d
+HCAN_HES_PVSENSOR_STATE_CHANGE_INFO	../../include/hcan-def.h	356;"	d
+HCAN_HES_PVSENSOR_STATE_REPLAY	../../include/hcan-def.h	351;"	d
+HCAN_HES_PVSENSOR_STATE_REQUEST	../../include/hcan-def.h	346;"	d
+HCAN_HES_REEDKONTAKT_OFFEN	../../include/hcan-def.h	328;"	d
+HCAN_HES_REEDKONTAKT_STATE_CHANGE	../../include/hcan-def.h	342;"	d
+HCAN_HES_REEDKONTAKT_STATE_QUERY	../../include/hcan-def.h	332;"	d
+HCAN_HES_REEDKONTAKT_STATE_REPLAY	../../include/hcan-def.h	337;"	d
+HCAN_HES_ROLLADEN_DEFINE_POSITION	../../include/hcan-def.h	278;"	d
+HCAN_HES_ROLLADEN_POSITION_CHANGED_INFO	../../include/hcan-def.h	285;"	d
+HCAN_HES_ROLLADEN_POSITION_REPLAY	../../include/hcan-def.h	273;"	d
+HCAN_HES_ROLLADEN_POSITION_REQUEST	../../include/hcan-def.h	268;"	d
+HCAN_HES_ROLLADEN_POSITION_SET	../../include/hcan-def.h	264;"	d
+HCAN_HES_TASTER_DOWN	../../include/hcan-def.h	215;"	d
+HCAN_HES_TASTER_UP	../../include/hcan-def.h	221;"	d
+HCAN_HES_ZEITZONE_DETAILS_REPLAY	../../include/hcan-def.h	496;"	d
+HCAN_HES_ZEITZONE_DETAILS_REQUEST	../../include/hcan-def.h	487;"	d
+HCAN_HES_ZEITZONE_TEST_MATCH_REPLAY	../../include/hcan-def.h	518;"	d
+HCAN_HES_ZEITZONE_TEST_MATCH_REQUERST	../../include/hcan-def.h	513;"	d
+HCAN_HES_ZEITZONE_WRITE_DETAILS	../../include/hcan-def.h	505;"	d
+HCAN_HES_ZEITZONE_WRITE_DETAILS_ACK	../../include/hcan-def.h	509;"	d
+HCAN_HMS_BUILD_VERSION_QUERY	../../include/hcan-def.h	112;"	d
+HCAN_HMS_BUILD_VERSION_REPLAY	../../include/hcan-def.h	117;"	d
+HCAN_HMS_CAN_EC_QUERY	../../include/hcan-def.h	120;"	d
+HCAN_HMS_CAN_EC_REPLAY	../../include/hcan-def.h	125;"	d
+HCAN_HMS_DEVICE_BOOT_STOP	../../include/hcan-def.h	27;"	d
+HCAN_HMS_DEVICE_BOOT_STOP_ACK	../../include/hcan-def.h	30;"	d
+HCAN_HMS_DEVICE_LOAD_APP	../../include/hcan-def.h	33;"	d
+HCAN_HMS_DEVICE_RESET	../../include/hcan-def.h	24;"	d
+HCAN_HMS_DEVICE_STATE_REPLAY	../../include/hcan-def.h	21;"	d
+HCAN_HMS_DEVICE_STATE_REQUEST	../../include/hcan-def.h	17;"	d
+HCAN_HMS_DEVICE_TYPE_REPLAY	../../include/hcan-def.h	41;"	d
+HCAN_HMS_DEVICE_TYPE_REQUEST	../../include/hcan-def.h	36;"	d
+HCAN_HMS_DEV_STATE_APPLICATION	../../include/hcan.h	63;"	d
+HCAN_HMS_DEV_STATE_BOOTING	../../include/hcan.h	61;"	d
+HCAN_HMS_DEV_STATE_BOOTLOADER	../../include/hcan.h	62;"	d
+HCAN_HMS_FLASH_BUFFER_FILL	../../include/hcan-def.h	50;"	d
+HCAN_HMS_FLASH_BUFFER_FILL_ACK	../../include/hcan-def.h	53;"	d
+HCAN_HMS_FLASH_BUFFER_WRITE	../../include/hcan-def.h	58;"	d
+HCAN_HMS_FLASH_BUFFER_WRITE_ACK	../../include/hcan-def.h	61;"	d
+HCAN_HMS_FLASH_CRC16_QUERY	../../include/hcan-def.h	131;"	d
+HCAN_HMS_FLASH_CRC16_REPLAY	../../include/hcan-def.h	136;"	d
+HCAN_HMS_H	../../canix/hcan_hms.h	22;"	d
+HCAN_HMS_INTERNAL_EEPROM_READ_BULK_REPLAY	../../include/hcan-def.h	94;"	d
+HCAN_HMS_INTERNAL_EEPROM_READ_BULK_REQUEST	../../include/hcan-def.h	85;"	d
+HCAN_HMS_INTERNAL_EEPROM_READ_REPLAY	../../include/hcan-def.h	79;"	d
+HCAN_HMS_INTERNAL_EEPROM_READ_REQUEST	../../include/hcan-def.h	75;"	d
+HCAN_HMS_INTERNAL_EEPROM_WRITE	../../include/hcan-def.h	67;"	d
+HCAN_HMS_INTERNAL_EEPROM_WRITE_ACK	../../include/hcan-def.h	70;"	d
+HCAN_HMS_LOOP_THROUGHPUT_QUERY	../../include/hcan-def.h	139;"	d
+HCAN_HMS_LOOP_THROUGHPUT_REPLAY	../../include/hcan-def.h	144;"	d
+HCAN_HMS_PING_REPLAY	../../include/hcan-def.h	14;"	d
+HCAN_HMS_PING_REQUEST	../../include/hcan-def.h	11;"	d
+HCAN_HMS_RX_LOST_QUERY	../../include/hcan-def.h	157;"	d
+HCAN_HMS_RX_LOST_REPLAY	../../include/hcan-def.h	164;"	d
+HCAN_HMS_RX_RECEIVED_QUERY	../../include/hcan-def.h	147;"	d
+HCAN_HMS_RX_RECEIVED_REPLAY	../../include/hcan-def.h	154;"	d
+HCAN_HMS_RX_TX_STATS_RESET	../../include/hcan-def.h	187;"	d
+HCAN_HMS_SYSLOG_LEVEL_SET	../../include/hcan-def.h	109;"	d
+HCAN_HMS_TX_DROPPED_QUERY	../../include/hcan-def.h	177;"	d
+HCAN_HMS_TX_DROPPED_REPLAY	../../include/hcan-def.h	184;"	d
+HCAN_HMS_TX_SENT_QUERY	../../include/hcan-def.h	167;"	d
+HCAN_HMS_TX_SENT_REPLAY	../../include/hcan-def.h	174;"	d
+HCAN_HMS_UPTIME_QUERY	../../include/hcan-def.h	98;"	d
+HCAN_HMS_UPTIME_REPLAY	../../include/hcan-def.h	105;"	d
+HCAN_MULTICAST_CONTROL	../../include/hcan_multicast.h	37;"	d
+HCAN_MULTICAST_H	../../include/hcan_multicast.h	22;"	d
+HCAN_MULTICAST_INFO	../../include/hcan_multicast.h	44;"	d
+HCAN_MULTICAST_PING	../../include/hcan_multicast.h	30;"	d
+HCAN_MULTICAST_SYSLOG	../../include/hcan_multicast.h	51;"	d
+HCAN_OAPS_FIELD_ATTRIBUTE_REPLAY	../../include/hcan-def.h	721;"	d
+HCAN_OAPS_FIELD_ATTRIBUTE_REQUEST	../../include/hcan-def.h	713;"	d
+HCAN_OAPS_FIELD_COUNT_REPLAY	../../include/hcan-def.h	708;"	d
+HCAN_OAPS_FIELD_COUNT_REQUEST	../../include/hcan-def.h	703;"	d
+HCAN_OAPS_FIELD_READ_REPLAY	../../include/hcan-def.h	735;"	d
+HCAN_OAPS_FIELD_READ_REQUEST	../../include/hcan-def.h	727;"	d
+HCAN_OAPS_FIELD_WRITE_REPLAY	../../include/hcan-def.h	749;"	d
+HCAN_OAPS_FIELD_WRITE_REQUEST	../../include/hcan-def.h	743;"	d
+HCAN_OAPS_OBJECT_ATTRIBUTE_REPLAY	../../include/hcan-def.h	699;"	d
+HCAN_OAPS_OBJECT_ATTRIBUTE_REQUEST	../../include/hcan-def.h	690;"	d
+HCAN_OAPS_OBJECT_COUNT_REPLAY	../../include/hcan-def.h	686;"	d
+HCAN_OAPS_OBJECT_COUNT_REQUEST	../../include/hcan-def.h	682;"	d
+HCAN_OWS_DS1820_QUERY	../../include/hcan.h	69;"	d
+HCAN_OWS_DS1820_READ_TEMP_REPLAY	../../include/hcan.h	72;"	d
+HCAN_OWS_DS1820_READ_TEMP_REQUEST	../../include/hcan.h	71;"	d
+HCAN_OWS_DS1820_REPLAY	../../include/hcan.h	70;"	d
+HCAN_OWS_ERROR	../../include/hcan.h	73;"	d
+HCAN_OWS_PORTS_QUERY	../../include/hcan.h	67;"	d
+HCAN_OWS_PORTS_REPLAY	../../include/hcan.h	68;"	d
+HCAN_PRIO_HI	../../canix/canix.h	100;"	d
+HCAN_PRIO_LOW	../../canix/canix.h	92;"	d
+HCAN_PROTO_DAAP	../../include/hcan.h	37;"	d
+HCAN_PROTO_SFP	../../include/hcan.h	36;"	d
+HCAN_PROTO_SYSLOG	../../include/hcan.h	38;"	d
+HCAN_RCS_EEPROM_SAVE	../../include/hcan.h	93;"	d
+HCAN_RCS_ERROR	../../include/hcan.h	94;"	d
+HCAN_RCS_MULTICAST_GROUP_OFF	../../include/hcan.h	91;"	d
+HCAN_RCS_MULTICAST_GROUP_ON	../../include/hcan.h	90;"	d
+HCAN_RCS_MULTICAST_GROUP_TOGGLE	../../include/hcan.h	92;"	d
+HCAN_RCS_PORTS_QUERY	../../include/hcan.h	77;"	d
+HCAN_RCS_PORTS_REPLAY	../../include/hcan.h	78;"	d
+HCAN_RCS_RELAIS_GROUP_QUERY	../../include/hcan.h	82;"	d
+HCAN_RCS_RELAIS_GROUP_REPLAY	../../include/hcan.h	83;"	d
+HCAN_RCS_RELAIS_OFF	../../include/hcan.h	88;"	d
+HCAN_RCS_RELAIS_ON	../../include/hcan.h	87;"	d
+HCAN_RCS_RELAIS_STATE_QUERY	../../include/hcan.h	85;"	d
+HCAN_RCS_RELAIS_STATE_REPLAY	../../include/hcan.h	86;"	d
+HCAN_RCS_RELAIS_TOGGLE	../../include/hcan.h	89;"	d
+HCAN_RCS_RELAIS_TYPE_QUERY	../../include/hcan.h	79;"	d
+HCAN_RCS_RELAIS_TYPE_REPLAY	../../include/hcan.h	80;"	d
+HCAN_RCS_SET_RELAIS_TYPE	../../include/hcan.h	81;"	d
+HCAN_RCS_SET_RELAY_GROUP	../../include/hcan.h	84;"	d
+HCAN_RTS_DATE_INFO	../../include/hcan-def.h	534;"	d
+HCAN_RTS_DATE_REQUEST	../../include/hcan-def.h	540;"	d
+HCAN_RTS_H	../../canix/hcan_rts.h	22;"	d
+HCAN_RTS_TIME_INFO	../../include/hcan-def.h	527;"	d
+HCAN_RTS_TIME_REQUEST	../../include/hcan-def.h	537;"	d
+HCAN_SLS_BOOT_RESETFLAG_LOG	../../include/hcan-def.h	192;"	d
+HCAN_SLS_DUMP_DEBUG_INFO	../../include/hcan-def.h	207;"	d
+HCAN_SLS_FIRMWARE_CONFIG_COMPAT_ERROR	../../include/hcan-def.h	203;"	d
+HCAN_SLS_FIRMWARE_CRC16_ERROR	../../include/hcan-def.h	195;"	d
+HCAN_SRV_EBUS	../../include/hcan.h	51;"	d
+HCAN_SRV_EDS	../../include/hcan.h	49;"	d
+HCAN_SRV_HES	../../include/hcan.h	47;"	d
+HCAN_SRV_HMS	../../include/hcan.h	43;"	d
+HCAN_SRV_OAPS	../../include/hcan.h	53;"	d
+HCAN_SRV_OWS	../../include/hcan.h	44;"	d
+HCAN_SRV_RCS	../../include/hcan.h	45;"	d
+HCAN_SRV_RTS	../../include/hcan.h	48;"	d
+HCAN_SRV_SLS	../../include/hcan.h	46;"	d
+HCAN_SRV_USVS	../../include/hcan.h	50;"	d
+HCAN_SRV_WS	../../include/hcan.h	52;"	d
+HCAN_SYSLOG_H	../../canix/syslog.h	22;"	d
+HCAN_USVS_STATE_INFO	../../include/hcan-def.h	610;"	d
+HCAN_USVS_STATE_REQUEST	../../include/hcan-def.h	606;"	d
+HCAN_USVS_VOLTAGE_REPLAY	../../include/hcan-def.h	619;"	d
+HCAN_USVS_VOLTAGE_REQUEST	../../include/hcan-def.h	614;"	d
+HCAN_USVS_VOLTAGE_STATS_REPLAY	../../include/hcan-def.h	631;"	d
+HCAN_USVS_VOLTAGE_STATS_REQUEST	../../include/hcan-def.h	623;"	d
+HCAN_USVS_VOLTAGE_STATS_RESET	../../include/hcan-def.h	634;"	d
+HCAN_WS_LICHT_STATS_5MIN	../../include/hcan-def.h	674;"	d
+HCAN_WS_WETTER_INFO	../../include/hcan-def.h	668;"	d
+HCAN_WS_WIND_STATS_5MIN	../../include/hcan-def.h	678;"	d
+HEIZUNG_FEATURE_DOPPEL_WAERMEBEDARF	heizung.h	18;"	d
+HEIZUNG_H	heizung.h	2;"	d
+HEIZUNG_MODE_AUTOMATIK	heizung.h	11;"	d
+HEIZUNG_MODE_MANUAL	heizung.h	9;"	d
+HEIZUNG_MODE_OFF	heizung.h	8;"	d
+HEIZUNG_MODE_THERMOSTAT	heizung.h	10;"	d
+ICOD0	../../canix/mcp2515.h	250;"	d
+ICOD1	../../canix/mcp2515.h	249;"	d
+ICOD2	../../canix/mcp2515.h	248;"	d
+IDE	../../canix/mcp2515.h	368;"	d
+ISR	../../canix/canix.c	/^ISR(TIMER0_OVF_vect)$/;"	f
+LAST_DEVICE	onewire.h	22;"	d
+LED_PORT	../../canix/led.h	28;"	d
+LED_PORT	../../canix/led.h	35;"	d
+LED_PORT	../../canix/led.h	42;"	d
+LED_PORT_DDR	../../canix/led.h	29;"	d
+LED_PORT_DDR	../../canix/led.h	36;"	d
+LED_PORT_DDR	../../canix/led.h	43;"	d
+LICHTZONE_EXT_SEC_COUNTER_MAX	lichtzone.h	15;"	d
+LICHTZONE_EXT_TIMERINIT	lichtzone.h	14;"	d
+LICHTZONE_H	lichtzone.h	2;"	d
+LICHTZONE_STATE_OFF	lichtzone.h	10;"	d
+LICHTZONE_STATE_ON	lichtzone.h	11;"	d
+LICHTZONE_STATE_ON_EXT	lichtzone.h	12;"	d
+LOG_H	log.h	2;"	d
+MASK	../../canix/mem_check.c	4;"	d	file:
+MATCH_ROM	onewire.h	9;"	d
+MAX_DEVICE_DATA	devices.h	26;"	d
+MAX_DEVICE_DATA	devices.h	30;"	d
+MAX_FRAME_CALLBACKS	../../canix/canix.h	105;"	d
+MAX_IDLE_CALLBACKS	../../canix/canix.h	110;"	d
+MAX_MEM_CRITICAL_SIZE	devices.h	27;"	d
+MAX_MEM_CRITICAL_SIZE	devices.h	31;"	d
+MAX_PDEVICE_DATA	devices.h	25;"	d
+MAX_PDEVICE_DATA	devices.h	29;"	d
+MAX_POWERPORT_GROUPS	powerport.h	9;"	d
+MAX_ROLLADEN_GROUPS	rolladen.h	8;"	d
+MAX_RTC_CALLBACKS	../../canix/canix.h	115;"	d
+MAX_TASTDIMMER_GROUPS	tastdimmer.h	8;"	d
+MCP2515_DEFS_H_	../../canix/mcp2515_defs.h	4;"	d
+MCP2515_FAIL	../../canix/mcp2515.c	93;"	d	file:
+MCP2515_OK	../../canix/mcp2515.c	92;"	d	file:
+MCP_BITMOD	../../canix/mcp2515_defs.h	139;"	d
+MCP_CANCTRL	../../canix/mcp2515_defs.h	87;"	d
+MCP_CANINTE	../../canix/mcp2515_defs.h	113;"	d
+MCP_CANINTF	../../canix/mcp2515_defs.h	114;"	d
+MCP_CANSTAT	../../canix/mcp2515_defs.h	86;"	d
+MCP_CNF1	../../canix/mcp2515_defs.h	112;"	d
+MCP_CNF2	../../canix/mcp2515_defs.h	111;"	d
+MCP_CNF3	../../canix/mcp2515_defs.h	110;"	d
+MCP_DLC_MASK	../../canix/mcp2515_defs.h	30;"	d
+MCP_EFLG	../../canix/mcp2515_defs.h	115;"	d
+MCP_EFLG_ERRORMASK	../../canix/mcp2515_defs.h	67;"	d
+MCP_EFLG_EWARN	../../canix/mcp2515_defs.h	66;"	d
+MCP_EFLG_RX0OVR	../../canix/mcp2515_defs.h	60;"	d
+MCP_EFLG_RX1OVR	../../canix/mcp2515_defs.h	59;"	d
+MCP_EFLG_RXEP	../../canix/mcp2515_defs.h	63;"	d
+MCP_EFLG_RXWAR	../../canix/mcp2515_defs.h	65;"	d
+MCP_EFLG_TXBO	../../canix/mcp2515_defs.h	61;"	d
+MCP_EFLG_TXEP	../../canix/mcp2515_defs.h	62;"	d
+MCP_EFLG_TXWAR	../../canix/mcp2515_defs.h	64;"	d
+MCP_EID0	../../canix/mcp2515_defs.h	27;"	d
+MCP_EID8	../../canix/mcp2515_defs.h	26;"	d
+MCP_LOAD_TX0	../../canix/mcp2515_defs.h	141;"	d
+MCP_LOAD_TX1	../../canix/mcp2515_defs.h	142;"	d
+MCP_LOAD_TX2	../../canix/mcp2515_defs.h	143;"	d
+MCP_NO_INT	../../canix/mcp2515_defs.h	128;"	d
+MCP_READ	../../canix/mcp2515_defs.h	137;"	d
+MCP_READ_RX0	../../canix/mcp2515_defs.h	150;"	d
+MCP_READ_RX1	../../canix/mcp2515_defs.h	151;"	d
+MCP_READ_STATUS	../../canix/mcp2515_defs.h	153;"	d
+MCP_REC	../../canix/mcp2515_defs.h	101;"	d
+MCP_RESET	../../canix/mcp2515_defs.h	157;"	d
+MCP_RTR_MASK	../../canix/mcp2515_defs.h	31;"	d
+MCP_RTS_ALL	../../canix/mcp2515_defs.h	148;"	d
+MCP_RTS_TX0	../../canix/mcp2515_defs.h	145;"	d
+MCP_RTS_TX1	../../canix/mcp2515_defs.h	146;"	d
+MCP_RTS_TX2	../../canix/mcp2515_defs.h	147;"	d
+MCP_RXB0CTRL	../../canix/mcp2515_defs.h	119;"	d
+MCP_RXB0SIDH	../../canix/mcp2515_defs.h	120;"	d
+MCP_RXB1CTRL	../../canix/mcp2515_defs.h	121;"	d
+MCP_RXB1SIDH	../../canix/mcp2515_defs.h	122;"	d
+MCP_RXB_BUKT_MASK	../../canix/mcp2515_defs.h	38;"	d
+MCP_RXB_IDE_M	../../canix/mcp2515_defs.h	52;"	d
+MCP_RXB_RTR_M	../../canix/mcp2515_defs.h	53;"	d
+MCP_RXB_RX_ANY	../../canix/mcp2515_defs.h	33;"	d
+MCP_RXB_RX_EXT	../../canix/mcp2515_defs.h	34;"	d
+MCP_RXB_RX_MASK	../../canix/mcp2515_defs.h	37;"	d
+MCP_RXB_RX_STD	../../canix/mcp2515_defs.h	35;"	d
+MCP_RXB_RX_STDEXT	../../canix/mcp2515_defs.h	36;"	d
+MCP_RXF0EID0	../../canix/mcp2515_defs.h	77;"	d
+MCP_RXF0EID8	../../canix/mcp2515_defs.h	76;"	d
+MCP_RXF0SIDH	../../canix/mcp2515_defs.h	74;"	d
+MCP_RXF0SIDL	../../canix/mcp2515_defs.h	75;"	d
+MCP_RXF1EID0	../../canix/mcp2515_defs.h	81;"	d
+MCP_RXF1EID8	../../canix/mcp2515_defs.h	80;"	d
+MCP_RXF1SIDH	../../canix/mcp2515_defs.h	78;"	d
+MCP_RXF1SIDL	../../canix/mcp2515_defs.h	79;"	d
+MCP_RXF2EID0	../../canix/mcp2515_defs.h	85;"	d
+MCP_RXF2EID8	../../canix/mcp2515_defs.h	84;"	d
+MCP_RXF2SIDH	../../canix/mcp2515_defs.h	82;"	d
+MCP_RXF2SIDL	../../canix/mcp2515_defs.h	83;"	d
+MCP_RXF3EID0	../../canix/mcp2515_defs.h	91;"	d
+MCP_RXF3EID8	../../canix/mcp2515_defs.h	90;"	d
+MCP_RXF3SIDH	../../canix/mcp2515_defs.h	88;"	d
+MCP_RXF3SIDL	../../canix/mcp2515_defs.h	89;"	d
+MCP_RXF4EID0	../../canix/mcp2515_defs.h	95;"	d
+MCP_RXF4EID8	../../canix/mcp2515_defs.h	94;"	d
+MCP_RXF4SIDH	../../canix/mcp2515_defs.h	92;"	d
+MCP_RXF4SIDL	../../canix/mcp2515_defs.h	93;"	d
+MCP_RXF5EID0	../../canix/mcp2515_defs.h	99;"	d
+MCP_RXF5EID8	../../canix/mcp2515_defs.h	98;"	d
+MCP_RXF5SIDH	../../canix/mcp2515_defs.h	96;"	d
+MCP_RXF5SIDL	../../canix/mcp2515_defs.h	97;"	d
+MCP_RXM0EID0	../../canix/mcp2515_defs.h	105;"	d
+MCP_RXM0EID8	../../canix/mcp2515_defs.h	104;"	d
+MCP_RXM0SIDH	../../canix/mcp2515_defs.h	102;"	d
+MCP_RXM0SIDL	../../canix/mcp2515_defs.h	103;"	d
+MCP_RXM1EID0	../../canix/mcp2515_defs.h	109;"	d
+MCP_RXM1EID8	../../canix/mcp2515_defs.h	108;"	d
+MCP_RXM1SIDH	../../canix/mcp2515_defs.h	106;"	d
+MCP_RXM1SIDL	../../canix/mcp2515_defs.h	107;"	d
+MCP_RX_INT	../../canix/mcp2515_defs.h	127;"	d
+MCP_RX_STATUS	../../canix/mcp2515_defs.h	155;"	d
+MCP_SIDH	../../canix/mcp2515_defs.h	24;"	d
+MCP_SIDL	../../canix/mcp2515_defs.h	25;"	d
+MCP_STAT_RX0IF	../../canix/mcp2515_defs.h	56;"	d
+MCP_STAT_RX1IF	../../canix/mcp2515_defs.h	57;"	d
+MCP_STAT_RXIF_MASK	../../canix/mcp2515_defs.h	55;"	d
+MCP_TEC	../../canix/mcp2515_defs.h	100;"	d
+MCP_TX01_INT	../../canix/mcp2515_defs.h	126;"	d
+MCP_TX01_MASK	../../canix/mcp2515_defs.h	130;"	d
+MCP_TXB0CTRL	../../canix/mcp2515_defs.h	116;"	d
+MCP_TXB1CTRL	../../canix/mcp2515_defs.h	117;"	d
+MCP_TXB2CTRL	../../canix/mcp2515_defs.h	118;"	d
+MCP_TXB_ABTF_M	../../canix/mcp2515_defs.h	44;"	d
+MCP_TXB_EXIDE_M	../../canix/mcp2515_defs.h	29;"	d
+MCP_TXB_MLOA_M	../../canix/mcp2515_defs.h	45;"	d
+MCP_TXB_RTR_M	../../canix/mcp2515_defs.h	51;"	d
+MCP_TXB_TXBUFE_M	../../canix/mcp2515_defs.h	43;"	d
+MCP_TXB_TXERR_M	../../canix/mcp2515_defs.h	46;"	d
+MCP_TXB_TXIE_M	../../canix/mcp2515_defs.h	48;"	d
+MCP_TXB_TXP10_M	../../canix/mcp2515_defs.h	49;"	d
+MCP_TXB_TXREQ_M	../../canix/mcp2515_defs.h	47;"	d
+MCP_TX_INT	../../canix/mcp2515_defs.h	125;"	d
+MCP_TX_MASK	../../canix/mcp2515_defs.h	131;"	d
+MCP_WRITE	../../canix/mcp2515_defs.h	135;"	d
+MEM_CHECK_H	../../canix/mem_check.h	2;"	d
+MERRE	../../canix/mcp2515.h	298;"	d
+MERRE	../../canix/mcp2515.h	418;"	d
+MERRF	../../canix/mcp2515.h	310;"	d
+MLOA	../../canix/mcp2515.h	335;"	d
+MODE_CONFIG	../../canix/mcp2515.h	86;"	d
+MODE_CONFIG	../../canix/mcp2515_defs.h	166;"	d
+MODE_LISTENONLY	../../canix/mcp2515.h	85;"	d
+MODE_LISTENONLY	../../canix/mcp2515_defs.h	165;"	d
+MODE_LOOPBACK	../../canix/mcp2515.h	84;"	d
+MODE_LOOPBACK	../../canix/mcp2515_defs.h	164;"	d
+MODE_MASK	../../canix/mcp2515.h	88;"	d
+MODE_MASK	../../canix/mcp2515_defs.h	168;"	d
+MODE_NORMAL	../../canix/mcp2515.h	82;"	d
+MODE_NORMAL	../../canix/mcp2515_defs.h	162;"	d
+MODE_ONESHOT	../../canix/mcp2515_defs.h	170;"	d
+MODE_POWERUP	../../canix/mcp2515.h	87;"	d
+MODE_POWERUP	../../canix/mcp2515_defs.h	167;"	d
+MODE_SLEEP	../../canix/mcp2515.h	83;"	d
+MODE_SLEEP	../../canix/mcp2515_defs.h	163;"	d
+OAP_ARRAY	../../include/oap-def.h	16;"	d
+OAP_CLASS_dunstabzugport	../../include/oap-def.h	32;"	d
+OAP_CLASS_flappingfilter_agent	../../include/oap-def.h	95;"	d
+OAP_CLASS_lichtzone	../../include/oap-def.h	35;"	d
+OAP_CLASS_powerport	../../include/oap-def.h	29;"	d
+OAP_CLASS_prio_agent	../../include/oap-def.h	86;"	d
+OAP_CLASS_reedkontakt	../../include/oap-def.h	41;"	d
+OAP_CLASS_rolladen	../../include/oap-def.h	44;"	d
+OAP_CLASS_rolladen_steuerung	../../include/oap-def.h	53;"	d
+OAP_CLASS_sonnenschutz_agent	../../include/oap-def.h	66;"	d
+OAP_CLASS_state2event_agent	../../include/oap-def.h	89;"	d
+OAP_CLASS_tag_nacht_agent	../../include/oap-def.h	57;"	d
+OAP_CLASS_taster	../../include/oap-def.h	26;"	d
+OAP_CLASS_tempsensor	../../include/oap-def.h	38;"	d
+OAP_CLASS_zeitfilter_agent	../../include/oap-def.h	92;"	d
+OAP_CLASS_zeitschaltuhr	../../include/oap-def.h	47;"	d
+OAP_CLASS_zeitzone	../../include/oap-def.h	50;"	d
+OAP_DEF_H	../../include/oap-def.h	3;"	d
+OAP_FIELD_rolladen_steuerung_enabled	../../include/oap-def.h	54;"	d
+OAP_FIELD_sonnenschutz_agent_active	../../include/oap-def.h	67;"	d
+OAP_FIELD_sonnenschutz_agent_flapinterval	../../include/oap-def.h	80;"	d
+OAP_FIELD_sonnenschutz_agent_hysterese	../../include/oap-def.h	79;"	d
+OAP_FIELD_sonnenschutz_agent_licht_ost	../../include/oap-def.h	81;"	d
+OAP_FIELD_sonnenschutz_agent_licht_sued	../../include/oap-def.h	82;"	d
+OAP_FIELD_sonnenschutz_agent_licht_west	../../include/oap-def.h	83;"	d
+OAP_FIELD_sonnenschutz_agent_ost_active	../../include/oap-def.h	68;"	d
+OAP_FIELD_sonnenschutz_agent_ost_schwelle	../../include/oap-def.h	76;"	d
+OAP_FIELD_sonnenschutz_agent_ost_to_time	../../include/oap-def.h	72;"	d
+OAP_FIELD_sonnenschutz_agent_soschu_pos	../../include/oap-def.h	71;"	d
+OAP_FIELD_sonnenschutz_agent_sued_active	../../include/oap-def.h	69;"	d
+OAP_FIELD_sonnenschutz_agent_sued_from_time	../../include/oap-def.h	73;"	d
+OAP_FIELD_sonnenschutz_agent_sued_schwelle	../../include/oap-def.h	77;"	d
+OAP_FIELD_sonnenschutz_agent_sued_to_time	../../include/oap-def.h	74;"	d
+OAP_FIELD_sonnenschutz_agent_west_active	../../include/oap-def.h	70;"	d
+OAP_FIELD_sonnenschutz_agent_west_from_time	../../include/oap-def.h	75;"	d
+OAP_FIELD_sonnenschutz_agent_west_schwelle	../../include/oap-def.h	78;"	d
+OAP_FIELD_tag_nacht_agent_active	../../include/oap-def.h	58;"	d
+OAP_FIELD_tag_nacht_agent_dunkel_grenze	../../include/oap-def.h	63;"	d
+OAP_FIELD_tag_nacht_agent_hell_grenze	../../include/oap-def.h	62;"	d
+OAP_FIELD_tag_nacht_agent_nacht_active	../../include/oap-def.h	60;"	d
+OAP_FIELD_tag_nacht_agent_nacht_pos	../../include/oap-def.h	61;"	d
+OAP_FIELD_tag_nacht_agent_tag_active	../../include/oap-def.h	59;"	d
+OAP_FLAGS_RW_PERS	../../include/oap-def.h	19;"	d
+OAP_FLAGS_RW_PERS_ARRAY	../../include/oap-def.h	18;"	d
+OAP_PERSISTENT	../../include/oap-def.h	15;"	d
+OAP_RW	../../include/oap-def.h	14;"	d
+OAP_TYPE_BOOL	../../include/oap-def.h	10;"	d
+OAP_TYPE_INT	../../include/oap-def.h	11;"	d
+OAP_TYPE_TIME	../../include/oap-def.h	12;"	d
+ONEWIRE_H	onewire.h	2;"	d
+OPMOD0	../../canix/mcp2515.h	247;"	d
+OPMOD1	../../canix/mcp2515.h	246;"	d
+OPMOD2	../../canix/mcp2515.h	245;"	d
+OW_DS1820	onewire.h	7;"	d
+PHSEG0	../../canix/mcp2515.h	281;"	d
+PHSEG0	../../canix/mcp2515.h	413;"	d
+PHSEG1	../../canix/mcp2515.h	280;"	d
+PHSEG1	../../canix/mcp2515.h	412;"	d
+PHSEG10	../../canix/mcp2515.h	278;"	d
+PHSEG10	../../canix/mcp2515.h	410;"	d
+PHSEG11	../../canix/mcp2515.h	277;"	d
+PHSEG11	../../canix/mcp2515.h	409;"	d
+PHSEG12	../../canix/mcp2515.h	276;"	d
+PHSEG12	../../canix/mcp2515.h	408;"	d
+PHSEG2	../../canix/mcp2515.h	279;"	d
+PHSEG2	../../canix/mcp2515.h	411;"	d
+PHSEG20	../../canix/mcp2515.h	269;"	d
+PHSEG20	../../canix/mcp2515.h	401;"	d
+PHSEG21	../../canix/mcp2515.h	268;"	d
+PHSEG21	../../canix/mcp2515.h	400;"	d
+PHSEG22	../../canix/mcp2515.h	267;"	d
+PHSEG22	../../canix/mcp2515.h	399;"	d
+POWERPORT_FEATURE_BISTABLE_RELAIS	powerport.h	11;"	d
+POWERPORT_H	powerport.h	2;"	d
+PRESENCE_ERR	onewire.h	20;"	d
+PROGMEM	../../canix/canix.c	/^char canix_version[] PROGMEM = "CANIX_VERSION_" CANIX_VERSION "_";$/;"	v
+PROTO_MASK	../../canix/canix.h	84;"	d
+READ	onewire.h	14;"	d
+REC	../../canix/mcp2515.h	127;"	d
+REEDKONTAKT_H	reedkontakt.h	2;"	d
+REEDKONTAKT_MODUS_AUS	reedkontakt.h	8;"	d
+REEDKONTAKT_MODUS_AUTOMATIK	reedkontakt.h	9;"	d
+REQOP0	../../canix/mcp2515.h	257;"	d
+REQOP1	../../canix/mcp2515.h	256;"	d
+REQOP2	../../canix/mcp2515.h	255;"	d
+RL_max	../../include/eds-structs.h	/^    uint8_t           RL_max;$/;"	m	struct:__anon26
+ROLLADEN_COMMAND_AB	rolladen.h	13;"	d
+ROLLADEN_COMMAND_AUF	rolladen.h	12;"	d
+ROLLADEN_COMMAND_DIR_CHANGE	rolladen.h	14;"	d
+ROLLADEN_COMMAND_STOP	rolladen.h	11;"	d
+ROLLADEN_DIR_AB	rolladen.h	30;"	d
+ROLLADEN_DIR_AUF	rolladen.h	29;"	d
+ROLLADEN_H	rolladen.h	2;"	d
+ROLLADEN_READY	rolladen.h	10;"	d
+ROLLADEN_STATE_AB	rolladen.h	22;"	d
+ROLLADEN_STATE_AB_WAIT_1	rolladen.h	20;"	d
+ROLLADEN_STATE_AB_WAIT_2	rolladen.h	21;"	d
+ROLLADEN_STATE_AUF	rolladen.h	18;"	d
+ROLLADEN_STATE_AUF_WAIT	rolladen.h	17;"	d
+ROLLADEN_STATE_DIR_CHANGE_WAIT_1	rolladen.h	25;"	d
+ROLLADEN_STATE_DIR_CHANGE_WAIT_2	rolladen.h	26;"	d
+ROLLADEN_STATE_DIR_CHANGE_WAIT_3	rolladen.h	27;"	d
+ROLLADEN_STATE_STOP	rolladen.h	16;"	d
+ROLLADEN_STATE_STOP_WAIT_1	rolladen.h	19;"	d
+ROLLADEN_STATE_STOP_WAIT_2	rolladen.h	23;"	d
+ROLLADEN_STATE_STOP_WAIT_3	rolladen.h	24;"	d
+RTR	../../canix/mcp2515.h	375;"	d
+RX0IE	../../canix/mcp2515.h	305;"	d
+RX0IE	../../canix/mcp2515.h	425;"	d
+RX0IF	../../canix/mcp2515.h	317;"	d
+RX0OVR	../../canix/mcp2515.h	323;"	d
+RX1IE	../../canix/mcp2515.h	304;"	d
+RX1IE	../../canix/mcp2515.h	424;"	d
+RX1IF	../../canix/mcp2515.h	316;"	d
+RX1OVR	../../canix/mcp2515.h	322;"	d
+RXB0CTRL	../../canix/mcp2515.h	189;"	d
+RXB0D0	../../canix/mcp2515.h	195;"	d
+RXB0D1	../../canix/mcp2515.h	196;"	d
+RXB0D2	../../canix/mcp2515.h	197;"	d
+RXB0D3	../../canix/mcp2515.h	198;"	d
+RXB0D4	../../canix/mcp2515.h	199;"	d
+RXB0D5	../../canix/mcp2515.h	200;"	d
+RXB0D6	../../canix/mcp2515.h	201;"	d
+RXB0D7	../../canix/mcp2515.h	202;"	d
+RXB0DLC	../../canix/mcp2515.h	194;"	d
+RXB0EID0	../../canix/mcp2515.h	193;"	d
+RXB0EID8	../../canix/mcp2515.h	192;"	d
+RXB0SIDH	../../canix/mcp2515.h	190;"	d
+RXB0SIDL	../../canix/mcp2515.h	191;"	d
+RXB1CTRL	../../canix/mcp2515.h	204;"	d
+RXB1D0	../../canix/mcp2515.h	210;"	d
+RXB1D1	../../canix/mcp2515.h	211;"	d
+RXB1D2	../../canix/mcp2515.h	212;"	d
+RXB1D3	../../canix/mcp2515.h	213;"	d
+RXB1D4	../../canix/mcp2515.h	214;"	d
+RXB1D5	../../canix/mcp2515.h	215;"	d
+RXB1D6	../../canix/mcp2515.h	216;"	d
+RXB1D7	../../canix/mcp2515.h	217;"	d
+RXB1DLC	../../canix/mcp2515.h	209;"	d
+RXB1EID0	../../canix/mcp2515.h	208;"	d
+RXB1EID8	../../canix/mcp2515.h	207;"	d
+RXB1SIDH	../../canix/mcp2515.h	205;"	d
+RXB1SIDL	../../canix/mcp2515.h	206;"	d
+RXEP	../../canix/mcp2515.h	326;"	d
+RXF0EID0	../../canix/mcp2515.h	100;"	d
+RXF0EID8	../../canix/mcp2515.h	99;"	d
+RXF0SIDH	../../canix/mcp2515.h	97;"	d
+RXF0SIDL	../../canix/mcp2515.h	98;"	d
+RXF1EID0	../../canix/mcp2515.h	104;"	d
+RXF1EID8	../../canix/mcp2515.h	103;"	d
+RXF1SIDH	../../canix/mcp2515.h	101;"	d
+RXF1SIDL	../../canix/mcp2515.h	102;"	d
+RXF2EID0	../../canix/mcp2515.h	108;"	d
+RXF2EID8	../../canix/mcp2515.h	107;"	d
+RXF2SIDH	../../canix/mcp2515.h	105;"	d
+RXF2SIDL	../../canix/mcp2515.h	106;"	d
+RXF3EID0	../../canix/mcp2515.h	117;"	d
+RXF3EID8	../../canix/mcp2515.h	116;"	d
+RXF3SIDH	../../canix/mcp2515.h	114;"	d
+RXF3SIDL	../../canix/mcp2515.h	115;"	d
+RXF4EID0	../../canix/mcp2515.h	121;"	d
+RXF4EID8	../../canix/mcp2515.h	120;"	d
+RXF4SIDH	../../canix/mcp2515.h	118;"	d
+RXF4SIDL	../../canix/mcp2515.h	119;"	d
+RXF5EID0	../../canix/mcp2515.h	125;"	d
+RXF5EID8	../../canix/mcp2515.h	124;"	d
+RXF5SIDH	../../canix/mcp2515.h	122;"	d
+RXF5SIDL	../../canix/mcp2515.h	123;"	d
+RXM0	../../canix/mcp2515.h	345;"	d
+RXM0EID0	../../canix/mcp2515.h	132;"	d
+RXM0EID8	../../canix/mcp2515.h	131;"	d
+RXM0SIDH	../../canix/mcp2515.h	129;"	d
+RXM0SIDL	../../canix/mcp2515.h	130;"	d
+RXM1	../../canix/mcp2515.h	344;"	d
+RXM1EID0	../../canix/mcp2515.h	136;"	d
+RXM1EID8	../../canix/mcp2515.h	135;"	d
+RXM1SIDH	../../canix/mcp2515.h	133;"	d
+RXM1SIDL	../../canix/mcp2515.h	134;"	d
+RXRTR	../../canix/mcp2515.h	346;"	d
+RXWAR	../../canix/mcp2515.h	328;"	d
+SAM	../../canix/mcp2515.h	275;"	d
+SAM	../../canix/mcp2515.h	407;"	d
+SEARCH_FIRST	onewire.h	19;"	d
+SEARCH_ROM	onewire.h	11;"	d
+SJW0	../../canix/mcp2515.h	287;"	d
+SJW0	../../canix/mcp2515.h	387;"	d
+SJW1	../../canix/mcp2515.h	286;"	d
+SJW1	../../canix/mcp2515.h	386;"	d
+SKIP_ROM	onewire.h	10;"	d
+SPI_BIT_MODIFY	../../canix/mcp2515.h	80;"	d
+SPI_CS	../../canix/mcp2515.c	73;"	d	file:
+SPI_CS	../../canix/mcp2515.c	84;"	d	file:
+SPI_CS_PORT	../../canix/mcp2515.c	72;"	d	file:
+SPI_CS_PORT	../../canix/mcp2515.c	83;"	d	file:
+SPI_CS_PORT_DDR	../../canix/mcp2515.c	71;"	d	file:
+SPI_CS_PORT_DDR	../../canix/mcp2515.c	82;"	d	file:
+SPI_MISO	../../canix/mcp2515.c	68;"	d	file:
+SPI_MISO	../../canix/mcp2515.c	79;"	d	file:
+SPI_MOSI	../../canix/mcp2515.c	69;"	d	file:
+SPI_MOSI	../../canix/mcp2515.c	80;"	d	file:
+SPI_PORT	../../canix/mcp2515.c	67;"	d	file:
+SPI_PORT	../../canix/mcp2515.c	78;"	d	file:
+SPI_PORT_DDR	../../canix/mcp2515.c	66;"	d	file:
+SPI_PORT_DDR	../../canix/mcp2515.c	77;"	d	file:
+SPI_READ	../../canix/mcp2515.h	73;"	d
+SPI_READ_RX	../../canix/mcp2515.h	74;"	d
+SPI_READ_STATUS	../../canix/mcp2515.h	78;"	d
+SPI_RESET	../../canix/mcp2515.h	72;"	d
+SPI_RTS	../../canix/mcp2515.h	77;"	d
+SPI_RX_STATUS	../../canix/mcp2515.h	79;"	d
+SPI_SCK	../../canix/mcp2515.c	70;"	d	file:
+SPI_SCK	../../canix/mcp2515.c	81;"	d	file:
+SPI_WRITE	../../canix/mcp2515.h	75;"	d
+SPI_WRITE_TX	../../canix/mcp2515.h	76;"	d
+SRR	../../canix/mcp2515.h	367;"	d
+SYSLOG_PRIO_CRITICAL	../../canix/syslog.h	28;"	d
+SYSLOG_PRIO_DEBUG	../../canix/syslog.h	31;"	d
+SYSLOG_PRIO_ERROR	../../canix/syslog.h	29;"	d
+SYSLOG_PRIO_WARNING	../../canix/syslog.h	30;"	d
+TASTDIMMER_H	tastdimmer.h	2;"	d
+TASTERINPUT_H	tasterinput.h	2;"	d
+TASTER_H	taster.h	2;"	d
+TEC	../../canix/mcp2515.h	126;"	d
+TEMPSENSOR_H	tempsensor.h	2;"	d
+TIMER_H	timer.h	2;"	d
+TIMESERVICE_H	timeservice.h	2;"	d
+TOOLS_H	../../canix/tools.h	22;"	d
+TX0IE	../../canix/mcp2515.h	303;"	d
+TX0IE	../../canix/mcp2515.h	423;"	d
+TX0IF	../../canix/mcp2515.h	315;"	d
+TX1IE	../../canix/mcp2515.h	302;"	d
+TX1IE	../../canix/mcp2515.h	422;"	d
+TX1IF	../../canix/mcp2515.h	314;"	d
+TX2IE	../../canix/mcp2515.h	301;"	d
+TX2IE	../../canix/mcp2515.h	421;"	d
+TX2IF	../../canix/mcp2515.h	313;"	d
+TXB0	../../canix/mcp2515.h	324;"	d
+TXB0CTRL	../../canix/mcp2515.h	144;"	d
+TXB0D0	../../canix/mcp2515.h	150;"	d
+TXB0D1	../../canix/mcp2515.h	151;"	d
+TXB0D2	../../canix/mcp2515.h	152;"	d
+TXB0D3	../../canix/mcp2515.h	153;"	d
+TXB0D4	../../canix/mcp2515.h	154;"	d
+TXB0D5	../../canix/mcp2515.h	155;"	d
+TXB0D6	../../canix/mcp2515.h	156;"	d
+TXB0D7	../../canix/mcp2515.h	157;"	d
+TXB0DLC	../../canix/mcp2515.h	149;"	d
+TXB0EID0	../../canix/mcp2515.h	148;"	d
+TXB0EID8	../../canix/mcp2515.h	147;"	d
+TXB0SIDH	../../canix/mcp2515.h	145;"	d
+TXB0SIDL	../../canix/mcp2515.h	146;"	d
+TXB1CTRL	../../canix/mcp2515.h	159;"	d
+TXB1D0	../../canix/mcp2515.h	165;"	d
+TXB1D1	../../canix/mcp2515.h	166;"	d
+TXB1D2	../../canix/mcp2515.h	167;"	d
+TXB1D3	../../canix/mcp2515.h	168;"	d
+TXB1D4	../../canix/mcp2515.h	169;"	d
+TXB1D5	../../canix/mcp2515.h	170;"	d
+TXB1D6	../../canix/mcp2515.h	171;"	d
+TXB1D7	../../canix/mcp2515.h	172;"	d
+TXB1DLC	../../canix/mcp2515.h	164;"	d
+TXB1EID0	../../canix/mcp2515.h	163;"	d
+TXB1EID8	../../canix/mcp2515.h	162;"	d
+TXB1SIDH	../../canix/mcp2515.h	160;"	d
+TXB1SIDL	../../canix/mcp2515.h	161;"	d
+TXB2CTRL	../../canix/mcp2515.h	174;"	d
+TXB2D0	../../canix/mcp2515.h	180;"	d
+TXB2D1	../../canix/mcp2515.h	181;"	d
+TXB2D2	../../canix/mcp2515.h	182;"	d
+TXB2D3	../../canix/mcp2515.h	183;"	d
+TXB2D4	../../canix/mcp2515.h	184;"	d
+TXB2D5	../../canix/mcp2515.h	185;"	d
+TXB2D6	../../canix/mcp2515.h	186;"	d
+TXB2D7	../../canix/mcp2515.h	187;"	d
+TXB2DLC	../../canix/mcp2515.h	179;"	d
+TXB2EID0	../../canix/mcp2515.h	178;"	d
+TXB2EID8	../../canix/mcp2515.h	177;"	d
+TXB2SIDH	../../canix/mcp2515.h	175;"	d
+TXB2SIDL	../../canix/mcp2515.h	176;"	d
+TXEP	../../canix/mcp2515.h	325;"	d
+TXERR	../../canix/mcp2515.h	336;"	d
+TXP0	../../canix/mcp2515.h	339;"	d
+TXP1	../../canix/mcp2515.h	338;"	d
+TXREQ	../../canix/mcp2515.h	337;"	d
+TXRTSCTRL	../../canix/mcp2515.h	110;"	d
+TXWAR	../../canix/mcp2515.h	327;"	d
+VT_min	../../include/eds-structs.h	/^    uint8_t           VT_min;$/;"	m	struct:__anon26
+W1_DDR	onewire.c	17;"	d	file:
+W1_IN	onewire.c	15;"	d	file:
+W1_OUT	onewire.c	16;"	d	file:
+W1_PIN	onewire.c	14;"	d	file:
+WAKFIL	../../canix/mcp2515.h	266;"	d
+WAKFIL	../../canix/mcp2515.h	398;"	d
+WAKIE	../../canix/mcp2515.h	299;"	d
+WAKIE	../../canix/mcp2515.h	419;"	d
+WAKIF	../../canix/mcp2515.h	311;"	d
+WRITE	onewire.h	15;"	d
+ZEITSCHALTUHR_H	zeitschaltuhr.h	2;"	d
+ZEITSCHALTUHR_UPDATE_INTERVAL	zeitschaltuhr.h	8;"	d
+ZEITZONE_H	zeitzone.h	2;"	d
+_MCP2515_H_	../../canix/mcp2515.h	67;"	d
+__init8_mem	../../canix/mem_check.c	/^void __init8_mem(void) $/;"	f
+_delayFourCycles	../../canix/tools.c	/^void _delayFourCycles(unsigned int count)$/;"	f
+a	../../include/eds-structs.h	/^    uint8_t           a;$/;"	m	struct:__anon26
+action_gruppe0	../../include/eds-structs.h	/^    uint8_t           action_gruppe0;$/;"	m	struct:__anon40
+action_gruppe1	../../include/eds-structs.h	/^    uint8_t           action_gruppe1;$/;"	m	struct:__anon40
+active	../../include/eds-structs.h	/^    uint8_t           active;$/;"	m	struct:__anon19
+active	../../include/eds-structs.h	/^    uint8_t           active;$/;"	m	struct:__anon20
+b	../../include/eds-structs.h	/^    uint8_t           b;$/;"	m	struct:__anon26
+backlight	../../include/eds-structs.h	/^    uint8_t           backlight;$/;"	m	struct:__anon28
+bool	../../canix/canix.h	71;"	d
+callback	../../canix/canix.c	/^	canix_frame_callback callback;$/;"	m	struct:__anon14	file:
+can_any_sendable	../../canix/mcp2515.c	/^bool can_any_sendable(void)$/;"	f
+can_disable_mcp2515	../../canix/mcp2515.c	/^void can_disable_mcp2515(void)$/;"	f
+can_enable_mcp2515	../../canix/mcp2515.c	/^void can_enable_mcp2515(void)$/;"	f
+can_error_counters	../../canix/mcp2515.c	/^uint16_t can_error_counters(void)$/;"	f
+can_message_available	../../canix/mcp2515.c	/^bool can_message_available(void)$/;"	f
+can_open_interface	../../canix/mcp2515.c	/^uint8_t can_open_interface(void)$/;"	f
+can_read_message	../../canix/mcp2515.c	/^uint8_t can_read_message(uint32_t *extended, char *data)$/;"	f
+can_send_message	../../canix/mcp2515.c	/^uint8_t can_send_message(uint32_t id, const uint8_t *data, uint8_t length)$/;"	f
+can_sendable	../../canix/mcp2515.c	/^bool can_sendable(const uint8_t tx_index)$/;"	f
+canix_SFP_HMS_handler	../../canix/hcan_hms.c	/^void canix_SFP_HMS_handler(const canix_frame *frame)$/;"	f
+canix_SFP_RTS_handler	../../canix/hcan_rts.c	/^void canix_SFP_RTS_handler(const canix_frame *frame)$/;"	f
+canix_debug_level	../../canix/syslog.c	/^uint8_t canix_debug_level = 0;$/;"	v
+canix_deliver_frame	../../canix/canix.c	/^void canix_deliver_frame(const canix_frame *frame)$/;"	f
+canix_frame	../../canix/canix.h	/^} canix_frame;$/;"	t	typeref:struct:__anon15
+canix_frame_callback	../../canix/canix.h	/^typedef void (*canix_frame_callback) (const canix_frame *frame);$/;"	t
+canix_frame_callback_entry	../../canix/canix.c	/^} canix_frame_callback_entry;$/;"	t	typeref:struct:__anon14	file:
+canix_frame_send	../../canix/canix.c	/^void canix_frame_send(const canix_frame *frame)$/;"	f
+canix_frame_send_with_prio	../../canix/canix.c	/^void canix_frame_send_with_prio(const canix_frame *frame, uint8_t prio)$/;"	f
+canix_idle_callback	../../canix/canix.h	/^typedef void (*canix_idle_callback) (void);$/;"	t
+canix_init	../../canix/canix.c	/^uint8_t canix_init(void)$/;"	f
+canix_is_date_valid	../../canix/canix.c	/^uint8_t canix_is_date_valid(void)$/;"	f
+canix_led_disable	../../canix/led.h	50;"	d
+canix_led_disable	../../canix/led.h	56;"	d
+canix_led_enable	../../canix/led.h	49;"	d
+canix_led_enable	../../canix/led.h	55;"	d
+canix_led_init_ports	../../canix/led.h	51;"	d
+canix_led_init_ports	../../canix/led.h	57;"	d
+canix_loop_throughput	../../canix/canix.c	/^volatile uint16_t canix_loop_throughput;$/;"	v
+canix_loop_throughput_counter	../../canix/canix.c	/^volatile uint16_t canix_loop_throughput_counter;$/;"	v
+canix_mainloop	../../canix/canix.c	/^void canix_mainloop(void)$/;"	f
+canix_process_messages	../../canix/canix.c	/^void canix_process_messages(void)$/;"	f
+canix_reg_frame_callback	../../canix/canix.c	/^void canix_reg_frame_callback(canix_frame_callback callback, $/;"	f
+canix_reg_idle_callback	../../canix/canix.c	/^void canix_reg_idle_callback(canix_idle_callback callback)$/;"	f
+canix_reg_rtc_callback	../../canix/canix.c	/^void canix_reg_rtc_callback(canix_rtc_callback callback)$/;"	f
+canix_reset	../../canix/canix.c	/^void canix_reset(void)$/;"	f
+canix_rtc_callback	../../canix/canix.h	/^typedef void (*canix_rtc_callback) (void);$/;"	t
+canix_rtc_clock	../../canix/canix.c	/^volatile canix_rtc_clock_t canix_rtc_clock;$/;"	v
+canix_rtc_clock_t	../../canix/rtc.h	/^} canix_rtc_clock_t;$/;"	t	typeref:struct:__anon17
+canix_rtc_init	../../canix/canix.c	/^void canix_rtc_init(void)$/;"	f
+canix_rx_lost	../../canix/canix.c	/^volatile uint32_t canix_rx_lost = 0;$/;"	v
+canix_rx_queue	../../canix/canix.c	/^volatile canix_rx_queue_entry_t canix_rx_queue[CANIX_QUEUE_SIZE];$/;"	v
+canix_rx_queue_entry_t	../../canix/canix.h	/^} canix_rx_queue_entry_t;$/;"	t	typeref:struct:__anon16
+canix_rx_received	../../canix/canix.c	/^volatile uint32_t canix_rx_received = 0;$/;"	v
+canix_rxq_fetch_one	../../canix/canix.c	/^uint8_t canix_rxq_fetch_one(void)$/;"	f
+canix_rxq_put_one	../../canix/canix.c	/^uint8_t canix_rxq_put_one(void)$/;"	f
+canix_rxq_size	../../canix/canix.c	/^uint8_t canix_rxq_size(void)$/;"	f
+canix_selfaddr	../../canix/canix.c	/^uint16_t canix_selfaddr(void)$/;"	f
+canix_set_syslog_level	../../canix/syslog.c	/^void canix_set_syslog_level(uint8_t level)$/;"	f
+canix_sleep_100th	../../canix/canix.c	/^void canix_sleep_100th(uint8_t n)$/;"	f
+canix_sleep_ticker	../../canix/canix.c	/^volatile int32_t canix_sleep_ticker;$/;"	v
+canix_syslog_P	../../canix/syslog.c	/^void canix_syslog_P(uint8_t prio, const char *fmt, ...)$/;"	f
+canix_tx_dropped	../../canix/canix.c	/^volatile uint32_t canix_tx_dropped = 0;$/;"	v
+canix_tx_sent	../../canix/canix.c	/^volatile uint32_t canix_tx_sent = 0;$/;"	v
+canix_update_datetime	../../canix/canix.c	/^void canix_update_datetime(void)$/;"	f
+cmdsrc	rolladen.h	/^	uint16_t cmdsrc;$/;"	m	struct:__anon7
+config	dunstabzugport.h	/^    eds_dunstabzugport_block_t config;$/;"	m	struct:__anon1
+config	heizung.h	/^	eds_heizung_block_t config;$/;"	m	struct:__anon3
+config	lichtzone.h	/^	eds_lichtzone_block_t config;$/;"	m	struct:__anon4
+config	powerport.h	/^	eds_powerport_block_t config;$/;"	m	struct:__anon5
+config	reedkontakt.h	/^	eds_reedkontakt_block_t config;$/;"	m	struct:__anon6
+config	rolladen.h	/^	eds_rolladen_block_t config;$/;"	m	struct:__anon7
+config	tastdimmer.h	/^	eds_tastdimmer_block_t config;$/;"	m	struct:__anon8
+config	taster.h	/^	eds_taster_block_t config;$/;"	m	struct:__anon9
+config	tempsensor.h	/^	eds_tempsensor_block_t config;$/;"	m	struct:__anon10
+config	timeservice.h	/^	eds_timeservice_block_t config;$/;"	m	struct:__anon11
+config	zeitschaltuhr.h	/^	eds_zeitschaltuhr_block_t config;$/;"	m	struct:__anon12
+config	zeitzone.h	/^	eds_zeitzone_block_t config;$/;"	m	struct:__anon13
+contrast	../../include/eds-structs.h	/^    uint8_t           contrast;$/;"	m	struct:__anon28
+convert_sent	tempsensor.h	/^	uint8_t convert_sent;$/;"	m	struct:__anon10
+counter	dunstabzugport.h	/^    uint16_t counter;$/;"	m	struct:__anon1
+darlingtonoutput_getpin	darlingtonoutput.c	/^uint8_t darlingtonoutput_getpin(uint8_t n)$/;"	f
+darlingtonoutput_init	darlingtonoutput.c	/^void darlingtonoutput_init(void)$/;"	f
+darlingtonoutput_setpin	darlingtonoutput.c	/^void darlingtonoutput_setpin(uint8_t n, uint8_t state)$/;"	f
+data	../../canix/canix.h	/^	uint8_t data[8];$/;"	m	struct:__anon15
+data	../../canix/canix.h	/^	uint8_t data[8];$/;"	m	struct:__anon16
+day_of_month	../../canix/rtc.h	/^	uint8_t day_of_month;$/;"	m	struct:__anon17
+day_of_week	../../canix/rtc.h	/^	uint8_t day_of_week;$/;"	m	struct:__anon17
+day_pattern	../../include/eds-structs.h	/^    uint8_t           day_pattern;$/;"	m	struct:__anon49
+delay	../../canix/tools.c	/^void delay(uint16_t ms)$/;"	f
+device_data	devices.c	/^uint8_t device_data[MAX_DEVICE_DATA];$/;"	v
+device_data_dunstabzugport	dunstabzugport.h	/^} device_data_dunstabzugport;$/;"	t	typeref:struct:__anon1
+device_data_heizung	heizung.h	/^} device_data_heizung;$/;"	t	typeref:struct:__anon3
+device_data_lichtzone	lichtzone.h	/^} device_data_lichtzone;$/;"	t	typeref:struct:__anon4
+device_data_powerport	powerport.h	/^} device_data_powerport;$/;"	t	typeref:struct:__anon5
+device_data_ram_usage	devices.c	/^uint16_t device_data_ram_usage;$/;"	v
+device_data_reedkontakt	reedkontakt.h	/^} device_data_reedkontakt;$/;"	t	typeref:struct:__anon6
+device_data_rolladen	rolladen.h	/^} device_data_rolladen;$/;"	t	typeref:struct:__anon7
+device_data_tastdimmer	tastdimmer.h	/^} device_data_tastdimmer;$/;"	t	typeref:struct:__anon8
+device_data_taster	taster.h	/^} device_data_taster;$/;"	t	typeref:struct:__anon9
+device_data_tempsensor	tempsensor.h	/^} device_data_tempsensor;$/;"	t	typeref:struct:__anon10
+device_data_timeservice	timeservice.h	/^} device_data_timeservice;$/;"	t	typeref:struct:__anon11
+device_data_zeitschaltuhr	zeitschaltuhr.h	/^} device_data_zeitschaltuhr;$/;"	t	typeref:struct:__anon12
+device_data_zeitzone	zeitzone.h	/^} device_data_zeitzone;$/;"	t	typeref:struct:__anon13
+devices_init	devices.c	/^void devices_init(void)$/;"	f
+devices_load_config	devices.c	/^void devices_load_config(void)$/;"	f
+devtype	../../canix/chipdef.h	105;"	d
+devtype	../../canix/chipdef.h	136;"	d
+devtype	../../canix/chipdef.h	15;"	d
+devtype	../../canix/chipdef.h	45;"	d
+devtype	../../canix/chipdef.h	75;"	d
+dst	../../canix/canix.c	/^	int dst;$/;"	m	struct:__anon14	file:
+dst	../../canix/canix.h	/^	uint16_t dst;$/;"	m	struct:__anon15
+dummy	../../include/eds-structs.h	/^    uint8_t           dummy;$/;"	m	struct:__anon31
+dummy	../../include/eds-structs.h	/^    uint8_t           dummy;$/;"	m	struct:__anon43
+dummy0	../../include/eds-structs.h	/^    uint8_t           dummy0;$/;"	m	struct:__anon19
+dummy0	../../include/eds-structs.h	/^    uint8_t           dummy0;$/;"	m	struct:__anon27
+dummy1	../../include/eds-structs.h	/^    uint8_t           dummy1;$/;"	m	struct:__anon19
+dummy1	../../include/eds-structs.h	/^    uint8_t           dummy1;$/;"	m	struct:__anon27
+dummy2	../../include/eds-structs.h	/^    uint8_t           dummy2;$/;"	m	struct:__anon19
+dummy2	../../include/eds-structs.h	/^    uint8_t           dummy2;$/;"	m	struct:__anon27
+dummy3	../../include/eds-structs.h	/^    uint8_t           dummy3;$/;"	m	struct:__anon19
+dunkel_grenze	../../include/eds-structs.h	/^    uint8_t           dunkel_grenze;$/;"	m	struct:__anon19
+dunstabzugport_can_callback	dunstabzugport.c	/^void dunstabzugport_can_callback(device_data_dunstabzugport *p, $/;"	f
+dunstabzugport_init	dunstabzugport.c	/^void dunstabzugport_init(device_data_dunstabzugport *p, eds_block_p it)$/;"	f
+dunstabzugport_timer_handler	dunstabzugport.c	/^void dunstabzugport_timer_handler(device_data_dunstabzugport *p)$/;"	f
+duration_counter	heizung.h	/^	uint16_t duration_counter;   \/\/ remaining time in Manual\/Thermostat-Mode$/;"	m	struct:__anon3
+eds_alloc	../../canix/eds.c	/^uint8_t *eds_alloc(uint8_t size)$/;"	f
+eds_block_p	../../include/eds_types.h	/^typedef uint8_t* eds_block_p;$/;"	t
+eds_can_callback	../../canix/eds.c	/^void eds_can_callback(const canix_frame *frame)$/;"	f
+eds_defragment	../../canix/eds.c	/^void eds_defragment(void)$/;"	f
+eds_dir_page_block_t	../../include/eds-structs.h	/^} eds_dir_page_block_t;$/;"	t	typeref:struct:__anon31
+eds_dunstabzugport_block_t	../../include/eds-structs.h	/^} eds_dunstabzugport_block_t;$/;"	t	typeref:struct:__anon38
+eds_fenster_monitor_page_block_t	../../include/eds-structs.h	/^} eds_fenster_monitor_page_block_t;$/;"	t	typeref:struct:__anon36
+eds_find_next_block	../../canix/eds.c	/^eds_block_p eds_find_next_block(eds_block_p p, uint8_t type)$/;"	f
+eds_find_next_block_between	../../canix/eds.c	/^eds_block_p eds_find_next_block_between(eds_block_p p, $/;"	f
+eds_flappingfilter_agent_block_t	../../include/eds-structs.h	/^} eds_flappingfilter_agent_block_t;$/;"	t	typeref:struct:__anon25
+eds_format	../../canix/eds.c	/^void eds_format(void)$/;"	f
+eds_free	../../canix/eds.c	/^uint8_t eds_free(uint8_t *block)$/;"	f
+eds_heiz_page_block_t	../../include/eds-structs.h	/^} eds_heiz_page_block_t;$/;"	t	typeref:struct:__anon32
+eds_heizung_block_t	../../include/eds-structs.h	/^} eds_heizung_block_t;$/;"	t	typeref:struct:__anon39
+eds_heizungssteuerung_block_t	../../include/eds-structs.h	/^} eds_heizungssteuerung_block_t;$/;"	t	typeref:struct:__anon26
+eds_init	../../canix/eds.c	/^uint8_t eds_init(void)$/;"	f
+eds_lcd_light_settings_block_t	../../include/eds-structs.h	/^} eds_lcd_light_settings_block_t;$/;"	t	typeref:struct:__anon28
+eds_lichtzone_block_t	../../include/eds-structs.h	/^} eds_lichtzone_block_t;$/;"	t	typeref:struct:__anon40
+eds_next_block	../../canix/eds.c	/^uint8_t *eds_next_block(uint8_t *p)$/;"	f
+eds_powerport_block_t	../../include/eds-structs.h	/^} eds_powerport_block_t;$/;"	t	typeref:struct:__anon41
+eds_powerport_page_block_t	../../include/eds-structs.h	/^} eds_powerport_page_block_t;$/;"	t	typeref:struct:__anon35
+eds_prio_agent_block_t	../../include/eds-structs.h	/^} eds_prio_agent_block_t;$/;"	t	typeref:struct:__anon22
+eds_read_string	../../canix/eds.c	/^void eds_read_string(uint8_t *block, char *s, uint8_t len)$/;"	f
+eds_reedkontakt_block_t	../../include/eds-structs.h	/^} eds_reedkontakt_block_t;$/;"	t	typeref:struct:__anon42
+eds_rolladen_block_t	../../include/eds-structs.h	/^} eds_rolladen_block_t;$/;"	t	typeref:struct:__anon43
+eds_rolladen_id_assignment_block_t	../../include/eds-structs.h	/^} eds_rolladen_id_assignment_block_t;$/;"	t	typeref:struct:__anon18
+eds_rolladen_page_block_t	../../include/eds-structs.h	/^} eds_rolladen_page_block_t;$/;"	t	typeref:struct:__anon33
+eds_screensaver_page_block_t	../../include/eds-structs.h	/^} eds_screensaver_page_block_t;$/;"	t	typeref:struct:__anon30
+eds_sonnenschutz_agent_block_t	../../include/eds-structs.h	/^} eds_sonnenschutz_agent_block_t;$/;"	t	typeref:struct:__anon20
+eds_state2event_agent_block_t	../../include/eds-structs.h	/^} eds_state2event_agent_block_t;$/;"	t	typeref:struct:__anon23
+eds_tag_nacht_agent_block_t	../../include/eds-structs.h	/^} eds_tag_nacht_agent_block_t;$/;"	t	typeref:struct:__anon19
+eds_tastdimmer_block_t	../../include/eds-structs.h	/^} eds_tastdimmer_block_t;$/;"	t	typeref:struct:__anon44
+eds_taster_block_t	../../include/eds-structs.h	/^} eds_taster_block_t;$/;"	t	typeref:struct:__anon45
+eds_taster_page_block_t	../../include/eds-structs.h	/^} eds_taster_page_block_t;$/;"	t	typeref:struct:__anon34
+eds_temp_anzeige_page_block_t	../../include/eds-structs.h	/^} eds_temp_anzeige_page_block_t;$/;"	t	typeref:struct:__anon37
+eds_tempsensor_block_t	../../include/eds-structs.h	/^} eds_tempsensor_block_t;$/;"	t	typeref:struct:__anon46
+eds_timeservice_block_t	../../include/eds-structs.h	/^} eds_timeservice_block_t;$/;"	t	typeref:struct:__anon47
+eds_userpanel_shortcuts_block_t	../../include/eds-structs.h	/^} eds_userpanel_shortcuts_block_t;$/;"	t	typeref:struct:__anon29
+eds_wetterschutz_agent_block_t	../../include/eds-structs.h	/^} eds_wetterschutz_agent_block_t;$/;"	t	typeref:struct:__anon21
+eds_wetterstation_data_block_t	../../include/eds-structs.h	/^} eds_wetterstation_data_block_t;$/;"	t	typeref:struct:__anon27
+eds_zeitfilter_agent_block_t	../../include/eds-structs.h	/^} eds_zeitfilter_agent_block_t;$/;"	t	typeref:struct:__anon24
+eds_zeitschaltuhr_block_t	../../include/eds-structs.h	/^} eds_zeitschaltuhr_block_t;$/;"	t	typeref:struct:__anon48
+eds_zeitzone_block_t	../../include/eds-structs.h	/^} eds_zeitzone_block_t;$/;"	t	typeref:struct:__anon49
+extended	../../canix/canix.h	/^	uint32_t extended;$/;"	m	struct:__anon16
+exton_sec_counter	lichtzone.h	/^	uint8_t exton_sec_counter;$/;"	m	struct:__anon4
+exton_taster_down_counter	lichtzone.h	/^	uint8_t exton_taster_down_counter;$/;"	m	struct:__anon4
+false	../../canix/canix.h	69;"	d
+false	../../include/oap-def.h	7;"	d
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon33
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon34
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon35
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon37
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon39
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon41
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon42
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon43
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon44
+feature	../../include/eds-structs.h	/^    uint8_t           feature;$/;"	m	struct:__anon45
+feedback_guppe	../../include/eds-structs.h	/^    uint8_t           feedback_guppe;$/;"	m	struct:__anon44
+flapinterval	../../include/eds-structs.h	/^    uint8_t           flapinterval;$/;"	m	struct:__anon20
+frame_callback_entry	../../canix/canix.c	/^static canix_frame_callback_entry frame_callback_entry[MAX_FRAME_CALLBACKS];$/;"	v	file:
+freischalt_taster	../../include/eds-structs.h	/^    uint8_t           freischalt_taster;$/;"	m	struct:__anon38
+freischalt_zeit	../../include/eds-structs.h	/^    uint8_t           freischalt_zeit;$/;"	m	struct:__anon38
+from_hour	../../include/eds-structs.h	/^    uint8_t           from_hour;$/;"	m	struct:__anon49
+from_minute	../../include/eds-structs.h	/^    uint8_t           from_minute;$/;"	m	struct:__anon49
+get_mem_unused	../../canix/mem_check.c	/^uint16_t get_mem_unused(void)$/;"	f
+gruppe	../../include/eds-structs.h	/^    uint8_t           gruppe;$/;"	m	struct:__anon33
+gruppe	../../include/eds-structs.h	/^    uint8_t           gruppe;$/;"	m	struct:__anon34
+gruppe	../../include/eds-structs.h	/^    uint8_t           gruppe;$/;"	m	struct:__anon35
+gruppe	../../include/eds-structs.h	/^    uint8_t           gruppe;$/;"	m	struct:__anon42
+gruppe	../../include/eds-structs.h	/^    uint8_t           gruppe;$/;"	m	struct:__anon45
+gruppe	../../include/eds-structs.h	/^    uint8_t           gruppe;$/;"	m	struct:__anon46
+gruppe	../../include/eds-structs.h	/^    uint8_t           gruppe;$/;"	m	struct:__anon49
+gruppe0	../../include/eds-structs.h	/^    uint8_t           gruppe0;$/;"	m	struct:__anon41
+gruppe0	../../include/eds-structs.h	/^    uint8_t           gruppe0;$/;"	m	struct:__anon43
+gruppe0	../../include/eds-structs.h	/^    uint8_t           gruppe0;$/;"	m	struct:__anon44
+gruppe1	../../include/eds-structs.h	/^    uint8_t           gruppe1;$/;"	m	struct:__anon41
+gruppe1	../../include/eds-structs.h	/^    uint8_t           gruppe1;$/;"	m	struct:__anon43
+gruppe1	../../include/eds-structs.h	/^    uint8_t           gruppe1;$/;"	m	struct:__anon44
+gruppe2	../../include/eds-structs.h	/^    uint8_t           gruppe2;$/;"	m	struct:__anon41
+gruppe2	../../include/eds-structs.h	/^    uint8_t           gruppe2;$/;"	m	struct:__anon43
+gruppe2	../../include/eds-structs.h	/^    uint8_t           gruppe2;$/;"	m	struct:__anon44
+gruppe3	../../include/eds-structs.h	/^    uint8_t           gruppe3;$/;"	m	struct:__anon41
+gruppe3	../../include/eds-structs.h	/^    uint8_t           gruppe3;$/;"	m	struct:__anon43
+gruppe3	../../include/eds-structs.h	/^    uint8_t           gruppe3;$/;"	m	struct:__anon44
+gruppe4	../../include/eds-structs.h	/^    uint8_t           gruppe4;$/;"	m	struct:__anon44
+gruppe5	../../include/eds-structs.h	/^    uint8_t           gruppe5;$/;"	m	struct:__anon44
+gruppe6	../../include/eds-structs.h	/^    uint8_t           gruppe6;$/;"	m	struct:__anon44
+gruppe7	../../include/eds-structs.h	/^    uint8_t           gruppe7;$/;"	m	struct:__anon44
+hauselektrik_callback	main.c	/^void hauselektrik_callback(const canix_frame *frame)$/;"	f
+heiz_id	../../include/eds-structs.h	/^    uint8_t           heiz_id;$/;"	m	struct:__anon32
+heizung_can_callback	heizung.c	/^void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)$/;"	f
+heizung_check_ventilpflege	heizung.c	/^void heizung_check_ventilpflege(device_data_heizung *p)$/;"	f
+heizung_get_matching_zeitzone_id	heizung.c	/^int8_t heizung_get_matching_zeitzone_id(device_data_heizung *p)$/;"	f
+heizung_get_matching_zeitzone_index	heizung.c	/^int8_t heizung_get_matching_zeitzone_index(device_data_heizung *p)$/;"	f
+heizung_get_pwm	heizung.c	/^uint8_t heizung_get_pwm(device_data_heizung *p)$/;"	f
+heizung_handle_pwm	heizung.c	/^void heizung_handle_pwm(device_data_heizung *p)$/;"	f
+heizung_init	heizung.c	/^void heizung_init(device_data_heizung *p, eds_block_p it)$/;"	f
+heizung_set_pwm	heizung.c	/^void heizung_set_pwm(device_data_heizung *p, uint8_t rate)$/;"	f
+heizung_set_pwm_by_temp	heizung.c	/^void heizung_set_pwm_by_temp(device_data_heizung *p, int16_t soll, int16_t ist)$/;"	f
+heizung_timer_handler	heizung.c	/^void heizung_timer_handler(device_data_heizung *p)$/;"	f
+heizung_update_heizstop	heizung.c	/^void heizung_update_heizstop(device_data_heizung *p)$/;"	f
+hell_grenze	../../include/eds-structs.h	/^    uint8_t           hell_grenze;$/;"	m	struct:__anon19
+hilevel_up_event_counter	rolladen.h	/^	int8_t hilevel_up_event_counter;$/;"	m	struct:__anon7
+hour	../../canix/rtc.h	/^	uint8_t hour;$/;"	m	struct:__anon17
+hysterese	../../include/eds-structs.h	/^    uint8_t           hysterese;$/;"	m	struct:__anon20
+hysterese	../../include/eds-structs.h	/^    uint8_t           hysterese;$/;"	m	struct:__anon39
+id	../../include/eds-structs.h	/^    uint8_t           id;$/;"	m	struct:__anon39
+id	heizung.h	/^	uint8_t id;$/;"	m	struct:__anon2
+idle_callback	../../canix/canix.c	/^static canix_idle_callback idle_callback[MAX_IDLE_CALLBACKS];$/;"	v	file:
+idle_handler	timer.c	/^void idle_handler(void)$/;"	f
+in0	../../include/eds-structs.h	/^    uint8_t           in0;$/;"	m	struct:__anon22
+in0	../../include/eds-structs.h	/^    uint8_t           in0;$/;"	m	struct:__anon23
+in0	../../include/eds-structs.h	/^    uint8_t           in0;$/;"	m	struct:__anon24
+in0	../../include/eds-structs.h	/^    uint8_t           in0;$/;"	m	struct:__anon25
+in1	../../include/eds-structs.h	/^    uint8_t           in1;$/;"	m	struct:__anon22
+in2	../../include/eds-structs.h	/^    uint8_t           in2;$/;"	m	struct:__anon22
+inform_action_groups	lichtzone.c	/^void inform_action_groups(const device_data_lichtzone *p)$/;"	f
+interval	../../include/eds-structs.h	/^    uint8_t           interval;$/;"	m	struct:__anon46
+interval	../../include/eds-structs.h	/^    uint8_t           interval;$/;"	m	struct:__anon47
+io_pin	../../include/eds-structs.h	/^    uint8_t           io_pin;$/;"	m	struct:__anon46
+it	heizung.h	/^	eds_block_p it; \/\/ EDS Block Pointer, noetig fuer EDS Schreib-Ops$/;"	m	struct:__anon3
+it	zeitzone.h	/^	eds_block_p it; \/\/ EDS Block Pointer, noetig fuer EDS Schreib-Ops$/;"	m	struct:__anon13
+last_date_update	../../canix/rtc.h	/^	uint8_t last_date_update;$/;"	m	struct:__anon17
+last_state	reedkontakt.h	/^	uint8_t last_state; $/;"	m	struct:__anon6
+last_time_frame_received	timeservice.h	/^	uint8_t last_time_frame_received;$/;"	m	struct:__anon11
+last_time_frame_sent	timeservice.h	/^	uint8_t last_time_frame_sent;$/;"	m	struct:__anon11
+laufzeit	../../include/eds-structs.h	/^    uint16_t          laufzeit;$/;"	m	struct:__anon43
+laufzeit	rolladen.h	/^	int32_t laufzeit;$/;"	m	struct:__anon7
+level	../../include/eds-structs.h	/^    uint8_t           level;$/;"	m	struct:__anon47
+lichtzone_can_callback	lichtzone.c	/^void lichtzone_can_callback(device_data_lichtzone *p, $/;"	f
+lichtzone_setup_timer	lichtzone.c	/^void lichtzone_setup_timer(device_data_lichtzone *p)$/;"	f
+lichtzone_timer_handler	lichtzone.c	/^void lichtzone_timer_handler(device_data_lichtzone *p)$/;"	f
+line0	../../include/eds-structs.h	/^    char              line0[17];$/;"	m	struct:__anon33
+line0	../../include/eds-structs.h	/^    char              line0[17];$/;"	m	struct:__anon34
+line0	../../include/eds-structs.h	/^    char              line0[17];$/;"	m	struct:__anon35
+line1	../../include/eds-structs.h	/^    char              line1[17];$/;"	m	struct:__anon33
+line1	../../include/eds-structs.h	/^    char              line1[17];$/;"	m	struct:__anon34
+line1	../../include/eds-structs.h	/^    char              line1[9];$/;"	m	struct:__anon35
+lowlevel_command	rolladen.h	/^	uint8_t lowlevel_command;$/;"	m	struct:__anon7
+lowlevel_last_dir	rolladen.h	/^	uint8_t lowlevel_last_dir; $/;"	m	struct:__anon7
+lowlevel_state	rolladen.h	/^	uint8_t lowlevel_state;$/;"	m	struct:__anon7
+lowlevel_wait_counter	rolladen.h	/^	uint8_t lowlevel_wait_counter;$/;"	m	struct:__anon7
+main	main.c	/^int main(void)$/;"	f
+manual_rate	heizung.h	/^	uint8_t manual_rate;      \/\/ if in manual mode, this is the heating rate$/;"	m	struct:__anon3
+max_rekalib	../../include/eds-structs.h	/^    uint16_t          max_rekalib;$/;"	m	struct:__anon43
+mcp2515_bit_modify	../../canix/mcp2515.c	/^void mcp2515_bit_modify(uint8_t adress, uint8_t mask, uint8_t data)$/;"	f
+mcp2515_message_available	../../canix/mcp2515.c	/^bool mcp2515_message_available(void)$/;"	f
+mcp2515_read_message	../../canix/mcp2515.c	/^uint8_t mcp2515_read_message(uint32_t *extended, char *data)$/;"	f
+mcp2515_read_register	../../canix/mcp2515.c	/^uint8_t mcp2515_read_register(const uint8_t address)$/;"	f
+mcp2515_read_register_p	../../canix/mcp2515.c	/^void mcp2515_read_register_p(uint8_t adress, uint8_t *data, uint8_t length )$/;"	f
+mcp2515_set_mode	../../canix/mcp2515.c	/^uint8_t mcp2515_set_mode(uint8_t mode)$/;"	f
+mcp2515_write_register	../../canix/mcp2515.c	/^void mcp2515_write_register(uint8_t adress, uint8_t data )$/;"	f
+mcp2515_write_register_p	../../canix/mcp2515.c	/^void mcp2515_write_register_p(uint8_t adress, const uint8_t *data, $/;"	f
+measure_value	heizung.h	/^	int16_t measure_value;$/;"	m	struct:__anon3
+minute	../../canix/rtc.h	/^	uint8_t minute;$/;"	m	struct:__anon17
+mode	heizung.h	/^	uint8_t mode;             \/\/ see HEIZUNG_MODE_* above$/;"	m	struct:__anon3
+modus	../../include/eds-structs.h	/^    uint8_t           modus;$/;"	m	struct:__anon42
+modus	../../include/eds-structs.h	/^    uint8_t           modus;$/;"	m	struct:__anon46
+month_of_year	../../canix/rtc.h	/^	uint8_t month_of_year;$/;"	m	struct:__anon17
+name	../../include/eds-structs.h	/^    char              name[12];$/;"	m	struct:__anon31
+name	../../include/eds-structs.h	/^    char              name[17];$/;"	m	struct:__anon37
+name	../../include/eds-structs.h	/^    char              name[8];$/;"	m	struct:__anon32
+next_id	../../include/eds-structs.h	/^    uint8_t           next_id;$/;"	m	struct:__anon30
+next_id	../../include/eds-structs.h	/^    uint8_t           next_id;$/;"	m	struct:__anon31
+next_id	../../include/eds-structs.h	/^    uint8_t           next_id;$/;"	m	struct:__anon32
+next_id	../../include/eds-structs.h	/^    uint8_t           next_id;$/;"	m	struct:__anon33
+next_id	../../include/eds-structs.h	/^    uint8_t           next_id;$/;"	m	struct:__anon34
+next_id	../../include/eds-structs.h	/^    uint8_t           next_id;$/;"	m	struct:__anon35
+next_id	../../include/eds-structs.h	/^    uint8_t           next_id;$/;"	m	struct:__anon36
+next_id	../../include/eds-structs.h	/^    uint8_t           next_id;$/;"	m	struct:__anon37
+off_gruppe0	../../include/eds-structs.h	/^    uint8_t           off_gruppe0;$/;"	m	struct:__anon40
+off_gruppe1	../../include/eds-structs.h	/^    uint8_t           off_gruppe1;$/;"	m	struct:__anon40
+offset_licht_ost	../../include/eds-structs.h	/^    uint8_t           offset_licht_ost;$/;"	m	struct:__anon27
+offset_licht_sued	../../include/eds-structs.h	/^    uint8_t           offset_licht_sued;$/;"	m	struct:__anon27
+offset_licht_west	../../include/eds-structs.h	/^    uint8_t           offset_licht_west;$/;"	m	struct:__anon27
+on_gruppe0	../../include/eds-structs.h	/^    uint8_t           on_gruppe0;$/;"	m	struct:__anon40
+on_gruppe1	../../include/eds-structs.h	/^    uint8_t           on_gruppe1;$/;"	m	struct:__anon40
+ost_schwelle	../../include/eds-structs.h	/^    uint8_t           ost_schwelle;$/;"	m	struct:__anon20
+ost_to_hour	../../include/eds-structs.h	/^    uint8_t           ost_to_hour;$/;"	m	struct:__anon20
+ost_to_min	../../include/eds-structs.h	/^    uint8_t           ost_to_min;$/;"	m	struct:__anon20
+out0	../../include/eds-structs.h	/^    uint8_t           out0;$/;"	m	struct:__anon19
+out0	../../include/eds-structs.h	/^    uint8_t           out0;$/;"	m	struct:__anon20
+out0	../../include/eds-structs.h	/^    uint8_t           out0;$/;"	m	struct:__anon21
+out0	../../include/eds-structs.h	/^    uint8_t           out0;$/;"	m	struct:__anon22
+out0	../../include/eds-structs.h	/^    uint8_t           out0;$/;"	m	struct:__anon23
+out0	../../include/eds-structs.h	/^    uint8_t           out0;$/;"	m	struct:__anon24
+out0	../../include/eds-structs.h	/^    uint8_t           out0;$/;"	m	struct:__anon25
+ow_bit_io	onewire.c	/^uint8_t ow_bit_io(uint8_t bit)$/;"	f
+ow_command	onewire.c	/^void ow_command(uint8_t cmd, uint8_t *id)$/;"	f
+ow_discover	onewire.c	/^void ow_discover(const canix_frame *frame)$/;"	f
+ow_getpin	onewire.c	/^uint8_t ow_getpin(void)$/;"	f
+ow_id	../../include/eds-structs.h	/^    char              ow_id[17];$/;"	m	struct:__anon46
+ow_pin	onewire.c	/^uint8_t ow_pin = 0;$/;"	v
+ow_read_byte	onewire.c	/^uint8_t ow_read_byte(void)$/;"	f
+ow_reset	onewire.c	/^uint8_t ow_reset(void)$/;"	f
+ow_rom_search	onewire.c	/^uint8_t ow_rom_search(uint8_t diff, uint8_t *id)$/;"	f
+ow_setpin	onewire.c	/^void ow_setpin(uint8_t pin)$/;"	f
+ow_write_byte	onewire.c	/^uint8_t ow_write_byte(uint8_t b)$/;"	f
+page_id	../../include/eds-structs.h	/^    uint8_t           page_id;$/;"	m	struct:__anon30
+page_id	../../include/eds-structs.h	/^    uint8_t           page_id;$/;"	m	struct:__anon31
+page_id	../../include/eds-structs.h	/^    uint8_t           page_id;$/;"	m	struct:__anon32
+page_id	../../include/eds-structs.h	/^    uint8_t           page_id;$/;"	m	struct:__anon33
+page_id	../../include/eds-structs.h	/^    uint8_t           page_id;$/;"	m	struct:__anon34
+page_id	../../include/eds-structs.h	/^    uint8_t           page_id;$/;"	m	struct:__anon35
+page_id	../../include/eds-structs.h	/^    uint8_t           page_id;$/;"	m	struct:__anon36
+page_id	../../include/eds-structs.h	/^    uint8_t           page_id;$/;"	m	struct:__anon37
+parent_id	../../include/eds-structs.h	/^    uint8_t           parent_id;$/;"	m	struct:__anon30
+parent_id	../../include/eds-structs.h	/^    uint8_t           parent_id;$/;"	m	struct:__anon31
+parent_id	../../include/eds-structs.h	/^    uint8_t           parent_id;$/;"	m	struct:__anon32
+parent_id	../../include/eds-structs.h	/^    uint8_t           parent_id;$/;"	m	struct:__anon33
+parent_id	../../include/eds-structs.h	/^    uint8_t           parent_id;$/;"	m	struct:__anon34
+parent_id	../../include/eds-structs.h	/^    uint8_t           parent_id;$/;"	m	struct:__anon35
+parent_id	../../include/eds-structs.h	/^    uint8_t           parent_id;$/;"	m	struct:__anon36
+parent_id	../../include/eds-structs.h	/^    uint8_t           parent_id;$/;"	m	struct:__anon37
+pdevice_data	devices.c	/^uint8_t *pdevice_data[MAX_PDEVICE_DATA];$/;"	v
+port	../../include/eds-structs.h	/^    uint8_t           port;$/;"	m	struct:__anon38
+port	../../include/eds-structs.h	/^    uint8_t           port;$/;"	m	struct:__anon39
+port	../../include/eds-structs.h	/^    uint8_t           port;$/;"	m	struct:__anon41
+port	../../include/eds-structs.h	/^    uint8_t           port;$/;"	m	struct:__anon42
+port	../../include/eds-structs.h	/^    uint8_t           port;$/;"	m	struct:__anon44
+port	../../include/eds-structs.h	/^    uint8_t           port;$/;"	m	struct:__anon45
+port_dir	../../include/eds-structs.h	/^    uint8_t           port_dir;$/;"	m	struct:__anon43
+port_power	../../include/eds-structs.h	/^    uint8_t           port_power;$/;"	m	struct:__anon43
+pos	../../include/eds-structs.h	/^    uint8_t           pos;$/;"	m	struct:__anon33
+power_gruppe	../../include/eds-structs.h	/^    uint8_t           power_gruppe;$/;"	m	struct:__anon48
+powerport_can_callback	powerport.c	/^void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)$/;"	f
+powerport_get	powerport.c	/^uint8_t powerport_get(const device_data_powerport *p)$/;"	f
+powerport_is_in_group	powerport.c	/^uint8_t powerport_is_in_group(const device_data_powerport *p, uint8_t group)$/;"	f
+powerport_send_state_info	powerport.c	/^void powerport_send_state_info(device_data_powerport *p)$/;"	f
+powerport_set	powerport.c	/^void powerport_set(device_data_powerport *p, uint8_t state)$/;"	f
+powerport_toggle	powerport.c	/^void powerport_toggle(device_data_powerport *p)$/;"	f
+pressed	taster.h	/^	uint8_t pressed; \/\/ fuer Entprellung$/;"	m	struct:__anon9
+prev_id	../../include/eds-structs.h	/^    uint8_t           prev_id;$/;"	m	struct:__anon30
+prev_id	../../include/eds-structs.h	/^    uint8_t           prev_id;$/;"	m	struct:__anon31
+prev_id	../../include/eds-structs.h	/^    uint8_t           prev_id;$/;"	m	struct:__anon32
+prev_id	../../include/eds-structs.h	/^    uint8_t           prev_id;$/;"	m	struct:__anon33
+prev_id	../../include/eds-structs.h	/^    uint8_t           prev_id;$/;"	m	struct:__anon34
+prev_id	../../include/eds-structs.h	/^    uint8_t           prev_id;$/;"	m	struct:__anon35
+prev_id	../../include/eds-structs.h	/^    uint8_t           prev_id;$/;"	m	struct:__anon36
+prev_id	../../include/eds-structs.h	/^    uint8_t           prev_id;$/;"	m	struct:__anon37
+process_order	../../include/eds-structs.h	/^    uint8_t           process_order;$/;"	m	struct:__anon19
+process_order	../../include/eds-structs.h	/^    uint8_t           process_order;$/;"	m	struct:__anon20
+process_order	../../include/eds-structs.h	/^    uint8_t           process_order;$/;"	m	struct:__anon21
+process_order	../../include/eds-structs.h	/^    uint8_t           process_order;$/;"	m	struct:__anon22
+process_order	../../include/eds-structs.h	/^    uint8_t           process_order;$/;"	m	struct:__anon23
+process_order	../../include/eds-structs.h	/^    uint8_t           process_order;$/;"	m	struct:__anon24
+process_order	../../include/eds-structs.h	/^    uint8_t           process_order;$/;"	m	struct:__anon25
+proto	../../canix/canix.c	/^	uint8_t proto;$/;"	m	struct:__anon14	file:
+proto	../../canix/canix.h	/^	uint8_t proto;$/;"	m	struct:__anon15
+pwm0	../../include/eds-structs.h	/^    uint8_t           pwm0;$/;"	m	struct:__anon26
+pwm1	../../include/eds-structs.h	/^    uint8_t           pwm1;$/;"	m	struct:__anon26
+pwm10	../../include/eds-structs.h	/^    uint8_t           pwm10;$/;"	m	struct:__anon26
+pwm11	../../include/eds-structs.h	/^    uint8_t           pwm11;$/;"	m	struct:__anon26
+pwm12	../../include/eds-structs.h	/^    uint8_t           pwm12;$/;"	m	struct:__anon26
+pwm13	../../include/eds-structs.h	/^    uint8_t           pwm13;$/;"	m	struct:__anon26
+pwm14	../../include/eds-structs.h	/^    uint8_t           pwm14;$/;"	m	struct:__anon26
+pwm15	../../include/eds-structs.h	/^    uint8_t           pwm15;$/;"	m	struct:__anon26
+pwm16	../../include/eds-structs.h	/^    uint8_t           pwm16;$/;"	m	struct:__anon26
+pwm17	../../include/eds-structs.h	/^    uint8_t           pwm17;$/;"	m	struct:__anon26
+pwm18	../../include/eds-structs.h	/^    uint8_t           pwm18;$/;"	m	struct:__anon26
+pwm19	../../include/eds-structs.h	/^    uint8_t           pwm19;$/;"	m	struct:__anon26
+pwm2	../../include/eds-structs.h	/^    uint8_t           pwm2;$/;"	m	struct:__anon26
+pwm20	../../include/eds-structs.h	/^    uint8_t           pwm20;$/;"	m	struct:__anon26
+pwm21	../../include/eds-structs.h	/^    uint8_t           pwm21;$/;"	m	struct:__anon26
+pwm22	../../include/eds-structs.h	/^    uint8_t           pwm22;$/;"	m	struct:__anon26
+pwm23	../../include/eds-structs.h	/^    uint8_t           pwm23;$/;"	m	struct:__anon26
+pwm3	../../include/eds-structs.h	/^    uint8_t           pwm3;$/;"	m	struct:__anon26
+pwm4	../../include/eds-structs.h	/^    uint8_t           pwm4;$/;"	m	struct:__anon26
+pwm5	../../include/eds-structs.h	/^    uint8_t           pwm5;$/;"	m	struct:__anon26
+pwm6	../../include/eds-structs.h	/^    uint8_t           pwm6;$/;"	m	struct:__anon26
+pwm7	../../include/eds-structs.h	/^    uint8_t           pwm7;$/;"	m	struct:__anon26
+pwm8	../../include/eds-structs.h	/^    uint8_t           pwm8;$/;"	m	struct:__anon26
+pwm9	../../include/eds-structs.h	/^    uint8_t           pwm9;$/;"	m	struct:__anon26
+pwm_counter	heizung.h	/^	uint16_t pwm_counter;$/;"	m	struct:__anon3
+pwm_end	heizung.h	/^	uint16_t pwm_end;$/;"	m	struct:__anon3
+pwm_heizung_off	../../include/eds-structs.h	/^    uint8_t           pwm_heizung_off;$/;"	m	struct:__anon26
+pwm_periode	../../include/eds-structs.h	/^    uint8_t           pwm_periode;$/;"	m	struct:__anon39
+pwm_width	heizung.h	/^	uint16_t pwm_width;$/;"	m	struct:__anon3
+received_interval_counter	heizung.h	/^	uint8_t received_interval_counter;$/;"	m	struct:__anon3
+reed0	../../include/eds-structs.h	/^    uint8_t           reed0;$/;"	m	struct:__anon36
+reed0	../../include/eds-structs.h	/^    uint8_t           reed0;$/;"	m	struct:__anon39
+reed1	../../include/eds-structs.h	/^    uint8_t           reed1;$/;"	m	struct:__anon36
+reed1	../../include/eds-structs.h	/^    uint8_t           reed1;$/;"	m	struct:__anon39
+reed10	../../include/eds-structs.h	/^    uint8_t           reed10;$/;"	m	struct:__anon36
+reed11	../../include/eds-structs.h	/^    uint8_t           reed11;$/;"	m	struct:__anon36
+reed12	../../include/eds-structs.h	/^    uint8_t           reed12;$/;"	m	struct:__anon36
+reed13	../../include/eds-structs.h	/^    uint8_t           reed13;$/;"	m	struct:__anon36
+reed14	../../include/eds-structs.h	/^    uint8_t           reed14;$/;"	m	struct:__anon36
+reed15	../../include/eds-structs.h	/^    uint8_t           reed15;$/;"	m	struct:__anon36
+reed16	../../include/eds-structs.h	/^    uint8_t           reed16;$/;"	m	struct:__anon36
+reed17	../../include/eds-structs.h	/^    uint8_t           reed17;$/;"	m	struct:__anon36
+reed18	../../include/eds-structs.h	/^    uint8_t           reed18;$/;"	m	struct:__anon36
+reed19	../../include/eds-structs.h	/^    uint8_t           reed19;$/;"	m	struct:__anon36
+reed2	../../include/eds-structs.h	/^    uint8_t           reed2;$/;"	m	struct:__anon36
+reed2	../../include/eds-structs.h	/^    uint8_t           reed2;$/;"	m	struct:__anon39
+reed20	../../include/eds-structs.h	/^    uint8_t           reed20;$/;"	m	struct:__anon36
+reed21	../../include/eds-structs.h	/^    uint8_t           reed21;$/;"	m	struct:__anon36
+reed22	../../include/eds-structs.h	/^    uint8_t           reed22;$/;"	m	struct:__anon36
+reed23	../../include/eds-structs.h	/^    uint8_t           reed23;$/;"	m	struct:__anon36
+reed3	../../include/eds-structs.h	/^    uint8_t           reed3;$/;"	m	struct:__anon36
+reed3	../../include/eds-structs.h	/^    uint8_t           reed3;$/;"	m	struct:__anon39
+reed4	../../include/eds-structs.h	/^    uint8_t           reed4;$/;"	m	struct:__anon36
+reed4	../../include/eds-structs.h	/^    uint8_t           reed4;$/;"	m	struct:__anon39
+reed5	../../include/eds-structs.h	/^    uint8_t           reed5;$/;"	m	struct:__anon36
+reed5	../../include/eds-structs.h	/^    uint8_t           reed5;$/;"	m	struct:__anon39
+reed6	../../include/eds-structs.h	/^    uint8_t           reed6;$/;"	m	struct:__anon36
+reed6	../../include/eds-structs.h	/^    uint8_t           reed6;$/;"	m	struct:__anon39
+reed7	../../include/eds-structs.h	/^    uint8_t           reed7;$/;"	m	struct:__anon36
+reed7	../../include/eds-structs.h	/^    uint8_t           reed7;$/;"	m	struct:__anon39
+reed8	../../include/eds-structs.h	/^    uint8_t           reed8;$/;"	m	struct:__anon36
+reed9	../../include/eds-structs.h	/^    uint8_t           reed9;$/;"	m	struct:__anon36
+reed_gruppe0	../../include/eds-structs.h	/^    uint8_t           reed_gruppe0;$/;"	m	struct:__anon38
+reed_gruppe1	../../include/eds-structs.h	/^    uint8_t           reed_gruppe1;$/;"	m	struct:__anon38
+reed_heiz_stop_counter	heizung.h	/^	uint8_t reed_heiz_stop_counter;$/;"	m	struct:__anon3
+reedkontakt_can_callback	reedkontakt.c	/^void reedkontakt_can_callback(device_data_reedkontakt *p, $/;"	f
+reedkontakt_init	reedkontakt.c	/^void reedkontakt_init(device_data_reedkontakt *p, eds_block_p it)$/;"	f
+reedkontakt_timer_handler	reedkontakt.c	/^void reedkontakt_timer_handler(device_data_reedkontakt *p)$/;"	f
+roll_conf_0	../../include/eds-structs.h	/^    uint8_t           roll_conf_0;$/;"	m	struct:__anon19
+roll_conf_0	../../include/eds-structs.h	/^    uint8_t           roll_conf_0;$/;"	m	struct:__anon20
+roll_conf_1	../../include/eds-structs.h	/^    uint8_t           roll_conf_1;$/;"	m	struct:__anon19
+roll_conf_1	../../include/eds-structs.h	/^    uint8_t           roll_conf_1;$/;"	m	struct:__anon20
+roll_conf_10	../../include/eds-structs.h	/^    uint8_t           roll_conf_10;$/;"	m	struct:__anon19
+roll_conf_10	../../include/eds-structs.h	/^    uint8_t           roll_conf_10;$/;"	m	struct:__anon20
+roll_conf_11	../../include/eds-structs.h	/^    uint8_t           roll_conf_11;$/;"	m	struct:__anon19
+roll_conf_11	../../include/eds-structs.h	/^    uint8_t           roll_conf_11;$/;"	m	struct:__anon20
+roll_conf_12	../../include/eds-structs.h	/^    uint8_t           roll_conf_12;$/;"	m	struct:__anon19
+roll_conf_12	../../include/eds-structs.h	/^    uint8_t           roll_conf_12;$/;"	m	struct:__anon20
+roll_conf_13	../../include/eds-structs.h	/^    uint8_t           roll_conf_13;$/;"	m	struct:__anon19
+roll_conf_13	../../include/eds-structs.h	/^    uint8_t           roll_conf_13;$/;"	m	struct:__anon20
+roll_conf_14	../../include/eds-structs.h	/^    uint8_t           roll_conf_14;$/;"	m	struct:__anon19
+roll_conf_14	../../include/eds-structs.h	/^    uint8_t           roll_conf_14;$/;"	m	struct:__anon20
+roll_conf_15	../../include/eds-structs.h	/^    uint8_t           roll_conf_15;$/;"	m	struct:__anon19
+roll_conf_15	../../include/eds-structs.h	/^    uint8_t           roll_conf_15;$/;"	m	struct:__anon20
+roll_conf_16	../../include/eds-structs.h	/^    uint8_t           roll_conf_16;$/;"	m	struct:__anon19
+roll_conf_16	../../include/eds-structs.h	/^    uint8_t           roll_conf_16;$/;"	m	struct:__anon20
+roll_conf_17	../../include/eds-structs.h	/^    uint8_t           roll_conf_17;$/;"	m	struct:__anon19
+roll_conf_17	../../include/eds-structs.h	/^    uint8_t           roll_conf_17;$/;"	m	struct:__anon20
+roll_conf_18	../../include/eds-structs.h	/^    uint8_t           roll_conf_18;$/;"	m	struct:__anon19
+roll_conf_18	../../include/eds-structs.h	/^    uint8_t           roll_conf_18;$/;"	m	struct:__anon20
+roll_conf_19	../../include/eds-structs.h	/^    uint8_t           roll_conf_19;$/;"	m	struct:__anon19
+roll_conf_19	../../include/eds-structs.h	/^    uint8_t           roll_conf_19;$/;"	m	struct:__anon20
+roll_conf_2	../../include/eds-structs.h	/^    uint8_t           roll_conf_2;$/;"	m	struct:__anon19
+roll_conf_2	../../include/eds-structs.h	/^    uint8_t           roll_conf_2;$/;"	m	struct:__anon20
+roll_conf_3	../../include/eds-structs.h	/^    uint8_t           roll_conf_3;$/;"	m	struct:__anon19
+roll_conf_3	../../include/eds-structs.h	/^    uint8_t           roll_conf_3;$/;"	m	struct:__anon20
+roll_conf_4	../../include/eds-structs.h	/^    uint8_t           roll_conf_4;$/;"	m	struct:__anon19
+roll_conf_4	../../include/eds-structs.h	/^    uint8_t           roll_conf_4;$/;"	m	struct:__anon20
+roll_conf_5	../../include/eds-structs.h	/^    uint8_t           roll_conf_5;$/;"	m	struct:__anon19
+roll_conf_5	../../include/eds-structs.h	/^    uint8_t           roll_conf_5;$/;"	m	struct:__anon20
+roll_conf_6	../../include/eds-structs.h	/^    uint8_t           roll_conf_6;$/;"	m	struct:__anon19
+roll_conf_6	../../include/eds-structs.h	/^    uint8_t           roll_conf_6;$/;"	m	struct:__anon20
+roll_conf_7	../../include/eds-structs.h	/^    uint8_t           roll_conf_7;$/;"	m	struct:__anon19
+roll_conf_7	../../include/eds-structs.h	/^    uint8_t           roll_conf_7;$/;"	m	struct:__anon20
+roll_conf_8	../../include/eds-structs.h	/^    uint8_t           roll_conf_8;$/;"	m	struct:__anon19
+roll_conf_8	../../include/eds-structs.h	/^    uint8_t           roll_conf_8;$/;"	m	struct:__anon20
+roll_conf_9	../../include/eds-structs.h	/^    uint8_t           roll_conf_9;$/;"	m	struct:__anon19
+roll_conf_9	../../include/eds-structs.h	/^    uint8_t           roll_conf_9;$/;"	m	struct:__anon20
+roll_id_0	../../include/eds-structs.h	/^    uint8_t           roll_id_0;$/;"	m	struct:__anon18
+roll_id_1	../../include/eds-structs.h	/^    uint8_t           roll_id_1;$/;"	m	struct:__anon18
+roll_id_10	../../include/eds-structs.h	/^    uint8_t           roll_id_10;$/;"	m	struct:__anon18
+roll_id_11	../../include/eds-structs.h	/^    uint8_t           roll_id_11;$/;"	m	struct:__anon18
+roll_id_12	../../include/eds-structs.h	/^    uint8_t           roll_id_12;$/;"	m	struct:__anon18
+roll_id_13	../../include/eds-structs.h	/^    uint8_t           roll_id_13;$/;"	m	struct:__anon18
+roll_id_14	../../include/eds-structs.h	/^    uint8_t           roll_id_14;$/;"	m	struct:__anon18
+roll_id_15	../../include/eds-structs.h	/^    uint8_t           roll_id_15;$/;"	m	struct:__anon18
+roll_id_16	../../include/eds-structs.h	/^    uint8_t           roll_id_16;$/;"	m	struct:__anon18
+roll_id_17	../../include/eds-structs.h	/^    uint8_t           roll_id_17;$/;"	m	struct:__anon18
+roll_id_18	../../include/eds-structs.h	/^    uint8_t           roll_id_18;$/;"	m	struct:__anon18
+roll_id_19	../../include/eds-structs.h	/^    uint8_t           roll_id_19;$/;"	m	struct:__anon18
+roll_id_2	../../include/eds-structs.h	/^    uint8_t           roll_id_2;$/;"	m	struct:__anon18
+roll_id_3	../../include/eds-structs.h	/^    uint8_t           roll_id_3;$/;"	m	struct:__anon18
+roll_id_4	../../include/eds-structs.h	/^    uint8_t           roll_id_4;$/;"	m	struct:__anon18
+roll_id_5	../../include/eds-structs.h	/^    uint8_t           roll_id_5;$/;"	m	struct:__anon18
+roll_id_6	../../include/eds-structs.h	/^    uint8_t           roll_id_6;$/;"	m	struct:__anon18
+roll_id_7	../../include/eds-structs.h	/^    uint8_t           roll_id_7;$/;"	m	struct:__anon18
+roll_id_8	../../include/eds-structs.h	/^    uint8_t           roll_id_8;$/;"	m	struct:__anon18
+roll_id_9	../../include/eds-structs.h	/^    uint8_t           roll_id_9;$/;"	m	struct:__anon18
+roll_idx_0	../../include/eds-structs.h	/^    uint8_t           roll_idx_0;$/;"	m	struct:__anon24
+roll_idx_1	../../include/eds-structs.h	/^    uint8_t           roll_idx_1;$/;"	m	struct:__anon24
+roll_idx_2	../../include/eds-structs.h	/^    uint8_t           roll_idx_2;$/;"	m	struct:__anon24
+roll_idx_3	../../include/eds-structs.h	/^    uint8_t           roll_idx_3;$/;"	m	struct:__anon24
+roll_idx_4	../../include/eds-structs.h	/^    uint8_t           roll_idx_4;$/;"	m	struct:__anon24
+roll_idx_5	../../include/eds-structs.h	/^    uint8_t           roll_idx_5;$/;"	m	struct:__anon24
+roll_idx_6	../../include/eds-structs.h	/^    uint8_t           roll_idx_6;$/;"	m	struct:__anon24
+roll_idx_7	../../include/eds-structs.h	/^    uint8_t           roll_idx_7;$/;"	m	struct:__anon24
+rolladen_can_callback	rolladen.c	/^void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)$/;"	f
+rolladen_init	rolladen.c	/^void rolladen_init(device_data_rolladen *p, eds_block_p it)$/;"	f
+rolladen_is_in_group	rolladen.c	/^uint8_t rolladen_is_in_group(const device_data_rolladen *p, uint8_t group)$/;"	f
+rolladen_laufzeit_align	rolladen.c	/^void rolladen_laufzeit_align(device_data_rolladen *p)$/;"	f
+rolladen_lowlevel_define_position	rolladen.c	/^void rolladen_lowlevel_define_position(device_data_rolladen *p, uint8_t pos)$/;"	f
+rolladen_lowlevel_get_position	rolladen.c	/^uint8_t rolladen_lowlevel_get_position(const device_data_rolladen *p)$/;"	f
+rolladen_lowlevel_get_state	rolladen.c	/^uint8_t rolladen_lowlevel_get_state(const device_data_rolladen *p)$/;"	f
+rolladen_lowlevel_timer_handler	rolladen.c	/^void rolladen_lowlevel_timer_handler(device_data_rolladen *p)$/;"	f
+rolladen_max_laufzeit	rolladen.c	/^int32_t rolladen_max_laufzeit(device_data_rolladen *p)$/;"	f
+rolladen_min_laufzeit	rolladen.c	/^int32_t rolladen_min_laufzeit(device_data_rolladen *p)$/;"	f
+rolladen_send_changed_info	rolladen.c	/^void rolladen_send_changed_info(device_data_rolladen *p)$/;"	f
+rolladen_set_soll_laufzeit	rolladen.c	/^void rolladen_set_soll_laufzeit(device_data_rolladen *p, uint8_t percent)$/;"	f
+rolladen_timer_handler	rolladen.c	/^void rolladen_timer_handler(device_data_rolladen *p)$/;"	f
+rtc_callback	../../canix/canix.c	/^static canix_rtc_callback  rtc_callback[MAX_RTC_CALLBACKS];$/;"	v	file:
+second	../../canix/rtc.h	/^	uint8_t second;$/;"	m	struct:__anon17
+send_log	log.c	/^void send_log(uint8_t data, uint8_t data2)$/;"	f
+send_log2	log.c	/^void send_log2(uint8_t data, uint16_t data2)$/;"	f
+sensor_id	../../include/eds-structs.h	/^    uint8_t           sensor_id;$/;"	m	struct:__anon39
+sig_byte1	../../canix/chipdef.h	103;"	d
+sig_byte1	../../canix/chipdef.h	134;"	d
+sig_byte1	../../canix/chipdef.h	13;"	d
+sig_byte1	../../canix/chipdef.h	43;"	d
+sig_byte1	../../canix/chipdef.h	73;"	d
+sig_byte2	../../canix/chipdef.h	102;"	d
+sig_byte2	../../canix/chipdef.h	12;"	d
+sig_byte2	../../canix/chipdef.h	133;"	d
+sig_byte2	../../canix/chipdef.h	42;"	d
+sig_byte2	../../canix/chipdef.h	72;"	d
+sig_byte3	../../canix/chipdef.h	101;"	d
+sig_byte3	../../canix/chipdef.h	11;"	d
+sig_byte3	../../canix/chipdef.h	132;"	d
+sig_byte3	../../canix/chipdef.h	41;"	d
+sig_byte3	../../canix/chipdef.h	71;"	d
+size	../../canix/canix.h	/^	uint8_t size;$/;"	m	struct:__anon15
+size	../../canix/canix.h	/^	uint8_t size;$/;"	m	struct:__anon16
+soll_laufzeit	rolladen.h	/^	int32_t soll_laufzeit;$/;"	m	struct:__anon7
+solltemp_line_t	heizung.h	/^} solltemp_line_t;$/;"	t	typeref:struct:__anon2
+spi_getc	../../canix/mcp2515.c	/^uint8_t spi_getc(void)$/;"	f
+spi_init	../../canix/mcp2515.c	/^void spi_init(void)$/;"	f
+spi_putc	../../canix/mcp2515.c	/^uint8_t spi_putc( uint8_t data )$/;"	f
+src	../../canix/canix.h	/^	uint16_t src;$/;"	m	struct:__anon15
+srv	../../canix/canix.c	/^	uint8_t srv;$/;"	m	struct:__anon14	file:
+state	lichtzone.h	/^	uint8_t state; \/\/ 0 = off, 1 = on, 2 = on\/extended$/;"	m	struct:__anon4
+state	zeitschaltuhr.h	/^	uint8_t state;$/;"	m	struct:__anon12
+state_dunst	dunstabzugport.h	/^    uint8_t state_dunst;$/;"	m	struct:__anon1
+state_reed0	dunstabzugport.h	/^    uint8_t state_reed0;$/;"	m	struct:__anon1
+state_reed1	dunstabzugport.h	/^    uint8_t state_reed1;$/;"	m	struct:__anon1
+sued_from_hour	../../include/eds-structs.h	/^    uint8_t           sued_from_hour;$/;"	m	struct:__anon20
+sued_from_min	../../include/eds-structs.h	/^    uint8_t           sued_from_min;$/;"	m	struct:__anon20
+sued_schwelle	../../include/eds-structs.h	/^    uint8_t           sued_schwelle;$/;"	m	struct:__anon20
+sued_to_hour	../../include/eds-structs.h	/^    uint8_t           sued_to_hour;$/;"	m	struct:__anon20
+sued_to_min	../../include/eds-structs.h	/^    uint8_t           sued_to_min;$/;"	m	struct:__anon20
+summe_laufzeit	rolladen.h	/^	uint32_t summe_laufzeit;$/;"	m	struct:__anon7
+takeover_time	../../include/eds-structs.h	/^    uint8_t           takeover_time;$/;"	m	struct:__anon47
+tastdimmer_can_callback	tastdimmer.c	/^void tastdimmer_can_callback(device_data_tastdimmer *p, const canix_frame *frame)$/;"	f
+tastdimmer_is_in_group	tastdimmer.c	/^uint8_t tastdimmer_is_in_group(const device_data_tastdimmer *p, uint8_t group)$/;"	f
+taster	../../include/eds-structs.h	/^    uint8_t           taster;$/;"	m	struct:__anon43
+taster_timer_handler	taster.c	/^void taster_timer_handler(device_data_taster *p)$/;"	f
+tasterport_read	tasterinput.c	/^uint8_t tasterport_read(uint8_t n)$/;"	f
+temp	heizung.h	/^	int16_t temp;$/;"	m	struct:__anon2
+temperature	tempsensor.h	/^	int16_t temperature;$/;"	m	struct:__anon10
+tempsensor_can_callback	tempsensor.c	/^void tempsensor_can_callback(device_data_tempsensor *p, $/;"	f
+tempsensor_id	../../include/eds-structs.h	/^    uint8_t           tempsensor_id;$/;"	m	struct:__anon37
+tempsensor_init	tempsensor.c	/^void tempsensor_init(device_data_tempsensor *p, eds_block_p it)$/;"	f
+tempsensor_str2id	tempsensor.c	/^uint8_t tempsensor_str2id(char *str, char *id)$/;"	f
+tempsensor_timer_handler	tempsensor.c	/^void tempsensor_timer_handler(device_data_tempsensor *p)$/;"	f
+thermostat_temp	heizung.h	/^	int16_t thermostat_temp;    \/\/ Soll-Temperatur im Thermostat-Modus$/;"	m	struct:__anon3
+time_matches	../../canix/tools.c	/^uint8_t time_matches(uint8_t from_hour, uint8_t from_minute,$/;"	f
+timer_counter	heizung.h	/^	uint8_t timer_counter;     \/\/ just update all 30 Seconds !$/;"	m	struct:__anon3
+timer_counter	lichtzone.h	/^	uint16_t timer_counter;$/;"	m	struct:__anon4
+timer_counter	reedkontakt.h	/^	uint8_t timer_counter;$/;"	m	struct:__anon6
+timer_counter	tempsensor.h	/^	uint8_t timer_counter;$/;"	m	struct:__anon10
+timer_counter_1	timer.c	/^volatile uint8_t timer_counter_1 = 0;$/;"	v
+timer_counter_100th	timer.c	/^volatile uint8_t timer_counter_100th = 0;$/;"	v
+timer_counter_10th	timer.c	/^volatile uint8_t timer_counter_10th = 0;$/;"	v
+timer_delay	../../include/eds-structs.h	/^    uint8_t           timer_delay;$/;"	m	struct:__anon40
+timer_event_1	timer.c	/^volatile uint8_t timer_event_1 = 0;$/;"	v
+timer_event_100th	timer.c	/^volatile uint8_t timer_event_100th = 0;$/;"	v
+timer_event_10th	timer.c	/^volatile uint8_t timer_event_10th = 0;$/;"	v
+timer_handler	timer.c	/^void timer_handler(void)$/;"	f
+timeservice_can_callback	timeservice.c	/^void timeservice_can_callback(device_data_timeservice *p,$/;"	f
+timeservice_timer_handler	timeservice.c	/^void timeservice_timer_handler(device_data_timeservice *p)$/;"	f
+to_hour	../../include/eds-structs.h	/^    uint8_t           to_hour;$/;"	m	struct:__anon49
+to_minute	../../include/eds-structs.h	/^    uint8_t           to_minute;$/;"	m	struct:__anon49
+toggle_gruppe0	../../include/eds-structs.h	/^    uint8_t           toggle_gruppe0;$/;"	m	struct:__anon40
+toggle_gruppe1	../../include/eds-structs.h	/^    uint8_t           toggle_gruppe1;$/;"	m	struct:__anon40
+toggle_gruppe2	../../include/eds-structs.h	/^    uint8_t           toggle_gruppe2;$/;"	m	struct:__anon40
+toggle_gruppe3	../../include/eds-structs.h	/^    uint8_t           toggle_gruppe3;$/;"	m	struct:__anon40
+true	../../canix/canix.h	68;"	d
+true	../../include/oap-def.h	6;"	d
+type	dunstabzugport.h	/^    uint8_t type;$/;"	m	struct:__anon1
+type	heizung.h	/^	uint8_t type;$/;"	m	struct:__anon3
+type	lichtzone.h	/^	uint8_t type;$/;"	m	struct:__anon4
+type	powerport.h	/^	uint8_t type;$/;"	m	struct:__anon5
+type	reedkontakt.h	/^	uint8_t type;$/;"	m	struct:__anon6
+type	rolladen.h	/^	uint8_t type;$/;"	m	struct:__anon7
+type	tastdimmer.h	/^	uint8_t type;$/;"	m	struct:__anon8
+type	taster.h	/^	uint8_t type;$/;"	m	struct:__anon9
+type	tempsensor.h	/^	uint8_t type;$/;"	m	struct:__anon10
+type	timeservice.h	/^	uint8_t type;$/;"	m	struct:__anon11
+type	zeitschaltuhr.h	/^	uint8_t type;$/;"	m	struct:__anon12
+type	zeitzone.h	/^	uint8_t type;$/;"	m	struct:__anon13
+udelay	../../canix/tools.h	35;"	d
+update_counter	zeitschaltuhr.h	/^	uint16_t update_counter;$/;"	m	struct:__anon12
+uptime_sec	../../canix/rtc.h	/^	uint32_t uptime_sec;$/;"	m	struct:__anon17
+uptime_sec_100th	../../canix/rtc.h	/^	uint8_t uptime_sec_100th;$/;"	m	struct:__anon17
+used	../../canix/canix.h	/^	uint8_t used;$/;"	m	struct:__anon16
+ventilpflege_counter	heizung.h	/^	uint16_t ventilpflege_counter;$/;"	m	struct:__anon3
+waermebedarf_counter	heizung.h	/^	uint8_t waermebedarf_counter;$/;"	m	struct:__anon3
+west_from_hour	../../include/eds-structs.h	/^    uint8_t           west_from_hour;$/;"	m	struct:__anon20
+west_from_min	../../include/eds-structs.h	/^    uint8_t           west_from_min;$/;"	m	struct:__anon20
+west_schwelle	../../include/eds-structs.h	/^    uint8_t           west_schwelle;$/;"	m	struct:__anon20
+year	../../canix/rtc.h	/^	uint8_t year;$/;"	m	struct:__anon17
+zeitschaltuhr_init	zeitschaltuhr.c	/^void zeitschaltuhr_init(device_data_zeitschaltuhr *p, eds_block_p it)$/;"	f
+zeitschaltuhr_timer_handler	zeitschaltuhr.c	/^void zeitschaltuhr_timer_handler(device_data_zeitschaltuhr *p)$/;"	f
+zeitzone0_id	../../include/eds-structs.h	/^    uint8_t           zeitzone0_id;$/;"	m	struct:__anon39
+zeitzone0_id	../../include/eds-structs.h	/^    uint8_t           zeitzone0_id;$/;"	m	struct:__anon48
+zeitzone0_temp	../../include/eds-structs.h	/^    uint16_t          zeitzone0_temp;$/;"	m	struct:__anon39
+zeitzone1_id	../../include/eds-structs.h	/^    uint8_t           zeitzone1_id;$/;"	m	struct:__anon39
+zeitzone1_id	../../include/eds-structs.h	/^    uint8_t           zeitzone1_id;$/;"	m	struct:__anon48
+zeitzone1_temp	../../include/eds-structs.h	/^    uint16_t          zeitzone1_temp;$/;"	m	struct:__anon39
+zeitzone2_id	../../include/eds-structs.h	/^    uint8_t           zeitzone2_id;$/;"	m	struct:__anon39
+zeitzone2_id	../../include/eds-structs.h	/^    uint8_t           zeitzone2_id;$/;"	m	struct:__anon48
+zeitzone2_temp	../../include/eds-structs.h	/^    uint16_t          zeitzone2_temp;$/;"	m	struct:__anon39
+zeitzone3_id	../../include/eds-structs.h	/^    uint8_t           zeitzone3_id;$/;"	m	struct:__anon39
+zeitzone3_id	../../include/eds-structs.h	/^    uint8_t           zeitzone3_id;$/;"	m	struct:__anon48
+zeitzone3_temp	../../include/eds-structs.h	/^    uint16_t          zeitzone3_temp;$/;"	m	struct:__anon39
+zeitzone4_id	../../include/eds-structs.h	/^    uint8_t           zeitzone4_id;$/;"	m	struct:__anon39
+zeitzone4_id	../../include/eds-structs.h	/^    uint8_t           zeitzone4_id;$/;"	m	struct:__anon48
+zeitzone4_temp	../../include/eds-structs.h	/^    uint16_t          zeitzone4_temp;$/;"	m	struct:__anon39
+zeitzone5_id	../../include/eds-structs.h	/^    uint8_t           zeitzone5_id;$/;"	m	struct:__anon39
+zeitzone5_id	../../include/eds-structs.h	/^    uint8_t           zeitzone5_id;$/;"	m	struct:__anon48
+zeitzone5_temp	../../include/eds-structs.h	/^    uint16_t          zeitzone5_temp;$/;"	m	struct:__anon39
+zeitzone6_id	../../include/eds-structs.h	/^    uint8_t           zeitzone6_id;$/;"	m	struct:__anon39
+zeitzone6_id	../../include/eds-structs.h	/^    uint8_t           zeitzone6_id;$/;"	m	struct:__anon48
+zeitzone6_temp	../../include/eds-structs.h	/^    uint16_t          zeitzone6_temp;$/;"	m	struct:__anon39
+zeitzone7_id	../../include/eds-structs.h	/^    uint8_t           zeitzone7_id;$/;"	m	struct:__anon39
+zeitzone7_id	../../include/eds-structs.h	/^    uint8_t           zeitzone7_id;$/;"	m	struct:__anon48
+zeitzone7_temp	../../include/eds-structs.h	/^    uint16_t          zeitzone7_temp;$/;"	m	struct:__anon39
+zeitzone_can_callback	zeitzone.c	/^void zeitzone_can_callback(device_data_zeitzone *p,$/;"	f
+zeitzone_id	../../include/eds-structs.h	/^    uint8_t           zeitzone_id;$/;"	m	struct:__anon28
+zeitzone_init	zeitzone.c	/^void zeitzone_init(device_data_zeitzone *p, eds_block_p it)$/;"	f
+zeitzone_matches	zeitzone.c	/^uint8_t zeitzone_matches(uint8_t zeitzone_id)$/;"	f
+zz_id_0	../../include/eds-structs.h	/^    uint8_t           zz_id_0;$/;"	m	struct:__anon24
+zz_id_1	../../include/eds-structs.h	/^    uint8_t           zz_id_1;$/;"	m	struct:__anon24
+zz_id_2	../../include/eds-structs.h	/^    uint8_t           zz_id_2;$/;"	m	struct:__anon24
+zz_id_3	../../include/eds-structs.h	/^    uint8_t           zz_id_3;$/;"	m	struct:__anon24
+zz_id_4	../../include/eds-structs.h	/^    uint8_t           zz_id_4;$/;"	m	struct:__anon24
+zz_id_5	../../include/eds-structs.h	/^    uint8_t           zz_id_5;$/;"	m	struct:__anon24
+zz_id_6	../../include/eds-structs.h	/^    uint8_t           zz_id_6;$/;"	m	struct:__anon24
+zz_id_7	../../include/eds-structs.h	/^    uint8_t           zz_id_7;$/;"	m	struct:__anon24

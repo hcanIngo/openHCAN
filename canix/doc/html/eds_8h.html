@@ -1,0 +1,779 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: eds.h-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>eds.h-Dateireferenz</h1><code>#include &lt;inttypes.h&gt;</code><br>
+<code>#include &lt;eds_types.h&gt;</code><br>
+<code>#include &lt;eds_blocks.h&gt;</code><br>
+<code>#include &lt;<a class="el" href="canix_8h-source.html">canix/canix.h</a>&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für eds.h:</div>
+<div class="dynsection">
+<p><center><img src="eds_8h__incl.png" border="0" usemap="#eds.h_map" alt=""></center>
+</div>
+
+<p>
+<div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dynsection">
+<p><center><img src="eds_8h__dep__incl.png" border="0" usemap="#eds.hdep_map" alt=""></center>
+</div>
+
+<p>
+<a href="eds_8h-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#c4b69b815f359c501bb0addc632a29db">EDS_START</a>&nbsp;&nbsp;&nbsp;((uint8_t *) 32)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#c6092ee5dcbafdba182815b8c1652409">EDS_DATA_START</a>&nbsp;&nbsp;&nbsp;(EDS_START + 2)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#14cbd7e6cc344943a7ede1c98a290ccf">EDS_END</a>&nbsp;&nbsp;&nbsp;((uint8_t *) 1023)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#335b21b81a4cb885893461988ce83219">EDS_OK</a>&nbsp;&nbsp;&nbsp;0</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#367a63f82b58cca3f6566a255b5712b0">EDS_NOT_FORMATED</a>&nbsp;&nbsp;&nbsp;1</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#52841f1e231b0743b94498700e24f08b">EDS_INVALID_POINTER</a>&nbsp;&nbsp;&nbsp;2</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#34b53998e8a8da6506d06d140197f1f5">EDS_BLOCK_TYPE</a>(p)&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#f912d7e889ebcdc36c89a068b39e0371">EDS_BLOCK_IS_FREE</a>(p)&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p) == 0)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#917d99c819f186e872c16f6e4daad52a">EDS_BLOCK_SIZE</a>(p)&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 1))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#cb5163ee0e0501d0ebc1da863d6ccbb4">EDS_SET_BLOCK_SIZE</a>(p, t)&nbsp;&nbsp;&nbsp;(eeprom_write_byte(p + 1, t))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#7729f91e10a3aefa90d61a22a0220892">EDS_SET_BLOCK_TYPE</a>(p, t)&nbsp;&nbsp;&nbsp;(eeprom_write_byte(p,t))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#91cdac018aeae6ccbb6c081cf1caa03b">EDS_BLOCK_DATA</a>(p, i)&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 2 + i))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#995dfcfe875ec76b68ff7d0ce58c63f3">EDS_SET_BLOCK_DATA</a>(p, i, v)&nbsp;&nbsp;&nbsp;(eeprom_write_byte(p + 2 + i, v))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#0d889f841f06bf69fc7b18f05416d052">EDS_foreach_block_between</a>(it, a, b)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#826b2f5e8c0ff03f17c31c3f182f6f78">EDS_PAGE_ID</a>(p)&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 2))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#c6eac631f2244217c3e59e6526a5930c">EDS_PAGE_PARENT</a>(p)&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 3))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#beee405c0cee7e6e9e3c9e7643c4867e">EDS_PAGE_NEXT</a>(p)&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 4))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#f98a0909706d340a119df79b743f976f">EDS_PAGE_PREV</a>(p)&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 5))</td></tr>
+
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#cafeb3a3f5989632617a0ec2ded0c4eb">eds_init</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#541e0264264d9caef67ac4464bd32d05">eds_defragment</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#e629aa1e825c6db792328eb5ae82846c">eds_alloc</a> (uint8_t size)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#a9e27b5ea1c2785f124a41c3704f51d9">eds_free</a> (uint8_t *block)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#4ee3836d55ab687b7406197db0eba390">eds_read_string</a> (uint8_t *block, char *s, uint8_t len)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#3ece872f285f51f0da1665fee2bd647f">eds_find_next_block</a> (uint8_t *p, uint8_t type)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#d820135a82be171c958d32fbba09c105">eds_find_next_block_between</a> (uint8_t *p, uint8_t type1, uint8_t type2)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds_8h.html#82b8f9e4abf2bb811517066e8af46610">eds_can_callback</a> (const <a class="el" href="structcanix__frame.html">canix_frame</a> *frame)</td></tr>
+
+</table>
+<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="91cdac018aeae6ccbb6c081cf1caa03b"></a><!-- doxytag: member="eds.h::EDS_BLOCK_DATA" ref="91cdac018aeae6ccbb6c081cf1caa03b" args="(p, i)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_BLOCK_DATA          </td>
+          <td>(</td>
+          <td class="paramtype">p,         <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">i&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 2 + i))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00028">28</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="f912d7e889ebcdc36c89a068b39e0371"></a><!-- doxytag: member="eds.h::EDS_BLOCK_IS_FREE" ref="f912d7e889ebcdc36c89a068b39e0371" args="(p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_BLOCK_IS_FREE          </td>
+          <td>(</td>
+          <td class="paramtype">p&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p) == 0)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00024">24</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00125">eds_defragment()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="917d99c819f186e872c16f6e4daad52a"></a><!-- doxytag: member="eds.h::EDS_BLOCK_SIZE" ref="917d99c819f186e872c16f6e4daad52a" args="(p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_BLOCK_SIZE          </td>
+          <td>(</td>
+          <td class="paramtype">p&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 1))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00025">25</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00074">eds_alloc()</a>, <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>, <a class="el" href="eds_8c-source.html#l00125">eds_defragment()</a> und <a class="el" href="eds_8c-source.html#l00045">eds_next_block()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="34b53998e8a8da6506d06d140197f1f5"></a><!-- doxytag: member="eds.h::EDS_BLOCK_TYPE" ref="34b53998e8a8da6506d06d140197f1f5" args="(p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_BLOCK_TYPE          </td>
+          <td>(</td>
+          <td class="paramtype">p&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00023">23</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00074">eds_alloc()</a>, <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>, <a class="el" href="eds_8c-source.html#l00172">eds_find_next_block()</a> und <a class="el" href="eds_8c-source.html#l00190">eds_find_next_block_between()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c6092ee5dcbafdba182815b8c1652409"></a><!-- doxytag: member="eds.h::EDS_DATA_START" ref="c6092ee5dcbafdba182815b8c1652409" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_DATA_START&nbsp;&nbsp;&nbsp;(EDS_START + 2)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00014">14</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00074">eds_alloc()</a>, <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>, <a class="el" href="eds_8c-source.html#l00125">eds_defragment()</a>, <a class="el" href="eds_8c-source.html#l00172">eds_find_next_block()</a>, <a class="el" href="eds_8c-source.html#l00190">eds_find_next_block_between()</a> und <a class="el" href="eds_8c-source.html#l00106">eds_free()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="14cbd7e6cc344943a7ede1c98a290ccf"></a><!-- doxytag: member="eds.h::EDS_END" ref="14cbd7e6cc344943a7ede1c98a290ccf" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_END&nbsp;&nbsp;&nbsp;((uint8_t *) 1023)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00015">15</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00074">eds_alloc()</a>, <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>, <a class="el" href="eds_8c-source.html#l00125">eds_defragment()</a>, <a class="el" href="eds_8c-source.html#l00172">eds_find_next_block()</a>, <a class="el" href="eds_8c-source.html#l00190">eds_find_next_block_between()</a>, <a class="el" href="eds_8c-source.html#l00014">eds_format()</a> und <a class="el" href="eds_8c-source.html#l00106">eds_free()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="0d889f841f06bf69fc7b18f05416d052"></a><!-- doxytag: member="eds.h::EDS_foreach_block_between" ref="0d889f841f06bf69fc7b18f05416d052" args="(it, a, b)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_foreach_block_between          </td>
+          <td>(</td>
+          <td class="paramtype">it,         <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">a,         <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">b&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+<b>Wert:</b><div class="fragment"><pre class="fragment"><span class="keywordflow">for</span> (it = <a class="code" href="eds_8c.html#741f4564b4aba93c650d8f74fd62a3f5">eds_find_next_block_between</a>(0, \
+        a, b); it != 0; it = <a class="code" href="eds_8c.html#741f4564b4aba93c650d8f74fd62a3f5">eds_find_next_block_between</a>(it,a,b))
+</pre></div>
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00034">34</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="52841f1e231b0743b94498700e24f08b"></a><!-- doxytag: member="eds.h::EDS_INVALID_POINTER" ref="52841f1e231b0743b94498700e24f08b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_INVALID_POINTER&nbsp;&nbsp;&nbsp;2          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00020">20</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00106">eds_free()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="367a63f82b58cca3f6566a255b5712b0"></a><!-- doxytag: member="eds.h::EDS_NOT_FORMATED" ref="367a63f82b58cca3f6566a255b5712b0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_NOT_FORMATED&nbsp;&nbsp;&nbsp;1          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00019">19</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00050">eds_init()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="335b21b81a4cb885893461988ce83219"></a><!-- doxytag: member="eds.h::EDS_OK" ref="335b21b81a4cb885893461988ce83219" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_OK&nbsp;&nbsp;&nbsp;0          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00018">18</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00106">eds_free()</a> und <a class="el" href="eds_8c-source.html#l00050">eds_init()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="826b2f5e8c0ff03f17c31c3f182f6f78"></a><!-- doxytag: member="eds.h::EDS_PAGE_ID" ref="826b2f5e8c0ff03f17c31c3f182f6f78" args="(p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_PAGE_ID          </td>
+          <td>(</td>
+          <td class="paramtype">p&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 2))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00039">39</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="beee405c0cee7e6e9e3c9e7643c4867e"></a><!-- doxytag: member="eds.h::EDS_PAGE_NEXT" ref="beee405c0cee7e6e9e3c9e7643c4867e" args="(p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_PAGE_NEXT          </td>
+          <td>(</td>
+          <td class="paramtype">p&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 4))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00041">41</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c6eac631f2244217c3e59e6526a5930c"></a><!-- doxytag: member="eds.h::EDS_PAGE_PARENT" ref="c6eac631f2244217c3e59e6526a5930c" args="(p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_PAGE_PARENT          </td>
+          <td>(</td>
+          <td class="paramtype">p&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 3))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00040">40</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="f98a0909706d340a119df79b743f976f"></a><!-- doxytag: member="eds.h::EDS_PAGE_PREV" ref="f98a0909706d340a119df79b743f976f" args="(p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_PAGE_PREV          </td>
+          <td>(</td>
+          <td class="paramtype">p&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_read_byte(p + 5))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00042">42</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="995dfcfe875ec76b68ff7d0ce58c63f3"></a><!-- doxytag: member="eds.h::EDS_SET_BLOCK_DATA" ref="995dfcfe875ec76b68ff7d0ce58c63f3" args="(p, i, v)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_SET_BLOCK_DATA          </td>
+          <td>(</td>
+          <td class="paramtype">p,         <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">i,         <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">v&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_write_byte(p + 2 + i, v))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00029">29</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="cb5163ee0e0501d0ebc1da863d6ccbb4"></a><!-- doxytag: member="eds.h::EDS_SET_BLOCK_SIZE" ref="cb5163ee0e0501d0ebc1da863d6ccbb4" args="(p, t)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_SET_BLOCK_SIZE          </td>
+          <td>(</td>
+          <td class="paramtype">p,         <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_write_byte(p + 1, t))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00026">26</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00125">eds_defragment()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="7729f91e10a3aefa90d61a22a0220892"></a><!-- doxytag: member="eds.h::EDS_SET_BLOCK_TYPE" ref="7729f91e10a3aefa90d61a22a0220892" args="(p, t)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_SET_BLOCK_TYPE          </td>
+          <td>(</td>
+          <td class="paramtype">p,         <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(eeprom_write_byte(p,t))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00027">27</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a> und <a class="el" href="eds_8c-source.html#l00106">eds_free()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c4b69b815f359c501bb0addc632a29db"></a><!-- doxytag: member="eds.h::EDS_START" ref="c4b69b815f359c501bb0addc632a29db" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EDS_START&nbsp;&nbsp;&nbsp;((uint8_t *) 32)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8h-source.html#l00013">13</a> der Datei <a class="el" href="eds_8h-source.html">eds.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00014">eds_format()</a> und <a class="el" href="eds_8c-source.html#l00050">eds_init()</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="e629aa1e825c6db792328eb5ae82846c"></a><!-- doxytag: member="eds.h::eds_alloc" ref="e629aa1e825c6db792328eb5ae82846c" args="(uint8_t size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t* eds_alloc           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>size</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8c-source.html#l00074">74</a> der Datei <a class="el" href="eds_8c-source.html">eds.c</a>.</p>
+
+<p>Benutzt <a class="el" href="eds_8h-source.html#l00025">EDS_BLOCK_SIZE</a>, <a class="el" href="eds_8h-source.html#l00023">EDS_BLOCK_TYPE</a>, <a class="el" href="eds_8h-source.html#l00014">EDS_DATA_START</a>, <a class="el" href="eds_8h-source.html#l00015">EDS_END</a> und <a class="el" href="eds_8c-source.html#l00045">eds_next_block()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="eds_8h_e629aa1e825c6db792328eb5ae82846c_cgraph.png" border="0" usemap="#eds_8h_e629aa1e825c6db792328eb5ae82846c_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="82b8f9e4abf2bb811517066e8af46610"></a><!-- doxytag: member="eds.h::eds_can_callback" ref="82b8f9e4abf2bb811517066e8af46610" args="(const canix_frame *frame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void eds_can_callback           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcanix__frame.html">canix_frame</a> *&nbsp;</td>
+          <td class="paramname"> <em>frame</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8c-source.html#l00209">209</a> der Datei <a class="el" href="eds_8c-source.html">eds.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00472">canix_frame_send()</a>, <a class="el" href="canix_8c-source.html#l00408">canix_selfaddr()</a>, <a class="el" href="canix_8h-source.html#l00147">canix_frame::data</a>, <a class="el" href="canix_8h-source.html#l00131">canix_frame::dst</a>, <a class="el" href="eds_8c-source.html#l00074">eds_alloc()</a>, <a class="el" href="eds_8h-source.html#l00025">EDS_BLOCK_SIZE</a>, <a class="el" href="eds_8h-source.html#l00023">EDS_BLOCK_TYPE</a>, <a class="el" href="eds_8h-source.html#l00014">EDS_DATA_START</a>, <a class="el" href="eds_8c-source.html#l00125">eds_defragment()</a>, <a class="el" href="eds_8h-source.html#l00015">EDS_END</a>, <a class="el" href="eds_8c-source.html#l00014">eds_format()</a>, <a class="el" href="eds_8c-source.html#l00106">eds_free()</a>, <a class="el" href="eds_8c-source.html#l00045">eds_next_block()</a>, <a class="el" href="eds_8h-source.html#l00027">EDS_SET_BLOCK_TYPE</a>, <a class="el" href="canix_8h-source.html#l00136">canix_frame::proto</a>, <a class="el" href="canix_8h-source.html#l00142">canix_frame::size</a> und <a class="el" href="canix_8h-source.html#l00126">canix_frame::src</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="eds_8h_82b8f9e4abf2bb811517066e8af46610_cgraph.png" border="0" usemap="#eds_8h_82b8f9e4abf2bb811517066e8af46610_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="541e0264264d9caef67ac4464bd32d05"></a><!-- doxytag: member="eds.h::eds_defragment" ref="541e0264264d9caef67ac4464bd32d05" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void eds_defragment           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8c-source.html#l00125">125</a> der Datei <a class="el" href="eds_8c-source.html">eds.c</a>.</p>
+
+<p>Benutzt <a class="el" href="eds_8h-source.html#l00024">EDS_BLOCK_IS_FREE</a>, <a class="el" href="eds_8h-source.html#l00025">EDS_BLOCK_SIZE</a>, <a class="el" href="eds_8h-source.html#l00014">EDS_DATA_START</a>, <a class="el" href="eds_8h-source.html#l00015">EDS_END</a>, <a class="el" href="eds_8c-source.html#l00045">eds_next_block()</a> und <a class="el" href="eds_8h-source.html#l00026">EDS_SET_BLOCK_SIZE</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="eds_8h_541e0264264d9caef67ac4464bd32d05_cgraph.png" border="0" usemap="#eds_8h_541e0264264d9caef67ac4464bd32d05_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="3ece872f285f51f0da1665fee2bd647f"></a><!-- doxytag: member="eds.h::eds_find_next_block" ref="3ece872f285f51f0da1665fee2bd647f" args="(uint8_t *p, uint8_t type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t* eds_find_next_block           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&nbsp;</td>
+          <td class="paramname"> <em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>type</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="d820135a82be171c958d32fbba09c105"></a><!-- doxytag: member="eds.h::eds_find_next_block_between" ref="d820135a82be171c958d32fbba09c105" args="(uint8_t *p, uint8_t type1, uint8_t type2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t* eds_find_next_block_between           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&nbsp;</td>
+          <td class="paramname"> <em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>type1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>type2</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="a9e27b5ea1c2785f124a41c3704f51d9"></a><!-- doxytag: member="eds.h::eds_free" ref="a9e27b5ea1c2785f124a41c3704f51d9" args="(uint8_t *block)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t eds_free           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&nbsp;</td>
+          <td class="paramname"> <em>block</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8c-source.html#l00106">106</a> der Datei <a class="el" href="eds_8c-source.html">eds.c</a>.</p>
+
+<p>Benutzt <a class="el" href="eds_8h-source.html#l00014">EDS_DATA_START</a>, <a class="el" href="eds_8h-source.html#l00015">EDS_END</a>, <a class="el" href="eds_8h-source.html#l00020">EDS_INVALID_POINTER</a>, <a class="el" href="eds_8c-source.html#l00045">eds_next_block()</a>, <a class="el" href="eds_8h-source.html#l00018">EDS_OK</a> und <a class="el" href="eds_8h-source.html#l00027">EDS_SET_BLOCK_TYPE</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="eds_8h_a9e27b5ea1c2785f124a41c3704f51d9_cgraph.png" border="0" usemap="#eds_8h_a9e27b5ea1c2785f124a41c3704f51d9_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="cafeb3a3f5989632617a0ec2ded0c4eb"></a><!-- doxytag: member="eds.h::eds_init" ref="cafeb3a3f5989632617a0ec2ded0c4eb" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t eds_init           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8c-source.html#l00050">50</a> der Datei <a class="el" href="eds_8c-source.html">eds.c</a>.</p>
+
+<p>Benutzt <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a>, <a class="el" href="eds_8c-source.html#l00014">eds_format()</a>, <a class="el" href="eds_8c-source.html#l00011">EDS_MAGIC1</a>, <a class="el" href="eds_8c-source.html#l00012">EDS_MAGIC2</a>, <a class="el" href="eds_8h-source.html#l00019">EDS_NOT_FORMATED</a>, <a class="el" href="eds_8h-source.html#l00018">EDS_OK</a>, <a class="el" href="eds_8h-source.html#l00013">EDS_START</a>, <a class="el" href="syslog_8h-source.html#l00031">SYSLOG_PRIO_DEBUG</a> und <a class="el" href="syslog_8h-source.html#l00029">SYSLOG_PRIO_ERROR</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="eds_8h_cafeb3a3f5989632617a0ec2ded0c4eb_cgraph.png" border="0" usemap="#eds_8h_cafeb3a3f5989632617a0ec2ded0c4eb_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="4ee3836d55ab687b7406197db0eba390"></a><!-- doxytag: member="eds.h::eds_read_string" ref="4ee3836d55ab687b7406197db0eba390" args="(uint8_t *block, char *s, uint8_t len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void eds_read_string           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&nbsp;</td>
+          <td class="paramname"> <em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds_8c-source.html#l00161">161</a> der Datei <a class="el" href="eds_8c-source.html">eds.c</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

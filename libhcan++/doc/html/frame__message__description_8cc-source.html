@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: frame_message_description.cc Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>frame_message_description.cc</h1><a href="frame__message__description_8cc.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;sstream&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="traceable__error_8h.html">traceable_error.h</a>&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="frame__message__description_8h.html">frame_message_description.h</a>&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;libxml++/parsers/domparser.h&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;libxml++/nodes/node.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;stdexcept&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;assert.h&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;<a class="code" href="utils_8h.html">utils.h</a>&gt;</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="keyword">using namespace </span>std;
+<a name="l00014"></a>00014 <span class="keyword">using namespace </span>xmlpp;
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 
+<a name="l00017"></a><a class="code" href="frame__message__description_8h.html#0cebb2ec0a60f863eb4d66caffb9bc7e">00017</a> vector &lt; frame_message_description_t &gt; <a class="code" href="frame__message__description_8cc.html#0cebb2ec0a60f863eb4d66caffb9bc7e">frame_message_description</a>;
+<a name="l00018"></a>00018 
+<a name="l00019"></a><a class="code" href="frame__message__description_8cc.html#c14a0c4a5fdaff2ea24d2dea904d489a">00019</a> <span class="keywordtype">void</span> <a class="code" href="frame__message__description_8cc.html#c14a0c4a5fdaff2ea24d2dea904d489a">parse_message</a>(<span class="keyword">const</span> Element *proto_e, 
+<a name="l00020"></a>00020         <span class="keyword">const</span> Element *service_e, <span class="keyword">const</span> Element *message_e)
+<a name="l00021"></a>00021 {
+<a name="l00022"></a>00022     <a class="code" href="structframe__message__description__t.html">frame_message_description_t</a> msg;
+<a name="l00023"></a>00023     msg.<a class="code" href="structframe__message__description__t.html#b25e1ec7e4c347cb187a8e35dbfba1d2">proto</a> = <a class="code" href="utils_8cc.html#d16b6191ff6bf984072db394adebf076">glib_ustring2uint16</a>(
+<a name="l00024"></a>00024             proto_e-&gt;get_attribute(<span class="stringliteral">"id"</span>)-&gt;get_value());
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027     msg.<a class="code" href="structframe__message__description__t.html#3f7b3580b3b92a1fd748b014f1a217b4">service</a> = <a class="code" href="utils_8cc.html#d16b6191ff6bf984072db394adebf076">glib_ustring2uint16</a>(
+<a name="l00028"></a>00028             service_e-&gt;get_attribute(<span class="stringliteral">"id"</span>)-&gt;get_value());
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030     msg.<a class="code" href="structframe__message__description__t.html#60f95485733fa9e3396d5ac45805778b">service_name</a> = service_e-&gt;get_attribute(<span class="stringliteral">"name"</span>)-&gt;get_value();
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032     assert(message_e);
+<a name="l00033"></a>00033     assert(message_e-&gt;get_attribute(<span class="stringliteral">"id"</span>));
+<a name="l00034"></a>00034     msg.<a class="code" href="structframe__message__description__t.html#a57802ec26f65b96d1923bbd7fe7108e">command</a> = <a class="code" href="utils_8cc.html#d16b6191ff6bf984072db394adebf076">glib_ustring2uint16</a>(
+<a name="l00035"></a>00035             message_e-&gt;get_attribute(<span class="stringliteral">"id"</span>)-&gt;get_value());
+<a name="l00036"></a>00036     msg.<a class="code" href="structframe__message__description__t.html#89b50832da3bca4f754068188085cec2">command_name</a> = message_e-&gt;get_attribute(<span class="stringliteral">"name"</span>)-&gt;get_value();
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038     Node::NodeList nl = message_e-&gt;get_children();
+<a name="l00039"></a>00039     <span class="keywordflow">for</span> (Node::NodeList::const_iterator param = nl.begin(); 
+<a name="l00040"></a>00040         param != nl.end(); param++)
+<a name="l00041"></a>00041     {
+<a name="l00042"></a>00042         <span class="keyword">const</span> Element *param_e = (<span class="keyword">const</span> Element *)(*param);
+<a name="l00043"></a>00043         assert(param_e);
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045         <span class="keywordflow">if</span> (param_e-&gt;get_name() == <span class="stringliteral">"param"</span>)
+<a name="l00046"></a>00046         {
+<a name="l00047"></a>00047             msg.<a class="code" href="structframe__message__description__t.html#b3a377384aa56ee92858b12f9c333633">param_names</a>.push_back(
+<a name="l00048"></a>00048                     param_e-&gt;get_attribute(<span class="stringliteral">"name"</span>)-&gt;get_value());
+<a name="l00049"></a>00049         }
+<a name="l00050"></a>00050     }
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052     <a class="code" href="frame__message__description_8cc.html#0cebb2ec0a60f863eb4d66caffb9bc7e">frame_message_description</a>.push_back(msg);
+<a name="l00053"></a>00053 }
+<a name="l00054"></a>00054 
+<a name="l00055"></a><a class="code" href="frame__message__description_8cc.html#beee257b46a2b5408e949dd3eb27b7ed">00055</a> <span class="keywordtype">void</span> <a class="code" href="frame__message__description_8cc.html#beee257b46a2b5408e949dd3eb27b7ed">parse_service</a>(<span class="keyword">const</span> Element *proto_e, <span class="keyword">const</span> Element *service_e)
+<a name="l00056"></a>00056 {
+<a name="l00057"></a>00057     Node::NodeList nl = service_e-&gt;get_children();
+<a name="l00058"></a>00058     <span class="keywordflow">for</span> (Node::NodeList::const_iterator message = nl.begin(); 
+<a name="l00059"></a>00059         message != nl.end(); message++)
+<a name="l00060"></a>00060     {
+<a name="l00061"></a>00061         <span class="keyword">const</span> Element *message_e = (<span class="keyword">const</span> Element *)(*message);
+<a name="l00062"></a>00062         assert(message_e);
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064         <span class="keywordflow">if</span> (message_e-&gt;get_name() == <span class="stringliteral">"message"</span>)
+<a name="l00065"></a>00065             <a class="code" href="frame__message__description_8cc.html#c14a0c4a5fdaff2ea24d2dea904d489a">parse_message</a>(proto_e, service_e, message_e);
+<a name="l00066"></a>00066     }
+<a name="l00067"></a>00067 }
+<a name="l00068"></a>00068 
+<a name="l00069"></a><a class="code" href="frame__message__description_8cc.html#52426b8d7da6d98b381aa8079abc814e">00069</a> <span class="keywordtype">void</span> <a class="code" href="frame__message__description_8cc.html#52426b8d7da6d98b381aa8079abc814e">parse_protocol</a>(<span class="keyword">const</span> Element *proto_e)
+<a name="l00070"></a>00070 {
+<a name="l00071"></a>00071     <span class="keywordtype">string</span> name = proto_e-&gt;get_attribute(<span class="stringliteral">"name"</span>)-&gt;get_value();
+<a name="l00072"></a>00072     <span class="keywordtype">string</span> descr = proto_e-&gt;get_attribute(<span class="stringliteral">"description"</span>)-&gt;get_value();
+<a name="l00073"></a>00073     <span class="keywordtype">string</span> <span class="keywordtype">id</span> = proto_e-&gt;get_attribute(<span class="stringliteral">"id"</span>)-&gt;get_value();
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075     Node::NodeList nl = proto_e-&gt;get_children();
+<a name="l00076"></a>00076     <span class="keywordflow">for</span> (Node::NodeList::const_iterator service = nl.begin(); 
+<a name="l00077"></a>00077         service != nl.end(); service++)
+<a name="l00078"></a>00078     {
+<a name="l00079"></a>00079         <span class="keyword">const</span> Element *service_e = (<span class="keyword">const</span> Element *)(*service);
+<a name="l00080"></a>00080         assert(service_e);
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082         <span class="keywordflow">if</span> (service_e-&gt;get_name() == <span class="stringliteral">"service"</span>)
+<a name="l00083"></a>00083             <a class="code" href="frame__message__description_8cc.html#beee257b46a2b5408e949dd3eb27b7ed">parse_service</a>(proto_e, service_e);
+<a name="l00084"></a>00084     }
+<a name="l00085"></a>00085 }
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087 <span class="keywordtype">void</span>
+<a name="l00088"></a><a class="code" href="frame__message__description_8h.html#d9f8a153e8dd5cbe4fa07b8fe5c40f52">00088</a> <a class="code" href="frame__message__description_8cc.html#d9f8a153e8dd5cbe4fa07b8fe5c40f52">init_frame_message_description</a>()
+<a name="l00089"></a>00089 {
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091     DomParser p;
+<a name="l00092"></a>00092     p.parse_file(<span class="stringliteral">"/usr/share/hcan/hcan-protocol.xml"</span>);
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094     <span class="keywordflow">if</span> (p)
+<a name="l00095"></a>00095     {
+<a name="l00096"></a>00096         Element *rn = p.get_document()-&gt;get_root_node();
+<a name="l00097"></a>00097         Node::NodeList nl = rn-&gt;get_children();
+<a name="l00098"></a>00098         <span class="keywordflow">for</span> (Node::NodeList::const_iterator proto = nl.begin(); 
+<a name="l00099"></a>00099             proto != nl.end(); proto++)
+<a name="l00100"></a>00100         {
+<a name="l00101"></a>00101             <span class="keyword">const</span> Element *e = (<span class="keyword">const</span> Element *)(*proto);
+<a name="l00102"></a>00102             assert(e);
+<a name="l00103"></a>00103             <span class="keywordflow">if</span> ( e-&gt;get_name() == <span class="stringliteral">"protocol"</span>)
+<a name="l00104"></a>00104             {
+<a name="l00105"></a>00105                 <a class="code" href="frame__message__description_8cc.html#52426b8d7da6d98b381aa8079abc814e">parse_protocol</a>(e);
+<a name="l00106"></a>00106             }
+<a name="l00107"></a>00107         }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109     }
+<a name="l00110"></a>00110     <span class="keywordflow">else</span>
+<a name="l00111"></a>00111         <span class="keywordflow">throw</span> <a class="code" href="classtraceable__error.html">traceable_error</a>(
+<a name="l00112"></a>00112                 <span class="stringliteral">"could not parse /usr/share/hcan/hcan-protocol.xml"</span>);
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 }
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

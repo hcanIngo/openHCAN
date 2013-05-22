@@ -1,0 +1,15 @@
+<area shape="rect" href="$controller1612__driver_8h.html" title="controller1612_driver.h" alt="" coords="484,84,652,111">
+<area shape="rect" href="$board__connection_8h.html" title="libhcan++/board_connection.h" alt="" coords="605,316,824,343">
+<area shape="rect" href="$transport__connection_8h.html" title="transport_connection.h" alt="" coords="1137,161,1305,188">
+<area shape="rect" href="$eds__commands_8h.html" title="eds_commands.h" alt="" coords="605,161,741,188">
+<area shape="rect" href="$atmega32__board__driver_8h.html" title="atmega32_board_driver.h" alt="" coords="5,316,189,343">
+<area shape="rect" href="$traceable__error_8h.html" title="libhcan++/traceable_error.h" alt="" coords="357,393,557,420">
+<area shape="rect" href="$eds__connection_8h.html" title="libhcan++/eds_connection.h" alt="" coords="791,239,993,265">
+<area shape="rect" href="$oap__driver_8h.html" title="libhcan++/oap_driver.h" alt="" coords="347,161,517,188">
+<area shape="rect" href="$board__driver_8h.html" title="board_driver.h" alt="" coords="221,393,333,420">
+<area shape="rect" href="$eds__desc_8h.html" title="eds_desc.h" alt="" coords="920,393,1013,420">
+<area shape="rect" href="$oap__access_8h.html" title="libhcan++/oap_access.h" alt="" coords="343,239,521,265">
+<area shape="rect" href="$hcan__transport_8h.html" title="libhcan++/hcan_transport.h" alt="" coords="1189,239,1389,265">
+<area shape="rect" href="$frame_8h.html" title="frame.h" alt="" coords="1380,316,1452,343">
+<area shape="rect" href="$frame__message__description_8h.html" title="frame_message_description.h" alt="" coords="683,393,896,420">
+<area shape="rect" href="$colors_8h.html" title="colors.h" alt="" coords="1533,393,1605,420">

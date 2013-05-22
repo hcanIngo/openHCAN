@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: tools.h-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>tools.h-Dateireferenz</h1>
+<p>
+<div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dynsection">
+<p><center><img src="tools_8h__dep__incl.png" border="0" usemap="#tools.hdep_map" alt=""></center>
+</div>
+
+<p>
+<a href="tools_8h-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="tools_8h.html#84b5bf7ed1d3df07f4b011f169d5b174">udelay</a>(us)&nbsp;&nbsp;&nbsp;_delayFourCycles( ( ( 1*(F_CPU/4000) )*us)/1000 )</td></tr>
+
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="tools_8h.html#db7db4d9ef946dcfb58bcfc667ee674a">delay</a> (uint16_t ms)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="tools_8h.html#aeadd3db27dc2317c5e2e23ce8d6a9b6">_delayFourCycles</a> (unsigned int count)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="tools_8h.html#562f9ce050b34f92e3c5b052504ddd95">time_matches</a> (uint8_t from_hour, uint8_t from_minute, uint8_t to_hour, uint8_t to_minute, uint8_t day_pattern)</td></tr>
+
+</table>
+<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="84b5bf7ed1d3df07f4b011f169d5b174"></a><!-- doxytag: member="tools.h::udelay" ref="84b5bf7ed1d3df07f4b011f169d5b174" args="(us)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define udelay          </td>
+          <td>(</td>
+          <td class="paramtype">us&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;_delayFourCycles( ( ( 1*(F_CPU/4000) )*us)/1000 )</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Wartet die angegebene Anzahl von usec (!). Achtung: Falls die F_CPU einen anderen Wert bekomt, kann es noetig sein, diese Formel (wegen Rundungsfehler) anzupassen. 
+<p>Definiert in Zeile <a class="el" href="tools_8h-source.html#l00035">35</a> der Datei <a class="el" href="tools_8h-source.html">tools.h</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="aeadd3db27dc2317c5e2e23ce8d6a9b6"></a><!-- doxytag: member="tools.h::_delayFourCycles" ref="aeadd3db27dc2317c5e2e23ce8d6a9b6" args="(unsigned int count)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void _delayFourCycles           </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&nbsp;</td>
+          <td class="paramname"> <em>count</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+nur zu internen Verwendung: Wartet 4 Takt-Zyklen 
+<p>Definiert in Zeile <a class="el" href="tools_8c-source.html#l00040">40</a> der Datei <a class="el" href="tools_8c-source.html">tools.c</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="db7db4d9ef946dcfb58bcfc667ee674a"></a><!-- doxytag: member="tools.h::delay" ref="db7db4d9ef946dcfb58bcfc667ee674a" args="(uint16_t ms)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void delay           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>ms</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Wartet die angegebene Anzahl von msec. Achtung: Der WDT koennte den Controller resetten 
+<p>Definiert in Zeile <a class="el" href="tools_8c-source.html#l00024">24</a> der Datei <a class="el" href="tools_8c-source.html">tools.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00221">can_open_interface()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="562f9ce050b34f92e3c5b052504ddd95"></a><!-- doxytag: member="tools.h::time_matches" ref="562f9ce050b34f92e3c5b052504ddd95" args="(uint8_t from_hour, uint8_t from_minute, uint8_t to_hour, uint8_t to_minute, uint8_t day_pattern)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t time_matches           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>from_hour</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>from_minute</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>to_hour</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>to_minute</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>day_pattern</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Prueft, ob die aktuelle Uhrzeit im gegebenen Interval (Zeitzone) liegt. Liefert 1 bzw. 0. 
+<p>Definiert in Zeile <a class="el" href="tools_8c-source.html#l00049">49</a> der Datei <a class="el" href="tools_8c-source.html">tools.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00093">canix_rtc_clock</a>, <a class="el" href="rtc_8h-source.html#l00018">canix_rtc_clock_t::day_of_week</a>, <a class="el" href="rtc_8h-source.html#l00020">canix_rtc_clock_t::hour</a> und <a class="el" href="rtc_8h-source.html#l00022">canix_rtc_clock_t::minute</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

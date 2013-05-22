@@ -1,0 +1,23 @@
+<!ELEMENT haus (board)+>
+<!ELEMENT board (taster|reedkontakt|tempsensor|powerport|heizung|rolladen)*>
+	<!ATTLIST board addr CDATA #REQUIRED>
+	<!ELEMENT taster EMPTY>
+		<!ATTLIST taster gruppe CDATA #REQUIRED>
+		<!ATTLIST taster name CDATA #REQUIRED>
+	<!ELEMENT reedkontakt EMPTY>
+		<!ATTLIST reedkontakt gruppe CDATA #REQUIRED>
+		<!ATTLIST reedkontakt name CDATA #REQUIRED>
+	<!ELEMENT tempsensor EMPTY>
+		<!ATTLIST tempsensor gruppe CDATA #REQUIRED>
+		<!ATTLIST tempsensor name CDATA #REQUIRED>
+	<!ELEMENT powerport EMPTY>
+		<!ATTLIST powerport typ CDATA #REQUIRED>
+		<!ATTLIST powerport gruppe CDATA #REQUIRED>
+		<!ATTLIST powerport name CDATA #REQUIRED>
+	<!ELEMENT heizung EMPTY>
+		<!ATTLIST heizung gruppe CDATA #REQUIRED>
+		<!ATTLIST heizung name CDATA #REQUIRED>
+	<!ELEMENT rolladen EMPTY>
+		<!ATTLIST rolladen gruppe CDATA #REQUIRED>
+		<!ATTLIST rolladen name CDATA #REQUIRED>
+

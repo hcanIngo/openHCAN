@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: frame_message_description.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>frame_message_description.h</h1><a href="frame__message__description_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef FRAME_MESSAGE_DESCRIPTION_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define FRAME_MESSAGE_DESCRIPTION_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="keyword">using namespace </span>std;
+<a name="l00008"></a>00008 
+<a name="l00009"></a><a class="code" href="structframe__message__description__t.html">00009</a> <span class="keyword">struct </span><a class="code" href="structframe__message__description__t.html">frame_message_description_t</a> {
+<a name="l00010"></a><a class="code" href="structframe__message__description__t.html#b25e1ec7e4c347cb187a8e35dbfba1d2">00010</a>     uint16_t        <a class="code" href="structframe__message__description__t.html#b25e1ec7e4c347cb187a8e35dbfba1d2">proto</a>;
+<a name="l00011"></a><a class="code" href="structframe__message__description__t.html#3f7b3580b3b92a1fd748b014f1a217b4">00011</a>     uint16_t        <a class="code" href="structframe__message__description__t.html#3f7b3580b3b92a1fd748b014f1a217b4">service</a>;
+<a name="l00012"></a><a class="code" href="structframe__message__description__t.html#60f95485733fa9e3396d5ac45805778b">00012</a>     <span class="keywordtype">string</span>          <a class="code" href="structframe__message__description__t.html#60f95485733fa9e3396d5ac45805778b">service_name</a>;
+<a name="l00013"></a><a class="code" href="structframe__message__description__t.html#a57802ec26f65b96d1923bbd7fe7108e">00013</a>     uint16_t        <a class="code" href="structframe__message__description__t.html#a57802ec26f65b96d1923bbd7fe7108e">command</a>;
+<a name="l00014"></a><a class="code" href="structframe__message__description__t.html#89b50832da3bca4f754068188085cec2">00014</a>     <span class="keywordtype">string</span>          <a class="code" href="structframe__message__description__t.html#89b50832da3bca4f754068188085cec2">command_name</a>;
+<a name="l00015"></a><a class="code" href="structframe__message__description__t.html#f95e1ce68ab1334d92e1872e8f244fca">00015</a>     <span class="keywordtype">string</span>          <a class="code" href="structframe__message__description__t.html#f95e1ce68ab1334d92e1872e8f244fca">details</a>;
+<a name="l00016"></a><a class="code" href="structframe__message__description__t.html#b3a377384aa56ee92858b12f9c333633">00016</a>                     vector &lt; string &gt; <a class="code" href="structframe__message__description__t.html#b3a377384aa56ee92858b12f9c333633">param_names</a>;
+<a name="l00017"></a>00017 };
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 <span class="keyword">extern</span> vector &lt; frame_message_description_t &gt; <a class="code" href="frame__message__description_8cc.html#0cebb2ec0a60f863eb4d66caffb9bc7e">frame_message_description</a>;
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="keywordtype">void</span> <a class="code" href="frame__message__description_8cc.html#d9f8a153e8dd5cbe4fa07b8fe5c40f52">init_frame_message_description</a>();
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="preprocessor">#endif</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+tmp=`mktemp`
+addr="640"
+POLITE_TIME=40
+
+(
+	telican -d > $tmp 2>&1 &
+	pid=$!
+	sleep 1
+
+	telican -s $addr -p 36 > /dev/null 2>&1
+	sleep 0.5
+	kill -HUP $pid 
+	wait $pid
+
+) > /dev/null 2>&1
+
+cat $tmp | grep -E "\-> 0?$addr" | awk '{ print $1 }' | sort | uniq | \
+while read node; do
+	board=`telican -s $addr -c $node -e "show system" | grep 'Board' | \
+		sed 's/Board : *//'`
+	sleep .3
+	uptime=`telican -s $addr -c $node -e "show uptime"`
+	sleep .3
+	echo "$node:"
+	echo "       Typ: $board"
+	echo "       Up:  $uptime"
+done
+
+rm $tmp
+
+

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: rtc.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>rtc.h</h1><a href="rtc_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef CANIX_RTC_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define CANIX_RTC_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;avr/io.h&gt;</span>
+<a name="l00005"></a>00005 
+<a name="l00010"></a><a class="code" href="structcanix__rtc__clock__t.html">00010</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>
+<a name="l00011"></a>00011 {
+<a name="l00013"></a><a class="code" href="structcanix__rtc__clock__t.html#4b435c087c472fc183b9cbb3eedc265f">00013</a>     uint32_t uptime_sec;
+<a name="l00015"></a><a class="code" href="structcanix__rtc__clock__t.html#220d96eed64c90a1e8ca5f32fe9c719f">00015</a>     uint8_t uptime_sec_100th;
+<a name="l00016"></a>00016 
+<a name="l00018"></a><a class="code" href="structcanix__rtc__clock__t.html#da3307245c314efcffa7d9834ecfdc9f">00018</a>     uint8_t day_of_week;
+<a name="l00020"></a><a class="code" href="structcanix__rtc__clock__t.html#047109724cdb05a49852b54d5d0f56bb">00020</a>     uint8_t hour;
+<a name="l00022"></a><a class="code" href="structcanix__rtc__clock__t.html#0e3a8e887acdce1255d0810db0a30875">00022</a>     uint8_t minute;
+<a name="l00024"></a><a class="code" href="structcanix__rtc__clock__t.html#2a1f1d513a296d32faa0a3af8037de1d">00024</a>     uint8_t second;
+<a name="l00025"></a>00025 
+<a name="l00027"></a><a class="code" href="structcanix__rtc__clock__t.html#9d0941e68ee221a1572618ffea5a8c65">00027</a>     uint8_t last_date_update;
+<a name="l00028"></a>00028 
+<a name="l00030"></a><a class="code" href="structcanix__rtc__clock__t.html#6c456b64a4516b8d34ab0ba329ea15e3">00030</a>     uint8_t day_of_month;
+<a name="l00032"></a><a class="code" href="structcanix__rtc__clock__t.html#70983fb2cf241b7813c50026f87bb764">00032</a>     uint8_t month_of_year;
+<a name="l00036"></a><a class="code" href="structcanix__rtc__clock__t.html#cd2066667d9b2571f0ba93c7947f36b5">00036</a>     uint8_t year;
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038 } <a class="code" href="structcanix__rtc__clock__t.html">canix_rtc_clock_t</a>;
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 <span class="keyword">extern</span> <span class="keyword">volatile</span> <a class="code" href="structcanix__rtc__clock__t.html">canix_rtc_clock_t</a> <a class="code" href="canix_8c.html#fbd61373f4655cc6a0f2abecb4bff330">canix_rtc_clock</a>;
+<a name="l00041"></a>00041 
+<a name="l00048"></a>00048 uint8_t <a class="code" href="canix_8c.html#e0d77fda8ce55ebbf9060189b8693d2c">canix_is_date_valid</a>(<span class="keywordtype">void</span>);
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

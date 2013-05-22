@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: colors.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>colors.h</h1><a href="colors_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef COLORS_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define COLORS_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#ifndef __WIN32__</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span>
+<a name="l00006"></a><a class="code" href="colors_8h.html#c366dc6682d1d12bcae1eb1ae8ae09c5">00006</a> <span class="preprocessor">#define COLOR_NORMAL "\033[30;0m"</span>
+<a name="l00007"></a><a class="code" href="colors_8h.html#d86358bf19927183dd7b4ae215a29731">00007</a> <span class="preprocessor"></span><span class="preprocessor">#define COLOR_RED "\033[31;2m"</span>
+<a name="l00008"></a><a class="code" href="colors_8h.html#fc9149f5de51bd9ac4f5ebbfa153f018">00008</a> <span class="preprocessor"></span><span class="preprocessor">#define COLOR_GREEN "\033[32;2m"</span>
+<a name="l00009"></a><a class="code" href="colors_8h.html#400aa90eafe2d8877408bd48ffff7d59">00009</a> <span class="preprocessor"></span><span class="preprocessor">#define COLOR_3 "\033[33;2m"</span>
+<a name="l00010"></a><a class="code" href="colors_8h.html#23c70d699a5a775bc2e1ebeb8603f630">00010</a> <span class="preprocessor"></span><span class="preprocessor">#define COLOR_BLUE "\033[34;1m"</span>
+<a name="l00011"></a><a class="code" href="colors_8h.html#19e93b1b5f86fec1bd4aa0426e0a543d">00011</a> <span class="preprocessor"></span><span class="preprocessor">#define COLOR_5 "\033[35;2m"</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="preprocessor">#else</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 <span class="keyword">using namespace </span>std;
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 ostream &amp;<a class="code" href="colors_8h.html#c366dc6682d1d12bcae1eb1ae8ae09c5">COLOR_NORMAL</a> (ostream &amp;s);
+<a name="l00020"></a>00020 ostream &amp;<a class="code" href="colors_8h.html#fc9149f5de51bd9ac4f5ebbfa153f018">COLOR_GREEN</a> (ostream &amp;s);
+<a name="l00021"></a>00021 ostream &amp;<a class="code" href="colors_8h.html#23c70d699a5a775bc2e1ebeb8603f630">COLOR_BLUE</a> (ostream &amp;s);
+<a name="l00022"></a>00022 ostream &amp;<a class="code" href="colors_8h.html#d86358bf19927183dd7b4ae215a29731">COLOR_RED</a> (ostream &amp;s);
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="preprocessor">#endif</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span>
+<a name="l00026"></a>00026 <span class="preprocessor">#endif</span>
+<a name="l00027"></a>00027 <span class="preprocessor"></span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:50 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

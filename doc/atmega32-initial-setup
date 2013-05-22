@@ -1,0 +1,54 @@
+
+Wie wird ein Atmega32 initialisiert ?
+-------------------------------------
+
+- externen Osz einschalten
+- Bootloader auf 4k
+- Jump-to-Bootloader on reset
+- Bootload Speicher schuetzen
+- WD Enabled
+- Brownout Detection enabled
+
+dazu Fuse Hi Bits wie folgt programmieren (von Bit 7 zu bit 0):
+- OCD enable:       1 (off)
+- JTAG:             1 (off)
+- SPIEN:            0 (active)
+- CKOPT:            0 (noisy env)
+- EESAVE:           0 (save EE von chip erase)
+- BOOTSZ1:          0
+- BOOTSZ0:          0
+- BOOTRST:          0
+
+-> fuse hi byte = 0xc0
+
+Fuse Lo Byte:
+- BODLEVEL:         0 (progr) (1 = 3.3 V, aber nur Atmega32L !!)
+- BODEN:            0 (progr)
+- SUT1:             0
+- SUT2:             0
+- CKSEL3:           1
+- CKSEL2:           1
+- CKSEL1:           1
+- CKSEL0:           1
+
+-> fuse lo byte = 0x0f
+-> mem lock byte = 0x2f
+
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_fuse_h=0xc0
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_fuse_l=0x0f
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_lock=0x2f
+
+ACHTUNG: Fuer das HCAN-HI-v02 (USB Variante):
+- hier gibt es KEINEN ext. Quarz, somit fuer 4MHz intern
+- auch gibt es hier KEINEN Bootloader!
+
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_fuse_h=0xc0
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_fuse_l=0x03
+	uisp -dlpt=/dev/parport0 -dprog=dapa --wr_lock=0x2f
+
+"modprobe ppdev" ist fuer uisp Betrieb noetig.
+
+
+Oder mit avrdude und dem ATMEL-ISP-Programmer mkII: 
+sudo 'avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"./hcanBL_atmega32/main.hex" -U hfuse:w:0xc0:m -U lfuse:w:0x0f:m' -U lock:w:0x2f:m'
+

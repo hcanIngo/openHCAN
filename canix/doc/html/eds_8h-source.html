@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: eds.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>eds.h</h1><a href="eds_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef EDS_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define EDS_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#ifndef CANIX_EDS</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#error "CANIX_EDS muss definiert werden"</span>
+<a name="l00006"></a>00006 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00007"></a>00007 <span class="preprocessor"></span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;eds_types.h&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;eds_blocks.h&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;<a class="code" href="canix_8h.html" title="enth‰lt Funktionen des CANIX Frameworks">canix/canix.h</a>&gt;</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a><a class="code" href="eds_8h.html#c4b69b815f359c501bb0addc632a29db">00013</a> <span class="preprocessor">#define EDS_START ((uint8_t *) 32)</span>
+<a name="l00014"></a><a class="code" href="eds_8h.html#c6092ee5dcbafdba182815b8c1652409">00014</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_DATA_START (EDS_START + 2)</span>
+<a name="l00015"></a><a class="code" href="eds_8h.html#14cbd7e6cc344943a7ede1c98a290ccf">00015</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_END   ((uint8_t *) 1023)</span>
+<a name="l00016"></a>00016 <span class="preprocessor"></span>
+<a name="l00017"></a>00017 <span class="comment">// Rueckgabewerte des EDS Routinen:</span>
+<a name="l00018"></a><a class="code" href="eds_8h.html#335b21b81a4cb885893461988ce83219">00018</a> <span class="preprocessor">#define EDS_OK                        0</span>
+<a name="l00019"></a><a class="code" href="eds_8h.html#367a63f82b58cca3f6566a255b5712b0">00019</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_NOT_FORMATED              1</span>
+<a name="l00020"></a><a class="code" href="eds_8h.html#52841f1e231b0743b94498700e24f08b">00020</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_INVALID_POINTER           2</span>
+<a name="l00021"></a>00021 <span class="preprocessor"></span>
+<a name="l00022"></a>00022 <span class="comment">// Hilfsmacros</span>
+<a name="l00023"></a><a class="code" href="eds_8h.html#34b53998e8a8da6506d06d140197f1f5">00023</a> <span class="preprocessor">#define EDS_BLOCK_TYPE(p) (eeprom_read_byte(p))</span>
+<a name="l00024"></a><a class="code" href="eds_8h.html#f912d7e889ebcdc36c89a068b39e0371">00024</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_BLOCK_IS_FREE(p) (eeprom_read_byte(p) == 0)</span>
+<a name="l00025"></a><a class="code" href="eds_8h.html#917d99c819f186e872c16f6e4daad52a">00025</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_BLOCK_SIZE(p) (eeprom_read_byte(p + 1))</span>
+<a name="l00026"></a><a class="code" href="eds_8h.html#cb5163ee0e0501d0ebc1da863d6ccbb4">00026</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_SET_BLOCK_SIZE(p,t) (eeprom_write_byte(p + 1, t))</span>
+<a name="l00027"></a><a class="code" href="eds_8h.html#7729f91e10a3aefa90d61a22a0220892">00027</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_SET_BLOCK_TYPE(p,t) (eeprom_write_byte(p,t))</span>
+<a name="l00028"></a><a class="code" href="eds_8h.html#91cdac018aeae6ccbb6c081cf1caa03b">00028</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_BLOCK_DATA(p,i) (eeprom_read_byte(p + 2 + i))</span>
+<a name="l00029"></a><a class="code" href="eds_8h.html#995dfcfe875ec76b68ff7d0ce58c63f3">00029</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_SET_BLOCK_DATA(p,i,v) (eeprom_write_byte(p + 2 + i, v))</span>
+<a name="l00030"></a>00030 <span class="preprocessor"></span>
+<a name="l00031"></a>00031 <span class="comment">// Iteriert ueber den EDS Space und setzt it jedes Mal auf den Block,</span>
+<a name="l00032"></a>00032 <span class="comment">// wenn die Block-ID zwischen a und b liegt.</span>
+<a name="l00033"></a>00033 <span class="comment">// Beispiel siehe firmwares/userpanel-v01/lcdstatemachine.c:97</span>
+<a name="l00034"></a><a class="code" href="eds_8h.html#0d889f841f06bf69fc7b18f05416d052">00034</a> <span class="preprocessor">#define EDS_foreach_block_between(it,a,b) \</span>
+<a name="l00035"></a>00035 <span class="preprocessor">    for (it = eds_find_next_block_between(0, \</span>
+<a name="l00036"></a>00036 <span class="preprocessor">        a, b); it != 0; it = eds_find_next_block_between(it,a,b))</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span>
+<a name="l00038"></a>00038 <span class="comment">// Hilfsmacros fuer page blocks</span>
+<a name="l00039"></a><a class="code" href="eds_8h.html#826b2f5e8c0ff03f17c31c3f182f6f78">00039</a> <span class="preprocessor">#define EDS_PAGE_ID(p) (eeprom_read_byte(p + 2))</span>
+<a name="l00040"></a><a class="code" href="eds_8h.html#c6eac631f2244217c3e59e6526a5930c">00040</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_PAGE_PARENT(p) (eeprom_read_byte(p + 3))</span>
+<a name="l00041"></a><a class="code" href="eds_8h.html#beee405c0cee7e6e9e3c9e7643c4867e">00041</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_PAGE_NEXT(p) (eeprom_read_byte(p + 4))</span>
+<a name="l00042"></a><a class="code" href="eds_8h.html#f98a0909706d340a119df79b743f976f">00042</a> <span class="preprocessor"></span><span class="preprocessor">#define EDS_PAGE_PREV(p) (eeprom_read_byte(p + 5))</span>
+<a name="l00043"></a>00043 <span class="preprocessor"></span>
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045 uint8_t <a class="code" href="eds_8c.html#cafeb3a3f5989632617a0ec2ded0c4eb">eds_init</a>(<span class="keywordtype">void</span>);
+<a name="l00046"></a>00046 <span class="keywordtype">void</span> <a class="code" href="eds_8c.html#541e0264264d9caef67ac4464bd32d05">eds_defragment</a>(<span class="keywordtype">void</span>);
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048 uint8_t *<a class="code" href="eds_8c.html#e629aa1e825c6db792328eb5ae82846c">eds_alloc</a>(uint8_t size);
+<a name="l00049"></a>00049 uint8_t <a class="code" href="eds_8c.html#a9e27b5ea1c2785f124a41c3704f51d9">eds_free</a>(uint8_t *block);
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="keywordtype">void</span> <a class="code" href="eds_8c.html#4ee3836d55ab687b7406197db0eba390">eds_read_string</a>(uint8_t *block, <span class="keywordtype">char</span> *s, uint8_t len);
+<a name="l00052"></a>00052 uint8_t *<a class="code" href="eds_8c.html#b43c13e6868b22e29dc473504585e413">eds_find_next_block</a>(uint8_t *p, uint8_t type);
+<a name="l00053"></a>00053 uint8_t *<a class="code" href="eds_8c.html#741f4564b4aba93c650d8f74fd62a3f5">eds_find_next_block_between</a>(uint8_t *p, uint8_t type1, uint8_t type2);
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <span class="keywordtype">void</span> <a class="code" href="eds_8c.html#82b8f9e4abf2bb811517066e8af46610">eds_can_callback</a>(<span class="keyword">const</span> <a class="code" href="structcanix__frame.html">canix_frame</a> *frame);
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 f√ºr canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

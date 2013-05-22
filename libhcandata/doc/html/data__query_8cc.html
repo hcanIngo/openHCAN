@@ -1,0 +1,489 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcandata: data_query.cc-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>data_query.cc-Dateireferenz</h1><code>#include &quot;<a class="el" href="data__query_8h-source.html">data_query.h</a>&quot;</code><br>
+<code>#include &lt;<a class="el" href="data__file_8h-source.html">libhcandata/data_file.h</a>&gt;</code><br>
+<code>#include &lt;libhcan++/traceable_error.h&gt;</code><br>
+<code>#include &lt;boost/regex.hpp&gt;</code><br>
+<code>#include &lt;iostream&gt;</code><br>
+<code>#include &lt;iomanip&gt;</code><br>
+<code>#include &lt;string&gt;</code><br>
+<code>#include &lt;sstream&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für data_query.cc:</div>
+<div class="dynsection">
+<p><center><img src="data__query_8cc__incl.png" border="0" usemap="#data_query.cc_map" alt=""></center>
+<map name="data_query.cc_map">
+<area shape="rect" href="data__query_8h.html" title="data_query.h" alt="" coords="153,239,257,265"><area shape="rect" href="data__file_8h.html" title="libhcandata/data_file.h" alt="" coords="123,84,288,111"><area shape="rect" href="file__format__v1_8h.html" title="libhcandata/file_format_v1.h" alt="" coords="195,316,395,343"><area shape="rect" href="data__storage_8h.html" title="libhcandata/data_storage.h" alt="" coords="108,161,303,188"></map>
+</div>
+
+<p>
+<a href="data__query_8cc-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#f8e146c06352910fbbd7d7e3bc58d4ea">TOKEN_NOP</a>&nbsp;&nbsp;&nbsp;0x00000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#36eda7881ef7113f9abd938704634ed0">TOKEN_INT</a>&nbsp;&nbsp;&nbsp;0x01000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#5167be598a171e36f55e0abd0c90bc66">TOKEN_SRC</a>&nbsp;&nbsp;&nbsp;0x10000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#abf9eaa1753e874f4230fa83915b3c62">TOKEN_DST</a>&nbsp;&nbsp;&nbsp;0x11000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#d362c3bc014d897c5383bae0e8074bcb">TOKEN_PROTO</a>&nbsp;&nbsp;&nbsp;0x12000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#832632b99234502cf65bc0872d30d0e0">TOKEN_SIZE</a>&nbsp;&nbsp;&nbsp;0x13000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#4788a01e513fc0f8d61c8f122ae8dcb2">TOKEN_D0</a>&nbsp;&nbsp;&nbsp;0x14000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#bf8a825cc647e8369ca135a7d2972f7e">TOKEN_D1</a>&nbsp;&nbsp;&nbsp;0x15000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#96edad2f2a51ab6c3e4b0f9a77d66378">TOKEN_D2</a>&nbsp;&nbsp;&nbsp;0x16000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#473aaaeb39c74394e22532c831bf209a">TOKEN_D3</a>&nbsp;&nbsp;&nbsp;0x17000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#9b1868e80de631ebdf58fbc8dbc07f7e">TOKEN_D4</a>&nbsp;&nbsp;&nbsp;0x18000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#6c59a0ddf54437b6384279d9b065052d">TOKEN_D5</a>&nbsp;&nbsp;&nbsp;0x19000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#a4715bb58802f7bf390e1730f43f624d">TOKEN_D6</a>&nbsp;&nbsp;&nbsp;0x20000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#10afc6842aee6de3d1aab68e55658b4d">TOKEN_D7</a>&nbsp;&nbsp;&nbsp;0x21000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#64ef0ce4d8a3c73c17f194272def1880">TOKEN_EQUAL</a>&nbsp;&nbsp;&nbsp;0x80000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#5e5bd963fce39427ad1efd2056c3171f">TOKEN_AND_OP</a>&nbsp;&nbsp;&nbsp;0x81000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#ea01200489244559ab3f45d2b3a9f22e">TOKEN_AND</a>&nbsp;&nbsp;&nbsp;0x82000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#5a2f07154d31f6dfd3cec6dff398fa7f">TOKEN_OR_OP</a>&nbsp;&nbsp;&nbsp;0x83000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#8ed7d99af9c937d761e5a79d7d7a09bb">TOKEN_OR</a>&nbsp;&nbsp;&nbsp;0x84000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#3ef548549621b7051753f94c4e324938">TOKEN_NOTEQUAL</a>&nbsp;&nbsp;&nbsp;0x85000000</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="data__query_8cc.html#724b7114ec16ec36591584e9e3abbc78">TOKEN_NOT</a>&nbsp;&nbsp;&nbsp;0x86000000</td></tr>
+
+</table>
+<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="ea01200489244559ab3f45d2b3a9f22e"></a><!-- doxytag: member="data_query.cc::TOKEN_AND" ref="ea01200489244559ab3f45d2b3a9f22e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_AND&nbsp;&nbsp;&nbsp;0x82000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00050">50</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="5e5bd963fce39427ad1efd2056c3171f"></a><!-- doxytag: member="data_query.cc::TOKEN_AND_OP" ref="5e5bd963fce39427ad1efd2056c3171f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_AND_OP&nbsp;&nbsp;&nbsp;0x81000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00049">49</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="4788a01e513fc0f8d61c8f122ae8dcb2"></a><!-- doxytag: member="data_query.cc::TOKEN_D0" ref="4788a01e513fc0f8d61c8f122ae8dcb2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_D0&nbsp;&nbsp;&nbsp;0x14000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00039">39</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="bf8a825cc647e8369ca135a7d2972f7e"></a><!-- doxytag: member="data_query.cc::TOKEN_D1" ref="bf8a825cc647e8369ca135a7d2972f7e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_D1&nbsp;&nbsp;&nbsp;0x15000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00040">40</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="96edad2f2a51ab6c3e4b0f9a77d66378"></a><!-- doxytag: member="data_query.cc::TOKEN_D2" ref="96edad2f2a51ab6c3e4b0f9a77d66378" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_D2&nbsp;&nbsp;&nbsp;0x16000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00041">41</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="473aaaeb39c74394e22532c831bf209a"></a><!-- doxytag: member="data_query.cc::TOKEN_D3" ref="473aaaeb39c74394e22532c831bf209a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_D3&nbsp;&nbsp;&nbsp;0x17000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00042">42</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="9b1868e80de631ebdf58fbc8dbc07f7e"></a><!-- doxytag: member="data_query.cc::TOKEN_D4" ref="9b1868e80de631ebdf58fbc8dbc07f7e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_D4&nbsp;&nbsp;&nbsp;0x18000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00043">43</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="6c59a0ddf54437b6384279d9b065052d"></a><!-- doxytag: member="data_query.cc::TOKEN_D5" ref="6c59a0ddf54437b6384279d9b065052d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_D5&nbsp;&nbsp;&nbsp;0x19000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00044">44</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="a4715bb58802f7bf390e1730f43f624d"></a><!-- doxytag: member="data_query.cc::TOKEN_D6" ref="a4715bb58802f7bf390e1730f43f624d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_D6&nbsp;&nbsp;&nbsp;0x20000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00045">45</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="10afc6842aee6de3d1aab68e55658b4d"></a><!-- doxytag: member="data_query.cc::TOKEN_D7" ref="10afc6842aee6de3d1aab68e55658b4d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_D7&nbsp;&nbsp;&nbsp;0x21000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00046">46</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="abf9eaa1753e874f4230fa83915b3c62"></a><!-- doxytag: member="data_query.cc::TOKEN_DST" ref="abf9eaa1753e874f4230fa83915b3c62" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_DST&nbsp;&nbsp;&nbsp;0x11000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00036">36</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="64ef0ce4d8a3c73c17f194272def1880"></a><!-- doxytag: member="data_query.cc::TOKEN_EQUAL" ref="64ef0ce4d8a3c73c17f194272def1880" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_EQUAL&nbsp;&nbsp;&nbsp;0x80000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00048">48</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="36eda7881ef7113f9abd938704634ed0"></a><!-- doxytag: member="data_query.cc::TOKEN_INT" ref="36eda7881ef7113f9abd938704634ed0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_INT&nbsp;&nbsp;&nbsp;0x01000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00033">33</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="f8e146c06352910fbbd7d7e3bc58d4ea"></a><!-- doxytag: member="data_query.cc::TOKEN_NOP" ref="f8e146c06352910fbbd7d7e3bc58d4ea" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_NOP&nbsp;&nbsp;&nbsp;0x00000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00032">32</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="724b7114ec16ec36591584e9e3abbc78"></a><!-- doxytag: member="data_query.cc::TOKEN_NOT" ref="724b7114ec16ec36591584e9e3abbc78" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_NOT&nbsp;&nbsp;&nbsp;0x86000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00054">54</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="3ef548549621b7051753f94c4e324938"></a><!-- doxytag: member="data_query.cc::TOKEN_NOTEQUAL" ref="3ef548549621b7051753f94c4e324938" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_NOTEQUAL&nbsp;&nbsp;&nbsp;0x85000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00053">53</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="8ed7d99af9c937d761e5a79d7d7a09bb"></a><!-- doxytag: member="data_query.cc::TOKEN_OR" ref="8ed7d99af9c937d761e5a79d7d7a09bb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_OR&nbsp;&nbsp;&nbsp;0x84000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00052">52</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="5a2f07154d31f6dfd3cec6dff398fa7f"></a><!-- doxytag: member="data_query.cc::TOKEN_OR_OP" ref="5a2f07154d31f6dfd3cec6dff398fa7f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_OR_OP&nbsp;&nbsp;&nbsp;0x83000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00051">51</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="d362c3bc014d897c5383bae0e8074bcb"></a><!-- doxytag: member="data_query.cc::TOKEN_PROTO" ref="d362c3bc014d897c5383bae0e8074bcb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_PROTO&nbsp;&nbsp;&nbsp;0x12000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00037">37</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="832632b99234502cf65bc0872d30d0e0"></a><!-- doxytag: member="data_query.cc::TOKEN_SIZE" ref="832632b99234502cf65bc0872d30d0e0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_SIZE&nbsp;&nbsp;&nbsp;0x13000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00038">38</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="5167be598a171e36f55e0abd0c90bc66"></a><!-- doxytag: member="data_query.cc::TOKEN_SRC" ref="5167be598a171e36f55e0abd0c90bc66" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOKEN_SRC&nbsp;&nbsp;&nbsp;0x10000000          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="data__query_8cc-source.html#l00035">35</a> der Datei <a class="el" href="data__query_8cc-source.html">data_query.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="data__query_8cc-source.html#l00255">hcan::data_query::match()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:41:32 2009 für libhcandata von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

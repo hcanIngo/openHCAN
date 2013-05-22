@@ -1,0 +1,751 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: hcan::frame Klassenreferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="hierarchy.html"><span>Klassenhierarchie</span></a></li>
+      <li><a href="functions.html"><span>Datenstruktur-Elemente</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="namespacehcan.html">hcan</a>::<a class="el" href="classhcan_1_1frame.html">frame</a>
+  </div>
+</div>
+<div class="contents">
+<h1>hcan::frame Klassenreferenz</h1><!-- doxytag: class="hcan::frame" --><code>#include &lt;<a class="el" href="frame_8h-source.html">frame.h</a>&gt;</code>
+<p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Öffentliche Typen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#12e301ad93045ff43dba80f8f4da87b7">prio</a> { <a class="el" href="classhcan_1_1frame.html#12e301ad93045ff43dba80f8f4da87b7c6483e8ac539d0033c636a94cc5c4e9c">prio_hi</a> =  0, 
+<a class="el" href="classhcan_1_1frame.html#12e301ad93045ff43dba80f8f4da87b79fbe1da1092335e692925cea37accaaa">prio_lo</a> =  3
+ }</td></tr>
+
+<tr><td colspan="2"><br><h2>Öffentliche Methoden</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#86ec0b54d9b3730a6ff91e91efffeb62">frame</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#29d47d31e0092520edc4f5340f8a656c">frame</a> (const uint16_t src, const uint16_t dst, const uint8_t proto, const uint8_t data[8], const uint32_t size)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#335649963755f4c1a8541354e23a2502">frame</a> (const uint16_t src, const uint16_t dst, const uint8_t proto, const vector&lt; uint8_t &gt; &amp;data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#6c958d1ae262ac3f3603033c8994b366">frame</a> (const <a class="el" href="classhcan_1_1frame.html">frame</a> &amp;f)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classhcan_1_1frame.html">frame</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#c3013e9bf1c553d7f702c3b23529daba">operator=</a> (const <a class="el" href="classhcan_1_1frame.html">frame</a> &amp;f)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#c86c6ed097f3c345a5c64d1277c56462">~frame</a> ()  throw ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe">write_to</a> (int fd, const in_addr_t hcand_ip) const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#238e184e56f32f997a81cee4a3cadb24">proto</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#8215eb69dc8f05fddddf49f5e0f30ed2">set_proto</a> (uint8_t proto)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e">src</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#4b59a1b00dd9d60a8b076f8ad634b343">set_src</a> (uint16_t src)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#2082e8773b425218b79e011d52b60bd8">dst</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#406905b78545d279a73c389adec26062">set_dst</a> (uint16_t dst)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944">data</a> (const int i) const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#216ce22630ca6c47eaffb70898afc090">set_data</a> (const int i, const uint8_t data)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#b680e9601707dce62ca84862035422ca">data_as_string</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38">size</a> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#2b3ba1999057e8340aad557fec6ae609">set_size</a> (uint32_t size)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#2db9e9b6b85cae3911f171d60427cf25">set_prio</a> (uint8_t <a class="el" href="classhcan_1_1frame.html#12e301ad93045ff43dba80f8f4da87b7">prio</a>)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#72a118c7d6a07e642d6d1fb807c40bb4">print</a> (bool numeric, bool color, const std::string &amp;prefix=&quot;&quot;) const </td></tr>
+
+<tr><td colspan="2"><br><h2>Öffentliche, statische Methoden</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">static <a class="el" href="classhcan_1_1frame.html">frame</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#79f356a2caf639add3fca28e28955466">read_from</a> (int fd)</td></tr>
+
+<tr><td colspan="2"><br><h2>Statische öffentliche Attribute</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">static bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#cfb32d1b3e442d451ac4dcdd4aa64c27">polite_mode</a> = true</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">static int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhcan_1_1frame.html#9d5a37e3c3b73a55fd6bca50df83edf8">polite_wait_time</a> = 50000</td></tr>
+
+<tr><td colspan="2"><br><h2>Datenstrukturen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><b>CANFrame</b></td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00034">34</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+<hr><h2>Dokumentation der Aufzählungstypen</h2>
+<a class="anchor" name="12e301ad93045ff43dba80f8f4da87b7"></a><!-- doxytag: member="hcan::frame::prio" ref="12e301ad93045ff43dba80f8f4da87b7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classhcan_1_1frame.html#12e301ad93045ff43dba80f8f4da87b7">hcan::frame::prio</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+<dl compact><dt><b>Aufzählungswerte: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" name="12e301ad93045ff43dba80f8f4da87b7c6483e8ac539d0033c636a94cc5c4e9c"></a><!-- doxytag: member="prio_hi" ref="12e301ad93045ff43dba80f8f4da87b7c6483e8ac539d0033c636a94cc5c4e9c" args="" -->prio_hi</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" name="12e301ad93045ff43dba80f8f4da87b79fbe1da1092335e692925cea37accaaa"></a><!-- doxytag: member="prio_lo" ref="12e301ad93045ff43dba80f8f4da87b79fbe1da1092335e692925cea37accaaa" args="" -->prio_lo</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00044">44</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Beschreibung der Konstruktoren und Destruktoren</h2>
+<a class="anchor" name="86ec0b54d9b3730a6ff91e91efffeb62"></a><!-- doxytag: member="hcan::frame::frame" ref="86ec0b54d9b3730a6ff91e91efffeb62" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">frame::frame           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00036">36</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="frame_8cc-source.html#l00168">read_from()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="29d47d31e0092520edc4f5340f8a656c"></a><!-- doxytag: member="hcan::frame::frame" ref="29d47d31e0092520edc4f5340f8a656c" args="(const uint16_t src, const uint16_t dst, const uint8_t proto, const uint8_t data[8], const uint32_t size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">hcan::frame::frame           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&nbsp;</td>
+          <td class="paramname"> <em>proto</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&nbsp;</td>
+          <td class="paramname"> <em>data</em>[8], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&nbsp;</td>
+          <td class="paramname"> <em>size</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+constuctor for normal use 
+</div>
+</div><p>
+<a class="anchor" name="335649963755f4c1a8541354e23a2502"></a><!-- doxytag: member="hcan::frame::frame" ref="335649963755f4c1a8541354e23a2502" args="(const uint16_t src, const uint16_t dst, const uint8_t proto, const vector&lt; uint8_t &gt; &amp;data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">frame::frame           </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&nbsp;</td>
+          <td class="paramname"> <em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&nbsp;</td>
+          <td class="paramname"> <em>proto</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; uint8_t &gt; &amp;&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00060">60</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="6c958d1ae262ac3f3603033c8994b366"></a><!-- doxytag: member="hcan::frame::frame" ref="6c958d1ae262ac3f3603033c8994b366" args="(const frame &amp;f)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">frame::frame           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhcan_1_1frame.html">frame</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>f</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Copy constuctor 
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00077">77</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="frame_8h-source.html#l00067">m_data</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c86c6ed097f3c345a5c64d1277c56462"></a><!-- doxytag: member="hcan::frame::~frame" ref="c86c6ed097f3c345a5c64d1277c56462" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">frame::~frame           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00100">100</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Elementfunktionen</h2>
+<a class="anchor" name="c3013e9bf1c553d7f702c3b23529daba"></a><!-- doxytag: member="hcan::frame::operator=" ref="c3013e9bf1c553d7f702c3b23529daba" args="(const frame &amp;f)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1frame.html">frame</a> &amp; frame::operator=           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhcan_1_1frame.html">frame</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>f</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Assign operator 
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00088">88</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="frame_8h-source.html#l00067">m_data</a>, <a class="el" href="frame_8h-source.html#l00061">m_dst</a>, <a class="el" href="frame_8h-source.html#l00065">m_prio</a>, <a class="el" href="frame_8h-source.html#l00063">m_proto</a>, <a class="el" href="frame_8h-source.html#l00069">m_size</a> und <a class="el" href="frame_8h-source.html#l00059">m_src</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="3b44a930c2866e5006a8baa2a961b9fe"></a><!-- doxytag: member="hcan::frame::write_to" ref="3b44a930c2866e5006a8baa2a961b9fe" args="(int fd, const in_addr_t hcand_ip) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frame::write_to           </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const in_addr_t&nbsp;</td>
+          <td class="paramname"> <em>hcand_ip</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00124">124</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="frame_8h-source.html#l00050">polite_mode</a> und <a class="el" href="frame_8h-source.html#l00056">polite_wait_time</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="transport__connection_8cc-source.html#l00063">hcan::transport_connection::keep_connection_alive()</a>, <a class="el" href="transport__connection_8cc-source.html#l00378">hcan::transport_connection::send()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04465">hcan::hcan_transport::send_1WIRE_DISCOVER()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04541">hcan::hcan_transport::send_1WIRE_DISCOVERED_PART_1()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04647">hcan::hcan_transport::send_1WIRE_DISCOVERED_PART_2()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04744">hcan::hcan_transport::send_1WIRE_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04817">hcan::hcan_transport::send_1WIRE_TEMPERATURE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04905">hcan::hcan_transport::send_1WIRE_TEMPERATURE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04980">hcan::hcan_transport::send_1WIRE_TEMPERATURE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08759">hcan::hcan_transport::send_ALLOCATE_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08839">hcan::hcan_transport::send_ALLOCATE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02941">hcan::hcan_transport::send_BOOT_RESETFLAG_LOG()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01675">hcan::hcan_transport::send_BUILD_VERSION_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01737">hcan::hcan_transport::send_BUILD_VERSION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01811">hcan::hcan_transport::send_CAN_EC_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01871">hcan::hcan_transport::send_CAN_EC_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07546">hcan::hcan_transport::send_CONFIG_RAM_USAGE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07484">hcan::hcan_transport::send_CONFIG_RAM_USAGE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07430">hcan::hcan_transport::send_CONFIG_RELOAD()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08310">hcan::hcan_transport::send_DATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08458">hcan::hcan_transport::send_DATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08699">hcan::hcan_transport::send_DEFRAGMENT()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00315">hcan::hcan_transport::send_DEVICE_BOOT_STOP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00371">hcan::hcan_transport::send_DEVICE_BOOT_STOP_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00427">hcan::hcan_transport::send_DEVICE_LOAD_APP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00261">hcan::hcan_transport::send_DEVICE_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00195">hcan::hcan_transport::send_DEVICE_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00136">hcan::hcan_transport::send_DEVICE_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00545">hcan::hcan_transport::send_DEVICE_TYPE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00483">hcan::hcan_transport::send_DEVICE_TYPE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03188">hcan::hcan_transport::send_DUMP_DEBUG_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10008">hcan::hcan_transport::send_FA_BLOCK1_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11201">hcan::hcan_transport::send_FIELD_ATTRIBUTE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11112">hcan::hcan_transport::send_FIELD_ATTRIBUTE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11032">hcan::hcan_transport::send_FIELD_COUNT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10961">hcan::hcan_transport::send_FIELD_COUNT_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11415">hcan::hcan_transport::send_FIELD_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11316">hcan::hcan_transport::send_FIELD_READ_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11650">hcan::hcan_transport::send_FIELD_WRITE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11535">hcan::hcan_transport::send_FIELD_WRITE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03077">hcan::hcan_transport::send_FIRMWARE_CONFIG_COMPAT_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03006">hcan::hcan_transport::send_FIRMWARE_CRC16_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00634">hcan::hcan_transport::send_FLASH_BUFFER_FILL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00737">hcan::hcan_transport::send_FLASH_BUFFER_FILL_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00799">hcan::hcan_transport::send_FLASH_BUFFER_WRITE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00875">hcan::hcan_transport::send_FLASH_BUFFER_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01951">hcan::hcan_transport::send_FLASH_CRC16_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02031">hcan::hcan_transport::send_FLASH_CRC16_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09424">hcan::hcan_transport::send_FORMAT()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08921">hcan::hcan_transport::send_FREE_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08998">hcan::hcan_transport::send_FREE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08518">hcan::hcan_transport::send_GET_NEXT_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08605">hcan::hcan_transport::send_GET_NEXT_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06958">hcan::hcan_transport::send_HEIZSTEUERUNG_SET_VL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06860">hcan::hcan_transport::send_HEIZSTEUERUNG_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06752">hcan::hcan_transport::send_HEIZSTEUERUNG_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06684">hcan::hcan_transport::send_HEIZSTEUERUNG_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05602">hcan::hcan_transport::send_HEIZUNG_DETAILS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06275">hcan::hcan_transport::send_HEIZUNG_MODE_AUTOMATIK_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05817">hcan::hcan_transport::send_HEIZUNG_MODE_MANUAL_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05671">hcan::hcan_transport::send_HEIZUNG_MODE_OFF_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06036">hcan::hcan_transport::send_HEIZUNG_MODE_THERMOSTAT_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06375">hcan::hcan_transport::send_HEIZUNG_SET_MODE_AUTOMATIK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05925">hcan::hcan_transport::send_HEIZUNG_SET_MODE_MANUAL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05740">hcan::hcan_transport::send_HEIZUNG_SET_MODE_OFF()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06159">hcan::hcan_transport::send_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07121">hcan::hcan_transport::send_HEIZUNG_SOLLTEMP_LINE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07030">hcan::hcan_transport::send_HEIZUNG_SOLLTEMP_LINE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07242">hcan::hcan_transport::send_HEIZUNG_SOLLTEMP_WRITE_LINE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07354">hcan::hcan_transport::send_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06518">hcan::hcan_transport::send_HEIZUNG_TIST_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06444">hcan::hcan_transport::send_HEIZUNG_TIST_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06609">hcan::hcan_transport::send_HEIZUNG_WAERMEBEDARF_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01333">hcan::hcan_transport::send_INTERNAL_EEPROM_READ_BULK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01239">hcan::hcan_transport::send_INTERNAL_EEPROM_READ_BULK_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01167">hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01088">hcan::hcan_transport::send_INTERNAL_EEPROM_READ_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00940">hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01026">hcan::hcan_transport::send_INTERNAL_EEPROM_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10479">hcan::hcan_transport::send_LICHT_STATS_5MIN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02105">hcan::hcan_transport::send_LOOP_THROUGHPUT_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02167">hcan::hcan_transport::send_LOOP_THROUGHPUT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10844">hcan::hcan_transport::send_OBJECT_ATTRIBUTE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10760">hcan::hcan_transport::send_OBJECT_ATTRIBUTE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10691">hcan::hcan_transport::send_OBJECT_COUNT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10632">hcan::hcan_transport::send_OBJECT_COUNT_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00082">hcan::hcan_transport::send_PING_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00028">hcan::hcan_transport::send_PING_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03483">hcan::hcan_transport::send_POWER_GROUP_OFF()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03416">hcan::hcan_transport::send_POWER_GROUP_ON()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03871">hcan::hcan_transport::send_POWER_GROUP_SET_TIMER()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03963">hcan::hcan_transport::send_POWER_GROUP_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03550">hcan::hcan_transport::send_POWER_GROUP_STATE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03622">hcan::hcan_transport::send_POWER_GROUP_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03701">hcan::hcan_transport::send_POWER_GROUP_TIMER_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03776">hcan::hcan_transport::send_POWER_GROUP_TIMER_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05523">hcan::hcan_transport::send_PVSENSOR_STATE_CHANGE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05442">hcan::hcan_transport::send_PVSENSOR_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05370">hcan::hcan_transport::send_PVSENSOR_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09072">hcan::hcan_transport::send_READ_FROM_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09168">hcan::hcan_transport::send_READ_FROM_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05069">hcan::hcan_transport::send_REEDKONTAKT_OFFEN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05291">hcan::hcan_transport::send_REEDKONTAKT_STATE_CHANGE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05137">hcan::hcan_transport::send_REEDKONTAKT_STATE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05209">hcan::hcan_transport::send_REEDKONTAKT_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10139">hcan::hcan_transport::send_REGLER_DATEN_INFO_FRG1()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10264">hcan::hcan_transport::send_REGLER_DATEN_INFO_FRG2()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04278">hcan::hcan_transport::send_ROLLADEN_DEFINE_POSITION()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04366">hcan::hcan_transport::send_ROLLADEN_POSITION_CHANGED_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04196">hcan::hcan_transport::send_ROLLADEN_POSITION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04124">hcan::hcan_transport::send_ROLLADEN_POSITION_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04045">hcan::hcan_transport::send_ROLLADEN_POSITION_SET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02403">hcan::hcan_transport::send_RX_LOST_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02469">hcan::hcan_transport::send_RX_LOST_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02241">hcan::hcan_transport::send_RX_RECEIVED_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02309">hcan::hcan_transport::send_RX_RECEIVED_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02882">hcan::hcan_transport::send_RX_TX_STATS_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09535">hcan::hcan_transport::send_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09478">hcan::hcan_transport::send_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01611">hcan::hcan_transport::send_SYSLOG_LEVEL_SET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03259">hcan::hcan_transport::send_TASTER_DOWN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03339">hcan::hcan_transport::send_TASTER_UP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08194">hcan::hcan_transport::send_TIME_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08404">hcan::hcan_transport::send_TIME_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02721">hcan::hcan_transport::send_TX_DROPPED_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02789">hcan::hcan_transport::send_TX_DROPPED_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02562">hcan::hcan_transport::send_TX_SENT_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02628">hcan::hcan_transport::send_TX_SENT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01449">hcan::hcan_transport::send_UPTIME_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01515">hcan::hcan_transport::send_UPTIME_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09672">hcan::hcan_transport::send_VOLTAGE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09602">hcan::hcan_transport::send_VOLTAGE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09829">hcan::hcan_transport::send_VOLTAGE_STATS_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09749">hcan::hcan_transport::send_VOLTAGE_STATS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09934">hcan::hcan_transport::send_VOLTAGE_STATS_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10365">hcan::hcan_transport::send_WETTER_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10568">hcan::hcan_transport::send_WIND_STATS_5MIN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09274">hcan::hcan_transport::send_WRITE_TO_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09368">hcan::hcan_transport::send_WRITE_TO_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07709">hcan::hcan_transport::send_ZEITZONE_DETAILS_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07625">hcan::hcan_transport::send_ZEITZONE_DETAILS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08103">hcan::hcan_transport::send_ZEITZONE_TEST_MATCH_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08031">hcan::hcan_transport::send_ZEITZONE_TEST_MATCH_REQUERST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07843">hcan::hcan_transport::send_ZEITZONE_WRITE_DETAILS()</a> und <a class="el" href="hcan__transport_8cc-source.html#l07962">hcan::hcan_transport::send_ZEITZONE_WRITE_DETAILS_ACK()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="79f356a2caf639add3fca28e28955466"></a><!-- doxytag: member="hcan::frame::read_from" ref="79f356a2caf639add3fca28e28955466" args="(int fd)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhcan_1_1frame.html">frame</a> frame::read_from           </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>fd</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00168">168</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="frame_8cc-source.html#l00036">frame()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="transport__connection_8cc-source.html#l00352">hcan::transport_connection::dump()</a>, <a class="el" href="transport__connection_8cc-source.html#l00078">hcan::transport_connection::recv_frame()</a> und <a class="el" href="transport__connection_8cc-source.html#l00222">hcan::transport_connection::recv_frame_with_timeout()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1frame_79f356a2caf639add3fca28e28955466_cgraph.png" border="0" usemap="#classhcan_1_1frame_79f356a2caf639add3fca28e28955466_cgraph_map" alt=""></center>
+<map name="classhcan_1_1frame_79f356a2caf639add3fca28e28955466_cgraph_map">
+<area shape="rect" href="classhcan_1_1frame.html#86ec0b54d9b3730a6ff91e91efffeb62" title="hcan::frame::frame" alt="" coords="227,5,371,32"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="238e184e56f32f997a81cee4a3cadb24"></a><!-- doxytag: member="hcan::frame::proto" ref="238e184e56f32f997a81cee4a3cadb24" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t hcan::frame::proto           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00085">85</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="frame_8cc-source.html#l00216">print()</a>, <a class="el" href="transport__connection_8cc-source.html#l00283">hcan::transport_connection::syslog()</a> und <a class="el" href="transport__connection_8cc-source.html#l00245">hcan::transport_connection::templog()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="8215eb69dc8f05fddddf49f5e0f30ed2"></a><!-- doxytag: member="hcan::frame::set_proto" ref="8215eb69dc8f05fddddf49f5e0f30ed2" args="(uint8_t proto)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hcan::frame::set_proto           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>proto</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00086">86</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="b9e91ba7845047a9679ea619625fa74e"></a><!-- doxytag: member="hcan::frame::src" ref="b9e91ba7845047a9679ea619625fa74e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t hcan::frame::src           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00087">87</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="frame_8cc-source.html#l00216">print()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04488">hcan::hcan_transport::recv_1WIRE_DISCOVER()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04579">hcan::hcan_transport::recv_1WIRE_DISCOVERED_PART_1()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04685">hcan::hcan_transport::recv_1WIRE_DISCOVERED_PART_2()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04767">hcan::hcan_transport::recv_1WIRE_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04850">hcan::hcan_transport::recv_1WIRE_TEMPERATURE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04929">hcan::hcan_transport::recv_1WIRE_TEMPERATURE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05014">hcan::hcan_transport::recv_1WIRE_TEMPERATURE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08787">hcan::hcan_transport::recv_ALLOCATE_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08868">hcan::hcan_transport::recv_ALLOCATE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02964">hcan::hcan_transport::recv_BOOT_RESETFLAG_LOG()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01694">hcan::hcan_transport::recv_BUILD_VERSION_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01765">hcan::hcan_transport::recv_BUILD_VERSION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01829">hcan::hcan_transport::recv_CAN_EC_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01899">hcan::hcan_transport::recv_CAN_EC_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07575">hcan::hcan_transport::recv_CONFIG_RAM_USAGE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07503">hcan::hcan_transport::recv_CONFIG_RAM_USAGE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07448">hcan::hcan_transport::recv_CONFIG_RELOAD()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08348">hcan::hcan_transport::recv_DATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08476">hcan::hcan_transport::recv_DATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08717">hcan::hcan_transport::recv_DEFRAGMENT()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00334">hcan::hcan_transport::recv_DEVICE_BOOT_STOP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00390">hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00446">hcan::hcan_transport::recv_DEVICE_LOAD_APP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00279">hcan::hcan_transport::recv_DEVICE_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00219">hcan::hcan_transport::recv_DEVICE_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00155">hcan::hcan_transport::recv_DEVICE_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00573">hcan::hcan_transport::recv_DEVICE_TYPE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00502">hcan::hcan_transport::recv_DEVICE_TYPE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03211">hcan::hcan_transport::recv_DUMP_DEBUG_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10055">hcan::hcan_transport::recv_FA_BLOCK1_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11245">hcan::hcan_transport::recv_FIELD_ATTRIBUTE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11140">hcan::hcan_transport::recv_FIELD_ATTRIBUTE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11060">hcan::hcan_transport::recv_FIELD_COUNT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10984">hcan::hcan_transport::recv_FIELD_COUNT_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11458">hcan::hcan_transport::recv_FIELD_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11349">hcan::hcan_transport::recv_FIELD_READ_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11683">hcan::hcan_transport::recv_FIELD_WRITE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11579">hcan::hcan_transport::recv_FIELD_WRITE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03122">hcan::hcan_transport::recv_FIRMWARE_CONFIG_COMPAT_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03025">hcan::hcan_transport::recv_FIRMWARE_CRC16_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00676">hcan::hcan_transport::recv_FLASH_BUFFER_FILL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00756">hcan::hcan_transport::recv_FLASH_BUFFER_FILL_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00828">hcan::hcan_transport::recv_FLASH_BUFFER_WRITE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00894">hcan::hcan_transport::recv_FLASH_BUFFER_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01979">hcan::hcan_transport::recv_FLASH_CRC16_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02059">hcan::hcan_transport::recv_FLASH_CRC16_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09442">hcan::hcan_transport::recv_FORMAT()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08949">hcan::hcan_transport::recv_FREE_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09021">hcan::hcan_transport::recv_FREE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08546">hcan::hcan_transport::recv_GET_NEXT_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08643">hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06982">hcan::hcan_transport::recv_HEIZSTEUERUNG_SET_VL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06898">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06791">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06703">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05626">hcan::hcan_transport::recv_HEIZUNG_DETAILS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06314">hcan::hcan_transport::recv_HEIZUNG_MODE_AUTOMATIK_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05856">hcan::hcan_transport::recv_HEIZUNG_MODE_MANUAL_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05695">hcan::hcan_transport::recv_HEIZUNG_MODE_OFF_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06080">hcan::hcan_transport::recv_HEIZUNG_MODE_THERMOSTAT_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06399">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_AUTOMATIK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05964">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_MANUAL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05763">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_OFF()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06202">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07165">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_LINE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07059">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_LINE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07286">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_WRITE_LINE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07383">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06551">hcan::hcan_transport::recv_HEIZUNG_TIST_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06467">hcan::hcan_transport::recv_HEIZUNG_TIST_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06637">hcan::hcan_transport::recv_HEIZUNG_WAERMEBEDARF_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01382">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_BULK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01268">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_BULK_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01191">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01117">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00974">hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01045">hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10513">hcan::hcan_transport::recv_LICHT_STATS_5MIN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02124">hcan::hcan_transport::recv_LOOP_THROUGHPUT_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02195">hcan::hcan_transport::recv_LOOP_THROUGHPUT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10892">hcan::hcan_transport::recv_OBJECT_ATTRIBUTE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10784">hcan::hcan_transport::recv_OBJECT_ATTRIBUTE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10715">hcan::hcan_transport::recv_OBJECT_COUNT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10651">hcan::hcan_transport::recv_OBJECT_COUNT_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00100">hcan::hcan_transport::recv_PING_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00046">hcan::hcan_transport::recv_PING_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03506">hcan::hcan_transport::recv_POWER_GROUP_OFF()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03439">hcan::hcan_transport::recv_POWER_GROUP_ON()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03905">hcan::hcan_transport::recv_POWER_GROUP_SET_TIMER()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03992">hcan::hcan_transport::recv_POWER_GROUP_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03574">hcan::hcan_transport::recv_POWER_GROUP_STATE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03651">hcan::hcan_transport::recv_POWER_GROUP_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03725">hcan::hcan_transport::recv_POWER_GROUP_TIMER_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03810">hcan::hcan_transport::recv_POWER_GROUP_TIMER_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05552">hcan::hcan_transport::recv_PVSENSOR_STATE_CHANGE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05470">hcan::hcan_transport::recv_PVSENSOR_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05394">hcan::hcan_transport::recv_PVSENSOR_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09105">hcan::hcan_transport::recv_READ_FROM_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09206">hcan::hcan_transport::recv_READ_FROM_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05092">hcan::hcan_transport::recv_REEDKONTAKT_OFFEN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05320">hcan::hcan_transport::recv_REEDKONTAKT_STATE_CHANGE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05161">hcan::hcan_transport::recv_REEDKONTAKT_STATE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05238">hcan::hcan_transport::recv_REEDKONTAKT_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10188">hcan::hcan_transport::recv_REGLER_DATEN_INFO_FRG1()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10298">hcan::hcan_transport::recv_REGLER_DATEN_INFO_FRG2()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04307">hcan::hcan_transport::recv_ROLLADEN_DEFINE_POSITION()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04405">hcan::hcan_transport::recv_ROLLADEN_POSITION_CHANGED_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04225">hcan::hcan_transport::recv_ROLLADEN_POSITION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04148">hcan::hcan_transport::recv_ROLLADEN_POSITION_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04074">hcan::hcan_transport::recv_ROLLADEN_POSITION_SET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02421">hcan::hcan_transport::recv_RX_LOST_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02506">hcan::hcan_transport::recv_RX_LOST_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02260">hcan::hcan_transport::recv_RX_RECEIVED_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02347">hcan::hcan_transport::recv_RX_RECEIVED_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02901">hcan::hcan_transport::recv_RX_TX_STATS_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09558">hcan::hcan_transport::recv_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09496">hcan::hcan_transport::recv_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01634">hcan::hcan_transport::recv_SYSLOG_LEVEL_SET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03287">hcan::hcan_transport::recv_TASTER_DOWN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03367">hcan::hcan_transport::recv_TASTER_UP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08237">hcan::hcan_transport::recv_TIME_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08422">hcan::hcan_transport::recv_TIME_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02740">hcan::hcan_transport::recv_TX_DROPPED_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02826">hcan::hcan_transport::recv_TX_DROPPED_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02580">hcan::hcan_transport::recv_TX_SENT_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02665">hcan::hcan_transport::recv_TX_SENT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01467">hcan::hcan_transport::recv_UPTIME_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01552">hcan::hcan_transport::recv_UPTIME_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09700">hcan::hcan_transport::recv_VOLTAGE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09625">hcan::hcan_transport::recv_VOLTAGE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09872">hcan::hcan_transport::recv_VOLTAGE_STATS_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09772">hcan::hcan_transport::recv_VOLTAGE_STATS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09953">hcan::hcan_transport::recv_VOLTAGE_STATS_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10408">hcan::hcan_transport::recv_WETTER_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10591">hcan::hcan_transport::recv_WIND_STATS_5MIN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09312">hcan::hcan_transport::recv_WRITE_TO_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09387">hcan::hcan_transport::recv_WRITE_TO_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07758">hcan::hcan_transport::recv_ZEITZONE_DETAILS_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07649">hcan::hcan_transport::recv_ZEITZONE_DETAILS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08132">hcan::hcan_transport::recv_ZEITZONE_TEST_MATCH_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08055">hcan::hcan_transport::recv_ZEITZONE_TEST_MATCH_REQUERST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07892">hcan::hcan_transport::recv_ZEITZONE_WRITE_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07986">hcan::hcan_transport::recv_ZEITZONE_WRITE_DETAILS_ACK()</a> und <a class="el" href="transport__connection_8cc-source.html#l00283">hcan::transport_connection::syslog()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="4b59a1b00dd9d60a8b076f8ad634b343"></a><!-- doxytag: member="hcan::frame::set_src" ref="4b59a1b00dd9d60a8b076f8ad634b343" args="(uint16_t src)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hcan::frame::set_src           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>src</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00088">88</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="2082e8773b425218b79e011d52b60bd8"></a><!-- doxytag: member="hcan::frame::dst" ref="2082e8773b425218b79e011d52b60bd8" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t hcan::frame::dst           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00089">89</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="frame_8cc-source.html#l00216">print()</a>, <a class="el" href="transport__connection_8cc-source.html#l00078">hcan::transport_connection::recv_frame()</a>, <a class="el" href="transport__connection_8cc-source.html#l00283">hcan::transport_connection::syslog()</a> und <a class="el" href="transport__connection_8cc-source.html#l00245">hcan::transport_connection::templog()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="406905b78545d279a73c389adec26062"></a><!-- doxytag: member="hcan::frame::set_dst" ref="406905b78545d279a73c389adec26062" args="(uint16_t dst)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hcan::frame::set_dst           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>dst</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00090">90</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="7c69b37dad2ce5c6ef848f8535b29944"></a><!-- doxytag: member="hcan::frame::data" ref="7c69b37dad2ce5c6ef848f8535b29944" args="(const int i) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t frame::data           </td>
+          <td>(</td>
+          <td class="paramtype">const int&nbsp;</td>
+          <td class="paramname"> <em>i</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00104">104</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>, <a class="el" href="frame_8cc-source.html#l00216">print()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04488">hcan::hcan_transport::recv_1WIRE_DISCOVER()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04579">hcan::hcan_transport::recv_1WIRE_DISCOVERED_PART_1()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04685">hcan::hcan_transport::recv_1WIRE_DISCOVERED_PART_2()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04767">hcan::hcan_transport::recv_1WIRE_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04850">hcan::hcan_transport::recv_1WIRE_TEMPERATURE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04929">hcan::hcan_transport::recv_1WIRE_TEMPERATURE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05014">hcan::hcan_transport::recv_1WIRE_TEMPERATURE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08787">hcan::hcan_transport::recv_ALLOCATE_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08868">hcan::hcan_transport::recv_ALLOCATE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02964">hcan::hcan_transport::recv_BOOT_RESETFLAG_LOG()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01694">hcan::hcan_transport::recv_BUILD_VERSION_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01765">hcan::hcan_transport::recv_BUILD_VERSION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01829">hcan::hcan_transport::recv_CAN_EC_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01899">hcan::hcan_transport::recv_CAN_EC_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07575">hcan::hcan_transport::recv_CONFIG_RAM_USAGE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07503">hcan::hcan_transport::recv_CONFIG_RAM_USAGE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07448">hcan::hcan_transport::recv_CONFIG_RELOAD()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08348">hcan::hcan_transport::recv_DATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08476">hcan::hcan_transport::recv_DATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08717">hcan::hcan_transport::recv_DEFRAGMENT()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00334">hcan::hcan_transport::recv_DEVICE_BOOT_STOP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00390">hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00446">hcan::hcan_transport::recv_DEVICE_LOAD_APP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00279">hcan::hcan_transport::recv_DEVICE_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00219">hcan::hcan_transport::recv_DEVICE_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00155">hcan::hcan_transport::recv_DEVICE_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00573">hcan::hcan_transport::recv_DEVICE_TYPE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00502">hcan::hcan_transport::recv_DEVICE_TYPE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03211">hcan::hcan_transport::recv_DUMP_DEBUG_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10055">hcan::hcan_transport::recv_FA_BLOCK1_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11245">hcan::hcan_transport::recv_FIELD_ATTRIBUTE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11140">hcan::hcan_transport::recv_FIELD_ATTRIBUTE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11060">hcan::hcan_transport::recv_FIELD_COUNT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10984">hcan::hcan_transport::recv_FIELD_COUNT_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11458">hcan::hcan_transport::recv_FIELD_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11349">hcan::hcan_transport::recv_FIELD_READ_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11683">hcan::hcan_transport::recv_FIELD_WRITE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11579">hcan::hcan_transport::recv_FIELD_WRITE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03122">hcan::hcan_transport::recv_FIRMWARE_CONFIG_COMPAT_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03025">hcan::hcan_transport::recv_FIRMWARE_CRC16_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00676">hcan::hcan_transport::recv_FLASH_BUFFER_FILL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00756">hcan::hcan_transport::recv_FLASH_BUFFER_FILL_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00828">hcan::hcan_transport::recv_FLASH_BUFFER_WRITE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00894">hcan::hcan_transport::recv_FLASH_BUFFER_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01979">hcan::hcan_transport::recv_FLASH_CRC16_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02059">hcan::hcan_transport::recv_FLASH_CRC16_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09442">hcan::hcan_transport::recv_FORMAT()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08949">hcan::hcan_transport::recv_FREE_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09021">hcan::hcan_transport::recv_FREE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08546">hcan::hcan_transport::recv_GET_NEXT_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08643">hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06982">hcan::hcan_transport::recv_HEIZSTEUERUNG_SET_VL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06898">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06791">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06703">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05626">hcan::hcan_transport::recv_HEIZUNG_DETAILS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06314">hcan::hcan_transport::recv_HEIZUNG_MODE_AUTOMATIK_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05856">hcan::hcan_transport::recv_HEIZUNG_MODE_MANUAL_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05695">hcan::hcan_transport::recv_HEIZUNG_MODE_OFF_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06080">hcan::hcan_transport::recv_HEIZUNG_MODE_THERMOSTAT_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06399">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_AUTOMATIK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05964">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_MANUAL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05763">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_OFF()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06202">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07165">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_LINE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07059">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_LINE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07286">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_WRITE_LINE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07383">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06551">hcan::hcan_transport::recv_HEIZUNG_TIST_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06467">hcan::hcan_transport::recv_HEIZUNG_TIST_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06637">hcan::hcan_transport::recv_HEIZUNG_WAERMEBEDARF_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01382">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_BULK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01268">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_BULK_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01191">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01117">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00974">hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01045">hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10513">hcan::hcan_transport::recv_LICHT_STATS_5MIN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02124">hcan::hcan_transport::recv_LOOP_THROUGHPUT_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02195">hcan::hcan_transport::recv_LOOP_THROUGHPUT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10892">hcan::hcan_transport::recv_OBJECT_ATTRIBUTE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10784">hcan::hcan_transport::recv_OBJECT_ATTRIBUTE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10715">hcan::hcan_transport::recv_OBJECT_COUNT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10651">hcan::hcan_transport::recv_OBJECT_COUNT_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00100">hcan::hcan_transport::recv_PING_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00046">hcan::hcan_transport::recv_PING_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03506">hcan::hcan_transport::recv_POWER_GROUP_OFF()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03439">hcan::hcan_transport::recv_POWER_GROUP_ON()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03905">hcan::hcan_transport::recv_POWER_GROUP_SET_TIMER()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03992">hcan::hcan_transport::recv_POWER_GROUP_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03574">hcan::hcan_transport::recv_POWER_GROUP_STATE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03651">hcan::hcan_transport::recv_POWER_GROUP_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03725">hcan::hcan_transport::recv_POWER_GROUP_TIMER_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03810">hcan::hcan_transport::recv_POWER_GROUP_TIMER_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05552">hcan::hcan_transport::recv_PVSENSOR_STATE_CHANGE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05470">hcan::hcan_transport::recv_PVSENSOR_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05394">hcan::hcan_transport::recv_PVSENSOR_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09105">hcan::hcan_transport::recv_READ_FROM_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09206">hcan::hcan_transport::recv_READ_FROM_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05092">hcan::hcan_transport::recv_REEDKONTAKT_OFFEN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05320">hcan::hcan_transport::recv_REEDKONTAKT_STATE_CHANGE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05161">hcan::hcan_transport::recv_REEDKONTAKT_STATE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05238">hcan::hcan_transport::recv_REEDKONTAKT_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10188">hcan::hcan_transport::recv_REGLER_DATEN_INFO_FRG1()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10298">hcan::hcan_transport::recv_REGLER_DATEN_INFO_FRG2()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04307">hcan::hcan_transport::recv_ROLLADEN_DEFINE_POSITION()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04405">hcan::hcan_transport::recv_ROLLADEN_POSITION_CHANGED_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04225">hcan::hcan_transport::recv_ROLLADEN_POSITION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04148">hcan::hcan_transport::recv_ROLLADEN_POSITION_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04074">hcan::hcan_transport::recv_ROLLADEN_POSITION_SET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02421">hcan::hcan_transport::recv_RX_LOST_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02506">hcan::hcan_transport::recv_RX_LOST_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02260">hcan::hcan_transport::recv_RX_RECEIVED_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02347">hcan::hcan_transport::recv_RX_RECEIVED_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02901">hcan::hcan_transport::recv_RX_TX_STATS_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09558">hcan::hcan_transport::recv_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09496">hcan::hcan_transport::recv_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01634">hcan::hcan_transport::recv_SYSLOG_LEVEL_SET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03287">hcan::hcan_transport::recv_TASTER_DOWN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03367">hcan::hcan_transport::recv_TASTER_UP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08237">hcan::hcan_transport::recv_TIME_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08422">hcan::hcan_transport::recv_TIME_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02740">hcan::hcan_transport::recv_TX_DROPPED_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02826">hcan::hcan_transport::recv_TX_DROPPED_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02580">hcan::hcan_transport::recv_TX_SENT_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02665">hcan::hcan_transport::recv_TX_SENT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01467">hcan::hcan_transport::recv_UPTIME_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01552">hcan::hcan_transport::recv_UPTIME_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09700">hcan::hcan_transport::recv_VOLTAGE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09625">hcan::hcan_transport::recv_VOLTAGE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09872">hcan::hcan_transport::recv_VOLTAGE_STATS_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09772">hcan::hcan_transport::recv_VOLTAGE_STATS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09953">hcan::hcan_transport::recv_VOLTAGE_STATS_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10408">hcan::hcan_transport::recv_WETTER_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10591">hcan::hcan_transport::recv_WIND_STATS_5MIN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09312">hcan::hcan_transport::recv_WRITE_TO_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09387">hcan::hcan_transport::recv_WRITE_TO_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07758">hcan::hcan_transport::recv_ZEITZONE_DETAILS_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07649">hcan::hcan_transport::recv_ZEITZONE_DETAILS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08132">hcan::hcan_transport::recv_ZEITZONE_TEST_MATCH_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08055">hcan::hcan_transport::recv_ZEITZONE_TEST_MATCH_REQUERST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07892">hcan::hcan_transport::recv_ZEITZONE_WRITE_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07986">hcan::hcan_transport::recv_ZEITZONE_WRITE_DETAILS_ACK()</a> und <a class="el" href="transport__connection_8cc-source.html#l00245">hcan::transport_connection::templog()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="216ce22630ca6c47eaffb70898afc090"></a><!-- doxytag: member="hcan::frame::set_data" ref="216ce22630ca6c47eaffb70898afc090" args="(const int i, const uint8_t data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frame::set_data           </td>
+          <td>(</td>
+          <td class="paramtype">const int&nbsp;</td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00109">109</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="b680e9601707dce62ca84862035422ca"></a><!-- doxytag: member="hcan::frame::data_as_string" ref="b680e9601707dce62ca84862035422ca" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const string frame::data_as_string           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00115">115</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="transport__connection_8cc-source.html#l00283">hcan::transport_connection::syslog()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="36de22f4d054f15afe99a70e7b1d3b38"></a><!-- doxytag: member="hcan::frame::size" ref="36de22f4d054f15afe99a70e7b1d3b38" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t hcan::frame::size           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00094">94</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="board__driver_8cc-source.html#l00078">hcan::board_driver::exec_command()</a>, <a class="el" href="frame_8cc-source.html#l00216">print()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04488">hcan::hcan_transport::recv_1WIRE_DISCOVER()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04579">hcan::hcan_transport::recv_1WIRE_DISCOVERED_PART_1()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04685">hcan::hcan_transport::recv_1WIRE_DISCOVERED_PART_2()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04767">hcan::hcan_transport::recv_1WIRE_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04850">hcan::hcan_transport::recv_1WIRE_TEMPERATURE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04929">hcan::hcan_transport::recv_1WIRE_TEMPERATURE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05014">hcan::hcan_transport::recv_1WIRE_TEMPERATURE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08787">hcan::hcan_transport::recv_ALLOCATE_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08868">hcan::hcan_transport::recv_ALLOCATE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02964">hcan::hcan_transport::recv_BOOT_RESETFLAG_LOG()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01694">hcan::hcan_transport::recv_BUILD_VERSION_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01765">hcan::hcan_transport::recv_BUILD_VERSION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01829">hcan::hcan_transport::recv_CAN_EC_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01899">hcan::hcan_transport::recv_CAN_EC_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07575">hcan::hcan_transport::recv_CONFIG_RAM_USAGE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07503">hcan::hcan_transport::recv_CONFIG_RAM_USAGE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07448">hcan::hcan_transport::recv_CONFIG_RELOAD()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08348">hcan::hcan_transport::recv_DATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08476">hcan::hcan_transport::recv_DATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08717">hcan::hcan_transport::recv_DEFRAGMENT()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00334">hcan::hcan_transport::recv_DEVICE_BOOT_STOP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00390">hcan::hcan_transport::recv_DEVICE_BOOT_STOP_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00446">hcan::hcan_transport::recv_DEVICE_LOAD_APP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00279">hcan::hcan_transport::recv_DEVICE_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00219">hcan::hcan_transport::recv_DEVICE_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00155">hcan::hcan_transport::recv_DEVICE_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00573">hcan::hcan_transport::recv_DEVICE_TYPE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00502">hcan::hcan_transport::recv_DEVICE_TYPE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03211">hcan::hcan_transport::recv_DUMP_DEBUG_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10055">hcan::hcan_transport::recv_FA_BLOCK1_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11245">hcan::hcan_transport::recv_FIELD_ATTRIBUTE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11140">hcan::hcan_transport::recv_FIELD_ATTRIBUTE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11060">hcan::hcan_transport::recv_FIELD_COUNT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10984">hcan::hcan_transport::recv_FIELD_COUNT_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11458">hcan::hcan_transport::recv_FIELD_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11349">hcan::hcan_transport::recv_FIELD_READ_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11683">hcan::hcan_transport::recv_FIELD_WRITE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l11579">hcan::hcan_transport::recv_FIELD_WRITE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03122">hcan::hcan_transport::recv_FIRMWARE_CONFIG_COMPAT_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03025">hcan::hcan_transport::recv_FIRMWARE_CRC16_ERROR()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00676">hcan::hcan_transport::recv_FLASH_BUFFER_FILL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00756">hcan::hcan_transport::recv_FLASH_BUFFER_FILL_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00828">hcan::hcan_transport::recv_FLASH_BUFFER_WRITE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00894">hcan::hcan_transport::recv_FLASH_BUFFER_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01979">hcan::hcan_transport::recv_FLASH_CRC16_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02059">hcan::hcan_transport::recv_FLASH_CRC16_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09442">hcan::hcan_transport::recv_FORMAT()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08949">hcan::hcan_transport::recv_FREE_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09021">hcan::hcan_transport::recv_FREE_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08546">hcan::hcan_transport::recv_GET_NEXT_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08643">hcan::hcan_transport::recv_GET_NEXT_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06982">hcan::hcan_transport::recv_HEIZSTEUERUNG_SET_VL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06898">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06791">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06703">hcan::hcan_transport::recv_HEIZSTEUERUNG_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05626">hcan::hcan_transport::recv_HEIZUNG_DETAILS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06314">hcan::hcan_transport::recv_HEIZUNG_MODE_AUTOMATIK_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05856">hcan::hcan_transport::recv_HEIZUNG_MODE_MANUAL_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05695">hcan::hcan_transport::recv_HEIZUNG_MODE_OFF_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06080">hcan::hcan_transport::recv_HEIZUNG_MODE_THERMOSTAT_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06399">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_AUTOMATIK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05964">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_MANUAL()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05763">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_OFF()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06202">hcan::hcan_transport::recv_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07165">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_LINE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07059">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_LINE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07286">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_WRITE_LINE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07383">hcan::hcan_transport::recv_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06551">hcan::hcan_transport::recv_HEIZUNG_TIST_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06467">hcan::hcan_transport::recv_HEIZUNG_TIST_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l06637">hcan::hcan_transport::recv_HEIZUNG_WAERMEBEDARF_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01382">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_BULK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01268">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_BULK_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01191">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01117">hcan::hcan_transport::recv_INTERNAL_EEPROM_READ_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00974">hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01045">hcan::hcan_transport::recv_INTERNAL_EEPROM_WRITE_ACK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10513">hcan::hcan_transport::recv_LICHT_STATS_5MIN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02124">hcan::hcan_transport::recv_LOOP_THROUGHPUT_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02195">hcan::hcan_transport::recv_LOOP_THROUGHPUT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10892">hcan::hcan_transport::recv_OBJECT_ATTRIBUTE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10784">hcan::hcan_transport::recv_OBJECT_ATTRIBUTE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10715">hcan::hcan_transport::recv_OBJECT_COUNT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10651">hcan::hcan_transport::recv_OBJECT_COUNT_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00100">hcan::hcan_transport::recv_PING_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l00046">hcan::hcan_transport::recv_PING_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03506">hcan::hcan_transport::recv_POWER_GROUP_OFF()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03439">hcan::hcan_transport::recv_POWER_GROUP_ON()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03905">hcan::hcan_transport::recv_POWER_GROUP_SET_TIMER()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03992">hcan::hcan_transport::recv_POWER_GROUP_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03574">hcan::hcan_transport::recv_POWER_GROUP_STATE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03651">hcan::hcan_transport::recv_POWER_GROUP_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03725">hcan::hcan_transport::recv_POWER_GROUP_TIMER_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03810">hcan::hcan_transport::recv_POWER_GROUP_TIMER_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05552">hcan::hcan_transport::recv_PVSENSOR_STATE_CHANGE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05470">hcan::hcan_transport::recv_PVSENSOR_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05394">hcan::hcan_transport::recv_PVSENSOR_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09105">hcan::hcan_transport::recv_READ_FROM_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09206">hcan::hcan_transport::recv_READ_FROM_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05092">hcan::hcan_transport::recv_REEDKONTAKT_OFFEN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05320">hcan::hcan_transport::recv_REEDKONTAKT_STATE_CHANGE()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05161">hcan::hcan_transport::recv_REEDKONTAKT_STATE_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l05238">hcan::hcan_transport::recv_REEDKONTAKT_STATE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10188">hcan::hcan_transport::recv_REGLER_DATEN_INFO_FRG1()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10298">hcan::hcan_transport::recv_REGLER_DATEN_INFO_FRG2()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04307">hcan::hcan_transport::recv_ROLLADEN_DEFINE_POSITION()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04405">hcan::hcan_transport::recv_ROLLADEN_POSITION_CHANGED_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04225">hcan::hcan_transport::recv_ROLLADEN_POSITION_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04148">hcan::hcan_transport::recv_ROLLADEN_POSITION_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l04074">hcan::hcan_transport::recv_ROLLADEN_POSITION_SET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02421">hcan::hcan_transport::recv_RX_LOST_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02506">hcan::hcan_transport::recv_RX_LOST_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02260">hcan::hcan_transport::recv_RX_RECEIVED_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02347">hcan::hcan_transport::recv_RX_RECEIVED_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02901">hcan::hcan_transport::recv_RX_TX_STATS_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09558">hcan::hcan_transport::recv_STATE_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09496">hcan::hcan_transport::recv_STATE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01634">hcan::hcan_transport::recv_SYSLOG_LEVEL_SET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03287">hcan::hcan_transport::recv_TASTER_DOWN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l03367">hcan::hcan_transport::recv_TASTER_UP()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08237">hcan::hcan_transport::recv_TIME_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08422">hcan::hcan_transport::recv_TIME_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02740">hcan::hcan_transport::recv_TX_DROPPED_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02826">hcan::hcan_transport::recv_TX_DROPPED_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02580">hcan::hcan_transport::recv_TX_SENT_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l02665">hcan::hcan_transport::recv_TX_SENT_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01467">hcan::hcan_transport::recv_UPTIME_QUERY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l01552">hcan::hcan_transport::recv_UPTIME_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09700">hcan::hcan_transport::recv_VOLTAGE_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09625">hcan::hcan_transport::recv_VOLTAGE_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09872">hcan::hcan_transport::recv_VOLTAGE_STATS_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09772">hcan::hcan_transport::recv_VOLTAGE_STATS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09953">hcan::hcan_transport::recv_VOLTAGE_STATS_RESET()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10408">hcan::hcan_transport::recv_WETTER_INFO()</a>, <a class="el" href="hcan__transport_8cc-source.html#l10591">hcan::hcan_transport::recv_WIND_STATS_5MIN()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09312">hcan::hcan_transport::recv_WRITE_TO_BLOCK()</a>, <a class="el" href="hcan__transport_8cc-source.html#l09387">hcan::hcan_transport::recv_WRITE_TO_BLOCK_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07758">hcan::hcan_transport::recv_ZEITZONE_DETAILS_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07649">hcan::hcan_transport::recv_ZEITZONE_DETAILS_REQUEST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08132">hcan::hcan_transport::recv_ZEITZONE_TEST_MATCH_REPLAY()</a>, <a class="el" href="hcan__transport_8cc-source.html#l08055">hcan::hcan_transport::recv_ZEITZONE_TEST_MATCH_REQUERST()</a>, <a class="el" href="hcan__transport_8cc-source.html#l07892">hcan::hcan_transport::recv_ZEITZONE_WRITE_DETAILS()</a> und <a class="el" href="hcan__transport_8cc-source.html#l07986">hcan::hcan_transport::recv_ZEITZONE_WRITE_DETAILS_ACK()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="2b3ba1999057e8340aad557fec6ae609"></a><!-- doxytag: member="hcan::frame::set_size" ref="2b3ba1999057e8340aad557fec6ae609" args="(uint32_t size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hcan::frame::set_size           </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&nbsp;</td>
+          <td class="paramname"> <em>size</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00095">95</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="2db9e9b6b85cae3911f171d60427cf25"></a><!-- doxytag: member="hcan::frame::set_prio" ref="2db9e9b6b85cae3911f171d60427cf25" args="(uint8_t prio)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frame::set_prio           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>prio</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00195">195</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="transport__connection_8cc-source.html#l00063">hcan::transport_connection::keep_connection_alive()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="72a118c7d6a07e642d6d1fb807c40bb4"></a><!-- doxytag: member="hcan::frame::print" ref="72a118c7d6a07e642d6d1fb807c40bb4" args="(bool numeric, bool color, const std::string &amp;prefix=&quot;&quot;) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frame::print           </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>numeric</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&nbsp;</td>
+          <td class="paramname"> <em>prefix</em> = <code>&quot;&quot;</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="frame_8cc-source.html#l00216">216</a> der Datei <a class="el" href="frame_8cc-source.html">frame.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="colors_8h-source.html#l00010">COLOR_BLUE</a>, <a class="el" href="colors_8h-source.html#l00008">COLOR_GREEN</a>, <a class="el" href="colors_8h-source.html#l00006">COLOR_NORMAL</a>, <a class="el" href="frame__message__description_8h-source.html#l00014">frame_message_description_t::command_name</a>, <a class="el" href="frame_8cc-source.html#l00104">data()</a>, <a class="el" href="frame__message__description_8h-source.html#l00015">frame_message_description_t::details</a>, <a class="el" href="frame_8h-source.html#l00089">dst()</a>, <a class="el" href="frame_8cc-source.html#l00200">find_frame_message_description()</a>, <a class="el" href="frame__message__description_8h-source.html#l00016">frame_message_description_t::param_names</a>, <a class="el" href="frame_8h-source.html#l00085">proto()</a>, <a class="el" href="frame__message__description_8h-source.html#l00012">frame_message_description_t::service_name</a>, <a class="el" href="frame_8h-source.html#l00094">size()</a> und <a class="el" href="frame_8h-source.html#l00087">src()</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="transport__connection_8cc-source.html#l00352">hcan::transport_connection::dump()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="classhcan_1_1frame_72a118c7d6a07e642d6d1fb807c40bb4_cgraph.png" border="0" usemap="#classhcan_1_1frame_72a118c7d6a07e642d6d1fb807c40bb4_cgraph_map" alt=""></center>
+<map name="classhcan_1_1frame_72a118c7d6a07e642d6d1fb807c40bb4_cgraph_map">
+<area shape="rect" href="classhcan_1_1frame.html#7c69b37dad2ce5c6ef848f8535b29944" title="hcan::frame::data" alt="" coords="237,5,373,32"><area shape="rect" href="classhcan_1_1frame.html#2082e8773b425218b79e011d52b60bd8" title="hcan::frame::dst" alt="" coords="243,56,368,83"><area shape="rect" href="frame_8cc.html#5d3cd1c3a32ebcd82eca34e787fb2f65" title="find_frame_message_description" alt="" coords="189,107,421,133"><area shape="rect" href="classhcan_1_1frame.html#238e184e56f32f997a81cee4a3cadb24" title="hcan::frame::proto" alt="" coords="236,157,375,184"><area shape="rect" href="classhcan_1_1frame.html#36de22f4d054f15afe99a70e7b1d3b38" title="hcan::frame::size" alt="" coords="240,208,371,235"><area shape="rect" href="classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="243,259,368,285"></map>
+</div>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Datenelemente</h2>
+<a class="anchor" name="cfb32d1b3e442d451ac4dcdd4aa64c27"></a><!-- doxytag: member="hcan::frame::polite_mode" ref="cfb32d1b3e442d451ac4dcdd4aa64c27" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classhcan_1_1frame.html#cfb32d1b3e442d451ac4dcdd4aa64c27">frame::polite_mode</a> = true<code> [static]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Wenn im Hoeflichkeits-Modus, dann die Sendefrequenz reduzieren. Somit kommen andere Busteilnehmer auch noch zum Zuge 
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00050">50</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="frame_8cc-source.html#l00124">write_to()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="9d5a37e3c3b73a55fd6bca50df83edf8"></a><!-- doxytag: member="hcan::frame::polite_wait_time" ref="9d5a37e3c3b73a55fd6bca50df83edf8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classhcan_1_1frame.html#9d5a37e3c3b73a55fd6bca50df83edf8">frame::polite_wait_time</a> = 50000<code> [static]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Das ist die Wartezeit im Polite-Mode, d.h. die Zeitspanne in usec, die mit usleep() vor jedem Frame Senden gewartet wird. 
+<p>Definiert in Zeile <a class="el" href="frame_8h-source.html#l00056">56</a> der Datei <a class="el" href="frame_8h-source.html">frame.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="frame_8cc-source.html#l00124">write_to()</a>.</p>
+
+</div>
+</div><p>
+<hr>Die Dokumentation für diese Klasse wurde erzeugt aufgrund der Dateien:<ul>
+<li><a class="el" href="frame_8h-source.html">frame.h</a><li><a class="el" href="frame_8cc-source.html">frame.cc</a></ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:40:04 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

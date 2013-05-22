@@ -1,0 +1,68 @@
+
+	$Id: geraete-einteilungen,v 1.10 2008-06-21 14:26:24 mah Exp $
+
+	Geraete Einteilung
+	------------------
+
+	Die verschiedenen Geraete werden eingeteilt:
+
+	o Geraete-Typ (Device Type ID)
+	o Geraete-Version (Device Hardware Revision)
+
+	Die Geraete-Typ-ID (1 byte) gibt den Typ an, also z.B. HI (Hostinterface),
+	4-fach-Relais-Modul, o.ae. Die Geraete-Version stellt die Hardware Version
+	dar - eine neue Version liegt dann vor, wenn sich irgendetwas an der
+	Hardware geaendert hat, z.B. eine LED ist an einem anderen Port oder
+	fuer den MCP wurde ein anderer Quarz verwendet.
+
+	Die Firmwares haben fuer jeden Geraete-Typ ein Unterverzeichnis in
+	firmwares/. Die Geraete-Version wird als Preprozessor-Macro verwendet:
+	DEV_HW_REVISION. Sie beginnt bei 1 und wird aufsteigend gezaehlt.
+
+
+	Bisher vergebene DEVICE_TYPE_IDs:
+
+	o 01 versuchsboard1 v02:
+		F_CPU 3686400Hz
+		F_CAN 8000000Hz
+		2 LEDs
+
+	o 02 Hostinterface v01:
+		F_CPU 3686400Hz
+		F_CAN 8000000Hz
+		2 LEDs, vertauscht (CANIX_LED_SETUP2)
+
+	o 03 Controllerboard-88 v01:
+		F_CPU 3686400Hz
+		F_CAN 8000000Hz
+		keine LEDs
+
+	o 04 Controllerboard-1612 v01:
+		F_CPU 3686400Hz
+		F_CAN 8000000Hz
+		keine LEDs
+
+	o 05 Userpanel v01:
+		F_CPU 3686400Hz
+		F_CAN 8000000Hz
+
+	o 06 USV Controller1612-v01 Unit:
+	  Besteht effektiv aus einer Controllerboard-1612 Hardware Einheit
+	  mit USV Software
+		F_CPU 3686400Hz
+		F_CAN 8000000Hz
+
+	o 07 Heizungssteuerung Controller1612-v01 Unit:
+	  Besteht effektiv aus einer Controllerboard-1612 Hardware Einheit
+	  mit Heizungssteuerungssoftware
+		F_CPU 3686400Hz
+		F_CAN 8000000Hz
+	
+	o 08 Wetterstation Controller1612-v01 Unit:
+	  Besteht effektiv aus einer Controllerboard-1612 Hardware Einheit
+	  mit Wettersensoren
+		F_CPU 3686400Hz
+		F_CAN 8000000Hz
+
+
+

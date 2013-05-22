@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcandata: file_format_v1.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>file_format_v1.h</h1><a href="file__format__v1_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef FILE_FORMAT_V1_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define FILE_FORMAT_V1_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008 <span class="comment">/*</span>
+<a name="l00009"></a>00009 <span class="comment"> * Aufbau des HCAN Data File, Version 1</span>
+<a name="l00010"></a>00010 <span class="comment"> *</span>
+<a name="l00011"></a>00011 <span class="comment"> * 1 header block</span>
+<a name="l00012"></a>00012 <span class="comment"> * 1 data blocks</span>
+<a name="l00013"></a>00013 <span class="comment"> */</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="keyword">namespace </span>hcan
+<a name="l00016"></a>00016 {
+<a name="l00017"></a><a class="code" href="file__format__v1_8h.html#d52d475f3b8079b6e7f6c1d5210b4034">00017</a> <span class="preprocessor">#define DATA_FILE_MAGIC_1 0x12345678</span>
+<a name="l00018"></a><a class="code" href="file__format__v1_8h.html#e824c65b25f9df68be87a4448c7bfd3e">00018</a> <span class="preprocessor"></span><span class="preprocessor">#define DATA_FILE_MAGIC_2 0x20080404 // heute ;-)</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>
+<a name="l00020"></a><a class="code" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec00a7a0e871e0b244e70a05cd9e4818b9e">00020</a>     <span class="keyword">enum</span> <a class="code" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec0">data_file_type</a> { <a class="code" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec00a7a0e871e0b244e70a05cd9e4818b9e">data_file_type_header</a> = 1, <a class="code" href="namespacehcan.html#aa11c514a1aa2d1612f5c7a45878fec09fc5c719a41014ffacc30b4ceee147fb">data_file_type_data</a> = 2 };
+<a name="l00021"></a>00021 
+<a name="l00032"></a><a class="code" href="structhcan_1_1data__file__block__t.html">00032</a>     <span class="keyword">typedef</span> <span class="keyword">struct</span>
+<a name="l00033"></a>00033     {
+<a name="l00034"></a><a class="code" href="structhcan_1_1data__file__block__t.html#2a6e00323698bd3e1e1532f9cb69e897">00034</a>         uint32_t type;            <span class="comment">// data_file_type</span>
+<a name="l00035"></a><a class="code" href="structhcan_1_1data__file__block__t.html#e78dfb008d4f6c0a357865d8162a5e4d">00035</a>         uint32_t size;            <span class="comment">// in bytes</span>
+<a name="l00036"></a>00036     } <a class="code" href="structhcan_1_1data__file__block__t.html">data_file_block_t</a>;
+<a name="l00037"></a>00037 
+<a name="l00038"></a><a class="code" href="structhcan_1_1data__file__header__block__v1__t.html">00038</a>     <span class="keyword">typedef</span> <span class="keyword">struct</span>
+<a name="l00039"></a>00039     {
+<a name="l00040"></a><a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#6557c8d1b060b7d8e7109f3b94d2ba15">00040</a>         uint32_t type;            <span class="comment">// data_file_type</span>
+<a name="l00041"></a><a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#69342f9638ab7c4b8762241c9b1fd105">00041</a>         uint32_t size;            <span class="comment">// in bytes</span>
+<a name="l00042"></a><a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#4710db82136775be5d943aa2831e713d">00042</a>         uint32_t magic;           <span class="comment">// = DATA_FILE_MAGIC_1</span>
+<a name="l00043"></a><a class="code" href="structhcan_1_1data__file__header__block__v1__t.html#57e38c6b7fe4136f595493f3a5666ef1">00043</a>         uint32_t magic2;          <span class="comment">// = DATA_FILE_MAGIC_2</span>
+<a name="l00044"></a>00044     } <a class="code" href="structhcan_1_1data__file__header__block__v1__t.html">data_file_header_block_v1_t</a>;
+<a name="l00045"></a>00045 
+<a name="l00046"></a><a class="code" href="structhcan_1_1data__file__data__block__t.html">00046</a>     <span class="keyword">typedef</span> <span class="keyword">struct</span>
+<a name="l00047"></a>00047     {
+<a name="l00048"></a><a class="code" href="structhcan_1_1data__file__data__block__t.html#e3cf7a442fcd912869cd48e23fd4ee8c">00048</a>         uint32_t type;            <span class="comment">// data_file_type </span>
+<a name="l00049"></a><a class="code" href="structhcan_1_1data__file__data__block__t.html#cd57ed2d50be502ef91351f65811f77f">00049</a>         uint32_t size;            <span class="comment">// in bytes</span>
+<a name="l00050"></a><a class="code" href="structhcan_1_1data__file__data__block__t.html#e7e0d8c18bd06c7297a019f91382b90b">00050</a>         uint64_t first_timestamp; <span class="comment">// unix epoch 64bit</span>
+<a name="l00051"></a><a class="code" href="structhcan_1_1data__file__data__block__t.html#fa5a0210d58991154f027f16c1abe68a">00051</a>         uint64_t last_timestamp;  <span class="comment">// unix epoch 64bit</span>
+<a name="l00052"></a>00052     } <a class="code" href="structhcan_1_1data__file__data__block__t.html">data_file_data_block_t</a>;
+<a name="l00053"></a>00053 
+<a name="l00054"></a><a class="code" href="structhcan_1_1data__file__frame__entry.html">00054</a>     <span class="keyword">typedef</span> <span class="keyword">struct</span>
+<a name="l00055"></a>00055     {
+<a name="l00056"></a><a class="code" href="structhcan_1_1data__file__frame__entry.html#098fca57ac3e0788b3b0ebacdecac96d">00056</a>         uint64_t timestamp;
+<a name="l00057"></a><a class="code" href="structhcan_1_1data__file__frame__entry.html#f336adde1d114e9326a87664fe5590ed">00057</a>         uint16_t src;
+<a name="l00058"></a><a class="code" href="structhcan_1_1data__file__frame__entry.html#141e2ce1a28f169188107e5401df7dac">00058</a>         uint16_t dst;
+<a name="l00059"></a><a class="code" href="structhcan_1_1data__file__frame__entry.html#b061a32a535c188bfe88b4086dd70008">00059</a>         uint16_t proto;
+<a name="l00060"></a><a class="code" href="structhcan_1_1data__file__frame__entry.html#9e9a1dc1428e6f2083aaf639f8ed8dfa">00060</a>         uint16_t size;
+<a name="l00061"></a><a class="code" href="structhcan_1_1data__file__frame__entry.html#a220b0bd7b82b8bdb2d04d691b2e982c">00061</a>         uint8_t  data[8];
+<a name="l00062"></a>00062     } <a class="code" href="structhcan_1_1data__file__frame__entry.html">data_file_frame_entry</a>; <span class="comment">// 22 Bytes</span>
+<a name="l00063"></a>00063 
+<a name="l00064"></a><a class="code" href="classhcan_1_1file__format__v1.html">00064</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1file__format__v1.html">file_format_v1</a>
+<a name="l00065"></a>00065     {
+<a name="l00066"></a>00066         <span class="keyword">public</span>:
+<a name="l00067"></a>00067             <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classhcan_1_1file__format__v1.html#04c295fc9ab0677a10d1261c52887506">check</a>(<span class="keyword">const</span> std::string &amp;filename);
+<a name="l00068"></a>00068     };
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070 }
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:41:32 2009 für libhcandata von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

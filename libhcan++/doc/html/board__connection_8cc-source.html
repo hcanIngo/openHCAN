@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: board_connection.cc Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>board_connection.cc</h1><a href="board__connection_8cc.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;<a class="code" href="traceable__error_8h.html">libhcan++/traceable_error.h</a>&gt;</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;<a class="code" href="board__connection_8h.html">board_connection.h</a>&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;<a class="code" href="transport__connection_8h.html">transport_connection.h</a>&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="driver__factory_8h.html">driver_factory.h</a>&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="preprocessor">#ifndef __WIN32__</span>
+<a name="l00008"></a>00008 <span class="preprocessor"></span><span class="preprocessor">#include &lt;sys/types.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;sys/socket.h&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;netinet/in.h&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;arpa/inet.h&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#else</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#include &lt;winsock2.h&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#endif</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span><span class="preprocessor">#include &lt;errno.h&gt;</span>
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 <span class="keyword">using namespace </span>hcan;
+<a name="l00018"></a>00018 <span class="keyword">using namespace </span>std;
+<a name="l00019"></a>00019 
+<a name="l00020"></a><a class="code" href="classhcan_1_1board__error.html#45ff898b9be9d3ea56f92fa84c569b68">00020</a> board_error::board_error (<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;s) :
+<a name="l00021"></a>00021     <a class="code" href="classtraceable__error.html">traceable_error</a>(s)
+<a name="l00022"></a>00022 {
+<a name="l00023"></a>00023 }
+<a name="l00024"></a>00024 
+<a name="l00025"></a><a class="code" href="classhcan_1_1board__connection.html#7fba6a00c711f71e92c4da1d7fc769b2">00025</a> <a class="code" href="classhcan_1_1board__connection.html#7fba6a00c711f71e92c4da1d7fc769b2">board_connection::board_connection</a> (<a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;tcon,
+<a name="l00026"></a>00026         uint16_t src, uint16_t dst, <span class="keywordtype">bool</span> ignore_type, uint8_t arch) :
+<a name="l00027"></a>00027     m_tcon(tcon),
+<a name="l00028"></a>00028     m_driver(0),
+<a name="l00029"></a>00029     m_src(src),
+<a name="l00030"></a>00030     m_dst(dst)
+<a name="l00031"></a>00031 {
+<a name="l00032"></a>00032     uint8_t type;
+<a name="l00033"></a>00033     type = 255;
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#13800387603b964725c1627bf28329d0">send_PING_REQUEST</a>(m_src, m_dst);
+<a name="l00036"></a>00036     m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#a341d87b58665fe959b392e83eca7c33">recv_PING_REPLAY</a>(m_dst, m_src);
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038     <span class="keywordflow">if</span> (!ignore_type &amp;&amp; (arch == <a class="code" href="namespacehcan.html#4ac604a7596d82afd30fb857f7db835a92420254ad2ca378417f54d55255ae0d">hcan::HCAN_ARCH_AUTODETECT</a>))
+<a name="l00039"></a>00039     {
+<a name="l00040"></a>00040         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#c726d888becb5c9a4b1f7fce65d0d64b">send_DEVICE_TYPE_REQUEST</a>(m_src, m_dst);
+<a name="l00041"></a>00041         m_tcon.<a class="code" href="classhcan_1_1hcan__transport.html#6534aced9169871e8f6ee48407aa5e9c">recv_DEVICE_TYPE_REPLAY</a>(m_dst, m_src, &amp;arch, &amp;type);
+<a name="l00042"></a>00042     }
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044     <a class="code" href="classhcan_1_1driver__factory.html">hcan::driver_factory</a> factory;
+<a name="l00045"></a>00045     m_driver = factory.<a class="code" href="classhcan_1_1driver__factory.html#ad685acfbbd2bc688abf761112c40bef">make_driver</a>(*<span class="keyword">this</span>, arch, type);
+<a name="l00046"></a>00046 }
+<a name="l00047"></a>00047 
+<a name="l00048"></a><a class="code" href="classhcan_1_1board__connection.html#54ac476899e5afd92468969d3abd5d78">00048</a> <a class="code" href="classhcan_1_1board__connection.html#54ac476899e5afd92468969d3abd5d78">board_connection::~board_connection</a>() throw ()
+<a name="l00049"></a>00049 {
+<a name="l00050"></a>00050 }
+<a name="l00051"></a>00051 
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:50 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

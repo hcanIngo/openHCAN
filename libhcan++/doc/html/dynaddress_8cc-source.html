@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: dynaddress.cc Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>dynaddress.cc</h1><a href="dynaddress_8cc.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;<a class="code" href="dynaddress_8h.html">dynaddress.h</a>&gt;</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;unistd.h&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;sys/types.h&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;sys/socket.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;sys/un.h&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;sys/types.h&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;sys/socket.h&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;netinet/in.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;sys/socket.h&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;arpa/inet.h&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;assert.h&gt;</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="keyword">using namespace </span>hcan;
+<a name="l00014"></a>00014 
+<a name="l00015"></a><a class="code" href="classhcan_1_1dynaddress__error.html#dc06c877634fbf468c2aea7db75a9c4a">00015</a> dynaddress_error::dynaddress_error(<span class="keyword">const</span> std::string &amp;s) :
+<a name="l00016"></a>00016     <a class="code" href="classtraceable__error.html">traceable_error</a>(<span class="stringliteral">"hcanaddressd: "</span> + s)
+<a name="l00017"></a>00017 {
+<a name="l00018"></a>00018 }
+<a name="l00019"></a>00019 
+<a name="l00020"></a><a class="code" href="classhcan_1_1dynaddress.html#259f6d389e7d1b1f9cf7aad8db6bbc7d">00020</a> <a class="code" href="classhcan_1_1dynaddress.html#259f6d389e7d1b1f9cf7aad8db6bbc7d">dynaddress::dynaddress</a>(<span class="keyword">const</span> in_addr_t hcanaddressd_ip) :
+<a name="l00021"></a>00021     m_address(-1),
+<a name="l00022"></a>00022     m_socket(-1)
+<a name="l00023"></a>00023 {
+<a name="l00024"></a>00024     <span class="comment">//struct sockaddr_in sin;</span>
+<a name="l00025"></a>00025     memset(&amp;m_sin, 0, <span class="keyword">sizeof</span>(m_sin));
+<a name="l00026"></a>00026     m_sin.sin_family = AF_INET;
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028     <span class="keywordflow">if</span> (hcanaddressd_ip == 0)
+<a name="l00029"></a>00029         m_sin.sin_addr.s_addr = inet_addr(<span class="stringliteral">"127.0.0.1"</span>);
+<a name="l00030"></a>00030     <span class="keywordflow">else</span>
+<a name="l00031"></a>00031         m_sin.sin_addr.s_addr = hcanaddressd_ip;
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033     m_sin.sin_port = htons(3601);
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036 }
+<a name="l00037"></a>00037 
+<a name="l00038"></a><a class="code" href="classhcan_1_1dynaddress.html#06f1659c6f2358be3184ced6a4034e66">00038</a> <a class="code" href="classhcan_1_1dynaddress.html#06f1659c6f2358be3184ced6a4034e66">dynaddress::~dynaddress</a>()
+<a name="l00039"></a>00039 {
+<a name="l00040"></a>00040     <span class="comment">// TCP Verbindung zum hcanaddressd zumachen</span>
+<a name="l00041"></a>00041     <span class="comment">// und damit die Adresse freigeben</span>
+<a name="l00042"></a>00042     <span class="keywordflow">if</span> (m_socket != -1)
+<a name="l00043"></a>00043         close(m_socket);
+<a name="l00044"></a>00044 }
+<a name="l00045"></a>00045 
+<a name="l00046"></a><a class="code" href="classhcan_1_1dynaddress.html#29ef9e02b299f854c21dfe5fe72eeb88">00046</a> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1dynaddress.html#29ef9e02b299f854c21dfe5fe72eeb88">dynaddress::allocate</a>()
+<a name="l00047"></a>00047 {
+<a name="l00048"></a>00048     m_socket = ::socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+<a name="l00049"></a>00049     <span class="keywordtype">int</span> res = connect(m_socket,(<span class="keyword">const</span> <span class="keyword">struct</span> sockaddr*)&amp;m_sin,<span class="keyword">sizeof</span>(m_sin));
+<a name="l00050"></a>00050     <span class="keywordflow">if</span> (res == 0)
+<a name="l00051"></a>00051     {
+<a name="l00052"></a>00052         int32_t tmp;
+<a name="l00053"></a>00053         <span class="keywordtype">size_t</span> nread = read(m_socket,&amp;tmp,<span class="keyword">sizeof</span>(tmp));
+<a name="l00054"></a>00054         <span class="keywordflow">if</span> (nread != <span class="keyword">sizeof</span>(tmp))
+<a name="l00055"></a>00055             <a class="code" href="classhcan_1_1dynaddress__error.html">dynaddress_error</a>(<span class="stringliteral">"protocol error"</span>);
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057         m_address = tmp;
+<a name="l00058"></a>00058     }
+<a name="l00059"></a>00059     <span class="keywordflow">else</span>
+<a name="l00060"></a>00060         <span class="keywordflow">throw</span> <a class="code" href="classhcan_1_1dynaddress__error.html">dynaddress_error</a>(<span class="stringliteral">"could not connect to hcanaddressd"</span>);
+<a name="l00061"></a>00061 }
+<a name="l00062"></a>00062 
+<a name="l00063"></a><a class="code" href="classhcan_1_1dynaddress.html#f3e0566e035ec882c6bc80ac1f2b3b6f">00063</a> uint16_t <a class="code" href="classhcan_1_1dynaddress.html#f3e0566e035ec882c6bc80ac1f2b3b6f">dynaddress::operator()</a>()
+<a name="l00064"></a>00064 {
+<a name="l00065"></a>00065     <span class="comment">// Falls gar keine Adresse alloziert wurde, Error werfen:</span>
+<a name="l00066"></a>00066     <span class="keywordflow">if</span> (m_address == -1)
+<a name="l00067"></a>00067         <span class="keywordflow">throw</span> <a class="code" href="classhcan_1_1dynaddress__error.html">dynaddress_error</a>(<span class="stringliteral">"no address allocated"</span>);
+<a name="l00068"></a>00068     <span class="keywordflow">return</span> m_address;
+<a name="l00069"></a>00069 }
+<a name="l00070"></a>00070 
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:50 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

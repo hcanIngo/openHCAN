@@ -1,0 +1,934 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: canix.h-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>canix.h-Dateireferenz</h1>enth�lt Funktionen des CANIX Frameworks <a href="#_details">Mehr ...</a>
+<p>
+<code>#include &lt;avr/io.h&gt;</code><br>
+<code>#include &lt;hcan_eeprom.h&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für canix.h:</div>
+<div class="dynsection">
+<p><center><img src="canix_8h__incl.png" border="0" usemap="#canix.h_map" alt=""></center>
+</div>
+
+<p>
+<div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dynsection">
+<p><center><img src="canix_8h__dep__incl.png" border="0" usemap="#canix.hdep_map" alt=""></center>
+</div>
+
+<p>
+<a href="canix_8h-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Datenstrukturen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame.html">canix_frame</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__rx__queue__entry__t.html">canix_rx_queue_entry_t</a></td></tr>
+
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#41f9c5fb8b08eb5dc3edce4dcb37fee7">true</a>&nbsp;&nbsp;&nbsp;1</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#65e9886d74aaee76545e83dd09011727">false</a>&nbsp;&nbsp;&nbsp;0</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#bb452686968e48b67397da5f97445f5b">bool</a>&nbsp;&nbsp;&nbsp;char</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#15b16c1073c60f0be255caf0a60251be">ADDR_MASK</a>&nbsp;&nbsp;&nbsp;0x000003ff</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#3e1ea9fc2f4c30841e8b211c4c0fadb3">PROTO_MASK</a>&nbsp;&nbsp;&nbsp;0x00000007</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#b8b49a8dc11502858c972368e759c5f9">HCAN_PRIO_LOW</a>&nbsp;&nbsp;&nbsp;0x03</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#876de108a9ce18a7750ba4d553115638">HCAN_PRIO_HI</a>&nbsp;&nbsp;&nbsp;0x00</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#2df540804cd4d777f0970fe487f25173">MAX_FRAME_CALLBACKS</a>&nbsp;&nbsp;&nbsp;16</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#fc4f14ecab3ee6ce4ee74f6035238121">MAX_IDLE_CALLBACKS</a>&nbsp;&nbsp;&nbsp;8</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#adee46f93acf45421308a90fc41b5f38">MAX_RTC_CALLBACKS</a>&nbsp;&nbsp;&nbsp;8</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#ceb00b1b4264da805d7956e7ba62a775">CANIX_QUEUE_SIZE</a>&nbsp;&nbsp;&nbsp;12</td></tr>
+
+<tr><td colspan="2"><br><h2>Typdefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">typedef void(*&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#6e5d26a3e024074f7058e053d4a33336">canix_frame_callback</a> )(const <a class="el" href="structcanix__frame.html">canix_frame</a> *frame)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">typedef void(*&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#7e13616b7a245975818954d43b1b338a">canix_idle_callback</a> )(void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">typedef void(*&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#c02ea5afd7978308f150dc823eb1d241">canix_rtc_callback</a> )(void)</td></tr>
+
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#0aa66200e2ea0fafcd84e33e05427967">canix_init</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#6b25751e4e4e70ed76b15097e611704f">canix_selfaddr</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#9ad6b51ae259cd200289f44b303862bb">canix_reg_frame_callback</a> (<a class="el" href="canix_8h.html#6e5d26a3e024074f7058e053d4a33336">canix_frame_callback</a> callback, int dst, uint8_t proto, uint8_t srv)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#c96af311c91b003bb105fc8e2473051b">canix_reg_idle_callback</a> (<a class="el" href="canix_8h.html#7e13616b7a245975818954d43b1b338a">canix_idle_callback</a> callback)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#1646efbd7a4a4652a19db52d92a6cb48">canix_reg_rtc_callback</a> (<a class="el" href="canix_8h.html#c02ea5afd7978308f150dc823eb1d241">canix_rtc_callback</a> callback)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#22d6e59bbd66f61676cecfaa1ca659f7">canix_mainloop</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#1b738624595b5c99890d9553bf65c214">canix_process_messages</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#771938d7adbec51e8b4d9097c12be8a1">canix_frame_send</a> (const <a class="el" href="structcanix__frame.html">canix_frame</a> *frame)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#4312811c40e44902819311fec54e9245">canix_frame_send_with_prio</a> (const <a class="el" href="structcanix__frame.html">canix_frame</a> *frame, uint8_t prio)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#9664a4214401645c1ba9629e9dd43f85">canix_reset</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#97444a1654f4161236c8c9be60d4086c">canix_deliver_frame</a> (const <a class="el" href="structcanix__frame.html">canix_frame</a> *frame)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#0e17308266aa410354f69cd9ac128632">canix_sleep_100th</a> (uint8_t n)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#3ca95f85374640f22523865c16ad12b9">canix_rxq_size</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#c192c19377022a9943e084b9020efeb5">canix_rxq_fetch_one</a> (void)</td></tr>
+
+<tr><td colspan="2"><br><h2>Variablen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">volatile <a class="el" href="structcanix__rx__queue__entry__t.html">canix_rx_queue_entry_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#61028144dcafb2668275fb96cb98b00a">canix_rx_queue</a> [CANIX_QUEUE_SIZE]</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">volatile uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#8d08c0aa332b274c83d72d7b26963613">canix_rx_received</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">volatile uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#eab250c9c0611dd34b0b21b4d251b7db">canix_rx_lost</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">volatile uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#2c3a7c87bb3f144b83176ff71fac5ce6">canix_tx_sent</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">volatile uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="canix_8h.html#685d520d2b7e1d71ebbf3ce9f8a30645">canix_tx_dropped</a></td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+enth�lt Funktionen des CANIX Frameworks 
+<p>
+<dl class="author" compact><dt><b>Autor:</b></dt><dd>Martin Haller </dd></dl>
+<dl class="date" compact><dt><b>Datum:</b></dt><dd>13.3.2006</dd></dl>
+CANIX ist ein Framework, das versucht, alle Gemeinsamkeiten der Firmwares zu umspannen. Dazu gehoeren:<p>
+<ul>
+<li>Frame-Empfang</li><li>Frame-Versand</li><li>lokales Frame-Zustellen</li><li>Implementierung des Basis-Protokolls HMS (HCAN Management Service) mit z.b. Ping, Typ-Abfragen, EEPROM Zugriff, Flash-Zugriff (nur im Bootloader)</li><li>Uptime-Zaehler</li><li>RTC mit Datum und Uhrzeit, Empfang und Verarbeitung von Zeit-/Datums-Frames</li><li>Reset ueber den Watchdog</li><li>EEPROM Lese-/Schreib-Zugriff ueber HMS</li></ul>
+<p>
+HCAN (steht fuer Haus-/House-CAN) verwendet den CAN-2.0b Extended Identifier. Darin werden eine Protokoll-ID, Quell- und Ziel-Adresse wie folgt codiert:<p>
+<ul>
+<li>Bit 0..9: Quell-Adresse</li><li>Bit 10..19: Ziel-Adresse</li><li>Bit 20..22: Protokoll ID</li></ul>
+<p>
+Die oberen Bits werden nicht verwendet, da in den MCP2515 Errata steht, dass eine bestimmte MCP2515 Baureihe (war zum Startpunkt des HCAN-Projektes unklar, ob/wann das behoben wird) einen Fehler beim Frame-Empfang aufweist: Unter gewissen (unklaren, sporadisch auftretenden Umstaenden) sind die oben Bits alle "0". Um diesem Problem von vorn herein aus dem Weg zu gehen, wurden die oberen Bits einfach nicht verwendet. 
+<p>Definiert in Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="15b16c1073c60f0be255caf0a60251be"></a><!-- doxytag: member="canix.h::ADDR_MASK" ref="15b16c1073c60f0be255caf0a60251be" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ADDR_MASK&nbsp;&nbsp;&nbsp;0x000003ff          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Die HCAN Adress-Maske maskiert 10 Bits (Adress-Bereich 0..1023); sie muss fuer die Quell-Adresse um 10 Bits nach links geschoben werden. 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00077">77</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a> und <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="bb452686968e48b67397da5f97445f5b"></a><!-- doxytag: member="canix.h::bool" ref="bb452686968e48b67397da5f97445f5b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bool&nbsp;&nbsp;&nbsp;char          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00071">71</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="ceb00b1b4264da805d7956e7ba62a775"></a><!-- doxytag: member="canix.h::CANIX_QUEUE_SIZE" ref="ceb00b1b4264da805d7956e7ba62a775" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CANIX_QUEUE_SIZE&nbsp;&nbsp;&nbsp;12          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00297">297</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>, <a class="el" href="canix_8c-source.html#l00123">canix_rxq_fetch_one()</a>, <a class="el" href="canix_8c-source.html#l00140">canix_rxq_put_one()</a>, <a class="el" href="canix_8c-source.html#l00107">canix_rxq_size()</a> und <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="65e9886d74aaee76545e83dd09011727"></a><!-- doxytag: member="canix.h::false" ref="65e9886d74aaee76545e83dd09011727" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define false&nbsp;&nbsp;&nbsp;0          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00069">69</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="876de108a9ce18a7750ba4d553115638"></a><!-- doxytag: member="canix.h::HCAN_PRIO_HI" ref="876de108a9ce18a7750ba4d553115638" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HCAN_PRIO_HI&nbsp;&nbsp;&nbsp;0x00          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Hohe Prioritaet fuer die CAN Bus Arbitrierung. Dominater Pegel ist low, somit gewinnt im Kollisionsfalle eine 0 gegenueber einer 1.<p>
+HCAN_PRIO_HI gewinnt gegenueber HCAN_PRIO_LOW 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00100">100</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="b8b49a8dc11502858c972368e759c5f9"></a><!-- doxytag: member="canix.h::HCAN_PRIO_LOW" ref="b8b49a8dc11502858c972368e759c5f9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HCAN_PRIO_LOW&nbsp;&nbsp;&nbsp;0x03          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Niedrige Prioritaet fuer die CAN Bus Arbitrierung. Dominater Pegel ist low, somit gewinnt im Kollisionsfalle eine 0 gegenueber einer 1<p>
+HCAN_PRIO_HI gewinnt gegenueber HCAN_PRIO_LOW 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00092">92</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00472">canix_frame_send()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="2df540804cd4d777f0970fe487f25173"></a><!-- doxytag: member="canix.h::MAX_FRAME_CALLBACKS" ref="2df540804cd4d777f0970fe487f25173" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_FRAME_CALLBACKS&nbsp;&nbsp;&nbsp;16          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Maximale (feste) Anzahl von zu registierten HCAN-Frame Callbacks 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00105">105</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00420">canix_deliver_frame()</a>, <a class="el" href="canix_8c-source.html#l00345">canix_init()</a> und <a class="el" href="canix_8c-source.html#l00477">canix_reg_frame_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="fc4f14ecab3ee6ce4ee74f6035238121"></a><!-- doxytag: member="canix.h::MAX_IDLE_CALLBACKS" ref="fc4f14ecab3ee6ce4ee74f6035238121" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_IDLE_CALLBACKS&nbsp;&nbsp;&nbsp;8          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Maximale (feste) Anzahl von zu registierten Idle Callbacks 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00110">110</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>, <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a> und <a class="el" href="canix_8c-source.html#l00495">canix_reg_idle_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="adee46f93acf45421308a90fc41b5f38"></a><!-- doxytag: member="canix.h::MAX_RTC_CALLBACKS" ref="adee46f93acf45421308a90fc41b5f38" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_RTC_CALLBACKS&nbsp;&nbsp;&nbsp;8          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Maximale (feste) Anzahl von zu registierten RTC Callbacks (f = 100 Hz) 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00115">115</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>, <a class="el" href="canix_8c-source.html#l00509">canix_reg_rtc_callback()</a> und <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="3e1ea9fc2f4c30841e8b211c4c0fadb3"></a><!-- doxytag: member="canix.h::PROTO_MASK" ref="3e1ea9fc2f4c30841e8b211c4c0fadb3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTO_MASK&nbsp;&nbsp;&nbsp;0x00000007          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Die HCAN Protokoll-Maske maskiert 3 Bits (Werte-Bereich 0..7); sie muss zum Maskieren der Protokoll-ID im CAN-2.0b Identifier um 20 Bits nach links geschoben werden. 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00084">84</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a> und <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="41f9c5fb8b08eb5dc3edce4dcb37fee7"></a><!-- doxytag: member="canix.h::true" ref="41f9c5fb8b08eb5dc3edce4dcb37fee7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define true&nbsp;&nbsp;&nbsp;1          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00068">68</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der benutzerdefinierten Typen</h2>
+<a class="anchor" name="6e5d26a3e024074f7058e053d4a33336"></a><!-- doxytag: member="canix.h::canix_frame_callback" ref="6e5d26a3e024074f7058e053d4a33336" args=")(const canix_frame *frame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* <a class="el" href="canix_8h.html#6e5d26a3e024074f7058e053d4a33336">canix_frame_callback</a>)(const <a class="el" href="structcanix__frame.html">canix_frame</a> *frame)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Prototyp fuer einen HCAN Frame Callback 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00154">154</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="7e13616b7a245975818954d43b1b338a"></a><!-- doxytag: member="canix.h::canix_idle_callback" ref="7e13616b7a245975818954d43b1b338a" args=")(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* <a class="el" href="canix_8h.html#7e13616b7a245975818954d43b1b338a">canix_idle_callback</a>)(void)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Prototyp fuer einen Idle Callback 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00159">159</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c02ea5afd7978308f150dc823eb1d241"></a><!-- doxytag: member="canix.h::canix_rtc_callback" ref="c02ea5afd7978308f150dc823eb1d241" args=")(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* <a class="el" href="canix_8h.html#c02ea5afd7978308f150dc823eb1d241">canix_rtc_callback</a>)(void)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Prototyp fuer einen RTC Callback 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00164">164</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="97444a1654f4161236c8c9be60d4086c"></a><!-- doxytag: member="canix.h::canix_deliver_frame" ref="97444a1654f4161236c8c9be60d4086c" args="(const canix_frame *frame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_deliver_frame           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcanix__frame.html">canix_frame</a> *&nbsp;</td>
+          <td class="paramname"> <em>frame</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Nur zur internen Verwendung:<p>
+Stellt einen HCAN Frame (nur!) lokal zu (d.h. es werden die entsprechenden HCAN-Callbacks aufgerufen, sofern die Filter dazu passen).<p>
+Es gibt 3 Filter: * Source Address (Wildcard ist hier -1; Ausnahme hier, da 0 schon als Default-Adresse vorkommen kann) * Protokoll (Wildcard ist 0) * Service (Wildcard ist 0) 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00420">420</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00061">canix_frame_callback_entry::callback</a>, <a class="el" href="canix_8h-source.html#l00147">canix_frame::data</a>, <a class="el" href="canix_8h-source.html#l00131">canix_frame::dst</a>, <a class="el" href="canix_8h-source.html#l00105">MAX_FRAME_CALLBACKS</a>, <a class="el" href="canix_8h-source.html#l00136">canix_frame::proto</a> und <a class="el" href="canix_8c-source.html#l00064">canix_frame_callback_entry::srv</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a> und <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="771938d7adbec51e8b4d9097c12be8a1"></a><!-- doxytag: member="canix.h::canix_frame_send" ref="771938d7adbec51e8b4d9097c12be8a1" args="(const canix_frame *frame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_frame_send           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcanix__frame.html">canix_frame</a> *&nbsp;</td>
+          <td class="paramname"> <em>frame</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Sendet einen HCAN Frame. Dazu wird der Frame an den MCP2515 uebergeben und (da dieser zu sendende Frames nicht als Loop zustellt) manuell ueber canix_deliver_frame(..) lokal zugestellt. Damit koennen verschiedene Module der Firmware ebenfalls ueber HCAN Frames kommunizieren.<p>
+Die Routine uebergibt zum Senden an den MCP2515 das Frame der Funktion <a class="el" href="canix_8h.html#4312811c40e44902819311fec54e9245">canix_frame_send_with_prio</a> mit der Prioritaet HCAN_PRIO_LOW 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00472">472</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a> und <a class="el" href="canix_8h-source.html#l00092">HCAN_PRIO_LOW</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a> und <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="canix_8h_771938d7adbec51e8b4d9097c12be8a1_cgraph.png" border="0" usemap="#canix_8h_771938d7adbec51e8b4d9097c12be8a1_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="4312811c40e44902819311fec54e9245"></a><!-- doxytag: member="canix.h::canix_frame_send_with_prio" ref="4312811c40e44902819311fec54e9245" args="(const canix_frame *frame, uint8_t prio)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_frame_send_with_prio           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcanix__frame.html">canix_frame</a> *&nbsp;</td>
+          <td class="paramname"> <em>frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>prio</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Wie <a class="el" href="canix_8h.html#771938d7adbec51e8b4d9097c12be8a1">canix_frame_send</a>, allerdings mit einer explizit angegebenen Prioritaet. uebergeben und (da dieser zu sendende Frames nicht als Loop zustellt) manuell ueber canix_deliver_frame(..) lokal zugestellt. Damit koennen verschiedene Module der Firmware ebenfalls ueber HCAN Frames kommunizieren.<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>frame</em>&nbsp;</td><td>das zu versendende HCAN Frame </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>prio</em>&nbsp;</td><td>HCAN_PRIO_LOW, HCAN_PRIO_HI </td></tr>
+  </table>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00452">452</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8h-source.html#l00077">ADDR_MASK</a>, <a class="el" href="mcp2515_8c-source.html#l00350">can_any_sendable()</a>, <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a>, <a class="el" href="canix_8c-source.html#l00420">canix_deliver_frame()</a>, <a class="el" href="canix_8h-source.html#l00147">canix_frame::data</a>, <a class="el" href="canix_8h-source.html#l00131">canix_frame::dst</a>, <a class="el" href="canix_8h-source.html#l00136">canix_frame::proto</a>, <a class="el" href="canix_8h-source.html#l00084">PROTO_MASK</a>, <a class="el" href="canix_8h-source.html#l00142">canix_frame::size</a> und <a class="el" href="canix_8h-source.html#l00126">canix_frame::src</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00472">canix_frame_send()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="canix_8h_4312811c40e44902819311fec54e9245_cgraph.png" border="0" usemap="#canix_8h_4312811c40e44902819311fec54e9245_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="0aa66200e2ea0fafcd84e33e05427967"></a><!-- doxytag: member="canix.h::canix_init" ref="0aa66200e2ea0fafcd84e33e05427967" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t canix_init           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Diese Funktion muss vor dem Verwenden des Canix-Frameworks aufgerufen werden. Hier werden<ul>
+<li>alle Callbacks initialisiert</li><li>die RTC initialisiert</li><li>falls definiert, die LEDs aktiviert</li><li>der SPI Port initialisiert</li><li>der MCP2515 initialisiert (<a class="el" href="mcp2515_8c.html#1b4158391bfdcac1aefbd938d06c8088">can_open_interface()</a>)</li><li>verschiedene Callback Handler, die die Grundfunktionen von Canix zur Verfuegung stellen, registiert</li><li>und die Interrupts eingeschaltet </li></ul>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00345">345</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="mcp2515_8c-source.html#l00221">can_open_interface()</a>, <a class="el" href="led_8h-source.html#l00057">canix_led_init_ports</a>, <a class="el" href="canix_8h-source.html#l00297">CANIX_QUEUE_SIZE</a>, <a class="el" href="canix_8c-source.html#l00477">canix_reg_frame_callback()</a>, <a class="el" href="canix_8c-source.html#l00164">canix_rtc_init()</a>, <a class="el" href="canix_8c-source.html#l00408">canix_selfaddr()</a>, <a class="el" href="syslog_8c-source.html#l00035">canix_set_syslog_level()</a>, <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>, <a class="el" href="eds_8c-source.html#l00050">eds_init()</a>, <a class="el" href="canix_8c-source.html#l00076">idle_callback</a>, <a class="el" href="canix_8h-source.html#l00105">MAX_FRAME_CALLBACKS</a>, <a class="el" href="canix_8h-source.html#l00110">MAX_IDLE_CALLBACKS</a>, <a class="el" href="canix_8h-source.html#l00115">MAX_RTC_CALLBACKS</a>, <a class="el" href="canix_8c-source.html#l00081">rtc_callback</a> und <a class="el" href="mcp2515_8c-source.html#l00095">spi_init()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="canix_8h_0aa66200e2ea0fafcd84e33e05427967_cgraph.png" border="0" usemap="#canix_8h_0aa66200e2ea0fafcd84e33e05427967_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="22d6e59bbd66f61676cecfaa1ca659f7"></a><!-- doxytag: member="canix.h::canix_mainloop" ref="22d6e59bbd66f61676cecfaa1ca659f7" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_mainloop           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Das ist die Main-Loop. Diese muss nach dem Aufruf des <a class="el" href="canix_8c.html#0aa66200e2ea0fafcd84e33e05427967">canix_init()</a> in der main() Funktion der Firmware aufgerufen werden. Sie kehrt nie zurueck (Endlosschleife). 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00547">547</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00097">canix_loop_throughput_counter</a> und <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="canix_8h_22d6e59bbd66f61676cecfaa1ca659f7_cgraph.png" border="0" usemap="#canix_8h_22d6e59bbd66f61676cecfaa1ca659f7_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="1b738624595b5c99890d9553bf65c214"></a><!-- doxytag: member="canix.h::canix_process_messages" ref="1b738624595b5c99890d9553bf65c214" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_process_messages           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Verarbeitet anstehende Botschaften wie HCAN Frames etc.. Von hier aus werden alle Aufrufe an die diversen Bereiche deligiert (z.B. durch Idle Handler). 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00523">523</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8h-source.html#l00077">ADDR_MASK</a>, <a class="el" href="mcp2515_8c-source.html#l00355">can_message_available()</a>, <a class="el" href="mcp2515_8c-source.html#l00398">can_read_message()</a>, <a class="el" href="canix_8c-source.html#l00420">canix_deliver_frame()</a>, <a class="el" href="canix_8h-source.html#l00147">canix_frame::data</a>, <a class="el" href="canix_8h-source.html#l00131">canix_frame::dst</a>, <a class="el" href="canix_8c-source.html#l00076">idle_callback</a>, <a class="el" href="canix_8h-source.html#l00110">MAX_IDLE_CALLBACKS</a>, <a class="el" href="canix_8h-source.html#l00136">canix_frame::proto</a>, <a class="el" href="canix_8h-source.html#l00084">PROTO_MASK</a>, <a class="el" href="canix_8h-source.html#l00142">canix_frame::size</a> und <a class="el" href="canix_8h-source.html#l00126">canix_frame::src</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00547">canix_mainloop()</a> und <a class="el" href="canix_8c-source.html#l00566">canix_sleep_100th()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="canix_8h_1b738624595b5c99890d9553bf65c214_cgraph.png" border="0" usemap="#canix_8h_1b738624595b5c99890d9553bf65c214_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="9ad6b51ae259cd200289f44b303862bb"></a><!-- doxytag: member="canix.h::canix_reg_frame_callback" ref="9ad6b51ae259cd200289f44b303862bb" args="(canix_frame_callback callback, int dst, uint8_t proto, uint8_t srv)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_reg_frame_callback           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="canix_8h.html#6e5d26a3e024074f7058e053d4a33336">canix_frame_callback</a>&nbsp;</td>
+          <td class="paramname"> <em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>proto</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>srv</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+dst: Wenn != 1, dann gilt als Filter diese Adresse Registriert einen HCAN Frame Callback. Der Client kann damit HCAN Frames empfangen. <dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>callback</em>&nbsp;</td><td>die Adresse der Callback Funktion </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>dst</em>&nbsp;</td><td>die Ziel-Adresse (im CAN 2.0b Header), sofern != -1 (!); sonst ist der Ziel-Adress-Filter nicht aktiv </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>proto</em>&nbsp;</td><td>das Protokoll (im CAN 2.0b Header), sofern != 0 (!) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>srv</em>&nbsp;</td><td>die Service ID (data[0]), sofern != 0 (!) </td></tr>
+  </table>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00477">477</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00061">canix_frame_callback_entry::callback</a>, <a class="el" href="canix_8c-source.html#l00062">canix_frame_callback_entry::dst</a>, <a class="el" href="canix_8h-source.html#l00105">MAX_FRAME_CALLBACKS</a>, <a class="el" href="canix_8c-source.html#l00063">canix_frame_callback_entry::proto</a> und <a class="el" href="canix_8c-source.html#l00064">canix_frame_callback_entry::srv</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c96af311c91b003bb105fc8e2473051b"></a><!-- doxytag: member="canix.h::canix_reg_idle_callback" ref="c96af311c91b003bb105fc8e2473051b" args="(canix_idle_callback callback)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_reg_idle_callback           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="canix_8h.html#7e13616b7a245975818954d43b1b338a">canix_idle_callback</a>&nbsp;</td>
+          <td class="paramname"> <em>callback</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Registriert einen Idle Callback Handler. Dieser wird immer dann aufgerufen wenn der Prozessor in der Hauptschleifer der Botschaftsverarbeitung vorbeikommt. 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00495">495</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00076">idle_callback</a> und <a class="el" href="canix_8h-source.html#l00110">MAX_IDLE_CALLBACKS</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="1646efbd7a4a4652a19db52d92a6cb48"></a><!-- doxytag: member="canix.h::canix_reg_rtc_callback" ref="1646efbd7a4a4652a19db52d92a6cb48" args="(canix_rtc_callback callback)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_reg_rtc_callback           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="canix_8h.html#c02ea5afd7978308f150dc823eb1d241">canix_rtc_callback</a>&nbsp;</td>
+          <td class="paramname"> <em>callback</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Registriert einen RTC Callback Handler. Dieser wird mit einer Frequenz von 100Hz von der Timer0 ISR aufgerufen.<p>
+ACHTUNG: ein RTC Handler wird direkt von der Timer ISR aus aufgerufen und darf daher keinerlei Code enthalten, der wiederrum Interrupts ausloest. Es ist vergleichbar mit dem Bottom-Teil des Linux-Kernels. Die eigentlichen Aktionen sollten in einem Idle Handler stattfinden (vergleichbar mit dem Topteil des Linux-Kernels.) 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00509">509</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8h-source.html#l00115">MAX_RTC_CALLBACKS</a> und <a class="el" href="canix_8c-source.html#l00081">rtc_callback</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="9664a4214401645c1ba9629e9dd43f85"></a><!-- doxytag: member="canix.h::canix_reset" ref="9664a4214401645c1ba9629e9dd43f85" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_reset           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Hier der Watchdog auf 15 msec gesetzt, eine Endlosschleife gestartet und gewartet, bis der Watchdog einen Reset ausloest. Die Zeit bis zum Ausloesen des Watchdog dauert max 15 msec, kann aber auch schneller gehen (je nachdem, wann ein wdt_reset() das letzte Mal stattgefunden hat). 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00560">560</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c192c19377022a9943e084b9020efeb5"></a><!-- doxytag: member="canix.h::canix_rxq_fetch_one" ref="c192c19377022a9943e084b9020efeb5" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t canix_rxq_fetch_one           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert einen index auf der RX Queue, an der sich ein Frame befindet. Dieser kann dann ausgelesen werden 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00123">123</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8h-source.html#l00297">CANIX_QUEUE_SIZE</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00398">can_read_message()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="3ca95f85374640f22523865c16ad12b9"></a><!-- doxytag: member="canix.h::canix_rxq_size" ref="3ca95f85374640f22523865c16ad12b9" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t canix_rxq_size           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00107">107</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8h-source.html#l00297">CANIX_QUEUE_SIZE</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00355">can_message_available()</a>, <a class="el" href="mcp2515_8c-source.html#l00398">can_read_message()</a> und <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="6b25751e4e4e70ed76b15097e611704f"></a><!-- doxytag: member="canix.h::canix_selfaddr" ref="6b25751e4e4e70ed76b15097e611704f" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t canix_selfaddr           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert die eigene HCAN Adresse (ge-cached). 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00408">408</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00345">canix_init()</a>, <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a> und <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="0e17308266aa410354f69cd9ac128632"></a><!-- doxytag: member="canix.h::canix_sleep_100th" ref="0e17308266aa410354f69cd9ac128632" args="(uint8_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void canix_sleep_100th           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>n</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+"Schlaeft" n mal 10msec; arbeitet in der Zeit aber die Main Loop ab. Der Code muss sicherstellen, dass er nicht rekursiv aufgerufen wird! 
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00566">566</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Benutzt <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a> und <a class="el" href="canix_8c-source.html#l00095">canix_sleep_ticker</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a>.</p>
+
+<p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, was diese Funktion aufruft:</div>
+<div class="dynsection">
+<p><center><img src="canix_8h_0e17308266aa410354f69cd9ac128632_cgraph.png" border="0" usemap="#canix_8h_0e17308266aa410354f69cd9ac128632_cgraph_map" alt=""></center>
+</div>
+
+</div>
+</div><p>
+<hr><h2>Variablen-Dokumentation</h2>
+<a class="anchor" name="eab250c9c0611dd34b0b21b4d251b7db"></a><!-- doxytag: member="canix.h::canix_rx_lost" ref="eab250c9c0611dd34b0b21b4d251b7db" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint32_t <a class="el" href="canix_8h.html#eab250c9c0611dd34b0b21b4d251b7db">canix_rx_lost</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00101">101</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a> und <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="61028144dcafb2668275fb96cb98b00a"></a><!-- doxytag: member="canix.h::canix_rx_queue" ref="61028144dcafb2668275fb96cb98b00a" args="[CANIX_QUEUE_SIZE]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile <a class="el" href="structcanix__rx__queue__entry__t.html">canix_rx_queue_entry_t</a> <a class="el" href="canix_8h.html#61028144dcafb2668275fb96cb98b00a">canix_rx_queue</a>[CANIX_QUEUE_SIZE]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00105">105</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00398">can_read_message()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="8d08c0aa332b274c83d72d7b26963613"></a><!-- doxytag: member="canix.h::canix_rx_received" ref="8d08c0aa332b274c83d72d7b26963613" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint32_t <a class="el" href="canix_8h.html#8d08c0aa332b274c83d72d7b26963613">canix_rx_received</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00100">100</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a> und <a class="el" href="canix_8c-source.html#l00270">ISR()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="685d520d2b7e1d71ebbf3ce9f8a30645"></a><!-- doxytag: member="canix.h::canix_tx_dropped" ref="685d520d2b7e1d71ebbf3ce9f8a30645" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint32_t <a class="el" href="canix_8h.html#685d520d2b7e1d71ebbf3ce9f8a30645">canix_tx_dropped</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00103">103</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a> und <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="2c3a7c87bb3f144b83176ff71fac5ce6"></a><!-- doxytag: member="canix.h::canix_tx_sent" ref="2c3a7c87bb3f144b83176ff71fac5ce6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint32_t <a class="el" href="canix_8h.html#2c3a7c87bb3f144b83176ff71fac5ce6">canix_tx_sent</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="canix_8c-source.html#l00102">102</a> der Datei <a class="el" href="canix_8c-source.html">canix.c</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="mcp2515_8c-source.html#l00286">can_send_message()</a> und <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

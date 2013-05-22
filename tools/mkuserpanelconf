@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# Hinweise:
+#
+# Es muss sichergestellt sein, dass alle IDs eindeutig sind, d.h. nicht
+# mechfach vorkommen.
+
+set -e
+
+if [ $# != 1 ]; then
+	echo "$0 <config.xml>"
+	echo "   generiert config.cf"
+	exit 1
+fi
+
+in="$1"
+out="`basename $1 .xml`.cf"
+tmp=`mktemp /tmp/mkuserpanelconf.XXXXXXXX` || exit 1
+
+> $tmp
+
+# Summen-File erzeugen (include-Anweisungen expandieren:
+cat $in | while read i; do
+	if [ -n "`echo $i | grep '^#include'`" ]; then
+		incfile="`echo $i | awk '{ print $2 }'`"
+		if [ -e "$incfile" ]; then
+			echo "including $incfile..."
+			cat $incfile >> $tmp
+		else
+			echo "error: $incfile not found."
+			exit 1
+		fi
+	else
+		echo "$i" >> $tmp
+	fi
+done && \
+xalan -in $tmp -xsl /usr/share/hcan/mkuserpanelconf.xsl | \
+	sed 's/^[ \t]*//' | \
+	grep -v '^$' | sed 's/^set/  set/' > $out
+
+rm $tmp
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<classes>
+
+	<class id="1" name="taster" >
+	</class>
+
+	<class id="2" name="powerport" >
+	</class>
+
+	<class id="3" name="dunstabzugport" >
+	</class>
+
+	<class id="4" name="lichtzone" >
+	</class>
+
+	<class id="5" name="tempsensor" >
+	</class>
+
+	<class id="6" name="reedkontakt" >
+	</class>
+
+	<class id="7" name="rolladen" >
+	</class>
+
+	<class id="8" name="zeitschaltuhr" >
+	</class>
+
+	<class id="9" name="zeitzone" >
+	</class>
+
+
+
+	<class id="20" name="rolladen_steuerung" >
+		<field id="0" name="enabled" />
+	</class>
+
+
+	<class id="21" name="tag_nacht_agent" >
+		<field id="0" name="active" />
+		<field id="1" name="tag_active" />
+		<field id="2" name="nacht_active" />
+		<field id="3" name="nacht_pos" />
+		<field id="4" name="hell_grenze" />
+		<field id="5" name="dunkel_grenze" />
+	</class>
+
+	<class id="22" name="sonnenschutz_agent" >
+		<field id="0" name="active" />
+		<field id="1" name="ost_active" />
+		<field id="2" name="sued_active" />
+		<field id="3" name="west_active" />
+		<field id="4" name="soschu_pos" />
+		<field id="5" name="ost_to_time" />
+		<field id="6" name="sued_from_time" />
+		<field id="7" name="sued_to_time" />
+		<field id="8" name="west_from_time" />
+		<field id="9" name="ost_schwelle" />
+		<field id="10" name="sued_schwelle" />
+		<field id="11" name="west_schwelle" />
+		<field id="12" name="hysterese" />
+		<field id="13" name="flapinterval" />
+		<field id="14" name="licht_ost" />
+		<field id="15" name="licht_sued" />
+		<field id="16" name="licht_west" />
+	</class>
+
+	<class id="23" name="prio_agent" >
+	</class>
+
+	<class id="24" name="state2event_agent" >
+	</class>
+
+	<class id="25" name="zeitfilter_agent" >
+	</class>
+
+	<class id="26" name="flappingfilter_agent" >
+	</class>
+
+</classes>
+

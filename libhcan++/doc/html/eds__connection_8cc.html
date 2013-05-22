@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: eds_connection.cc-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>eds_connection.cc-Dateireferenz</h1><code>#include &lt;<a class="el" href="eds__connection_8h-source.html">eds_connection.h</a>&gt;</code><br>
+<code>#include &lt;<a class="el" href="board__connection_8h-source.html">board_connection.h</a>&gt;</code><br>
+<code>#include &lt;<a class="el" href="transport__connection_8h-source.html">transport_connection.h</a>&gt;</code><br>
+<code>#include &lt;iostream&gt;</code><br>
+
+<p>
+<div class="dynheader">
+Include-Abhängigkeitsdiagramm für eds_connection.cc:</div>
+<div class="dynsection">
+<p><center><img src="eds__connection_8cc__incl.png" border="0" usemap="#eds_connection.cc_map" alt=""></center>
+<map name="eds_connection.cc_map">
+<area shape="rect" href="eds__connection_8h.html" title="eds_connection.h" alt="" coords="349,161,483,188"><area shape="rect" href="board__connection_8h.html" title="libhcan++/board_connection.h" alt="" coords="61,239,280,265"><area shape="rect" href="transport__connection_8h.html" title="transport_connection.h" alt="" coords="159,84,327,111"><area shape="rect" href="traceable__error_8h.html" title="libhcan++/traceable_error.h" alt="" coords="368,316,568,343"><area shape="rect" href="eds__desc_8h.html" title="eds_desc.h" alt="" coords="251,316,344,343"><area shape="rect" href="board__driver_8h.html" title="board_driver.h" alt="" coords="115,316,227,343"><area shape="rect" href="hcan__transport_8h.html" title="libhcan++/hcan_transport.h" alt="" coords="125,161,325,188"><area shape="rect" href="frame_8h.html" title="frame.h" alt="" coords="932,239,1004,265"><area shape="rect" href="frame__message__description_8h.html" title="frame_message_description.h" alt="" coords="949,316,1163,343"><area shape="rect" href="colors_8h.html" title="colors.h" alt="" coords="1480,316,1552,343"></map>
+</div>
+
+<p>
+<a href="eds__connection_8cc-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const <a class="el" href="structeds__block__desc__t.html">eds_block_desc_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds__connection_8cc.html#4429f9022a69cc6386b135009dde6228">get_block_desc_by_type</a> (uint8_t type)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const <a class="el" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds__connection_8cc.html#7e403a7925c707f9587aee7605b73f6b">get_block_field_desc_by_key</a> (const <a class="el" href="structeds__block__desc__t.html">eds_block_desc_t</a> &amp;desc, const string &amp;key)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds__connection_8cc.html#55072500c2be3485598bb6ef2849dfc1">get_block_field_index_by_key</a> (const <a class="el" href="structeds__block__desc__t.html">eds_block_desc_t</a> &amp;desc, const string &amp;key)</td></tr>
+
+<tr><td colspan="2"><br><h2>Variablen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const vector&lt; <a class="el" href="structeds__block__desc__t.html">eds_block_desc_t</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="eds__connection_8cc.html#f09a1a6ea304dcfde52efc6d0d928ff2">eds_block_descriptions</a></td></tr>
+
+</table>
+<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="4429f9022a69cc6386b135009dde6228"></a><!-- doxytag: member="eds_connection.cc::get_block_desc_by_type" ref="4429f9022a69cc6386b135009dde6228" args="(uint8_t type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structeds__block__desc__t.html">eds_block_desc_t</a> get_block_desc_by_type           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>type</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert das passende Block-Beschreibungsobjekt fuer die gegebene Block-Typ-ID 
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00025">25</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="eds__connection_8cc-source.html#l00014">eds_block_descriptions</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__connection_8cc-source.html#l00100">hcan::eds_block::init()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="7e403a7925c707f9587aee7605b73f6b"></a><!-- doxytag: member="eds_connection.cc::get_block_field_desc_by_key" ref="7e403a7925c707f9587aee7605b73f6b" args="(const eds_block_desc_t &amp;desc, const string &amp;key)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structeds__block__field__desc__t.html">eds_block_field_desc_t</a> get_block_field_desc_by_key           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structeds__block__desc__t.html">eds_block_desc_t</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&nbsp;</td>
+          <td class="paramname"> <em>key</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert das passende Field-Beschreibungsobjekt fuer den gegebenen Key 
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00045">45</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="eds__desc_8h-source.html#l00033">eds_block_desc_t::fields</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__connection_8cc-source.html#l00127">hcan::eds_block::field()</a>, <a class="el" href="eds__connection_8cc-source.html#l00296">hcan::eds_block::field_datatype()</a>, <a class="el" href="eds__connection_8cc-source.html#l00253">hcan::eds_block::set_field_str()</a>, <a class="el" href="eds__connection_8cc-source.html#l00227">hcan::eds_block::set_field_uint16()</a>, <a class="el" href="eds__connection_8cc-source.html#l00207">hcan::eds_block::set_field_uint8()</a>, <a class="el" href="eds__connection_8cc-source.html#l00174">hcan::eds_block::strfield()</a> und <a class="el" href="eds__connection_8cc-source.html#l00151">hcan::eds_block::uint16_field()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="55072500c2be3485598bb6ef2849dfc1"></a><!-- doxytag: member="eds_connection.cc::get_block_field_index_by_key" ref="55072500c2be3485598bb6ef2849dfc1" args="(const eds_block_desc_t &amp;desc, const string &amp;key)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_block_field_index_by_key           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structeds__block__desc__t.html">eds_block_desc_t</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&nbsp;</td>
+          <td class="paramname"> <em>key</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00061">61</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Benutzt <a class="el" href="eds__desc_8h-source.html#l00033">eds_block_desc_t::fields</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Variablen-Dokumentation</h2>
+<a class="anchor" name="f09a1a6ea304dcfde52efc6d0d928ff2"></a><!-- doxytag: member="eds_connection.cc::eds_block_descriptions" ref="f09a1a6ea304dcfde52efc6d0d928ff2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const vector&lt;<a class="el" href="structeds__block__desc__t.html">eds_block_desc_t</a>&gt; <a class="el" href="eds__connection_8cc.html#f09a1a6ea304dcfde52efc6d0d928ff2">eds_block_descriptions</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+<b>Initialisierung:</b><div class="fragment"><pre class="fragment"> 
+    <a class="code" href="eds__desc_8cc.html#f6bc343d28b136b4fbe54f737b53f3f1">eds_get_block_descriptions</a>()
+</pre></div>dieser Baum wird aus den Daten der XML Datei eds.xml erzeugt. Der Baum beschreibt die im EDS Interface exisitenten Block-Typen und deren Felder (Namen und Typen). 
+<p>Definiert in Zeile <a class="el" href="eds__connection_8cc-source.html#l00014">14</a> der Datei <a class="el" href="eds__connection_8cc-source.html">eds_connection.cc</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="eds__connection_8cc-source.html#l00395">hcan::eds_connection::create_block()</a> und <a class="el" href="eds__connection_8cc-source.html#l00025">get_block_desc_by_type()</a>.</p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:52 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

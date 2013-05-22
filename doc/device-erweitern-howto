@@ -1,0 +1,46 @@
+Dieses Howto beschreibt die Erweiterung eines EDS-Objekts um ein oder mehrere
+Felder.
+
+
+- eds-definitions.xml editieren
+	o neue Felder hinzufuegen (analog der schon exisitierenden Felder)
+	o dabei wichtig: das pos Atribut muss stimmen, d.h. je nach Datentyp
+	  muss es gegenueber dem vorigem Wert n erhoeht werden. Im Prinzip
+	  stellt pos die Byte-Postition des ersten Bytes des Feldes dar
+	o dann das size Atribut des <block> Tags anpassen
+	o werden hierbei Fehler gemacht, so kann das ganze EDS gestoert sein,
+	  es ist hier KEINE Validitaetspruefung implementiert!!
+	o sodann im <block> Text eine Beschreibung der neu hinzugefuegten Felder
+	  eintragen
+- im xml Verzeichnis "make" aufrufen; dazu wird xalan (apt-get install xalan)
+  benoetigt; dieser Lauf generiert nun aus (geaenderten) XML Dateien neue
+  Header-Files und andere Informationen
+
+	mah@grobi:~/src/hcan/xml> make
+	xalan -in hcan-protocol.xml -xsl mk_hcan-def_h.xsl -indent 0 | \
+			indent -orig -ci4 | sed 's/SED_DELETE/ /g' > hcan-def.h
+	cp hcan-def.h ../include
+	xalan -in hcan-protocol.xml -xsl mk_transport_h.xsl  | \
+			indent -orig -ci4 | sed 's/,)/)/g' > hcan_transport.h
+	cp hcan_transport.h ../libhcan++
+	xalan -in hcan-protocol.xml -xsl mk_transport_cc.xsl  | \
+			indent -orig -ci4 | sed 's/,)/)/g' > hcan_transport.cc
+	cp hcan_transport.cc ../libhcan++
+	xalan -in hcan-protocol.xml -xsl mk_frame_message_description_h.xsl  | \
+			indent -orig -ci4 | sed 's/,)/)/g' > frame_message_description.h
+	cp frame_message_description.h ../libhcan++
+	xalan -in eds-definitions.xml -xsl mk_eds_structs.xsl -indent 0 | \
+			indent -orig -ci4 | sed 's/SED_DELETE/ /g' > eds-structs.h
+	cp eds-structs.h ../include
+	xalan -in eds-definitions.xml -xsl mk_eds_desc.xsl -indent 0 | \
+			indent -orig -ci4 | sed 's/SED_DELETE/ /g' > eds_desc.cc
+	cp eds_desc.cc ../libhcan++/
+	mah@grobi:~/src/hcan/xml> 
+
+- nun kann die Controller-1612 (oder eine andere EDS verwendende Firmware)
+  angepasst werden
+- die Datei ../../include/eds-structs.h ist in unserem Falle veraendert worden;
+  die Struct eds_heizung_block_t z.B. hat die neuen Felder erhalten
+- Nun das entsprechende Device anpassen; Zugriff auf die neuen Felder
+  bekommt man ueber beispielsweise p->config.hysterese.
+

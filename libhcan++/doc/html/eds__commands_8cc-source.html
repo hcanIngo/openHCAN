@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: eds_commands.cc Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>eds_commands.cc</h1><a href="eds__commands_8cc.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;<a class="code" href="userpanel__driver_8h.html">userpanel_driver.h</a>&gt;</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;<a class="code" href="board__connection_8h.html">board_connection.h</a>&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;<a class="code" href="transport__connection_8h.html">transport_connection.h</a>&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;assert.h&gt;</span>
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;iomanip&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;sstream&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;fstream&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;<a class="code" href="eds__desc_8h.html">eds_desc.h</a>&gt;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;<a class="code" href="eds__connection_8h.html">eds_connection.h</a>&gt;</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="keyword">using namespace </span>hcan;
+<a name="l00016"></a>00016 <span class="keyword">using namespace </span>std;
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="keyword">namespace </span>hcan
+<a name="l00019"></a>00019 {
+<a name="l00020"></a>00020 
+<a name="l00021"></a><a class="code" href="namespacehcan.html#de293f02631b9ff24d26310597fec497">00021</a> <span class="keywordtype">void</span> <a class="code" href="namespacehcan.html#de293f02631b9ff24d26310597fec497">eds_cmd_list</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon, <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ, <a class="code" href="structhcan_1_1context.html">context</a> &amp;c)
+<a name="l00022"></a>00022 {
+<a name="l00023"></a>00023     <span class="keywordflow">if</span> (c.<a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> == <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389ebf6a2f033a72a65aab4c29bcfb990b3f">context::normal</a>)
+<a name="l00024"></a>00024     {
+<a name="l00025"></a>00025         <span class="keywordflow">for</span> (eds_connection::eds_blocks::const_iterator i = 
+<a name="l00026"></a>00026                 econ.<a class="code" href="classhcan_1_1eds__connection.html#68312d4d37395014849696321489b93a">blocks</a>().begin(); i != econ.<a class="code" href="classhcan_1_1eds__connection.html#68312d4d37395014849696321489b93a">blocks</a>().end(); i++)
+<a name="l00027"></a>00027         {
+<a name="l00028"></a>00028             cout &lt;&lt; <span class="stringliteral">"{"</span> &lt;&lt; i-&gt;type_name() &lt;&lt; <span class="stringliteral">"}@"</span> &lt;&lt; i-&gt;address() &lt;&lt; endl;
+<a name="l00029"></a>00029         }
+<a name="l00030"></a>00030     }
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032     <span class="keywordflow">if</span> (c.<a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> == <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389eb7c74a07afbb49d89869aa37d7f10c0c">context::edit</a>)
+<a name="l00033"></a>00033     {
+<a name="l00034"></a>00034         <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;block = econ.<a class="code" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">block_by_address</a>(c.<a class="code" href="structhcan_1_1context.html#02bae85c0649eddc3e6e952295b432f4">eds_block_address</a>);
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036         <span class="keywordflow">for</span> (eds_block_fields_t::const_iterator i =
+<a name="l00037"></a>00037                 block.<a class="code" href="classhcan_1_1eds__block.html#36c9419cc70dc4b19b4ace0713591d76">fields</a>().begin(); i != block.<a class="code" href="classhcan_1_1eds__block.html#36c9419cc70dc4b19b4ace0713591d76">fields</a>().end(); i++)
+<a name="l00038"></a>00038         {
+<a name="l00039"></a>00039             <span class="keywordflow">if</span> (i-&gt;datatype == <span class="stringliteral">"char"</span>)
+<a name="l00040"></a>00040             {
+<a name="l00041"></a>00041                 cout &lt;&lt; <span class="stringliteral">"char["</span> &lt;&lt; i-&gt;<a class="code" href="classhcan_1_1eds__block.html#d0e51b474ec22ffb7c56efe4cdf7ce1e">size</a> &lt;&lt; <span class="stringliteral">"] "</span> &lt;&lt; i-&gt;name 
+<a name="l00042"></a>00042                     &lt;&lt; <span class="stringliteral">" '"</span> &lt;&lt; block.<a class="code" href="classhcan_1_1eds__block.html#b6e52382fc6c2be423fa78b9d2cae65e">strfield</a>(i-&gt;name) &lt;&lt; <span class="stringliteral">"'"</span> &lt;&lt; endl;
+<a name="l00043"></a>00043             }
+<a name="l00044"></a>00044             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (i-&gt;datatype == <span class="stringliteral">"uint16_t"</span>)
+<a name="l00045"></a>00045             {
+<a name="l00046"></a>00046                 cout &lt;&lt; i-&gt;datatype &lt;&lt; <span class="stringliteral">" "</span> &lt;&lt; i-&gt;name
+<a name="l00047"></a>00047                     &lt;&lt; <span class="stringliteral">" "</span> &lt;&lt; block.<a class="code" href="classhcan_1_1eds__block.html#164bcb7df3fdb8625f0e663a4f4a7d22">uint16_field</a>(i-&gt;name) &lt;&lt; endl;
+<a name="l00048"></a>00048             }
+<a name="l00049"></a>00049             <span class="keywordflow">else</span>
+<a name="l00050"></a>00050             {
+<a name="l00051"></a>00051                 cout &lt;&lt; i-&gt;datatype &lt;&lt; <span class="stringliteral">" "</span> &lt;&lt; i-&gt;name
+<a name="l00052"></a>00052                     &lt;&lt; <span class="stringliteral">" "</span> &lt;&lt; (uint16_t)block.<a class="code" href="classhcan_1_1eds__block.html#06434d1ee09d11e711fba0689616383c">field</a>(i-&gt;name) &lt;&lt; endl;
+<a name="l00053"></a>00053             }
+<a name="l00054"></a>00054         }
+<a name="l00055"></a>00055     }
+<a name="l00056"></a>00056 }
+<a name="l00057"></a>00057 
+<a name="l00058"></a><a class="code" href="namespacehcan.html#3db58084b75373aa436458df1f5b131e">00058</a> <span class="keywordtype">void</span> <a class="code" href="namespacehcan.html#3db58084b75373aa436458df1f5b131e">eds_cmd_create</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon, <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ, 
+<a name="l00059"></a>00059         <a class="code" href="structhcan_1_1context.html">context</a> &amp;c, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type)
+<a name="l00060"></a>00060 {
+<a name="l00061"></a>00061     <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;block = econ.<a class="code" href="classhcan_1_1eds__connection.html#8f674468e5ea4235480f84c54fa674bc">create_block</a>(type);
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     cout &lt;&lt; <span class="stringliteral">"creating new "</span> &lt;&lt; type 
+<a name="l00064"></a>00064         &lt;&lt; <span class="stringliteral">", type id = "</span> &lt;&lt; (uint16_t)(block.<a class="code" href="classhcan_1_1eds__block.html#7b849f2c7072a95dab2081070a0f026c">type</a>()) &lt;&lt; <span class="stringliteral">"..."</span> &lt;&lt; endl;
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066     stringstream ss;
+<a name="l00067"></a>00067     ss &lt;&lt; <span class="stringliteral">"EDS/{"</span> &lt;&lt; block.<a class="code" href="classhcan_1_1eds__block.html#58655ce4e5f09a6833384d720ed45c06">type_name</a>() &lt;&lt; <span class="stringliteral">"}@"</span> &lt;&lt; block.<a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>() &lt;&lt; <span class="stringliteral">" &gt; "</span>;
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069     c.<a class="code" href="structhcan_1_1context.html#c030e887b884a3d99c5d8e17cc63899d">prompt</a> = ss.str();
+<a name="l00070"></a>00070     c.<a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> = <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389eb7c74a07afbb49d89869aa37d7f10c0c">context::edit</a>;
+<a name="l00071"></a>00071     c.<a class="code" href="structhcan_1_1context.html#02bae85c0649eddc3e6e952295b432f4">eds_block_address</a> = block.<a class="code" href="classhcan_1_1eds__block.html#eaf39e34c60c34af52d0c73b4eb2a85b">address</a>();
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073     <span class="keywordflow">return</span>;
+<a name="l00074"></a>00074 }
+<a name="l00075"></a>00075 
+<a name="l00076"></a><a class="code" href="namespacehcan.html#802f4d4d4405482737ac819811e22c64">00076</a> <span class="keywordtype">void</span> <a class="code" href="namespacehcan.html#802f4d4d4405482737ac819811e22c64">eds_cmd_delete</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon, <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ, 
+<a name="l00077"></a>00077         <a class="code" href="structhcan_1_1context.html">context</a> &amp;c, uint16_t address)
+<a name="l00078"></a>00078 {
+<a name="l00079"></a>00079     econ.<a class="code" href="classhcan_1_1eds__connection.html#e7f68b11d62a9ac9dc08da2ffb1ca8a2">delete_block</a>(econ.<a class="code" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">block_by_address</a>(address));
+<a name="l00080"></a>00080 }
+<a name="l00081"></a>00081 
+<a name="l00082"></a><a class="code" href="namespacehcan.html#39c5a5670c3fe49e49b00fda5de0c7bd">00082</a> <span class="keywordtype">void</span> <a class="code" href="namespacehcan.html#39c5a5670c3fe49e49b00fda5de0c7bd">eds_cmd_edit</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon, <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ, <a class="code" href="structhcan_1_1context.html">context</a> &amp;c, 
+<a name="l00083"></a>00083         uint16_t address)
+<a name="l00084"></a>00084 {
+<a name="l00085"></a>00085     <span class="keyword">const</span> <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;block = econ.<a class="code" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">block_by_address</a>(address);
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     stringstream ss;
+<a name="l00088"></a>00088     ss &lt;&lt; <span class="stringliteral">"EDS/{"</span> &lt;&lt; block.<a class="code" href="classhcan_1_1eds__block.html#58655ce4e5f09a6833384d720ed45c06">type_name</a>() &lt;&lt; <span class="stringliteral">"}@"</span> &lt;&lt; address &lt;&lt; <span class="stringliteral">" &gt; "</span>;
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090     c.<a class="code" href="structhcan_1_1context.html#c030e887b884a3d99c5d8e17cc63899d">prompt</a> = ss.str();
+<a name="l00091"></a>00091     c.<a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> = <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389eb7c74a07afbb49d89869aa37d7f10c0c">context::edit</a>;
+<a name="l00092"></a>00092     c.<a class="code" href="structhcan_1_1context.html#02bae85c0649eddc3e6e952295b432f4">eds_block_address</a> = address;
+<a name="l00093"></a>00093 }
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095 
+<a name="l00096"></a><a class="code" href="namespacehcan.html#fc697055a1e11fd9565f99a04425f324">00096</a> <span class="keywordtype">void</span> <a class="code" href="namespacehcan.html#fc697055a1e11fd9565f99a04425f324">eds_cmd_set_field</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon, <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ,
+<a name="l00097"></a>00097         <a class="code" href="structhcan_1_1context.html">context</a> &amp;c, uint16_t address, 
+<a name="l00098"></a>00098         <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;key, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;value)
+<a name="l00099"></a>00099 {
+<a name="l00100"></a>00100     <a class="code" href="classhcan_1_1eds__block.html">eds_block</a> &amp;block = econ.<a class="code" href="classhcan_1_1eds__connection.html#1fee6e054de447c072d2a29d9462987d">block_by_address</a>(address);
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102     <span class="keywordflow">if</span> (block.<a class="code" href="classhcan_1_1eds__block.html#da1c236e1901db66820065283471bd23">field_datatype</a>(key) == <span class="stringliteral">"char"</span>)
+<a name="l00103"></a>00103     {
+<a name="l00104"></a>00104         block.<a class="code" href="classhcan_1_1eds__block.html#b7a9e79c7095fe46291d507132f2c87e">set_field_str</a>(key,value);
+<a name="l00105"></a>00105     }
+<a name="l00106"></a>00106     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (block.<a class="code" href="classhcan_1_1eds__block.html#da1c236e1901db66820065283471bd23">field_datatype</a>(key) == <span class="stringliteral">"uint16_t"</span>)
+<a name="l00107"></a>00107     {
+<a name="l00108"></a>00108         istringstream ss(value);
+<a name="l00109"></a>00109         <span class="keywordtype">int</span> v;
+<a name="l00110"></a>00110         ss &gt;&gt; v;
+<a name="l00111"></a>00111         block.<a class="code" href="classhcan_1_1eds__block.html#2300eb17177ead03b2be2859d493209e">set_field_uint16</a>(key, (uint16_t) v);
+<a name="l00112"></a>00112     }
+<a name="l00113"></a>00113     <span class="keywordflow">else</span>
+<a name="l00114"></a>00114     {
+<a name="l00115"></a>00115         istringstream ss(value);
+<a name="l00116"></a>00116         <span class="keywordtype">int</span> v;
+<a name="l00117"></a>00117         ss &gt;&gt; v;
+<a name="l00118"></a>00118         block.<a class="code" href="classhcan_1_1eds__block.html#0fa0660d4974f65834754ded3dde3018">set_field_uint8</a>(key, (uint8_t) v);
+<a name="l00119"></a>00119     }
+<a name="l00120"></a>00120 }
+<a name="l00121"></a>00121 
+<a name="l00122"></a><a class="code" href="namespacehcan.html#8b154bf647360c7097d64079e314d3f3">00122</a> <span class="keywordtype">void</span> <a class="code" href="namespacehcan.html#8b154bf647360c7097d64079e314d3f3">eds_cmd_show_conf</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon, <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ, 
+<a name="l00123"></a>00123         <a class="code" href="structhcan_1_1context.html">context</a> &amp;c)
+<a name="l00124"></a>00124 {
+<a name="l00125"></a>00125     <span class="keywordflow">for</span> (eds_connection::eds_blocks::iterator i = 
+<a name="l00126"></a>00126             econ.<a class="code" href="classhcan_1_1eds__connection.html#68312d4d37395014849696321489b93a">blocks</a>().begin(); i != econ.<a class="code" href="classhcan_1_1eds__connection.html#68312d4d37395014849696321489b93a">blocks</a>().end(); i++)
+<a name="l00127"></a>00127     {
+<a name="l00128"></a>00128         cout &lt;&lt; <span class="stringliteral">"# EDS-Address: "</span> &lt;&lt; i-&gt;address() &lt;&lt; endl;
+<a name="l00129"></a>00129         cout &lt;&lt; <span class="stringliteral">"create "</span> &lt;&lt; i-&gt;type_name() &lt;&lt; endl;
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131         <span class="keywordflow">for</span> (eds_block_fields_t::const_iterator j =
+<a name="l00132"></a>00132                 i-&gt;fields().begin(); j != i-&gt;fields().end(); j++)
+<a name="l00133"></a>00133         {
+<a name="l00134"></a>00134             <span class="keywordflow">if</span> (j-&gt;datatype == <span class="stringliteral">"char"</span>)
+<a name="l00135"></a>00135                 cout &lt;&lt; <span class="stringliteral">"  set "</span> &lt;&lt; j-&gt;name &lt;&lt; <span class="stringliteral">" "</span> &lt;&lt; 
+<a name="l00136"></a>00136                     i-&gt;strfield(j-&gt;name) &lt;&lt; endl;
+<a name="l00137"></a>00137             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (j-&gt;datatype == <span class="stringliteral">"uint16_t"</span>)
+<a name="l00138"></a>00138                 cout &lt;&lt; <span class="stringliteral">"  set "</span> &lt;&lt; j-&gt;name &lt;&lt; <span class="stringliteral">" "</span> &lt;&lt; 
+<a name="l00139"></a>00139                     i-&gt;uint16_field(j-&gt;name) &lt;&lt; endl;
+<a name="l00140"></a>00140             <span class="keywordflow">else</span>
+<a name="l00141"></a>00141                 cout &lt;&lt; <span class="stringliteral">"  set "</span> &lt;&lt; j-&gt;name &lt;&lt; <span class="stringliteral">" "</span> &lt;&lt; 
+<a name="l00142"></a>00142                     (uint16_t)i-&gt;field(j-&gt;name) &lt;&lt; endl;
+<a name="l00143"></a>00143         }
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145         cout &lt;&lt; <span class="stringliteral">"exit"</span> &lt;&lt; endl;
+<a name="l00146"></a>00146     }
+<a name="l00147"></a>00147 }
+<a name="l00148"></a>00148 
+<a name="l00149"></a><a class="code" href="namespacehcan.html#0303c12b76f9664c59973c296dd547b7">00149</a> <span class="keywordtype">bool</span> <a class="code" href="namespacehcan.html#0303c12b76f9664c59973c296dd547b7">eds_exec_cmd</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon, <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> &amp;econ,
+<a name="l00150"></a>00150         <a class="code" href="structhcan_1_1context.html">context</a> &amp;c, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;cmd)
+<a name="l00151"></a>00151 {
+<a name="l00152"></a>00152     istringstream sin(cmd);
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154     <span class="keywordtype">string</span> s;
+<a name="l00155"></a>00155     sin &gt;&gt; s;
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157     <span class="keywordflow">if</span> (s == <span class="stringliteral">"show"</span>)
+<a name="l00158"></a>00158     {
+<a name="l00159"></a>00159         sin &gt;&gt; s;
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161         <span class="keywordflow">if</span> (s == <span class="stringliteral">"conf"</span>)
+<a name="l00162"></a>00162         {
+<a name="l00163"></a>00163             <a class="code" href="namespacehcan.html#8b154bf647360c7097d64079e314d3f3">eds_cmd_show_conf</a>(bcon, econ, c);
+<a name="l00164"></a>00164             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00165"></a>00165         }
+<a name="l00166"></a>00166     }
+<a name="l00167"></a>00167     <span class="keywordflow">if</span> ((s == <span class="stringliteral">"list"</span>) &amp;&amp; 
+<a name="l00168"></a>00168             ((c.<a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> == <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389ebf6a2f033a72a65aab4c29bcfb990b3f">context::normal</a>) || (c.<a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> == <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389eb7c74a07afbb49d89869aa37d7f10c0c">context::edit</a>)))
+<a name="l00169"></a>00169     {
+<a name="l00170"></a>00170         <a class="code" href="namespacehcan.html#de293f02631b9ff24d26310597fec497">eds_cmd_list</a>(bcon, econ, c);
+<a name="l00171"></a>00171         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00172"></a>00172     }
+<a name="l00173"></a>00173 
+<a name="l00174"></a>00174     <span class="keywordflow">if</span> (s == <span class="stringliteral">"edit"</span>)
+<a name="l00175"></a>00175     {
+<a name="l00176"></a>00176         uint16_t address;
+<a name="l00177"></a>00177         sin &gt;&gt; address;
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179         <a class="code" href="namespacehcan.html#39c5a5670c3fe49e49b00fda5de0c7bd">eds_cmd_edit</a>(bcon, econ, c,address);
+<a name="l00180"></a>00180         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00181"></a>00181     }
+<a name="l00182"></a>00182 
+<a name="l00183"></a>00183     <span class="keywordflow">if</span> (s == <span class="stringliteral">"create"</span>)
+<a name="l00184"></a>00184     {
+<a name="l00185"></a>00185         sin &gt;&gt; s;
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187         <a class="code" href="namespacehcan.html#3db58084b75373aa436458df1f5b131e">eds_cmd_create</a>(bcon, econ, c, s);
+<a name="l00188"></a>00188         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00189"></a>00189     }
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191     <span class="keywordflow">if</span> (s == <span class="stringliteral">"delete"</span>)
+<a name="l00192"></a>00192     {
+<a name="l00193"></a>00193         uint16_t address;
+<a name="l00194"></a>00194         sin &gt;&gt; address;
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196         <a class="code" href="namespacehcan.html#802f4d4d4405482737ac819811e22c64">eds_cmd_delete</a>(bcon, econ, c, address);
+<a name="l00197"></a>00197         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00198"></a>00198     }
+<a name="l00199"></a>00199 
+<a name="l00200"></a>00200     <span class="keywordflow">if</span> (s == <span class="stringliteral">"defragment"</span>)
+<a name="l00201"></a>00201     {
+<a name="l00202"></a>00202         econ.<a class="code" href="classhcan_1_1eds__connection.html#e301ff324b1f11e3a3505dbc50dc3d1d">defragment</a>();
+<a name="l00203"></a>00203         econ.<a class="code" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">update</a>();
+<a name="l00204"></a>00204         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00205"></a>00205     }
+<a name="l00206"></a>00206     <span class="keywordflow">if</span> (s == <span class="stringliteral">"Format"</span>)
+<a name="l00207"></a>00207     {
+<a name="l00208"></a>00208         bcon.<a class="code" href="classhcan_1_1board__connection.html#1bb0634172656683440c6859dbffee47">tcon</a>().<a class="code" href="classhcan_1_1hcan__transport.html#26eb13a3637ae871edb858a65fb10dea">send_FORMAT</a>(bcon.<a class="code" href="classhcan_1_1board__connection.html#87c9431f4e6ceee9311fc488adb1f0f7">src</a>(), bcon.<a class="code" href="classhcan_1_1board__connection.html#5e4ee03bc38774aea89fc7744b03bb86">dst</a>());
+<a name="l00209"></a>00209         econ.<a class="code" href="classhcan_1_1eds__connection.html#580a52e7314f82648630d66cec87b048">update</a>();
+<a name="l00210"></a>00210         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00211"></a>00211     }
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213     <span class="keywordflow">if</span> ((s == <span class="stringliteral">"exit"</span>) &amp;&amp; (c.<a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> == <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389eb7c74a07afbb49d89869aa37d7f10c0c">context::edit</a>))
+<a name="l00214"></a>00214     {
+<a name="l00215"></a>00215         c.<a class="code" href="structhcan_1_1context.html#d5f3402c26ce04682ce567202e0fc30d">reset</a>();
+<a name="l00216"></a>00216         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00217"></a>00217     }
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219     <span class="keywordflow">if</span> (c.<a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> == <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389eb7c74a07afbb49d89869aa37d7f10c0c">context::edit</a>)
+<a name="l00220"></a>00220     {
+<a name="l00221"></a>00221         <span class="keywordflow">if</span> (s == <span class="stringliteral">"set"</span>)
+<a name="l00222"></a>00222         {
+<a name="l00223"></a>00223             <span class="keywordtype">string</span> value;
+<a name="l00224"></a>00224             sin &gt;&gt; s;
+<a name="l00225"></a>00225             
+<a name="l00226"></a>00226             value = <span class="stringliteral">""</span>;
+<a name="l00227"></a>00227             <span class="keywordtype">int</span> i = 0;
+<a name="l00228"></a>00228             <span class="keywordflow">while</span> (! sin.eof())
+<a name="l00229"></a>00229             {
+<a name="l00230"></a>00230                 <span class="keywordflow">if</span> (i &gt; 0)
+<a name="l00231"></a>00231                     value = value + <span class="stringliteral">" "</span>;
+<a name="l00232"></a>00232                 <span class="keywordtype">string</span> s;
+<a name="l00233"></a>00233                 sin &gt;&gt; s;
+<a name="l00234"></a>00234                 value = value + s;
+<a name="l00235"></a>00235                 i++;
+<a name="l00236"></a>00236             }
+<a name="l00237"></a>00237             <a class="code" href="namespacehcan.html#fc697055a1e11fd9565f99a04425f324">eds_cmd_set_field</a>(bcon, econ, c, c.<a class="code" href="structhcan_1_1context.html#02bae85c0649eddc3e6e952295b432f4">eds_block_address</a>, s, value);
+<a name="l00238"></a>00238             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00239"></a>00239         }
+<a name="l00240"></a>00240     }
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00243"></a>00243 }
+<a name="l00244"></a>00244 
+<a name="l00245"></a><a class="code" href="namespacehcan.html#a77ace1e5abf3476c0bf92316b11d6b2">00245</a> <span class="keywordtype">bool</span> <a class="code" href="namespacehcan.html#a77ace1e5abf3476c0bf92316b11d6b2">eds_show_help</a> ()
+<a name="l00246"></a>00246 {
+<a name="l00247"></a>00247     cout &lt;&lt; 
+<a name="l00248"></a>00248         <span class="stringliteral">"   list                  EDS: Zeigt alle Blocks an\n"</span> &lt;&lt;
+<a name="l00249"></a>00249         <span class="stringliteral">"   print &lt;n&gt;             EDS: Zeigt die Felder des Blocks &lt;n&gt; an\n"</span> &lt;&lt;
+<a name="l00250"></a>00250         <span class="stringliteral">"   edit &lt;n&gt;              EDS: Editiert den Block &lt;n&gt;\n"</span> &lt;&lt;
+<a name="l00251"></a>00251         <span class="stringliteral">"   set &lt;field&gt; &lt;v&gt;       EDS: Setzt das Feld &lt;field&gt; auf den Wert &lt;v&gt;\n"</span> &lt;&lt;
+<a name="l00252"></a>00252         <span class="stringliteral">"   create &lt;blocktype&gt;    EDS: Legt einen neuen Block an\n"</span> &lt;&lt;
+<a name="l00253"></a>00253         <span class="stringliteral">"   delete &lt;n&gt;            EDS: Loescht den mit &lt;n&gt; spez. Block\n"</span> &lt;&lt;
+<a name="l00254"></a>00254         <span class="stringliteral">"   defragment            EDS: Defragmentiert das EEPROM\n"</span> &lt;&lt;
+<a name="l00255"></a>00255         <span class="stringliteral">"   Format                EDS: (!) Formatiert das EEPROM (!) \n"</span> &lt;&lt;
+<a name="l00256"></a>00256         <span class="stringliteral">"   show conf             EDS: Zeigt alle Bloecke an \n"</span> &lt;&lt;
+<a name="l00257"></a>00257         
+<a name="l00258"></a>00258     endl;
+<a name="l00259"></a>00259 
+<a name="l00260"></a>00260     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00261"></a>00261 }
+<a name="l00262"></a>00262 
+<a name="l00263"></a>00263 };
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:50 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

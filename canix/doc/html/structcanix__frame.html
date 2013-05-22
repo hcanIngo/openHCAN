@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: canix_frame Strukturreferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li><a href="functions.html"><span>Datenstruktur-Elemente</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>canix_frame Strukturreferenz</h1><!-- doxytag: class="canix_frame" --><code>#include &lt;<a class="el" href="canix_8h-source.html">canix.h</a>&gt;</code>
+<p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Datenfelder</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame.html#840557141148ee4711699e8e2c169013">src</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame.html#1e1868e00870b0a50b69c1ada950a425">dst</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame.html#d60b7525c58fdf1fcf02060345239037">proto</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame.html#46db003664ef02e4855b2383b3ab280e">size</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a> [8]</td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+Repreaesentiert ein HCAN Frame. Datenaustausch dieser Struktur: Die Anzahl der Datenbytes wird im Feld size definiert, data[8] ist immer 8 Bytes gross. 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00121">121</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+<hr><h2>Dokumentation der Datenelemente</h2>
+<a class="anchor" name="840557141148ee4711699e8e2c169013"></a><!-- doxytag: member="canix_frame::src" ref="840557141148ee4711699e8e2c169013" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t <a class="el" href="structcanix__frame.html#840557141148ee4711699e8e2c169013">canix_frame::src</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+HCAN Quell-Adresse 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00126">126</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a>, <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>, <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a> und <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="1e1868e00870b0a50b69c1ada950a425"></a><!-- doxytag: member="canix_frame::dst" ref="1e1868e00870b0a50b69c1ada950a425" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t <a class="el" href="structcanix__frame.html#1e1868e00870b0a50b69c1ada950a425">canix_frame::dst</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+HCAN Ziel-Adresse 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00131">131</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00420">canix_deliver_frame()</a>, <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a>, <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>, <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a> und <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="d60b7525c58fdf1fcf02060345239037"></a><!-- doxytag: member="canix_frame::proto" ref="d60b7525c58fdf1fcf02060345239037" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__frame.html#d60b7525c58fdf1fcf02060345239037">canix_frame::proto</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+HCAN Protokoll 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00136">136</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00420">canix_deliver_frame()</a>, <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a>, <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>, <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a> und <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="46db003664ef02e4855b2383b3ab280e"></a><!-- doxytag: member="canix_frame::size" ref="46db003664ef02e4855b2383b3ab280e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__frame.html#46db003664ef02e4855b2383b3ab280e">canix_frame::size</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Anzahl der Datenbytes des Frames. Jedes data[ Index &gt; size ] ist undefiniert 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00142">142</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a>, <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>, <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a> und <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="403e2a22db5b770c322f0bb5e7e7282f"></a><!-- doxytag: member="canix_frame::data" ref="403e2a22db5b770c322f0bb5e7e7282f" args="[8]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">canix_frame::data</a>[8]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Die Datenbytes des Frames 
+<p>Definiert in Zeile <a class="el" href="canix_8h-source.html#l00147">147</a> der Datei <a class="el" href="canix_8h-source.html">canix.h</a>.</p>
+
+<p>Wird benutzt von <a class="el" href="canix_8c-source.html#l00420">canix_deliver_frame()</a>, <a class="el" href="canix_8c-source.html#l00452">canix_frame_send_with_prio()</a>, <a class="el" href="canix_8c-source.html#l00523">canix_process_messages()</a>, <a class="el" href="hcan__hms_8c-source.html#l00039">canix_SFP_HMS_handler()</a>, <a class="el" href="hcan__rts_8c-source.html#l00034">canix_SFP_RTS_handler()</a>, <a class="el" href="syslog_8c-source.html#l00040">canix_syslog_P()</a> und <a class="el" href="eds_8c-source.html#l00209">eds_can_callback()</a>.</p>
+
+</div>
+</div><p>
+<hr>Die Dokumentation für diese Struktur wurde erzeugt aufgrund der Datei:<ul>
+<li><a class="el" href="canix_8h-source.html">canix.h</a></ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: controller1612_driver.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>controller1612_driver.h</h1><a href="controller1612__driver_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef CONTROLLER1612_DRIVER_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define CONTROLLER1612_DRIVER_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="atmega32__board__driver_8h.html">atmega32_board_driver.h</a>&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="traceable__error_8h.html">libhcan++/traceable_error.h</a>&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="eds__connection_8h.html">libhcan++/eds_connection.h</a>&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;<a class="code" href="oap__driver_8h.html">libhcan++/oap_driver.h</a>&gt;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="keyword">namespace </span>hcan
+<a name="l00010"></a>00010 {
+<a name="l00011"></a><a class="code" href="classhcan_1_1controller1612__error.html">00011</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1controller1612__error.html">controller1612_error</a> : <span class="keyword">public</span> <a class="code" href="classtraceable__error.html">traceable_error</a>
+<a name="l00012"></a>00012     {
+<a name="l00013"></a>00013         <span class="keyword">public</span>:
+<a name="l00014"></a>00014             <a class="code" href="classhcan_1_1controller1612__error.html#a971399629f2644f1bc3663464b5073a">controller1612_error</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;);
+<a name="l00015"></a>00015     };
+<a name="l00016"></a>00016 
+<a name="l00017"></a><a class="code" href="classhcan_1_1controller1612__driver.html">00017</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1controller1612__driver.html">controller1612_driver</a> : <span class="keyword">public</span> <a class="code" href="classhcan_1_1atmega32__board__driver.html">atmega32_board_driver</a> 
+<a name="l00018"></a>00018     {
+<a name="l00019"></a>00019         <span class="keyword">protected</span>:
+<a name="l00020"></a><a class="code" href="classhcan_1_1controller1612__driver.html#78a85e5503789ef97c3925ac512a34a9">00020</a>             <a class="code" href="classhcan_1_1eds__connection.html">eds_connection</a> <a class="code" href="classhcan_1_1controller1612__driver.html#78a85e5503789ef97c3925ac512a34a9">m_econ</a>;
+<a name="l00021"></a><a class="code" href="classhcan_1_1controller1612__driver.html#4b321fe9ae841f6ba29fb324dbc3d2b9">00021</a>             <a class="code" href="classhcan_1_1oap__driver.html">oap_driver</a> <a class="code" href="classhcan_1_1controller1612__driver.html#4b321fe9ae841f6ba29fb324dbc3d2b9">m_oap_driver</a>;
+<a name="l00022"></a>00022         <span class="keyword">protected</span>:
+<a name="l00023"></a>00023             <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classhcan_1_1controller1612__driver.html#98fcfec7c5bc4a31a012c8a0483a90c9">show_help</a> ();
+<a name="l00024"></a>00024             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1controller1612__driver.html#fa84d0599080d7b9f4192664d5008d6b">cmd_show_ram_usage</a>();
+<a name="l00025"></a>00025             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1controller1612__driver.html#4d89202a0682fcedf7555d59e4b68622">cmd_discover_1wire</a>(uint8_t pin);
+<a name="l00026"></a>00026             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1controller1612__driver.html#ded0b9bf88ce2cbd785c79683d1a8e09">cmd_config_reload</a>();
+<a name="l00027"></a>00027         <span class="keyword">public</span>:
+<a name="l00028"></a>00028             <a class="code" href="classhcan_1_1controller1612__driver.html#bc8ee9f36ca262d255e6d90b01a9701a">controller1612_driver</a> (<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon);
+<a name="l00029"></a>00029             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1controller1612__driver.html#98f2ff2eb0e929cdccb70d1ec8ba7c4a">~controller1612_driver</a>();
+<a name="l00030"></a>00030             <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classhcan_1_1controller1612__driver.html#c50297af09472e129c7e776c41846579">exec_command</a> (<a class="code" href="structhcan_1_1context.html">context</a> &amp;c, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;);
+<a name="l00031"></a>00031     };
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 };
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:50 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<area shape="rect" href="$classhcan_1_1frame.html#b680e9601707dce62ca84862035422ca" title="hcan::frame::data_as_string" alt="" coords="381,5,581,32">
+<area shape="rect" href="$classhcan_1_1frame.html#2082e8773b425218b79e011d52b60bd8" title="hcan::frame::dst" alt="" coords="419,56,544,83">
+<area shape="rect" href="$classhcan_1_1transport__connection.html#efd2679469cdc79846aefbad98ad9e74" title="hcan::transport_connection::keep_connection_alive" alt="" coords="308,107,655,133">
+<area shape="rect" href="$classhcan_1_1frame.html#238e184e56f32f997a81cee4a3cadb24" title="hcan::frame::proto" alt="" coords="412,157,551,184">
+<area shape="rect" href="$classhcan_1_1transport__connection.html#e5df67fe31134e16abfac65a12381518" title="hcan::transport_connection::recv_frame_with_timeout" alt="" coords="299,208,664,235">
+<area shape="rect" href="$classhcan_1_1frame.html#b9e91ba7845047a9679ea619625fa74e" title="hcan::frame::src" alt="" coords="419,259,544,285">
+<area shape="rect" href="$classhcan_1_1frame.html#2db9e9b6b85cae3911f171d60427cf25" title="hcan::frame::set_prio" alt="" coords="720,81,877,108">
+<area shape="rect" href="$classhcan_1_1frame.html#3b44a930c2866e5006a8baa2a961b9fe" title="hcan::frame::write_to" alt="" coords="721,132,876,159">
+<area shape="rect" href="$classhcan_1_1frame.html#79f356a2caf639add3fca28e28955466" title="hcan::frame::read_from" alt="" coords="713,208,884,235">
+<area shape="rect" href="$classhcan_1_1frame.html#86ec0b54d9b3730a6ff91e91efffeb62" title="hcan::frame::frame" alt="" coords="933,208,1077,235">

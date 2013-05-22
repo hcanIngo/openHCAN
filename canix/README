@@ -1,0 +1,8 @@
+
+mah, Mon Mar 13 18:20:51 CET 2006
+- Warum hier kein Archiv canix.a und das zu den Firmwares linken ?
+  
+  Der Code hat einige Preprocessor-Direktiven; diese wuerden nicht so
+  wie im Hauptprogramm verwendet. Daher compiliert jede Firmware all
+  die .c Files mit ihren Defines und linkt sie
+

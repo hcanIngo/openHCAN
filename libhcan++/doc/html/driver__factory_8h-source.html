@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: driver_factory.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>driver_factory.h</h1><a href="driver__factory_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef DRIVER_FACTORY_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define DRIVER_FACTORY_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;memory&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="traceable__error_8h.html">libhcan++/traceable_error.h</a>&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;<a class="code" href="board__driver_8h.html">board_driver.h</a>&gt;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="keyword">using namespace </span>std;
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="keyword">namespace </span>hcan
+<a name="l00013"></a>00013 {
+<a name="l00014"></a><a class="code" href="classhcan_1_1driver__error.html">00014</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1driver__error.html">driver_error</a> : <span class="keyword">public</span> <a class="code" href="classtraceable__error.html">traceable_error</a>
+<a name="l00015"></a>00015     {
+<a name="l00016"></a>00016         <span class="keyword">public</span>:
+<a name="l00017"></a>00017             <a class="code" href="classhcan_1_1driver__error.html#d5f63dbe6612b063489b28883d50b753">driver_error</a> (<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;s);
+<a name="l00018"></a>00018     };
+<a name="l00019"></a>00019 
+<a name="l00020"></a><a class="code" href="namespacehcan.html#4ac604a7596d82afd30fb857f7db835a1ce52b9acba0440af52303b5f222f7b2">00020</a>     <span class="keyword">enum</span> { <a class="code" href="namespacehcan.html#4ac604a7596d82afd30fb857f7db835a1ce52b9acba0440af52303b5f222f7b2">HCAN_ARCH_ATMEGA8</a> = 0, <a class="code" href="namespacehcan.html#4ac604a7596d82afd30fb857f7db835a828bc2b701975464721046fed4fe81de">HCAN_ARCH_ATMEGA32</a> = 1,
+<a name="l00021"></a><a class="code" href="namespacehcan.html#4ac604a7596d82afd30fb857f7db835a92420254ad2ca378417f54d55255ae0d">00021</a>             <a class="code" href="namespacehcan.html#4ac604a7596d82afd30fb857f7db835a92420254ad2ca378417f54d55255ae0d">HCAN_ARCH_AUTODETECT</a> = 255 };
+<a name="l00022"></a>00022 
+<a name="l00023"></a><a class="code" href="classhcan_1_1driver__factory.html">00023</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1driver__factory.html">driver_factory</a> 
+<a name="l00024"></a>00024     {
+<a name="l00025"></a>00025         <span class="keyword">private</span>:
+<a name="l00026"></a>00026         <span class="keyword">public</span>:
+<a name="l00027"></a><a class="code" href="classhcan_1_1driver__factory.html#442bd0d669a8c2cc68567c8e580422bb">00027</a>             <a class="code" href="classhcan_1_1driver__factory.html#442bd0d669a8c2cc68567c8e580422bb">driver_factory</a> () {};
+<a name="l00028"></a><a class="code" href="classhcan_1_1driver__factory.html#72e57a7278b6e882dc69f9ce20d2e83f">00028</a>             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1driver__factory.html#72e57a7278b6e882dc69f9ce20d2e83f">~driver_factory</a> () {};
+<a name="l00029"></a>00029             <a class="code" href="namespacehcan.html#4405ce0eef0494525026215fd1929148">board_driver_p</a> <a class="code" href="classhcan_1_1driver__factory.html#ad685acfbbd2bc688abf761112c40bef">make_driver</a> (<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon,
+<a name="l00030"></a>00030                     <span class="keyword">const</span> uint8_t arch, <span class="keyword">const</span> uint8_t type) <span class="keyword">const</span>;
+<a name="l00031"></a>00031     };
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 };
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:50 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,27 @@
+	$Id: adressen,v 1.7 2008-02-26 08:42:54 mah Exp $
+	
+	Adress-Raum der HCAN Frames
+	---------------------------
+
+	Fuer eine HCAN Adresse stehen 10 Bits zur Verfuegung. Damit sind
+	Adressen im Wertebereich von 0 bis 1023 realisierbar. Um sowohl die
+	Geraete direkt zu adressieren als auch ueber Multicast bestimmte
+	Events zu melden, wird der Adress-Raum wie folgt eingeteilt:
+
+	o 0          : reserviert
+	o 1-63       : Multicast-Adressen mit hoher Prioritaet
+	o 64-127     : reserviert
+	o 128-959    : statische Adressen:
+		128-512  : statische Adressen fuer Hardware
+		512-575  : 64 dynamisch zugewiesene Adressen (hcand)
+		576-639  : 64 dynamisch zugewiesene Adressen (hcanbrokerd)
+		640-703  : 64 statisch verwendete Adressen in Scripten
+		704-959  : 256 Adressen frei
+	o 960-1022   : Multicast-Adressen mit niedriger Prioritaet
+	o 1023       : reserviert
+
+	Somit koennen maximal 831 Geraete in einem HCAN Netz betrieben werden.
+	Es koennen maximal 124 Multicast-Botschaften verwendet werden.
+
+	Multicast Adressen siehe ../include/hcan_multicast.h
+

@@ -1,0 +1,192 @@
+   1               		.file	"hcan_rts.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__ = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.text
+   9               	.global	canix_SFP_RTS_handler
+  11               	canix_SFP_RTS_handler:
+  12 0000 AEE0      		ldi r26,lo8(14)
+  13 0002 B0E0      		ldi r27,hi8(14)
+  14 0004 E0E0      		ldi r30,lo8(gs(1f))
+  15 0006 F0E0      		ldi r31,hi8(gs(1f))
+  16 0008 0C94 0000 		jmp __prologue_saves__+((18 - 8) * 2)
+  17               	1:
+  18               	/* prologue: function */
+  19               	/* frame size = 14 */
+  20               	/* stack size = 22 */
+  21               	.L__stack_usage = 22
+  22 000c 8C01      		movw r16,r24
+  23 000e 0E94 0000 		call canix_selfaddr
+  24 0012 9A83      		std Y+2,r25
+  25 0014 8983      		std Y+1,r24
+  26 0016 F801      		movw r30,r16
+  27 0018 8081      		ld r24,Z
+  28 001a 9181      		ldd r25,Z+1
+  29 001c 9C83      		std Y+4,r25
+  30 001e 8B83      		std Y+3,r24
+  31 0020 EE24      		clr r14
+  32 0022 E394      		inc r14
+  33 0024 ED82      		std Y+5,r14
+  34 0026 86E0      		ldi r24,lo8(6)
+  35 0028 F82E      		mov r15,r24
+  36 002a FF82      		std Y+7,r15
+  37 002c 8781      		ldd r24,Z+7
+  38 002e 8230      		cpi r24,lo8(2)
+  39 0030 01F4      		brne .+2
+  40 0032 00C0      		rjmp .L4
+  41 0034 8330      		cpi r24,lo8(3)
+  42 0036 00F4      		brsh .L7
+  43 0038 8130      		cpi r24,lo8(1)
+  44 003a 01F0      		breq .+2
+  45 003c 00C0      		rjmp .L1
+  46 003e 00C0      		rjmp .L10
+  47               	.L7:
+  48 0040 8330      		cpi r24,lo8(3)
+  49 0042 01F4      		brne .+2
+  50 0044 00C0      		rjmp .L5
+  51 0046 8430      		cpi r24,lo8(4)
+  52 0048 01F0      		breq .+2
+  53 004a 00C0      		rjmp .L1
+  54 004c 00C0      		rjmp .L11
+  55               	.L10:
+  56 004e 1092 0000 		sts canix_rtc_clock+9,__zero_reg__
+  57 0052 F090 0000 		lds r15,canix_rtc_clock+8
+  58 0056 6091 0000 		lds r22,canix_rtc_clock+6
+  59 005a E090 0000 		lds r14,canix_rtc_clock+7
+  60 005e F801      		movw r30,r16
+  61 0060 A485      		ldd r26,Z+12
+  62 0062 D284      		ldd r13,Z+10
+  63 0064 C384      		ldd r12,Z+11
+  64 0066 2D2D      		mov r18,r13
+  65 0068 30E0      		ldi r19,lo8(0)
+  66 006a 40E1      		ldi r20,lo8(3600)
+  67 006c 5EE0      		ldi r21,hi8(3600)
+  68 006e 249F      		mul r18,r20
+  69 0070 C001      		movw r24,r0
+  70 0072 259F      		mul r18,r21
+  71 0074 900D      		add r25,r0
+  72 0076 349F      		mul r19,r20
+  73 0078 900D      		add r25,r0
+  74 007a 1124      		clr r1
+  75 007c BCE3      		ldi r27,lo8(60)
+  76 007e FC2D      		mov r31,r12
+  77 0080 FB9F      		mul r31,r27
+  78 0082 9001      		movw r18,r0
+  79 0084 1124      		clr r1
+  80 0086 820F      		add r24,r18
+  81 0088 931F      		adc r25,r19
+  82 008a 8A0F      		add r24,r26
+  83 008c 911D      		adc r25,__zero_reg__
+  84 008e 70E0      		ldi r23,lo8(0)
+  85 0090 649F      		mul r22,r20
+  86 0092 9001      		movw r18,r0
+  87 0094 659F      		mul r22,r21
+  88 0096 300D      		add r19,r0
+  89 0098 749F      		mul r23,r20
+  90 009a 300D      		add r19,r0
+  91 009c 1124      		clr r1
+  92 009e 6E2D      		mov r22,r14
+  93 00a0 6B9F      		mul r22,r27
+  94 00a2 A001      		movw r20,r0
+  95 00a4 1124      		clr r1
+  96 00a6 240F      		add r18,r20
+  97 00a8 351F      		adc r19,r21
+  98 00aa 2F0D      		add r18,r15
+  99 00ac 311D      		adc r19,__zero_reg__
+ 100 00ae 821B      		sub r24,r18
+ 101 00b0 930B      		sbc r25,r19
+ 102 00b2 97FF      		sbrs r25,7
+ 103 00b4 00C0      		rjmp .L8
+ 104 00b6 9095      		com r25
+ 105 00b8 8195      		neg r24
+ 106 00ba 9F4F      		sbci r25,lo8(-1)
+ 107               	.L8:
+ 108 00bc 8430      		cpi r24,4
+ 109 00be 9105      		cpc r25,__zero_reg__
+ 110 00c0 04F4      		brge .+2
+ 111 00c2 00C0      		rjmp .L1
+ 112 00c4 A093 0000 		sts canix_rtc_clock+8,r26
+ 113 00c8 C092 0000 		sts canix_rtc_clock+7,r12
+ 114 00cc D092 0000 		sts canix_rtc_clock+6,r13
+ 115 00d0 F801      		movw r30,r16
+ 116 00d2 8185      		ldd r24,Z+9
+ 117 00d4 8093 0000 		sts canix_rtc_clock+5,r24
+ 118 00d8 00C0      		rjmp .L1
+ 119               	.L4:
+ 120 00da F801      		movw r30,r16
+ 121 00dc 8185      		ldd r24,Z+9
+ 122 00de 8093 0000 		sts canix_rtc_clock+10,r24
+ 123 00e2 8285      		ldd r24,Z+10
+ 124 00e4 8093 0000 		sts canix_rtc_clock+11,r24
+ 125 00e8 8385      		ldd r24,Z+11
+ 126 00ea 8093 0000 		sts canix_rtc_clock+12,r24
+ 127 00ee 00C0      		rjmp .L1
+ 128               	.L5:
+ 129 00f0 F801      		movw r30,r16
+ 130 00f2 0281      		ldd r16,Z+2
+ 131 00f4 1381      		ldd r17,Z+3
+ 132 00f6 0E94 0000 		call canix_selfaddr
+ 133 00fa 0817      		cp r16,r24
+ 134 00fc 1907      		cpc r17,r25
+ 135 00fe 01F4      		brne .L1
+ 136 0100 E886      		std Y+8,r14
+ 137 0102 8FEF      		ldi r24,lo8(-1)
+ 138 0104 8987      		std Y+9,r24
+ 139 0106 8091 0000 		lds r24,canix_rtc_clock+5
+ 140 010a 8A87      		std Y+10,r24
+ 141 010c 8091 0000 		lds r24,canix_rtc_clock+6
+ 142 0110 8B87      		std Y+11,r24
+ 143 0112 8091 0000 		lds r24,canix_rtc_clock+7
+ 144 0116 8C87      		std Y+12,r24
+ 145 0118 8091 0000 		lds r24,canix_rtc_clock+8
+ 146 011c 8D87      		std Y+13,r24
+ 147 011e 87E0      		ldi r24,lo8(7)
+ 148 0120 8E83      		std Y+6,r24
+ 149 0122 00C0      		rjmp .L9
+ 150               	.L11:
+ 151 0124 F801      		movw r30,r16
+ 152 0126 0281      		ldd r16,Z+2
+ 153 0128 1381      		ldd r17,Z+3
+ 154 012a 0E94 0000 		call canix_selfaddr
+ 155 012e 0817      		cp r16,r24
+ 156 0130 1907      		cpc r17,r25
+ 157 0132 01F4      		brne .L1
+ 158 0134 82E0      		ldi r24,lo8(2)
+ 159 0136 8887      		std Y+8,r24
+ 160 0138 8FEF      		ldi r24,lo8(-1)
+ 161 013a 8987      		std Y+9,r24
+ 162 013c 8091 0000 		lds r24,canix_rtc_clock+10
+ 163 0140 8A87      		std Y+10,r24
+ 164 0142 8091 0000 		lds r24,canix_rtc_clock+11
+ 165 0146 8B87      		std Y+11,r24
+ 166 0148 8091 0000 		lds r24,canix_rtc_clock+12
+ 167 014c 8C87      		std Y+12,r24
+ 168 014e FE82      		std Y+6,r15
+ 169               	.L9:
+ 170 0150 CE01      		movw r24,r28
+ 171 0152 0196      		adiw r24,1
+ 172 0154 0E94 0000 		call canix_frame_send
+ 173               	.L1:
+ 174               	/* epilogue start */
+ 175 0158 2E96      		adiw r28,14
+ 176 015a E8E0      		ldi r30, lo8(8)
+ 177 015c 0C94 0000 		jmp __epilogue_restores__ + ((18 - 8) * 2)
+DEFINED SYMBOLS
+                            *ABS*:00000000 hcan_rts.c
+     /tmp/cc2lLLBl.s:2      *ABS*:0000003f __SREG__
+     /tmp/cc2lLLBl.s:3      *ABS*:0000003e __SP_H__
+     /tmp/cc2lLLBl.s:4      *ABS*:0000003d __SP_L__
+     /tmp/cc2lLLBl.s:5      *ABS*:00000034 __CCP__
+     /tmp/cc2lLLBl.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/cc2lLLBl.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/cc2lLLBl.s:11     .text:00000000 canix_SFP_RTS_handler
+
+UNDEFINED SYMBOLS
+__prologue_saves__
+canix_selfaddr
+canix_rtc_clock
+canix_frame_send
+__epilogue_restores__

@@ -1,0 +1,585 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+ABAT	mcp2515.h	258;"	d
+ABORT_TX	mcp2515_defs.h	169;"	d
+ABTF	mcp2515.h	334;"	d
+ADDR_MASK	canix.h	77;"	d
+APP_END	chipdef.h	111;"	d
+APP_END	chipdef.h	115;"	d
+APP_END	chipdef.h	119;"	d
+APP_END	chipdef.h	123;"	d
+APP_END	chipdef.h	127;"	d
+APP_END	chipdef.h	142;"	d
+APP_END	chipdef.h	146;"	d
+APP_END	chipdef.h	150;"	d
+APP_END	chipdef.h	154;"	d
+APP_END	chipdef.h	21;"	d
+APP_END	chipdef.h	25;"	d
+APP_END	chipdef.h	29;"	d
+APP_END	chipdef.h	33;"	d
+APP_END	chipdef.h	51;"	d
+APP_END	chipdef.h	55;"	d
+APP_END	chipdef.h	59;"	d
+APP_END	chipdef.h	63;"	d
+APP_END	chipdef.h	81;"	d
+APP_END	chipdef.h	85;"	d
+APP_END	chipdef.h	89;"	d
+APP_END	chipdef.h	93;"	d
+APP_PAGES	chipdef.h	110;"	d
+APP_PAGES	chipdef.h	114;"	d
+APP_PAGES	chipdef.h	118;"	d
+APP_PAGES	chipdef.h	122;"	d
+APP_PAGES	chipdef.h	126;"	d
+APP_PAGES	chipdef.h	141;"	d
+APP_PAGES	chipdef.h	145;"	d
+APP_PAGES	chipdef.h	149;"	d
+APP_PAGES	chipdef.h	153;"	d
+APP_PAGES	chipdef.h	20;"	d
+APP_PAGES	chipdef.h	24;"	d
+APP_PAGES	chipdef.h	28;"	d
+APP_PAGES	chipdef.h	32;"	d
+APP_PAGES	chipdef.h	50;"	d
+APP_PAGES	chipdef.h	54;"	d
+APP_PAGES	chipdef.h	58;"	d
+APP_PAGES	chipdef.h	62;"	d
+APP_PAGES	chipdef.h	80;"	d
+APP_PAGES	chipdef.h	84;"	d
+APP_PAGES	chipdef.h	88;"	d
+APP_PAGES	chipdef.h	92;"	d
+B0BFE	mcp2515.h	228;"	d
+B0BFM	mcp2515.h	230;"	d
+B0BFS	mcp2515.h	226;"	d
+B0RTS	mcp2515.h	237;"	d
+B0RTSM	mcp2515.h	240;"	d
+B1BFE	mcp2515.h	227;"	d
+B1BFM	mcp2515.h	229;"	d
+B1BFS	mcp2515.h	225;"	d
+B1RTS	mcp2515.h	236;"	d
+B1RTSM	mcp2515.h	239;"	d
+B2RTS	mcp2515.h	235;"	d
+B2RTSM	mcp2515.h	238;"	d
+BFPCTRL	mcp2515.h	109;"	d
+BRP0	mcp2515.h	293;"	d
+BRP0	mcp2515.h	393;"	d
+BRP1	mcp2515.h	292;"	d
+BRP1	mcp2515.h	392;"	d
+BRP2	mcp2515.h	291;"	d
+BRP2	mcp2515.h	391;"	d
+BRP3	mcp2515.h	290;"	d
+BRP3	mcp2515.h	390;"	d
+BRP4	mcp2515.h	289;"	d
+BRP4	mcp2515.h	389;"	d
+BRP5	mcp2515.h	288;"	d
+BRP5	mcp2515.h	388;"	d
+BTLMODE	mcp2515.h	274;"	d
+BTLMODE	mcp2515.h	406;"	d
+BUKT	mcp2515.h	347;"	d
+BUKT1	mcp2515.h	348;"	d
+CANCTRL	mcp2515.h	112;"	d
+CANINTE	mcp2515.h	140;"	d
+CANINTE	mcp2515.h	430;"	d
+CANINTF	mcp2515.h	141;"	d
+CANINTF	mcp2515.h	431;"	d
+CANIX_H	canix.h	22;"	d
+CANIX_LED_H	led.h	22;"	d
+CANIX_LED_RED	led.h	27;"	d
+CANIX_LED_RED	led.h	34;"	d
+CANIX_LED_RED	led.h	41;"	d
+CANIX_LED_YELLOW	led.h	26;"	d
+CANIX_LED_YELLOW	led.h	33;"	d
+CANIX_LED_YELLOW	led.h	40;"	d
+CANIX_RTC_H	rtc.h	2;"	d
+CANIX_RTC_TCNT0_INIT	canix.c	96;"	d	file:
+CANSTAT	mcp2515.h	111;"	d
+CAN_EID	mcp2515.h	438;"	d
+CAN_RTR	mcp2515.h	437;"	d
+CHIPDEF_H	chipdef.h	3;"	d
+CLKEN	mcp2515.h	259;"	d
+CLKOUT_DISABLE	mcp2515_defs.h	172;"	d
+CLKOUT_ENABLE	mcp2515_defs.h	171;"	d
+CLKOUT_PS1	mcp2515_defs.h	173;"	d
+CLKOUT_PS2	mcp2515_defs.h	174;"	d
+CLKOUT_PS4	mcp2515_defs.h	175;"	d
+CLKOUT_PS8	mcp2515_defs.h	176;"	d
+CLKPRE0	mcp2515.h	261;"	d
+CLKPRE1	mcp2515.h	260;"	d
+CNF1	mcp2515.h	139;"	d
+CNF1	mcp2515.h	429;"	d
+CNF2	mcp2515.h	138;"	d
+CNF2	mcp2515.h	428;"	d
+CNF3	mcp2515.h	137;"	d
+CNF3	mcp2515.h	427;"	d
+DLC0	mcp2515.h	379;"	d
+DLC1	mcp2515.h	378;"	d
+DLC2	mcp2515.h	377;"	d
+DLC3	mcp2515.h	376;"	d
+EDS_H	eds.h	2;"	d
+EDS_MAGIC1	eds.c	11;"	d	file:
+EDS_MAGIC2	eds.c	12;"	d	file:
+EFLG	mcp2515.h	142;"	d
+EFLG	mcp2515.h	432;"	d
+ERRIE	mcp2515.h	300;"	d
+ERRIE	mcp2515.h	420;"	d
+ERRIF	mcp2515.h	312;"	d
+EWARN	mcp2515.h	329;"	d
+EXIDE	mcp2515.h	354;"	d
+FILHIT0	mcp2515.h	349;"	d
+FILHIT1	mcp2515.h	362;"	d
+FILHIT2	mcp2515.h	361;"	d
+HCAN_HMS_H	hcan_hms.h	22;"	d
+HCAN_PRIO_HI	canix.h	100;"	d
+HCAN_PRIO_LOW	canix.h	92;"	d
+HCAN_RTS_H	hcan_rts.h	22;"	d
+HCAN_SYSLOG_H	syslog.h	22;"	d
+ICOD0	mcp2515.h	250;"	d
+ICOD1	mcp2515.h	249;"	d
+ICOD2	mcp2515.h	248;"	d
+IDE	mcp2515.h	368;"	d
+LED_PORT	led.h	28;"	d
+LED_PORT	led.h	35;"	d
+LED_PORT	led.h	42;"	d
+LED_PORT_DDR	led.h	29;"	d
+LED_PORT_DDR	led.h	36;"	d
+LED_PORT_DDR	led.h	43;"	d
+MAX_FRAME_CALLBACKS	canix.h	105;"	d
+MAX_IDLE_CALLBACKS	canix.h	110;"	d
+MAX_RTC_CALLBACKS	canix.h	115;"	d
+MCP2515_DEFS_H_	mcp2515_defs.h	4;"	d
+MCP2515_FAIL	mcp2515.c	93;"	d	file:
+MCP2515_OK	mcp2515.c	92;"	d	file:
+MCP_BITMOD	mcp2515_defs.h	139;"	d
+MCP_CANCTRL	mcp2515_defs.h	87;"	d
+MCP_CANINTE	mcp2515_defs.h	113;"	d
+MCP_CANINTF	mcp2515_defs.h	114;"	d
+MCP_CANSTAT	mcp2515_defs.h	86;"	d
+MCP_CNF1	mcp2515_defs.h	112;"	d
+MCP_CNF2	mcp2515_defs.h	111;"	d
+MCP_CNF3	mcp2515_defs.h	110;"	d
+MCP_DLC_MASK	mcp2515_defs.h	30;"	d
+MCP_EFLG	mcp2515_defs.h	115;"	d
+MCP_EFLG_ERRORMASK	mcp2515_defs.h	67;"	d
+MCP_EFLG_EWARN	mcp2515_defs.h	66;"	d
+MCP_EFLG_RX0OVR	mcp2515_defs.h	60;"	d
+MCP_EFLG_RX1OVR	mcp2515_defs.h	59;"	d
+MCP_EFLG_RXEP	mcp2515_defs.h	63;"	d
+MCP_EFLG_RXWAR	mcp2515_defs.h	65;"	d
+MCP_EFLG_TXBO	mcp2515_defs.h	61;"	d
+MCP_EFLG_TXEP	mcp2515_defs.h	62;"	d
+MCP_EFLG_TXWAR	mcp2515_defs.h	64;"	d
+MCP_EID0	mcp2515_defs.h	27;"	d
+MCP_EID8	mcp2515_defs.h	26;"	d
+MCP_LOAD_TX0	mcp2515_defs.h	141;"	d
+MCP_LOAD_TX1	mcp2515_defs.h	142;"	d
+MCP_LOAD_TX2	mcp2515_defs.h	143;"	d
+MCP_NO_INT	mcp2515_defs.h	128;"	d
+MCP_READ	mcp2515_defs.h	137;"	d
+MCP_READ_RX0	mcp2515_defs.h	150;"	d
+MCP_READ_RX1	mcp2515_defs.h	151;"	d
+MCP_READ_STATUS	mcp2515_defs.h	153;"	d
+MCP_REC	mcp2515_defs.h	101;"	d
+MCP_RESET	mcp2515_defs.h	157;"	d
+MCP_RTR_MASK	mcp2515_defs.h	31;"	d
+MCP_RTS_ALL	mcp2515_defs.h	148;"	d
+MCP_RTS_TX0	mcp2515_defs.h	145;"	d
+MCP_RTS_TX1	mcp2515_defs.h	146;"	d
+MCP_RTS_TX2	mcp2515_defs.h	147;"	d
+MCP_RXB0CTRL	mcp2515_defs.h	119;"	d
+MCP_RXB0SIDH	mcp2515_defs.h	120;"	d
+MCP_RXB1CTRL	mcp2515_defs.h	121;"	d
+MCP_RXB1SIDH	mcp2515_defs.h	122;"	d
+MCP_RXB_BUKT_MASK	mcp2515_defs.h	38;"	d
+MCP_RXB_IDE_M	mcp2515_defs.h	52;"	d
+MCP_RXB_RTR_M	mcp2515_defs.h	53;"	d
+MCP_RXB_RX_ANY	mcp2515_defs.h	33;"	d
+MCP_RXB_RX_EXT	mcp2515_defs.h	34;"	d
+MCP_RXB_RX_MASK	mcp2515_defs.h	37;"	d
+MCP_RXB_RX_STD	mcp2515_defs.h	35;"	d
+MCP_RXB_RX_STDEXT	mcp2515_defs.h	36;"	d
+MCP_RXF0EID0	mcp2515_defs.h	77;"	d
+MCP_RXF0EID8	mcp2515_defs.h	76;"	d
+MCP_RXF0SIDH	mcp2515_defs.h	74;"	d
+MCP_RXF0SIDL	mcp2515_defs.h	75;"	d
+MCP_RXF1EID0	mcp2515_defs.h	81;"	d
+MCP_RXF1EID8	mcp2515_defs.h	80;"	d
+MCP_RXF1SIDH	mcp2515_defs.h	78;"	d
+MCP_RXF1SIDL	mcp2515_defs.h	79;"	d
+MCP_RXF2EID0	mcp2515_defs.h	85;"	d
+MCP_RXF2EID8	mcp2515_defs.h	84;"	d
+MCP_RXF2SIDH	mcp2515_defs.h	82;"	d
+MCP_RXF2SIDL	mcp2515_defs.h	83;"	d
+MCP_RXF3EID0	mcp2515_defs.h	91;"	d
+MCP_RXF3EID8	mcp2515_defs.h	90;"	d
+MCP_RXF3SIDH	mcp2515_defs.h	88;"	d
+MCP_RXF3SIDL	mcp2515_defs.h	89;"	d
+MCP_RXF4EID0	mcp2515_defs.h	95;"	d
+MCP_RXF4EID8	mcp2515_defs.h	94;"	d
+MCP_RXF4SIDH	mcp2515_defs.h	92;"	d
+MCP_RXF4SIDL	mcp2515_defs.h	93;"	d
+MCP_RXF5EID0	mcp2515_defs.h	99;"	d
+MCP_RXF5EID8	mcp2515_defs.h	98;"	d
+MCP_RXF5SIDH	mcp2515_defs.h	96;"	d
+MCP_RXF5SIDL	mcp2515_defs.h	97;"	d
+MCP_RXM0EID0	mcp2515_defs.h	105;"	d
+MCP_RXM0EID8	mcp2515_defs.h	104;"	d
+MCP_RXM0SIDH	mcp2515_defs.h	102;"	d
+MCP_RXM0SIDL	mcp2515_defs.h	103;"	d
+MCP_RXM1EID0	mcp2515_defs.h	109;"	d
+MCP_RXM1EID8	mcp2515_defs.h	108;"	d
+MCP_RXM1SIDH	mcp2515_defs.h	106;"	d
+MCP_RXM1SIDL	mcp2515_defs.h	107;"	d
+MCP_RX_INT	mcp2515_defs.h	127;"	d
+MCP_RX_STATUS	mcp2515_defs.h	155;"	d
+MCP_SIDH	mcp2515_defs.h	24;"	d
+MCP_SIDL	mcp2515_defs.h	25;"	d
+MCP_STAT_RX0IF	mcp2515_defs.h	56;"	d
+MCP_STAT_RX1IF	mcp2515_defs.h	57;"	d
+MCP_STAT_RXIF_MASK	mcp2515_defs.h	55;"	d
+MCP_TEC	mcp2515_defs.h	100;"	d
+MCP_TX01_INT	mcp2515_defs.h	126;"	d
+MCP_TX01_MASK	mcp2515_defs.h	130;"	d
+MCP_TXB0CTRL	mcp2515_defs.h	116;"	d
+MCP_TXB1CTRL	mcp2515_defs.h	117;"	d
+MCP_TXB2CTRL	mcp2515_defs.h	118;"	d
+MCP_TXB_ABTF_M	mcp2515_defs.h	44;"	d
+MCP_TXB_EXIDE_M	mcp2515_defs.h	29;"	d
+MCP_TXB_MLOA_M	mcp2515_defs.h	45;"	d
+MCP_TXB_RTR_M	mcp2515_defs.h	51;"	d
+MCP_TXB_TXBUFE_M	mcp2515_defs.h	43;"	d
+MCP_TXB_TXERR_M	mcp2515_defs.h	46;"	d
+MCP_TXB_TXIE_M	mcp2515_defs.h	48;"	d
+MCP_TXB_TXP10_M	mcp2515_defs.h	49;"	d
+MCP_TXB_TXREQ_M	mcp2515_defs.h	47;"	d
+MCP_TX_INT	mcp2515_defs.h	125;"	d
+MCP_TX_MASK	mcp2515_defs.h	131;"	d
+MCP_WRITE	mcp2515_defs.h	135;"	d
+MERRE	mcp2515.h	298;"	d
+MERRE	mcp2515.h	418;"	d
+MERRF	mcp2515.h	310;"	d
+MLOA	mcp2515.h	335;"	d
+MODE_CONFIG	mcp2515.h	86;"	d
+MODE_CONFIG	mcp2515_defs.h	166;"	d
+MODE_LISTENONLY	mcp2515.h	85;"	d
+MODE_LISTENONLY	mcp2515_defs.h	165;"	d
+MODE_LOOPBACK	mcp2515.h	84;"	d
+MODE_LOOPBACK	mcp2515_defs.h	164;"	d
+MODE_MASK	mcp2515.h	88;"	d
+MODE_MASK	mcp2515_defs.h	168;"	d
+MODE_NORMAL	mcp2515.h	82;"	d
+MODE_NORMAL	mcp2515_defs.h	162;"	d
+MODE_ONESHOT	mcp2515_defs.h	170;"	d
+MODE_POWERUP	mcp2515.h	87;"	d
+MODE_POWERUP	mcp2515_defs.h	167;"	d
+MODE_SLEEP	mcp2515.h	83;"	d
+MODE_SLEEP	mcp2515_defs.h	163;"	d
+OPMOD0	mcp2515.h	247;"	d
+OPMOD1	mcp2515.h	246;"	d
+OPMOD2	mcp2515.h	245;"	d
+PHSEG0	mcp2515.h	281;"	d
+PHSEG0	mcp2515.h	413;"	d
+PHSEG1	mcp2515.h	280;"	d
+PHSEG1	mcp2515.h	412;"	d
+PHSEG10	mcp2515.h	278;"	d
+PHSEG10	mcp2515.h	410;"	d
+PHSEG11	mcp2515.h	277;"	d
+PHSEG11	mcp2515.h	409;"	d
+PHSEG12	mcp2515.h	276;"	d
+PHSEG12	mcp2515.h	408;"	d
+PHSEG2	mcp2515.h	279;"	d
+PHSEG2	mcp2515.h	411;"	d
+PHSEG20	mcp2515.h	269;"	d
+PHSEG20	mcp2515.h	401;"	d
+PHSEG21	mcp2515.h	268;"	d
+PHSEG21	mcp2515.h	400;"	d
+PHSEG22	mcp2515.h	267;"	d
+PHSEG22	mcp2515.h	399;"	d
+PROTO_MASK	canix.h	84;"	d
+REC	mcp2515.h	127;"	d
+REQOP0	mcp2515.h	257;"	d
+REQOP1	mcp2515.h	256;"	d
+REQOP2	mcp2515.h	255;"	d
+RTR	mcp2515.h	375;"	d
+RX0IE	mcp2515.h	305;"	d
+RX0IE	mcp2515.h	425;"	d
+RX0IF	mcp2515.h	317;"	d
+RX0OVR	mcp2515.h	323;"	d
+RX1IE	mcp2515.h	304;"	d
+RX1IE	mcp2515.h	424;"	d
+RX1IF	mcp2515.h	316;"	d
+RX1OVR	mcp2515.h	322;"	d
+RXB0CTRL	mcp2515.h	189;"	d
+RXB0D0	mcp2515.h	195;"	d
+RXB0D1	mcp2515.h	196;"	d
+RXB0D2	mcp2515.h	197;"	d
+RXB0D3	mcp2515.h	198;"	d
+RXB0D4	mcp2515.h	199;"	d
+RXB0D5	mcp2515.h	200;"	d
+RXB0D6	mcp2515.h	201;"	d
+RXB0D7	mcp2515.h	202;"	d
+RXB0DLC	mcp2515.h	194;"	d
+RXB0EID0	mcp2515.h	193;"	d
+RXB0EID8	mcp2515.h	192;"	d
+RXB0SIDH	mcp2515.h	190;"	d
+RXB0SIDL	mcp2515.h	191;"	d
+RXB1CTRL	mcp2515.h	204;"	d
+RXB1D0	mcp2515.h	210;"	d
+RXB1D1	mcp2515.h	211;"	d
+RXB1D2	mcp2515.h	212;"	d
+RXB1D3	mcp2515.h	213;"	d
+RXB1D4	mcp2515.h	214;"	d
+RXB1D5	mcp2515.h	215;"	d
+RXB1D6	mcp2515.h	216;"	d
+RXB1D7	mcp2515.h	217;"	d
+RXB1DLC	mcp2515.h	209;"	d
+RXB1EID0	mcp2515.h	208;"	d
+RXB1EID8	mcp2515.h	207;"	d
+RXB1SIDH	mcp2515.h	205;"	d
+RXB1SIDL	mcp2515.h	206;"	d
+RXEP	mcp2515.h	326;"	d
+RXF0EID0	mcp2515.h	100;"	d
+RXF0EID8	mcp2515.h	99;"	d
+RXF0SIDH	mcp2515.h	97;"	d
+RXF0SIDL	mcp2515.h	98;"	d
+RXF1EID0	mcp2515.h	104;"	d
+RXF1EID8	mcp2515.h	103;"	d
+RXF1SIDH	mcp2515.h	101;"	d
+RXF1SIDL	mcp2515.h	102;"	d
+RXF2EID0	mcp2515.h	108;"	d
+RXF2EID8	mcp2515.h	107;"	d
+RXF2SIDH	mcp2515.h	105;"	d
+RXF2SIDL	mcp2515.h	106;"	d
+RXF3EID0	mcp2515.h	117;"	d
+RXF3EID8	mcp2515.h	116;"	d
+RXF3SIDH	mcp2515.h	114;"	d
+RXF3SIDL	mcp2515.h	115;"	d
+RXF4EID0	mcp2515.h	121;"	d
+RXF4EID8	mcp2515.h	120;"	d
+RXF4SIDH	mcp2515.h	118;"	d
+RXF4SIDL	mcp2515.h	119;"	d
+RXF5EID0	mcp2515.h	125;"	d
+RXF5EID8	mcp2515.h	124;"	d
+RXF5SIDH	mcp2515.h	122;"	d
+RXF5SIDL	mcp2515.h	123;"	d
+RXM0	mcp2515.h	345;"	d
+RXM0EID0	mcp2515.h	132;"	d
+RXM0EID8	mcp2515.h	131;"	d
+RXM0SIDH	mcp2515.h	129;"	d
+RXM0SIDL	mcp2515.h	130;"	d
+RXM1	mcp2515.h	344;"	d
+RXM1EID0	mcp2515.h	136;"	d
+RXM1EID8	mcp2515.h	135;"	d
+RXM1SIDH	mcp2515.h	133;"	d
+RXM1SIDL	mcp2515.h	134;"	d
+RXRTR	mcp2515.h	346;"	d
+RXWAR	mcp2515.h	328;"	d
+SAM	mcp2515.h	275;"	d
+SAM	mcp2515.h	407;"	d
+SIGNAL	canix.c	/^SIGNAL(SIG_OVERFLOW0)$/;"	f
+SJW0	mcp2515.h	287;"	d
+SJW0	mcp2515.h	387;"	d
+SJW1	mcp2515.h	286;"	d
+SJW1	mcp2515.h	386;"	d
+SPI_BIT_MODIFY	mcp2515.h	80;"	d
+SPI_CS	mcp2515.c	73;"	d	file:
+SPI_CS	mcp2515.c	84;"	d	file:
+SPI_CS_PORT	mcp2515.c	72;"	d	file:
+SPI_CS_PORT	mcp2515.c	83;"	d	file:
+SPI_CS_PORT_DDR	mcp2515.c	71;"	d	file:
+SPI_CS_PORT_DDR	mcp2515.c	82;"	d	file:
+SPI_MISO	mcp2515.c	68;"	d	file:
+SPI_MISO	mcp2515.c	79;"	d	file:
+SPI_MOSI	mcp2515.c	69;"	d	file:
+SPI_MOSI	mcp2515.c	80;"	d	file:
+SPI_PORT	mcp2515.c	67;"	d	file:
+SPI_PORT	mcp2515.c	78;"	d	file:
+SPI_PORT_DDR	mcp2515.c	66;"	d	file:
+SPI_PORT_DDR	mcp2515.c	77;"	d	file:
+SPI_READ	mcp2515.h	73;"	d
+SPI_READ_RX	mcp2515.h	74;"	d
+SPI_READ_STATUS	mcp2515.h	78;"	d
+SPI_RESET	mcp2515.h	72;"	d
+SPI_RTS	mcp2515.h	77;"	d
+SPI_RX_STATUS	mcp2515.h	79;"	d
+SPI_SCK	mcp2515.c	70;"	d	file:
+SPI_SCK	mcp2515.c	81;"	d	file:
+SPI_WRITE	mcp2515.h	75;"	d
+SPI_WRITE_TX	mcp2515.h	76;"	d
+SRR	mcp2515.h	367;"	d
+SYSLOG_PRIO_CRITICAL	syslog.h	28;"	d
+SYSLOG_PRIO_DEBUG	syslog.h	31;"	d
+SYSLOG_PRIO_ERROR	syslog.h	29;"	d
+SYSLOG_PRIO_WARNING	syslog.h	30;"	d
+TEC	mcp2515.h	126;"	d
+TOOLS_H	tools.h	22;"	d
+TX0IE	mcp2515.h	303;"	d
+TX0IE	mcp2515.h	423;"	d
+TX0IF	mcp2515.h	315;"	d
+TX1IE	mcp2515.h	302;"	d
+TX1IE	mcp2515.h	422;"	d
+TX1IF	mcp2515.h	314;"	d
+TX2IE	mcp2515.h	301;"	d
+TX2IE	mcp2515.h	421;"	d
+TX2IF	mcp2515.h	313;"	d
+TXB0	mcp2515.h	324;"	d
+TXB0CTRL	mcp2515.h	144;"	d
+TXB0D0	mcp2515.h	150;"	d
+TXB0D1	mcp2515.h	151;"	d
+TXB0D2	mcp2515.h	152;"	d
+TXB0D3	mcp2515.h	153;"	d
+TXB0D4	mcp2515.h	154;"	d
+TXB0D5	mcp2515.h	155;"	d
+TXB0D6	mcp2515.h	156;"	d
+TXB0D7	mcp2515.h	157;"	d
+TXB0DLC	mcp2515.h	149;"	d
+TXB0EID0	mcp2515.h	148;"	d
+TXB0EID8	mcp2515.h	147;"	d
+TXB0SIDH	mcp2515.h	145;"	d
+TXB0SIDL	mcp2515.h	146;"	d
+TXB1CTRL	mcp2515.h	159;"	d
+TXB1D0	mcp2515.h	165;"	d
+TXB1D1	mcp2515.h	166;"	d
+TXB1D2	mcp2515.h	167;"	d
+TXB1D3	mcp2515.h	168;"	d
+TXB1D4	mcp2515.h	169;"	d
+TXB1D5	mcp2515.h	170;"	d
+TXB1D6	mcp2515.h	171;"	d
+TXB1D7	mcp2515.h	172;"	d
+TXB1DLC	mcp2515.h	164;"	d
+TXB1EID0	mcp2515.h	163;"	d
+TXB1EID8	mcp2515.h	162;"	d
+TXB1SIDH	mcp2515.h	160;"	d
+TXB1SIDL	mcp2515.h	161;"	d
+TXB2CTRL	mcp2515.h	174;"	d
+TXB2D0	mcp2515.h	180;"	d
+TXB2D1	mcp2515.h	181;"	d
+TXB2D2	mcp2515.h	182;"	d
+TXB2D3	mcp2515.h	183;"	d
+TXB2D4	mcp2515.h	184;"	d
+TXB2D5	mcp2515.h	185;"	d
+TXB2D6	mcp2515.h	186;"	d
+TXB2D7	mcp2515.h	187;"	d
+TXB2DLC	mcp2515.h	179;"	d
+TXB2EID0	mcp2515.h	178;"	d
+TXB2EID8	mcp2515.h	177;"	d
+TXB2SIDH	mcp2515.h	175;"	d
+TXB2SIDL	mcp2515.h	176;"	d
+TXEP	mcp2515.h	325;"	d
+TXERR	mcp2515.h	336;"	d
+TXP0	mcp2515.h	339;"	d
+TXP1	mcp2515.h	338;"	d
+TXREQ	mcp2515.h	337;"	d
+TXRTSCTRL	mcp2515.h	110;"	d
+TXWAR	mcp2515.h	327;"	d
+WAKFIL	mcp2515.h	266;"	d
+WAKFIL	mcp2515.h	398;"	d
+WAKIE	mcp2515.h	299;"	d
+WAKIE	mcp2515.h	419;"	d
+WAKIF	mcp2515.h	311;"	d
+_MCP2515_H_	mcp2515.h	67;"	d
+_delayFourCycles	tools.c	/^void _delayFourCycles(unsigned int count)$/;"	f
+bool	canix.h	71;"	d
+callback	canix.c	/^	canix_frame_callback callback;$/;"	m	file:
+can_disable_mcp2515	mcp2515.c	/^void can_disable_mcp2515(void)$/;"	f
+can_enable_mcp2515	mcp2515.c	/^void can_enable_mcp2515(void)$/;"	f
+can_message_available	mcp2515.c	/^bool can_message_available(void)$/;"	f
+can_open_interface	mcp2515.c	/^uint8_t can_open_interface(void)$/;"	f
+can_read_message	mcp2515.c	/^uint8_t can_read_message(uint32_t *extended, char *data)$/;"	f
+can_send_message	mcp2515.c	/^uint8_t can_send_message(uint32_t id, const uint8_t *data, uint8_t length)$/;"	f
+canix_SFP_RTS_handler	hcan_rts.c	/^void canix_SFP_RTS_handler(const canix_frame *frame)$/;"	f
+canix_debug_level	syslog.c	/^uint8_t canix_debug_level = 0;$/;"	v
+canix_deliver_frame	canix.c	/^void canix_deliver_frame(const canix_frame *frame)$/;"	f
+canix_frame	canix.h	/^} canix_frame;$/;"	t
+canix_frame_callback	canix.h	/^typedef void (*canix_frame_callback) (const canix_frame *frame);$/;"	t
+canix_frame_callback_entry	canix.c	/^} canix_frame_callback_entry;$/;"	t	file:
+canix_frame_send	canix.c	/^void canix_frame_send(const canix_frame *frame)$/;"	f
+canix_frame_send_with_prio	canix.c	/^void canix_frame_send_with_prio(const canix_frame *frame, uint8_t prio)$/;"	f
+canix_idle_callback	canix.h	/^typedef void (*canix_idle_callback) (void);$/;"	t
+canix_init	canix.c	/^uint8_t canix_init(void)$/;"	f
+canix_is_date_valid	canix.c	/^uint8_t canix_is_date_valid(void)$/;"	f
+canix_led_disable	led.h	50;"	d
+canix_led_disable	led.h	56;"	d
+canix_led_enable	led.h	49;"	d
+canix_led_enable	led.h	55;"	d
+canix_led_init_ports	led.h	51;"	d
+canix_led_init_ports	led.h	57;"	d
+canix_mainloop	canix.c	/^void canix_mainloop(void)$/;"	f
+canix_process_messages	canix.c	/^void canix_process_messages(void)$/;"	f
+canix_reg_frame_callback	canix.c	/^void canix_reg_frame_callback(canix_frame_callback callback, $/;"	f
+canix_reg_idle_callback	canix.c	/^void canix_reg_idle_callback(canix_idle_callback callback)$/;"	f
+canix_reg_rtc_callback	canix.c	/^void canix_reg_rtc_callback(canix_rtc_callback callback)$/;"	f
+canix_reset	canix.c	/^void canix_reset(void)$/;"	f
+canix_rtc_callback	canix.h	/^typedef void (*canix_rtc_callback) (void);$/;"	t
+canix_rtc_clock	canix.c	/^volatile canix_rtc_clock_t canix_rtc_clock;$/;"	v
+canix_rtc_clock_t	rtc.h	/^} canix_rtc_clock_t;$/;"	t
+canix_rtc_init	canix.c	/^void canix_rtc_init(void)$/;"	f
+canix_selfaddr	canix.c	/^uint16_t canix_selfaddr(void)$/;"	f
+canix_set_syslog_level	syslog.c	/^void canix_set_syslog_level(uint8_t level)$/;"	f
+canix_syslog_P	syslog.c	/^void canix_syslog_P(uint8_t prio, const char *fmt, ...)$/;"	f
+canix_update_datetime	canix.c	/^void canix_update_datetime(void)$/;"	f
+data	canix.h	/^	uint8_t data[8];$/;"	m
+day_of_month	rtc.h	/^	uint8_t day_of_month;$/;"	m
+day_of_week	rtc.h	/^	uint8_t day_of_week;$/;"	m
+delay	tools.c	/^void delay(uint16_t ms)$/;"	f
+devtype	chipdef.h	105;"	d
+devtype	chipdef.h	136;"	d
+devtype	chipdef.h	15;"	d
+devtype	chipdef.h	45;"	d
+devtype	chipdef.h	75;"	d
+dst	canix.c	/^	int dst;$/;"	m	file:
+dst	canix.h	/^	uint16_t dst;$/;"	m
+eds_alloc	eds.c	/^uint8_t *eds_alloc(uint8_t size)$/;"	f
+eds_can_callback	eds.c	/^void eds_can_callback(const canix_frame *frame)$/;"	f
+eds_defragment	eds.c	/^void eds_defragment(void)$/;"	f
+eds_find_next_block	eds.c	/^eds_block_p eds_find_next_block(eds_block_p p, uint8_t type)$/;"	f
+eds_find_next_block_between	eds.c	/^eds_block_p eds_find_next_block_between(eds_block_p p, $/;"	f
+eds_format	eds.c	/^void eds_format(void)$/;"	f
+eds_free	eds.c	/^uint8_t eds_free(uint8_t *block)$/;"	f
+eds_init	eds.c	/^uint8_t eds_init(void)$/;"	f
+eds_next_block	eds.c	/^uint8_t *eds_next_block(uint8_t *p)$/;"	f
+eds_read_string	eds.c	/^void eds_read_string(uint8_t *block, char *s, uint8_t len)$/;"	f
+false	canix.h	69;"	d
+frame_callback_entry	canix.c	/^static canix_frame_callback_entry frame_callback_entry[MAX_FRAME_CALLBACKS];$/;"	v	file:
+hour	rtc.h	/^	uint8_t hour;$/;"	m
+idle_callback	canix.c	/^static canix_idle_callback idle_callback[MAX_IDLE_CALLBACKS];$/;"	v	file:
+last_date_update	rtc.h	/^	uint8_t last_date_update;$/;"	m
+mcp2515_bit_modify	mcp2515.c	/^void mcp2515_bit_modify(uint8_t adress, uint8_t mask, uint8_t data)$/;"	f
+mcp2515_read_register	mcp2515.c	/^uint8_t mcp2515_read_register(const uint8_t address)$/;"	f
+mcp2515_read_register_p	mcp2515.c	/^void mcp2515_read_register_p(uint8_t adress, uint8_t *data, uint8_t length )$/;"	f
+mcp2515_set_mode	mcp2515.c	/^uint8_t mcp2515_set_mode(uint8_t mode)$/;"	f
+mcp2515_write_register	mcp2515.c	/^void mcp2515_write_register(uint8_t adress, uint8_t data )$/;"	f
+mcp2515_write_register_p	mcp2515.c	/^void mcp2515_write_register_p(uint8_t adress, const uint8_t *data, $/;"	f
+minute	rtc.h	/^	uint8_t minute;$/;"	m
+month_of_year	rtc.h	/^	uint8_t month_of_year;$/;"	m
+proto	canix.c	/^	uint8_t proto;$/;"	m	file:
+proto	canix.h	/^	uint8_t proto;$/;"	m
+rtc_callback	canix.c	/^static canix_rtc_callback  rtc_callback[MAX_RTC_CALLBACKS];$/;"	v	file:
+second	rtc.h	/^	uint8_t second;$/;"	m
+sig_byte1	chipdef.h	103;"	d
+sig_byte1	chipdef.h	134;"	d
+sig_byte1	chipdef.h	13;"	d
+sig_byte1	chipdef.h	43;"	d
+sig_byte1	chipdef.h	73;"	d
+sig_byte2	chipdef.h	102;"	d
+sig_byte2	chipdef.h	12;"	d
+sig_byte2	chipdef.h	133;"	d
+sig_byte2	chipdef.h	42;"	d
+sig_byte2	chipdef.h	72;"	d
+sig_byte3	chipdef.h	101;"	d
+sig_byte3	chipdef.h	11;"	d
+sig_byte3	chipdef.h	132;"	d
+sig_byte3	chipdef.h	41;"	d
+sig_byte3	chipdef.h	71;"	d
+size	canix.h	/^	uint8_t size;$/;"	m
+spi_getc	mcp2515.c	/^uint8_t spi_getc(void)$/;"	f
+spi_init	mcp2515.c	/^void spi_init(void)$/;"	f
+spi_putc	mcp2515.c	/^uint8_t spi_putc( uint8_t data )$/;"	f
+src	canix.h	/^	uint16_t src;$/;"	m
+srv	canix.c	/^	uint8_t srv;$/;"	m	file:
+true	canix.h	68;"	d
+udelay	tools.h	35;"	d
+uptime_sec	rtc.h	/^	uint32_t uptime_sec;$/;"	m
+uptime_sec_100th	rtc.h	/^	uint8_t uptime_sec_100th;$/;"	m
+year	rtc.h	/^	uint8_t year;$/;"	m

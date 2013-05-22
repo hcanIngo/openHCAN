@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: eds_commands.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>eds_commands.h</h1><a href="eds__commands_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef EDS_COMMANDS_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define EDS_COMMANDS_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="board__driver_8h.html">libhcan++/board_driver.h</a>&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="eds__connection_8h.html">libhcan++/eds_connection.h</a>&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="keyword">namespace </span>hcan
+<a name="l00008"></a>00008 {
+<a name="l00009"></a>00009     <span class="keywordtype">bool</span> <a class="code" href="namespacehcan.html#0303c12b76f9664c59973c296dd547b7">eds_exec_cmd</a>(board_connection &amp;bcon, eds_connection &amp;econ, 
+<a name="l00010"></a>00010             context &amp;c, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;cmd);
+<a name="l00011"></a>00011     <span class="keywordtype">bool</span> <a class="code" href="namespacehcan.html#a77ace1e5abf3476c0bf92316b11d6b2">eds_show_help</a> ();
+<a name="l00012"></a>00012 };
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

@@ -1,0 +1,21 @@
+digraph RolladenStatemachine
+{
+	Stop [style=filled,color="lightblue"];
+    Auf [style=filled,color="lightblue"];
+    Ab [style=filled,color="lightblue"];
+
+    Stop -> Auf_wait [label="COMMAND_AUF"];
+    Auf_wait -> Auf;
+    Dir_Change_wait1 -> Ab_wait1;
+    Stop -> Ab_wait1 [label="COMMAND_AB"];
+    Auf -> Stop_wait1 [label="COMMAND_STOP"];
+    Stop_wait1 -> Stop;
+    Auf -> Dir_Change_wait1 [label="COMMAND_DIR_CHANGE"];
+    Ab_wait1 -> Ab_wait2 -> Ab;
+    Ab -> Stop_wait2 [label="COMMAND_STOP"];
+    Stop_wait2 -> Stop_wait3 -> Stop;
+    Ab -> Dir_Change_wait2 [label="COMMAND_DIR_CHANGE"];
+    Dir_Change_wait2 -> Dir_Change_wait3 -> Auf_wait;
+
+}
+

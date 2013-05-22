@@ -1,0 +1,14 @@
+#!/bin/bash
+
+build=`cat buildver`
+build=$(($build + 1))
+echo $build > buildver
+
+echo "Release is Build# $build"
+
+(
+	echo "mah, `date`"
+	echo "- released build $build"
+	echo 
+) >> build-history
+

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: oap_access.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>oap_access.h</h1><a href="oap__access_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef OAP_ACCESS_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define OAP_ACCESS_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="board__connection_8h.html">libhcan++/board_connection.h</a>&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;libxml++/parsers/domparser.h&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="keyword">namespace </span>hcan
+<a name="l00008"></a>00008 {
+<a name="l00009"></a><a class="code" href="structhcan_1_1oap__time.html">00009</a>     <span class="keyword">typedef</span> <span class="keyword">struct</span>
+<a name="l00010"></a>00010     {
+<a name="l00011"></a><a class="code" href="structhcan_1_1oap__time.html#7811403f8d9a24720c6730c012c0e300">00011</a>         uint8_t hour;
+<a name="l00012"></a><a class="code" href="structhcan_1_1oap__time.html#ca77f9bba421023d1178f32cac80d2b1">00012</a>         uint8_t minute;
+<a name="l00013"></a>00013     } <a class="code" href="structhcan_1_1oap__time.html">oap_time</a>;
+<a name="l00014"></a>00014 
+<a name="l00015"></a><a class="code" href="classhcan_1_1oap__field.html">00015</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1oap__field.html">oap_field</a>
+<a name="l00016"></a>00016     {
+<a name="l00017"></a>00017         <span class="keyword">private</span>:
+<a name="l00018"></a>00018             <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> *m_bcon;
+<a name="l00019"></a>00019             <span class="keyword">mutable</span> uint8_t m_oid;
+<a name="l00020"></a>00020             <span class="keyword">mutable</span> uint8_t m_ocid;
+<a name="l00021"></a>00021             <span class="keyword">mutable</span> uint8_t m_fid;
+<a name="l00022"></a>00022             <span class="keyword">mutable</span> uint8_t m_fcid; <span class="comment">// Field Class / Datentyp des Feldes</span>
+<a name="l00023"></a>00023             <span class="keyword">mutable</span> uint8_t m_flags;
+<a name="l00024"></a>00024             <span class="keyword">mutable</span> uint8_t m_arraysize;
+<a name="l00025"></a>00025         <span class="keyword">private</span>:
+<a name="l00026"></a>00026             <span class="keyword">mutable</span> uint8_t m_details_loaded;
+<a name="l00027"></a>00027             <span class="keywordtype">void</span> load_details() <span class="keyword">const</span>; <span class="comment">// muss const sein wegen caller-methoden</span>
+<a name="l00028"></a>00028         <span class="keyword">public</span>:
+<a name="l00029"></a>00029             <a class="code" href="classhcan_1_1oap__field.html#b3aa52547f349a47a20308f13fdfc207">oap_field</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> *<a class="code" href="classhcan_1_1oap__field.html#5e805f6e45289b146beac3e28126dd6e">bcon</a>, uint8_t <a class="code" href="classhcan_1_1oap__field.html#a20bb23e2bf37246751ec909d33f2b18">oid</a>, uint8_t ocid,
+<a name="l00030"></a>00030                     uint8_t <a class="code" href="classhcan_1_1oap__field.html#67e752e31105b205c423710197ef9d33">fid</a>);
+<a name="l00031"></a>00031             <a class="code" href="classhcan_1_1oap__field.html#b3aa52547f349a47a20308f13fdfc207">oap_field</a>();
+<a name="l00032"></a>00032             <a class="code" href="classhcan_1_1oap__field.html#fba646da5b3e95d590d1190b43e4c37d">~oap_field</a>();
+<a name="l00033"></a>00033             <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1oap__field.html#15168a145f1ee98272b2ac8812516905">name</a>() <span class="keyword">const</span>;
+<a name="l00034"></a>00034             uint8_t <a class="code" href="classhcan_1_1oap__field.html#a20bb23e2bf37246751ec909d33f2b18">oid</a>() <span class="keyword">const</span>;
+<a name="l00035"></a>00035             uint8_t <a class="code" href="classhcan_1_1oap__field.html#67e752e31105b205c423710197ef9d33">fid</a>() <span class="keyword">const</span>;
+<a name="l00036"></a>00036             uint8_t <a class="code" href="classhcan_1_1oap__field.html#c9d171803062eeecf89f4c218665d684">fcid</a>() <span class="keyword">const</span>;
+<a name="l00037"></a>00037             uint8_t <a class="code" href="classhcan_1_1oap__field.html#4cfd37eb6ebe0651f0ddf702e28d5e4d">arraysize</a>() <span class="keyword">const</span>;
+<a name="l00038"></a>00038             uint16_t <a class="code" href="classhcan_1_1oap__field.html#1ff4dbb2efa77d75d6ec9eb7579191a4">value</a>(uint8_t idx = 0) <span class="keyword">const</span>;
+<a name="l00039"></a>00039             <a class="code" href="structhcan_1_1oap__time.html">oap_time</a> <a class="code" href="classhcan_1_1oap__field.html#505456ee723ebd939ef6ffd7c2e6a764">value_as_time</a>(uint8_t idx = 0) <span class="keyword">const</span>;
+<a name="l00040"></a>00040             <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1oap__field.html#21e280ca68a471c7d9110e1fff08987f">value_as_string</a>(uint8_t idx = 0) <span class="keyword">const</span>;
+<a name="l00041"></a>00041             <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1oap__field.html#1e16b5f29635b92fef1201c4f2a99a15">class_as_string</a>() <span class="keyword">const</span>;
+<a name="l00042"></a>00042             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">set_value</a>(uint16_t value, uint8_t idx = 0);
+<a name="l00043"></a>00043             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">set_value</a>(<a class="code" href="structhcan_1_1oap__time.html">oap_time</a> &amp;time, uint8_t idx = 0);
+<a name="l00044"></a>00044             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1oap__field.html#6ffd498458e6ce64d2ef546c07e4a0ba">set_value</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;value, uint8_t idx = 0);
+<a name="l00045"></a>00045             <span class="keyword">const</span> <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;<a class="code" href="classhcan_1_1oap__field.html#5e805f6e45289b146beac3e28126dd6e">bcon</a>() <span class="keyword">const</span>;
+<a name="l00046"></a>00046     };
+<a name="l00047"></a>00047 
+<a name="l00048"></a><a class="code" href="classhcan_1_1oap__object.html">00048</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1oap__object.html">oap_object</a>
+<a name="l00049"></a>00049     {
+<a name="l00050"></a>00050         <span class="keyword">private</span>:
+<a name="l00051"></a>00051             <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> *m_bcon;
+<a name="l00052"></a>00052             vector&lt;oap_field&gt; m_fields;
+<a name="l00053"></a>00053             uint8_t m_oid;
+<a name="l00054"></a>00054             <span class="keyword">mutable</span> uint8_t m_cid;
+<a name="l00055"></a>00055             <span class="keyword">mutable</span> uint8_t m_param1;
+<a name="l00056"></a>00056             <span class="keyword">mutable</span> uint8_t m_param2;
+<a name="l00057"></a>00057             <span class="keyword">mutable</span> uint8_t m_param3;
+<a name="l00058"></a>00058             <span class="keyword">mutable</span> uint8_t m_param4;
+<a name="l00059"></a>00059         <span class="keyword">public</span>:
+<a name="l00060"></a>00060             <a class="code" href="classhcan_1_1oap__object.html#a224b0cbaeb3db851819fe7a8b4ae476">oap_object</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> *bcon, uint8_t <a class="code" href="classhcan_1_1oap__object.html#23addfa97af315a02d6b5b9a9be59375">oid</a>);
+<a name="l00061"></a>00061             <a class="code" href="classhcan_1_1oap__object.html#6d4011e63fd4dc47b5cb3220136b65bf">~oap_object</a>();
+<a name="l00062"></a>00062             <span class="keywordtype">string</span> <a class="code" href="classhcan_1_1oap__object.html#f4506e1a04de61e0df0828e5a2e5ac1f">class_name</a>() <span class="keyword">const</span>;
+<a name="l00063"></a>00063             uint8_t <a class="code" href="classhcan_1_1oap__object.html#42fb6717d965718b0a48d47670b667c1">field_count</a>() <span class="keyword">const</span>;
+<a name="l00064"></a>00064             <span class="keyword">const</span> <a class="code" href="classhcan_1_1oap__field.html">oap_field</a> &amp;<a class="code" href="classhcan_1_1oap__object.html#1370cda7e48ddcf3f4bdee8c8ef4d655">field</a>(uint8_t fid) <span class="keyword">const</span>;
+<a name="l00065"></a>00065             uint8_t <a class="code" href="classhcan_1_1oap__object.html#23addfa97af315a02d6b5b9a9be59375">oid</a>() <span class="keyword">const</span>;
+<a name="l00066"></a>00066             uint8_t <a class="code" href="classhcan_1_1oap__object.html#821825642a2bf03732c8c249d3711a46">cid</a>() <span class="keyword">const</span>;
+<a name="l00067"></a>00067             <span class="keyword">const</span> <a class="code" href="classhcan_1_1oap__field.html">oap_field</a> &amp;<a class="code" href="classhcan_1_1oap__object.html#b0a1d5dfc5b74ae90a4d7ed918a31aae">field_by_name</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name) <span class="keyword">const</span>;
+<a name="l00068"></a>00068     };
+<a name="l00069"></a>00069 
+<a name="l00070"></a><a class="code" href="classhcan_1_1oap__access.html">00070</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1oap__access.html">oap_access</a>
+<a name="l00071"></a>00071     {
+<a name="l00072"></a>00072         <span class="keyword">private</span>:
+<a name="l00073"></a>00073             <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;m_bcon;
+<a name="l00074"></a>00074             vector&lt;oap_object&gt; m_objects;
+<a name="l00075"></a>00075             xmlpp::DomParser m_oap_xml;
+<a name="l00076"></a>00076         <span class="keyword">public</span>:
+<a name="l00077"></a>00077             <a class="code" href="classhcan_1_1oap__access.html#5b1b7d70336ed73947b536ede2b4a307">oap_access</a>(<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon);
+<a name="l00078"></a>00078             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1oap__access.html#2a39790ef0b83d9d63bca3c435f567de">~oap_access</a>();
+<a name="l00079"></a>00079             uint8_t <a class="code" href="classhcan_1_1oap__access.html#cfd484c63952eb7b107417a08219f2f8">object_count</a>();
+<a name="l00080"></a>00080             <a class="code" href="classhcan_1_1oap__object.html">oap_object</a> &amp;<a class="code" href="classhcan_1_1oap__access.html#311cb2907c56f23fcca25737338e5c9f">object</a>(uint8_t oid);
+<a name="l00081"></a>00081     };
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 }
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:51 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

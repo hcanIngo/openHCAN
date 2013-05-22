@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>libhcan++: board_driver.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>board_driver.h</h1><a href="board__driver_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef BOARD_DRIVER_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define BOARD_DRIVER_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;memory&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008 <span class="keyword">using namespace </span>std;
+<a name="l00009"></a>00009 
+<a name="l00010"></a>00010 <span class="keyword">namespace </span>hcan
+<a name="l00011"></a>00011 {
+<a name="l00012"></a>00012     <span class="keyword">class </span>board_connection;
+<a name="l00013"></a>00013     <span class="keyword">class </span>transport_connection;
+<a name="l00014"></a>00014 
+<a name="l00015"></a><a class="code" href="structhcan_1_1context.html">00015</a>     <span class="keyword">struct </span><a class="code" href="structhcan_1_1context.html">context</a>
+<a name="l00016"></a>00016     {
+<a name="l00017"></a><a class="code" href="structhcan_1_1context.html#c030e887b884a3d99c5d8e17cc63899d">00017</a>         <span class="keywordtype">string</span> <a class="code" href="structhcan_1_1context.html#c030e887b884a3d99c5d8e17cc63899d">prompt</a>;
+<a name="l00018"></a><a class="code" href="structhcan_1_1context.html#af5fec76a373a4ac7e2e1168d37696a3">00018</a>         <span class="keywordtype">string</span> <a class="code" href="structhcan_1_1context.html#af5fec76a373a4ac7e2e1168d37696a3">std_prompt</a>;
+<a name="l00019"></a><a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">00019</a>         uint16_t <a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a>;
+<a name="l00020"></a><a class="code" href="structhcan_1_1context.html#02bae85c0649eddc3e6e952295b432f4">00020</a>         uint16_t <a class="code" href="structhcan_1_1context.html#02bae85c0649eddc3e6e952295b432f4">eds_block_address</a>;
+<a name="l00021"></a><a class="code" href="structhcan_1_1context.html#83a28ffb84b3979ff65dfe2c3b0b0e99">00021</a>         uint16_t <a class="code" href="structhcan_1_1context.html#83a28ffb84b3979ff65dfe2c3b0b0e99">oap_oid</a>;
+<a name="l00022"></a><a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389ef4275146383a9e57bd7215ce19a926f1">00022</a>         <span class="keyword">enum</span> { <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389ebf6a2f033a72a65aab4c29bcfb990b3f">normal</a> = 1, <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389eb7c74a07afbb49d89869aa37d7f10c0c">edit</a>, <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389ef4275146383a9e57bd7215ce19a926f1">oap</a> };
+<a name="l00023"></a>00023 
+<a name="l00024"></a><a class="code" href="structhcan_1_1context.html#0d694520960de7913678fa2e7a79831a">00024</a>         <a class="code" href="structhcan_1_1context.html#0d694520960de7913678fa2e7a79831a">context</a> ()
+<a name="l00025"></a>00025         {
+<a name="l00026"></a>00026             <a class="code" href="structhcan_1_1context.html#af5fec76a373a4ac7e2e1168d37696a3">std_prompt</a> = <span class="stringliteral">"&gt; "</span>;
+<a name="l00027"></a>00027             <a class="code" href="structhcan_1_1context.html#d5f3402c26ce04682ce567202e0fc30d">reset</a>();
+<a name="l00028"></a>00028         }
+<a name="l00029"></a>00029 
+<a name="l00030"></a><a class="code" href="structhcan_1_1context.html#d5f3402c26ce04682ce567202e0fc30d">00030</a>         <span class="keywordtype">void</span> <a class="code" href="structhcan_1_1context.html#d5f3402c26ce04682ce567202e0fc30d">reset</a>()
+<a name="l00031"></a>00031         {
+<a name="l00032"></a>00032             <a class="code" href="structhcan_1_1context.html#c030e887b884a3d99c5d8e17cc63899d">prompt</a> = <a class="code" href="structhcan_1_1context.html#af5fec76a373a4ac7e2e1168d37696a3">std_prompt</a>;
+<a name="l00033"></a>00033             <a class="code" href="structhcan_1_1context.html#b8dba06550ec066974101d8d52b3ccb8">mode</a> = <a class="code" href="structhcan_1_1context.html#84bfd4bfcd2254c278347e55fb3c389ebf6a2f033a72a65aab4c29bcfb990b3f">normal</a>;
+<a name="l00034"></a>00034         }
+<a name="l00035"></a>00035     };
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="classhcan_1_1board__driver.html">00037</a>     <span class="keyword">class </span><a class="code" href="classhcan_1_1board__driver.html">board_driver</a>
+<a name="l00038"></a>00038     {
+<a name="l00039"></a>00039         <span class="keyword">protected</span>:
+<a name="l00040"></a><a class="code" href="classhcan_1_1board__driver.html#ed5c5ebb0dd033e4bd0ad83d6f7ed30c">00040</a>             <a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;<a class="code" href="classhcan_1_1board__driver.html#ed5c5ebb0dd033e4bd0ad83d6f7ed30c">m_bcon</a>;
+<a name="l00041"></a><a class="code" href="classhcan_1_1board__driver.html#851f4a319f7dd0637e353e1acba8db6b">00041</a>             <a class="code" href="classhcan_1_1transport__connection.html">transport_connection</a> &amp;<a class="code" href="classhcan_1_1board__driver.html#851f4a319f7dd0637e353e1acba8db6b">m_tcon</a>;
+<a name="l00042"></a><a class="code" href="classhcan_1_1board__driver.html#f05595f07110f0d67624ccd04a1e1ca6">00042</a>             uint16_t <a class="code" href="classhcan_1_1board__driver.html#f05595f07110f0d67624ccd04a1e1ca6">m_page_size</a>;
+<a name="l00043"></a>00043         <span class="keyword">protected</span>:
+<a name="l00044"></a>00044             <span class="keyword">virtual</span> uint8_t <a class="code" href="classhcan_1_1board__driver.html#6685e6263d14eff894c311b91f39ee74">read_eeprom_byte</a>(<span class="keyword">const</span> uint16_t address);
+<a name="l00045"></a>00045             <span class="keyword">virtual</span> uint16_t <a class="code" href="classhcan_1_1board__driver.html#97bf9d98e395083878bf511f2d1cf864">read_eeprom_word_le</a>(<span class="keyword">const</span> uint16_t address);
+<a name="l00046"></a>00046             <span class="keyword">virtual</span> uint16_t <a class="code" href="classhcan_1_1board__driver.html#3d486151eb69ee558b44cd87aeb7a360">read_eeprom_word_be</a>(<span class="keyword">const</span> uint16_t address);
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#00f1a530c7764fef98129a90df514d97">write_eeprom_byte</a>(<span class="keyword">const</span> uint16_t address, 
+<a name="l00049"></a>00049                     <span class="keyword">const</span> uint8_t data);
+<a name="l00050"></a>00050             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#98432dc27020af2fd5084cecd006be47">write_eeprom_word_le</a>(<span class="keyword">const</span> uint16_t address, 
+<a name="l00051"></a>00051                     <span class="keyword">const</span> uint16_t data);
+<a name="l00052"></a>00052             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#cfd9c662344c504dfbd50ba653d005e8">write_eeprom_word_be</a>(<span class="keyword">const</span> uint16_t address, 
+<a name="l00053"></a>00053                     <span class="keyword">const</span> uint16_t data);
+<a name="l00054"></a>00054             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#8f25cead4560d601b7afb0d80c2ceeba">cmd_flash</a> (<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;filename);
+<a name="l00055"></a>00055             <span class="keyword">virtual</span> uint16_t <a class="code" href="classhcan_1_1board__driver.html#563f3fb84df6cc10b39e65505d3420f7">cmd_getaddress</a> ();
+<a name="l00056"></a>00056             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#acfbc823a529f0c0ba4a0a9a2da5eca0">cmd_setaddress</a> (<span class="keyword">const</span> uint16_t address);
+<a name="l00057"></a>00057             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#10318a64a0e599689c5e29645369ae96">cmd_reset</a>();
+<a name="l00058"></a>00058             <span class="keyword">virtual</span> uint32_t <a class="code" href="classhcan_1_1board__driver.html#d85a56a6c4a0e2daee7f170f44881377">cmd_getuptime</a>();
+<a name="l00059"></a>00059             <span class="keyword">virtual</span> uint8_t <a class="code" href="classhcan_1_1board__driver.html#3b0cdff6199a3965e5e30b6ffc62f56b">cmd_getstate</a>();
+<a name="l00060"></a>00060             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#7b52d23a836c9a3e0e3da936f8aa5ada">cmd_dump_ee</a>(uint16_t address);
+<a name="l00061"></a>00061             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#c3db1a228d0b4198db2b84f70880f10b">cmd_setsysloglevel</a>(uint16_t level);
+<a name="l00062"></a>00062             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#b83e920bb45affa9d3313fb80c24cb03">cmd_loadapp</a>();
+<a name="l00063"></a>00063             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#99ce9ed441b270e1e0ef294578552803">cmd_bootloader</a>();
+<a name="l00064"></a>00064             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#15c50a808307b7bce15166961c79a3d5">cmd_show_system</a>();
+<a name="l00065"></a>00065             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#0f45b107f9b719aa249afdf174b8c2a9">cmd_show_time</a>();
+<a name="l00066"></a>00066             <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classhcan_1_1board__driver.html#776fdf66f44ce5bec1e8cb418b3d3ce7">show_help</a>();
+<a name="l00067"></a>00067             <span class="keyword">const</span> std::string <a class="code" href="classhcan_1_1board__driver.html#2072564d0cc87e96af1891016eb69361">cached_filename</a>() <span class="keyword">const</span>;
+<a name="l00068"></a>00068             uint16_t <a class="code" href="classhcan_1_1board__driver.html#231e586b2fc5e0947aa5db48bf82bebe">load_crc16_from_board</a>(uint16_t size) <span class="keyword">const</span>;
+<a name="l00069"></a>00069             <span class="keywordtype">void</span> <a class="code" href="classhcan_1_1board__driver.html#61ed709e97aa2d8a0e78277621eb6d52">save_crc16_to_board</a>(uint16_t crc16, uint16_t size);
+<a name="l00070"></a>00070         <span class="keyword">public</span>:
+<a name="l00071"></a>00071             <a class="code" href="classhcan_1_1board__driver.html#743153e4115c7b2dc78105dd925e943f">board_driver</a> (<a class="code" href="classhcan_1_1board__connection.html">board_connection</a> &amp;bcon);
+<a name="l00072"></a>00072             <span class="keyword">virtual</span> <a class="code" href="classhcan_1_1board__driver.html#8f59030a9040f601a1203061fe503817">~board_driver</a> ();
+<a name="l00073"></a>00073             <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classhcan_1_1board__driver.html#ff0b594b943d1106ebbe1dd46669c8ec">exec_command</a> (<a class="code" href="structhcan_1_1context.html">context</a> &amp;c, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;cmd);
+<a name="l00074"></a>00074     };
+<a name="l00075"></a>00075 
+<a name="l00076"></a><a class="code" href="namespacehcan.html#4405ce0eef0494525026215fd1929148">00076</a>     <span class="keyword">typedef</span> std::auto_ptr&lt;board_driver&gt; <a class="code" href="namespacehcan.html#4405ce0eef0494525026215fd1929148">board_driver_p</a>;
+<a name="l00077"></a>00077 };
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 <span class="comment">// Experimentelles Feature</span>
+<a name="l00080"></a>00080 <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="board__driver_8cc.html#f5d4e9ae3b6a4d974306b1baedb9ec22">incremental_flash</a>;
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:39:50 2009 für libhcan++ von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

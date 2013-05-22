@@ -1,0 +1,1363 @@
+
+\subsection{HMS - HCAN Management Service (1)}
+\begin{itemize}
+		
+\item \textbf{PING\_REQUEST} (1)
+
+\textit{Zum Testen, ob ein Geraet auf diese Adresse horcht}
+
+\item \textbf{PING\_REPLAY} (2)
+
+\textit{Anwort des Geraetes}
+
+\item \textbf{DEVICE\_STATE\_REQUEST} (3)
+
+\textit{Fragt ein Geraet nach seinem aktuellen Zustand}
+
+\item \textbf{DEVICE\_STATE\_REPLAY} (4)
+
+\textit{Liefert den aktuellen Zustand zurueck}
+
+\small
+\begin{itemize}
+		
+\item \textbf{state:} 0 = booting, 1 = Bootloader, 2 = Application
+\end{itemize}
+\normalsize
+	
+\item \textbf{DEVICE\_RESET} (5)
+
+\textit{Loest einen Watchdog Reset aus}
+
+\item \textbf{DEVICE\_BOOT\_STOP} (6)
+
+\textit{stoppt den Bootvorgang; Geraet geht in den Bootloader-State}
+
+\item \textbf{DEVICE\_BOOT\_STOP\_ACK} (7)
+
+\textit{Wenn Bootvorgang gestoppt, sendet das Geraet diese Bestaetigung}
+
+\item \textbf{DEVICE\_LOAD\_APP} (8)
+
+\textit{Laed die Applikation, sofern das Geraet im Bootloader State ist}
+
+\item \textbf{DEVICE\_TYPE\_REQUEST} (9)
+
+\textit{Fragt den Geraetetyp ab}
+
+\item \textbf{DEVICE\_TYPE\_REPLAY} (10)
+
+\textit{Liefert den Geraete-Typ}
+
+\small
+\begin{itemize}
+		
+\item \textbf{arch:} 0 = Atmega8 1 = Atmega32
+\item \textbf{type:} Hardware-Board-Typ
+\end{itemize}
+\normalsize
+	
+\item \textbf{FLASH\_BUFFER\_FILL} (16)
+
+\textit{Sendet 4 Bytes zum Geraet. Details stehen in der Dokumentation zum Flashen}
+
+\small
+\begin{itemize}
+		
+\item \textbf{index:} definiert die Position von d[0] im Zielbuffer auf dem Device
+\item \textbf{d0:} Databyte
+\item \textbf{d1:} Databyte
+\item \textbf{d2:} Databyte
+\item \textbf{d3:} Databyte
+\end{itemize}
+\normalsize
+	
+\item \textbf{FLASH\_BUFFER\_FILL\_ACK} (17)
+
+\textit{Geraet bestaetigt damit den Erhalt einer Zeile}
+
+\item \textbf{FLASH\_BUFFER\_WRITE} (18)
+
+\textit{Geraet schreibt den Puffer an die gegebene Adresse in das Flash}
+
+\small
+\begin{itemize}
+		
+\item \textbf{addr\_lsb:} LSB der Adresse im Flash
+\item \textbf{addr\_msb:} MSB der Adresse im Flash
+\end{itemize}
+\normalsize
+	
+\item \textbf{FLASH\_BUFFER\_WRITE\_ACK} (19)
+
+\textit{Geraet bestaetigt das Schreiben}
+
+\item \textbf{INTERNAL\_EEPROM\_WRITE} (20)
+
+\textit{Beschreibt eine Speicherzelle des internen EEPROMs (ohne Pruefung!)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{addr\_lsb:} LSB der Adresse im EEPROM
+\item \textbf{addr\_msb:} MSB der Adresse im EEPROM
+\item \textbf{value:} der zu schreibende Wert
+\end{itemize}
+\normalsize
+	
+\item \textbf{INTERNAL\_EEPROM\_WRITE\_ACK} (21)
+
+\textit{Geraet bestaetigt das Schreiben (ohne Pruefung!)}
+
+\item \textbf{INTERNAL\_EEPROM\_READ\_REQUEST} (22)
+
+\textit{Leseanforderung fuer eine Speicherzelle des internen EEPROMs}
+
+\small
+\begin{itemize}
+		
+\item \textbf{addr\_lsb:} LSB der Adresse im EEPROM
+\item \textbf{addr\_msb:} MSB der Adresse im EEPROM
+\end{itemize}
+\normalsize
+	
+\item \textbf{INTERNAL\_EEPROM\_READ\_REPLAY} (23)
+
+\textit{Geraet sendet den gelesenen Wert}
+
+\small
+\begin{itemize}
+		
+\item \textbf{value:} der Wert aus dem EEPROM
+\end{itemize}
+\normalsize
+	
+\item \textbf{INTERNAL\_EEPROM\_READ\_BULK\_REQUEST} (24)
+
+\textit{Leseanforderung fuer eine Speicherzelle des internen EEPROMs, Bulkversion}
+
+\small
+\begin{itemize}
+		
+\item \textbf{addr\_lsb:} LSB der Adresse im EEPROM
+\item \textbf{addr\_msb:} MSB der Adresse im EEPROM
+\end{itemize}
+\normalsize
+	
+\item \textbf{INTERNAL\_EEPROM\_READ\_BULK\_REPLAY} (25)
+
+\textit{Geraet sendet 6 gelesene Bytes (Bulk) ab addr\_msb:addr\_lsb}
+
+\small
+\begin{itemize}
+		
+\item \textbf{d0:} Byte an Offset 0
+\item \textbf{d1:} Byte an Offset 1
+\item \textbf{d2:} Byte an Offset 2
+\item \textbf{d3:} Byte an Offset 3
+\item \textbf{d4:} Byte an Offset 4
+\item \textbf{d5:} Byte an Offset 5
+\end{itemize}
+\normalsize
+	
+\item \textbf{UPTIME\_QUERY} (30)
+
+\textit{Abfrage der Uptime. Das ist die vergangene Zeit seit dem letzten Reboot/Reset}
+
+\item \textbf{UPTIME\_REPLAY} (31)
+
+\textit{Geraet sendet die Uptime als 32Bit Wert in Sekunden}
+
+\small
+\begin{itemize}
+		
+\item \textbf{u3:} MSB der 32 Bit Uptime
+\item \textbf{u2:} 
+\item \textbf{u1:} 
+\item \textbf{u0:} LSB der 32 Bit Uptime
+\end{itemize}
+\normalsize
+	
+\item \textbf{SYSLOG\_LEVEL\_SET} (32)
+
+\textit{Setzt den Debug-Level fuer die Syslog Botschaften}
+
+\small
+\begin{itemize}
+		
+\item \textbf{level:}  1 = CRITICAL, 2 = ERROR, 3 = WARNING, 4 = DEBUG 
+\end{itemize}
+\normalsize
+	
+\item \textbf{BUILD\_VERSION\_QUERY} (33)
+
+\textit{Fragt nach der Build Version}
+
+\item \textbf{BUILD\_VERSION\_REPLAY} (34)
+
+\textit{Liefert die Build Version}
+
+\small
+\begin{itemize}
+		
+\item \textbf{hi:} Build Nummer, Hi Teil
+\item \textbf{lo:} Build Nummer, Lo Teil
+\end{itemize}
+\normalsize
+	
+\item \textbf{CAN\_EC\_QUERY} (35)
+
+\textit{Fragt nach den CAN Error Counter Staenden}
+
+\item \textbf{CAN\_EC\_REPLAY} (36)
+
+\textit{Liefert die CAN Error Counter Staende}
+
+\small
+\begin{itemize}
+		
+\item \textbf{REC:} RX Error Counter
+\item \textbf{TEC:} TX Error Counter
+\end{itemize}
+\normalsize
+	
+\item \textbf{FLASH\_CRC16\_QUERY} (37)
+
+\textit{Errechnet die CRC16 Pruefsumme ueber den Flash bis zur angegebenen Adresse}
+
+\small
+\begin{itemize}
+		
+\item \textbf{hi:} Adresse hi
+\item \textbf{lo:} Adresse lo
+\end{itemize}
+\normalsize
+	
+\item \textbf{FLASH\_CRC16\_REPLAY} (38)
+
+\textit{Liefert die errechnete CRC16 Pruefsumme ueber den Flash}
+
+\small
+\begin{itemize}
+		
+\item \textbf{hi:} CRC16 hi
+\item \textbf{lo:} CRC16 lo
+\end{itemize}
+\normalsize
+	
+\item \textbf{LOOP\_THROUGHPUT\_QUERY} (39)
+
+\textit{Fragt nach der Anzahl der Schleifen/sec}
+
+\item \textbf{LOOP\_THROUGHPUT\_REPLAY} (40)
+
+\textit{Liefert die Anzahl der Schleifen/sec}
+
+\small
+\begin{itemize}
+		
+\item \textbf{hi:} MSB
+\item \textbf{lo:} LSB
+\end{itemize}
+\normalsize
+	
+\item \textbf{RX\_RECEIVED\_QUERY} (41)
+
+\textit{Fragt nach der Anzahl der bisher empfangenen Frames}
+
+\item \textbf{RX\_RECEIVED\_REPLAY} (42)
+
+\textit{Liefert die Anzahl der bisher empfangenen Frames (32bit)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{d0:} MSB
+\item \textbf{d1:} 
+\item \textbf{d2:} 
+\item \textbf{d3:} LSB
+\end{itemize}
+\normalsize
+	
+\item \textbf{RX\_LOST\_QUERY} (43)
+
+\textit{Fragt nach der Anzahl der bisher verlorenen Frames}
+
+\item \textbf{RX\_LOST\_REPLAY} (44)
+
+\textit{Liefert die Anzahl der bisher verlorenen Frames (32bit)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{d0:} MSB
+\item \textbf{d1:} 
+\item \textbf{d2:} 
+\item \textbf{d3:} LSB
+\end{itemize}
+\normalsize
+	
+\item \textbf{TX\_SENT\_QUERY} (45)
+
+\textit{Fragt nach der Anzahl der bisher gesendeten Frames}
+
+\item \textbf{TX\_SENT\_REPLAY} (46)
+
+\textit{Liefert die Anzahl der bisher gesendeten Frames (32bit)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{d0:} MSB
+\item \textbf{d1:} 
+\item \textbf{d2:} 
+\item \textbf{d3:} LSB
+\end{itemize}
+\normalsize
+	
+\item \textbf{TX\_DROPPED\_QUERY} (47)
+
+\textit{Fragt nach der Anzahl der bisher verworfenen Frames}
+
+\item \textbf{TX\_DROPPED\_REPLAY} (48)
+
+\textit{Liefert die Anzahl der bisher verworfenen Frames (32bit)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{d0:} MSB
+\item \textbf{d1:} 
+\item \textbf{d2:} 
+\item \textbf{d3:} LSB
+\end{itemize}
+\normalsize
+	
+\item \textbf{RX\_TX\_STATS\_RESET} (49)
+
+\textit{Setzt alle RX/TX Stats Counter zurueck}
+
+\end{itemize}
+	
+\subsection{SLS - Syslog Service (4)}
+\begin{itemize}
+		
+\item \textbf{BOOT\_RESETFLAG\_LOG} (1)
+
+\textit{Meldet den Wert des Resetflag-Registers direkt nach dem Booten}
+
+\textit{1: Power-on Reset 2: External Reset 4: Brown-Out Reset 8: Watchdog Reset}
+
+\small
+\begin{itemize}
+		
+\item \textbf{flag:} siehe Atmega8 Referenz-Handbuch, S.39
+\end{itemize}
+\normalsize
+	
+\item \textbf{FIRMWARE\_CRC16\_ERROR} (2)
+
+\textit{Meldet eine fehlerhafte CRC16 Firmware Pruefsumme}
+
+\item \textbf{FIRMWARE\_CONFIG\_COMPAT\_ERROR} (3)
+
+\textit{Firmware und Config sind nicht kompatibel}
+
+\small
+\begin{itemize}
+		
+\item \textbf{eds\_block\_type:} betroffener EDS Block-Typ
+\item \textbf{eds\_addr\_hi:} EDS Adresse Hi
+\item \textbf{eds\_addr\_lo:} EDS Adresse Lo
+\item \textbf{size\_in\_config:} Groesse im EDS
+\item \textbf{size\_in\_firmware:} Groesse in der Firmware
+\end{itemize}
+\normalsize
+	
+\end{itemize}
+	
+\subsection{HES - Haus-Elektrik Service (5)}
+\begin{itemize}
+		
+\item \textbf{TASTER\_DOWN} (1)
+
+\textit{Sendet ein Taster beim Druecken; Power-Ports reagieren mit Toggle (an -> aus, aus -> an)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Taster-Gruppe, auf die der Taster konfiguriert ist
+\item \textbf{index:} Index des Taster-Ports; nur noetig fuer Logging-Zwecke, falls Gruppe nicht eindeutig
+\end{itemize}
+\normalsize
+	
+\item \textbf{TASTER\_UP} (2)
+
+\textit{Sendet ein Taster beim Druecken; Power-Ports reagieren mit Toggle (an -> aus, aus -> an)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Taster-Gruppe
+\item \textbf{index:} Index des Taster-Ports
+\end{itemize}
+\normalsize
+	
+\item \textbf{POWER\_GROUP\_ON} (10)
+
+\textit{Reaktion: Power-Port(s) schalten sich an}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\end{itemize}
+\normalsize
+	
+\item \textbf{POWER\_GROUP\_OFF} (11)
+
+\textit{Power-Port(s) schalten sich aus}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\end{itemize}
+\normalsize
+	
+\item \textbf{POWER\_GROUP\_STATE\_QUERY} (12)
+
+\textit{Abfrage des Status eines oder mehrerer Power-Ports (ob an oder aus)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\end{itemize}
+\normalsize
+	
+\item \textbf{POWER\_GROUP\_STATE\_REPLAY} (13)
+
+\textit{Antwort eines Power-Ports mit dem aktuellen Status}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{status:} 1 = an, 0 = aus
+\end{itemize}
+\normalsize
+	
+\item \textbf{POWER\_GROUP\_TIMER\_QUERY} (14)
+
+\textit{Anfrage an eine Lichtzone o.ae. nach der Timer Stand }
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\end{itemize}
+\normalsize
+	
+\item \textbf{POWER\_GROUP\_TIMER\_REPLAY} (15)
+
+\textit{Antwort einer Lichtzone mit dem Timer Stand }
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{timer\_hi:} Timer-Stand, High Byte
+\item \textbf{timer\_lo:} Timer-Stand, Low Byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{POWER\_GROUP\_SET\_TIMER} (16)
+
+\textit{Setzt den aktuellen Timer-Stand einer Lichtzone}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{timer\_hi:} Timer-Stand, High Byte
+\item \textbf{timer\_lo:} Timer-Stand, Low Byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{POWER\_GROUP\_STATE\_INFO} (17)
+
+\textit{Power-Port meldet nach Aenderung seinen Status}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{status:} 1 = an, 0 = aus
+\end{itemize}
+\normalsize
+	
+\item \textbf{ROLLADEN\_POSITION\_SET} (20)
+
+\textit{Faehrt einen Rolladen auf die gegebene Position}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{position:} Position im Bereich [0..100]; 100% = oben
+\end{itemize}
+\normalsize
+	
+\item \textbf{ROLLADEN\_POSITION\_REQUEST} (21)
+
+\textit{Fragt einen Rolladen nach der aktuellen Position}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\end{itemize}
+\normalsize
+	
+\item \textbf{ROLLADEN\_POSITION\_REPLAY} (22)
+
+\textit{Der Rolladen antwortet mit der aktuellen Position}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{position:} Position im Bereich [0..100]; 100% = oben
+\end{itemize}
+\normalsize
+	
+\item \textbf{ROLLADEN\_DEFINE\_POSITION} (23)
+
+\textit{Definiert die aktuelle Position eines Rolladen (!)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{position:} Position im Bereich [0..100]; 100% = oben
+\end{itemize}
+\normalsize
+	
+\item \textbf{1WIRE\_DISCOVER} (30)
+
+\textit{Veranlasst einen 1Wire Scan an gebenen Pin}
+
+\small
+\begin{itemize}
+		
+\item \textbf{pin:} Pin ID des 1Wire Ports im Bereich [0..7]
+\end{itemize}
+\normalsize
+	
+\item \textbf{1WIRE\_DISCOVERED\_PART\_1} (31)
+
+\textit{ein 1Wire Device ist gefunden worden, Message Teil 1}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id0:} 1. Byte der 1Wire id[8] (Checksum dabei)
+\item \textbf{id1:} 2. Byte
+\item \textbf{id2:} 3. Byte
+\item \textbf{id3:} 4. Byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{1WIRE\_DISCOVERED\_PART\_2} (32)
+
+\textit{ein 1Wire Device ist gefunden worden, Message Teil 1}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id4:} 5. Byte der 1Wire id[8] (Checksum dabei)
+\item \textbf{id5:} 6. Byte
+\item \textbf{id6:} 7. Byte
+\item \textbf{id7:} 8. Byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{1WIRE\_ERROR} (33)
+
+\textit{ein 1Wire Fehler trat auf}
+
+\small
+\begin{itemize}
+		
+\item \textbf{error:} 3 = NoSensorFound, 4 = BusError
+\end{itemize}
+\normalsize
+	
+\item \textbf{1WIRE\_TEMPERATURE} (34)
+
+\textit{Messergebnis (Fixed Point) eines DS18B20 1Wire Temperaturfuehlers}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{temp\_hi:} MSB
+\item \textbf{temp\_lo:} LSB; 4 LSB sind Nachkommabits
+\end{itemize}
+\normalsize
+	
+\item \textbf{1WIRE\_TEMPERATURE\_QUERY} (35)
+
+\textit{fragt einen Temperatursensor nach der aktuellen Temperatur}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\end{itemize}
+\normalsize
+	
+\item \textbf{1WIRE\_TEMPERATURE\_REPLAY} (36)
+
+\textit{Messergebnis (Fixed Point) eines DS18B20 1Wire Temperaturfuehlers als Antwort auf 1WIRE\_TEMPERATURE\_QUERY}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{temp\_hi:} MSB
+\item \textbf{temp\_lo:} LSB; 4 LSB sind Nachkommabits
+\end{itemize}
+\normalsize
+	
+\item \textbf{REEDKONTAKT\_OFFEN} (40)
+
+\textit{Meldung fuer einen offenen Reedkontakt an Fenster oder Tuer}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\end{itemize}
+\normalsize
+	
+\item \textbf{REEDKONTAKT\_STATE\_QUERY} (41)
+
+\textit{Fragt nach dem Status eines Reedkontakts}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\end{itemize}
+\normalsize
+	
+\item \textbf{REEDKONTAKT\_STATE\_REPLAY} (42)
+
+\textit{Status Antwort eines Reedkontakts}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{state:} Zustand: 0 = zu, 1 = offen
+\end{itemize}
+\normalsize
+	
+\item \textbf{REEDKONTAKT\_STATE\_CHANGE} (43)
+
+\textit{Zustandsaenderung eines Reedkontakts}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Gruppe
+\item \textbf{state:} Zustand: 0 = zu, 1 = offen
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_DETAILS\_REQUEST} (50)
+
+\textit{UserPanel fragt nach Heizungsdetails}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_MODE\_OFF\_DETAILS} (51)
+
+\textit{Heizung ist aus (Off-Mode)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_SET\_MODE\_OFF} (52)
+
+\textit{Heizung schaltet aus}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_MODE\_MANUAL\_DETAILS} (53)
+
+\textit{Manueller Modus incl Parameter}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{rate:} Heiz-Rate
+\item \textbf{duration\_hi:} Restdauer (MSB), 0 = unbegrenzt
+\item \textbf{duration\_lo:} Restdauer (LSB)
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_SET\_MODE\_MANUAL} (54)
+
+\textit{Manueller Modus incl Parameter}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{rate:} Heiz-Rate
+\item \textbf{duration\_hi:} Restdauer (MSB), 0 = unbegrenzt
+\item \textbf{duration\_lo:} Restdauer (LSB)
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_MODE\_THERMOSTAT\_DETAILS} (55)
+
+\textit{Thermostat Modus incl Parameter}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{temp\_hi:} Soll-Temperatur (MSB)
+\item \textbf{temp\_lo:} Soll-Temperatur (LSB)
+\item \textbf{duration\_hi:} Restdauer (MSB), 0 = unbegrenzt
+\item \textbf{duration\_lo:} Restdauer (LSB)
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_SET\_MODE\_THERMOSTAT\_DETAILS} (56)
+
+\textit{Set Thermostat Modus incl Parameter}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{temp\_hi:} Soll-Temperatur (MSB)
+\item \textbf{temp\_lo:} Soll-Temperatur (LSB)
+\item \textbf{duration\_hi:} Restdauer (MSB), 0 = unbegrenzt
+\item \textbf{duration\_lo:} Restdauer (LSB)
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_MODE\_AUTOMATIK\_DETAILS} (57)
+
+\textit{Automatik Modus incl Parameter}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{temp\_hi:} Soll-Temperatur (MSB)
+\item \textbf{temp\_lo:} Soll-Temperatur (LSB)
+\item \textbf{timerange\_id:} Zeitbereichs-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_SET\_MODE\_AUTOMATIK} (58)
+
+\textit{Set Automatik Modus}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_TIST\_REQUEST} (59)
+
+\textit{UserPanel fragt nach T(ist)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_TIST\_REPLAY} (60)
+
+\textit{Controllerboard liefert T(ist)}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{temp\_hi:} Ist-Temperatur (MSB)
+\item \textbf{temp\_lo:} Ist-Temperatur (LSB)
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_WAERMEBEDARF\_INFO} (61)
+
+\textit{Heizung braucht Waerme oder nicht}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{value:} [0..100]: 0 = kein Bedarf
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZSTEUERUNG\_STATE\_REQUEST} (62)
+
+\textit{Fragt die Heizungssteuerung nach ihrem Stand}
+
+\item \textbf{HEIZSTEUERUNG\_STATE\_REPLAY} (63)
+
+\textit{die (einzige) Heizungssteuerung antwortet}
+
+\small
+\begin{itemize}
+		
+\item \textbf{VL\_soll:} Vorlauf-Soll
+\item \textbf{VL\_ist:} Vorlauf-Ist
+\item \textbf{RL\_ist:} Ruecklauf-Ist
+\item \textbf{BF:} Brennerfreigabe
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZSTEUERUNG\_STATE\_INFO} (64)
+
+\textit{Heizungssteuerung liefert den aktuellen Status}
+
+\small
+\begin{itemize}
+		
+\item \textbf{VL\_soll:} Vorlauf-Soll
+\item \textbf{GWB\_hi:} Gesamt-Waermebedarf
+\item \textbf{GWB\_lo:} Gesamt-Waermebedarf
+\item \textbf{BF:} Brennerfreigabe
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZSTEUERUNG\_SET\_VL} (65)
+
+\textit{gibt die Soll-VL Temperatur vor}
+
+\small
+\begin{itemize}
+		
+\item \textbf{VL\_soll:} Vorlauf-Soll
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_SOLLTEMP\_LINE\_REQUEST} (66)
+
+\textit{Fragt nach einer Solltemp/Zeitzonen Config Zeile}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{idx:} Index der Config Zeile [0..7]
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_SOLLTEMP\_LINE\_REPLAY} (67)
+
+\textit{Controllerboard liefert Zeile}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{idx:} Index der Config Zeile
+\item \textbf{temp\_hi:} Soll-Temperatur (MSB)
+\item \textbf{temp\_lo:} Soll-Temperatur (LSB)
+\item \textbf{zeitzone\_id:} ID der Zeitzone
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_SOLLTEMP\_WRITE\_LINE} (68)
+
+\textit{schreibt neue Solltemp Zeile: ACHTUNG: zeitzone\_id wird bisher NICHT geschrieben!}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{idx:} Index der Config Zeile
+\item \textbf{temp\_hi:} Soll-Temperatur (MSB)
+\item \textbf{temp\_lo:} Soll-Temperatur (LSB)
+\item \textbf{zeitzone\_id:} ID der Zeitzone
+\end{itemize}
+\normalsize
+	
+\item \textbf{HEIZUNG\_SOLLTEMP\_WRITE\_LINE\_ACK} (69)
+
+\textit{schreibt neue Solltemp Zeile}
+
+\small
+\begin{itemize}
+		
+\item \textbf{id:} Heizungs-ID
+\item \textbf{idx:} Index der Config Zeile
+\end{itemize}
+\normalsize
+	
+\item \textbf{CONFIG\_RELOAD} (100)
+
+\textit{Reaktion: Controllerboard laed die Config aus dem EEPROM neu}
+
+\item \textbf{CONFIG\_RAM\_USAGE\_REQUEST} (101)
+
+\textit{Fragt ab, wieviel bytes des Config RAM verwendet werden}
+
+\item \textbf{CONFIG\_RAM\_USAGE\_REPLAY} (102)
+
+\textit{Liefert die Anzahl der verwendeten Bytes im Config RAM}
+
+\small
+\begin{itemize}
+		
+\item \textbf{usage\_hi:} MSB des RAM Usage
+\item \textbf{usage\_lo:} LSB des RAM Usage
+\end{itemize}
+\normalsize
+	
+\item \textbf{ZEITZONE\_DETAILS\_REQUEST} (110)
+
+\textit{Fragt nach den Zeitzonen-Details}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Zeitzonen-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{ZEITZONE\_DETAILS\_REPLAY} (111)
+
+\textit{Liefert die Zeitzonen Details}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Zeitzonen-ID
+\item \textbf{day\_pattern:} Binaeres Day Pattern
+\item \textbf{from\_hour:} 
+\item \textbf{from\_minute:} 
+\item \textbf{to\_hour:} 
+\item \textbf{to\_minute:} 
+\end{itemize}
+\normalsize
+	
+\item \textbf{ZEITZONE\_WRITE\_DETAILS} (112)
+
+\textit{Liefert neue Zeitzonen Details, welche im EEPROM gespeichert werden}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Zeitzonen-ID
+\item \textbf{day\_pattern:} Binaeres Day Pattern
+\item \textbf{from\_hour:} 
+\item \textbf{from\_minute:} 
+\item \textbf{to\_hour:} 
+\item \textbf{to\_minute:} 
+\end{itemize}
+\normalsize
+	
+\item \textbf{ZEITZONE\_WRITE\_DETAILS\_ACK} (113)
+
+\textit{Liefert ein ACK auf den Schreibvorgang}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Zeitzonen-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{ZEITZONE\_TEST\_MATCH\_REQUERST} (114)
+
+\textit{Testet, ob die Zeitzone matched, d.h. zutrifft}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Zeitzonen-ID
+\end{itemize}
+\normalsize
+	
+\item \textbf{ZEITZONE\_TEST\_MATCH\_REPLAY} (115)
+
+\textit{Liefert die Info, ob die Zeitzone matched}
+
+\small
+\begin{itemize}
+		
+\item \textbf{gruppe:} Zeitzonen-ID
+\item \textbf{match:} 0 = false, 1 = true
+\end{itemize}
+\normalsize
+	
+\end{itemize}
+	
+\subsection{RTS - Real Time Service (6)}
+\begin{itemize}
+		
+\item \textbf{TIME\_INFO} (1)
+
+\textit{Meldet die aktuelle Zeit}
+
+\small
+\begin{itemize}
+		
+\item \textbf{level:} Time Level; regelt den Master-/Slave Betrieb
+\item \textbf{day\_of\_week:} Tag der Woche: [1..7] == [ Montag .. Sonntag ]
+\item \textbf{hour:} Stunde [0..23]
+\item \textbf{minute:} Minute [0..59]
+\item \textbf{second:} Sekunde [0..59]
+\end{itemize}
+\normalsize
+	
+\item \textbf{DATE\_INFO} (2)
+
+\textit{Meldet das aktuelle Datum}
+
+\small
+\begin{itemize}
+		
+\item \textbf{level:} Date Level; regelt den Master-/Slave Betrieb
+\item \textbf{day\_of\_month:} Tag des Monats [1..31] 
+\item \textbf{month\_of\_year:} Monat [1..12] 
+\item \textbf{year:} Jahr 2000 + [1..255] = [ 2001..2255 ]
+\end{itemize}
+\normalsize
+	
+\item \textbf{TIME\_REQUEST} (3)
+
+\textit{Fragt die aktuelle Zeit: Replay ist TIME\_INFO}
+
+\item \textbf{DATE\_REQUEST} (4)
+
+\textit{Fragt das aktuelle Datum: Replay ist DATE\_INFO}
+
+\end{itemize}
+	
+\subsection{EDS - EEPROM Data System Service (7)}
+\begin{itemize}
+		
+\item \textbf{GET\_NEXT\_BLOCK} (1)
+
+\textit{Fragt nach dem naechsten Block}
+
+\small
+\begin{itemize}
+		
+\item \textbf{handle\_hi:} Iterator, hi byte
+\item \textbf{handle\_lo:} Iterator, lo byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{GET\_NEXT\_BLOCK\_REPLAY} (2)
+
+\textit{Liefert den naechsten Block}
+
+\small
+\begin{itemize}
+		
+\item \textbf{handle\_hi:} Iterator, hi byte
+\item \textbf{handle\_lo:} Iterator, lo byte
+\item \textbf{type:} Typ des Blocks
+\item \textbf{size:} Groesse des Blocks
+\end{itemize}
+\normalsize
+	
+\item \textbf{DEFRAGMENT} (3)
+
+\textit{Fasst alle freien Bloecke zusammen}
+
+\item \textbf{ALLOCATE\_BLOCK} (4)
+
+\textit{Alloziert einen Block}
+
+\small
+\begin{itemize}
+		
+\item \textbf{type:} Typ des Blocks
+\item \textbf{size:} Groesse des Blocks
+\end{itemize}
+\normalsize
+	
+\item \textbf{ALLOCATE\_BLOCK\_REPLAY} (5)
+
+\textit{Liefert ein Handle auf den allozierten Block, oder 0, falls fehlgeschlagen}
+
+\small
+\begin{itemize}
+		
+\item \textbf{handle\_hi:} hi byte
+\item \textbf{handle\_lo:} lo byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{FREE\_BLOCK} (6)
+
+\textit{Gibt einen Block frei}
+
+\small
+\begin{itemize}
+		
+\item \textbf{handle\_hi:} hi byte
+\item \textbf{handle\_lo:} lo byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{FREE\_BLOCK\_REPLAY} (7)
+
+\textit{Gibt einen Block frei}
+
+\small
+\begin{itemize}
+		
+\item \textbf{result:} 0 = ok, 1 = error
+\end{itemize}
+\normalsize
+	
+\item \textbf{READ\_FROM\_BLOCK} (8)
+
+\textit{Fordert 4 Bytes aus einem Block an}
+
+\small
+\begin{itemize}
+		
+\item \textbf{handle\_hi:} hi byte
+\item \textbf{handle\_lo:} lo byte
+\item \textbf{index:} lo byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{READ\_FROM\_BLOCK\_REPLAY} (9)
+
+\textit{Liefert 4 Bytes aus einem Block an}
+
+\small
+\begin{itemize}
+		
+\item \textbf{d0:} Byte 0
+\item \textbf{d1:} Byte 1
+\item \textbf{d2:} Byte 2
+\item \textbf{d3:} Byte 3
+\end{itemize}
+\normalsize
+	
+\item \textbf{WRITE\_TO\_BLOCK} (10)
+
+\textit{Schreibt ein Byte in einem Block}
+
+\small
+\begin{itemize}
+		
+\item \textbf{handle\_hi:} hi byte
+\item \textbf{handle\_lo:} lo byte
+\item \textbf{index:} lo byte
+\item \textbf{d0:} Byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{WRITE\_TO\_BLOCK\_REPLAY} (11)
+
+\textit{Anwort auf ein geschriebenes Byte}
+
+\item \textbf{FORMAT} (12)
+
+\textit{Formatiert den EDS Bereich des EEPROM}
+
+\end{itemize}
+	
+\subsection{USVS - USV Service (8)}
+\begin{itemize}
+		
+\item \textbf{STATE\_REQUEST} (1)
+
+\textit{Fragt den aktuellen USV Zustand}
+
+\item \textbf{STATE\_INFO} (2)
+
+\textit{Meldet den aktuellen USV Zustand}
+
+\small
+\begin{itemize}
+		
+\item \textbf{state:} 0 = Netzbetrieb, 1 = Batterie
+\end{itemize}
+\normalsize
+	
+\item \textbf{VOLTAGE\_REQUEST} (3)
+
+\textit{Fragt nach einer USV Spannung}
+
+\small
+\begin{itemize}
+		
+\item \textbf{Ux:} 1-5
+\end{itemize}
+\normalsize
+	
+\item \textbf{VOLTAGE\_REPLAY} (4)
+
+\textit{Meldet die USV Spannung}
+
+\small
+\begin{itemize}
+		
+\item \textbf{Ux\_hi:} hi teil
+\item \textbf{Ux\_lo:} lo teil
+\end{itemize}
+\normalsize
+	
+\item \textbf{VOLTAGE\_STATS\_REQUEST} (5)
+
+\textit{Fragt nach den Spannungs-Statistiken}
+
+\small
+\begin{itemize}
+		
+\item \textbf{Ux:} 1-5
+\end{itemize}
+\normalsize
+	
+\item \textbf{VOLTAGE\_STATS\_REPLAY} (6)
+
+\textit{Fragt nach den Spannungs-Statistiken}
+
+\small
+\begin{itemize}
+		
+\item \textbf{U:} 1-5
+\item \textbf{min\_hi:} Minimum
+\item \textbf{min\_lo:} Minimum
+\item \textbf{max\_hi:} Maximum
+\item \textbf{max\_lo:} Maximum
+\end{itemize}
+\normalsize
+	
+\item \textbf{VOLTAGE\_STATS\_RESET} (7)
+
+\textit{Setzt alle Spannungs-Statistiken zurueck}
+
+\end{itemize}
+	
+\subsection{EBUS - eBus Telegramme (9)}
+\begin{itemize}
+		
+\item \textbf{FA\_BLOCK1\_INFO} (1)
+
+\textit{Feuerungsautomat Block 1}
+
+\small
+\begin{itemize}
+		
+\item \textbf{status:} LSB bis MSB: LDW,GDW,WS,Flamme,Ventil1,Ventil2,UWP,Alarm
+\item \textbf{stellgrad:} 0-100%
+\item \textbf{KT:} 0-100 Grad, (DATA1c)
+\item \textbf{RT:} 0-100 Grad
+\item \textbf{BT:} 0-100 Grad
+\item \textbf{AT:} -30-50 Grad (SIGN CHAR)
+\end{itemize}
+\normalsize
+	
+\item \textbf{REGLER\_DATEN\_INFO\_FRG1} (2)
+
+\textit{Regler Daten an FA Fragment 1}
+
+\small
+\begin{itemize}
+		
+\item \textbf{status:} Waermeanforderung (s.S.24)
+\item \textbf{aktion:} Ein/Ausschalten etc. (s.S.24)
+\item \textbf{kesseltemp\_soll\_lo:} Grad, DATA2c, lo Byte
+\item \textbf{kesseltemp\_soll\_hi:} Grad, DATA2c, hi Byte
+\item \textbf{kesseldr\_soll\_lo:} bar, DATA2b, lo Byte
+\item \textbf{kesseldr\_soll\_hi:} bar, DATA2b, hi Byte
+\end{itemize}
+\normalsize
+	
+\item \textbf{REGLER\_DATEN\_INFO\_FRG2} (3)
+
+\textit{Regler Daten an FA Fragment 2}
+
+\small
+\begin{itemize}
+		
+\item \textbf{stellgrad:} Modulationsgrad
+\item \textbf{ww\_soll:} Brauchwasser-Sollwert
+\item \textbf{brennstoff:} 00=?, 01=Gas, 10=Oel, 11=?
+\end{itemize}
+\normalsize
+	
+\end{itemize}
+	
+\subsection{WS - Wetter Service (10)}
+\begin{itemize}
+		
+\item \textbf{WETTER\_INFO} (1)
+
+\textit{Wetterdaten}
+
+\small
+\begin{itemize}
+		
+\item \textbf{licht:} Sonne/Helligkeit
+\item \textbf{niederschlag:} 1 = Niederschlag
+\item \textbf{wind:} Umdrehungen pro sec
+\end{itemize}
+\normalsize
+	
+\item \textbf{LICHT\_STATS\_5MIN} (2)
+
+\textit{Licht, ueber 5min gemittelt}
+
+\small
+\begin{itemize}
+		
+\item \textbf{licht:} Helligkeit
+\end{itemize}
+\normalsize
+	
+\item \textbf{WIND\_STATS\_5MIN} (3)
+
+\textit{Wind, ueber 5min gemittelt}
+
+\small
+\begin{itemize}
+		
+\item \textbf{wind:} Umdrehungen pro sec
+\end{itemize}
+\normalsize
+	
+\end{itemize}
+	

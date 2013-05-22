@@ -1,0 +1,35 @@
+create screensaver_page
+  set page_id 1
+  set parent_id 0
+  set next_id 0
+  set prev_id 0
+exit
+create dir_page
+  set page_id 2
+  set parent_id 1
+  set next_id 3
+  set prev_id 0
+  set name Heizung
+exit
+create dir_page
+  set page_id 3
+  set parent_id 1
+  set next_id 0
+  set prev_id 2
+  set name Infos
+exit
+create dir_page
+  set page_id 4
+  set parent_id 3
+  set next_id 0
+  set prev_id 0
+  set name Licht
+exit
+create heiz_page_general
+  set page_id 5
+  set parent_id 2
+  set next_id 6
+  set prev_id 0
+  set name ArbZ
+  set heiz_id 10
+exit

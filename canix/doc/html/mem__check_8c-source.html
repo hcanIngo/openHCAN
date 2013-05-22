@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: mem_check.c Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>mem_check.c</h1><a href="mem__check_8c.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;<a class="code" href="mem__check_8h.html">canix/mem_check.h</a>&gt;</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;avr/io.h&gt;</span>
+<a name="l00003"></a>00003 
+<a name="l00004"></a><a class="code" href="mem__check_8c.html#e7520c5477c11965aabeedc033c9862b">00004</a> <span class="preprocessor">#define MASK 0xaa</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span>
+<a name="l00006"></a>00006 <span class="keyword">extern</span> uint8_t <a class="code" href="mem__check_8c.html#8df5687976d9b998aa0486549fffc623">__heap_start</a>;
+<a name="l00007"></a>00007 
+<a name="l00008"></a><a class="code" href="mem__check_8h.html#06f6d68bbac025a9dd4dc5046905648e">00008</a> uint16_t <a class="code" href="mem__check_8c.html#06f6d68bbac025a9dd4dc5046905648e">get_mem_unused</a>(<span class="keywordtype">void</span>)
+<a name="l00009"></a>00009 {
+<a name="l00010"></a>00010     uint16_t unused = 0;
+<a name="l00011"></a>00011     uint8_t *p = &amp;<a class="code" href="mem__check_8c.html#8df5687976d9b998aa0486549fffc623">__heap_start</a>;
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013     <span class="keywordflow">do</span>
+<a name="l00014"></a>00014     {
+<a name="l00015"></a>00015         <span class="keywordflow">if</span> (*p++ != <a class="code" href="mem__check_8c.html#e7520c5477c11965aabeedc033c9862b">MASK</a>)
+<a name="l00016"></a>00016             <span class="keywordflow">break</span>;
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018         unused++;
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020     } <span class="keywordflow">while</span> (p &lt;= (uint8_t*) RAMEND);
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022     <span class="keywordflow">return</span> unused;
+<a name="l00023"></a>00023 }
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025 <span class="comment">// http://www.mikrocontroller.net/topic/83833</span>
+<a name="l00026"></a>00026 <span class="comment">// WinAVRs haben ohne diesen Prototypen Probleme</span>
+<a name="l00027"></a><a class="code" href="mem__check_8c.html#5190fc37a1a1525ccc0841a86e2d1b4e">00027</a> <span class="keywordtype">void</span> <a class="code" href="mem__check_8c.html#5190fc37a1a1525ccc0841a86e2d1b4e">__init8_mem</a>(<span class="keywordtype">void</span>) __attribute__ ((naked, section (".init8")));
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 <span class="keywordtype">void</span> <a class="code" href="mem__check_8c.html#5190fc37a1a1525ccc0841a86e2d1b4e">__init8_mem</a>(<span class="keywordtype">void</span>) 
+<a name="l00030"></a>00030 {
+<a name="l00031"></a>00031     __asm <span class="keyword">volatile</span> (
+<a name="l00032"></a>00032             <span class="stringliteral">"ldi r30, lo8 (__heap_start)"</span> <span class="stringliteral">"\n\t"</span>
+<a name="l00033"></a>00033             <span class="stringliteral">"ldi r31, hi8 (__heap_start)"</span> <span class="stringliteral">"\n\t"</span>
+<a name="l00034"></a>00034             <span class="stringliteral">"ldi r24, %0"</span> <span class="stringliteral">"\n\t"</span>
+<a name="l00035"></a>00035             <span class="stringliteral">"ldi r25, hi8(%1)"</span> <span class="stringliteral">"\n"</span>
+<a name="l00036"></a>00036             <span class="stringliteral">"0:"</span> <span class="stringliteral">"\n\t"</span>
+<a name="l00037"></a>00037             <span class="stringliteral">"st Z+,r24"</span> <span class="stringliteral">"\n\t"</span>
+<a name="l00038"></a>00038             <span class="stringliteral">"cpi r30, lo8(%1)"</span> <span class="stringliteral">"\n\t"</span>
+<a name="l00039"></a>00039             <span class="stringliteral">"cpc r31, r25"</span> <span class="stringliteral">"\n\t"</span>
+<a name="l00040"></a>00040             <span class="stringliteral">"brlo 0b"</span>
+<a name="l00041"></a>00041             :
+<a name="l00042"></a>00042             : <span class="stringliteral">"i"</span> (<a class="code" href="mem__check_8c.html#e7520c5477c11965aabeedc033c9862b">MASK</a>), <span class="stringliteral">"i"</span> (RAMEND+1)
+<a name="l00043"></a>00043             );
+<a name="l00044"></a>00044 }
+<a name="l00045"></a>00045 
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 für canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

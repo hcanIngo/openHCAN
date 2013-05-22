@@ -1,0 +1,4 @@
+<area shape="rect" href="$frame__message__description_8cc.html#52426b8d7da6d98b381aa8079abc814e" title="parse_protocol" alt="" coords="284,5,399,32">
+<area shape="rect" href="$frame__message__description_8cc.html#beee257b46a2b5408e949dd3eb27b7ed" title="parse_service" alt="" coords="448,5,557,32">
+<area shape="rect" href="$frame__message__description_8cc.html#c14a0c4a5fdaff2ea24d2dea904d489a" title="parse_message" alt="" coords="607,5,729,32">
+<area shape="rect" href="$utils_8cc.html#d16b6191ff6bf984072db394adebf076" title="glib_ustring2uint16" alt="" coords="780,5,921,32">

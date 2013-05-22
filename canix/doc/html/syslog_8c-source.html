@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>canix: syslog.c Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.6 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    </ul>
+  </div>
+<h1>syslog.c</h1><a href="syslog_8c.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> *  This file is part of the HCAN tools suite.</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> *  HCAN is free software; you can redistribute it and/or modify it under</span>
+<a name="l00005"></a>00005 <span class="comment"> *  the terms of the GNU General Public License as published by the Free</span>
+<a name="l00006"></a>00006 <span class="comment"> *  Software Foundation; either version 2 of the License, or (at your</span>
+<a name="l00007"></a>00007 <span class="comment"> *  option) any later version.</span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> *  HCAN is distributed in the hope that it will be useful, but WITHOUT</span>
+<a name="l00010"></a>00010 <span class="comment"> *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<a name="l00011"></a>00011 <span class="comment"> *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<a name="l00012"></a>00012 <span class="comment"> *  for more details.</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> *  You should have received a copy of the GNU General Public License along</span>
+<a name="l00015"></a>00015 <span class="comment"> *  with HCAN; if not, write to the Free Software Foundation, Inc., 51</span>
+<a name="l00016"></a>00016 <span class="comment"> *  Franklin St, Fifth Floor, Boston, MA 02110-1301  USA</span>
+<a name="l00017"></a>00017 <span class="comment"> *</span>
+<a name="l00018"></a>00018 <span class="comment"> *  (c) 2006 by Martin Haller, mah (at) iuse (dot) org</span>
+<a name="l00019"></a>00019 <span class="comment"> */</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="preprocessor">#include &lt;avr/wdt.h&gt;</span>
+<a name="l00022"></a>00022 <span class="preprocessor">#include &lt;<a class="code" href="syslog_8h.html">canix/syslog.h</a>&gt;</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &lt;<a class="code" href="canix_8h.html" title="enth‰lt Funktionen des CANIX Frameworks">canix/canix.h</a>&gt;</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &lt;hcan.h&gt;</span>
+<a name="l00025"></a>00025 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &lt;stdarg.h&gt;</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 <span class="preprocessor">#ifndef CANIX_SYSLOG</span>
+<a name="l00030"></a>00030 <span class="preprocessor"></span><span class="preprocessor">#error "CANIX_SYSLOG muss definiert werden"</span>
+<a name="l00031"></a>00031 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00032"></a>00032 <span class="preprocessor"></span>
+<a name="l00033"></a><a class="code" href="syslog_8c.html#6fdca49b9d5ea18e0693fb029ca3173c">00033</a> uint8_t <a class="code" href="syslog_8c.html#6fdca49b9d5ea18e0693fb029ca3173c">canix_debug_level</a> = 0;
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="syslog_8h.html#e878145d123e9d059486b519c7ad0285">00035</a> <span class="keywordtype">void</span> <a class="code" href="syslog_8c.html#e878145d123e9d059486b519c7ad0285">canix_set_syslog_level</a>(uint8_t level)
+<a name="l00036"></a>00036 {
+<a name="l00037"></a>00037     <a class="code" href="syslog_8c.html#6fdca49b9d5ea18e0693fb029ca3173c">canix_debug_level</a> = level;
+<a name="l00038"></a>00038 }
+<a name="l00039"></a>00039 
+<a name="l00040"></a><a class="code" href="syslog_8h.html#326f44be49c68907457db61f9d1e63e1">00040</a> <span class="keywordtype">void</span> <a class="code" href="syslog_8c.html#326f44be49c68907457db61f9d1e63e1">canix_syslog_P</a>(uint8_t prio, <span class="keyword">const</span> <span class="keywordtype">char</span> *fmt, ...)
+<a name="l00041"></a>00041 {
+<a name="l00042"></a>00042     <span class="keywordflow">if</span> (<a class="code" href="syslog_8c.html#6fdca49b9d5ea18e0693fb029ca3173c">canix_debug_level</a> &gt;= prio)
+<a name="l00043"></a>00043     {
+<a name="l00044"></a>00044         <a class="code" href="structcanix__frame.html">canix_frame</a> message;
+<a name="l00045"></a>00045         uint8_t s_counter, payload_counter;
+<a name="l00046"></a>00046         <span class="keywordtype">char</span> s[128];
+<a name="l00047"></a>00047         va_list ap;
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049         va_start(ap, fmt);
+<a name="l00050"></a>00050         vsnprintf_P(s, <span class="keyword">sizeof</span>(s)-2, fmt, ap);
+<a name="l00051"></a>00051         va_end(ap);
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053         <span class="comment">// An das Ende ein Retrun Zeichen anhaengen; somit kann die</span>
+<a name="l00054"></a>00054         <span class="comment">// empfangende Seite erkennen, wann die Meldung beendet ist.</span>
+<a name="l00055"></a>00055         <span class="comment">//</span>
+<a name="l00056"></a>00056         <span class="comment">// Hier benoetigen wir keinen Laengen-Check, da wir oben</span>
+<a name="l00057"></a>00057         <span class="comment">// sizeof(s)-2 verwendet haben.</span>
+<a name="l00058"></a>00058         strcat(s,<span class="stringliteral">"\n"</span>);
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060         message.<a class="code" href="structcanix__frame.html#840557141148ee4711699e8e2c169013">src</a> = <a class="code" href="canix_8c.html#6b25751e4e4e70ed76b15097e611704f">canix_selfaddr</a>();
+<a name="l00061"></a>00061         message.<a class="code" href="structcanix__frame.html#1e1868e00870b0a50b69c1ada950a425">dst</a> = HCAN_MULTICAST_SYSLOG;
+<a name="l00062"></a>00062         message.<a class="code" href="structcanix__frame.html#d60b7525c58fdf1fcf02060345239037">proto</a> = HCAN_PROTO_SYSLOG;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064         s_counter = 0;
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066         message.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[0] = prio;
+<a name="l00067"></a>00067         payload_counter = 1;
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069         <span class="keywordflow">while</span> (s_counter &lt; strlen(s))
+<a name="l00070"></a>00070         {
+<a name="l00071"></a>00071             wdt_reset();
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073             <span class="keywordflow">while</span> ((payload_counter &lt; 8) &amp;&amp; (s_counter &lt; strlen(s)))
+<a name="l00074"></a>00074             {
+<a name="l00075"></a>00075                 message.<a class="code" href="structcanix__frame.html#403e2a22db5b770c322f0bb5e7e7282f">data</a>[payload_counter++] = s[s_counter++];
+<a name="l00076"></a>00076             }
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078             message.<a class="code" href="structcanix__frame.html#46db003664ef02e4855b2383b3ab280e">size</a> = payload_counter;
+<a name="l00079"></a>00079             payload_counter = 0;
+<a name="l00080"></a>00080             <a class="code" href="canix_8c.html#771938d7adbec51e8b4d9097c12be8a1">canix_frame_send</a>(&amp;message);
+<a name="l00081"></a>00081         }
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083         <a class="code" href="canix_8c.html#0e17308266aa410354f69cd9ac128632">canix_sleep_100th</a>(1);
+<a name="l00084"></a>00084     }
+<a name="l00085"></a>00085 }
+<a name="l00086"></a>00086 
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Feb 8 11:37:09 2009 f√ºr canix von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
+</body>
+</html>

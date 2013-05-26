@@ -35,7 +35,7 @@ $(TARGET): $(OBJ) libhcan++
 clean:
 	rm -f *.o
 	cd ../libhcan++ && make clean
-	cd binary_$(ARCH); sudo rm -f $(TARGET)
+	test -d ./binary_$(ARCH) && cd binary_$(ARCH); sudo rm -f $(TARGET)
 
 ctags:
 	ctags *.cc *.h ../libhcan++/*.cc ../libhcan++/*.h

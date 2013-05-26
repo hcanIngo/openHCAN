@@ -35,8 +35,7 @@ hcandq: $(OBJ) libhcan++ libhcandata
 
 clean:
 	rm -f *.o
-	cd binary_$(ARCH); sudo rm -f hcandq
-	#sudo rm -f -R binary_$(ARCH)
+	test -d ./binary_$(ARCH) && cd binary_$(ARCH); sudo rm -f hcandq
 	
 	
 

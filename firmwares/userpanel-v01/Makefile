@@ -50,7 +50,7 @@ $(TARGET).out : $(OBJ)
 
 clean:
 	rm -f *.o *.map *.out ../../canix/*.o
-	test -d ./UI_$(MCU) || cd UI_$(MCU); sudo rm -f ./UI_$(MCU)/*.hex
+	test -d ./UI_$(MCU) && cd UI_$(MCU); sudo rm -f ./UI_$(MCU)/*.hex
 
 ctags:
 	ctags *.c *.h ../../canix/*.c ../../canix/*.h ../../include/*.h

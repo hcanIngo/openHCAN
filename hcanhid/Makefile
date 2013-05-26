@@ -32,7 +32,7 @@ $(OBJ): %.o:%.c
 clean:
 	rm -f *.o $(TARGET)
 	@echo last_ARCH=$(ARCH) > ARCH_letzter_Compilerlauf.inc
-	cd binary_$(ARCH); sudo rm -f $(TARGET)
+	test -d ./binary_$(ARCH) && cd binary_$(ARCH); sudo rm -f $(TARGET)
 
 ctags:
 	ctags *.c *.h

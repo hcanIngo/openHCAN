@@ -50,7 +50,7 @@ $(OBJ): %.o:%.cc
 clean:
 	rm -f *.o
 	@echo last_ARCH=$(ARCH) > ARCH_letzter_Compilerlauf.inc
-	test -d ./binary_$(ARCH) || cd binary_$(ARCH); sudo rm -f $(TARGET).so.2.0 $(TARGET).a
+	test -d ./binary_$(ARCH) && cd binary_$(ARCH); sudo rm -f $(TARGET).so.2.0 $(TARGET).a
 
 ctags:
 	ctags *.cc *.h

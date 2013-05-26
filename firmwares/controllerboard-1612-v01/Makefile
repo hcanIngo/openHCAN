@@ -51,7 +51,7 @@ $(TARGET).out : $(OBJ)
 
 clean:
 	rm -f *.o *.map *.out ../../canix/*.o
-	test -d ./C1612_$(MCU) || sudo rm -f ./C1612_$(MCU)/*.hex
+	test -d ./C1612_$(MCU) && sudo rm -f ./C1612_$(MCU)/*.hex
 
 ctags:
 	ctags *.c *.h ../../canix/*.c ../../canix/*.h ../../include/*.h

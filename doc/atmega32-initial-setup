@@ -50,5 +50,5 @@ ACHTUNG: Fuer das HCAN-HI-v02 (USB Variante):
 
 
 Oder mit avrdude und dem ATMEL-ISP-Programmer mkII: 
-sudo 'avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"./hcanBL_atmega32/main.hex" -U hfuse:w:0xc0:m -U lfuse:w:0x0f:m' -U lock:w:0x2f:m'
+sudo 'avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"./hcanbl/hcanBL_atmega32/main.hex" -U hfuse:w:0xc0:m -U lfuse:w:0x0f:m' -U lock:w:0x2f:m'
 

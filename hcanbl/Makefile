@@ -68,7 +68,7 @@ erase_eeprom:
 
 clean:
 	rm -f *.o *.map *.out
-	test -d ./hcanBL_$(MCU) && cd hcanBL_$(MCU); sudo rm -f ./hcanBL_$(MCU)/*.hex
+	test -d ./hcanBL_$(MCU) && cd hcanBL_$(MCU); sudo rm -f *.hex
 
 ctags:
 	ctags *.c *.h

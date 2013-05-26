@@ -261,12 +261,11 @@ void devices_load_config(void)
 				zeitzone_init( (device_data_zeitzone*) p, it); 
 				break;
 			case EDS_taster_BLOCK_ID: 
-				//if ( ((device_data_taster*) p)->config.port > 15 )
-				if ( ((device_data_taster*) p)->config.port > 19 ) // fuer Guido's C208
+				if ( ((device_data_taster*) p)->config.port > 15 )
 					shiftIOExt = 0x01; // es ist mindestens ein IOExtension-In-Port konfiguriert
 				break;
 			case EDS_powerport_BLOCK_ID: 
-				if ( ((device_data_powerport*) p)->config.port > 11 )
+				if ( ((device_data_powerport*) p)->config.port > 19 ) // fuer Guido's C820 (20 Ausgaenge)
 					shiftIOExt = 0x10; // es ist mindestens ein IOExtension-Out-Port konfiguriert
 				break;
 		}

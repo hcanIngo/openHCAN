@@ -33,7 +33,7 @@ $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	test -d ./binary_$(ARCH) && cd binary_$(ARCH); sudo rm -f *.o libhcandata.a libhcandata.so.2.0
+	sudo rm -f *.o ./binary_$(ARCH)/libhcandata.a ./binary_$(ARCH)/libhcandata.so.2.0
 
 ctags:
 	ctags *.cc *.h

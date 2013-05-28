@@ -35,7 +35,7 @@ hcanswd: $(OBJ) libhcan++ libhcandata
 
 clean:
 	rm -f *.o
-	test -d ./binary_$(ARCH) && cd binary_$(ARCH); sudo rm -f hcanswd
+	sudo rm -f ./binary_$(ARCH)/hcanswd
 
 ctags:
 	ctags *.cc *.h ../libhcan++/*.cc ../libhcan++/*.h ../libhcandata/*.cc ../libhcandata/*.h

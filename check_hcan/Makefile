@@ -9,7 +9,7 @@ endif
 TARGET = check_hcan
 OBJ = main.o
 
-LD_FLAGS = -Wl,--export-dynamic -L ../libhcan++ \
+LD_FLAGS = -Wl,--export-dynamic -L ../libhcan++/binary_$(ARCH) \
 		   -lhcan++ -lboost_program_options -lboost_regex \
 		   `pkg-config libxml++-2.6 --libs` -fPIC
 

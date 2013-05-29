@@ -14,7 +14,7 @@ OBJ = main.o readlinepp.o control.o readline_completer.o \
 	  reedkontakt_command.o rolladen_command.o \
       heizung_command.o tempsensor_command.o
 
-LD_FLAGS = -Wl,--export-dynamic -L ../libhcan++ \
+LD_FLAGS = -Wl,--export-dynamic -L ../libhcan++/binary_$(ARCH) \
 		   -lhcan++ -lboost_program_options -lreadline \
 		   -lboost_regex \
 		   `pkg-config libxml++-2.6 --libs` -fPIC

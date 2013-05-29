@@ -6,7 +6,7 @@ OBJ = main.o
 
 LD_FLAGS = -Wl,--export-dynamic \
 			-L ../libhcandata -lhcandata \
-			-L ../libhcan++ -lhcan++ \
+			-L ../libhcan++/binary_$(ARCH) -lhcan++ \
 			-lboost_program_options \
 			-lboost_regex \
 			`pkg-config libxml++-2.6 --libs`

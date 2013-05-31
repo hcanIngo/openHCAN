@@ -25,6 +25,7 @@ CXXFLAGS = -Wall -Werror -O2 $(INC)
 all: libhcan++ $(CONDITIONAL_CLEAN) $(TARGET)
 
 libhcan++:
+	ln -sf libhcan++.so.2.0 libhcan++.so
 	cd ../libhcan++ && $(MAKE)
 
 $(TARGET): $(OBJ) libhcan++

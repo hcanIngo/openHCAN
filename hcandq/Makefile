@@ -23,6 +23,7 @@ CXXFLAGS = -Wall -Werror -O2 $(INC) -g
 all: libhcan++ libhcandata hcandq
 
 libhcan++:
+	ln -sf libhcan++.so.2.0 libhcan++.so
 	cd ../libhcan++ && $(MAKE)
 
 libhcandata:

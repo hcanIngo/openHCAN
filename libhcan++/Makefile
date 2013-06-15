@@ -27,15 +27,15 @@ endif
 
 
 
-all: $(CONDITIONAL_CLEAN) $(TARGET).so.2.0
+all: $(CONDITIONAL_CLEAN) $(TARGET).so
 
 install:
-	/usr/bin/install ./binary_$(ARCH)/$(TARGET).so.2.0 /usr/lib
-	ln -fs /usr/lib/$(TARGET).so.2.0 /usr/lib/$(TARGET).so.2
-	ln -fs /usr/lib/$(TARGET).so.2 /usr/lib/$(TARGET).so
+	/usr/bin/install ./binary_$(ARCH)/$(TARGET).so /usr/lib
+	ln -fs /usr/lib/$(TARGET).so /usr/lib/$(TARGET).so.2
+	ln -fs /usr/lib/$(TARGET).so /usr/lib/$(TARGET).so.2.0
 
-$(TARGET).so.2.0: $(OBJ)
-	$(CXX) -shared -o $@ -fPIC -Wl,-soname,$(TARGET).so.2 $(OBJ)
+$(TARGET).so: $(OBJ)
+	$(CXX) -shared -o $@ -fPIC -Wl,-soname,$(TARGET).so $(OBJ)
 	test -d ./binary_$(ARCH) || mkdir binary_$(ARCH)
 	sudo mv $@ binary_$(ARCH)
 
@@ -50,7 +50,7 @@ $(OBJ): %.o:%.cc
 clean:
 	rm -f *.o
 	@echo last_ARCH=$(ARCH) > ARCH_letzter_Compilerlauf.inc
-	sudo rm -f ./binary_$(ARCH)/$(TARGET).so.2.0 ./binary_$(ARCH)/$(TARGET).a
+	sudo rm -f ./binary_$(ARCH)/$(TARGET).*
 
 ctags:
 	ctags *.cc *.h

@@ -157,7 +157,7 @@ uint8_t canix_rxq_put_one(void)
 /**
  * CANIX Versionsstring
  */
-char canix_version[] PROGMEM = "CANIX_VERSION_" CANIX_VERSION "_";
+const char canix_version[] PROGMEM = "CANIX_VERSION_" CANIX_VERSION "_";
 
 /**
  * Diese Funktion wird von canix_init() aufgerufen und initialisiert

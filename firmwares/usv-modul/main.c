@@ -19,7 +19,7 @@
 
 
 #define USVMODUL_VERSION "2.0"
-char controller1612_version[] PROGMEM = "USVMODUL_VERSION_" \
+const char controller1612_version[] PROGMEM = "USVMODUL_VERSION_" \
 										USVMODUL_VERSION "_";
 
 

@@ -34,7 +34,7 @@
 #include <usb.h>
 
 #define HOSTINTERFACE_V02_VERSION "0.2"
-char hostinterface_v02_version[] PROGMEM = "HOSTINTERFACE_V02_VERSION_" \
+const char hostinterface_v02_version[] PROGMEM = "HOSTINTERFACE_V02_VERSION_" \
 										HOSTINTERFACE_V02_VERSION "_";
 
 

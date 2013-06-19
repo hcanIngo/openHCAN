@@ -20,7 +20,7 @@
 #include <eds.h>
 
 #define USERPANEL_VERSION "0.9.5"
-char userpanel_version[] PROGMEM = "USERPANEL_VERSION_" \
+const char userpanel_version[] PROGMEM = "USERPANEL_VERSION_" \
 								   USERPANEL_VERSION "_";
 
 

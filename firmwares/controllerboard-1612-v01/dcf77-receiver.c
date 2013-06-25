@@ -229,13 +229,13 @@ uint8_t dcf77_ISR(void)
   static uint8_t dcf77_time, old_dcf77;
 
   uint8_t DCF77_PIN;
-  uint8_t DCF77_PORT;
+  //  uint8_t DCF77_PORT;
   uint8_t DCF77;
 
   // Portabfrage
   if (port < 8) {
     DCF77_PIN  = PINC;
-    DCF77_PORT = PORTC;
+    //  DCF77_PORT = PORTC;
     DCF77 = 1 << port;
   }
   else
@@ -244,7 +244,7 @@ uint8_t dcf77_ISR(void)
     k = port &  0x07;
     k = 7 - k;
     DCF77_PIN  = PINA;
-    DCF77_PORT = PORTA;
+    // DCF77_PORT = PORTA;
     DCF77 = 1<< k;
   }
 

@@ -114,13 +114,6 @@ void rolladenSchlitzpos_timer_handler(device_data_rolladenSchlitzpos *p)
 void rolladenSchlitzpos_can_callback(device_data_rolladenSchlitzpos *p,
 		const canix_frame *frame)
 {
-	canix_frame answer;
-
-	answer.src = canix_selfaddr();
-	answer.dst = frame->src;
-	answer.proto = HCAN_PROTO_SFP;
-	answer.data[0] = HCAN_SRV_HES;
-
 	switch (frame->data[1])
 	{
 		case HCAN_HES_REEDKONTAKT_STATE_CHANGE : //benoetigt Reedkontakt-Modus = 2

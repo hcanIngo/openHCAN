@@ -67,14 +67,6 @@ void timeservice_timer_handler(device_data_timeservice *p)
 
 void timeservice_can_callback(const canix_frame *frame)
 {
-	canix_frame answer;
-
-	answer.src = canix_selfaddr();
-	answer.dst = frame->src;
-	answer.proto = HCAN_PROTO_SFP;
-	answer.data[0] = HCAN_SRV_HES;
-
-
 	switch (frame->data[1])
 	{
 		case HCAN_RTS_TIME_INFO : 

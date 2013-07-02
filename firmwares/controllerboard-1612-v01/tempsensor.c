@@ -164,14 +164,6 @@ void tempsensor_timer_handler(device_data_tempsensor *p)
 void tempsensor_can_callback(device_data_tempsensor *p, 
 		const canix_frame *frame)
 {
-	canix_frame answer;
-
-	answer.src = canix_selfaddr();
-	answer.dst = frame->src;
-	answer.proto = HCAN_PROTO_SFP;
-	answer.data[0] = HCAN_SRV_HES;
-
-
 	switch (frame->data[1])
 	{
 		case HCAN_HES_1WIRE_TEMPERATURE_QUERY :

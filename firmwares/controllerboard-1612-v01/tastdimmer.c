@@ -39,12 +39,6 @@ uint8_t tastdimmer_is_in_group(const device_data_tastdimmer *p, uint8_t group)
 
 void tastdimmer_can_callback(device_data_tastdimmer *p, const canix_frame *frame)
 {
-	canix_frame answer;
-
-	answer.src = canix_selfaddr();
-	answer.dst = frame->src;
-	answer.proto = HCAN_PROTO_SFP;
-	answer.data[0] = HCAN_SRV_HES;
 
 	if (tastdimmer_is_in_group(p, frame->data[2]))
 	{

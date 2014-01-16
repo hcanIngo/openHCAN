@@ -46,7 +46,8 @@ extern uint8_t *pdevice_data[];
 extern uint8_t device_data[];
 extern uint16_t device_data_ram_usage;
 
-extern uint8_t shiftIOExt;
+extern uint8_t hasInExt;
+extern uint8_t hasOutExt;
 
 void devices_load_config(void);
 

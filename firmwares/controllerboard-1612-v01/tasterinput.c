@@ -6,20 +6,15 @@
 
 uint8_t tasterport_read(uint8_t n)
 {
-	if ((n == 0) && (shiftIOExt > 0))
+	if ((n < 2) && (hasInExt || hasOutExt))
 	{
-		// PC0 fuer shiftIn und oder shiftOut als Clk verwendet
-		// error: PC0 steht nicht als Eingang zur Verfuegung!
+		// PC0, PC1 shiftIn und oder shiftOut als SCL=PC0 und SDA=PC1 verwendet
+		// error: PC0 und 1 steht nicht als Eingang zur Verfuegung!
 	}
-	else if ( ((n == 1) || (n == 4)) && (shiftIOExt == 0x01) )
+	else if ( (n == 2) && hasInExt )
 	{
-		// PC1, PC4 fuer shift-In verwendet. Siehe shiftio.h. Daher:
-		// error: PC1, PC4 stehen nicht als Eingaenge zur Verfuegung!
-	}
-	else if ( ((n == 2) || (n == 3)) && (shiftIOExt == 0x10) )
-	{
-		// PC2, PC3 fuer shift-Out verwendet. Siehe shiftio.h. Daher:
-		// error: PC2, PC3 stehen nicht als Eingaenge zur Verfuegung!
+		// PC2 fuer shift-In als Interruptleitung verwendet.
+		// error: PC2 steht nicht als Eingang zur Verfuegung!
 	}
 	else if (n < 8)
 	{
@@ -49,14 +44,9 @@ uint8_t tasterport_read(uint8_t n)
 
 		return PINA & (1<< n);
 	}
-	/* Beispielsweise sind 7 x 8 Bit-Shiftregister
-	 * angeschlossen, dann existieren 56 weitere Eingaenge.
-	 * Diese Eingaenge sind dann in der EEPROM-Konfiguration
-	 * mit den Indizes 16...71 einzubinden. */
-	else if (n < 244) //255-16=224  244/8= 28 8-Bit Shiftregister maximal.
+	else if (n < 244)
 	{
-		n -= 16; //auf den Bereich 0-223 holen
-		return isBitFromShiftInSet(n); //n-tes Bit abfragen
+		return isBitFromShiftInSet(n); // n-tes Bit abfragen
 	}
 
 	return 0;

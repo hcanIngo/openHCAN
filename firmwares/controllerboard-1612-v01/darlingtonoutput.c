@@ -12,9 +12,6 @@ void darlingtonoutput_init(void)
 	// Darlington Ports ausschalten
 	PORTD = 0;
 	PORTB &= ~ (0x0f);
-
-	// Falls 'shiftIOExt > 0' liefert, wird die Eingangskonfiguration den Pin, trotz dieses initShiftInOut(), nutzen koennen:
-	initShiftInOut(); // -> Die Tasterports 0...4 sind hiermit fuer die shiftIOExtenstion initialisiert!
 }
 
 uint8_t darlingtonoutput_getpin(uint8_t n)
@@ -30,7 +27,7 @@ uint8_t darlingtonoutput_getpin(uint8_t n)
 	}
 	else
 	{
-		n -= 12; // n auf 0...95 bringen
+		//n -= 12; // n auf 0...95 bringen
 		return getShiftOutPinState(n);
 	}
 }
@@ -61,7 +58,6 @@ void darlingtonoutput_setpin(uint8_t n, uint8_t state)
 	}
 	else
 	{
-		n -= 12; // n auf 0...95 bringen
 		//canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("chgShOutPinStat,n=%d,stat=%d"), n, state);
 		changeShiftOutPinState(n, state);
 	}

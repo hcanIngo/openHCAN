@@ -58,6 +58,9 @@ void idle_handler(void)
 		// Event Flag zuruecksetzen
 		timer_event_100th = 0;
 
+		if (hasInExt) // es ist mindestens ein IOExtension-In-Port konfiguriert
+			readAllMCP23017Inputs ();
+
 		for (i = 0; i < MAX_PDEVICE_DATA; i++)
 		{
 			uint8_t *p = pdevice_data[i];
@@ -159,6 +162,9 @@ void idle_handler(void)
 			}
 		}
 
+		/*if (hasOutExt) // es ist mindestens ein IOExtension-Out-Port konfiguriert
+			writeAllMCP23017Outputs (); // after powerport was switched*/
+
 		unusedSRAM = get_mem_unused();
 		if( unusedSRAM < MAX_MEM_CRITICAL_SIZE )
 		{
@@ -166,7 +172,5 @@ void idle_handler(void)
 					PSTR("mem_free: %d bytes"), unusedSRAM);
 		}
 	}
-
-	shiftOut_timer_handler(); //die Ausgaben nachtriggern (Störungsunterdrückung)
 }
 

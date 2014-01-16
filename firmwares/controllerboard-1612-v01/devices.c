@@ -12,14 +12,15 @@
 #include <avr/wdt.h>
 
 #include <user_interrupt.h>
-
+#include "shiftio.h"
 #include "devices.h"
 #include "log.h"
 
 uint8_t *pdevice_data[MAX_PDEVICE_DATA];
 uint8_t device_data[MAX_DEVICE_DATA];
 uint16_t device_data_ram_usage;
-uint8_t shiftIOExt;
+uint8_t hasInExt;
+uint8_t hasOutExt;
 
 void devices_init(void)
 {
@@ -30,7 +31,8 @@ void devices_init(void)
 	for (i = 0; i < sizeof(device_data); i++)
 		device_data[i] = 0;
 	
-	shiftIOExt = 0x00; // Voreinstellung: Weder die In- noch Out-Extension verwendet
+	hasInExt = 0; // Voreinstellung: Weder die In- noch Out-Extension verwendet
+	hasOutExt = 0;
 }
 
 void devices_load_config(void)
@@ -262,17 +264,19 @@ void devices_load_config(void)
 				break;
 			case EDS_taster_BLOCK_ID: 
 				if ( ((device_data_taster*) p)->config.port > 15 )
-					shiftIOExt = 0x01; // es ist mindestens ein IOExtension-In-Port konfiguriert
+					hasInExt = 1; // es ist mindestens ein IOExtension-In-Port konfiguriert
 				break;
 			case EDS_powerport_BLOCK_ID: 
 				if ( ((device_data_powerport*) p)->config.port > 19 ) // fuer Guido's C820 (20 Ausgaenge)
-					shiftIOExt = 0x10; // es ist mindestens ein IOExtension-Out-Port konfiguriert
+					hasOutExt = 1; // es ist mindestens ein IOExtension-Out-Port konfiguriert
 				break;
 		}
 	}
 
+	if (hasInExt || hasOutExt) initMCP23017 ();
+
 	// wenn ein Device den Wunsch nach einem User Interrupt hat...
-        user_interrupt_activate();
+	user_interrupt_activate();
 
 	// die verwendeten Bytes an RAM merken
 	device_data_ram_usage = device_data_allocated;

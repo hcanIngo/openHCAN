@@ -43,7 +43,12 @@
  * - IO-Exp32-Board mit A2=1, A1=1 (0: switch ON) -> Adressen 6,7
  * */
 
-
+/* Achtung:
+ * --------
+ * Sind Input-Ports > 15 und oder Output-Pins > 11 konfiguriert,
+ * so wird versucht der atmega die I2C-Devices zu erreichen. Wenn an IN0 und IN1 keine
+ * 4,7 kOhm - Pullup's montiert sind macht der atmega Wdt-Resets!
+ */
 
 
 /* 	Details														A2 A1 A0 (Adressbits)
@@ -61,10 +66,10 @@
 
 	-- Baugruppe 3: IN-Exp64 --    (oder IO-Exp32, wenn dort y=1)
 	Input-Pin's (16...79)
-	3. IN-Exp64-IC1 IN0..7	 A(24..16) und IN8..15  B(25..32)	z  0  0  // IO-Exp32 mit x=0, y=1
-	3. IN-Exp64-IC2 IN16..23 A(40..33) und IN24..31 B(41..48)	z  0  1  // IO-Exp32 mit x=0, y=1
-	3. IN-Exp64-IC3 IN32..39 A(56..49) und IN40..47 B(57..64)	z  1  0  // IO-Exp32 mit x=1, y=1
-	3. IN-Exp64-IC4 IN48..55 A(72..65) und IN56..63 B(72..79)	z  1  1  // IO-Exp32 mit x=1, y=1
+	3. IN-Exp64-IC1 IN0..7	 A(23..16) und IN8..15  B(24..31)	z  0  0  // IO-Exp32 mit x=0, y=1
+	3. IN-Exp64-IC2 IN16..23 A(39..32) und IN24..31 B(40..47)	z  0  1  // IO-Exp32 mit x=0, y=1
+	3. IN-Exp64-IC3 IN32..39 A(55..48) und IN40..47 B(56..63)	z  1  0  // IO-Exp32 mit x=1, y=1
+	3. IN-Exp64-IC4 IN48..55 A(71..64) und IN56..63 B(72..79)	z  1  1  // IO-Exp32 mit x=1, y=1
 	mit z=1 durch NICHT gesteckten Jumper
 
 	somit koennen folgende C1612-Board-Pins im EDS konfiguriert sein:
@@ -80,13 +85,13 @@
 		- 74..81 -> MCP23x17_GPIOB ->							0  1  1    3
 
 	C1612-Board-In-Pins (lesen)
-		- 24..16 -> MCP23x17_GPIOA ->							1  0  0    4
-		- 25..32 -> MCP23x17_GPIOA ->							1  0  1    5
-		- 40..33 -> MCP23x17_GPIOB ->							1  0  0    4
-		- 41..48 -> MCP23x17_GPIOB ->							1  0  1    5
-		- 56..49 -> MCP23x17_GPIOA ->							1  1  0    6
-		- 57..64 -> MCP23x17_GPIOA ->							1  1  1    7
-		- 72..65 -> MCP23x17_GPIOB ->							1  1  0    6
+		- 16..23 -> MCP23x17_GPIOA ->							1  0  0    4
+		- 24..31 -> MCP23x17_GPIOA ->							1  0  1    5
+		- 32..39 -> MCP23x17_GPIOB ->							1  0  0    4
+		- 40..47 -> MCP23x17_GPIOB ->							1  0  1    5
+		- 48..55 -> MCP23x17_GPIOA ->							1  1  0    6
+		- 56..63 -> MCP23x17_GPIOA ->							1  1  1    7
+		- 64..71 -> MCP23x17_GPIOB ->							1  1  0    6
 		- 72..79 -> MCP23x17_GPIOB ->							1  1  1    7
 */
 

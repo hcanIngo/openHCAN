@@ -139,42 +139,42 @@ inline uint8_t isBitFromShiftInSet(uint8_t n)
 
 	//sendMessage (0x77, 0, 0, n);
 
-	if (n < 25) // 16..24
+	if (n < 24) // 16..23
 	{
 		inputByte = inPortState[0]; // statt: readMCP23017port (MCP23x17_GPIOA, 4);
 		n -= 16; // auf den Bereich 0-7 holen
 	}
-	else if (n < 33) // 25..32
+	else if (n < 32) // 24..31
 	{
 		inputByte = inPortState[2]; // statt: readMCP23017port (MCP23x17_GPIOA, 5);
-		n -= 25; // auf den Bereich 0-7 holen
+		n -= 24; // auf den Bereich 0-7 holen
 	}
-	else if (n < 41) // 33..40
+	else if (n < 40) // 32..39
 	{
 		inputByte = inPortState[1]; // statt: readMCP23017port (MCP23x17_GPIOB, 4);
-		n -= 33; // auf den Bereich 0-7 holen
+		n -= 32; // auf den Bereich 0-7 holen
 		n = 7 - n; // Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
 	}
-	else if (n < 49) // 41..48
+	else if (n < 48) // 40..47
 	{
 		inputByte = inPortState[3]; // statt: readMCP23017port (MCP23x17_GPIOB, 5);
-		n -= 41; // auf den Bereich 0-7 holen
+		n -= 40; // auf den Bereich 0-7 holen
 		n = 7 - n; // Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
 	}
-	else if (n < 57) // 49..56
+	else if (n < 56) // 48..55
 	{
 		inputByte = inPortState[4]; // statt: readMCP23017port (MCP23x17_GPIOA, 6);
-		n -= 49; // auf den Bereich 0-7 holen
+		n -= 48; // auf den Bereich 0-7 holen
 	}
-	else if (n < 65) // 57..64
+	else if (n < 64) // 56..63
 	{
 		inputByte = inPortState[6]; // statt: readMCP23017port (MCP23x17_GPIOA, 7);
-		n -= 57; // auf den Bereich 0-7 holen
+		n -= 56; // auf den Bereich 0-7 holen
 	}
-	else if (n < 73) // 65..72
+	else if (n < 72) // 64..71
 	{
 		inputByte = inPortState[5]; // statt: readMCP23017port (MCP23x17_GPIOB, 6);
-		n -= 65; // auf den Bereich 0-7 holen
+		n -= 64; // auf den Bereich 0-7 holen
 		n = 7 - n; // Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
 	}
 	else if (n < 80) // 72..79
@@ -190,15 +190,15 @@ inline uint8_t isBitFromShiftInSet(uint8_t n)
 // readAllInputs pollen/aufrufen, bevor die devices ihr Inputs abfragen
 inline void readAllMCP23017Inputs (void)
 {
-	inPortState[0] = readMCP23017port (MCP23x17_GPIOA, 4);
+	inPortState[0] = readMCP23017port (MCP23x17_GPIOA, 4); // todo ggf. nur von bei init erreichbaren Adressen lesen
 	inPortState[1] = readMCP23017port (MCP23x17_GPIOB, 4);
 	inPortState[2] = readMCP23017port (MCP23x17_GPIOA, 5);
 	inPortState[3] = readMCP23017port (MCP23x17_GPIOB, 5);
 
-	inPortState[4] = readMCP23017port (MCP23x17_GPIOA, 6); // ggf todo nur von konfigurierten Adressen lesen
+	inPortState[4] = readMCP23017port (MCP23x17_GPIOA, 6);
 	inPortState[5] = readMCP23017port (MCP23x17_GPIOB, 6);
 	inPortState[6] = readMCP23017port (MCP23x17_GPIOA, 7);
-	inPortState[7] = readMCP23017port (MCP23x17_GPIOB, 8);
+	inPortState[7] = readMCP23017port (MCP23x17_GPIOB, 7);
 }
 
 // port = MCP23x17_GPIOA or MCP23x17_GPIOB

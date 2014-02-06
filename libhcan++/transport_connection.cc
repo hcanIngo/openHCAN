@@ -7,6 +7,7 @@
 #include <hcan_multicast.h>
 #include <hcan.h>
 #include <colors.h>
+#include <unistd.h>
 #include <iostream>
 #include <iomanip>
 #include <string>

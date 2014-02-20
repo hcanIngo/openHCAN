@@ -562,6 +562,11 @@
 				<param pos="1" name="error" description="Fehlercode" />
 			</message>
 
+			<message name="DCF77_PULSE_DURATION" id="81"
+				description="Liefert die Länge des letzten Pulse in 1/100s" >
+				<param pos="0" name="length" description="Pulslaenge" />
+			</message>
+
 			<message name="CONFIG_RELOAD" id="100"
 				description="Reaktion: Controllerboard laed die Config aus dem EEPROM neu" />
 

@@ -25,7 +25,7 @@ export ARCH = i386
 
 # Choose firmware architecture atmega32 or atmega644 (for C1612 and UI): 
 ######################
-export MCU = atmega644
+export MCU = atmega32
 ######################
 
 # Choose HI-Interface-Server-IP for load firmware (eg. 192.168.1.24)

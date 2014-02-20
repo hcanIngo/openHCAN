@@ -82,12 +82,6 @@ static canix_idle_callback idle_callback[MAX_IDLE_CALLBACKS];
  */
 static canix_rtc_callback  rtc_callback[MAX_RTC_CALLBACKS];
 
-/** 
- * Der RTC Timer verwendet das TCNT0 Register, das mit diesem Wert geladen
- * wird. Dadurch entsteht eine IRQ-Frequenz von ca. 3.6kHz, d.h.  die ISR wird
- * alle 271 us aufgerufen.
- */
-#define CANIX_RTC_TCNT0_INIT 255
 
 /**
  * Hier sind die privaten Daten der RTC abgelegt.
@@ -163,6 +157,17 @@ const char canix_version[] PROGMEM = "CANIX_VERSION_" CANIX_VERSION "_";
  * Diese Funktion wird von canix_init() aufgerufen und initialisiert
  * den RTC Timer.
  */
+
+
+/** 
+ * Der RTC Timer verwendet das TCNT0 Register, das mit diesem Wert geladen
+ * wird. Dadurch entsteht eine IRQ-Frequenz von ca. 3.6kHz, d.h.  die ISR wird
+ * alle 271 us aufgerufen.
+ */
+#define CANIX_RTC_TCNT0_INIT 255
+volatile uint8_t myClockBasedTCNT0 = 0;
+volatile uint8_t myWaitingPeriod   = 0;
+
 void canix_rtc_init(void)
 {
 	canix_rtc_clock.uptime_sec_100th = 0;
@@ -179,15 +184,19 @@ void canix_rtc_init(void)
 
 	// Timer programmieren:
 #ifdef MCU_atmega32
-	TCCR0 = (1<<CS00)|(1<<CS02); // 3.686400 MHz / 1024 = 3.6 kHz
+	TCCR0 = (1<<CS00)|(1<<CS02); // Divider 1024
 	TIMSK = (1<<TOIE0); // Timer0 Interrupt einschalten
 #elif MCU_atmega644
-	TCCR0B = (1<<CS00)|(1<<CS02); // 3.686400 MHz / 1024 = 3.6 kHz
+	TCCR0B = (1<<CS00)|(1<<CS02); // Divider
 	TIMSK0 = (1<<TOIE0); // Timer0 Interrupt einschalten
 #endif
 	// Timter Counter loest immer bei 255 -> 0 den
 	// Interrupt aus; f = 3686 Hz
-	TCNT0 = CANIX_RTC_TCNT0_INIT;
+	myClockBasedTCNT0 = (uint8_t)((uint32_t)(F_CPU+3686399)/(uint32_t)3686400); 
+
+	TCNT0 = -myClockBasedTCNT0;
+
+	myWaitingPeriod = (uint8_t)(F_CPU/1024/myClockBasedTCNT0/100);
 }
 
 /**
@@ -275,7 +284,7 @@ ISR(TIMER0_OVF_vect)
 {
 	uint8_t i;
 
-	TCNT0 = CANIX_RTC_TCNT0_INIT;
+	TCNT0 = -myClockBasedTCNT0;
 
 	/* 
 	 * MCP pollen:
@@ -317,7 +326,7 @@ ISR(TIMER0_OVF_vect)
 	//
 	static uint8_t rtc_clock_counter = 0;
 
-	if (rtc_clock_counter++ > 34) // IL Bugfix; war: 35
+	if (rtc_clock_counter++ == myWaitingPeriod-1) // war: 34
 	{
 		// Counter zuruecksetzen
 		rtc_clock_counter = 0;

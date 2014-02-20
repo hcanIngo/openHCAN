@@ -11,7 +11,6 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 
-#include <user_interrupt.h>
 #include "shiftio.h"
 #include "devices.h"
 #include "log.h"
@@ -274,9 +273,6 @@ void devices_load_config(void)
 	}
 
 	if (hasInExt || hasOutExt) initMCP23017 ();
-
-	// wenn ein Device den Wunsch nach einem User Interrupt hat...
-	user_interrupt_activate();
 
 	// die verwendeten Bytes an RAM merken
 	device_data_ram_usage = device_data_allocated;

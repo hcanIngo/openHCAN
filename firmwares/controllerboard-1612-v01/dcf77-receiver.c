@@ -8,7 +8,7 @@
 /*              Original Sources (DCF77.ZIP):                           */
 /*              http://www.mikrocontroller.net/topic/58769#456232       */
 /*                                                                      */
-/*              Adapted for HCAN:                                       */
+/*              Adapted for openHCAN:                                   */
 /*                      Christoph Delfs                                 */
 /*                                                                      */
 /*                                                                      */
@@ -18,7 +18,6 @@
 #include <canix/canix.h>
 #include <canix/led.h>
 #include <canix/tools.h>
-#include <canix/rtc.h>
 #include <canix/syslog.h>
 #include <hcan.h>
 
@@ -28,9 +27,9 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 #include <hcan_multicast.h>
-#include <user_interrupt.h>
 #include <dcf77-receiver.h>
 #include <darlingtonoutput.h>
+#include <tasterinput.h>
 #include<avr/pgmspace.h>
 
 #define code PROGMEM
@@ -40,22 +39,6 @@
 // Es dauert in der Regel 2 bis 3 Minuten, bis eine gültige Zeit ermittelt wurde.
 // Über den monitor_port kann man prüfen, ob der Sekundentakt richtig erkannt wird.
 
-canix_rtc_clock_t newtime; // Struktur, die die DCF77-Routinen beschreiben
-canix_rtc_clock_t time;    // Struktur, die für die Zeitausgabe verwendet wird
-
-volatile uint8_t timeflags;
-uint8_t dcf77_pulse;     // Pulsdauer (zwischen 0,1 ['0'] und 0,2s ['1'])
-uint8_t dcf77_period;    // Taktung der Pulse (1 Sekunde, außer bei Sekunde 59)
-uint8_t ct_64Hz;         // 64Hz Grund-Takt
-uint8_t dcf77error = 0;  // sammelt alle Fehler, die die DCF77-Routinen beschreiben, innerhalb einer Minute
-volatile uint8_t reported_dcf77errors = 0; // Variable für die Fehlerausgabe
-
-// HCAN Device Parameter
-uint8_t port;
-static uint8_t monitor_port;
-
-uint8_t  report_flag = 0; // nur von 0 verschieden, wenn eine neue Minute begonnen hat
-uint8_t  valid_flag  = 0; // nur von 0 verschieden, wenn eine gültige Zeit empfangen wurde
 
 // Controller-eigene interne Uhr:
 extern volatile canix_rtc_clock_t canix_rtc_clock;
@@ -63,68 +46,44 @@ extern volatile canix_rtc_clock_t canix_rtc_clock;
 
 void dcf77_receiver_init(device_data_dcf77_receiver* p, eds_block_p it) 
 { 
-  uint8_t n;
-
-
-  // Port holen:
-  n = port = p->config.port;
-
   // Ausgabeport ermitteln: hier kann eine LED zur Visualisierung des DCF77-Signals angeschlossen werden
-  monitor_port = p->config.monitor_port;
   p->last_time_frame_received = 0;
+  p->dcf77error = 0;  // sammelt alle Fehler, die die DCF77-Routinen beschreiben, innerhalb einer Minute
+  p->reported_dcf77errors = 0; // Variable für die Fehlerausgabe
+  p->time.second = 0;
+  p->timeflags = 0;
+  p->dcf77_pulse = 0;     // Pulsdauer (zwischen 0,1 ['0'] und 0,2s ['1'])
+  p->dcf77_period = 0;    // Taktung der Pulse (1 Sekunde, außer bei Sekunde 59)
+  p->ct_100Hz = 0;         // 100Hz Grund-Takt
+  p->reported_minute = -1;
 
-  if (n < 8)
-    {
-      // Pins sind 1:1 von PORTC auszulesen
-      
-      // Pullup einschalten
-      PORTC |= (1<< n);
-      
-      // Modus Input setzen
-      DDRC &= ~ (1<< n);
-      
-      
-    }
-  else if (n < 16)
-    {
-      // auf den Bereich 0-7 holen:
-      n &= 0x07;
-      
-      // Pins sind zu spiegeln ( 0 -> 7, 1 -> 6 etc.)
-      n = 7 - n;
-      
-      // Pullup einschalten
-      PORTA |= (1<< n);
-      
-      // Modus Input setzen
-      DDRA &= ~ (1<< n);
-    }      
+  p->valid_flag = 0;
+  p->report_flag = 0;
 
-  time.second = 0;
-
-  // "Interrupt-Routine" für den DCF77-Empfänger einhängen:
-  user_interrupt_hook_in_my_ISR(dcf77_ISR);
+  // dcf77_handler:
+  p->dcf77_time=0;
+  p->dcf77_input_old=0;
+  p->parity = 0;
 }
 
 
 // Device Handler wird alle 10ms aufgerufen:
 void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p)
 {
-  static uint8_t reported_minute = -1;
 
+  // Read input from DCF77 receiver:
+  dcf77_handler(p);
   // Liegt jetzt eine gültige DCF77-Zeit vor?
-  scan_dcf77();
+  scan_dcf77(p);
 
   // Der Zähler (wann wurde zuletzt eine Zeitinformation empfangen?) wird hochgezählt.
   // Dies geschieht auch, wenn noch keine gültige Zeit vorliegt.
-  if ((p->last_time_frame_received < 255)&&(timeflags &  (1 << ONE_SECOND)))
+  if ((p->last_time_frame_received < 255)&&(p->timeflags &  (1 << ONE_SECOND)))
     p->last_time_frame_received++;
     
   // Wenn kein Signal anliegt, wird die canix-Uhr herangezogen, um im Minutentakt zu berichten:
-  if ((canix_rtc_clock.second == 0)&&(reported_dcf77errors>=DCF77_NO_SIGNAL) &&
-      (canix_rtc_clock.minute != reported_minute)) {
-    report_flag     = 1;
-    reported_minute = canix_rtc_clock.minute;
+  if ((canix_rtc_clock.second == 0)&&(p->reported_dcf77errors>=DCF77_NO_SIGNAL)) {
+    p->report_flag     = 1;
   }
 
   // Daraus ergibt sich: Ein Fehler wird zu jeder vollen Minute ausgegeben:
@@ -133,7 +92,9 @@ void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p)
   // Dabei wird eine Fehlerausgabe durch b) immer erfolgen (als Rückmeldung, daß der Minutenübergang erkannt wurde)
 
   // Jede volle Minute ggf. Zeit oder Fehler ausgeben:
-  if (report_flag) {
+  if (p->report_flag) {
+
+    p->report_flag = 0;
     
     canix_frame message;
     
@@ -142,17 +103,18 @@ void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p)
     message.proto = HCAN_PROTO_SFP;
 
     // Wenn die letzte Minute fehlerhaft empfangen wurde, Fehler ggf. absenden:
-    if ((reported_dcf77errors)&&(p->config.enable_error_reporting)) {
+    if ((p->reported_dcf77errors)&&(p->config.enable_error_reporting)&&(canix_rtc_clock.minute != p->reported_minute)) {
       message.data[0] = HCAN_SRV_HES;
       message.data[1] = HCAN_HES_DCF77_ERROR;
       message.data[2] = p->config.id;
-      message.data[3] = reported_dcf77errors;
+      message.data[3] = p->reported_dcf77errors;
     
       message.size    = 4;
       canix_frame_send(&message);      
 
-      // sicherstellen, daß nur einmal pro Minute der Fehlerstatus mitgeteilt wird:
-      reported_minute = canix_rtc_clock.minute;
+    // sicherstellen, daß nur einmal pro Minute der Fehlerstatus mitgeteilt wird:
+    p->reported_minute = canix_rtc_clock.minute;
+    
 
     }
     else {     
@@ -160,16 +122,16 @@ void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p)
       // und eine gültige Zeitinformation vorliegt.
       // p->last_time_frame_received wird durch den Callback dcf77_receiver_can_callback auf 0 gesetzt,
       // wenn eine Zeitinformation mit niedrigerem Level empfangen wurde.
-      if ((p->last_time_frame_received >= p->config.takeover_time)&& valid_flag) {
+      if ((p->last_time_frame_received >= p->config.takeover_time)&& p->valid_flag) {
 	
 	// Zeit-Info:
 	message.data[0] = HCAN_SRV_RTS;
 	message.data[1] = HCAN_RTS_TIME_INFO;
 	message.data[2] = p->config.level;
-	message.data[3] = time.day_of_week;
-	message.data[4] = time.hour;
-	message.data[5] = time.minute;
-	message.data[6] = time.second;
+	message.data[3] = p->time.day_of_week;
+	message.data[4] = p->time.hour;
+	message.data[5] = p->time.minute;
+	message.data[6] = p->time.second;
 	
 	message.size    = 7;
 	canix_frame_send(&message);
@@ -178,21 +140,20 @@ void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p)
 	message.data[0] = HCAN_SRV_RTS;
 	message.data[1] = HCAN_RTS_DATE_INFO;
 	message.data[2] = p->config.level;
-	message.data[3] = time.day_of_month;
-	message.data[4] = time.month_of_year;
-	message.data[5] = time.year;
+	message.data[3] = p->time.day_of_month;
+	message.data[4] = p->time.month_of_year;
+	message.data[5] = p->time.year;
 	
 	message.size    = 6;
 	canix_frame_send(&message);
 	
 	
 	p->last_time_frame_sent = 0;	
-	valid_flag = 0;
+	p->valid_flag = 0;
       }	  
     }
   }
-  report_flag = 0;
-  timeflags   = 0;
+  p->timeflags   = 0;
 }
 
 
@@ -219,74 +180,60 @@ void dcf77_receiver_can_callback(const canix_frame *frame)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-//uint8_t ISR_timer_counter;  // Rückmeldung für den user interrupt
 
-
-// "Interrupt-Routine" für den DCF77-Empfänger
-uint8_t dcf77_ISR(void)
+void dcf77_handler(device_data_dcf77_receiver *p)
 {
-  static uint8_t val = 1;
-  static uint8_t dcf77_time, old_dcf77;
 
-  uint8_t DCF77_PIN;
-  //  uint8_t DCF77_PORT;
-  uint8_t DCF77;
+  uint8_t dcf77_input;
 
-  // Portabfrage
-  if (port < 8) {
-    DCF77_PIN  = PINC;
-    //  DCF77_PORT = PORTC;
-    DCF77 = 1 << port;
+
+  dcf77_input = tasterport_read(p->config.port);
+
+  if( p->dcf77_time != 0xFF ) {			// bei 255 Ticks mit dem Zählen aufhören, sonst würde die Rechnung durcheinander kommen
+    p->dcf77_time++;           
+  }                    // sonst hochzählen
+  else {
+    p->dcf77error  |= DCF77_NO_SIGNAL;    // so eine lange Periode kann es nicht geben..
   }
-  else
-  {
-    uint8_t k;
-    k = port &  0x07;
-    k = 7 - k;
-    DCF77_PIN  = PINA;
-    // DCF77_PORT = PORTA;
-    DCF77 = 1<< k;
-  }
+			
+  if( dcf77_input != p->dcf77_input_old ){	// Hat sich der Pegel am Empfaenger geaendert?
 
-
-
-  if( dcf77_time != 0xFF )			// bei 255 Ticks mit dem Zählen aufhören, sonst würde die Rechnung durcheinander kommen
-    dcf77_time++;                               // sonst hochzählen
-  else
-    dcf77error  |= DCF77_NO_SIGNAL;    // so eine lange Periode kann es nicht geben..
-				
-  if( (DCF77_PIN ^ old_dcf77) & DCF77 ){	// Hat sich der Pegel geändert?
-    // dann: "Toggeln" des Ausgabeports:
-    if (monitor_port < 12) {
-      darlingtonoutput_setpin(monitor_port,val); // Flankenwechsel ausgeben, wenn gewünscht
-      val^=1;
-    }
+    p->dcf77_input_old = dcf77_input; 
 
     // Ein neuer Puls bedeutet eine fallende Flanke: 1->0 Übergang
     // Das Ende eines Pulse ist ein 0->1 Übergang
 
-    old_dcf77 ^= 0xFF;				// Flankenwechsel registrieren 
-    if( old_dcf77 & DCF77 ){                    // War ein 1->0 Wechsel? (Beginn eines Informations-Pulses)
-      dcf77_period = dcf77_time;		// merken, wie viele Ticks seit dem letzten Pulsanfang vergangen sind (Periodenbestimmung)
-      dcf77_time = 0;				// und wieder bei 0 loszählen
-    }else{
+    if(dcf77_input){                    // War ein 1->0 Wechsel? (Beginn eines Informations-Pulses)
+      p->dcf77_period = p->dcf77_time;		// merken, wie viele Ticks seit dem letzten Pulsanfang vergangen sind (Periodenbestimmung)
+      p->dcf77_time = 0;				// und wieder bei 0 loszählen
+    }
+    else{
                                                 // nein: dann ein 0->1 Wechsel (Ende eines Informations-Pulses)
-      dcf77_pulse = dcf77_time;			// Pulslänge merken, die Ticks werden aber weitergezählt für die Periodenbestimmung
+      p->dcf77_pulse = p->dcf77_time;			// Pulslänge merken, die Ticks werden aber weitergezählt für die Periodenbestimmung
+      // Report pulse length:
+      if (p->config.enable_error_reporting) {
+	canix_frame message;
+    
+	message.src = canix_selfaddr();
+	message.dst = HCAN_MULTICAST_INFO;
+	message.proto = HCAN_PROTO_SFP;
+
+	message.data[0] = HCAN_SRV_HES;
+	message.data[1] = HCAN_HES_DCF77_PULSE_DURATION;
+	message.data[2] = p->dcf77_pulse;
+	message.size    = 3;
+	canix_frame_send(&message);      
+      }      
     }
   }
-
-  if( ++ct_64Hz <TICKS_PER_SECOND )	       
+  if( ++p->ct_100Hz <TICKS_PER_SECOND )	       
     // wieder ein Tick vorbei
-    timeflags = 1<<ONE_TICK;			 
+    p->timeflags = 1<<ONE_TICK;			 
   else {
     // Flag setzen, dass eine Sekunde herum ist (und natürlich ein Tick)
-    timeflags = (1<<ONE_SECOND) ^ (1<<ONE_TICK); 
-    ct_64Hz = 0;                                 // Zähler zurücksetzen
+    p->timeflags = (1<<ONE_SECOND) ^ (1<<ONE_TICK); 
+    p->ct_100Hz = 0;                                 // Zähler zurücksetzen
   }
-
-  // Nächster Aufruf:
-  return ((uint16_t)(256 - T2COUNT));
-
 }
 
 // Die Tabelle BITNO enthält mehrere Informationen:
@@ -318,15 +265,14 @@ const uint8_t BMASK[] code  = { 1, 2, 4, 8, 10, 20, 40, 80 };
 
 
 // Das nächste Bit wird empfangen:
-void decode_dcf77( uint8_t pulse )
+void decode_dcf77( uint8_t pulse,device_data_dcf77_receiver *p)
 {
-  static uint8_t parity = 0;
   uint8_t i;
   uint8_t *d;
 
   // Siehe http://de.wikipedia.org/wiki/DCF77
   // Nur die Bits 21 bis 58 enthalten die regulären ZeitInformation:
-  i = newtime.second - 21;
+  i = p->newtime.second - 21;
   if( i >= sizeof( BITNO ))			
     return;
 
@@ -337,14 +283,14 @@ void decode_dcf77( uint8_t pulse )
   // Nach den Infobits für Minute, Stunde und den restlichen Infobits sind Paritätsbits eingelassen.
   // Mit jedem neuen Bit wird der erwartete Paritätswert neu bestimmt.
   // Auch das abschließende Paritätsbit wird mitverarbeitet.
-  parity ^= pulse;
+  p->parity ^= pulse;
 
   // Jetzt wird geprüft, ob das aktuelle Bit etwa das Paritätsbit ist:
   i = LPM(&BITNO[i]);
   if( i == 0xFF ){    // wenn ja..
-    if( parity )      // und die Parität 1 ist.. 
-      dcf77error |= DCF77_PARITY_ERROR; // dann war das ein Fehler.. ("Even-Parity", gerade Parität)
-    parity = 0;       // in jedem Fall geht es nun mit der nächsten Bit-Sequenz weiter
+    if( p->parity )      // und die Parität 1 ist.. 
+      p->dcf77error |= DCF77_PARITY_ERROR; // dann war das ein Fehler.. ("Even-Parity", gerade Parität)
+    p->parity = 0;       // in jedem Fall geht es nun mit der nächsten Bit-Sequenz weiter
     return;
   }
 
@@ -355,7 +301,7 @@ void decode_dcf77( uint8_t pulse )
   // 'i>>4' ermittelt die Bits 4-6 und liefert den Index auf das Byte in der Struktur
   // Siehe Tabelle BIT_NO
   // Für die Minute ist i>>4 gleich 2, für die Stunde ist er gleich 1, u.s.w.
-  d = (uint8_t *)&newtime.day_of_week + (i >> 4); 
+  d = (uint8_t *)&p->newtime.day_of_week + (i >> 4); 
 
   // Jetzt wird die Index eliminiert, um den "Wert" des Bits zu bestimmen:
   i &= 0x0F;			
@@ -369,62 +315,62 @@ void decode_dcf77( uint8_t pulse )
     *d += LPM(&BMASK[i]);
 }
 
-void scan_dcf77( void )
+void scan_dcf77( device_data_dcf77_receiver *p )
 {
   // Mit jedem Sekundentakt (Ausnahme siehe unten) wird eine Bitinformation mitgeliefert.
   // Die Dauer der Flankenwechsel werden in '0' und '1' umgewandelt:
 
-  reported_dcf77errors = dcf77error; // alte Fehler merken
+  p->reported_dcf77errors = p->dcf77error; // alte Fehler merken
 
-  if( dcf77_pulse ){
+  if( p->dcf77_pulse ){
     // Kurzer Puls: '0'
     // Erfolg, wenn ein Tick die Länge 5...6 hat
-    if( dcf77_pulse > (TICKS_ZERO-TICK_ERROR-1) && dcf77_pulse < (TICKS_ZERO+TICK_ERROR+1)){
-      decode_dcf77( 0 );
+    if( p->dcf77_pulse > (TICKS_ZERO-TICK_ERROR-1) && p->dcf77_pulse < (TICKS_ZERO+TICK_ERROR+1)){
+      decode_dcf77( 0,p );
     }else{
       // Langer Puls: '1'
       // Erfolg, wenn ein Tick die Länge 11..12 hat
-      if( dcf77_pulse > (TICKS_ONE-TICK_ERROR-1) && dcf77_pulse < (TICKS_ONE+TICK_ERROR+1)){
-	decode_dcf77( 1 );
+      if( p->dcf77_pulse > (TICKS_ONE-TICK_ERROR-1) && p->dcf77_pulse < (TICKS_ONE+TICK_ERROR+1)){
+	decode_dcf77( 1,p );
       }else{
 	// sonst ist die Pulslänge nicht einzuordnen:
-	dcf77error |= DCF77_ILLEGAL_PULSE_LENGTH;
+	p->dcf77error |= DCF77_ILLEGAL_PULSE_LENGTH;
       }
     }
-    dcf77_pulse = 0;
+    p->dcf77_pulse = 0;
   }
 
-  if( dcf77_period ){
-    if( newtime.second < 60 )
-      newtime.second++;
+  if( p->dcf77_period ){
+    if( p->newtime.second < 60 )
+      p->newtime.second++;
     // Die 59. Sekunde enthält kein Informationsbit (keinen Flankenwechsel)
     // D.h., 2 Sekunden werden Ticks bis zum Beginn der nächsten Periode hochgezählt.
     // 2 Sekunden = 2*TICKS_PER_SECOND:
-    if(( dcf77_period > 2*TICKS_PER_SECOND-TICK_ERROR-TICK_ERROR-1) && (dcf77_period < (2*TICKS_PER_SECOND+TICK_ERROR+1))) {
+    if(( p->dcf77_period > 2*TICKS_PER_SECOND-TICK_ERROR-TICK_ERROR-1) && (p->dcf77_period < (2*TICKS_PER_SECOND+TICK_ERROR+1))) {
       // Dieser Flankenwechsel ist gleich dem Anfang einer neuen Minute:
-      if( dcf77error == 0 && newtime.second == 59 ){
-        valid_flag         = 1;              // Zeitinformation gültig!
-	ct_64Hz            = 0;              // Zähler gleich zurücksetzen
-	time.minute        = newtime.minute; // ermittelte Zeit für die Ausgabe retten
-	time.hour          = newtime.hour;
-	time.day_of_week   = newtime.day_of_week;
-	time.day_of_month  = newtime.day_of_month;
-	time.month_of_year = newtime.month_of_year;
-	time.year          = newtime.year;
+      if( p->dcf77error == 0 && p->newtime.second == 59 ){
+        p->valid_flag         = 1;              // Zeitinformation gültig!
+	p->ct_100Hz           = 0;              // Zähler gleich zurücksetzen
+	p->time.minute        = p->newtime.minute; // ermittelte Zeit für die Ausgabe retten
+	p->time.hour          = p->newtime.hour;
+	p->time.day_of_week   = p->newtime.day_of_week;
+	p->time.day_of_month  = p->newtime.day_of_month;
+	p->time.month_of_year = p->newtime.month_of_year;
+	p->time.year          = p->newtime.year;
       }
-      newtime.second = 0;   // das ist ok und der Sekundenzähler wird angepaßt
-      dcf77error = 0;       // alte Fehler werden ggf. gelöscht -> neuer Versuch                            
-      report_flag = 1;      // für Zeit- oder Fehlerausgabe
+      p->newtime.second = 0;   // das ist ok und der Sekundenzähler wird angepaßt
+      p->dcf77error = 0;       // alte Fehler werden ggf. gelöscht -> neuer Versuch                            
+      p->report_flag = 1;      // für Zeit- oder Fehlerausgabe
     }
     else{
       // Eine Periode entspricht 1 Sekunde, d.h. 60 Ticks mit der Länge T2COUNT 
       // Wenn die Periode zu viele oder zu wenige Ticks enthält,stimmt irgendetwas nicht:
-      if( dcf77_period < TICKS_PER_SECOND-TICK_ERROR-1 || dcf77_period > TICKS_PER_SECOND+TICK_ERROR)
-        dcf77error |= DCF77_ILLEGAL_PERIOD_LENGTH;
+      if( p->dcf77_period < TICKS_PER_SECOND-TICK_ERROR-1 || p->dcf77_period > TICKS_PER_SECOND+TICK_ERROR)
+        p->dcf77error |= DCF77_ILLEGAL_PERIOD_LENGTH;
       //
       
     }
-    dcf77_period = 0;
+    p->dcf77_period = 0;
   }
 }
 

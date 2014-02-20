@@ -23,6 +23,7 @@ OBJ     = ../../canix/canix.o ../../canix/mcp2515.o \
 		  $(OBJ_LOCAL)
 
 export F_CPU  = 3686400
+#export F_CPU  = 16000000
 export F_CAN   = 8000000
 export CAN_SPEED = 125000
 

@@ -766,14 +766,13 @@
 		mit der viele Heizung/Heizzone gleichartig gesteuert werden.
 	</block>
 
-	<block type="200" name="dcf77_receiver" size="8">
+	<block type="200" name="dcf77_receiver" size="7">
 		<field datatype="uint8_t" name="level" pos="0" />
 		<field datatype="uint16_t" name="takeover_time" pos="1" />
 		<field datatype="uint8_t" name="dummy0" pos="3" />
 		<field datatype="uint8_t" name="port" pos="4" />		
-		<field datatype="uint8_t" name="monitor_port" pos="5" />				
-		<field datatype="uint8_t" name="id" pos="6" />				
-		<field datatype="uint8_t" name="enable_error_reporting" pos="7" />				
+		<field datatype="uint8_t" name="id" pos="5" />				
+		<field datatype="uint8_t" name="enable_error_reporting" pos="6" />				
 		Liefert einmal pro Minute die Zeit mit Hilfe eines angeschlossenen DCF77-Receiver.
 	</block>
 

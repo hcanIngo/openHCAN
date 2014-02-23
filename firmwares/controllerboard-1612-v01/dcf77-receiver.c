@@ -220,8 +220,9 @@ void dcf77_handler(device_data_dcf77_receiver *p)
 
 	message.data[0] = HCAN_SRV_HES;
 	message.data[1] = HCAN_HES_DCF77_PULSE_DURATION;
-	message.data[2] = p->dcf77_pulse;
-	message.size    = 3;
+	message.data[2] = p->config.id;
+	message.data[3] = p->dcf77_pulse;
+	message.size    = 4;
 	canix_frame_send(&message);      
       }      
     }

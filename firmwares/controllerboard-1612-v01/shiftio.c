@@ -213,7 +213,7 @@ static inline void writeMCP23017port (uint8_t port, uint8_t address, uint8_t out
 	}
 	i2c_stop ();
 
-	sendMessage (0x7B, port, address, outputByte); // 0x7B = 123
+	//sendMessage (0x7B, port, address, outputByte); // 0x7B = 123
 }
 
 static inline uint8_t getMCP23017outport (uint8_t n, uint8_t * port, uint8_t * address, uint8_t * i)

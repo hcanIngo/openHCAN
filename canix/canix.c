@@ -196,7 +196,7 @@ void canix_rtc_init(void)
 
 	TCNT0 = -myClockBasedTCNT0;
 
-	myWaitingPeriod = (uint8_t)(F_CPU/1024/myClockBasedTCNT0/100);
+	myWaitingPeriod = (uint8_t)(F_CPU/1024/myClockBasedTCNT0/100) - 2;
 }
 
 /**
@@ -326,7 +326,7 @@ ISR(TIMER0_OVF_vect)
 	//
 	static uint8_t rtc_clock_counter = 0;
 
-	if (rtc_clock_counter++ == myWaitingPeriod-1) // war: 34
+	if (rtc_clock_counter++ > myWaitingPeriod)
 	{
 		// Counter zuruecksetzen
 		rtc_clock_counter = 0;

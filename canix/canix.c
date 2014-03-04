@@ -164,7 +164,8 @@ const char canix_version[] PROGMEM = "CANIX_VERSION_" CANIX_VERSION "_";
  * wird. Dadurch entsteht eine IRQ-Frequenz von ca. 3.6kHz, d.h.  die ISR wird
  * alle 271 us aufgerufen.
  */
-#define CANIX_RTC_TCNT0_INIT 255
+
+#define F_CPU_REFERENCE      3686400
 volatile uint8_t myClockBasedTCNT0 = 0;
 volatile uint8_t myWaitingPeriod   = 0;
 
@@ -192,7 +193,7 @@ void canix_rtc_init(void)
 #endif
 	// Timter Counter loest immer bei 255 -> 0 den
 	// Interrupt aus; f = 3686 Hz
-	myClockBasedTCNT0 = (uint8_t)((uint32_t)(F_CPU+3686399)/(uint32_t)3686400); 
+	myClockBasedTCNT0 = (uint8_t)((uint32_t)(F_CPU+F_CPU_REFERENCE-1)/(uint32_t)F_CPU_REFERENCE); 
 
 	TCNT0 = -myClockBasedTCNT0;
 

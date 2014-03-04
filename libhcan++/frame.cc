@@ -215,6 +215,7 @@ const frame_message_description_t &find_frame_message_description (
 
 void frame::print(bool numeric, bool color, const std::string &prefix) const
 {
+	bool ascii = true;
 	cout << prefix;
 	cout.flush();
 
@@ -295,6 +296,16 @@ void frame::print(bool numeric, bool color, const std::string &prefix) const
 					<< setw(2) << (uint16_t)data(i);
 			cout << " ]";
 			cout << setbase(10);
+
+			if (ascii)
+			{
+				cout << " "; // " ASCII: ";
+				for (uint8_t i = 0; i < size(); i++)
+				{
+					if ((uint16_t)data(i) > 0x1F)
+						cout << static_cast<char>((uint16_t)data(i));
+				}
+			}
 		}
 		if (color)
 			cout << COLOR_NORMAL;

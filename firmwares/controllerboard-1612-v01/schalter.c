@@ -32,8 +32,6 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 
-#include <shiftio.h>
-
 #include <devices.h>
 
 static inline void sendMessage(device_data_schalter *p, uint8_t active);
@@ -110,17 +108,11 @@ static inline void sendMessage(device_data_schalter *p, uint8_t active)
 
 static inline uint8_t inputport_read(device_data_schalter *p, uint8_t n)
 {
-	if ((n < 2) && (hasInExt || hasOutExt))
+	if (expanderActive && (n < 2))
 	{
-		// PC0, PC1 shiftIn und oder shiftOut als SCL=PC0 und SDA=PC1 verwendet
-		// error: PC0 und 1 steht nicht als Eingang zur Verfuegung!
-	}
-	else if ( (n == 2) && hasInExt )
-	{
-		// PC2 fuer shift-In als Interruptleitung verwendet.
-		// error: PC2 steht nicht als Eingang zur Verfuegung!
-	}
-	else if (n < 8)
+    	return 0;
+  	}
+   	if (n < 8)
 	{
 		// Pins sind 1:1 von PORTC auszulesen
 
@@ -155,7 +147,7 @@ static inline uint8_t inputport_read(device_data_schalter *p, uint8_t n)
 	}
 	else if (n < 244)
 	{
-		return isBitFromShiftInSet(n); // n-tes Bit abfragen
+		return ports_getInput (n); // n-tes Bit abfragen
 	}
 
 	return 0;

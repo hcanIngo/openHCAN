@@ -849,6 +849,18 @@ Liefert die Info, ob die Zeitzone matched
 |match|0 = false, 1 = true|
 \\ 
 
+**EXPANDER_NOT_FOUND (120)**
+
+Error message for ports Device
+^Parameter^Beschreibung^
+|address|Adresse oder ID des nicht gefundenen Expanders|
+\\ 
+
+**ADDITIONAL_PORTS_DEVICE_IGNORED (121)**
+
+Error message for ports Device
+\\ 
+
 ======RTS - Real Time Service (6)======
 		
 **TIME_INFO (1)**

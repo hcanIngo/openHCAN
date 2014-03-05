@@ -505,6 +505,15 @@
 		<field datatype="uint8_t" name="process_order" pos="2" />
 	</block>
 
+	<block type="50" name="ports" size="5">
+		<field datatype="uint8_t" name="base" pos="0" />
+		<field datatype="uint8_t" name="expander0" pos="1" />
+		<field datatype="uint8_t" name="expander1" pos="2" />
+		<field datatype="uint8_t" name="expander2" pos="3" />
+		<field datatype="uint8_t" name="expander3" pos="4" />
+        Das Ports-Device steuert externe IO-Erweiterungen und eine Aenderung der Controller-eigenen IO-Ports.		
+	</block>
+
 	<block type="90" name="heizungssteuerung" size="29">
 		<field datatype="uint8_t" name="pwm0" pos="0" />
 		<field datatype="uint8_t" name="pwm1" pos="1" />

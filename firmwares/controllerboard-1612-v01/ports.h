@@ -15,10 +15,10 @@
  *  with HCAN; if not, write to the Free Software Foundation, Inc., 51
  *  Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  *
- *  (c) 2014 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
+ *  (c) 2014 by Christoph Delfs and Ingo Lages
  */
-#ifndef SHIFTIO_H
-#define SHIFTIO_H
+#ifndef PORTS_DEVICE_H
+#define PORTS_DEVICE_H
 
 #include <avr/io.h>
 
@@ -98,13 +98,31 @@
 #define MAX_NUM_OF_MCP23017_OUTPUT_PORTS 8 // 8 = maximal zwei IO-Exp32-Boards und
 #define MAX_NUM_OF_MCP23017_INPUT_PORTS 8  // 8 = maximal ein IN-Exp64-Board
 
-void initMCP23017 (void);
 
-inline void changeShiftOutPinState (uint8_t n, uint8_t state);
-inline uint8_t getShiftOutPinState (uint8_t n);
-inline void writeAllMCP23017Outputs (void);
+#include <canix/eds.h>
+#include <inttypes.h>
+#include <eds-structs.h>
 
-inline uint8_t isBitFromShiftInSet (uint8_t n);
-inline void readAllMCP23017Inputs (void);
+typedef struct
+{
+	uint8_t type;
+	eds_ports_block_t config;
+	eds_block_p it; // EDS Block Pointer, noetig fuer EDS Schreib-Ops
+} device_data_ports;
+
+void ports_init(device_data_ports *p, eds_block_p it);
+
+// Service functions:
+extern bool portsDeviceCreated;
+extern bool expanderActive;
+
+// void ports_darlingtonoutput_init(void);
+
+inline uint8_t ports_getInput(uint8_t portNumber);
+
+inline void ports_setOutput(uint8_t n, uint8_t state);
+inline uint8_t ports_getOutput(uint8_t n);
+
+inline void handlerForExpanderUpdate(void);
 
 #endif

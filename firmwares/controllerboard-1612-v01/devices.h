@@ -15,6 +15,7 @@
 #include "powerport.h"
 #include "reedkontakt.h"
 #include "powerportAutomat.h"
+#include "ports.h"
 #include "rolladenAutomat.h"
 #include "rolladen.h"
 #include "rolladenSchlitzpos.h"

@@ -13,7 +13,6 @@
 
 #include "timer.h"
 #include "devices.h"
-#include "shiftio.h"
 
 volatile uint8_t timer_counter_100th = 0;
 volatile uint8_t timer_counter_10th = 0;
@@ -58,8 +57,7 @@ void idle_handler(void)
 		// Event Flag zuruecksetzen
 		timer_event_100th = 0;
 
-		if (hasInExt) // es ist mindestens ein IOExtension-In-Port konfiguriert
-			readAllMCP23017Inputs ();
+		if (expanderActive) handlerForExpanderUpdate ();
 
 		for (i = 0; i < MAX_PDEVICE_DATA; i++)
 		{
@@ -161,9 +159,6 @@ void idle_handler(void)
 				}
 			}
 		}
-
-		/*if (hasOutExt) // es ist mindestens ein IOExtension-Out-Port konfiguriert
-			writeAllMCP23017Outputs (); // after powerport was switched*/
 
 		unusedSRAM = get_mem_unused();
 		if( unusedSRAM < MAX_MEM_CRITICAL_SIZE )

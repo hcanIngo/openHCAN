@@ -11,15 +11,12 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 
-#include "shiftio.h"
 #include "devices.h"
 #include "log.h"
 
 uint8_t *pdevice_data[MAX_PDEVICE_DATA];
 uint8_t device_data[MAX_DEVICE_DATA];
 uint16_t device_data_ram_usage;
-uint8_t hasInExt;
-uint8_t hasOutExt;
 
 void devices_init(void)
 {
@@ -30,8 +27,7 @@ void devices_init(void)
 	for (i = 0; i < sizeof(device_data); i++)
 		device_data[i] = 0;
 	
-	hasInExt = 0; // Voreinstellung: Weder die In- noch Out-Extension verwendet
-	hasOutExt = 0;
+	portsDeviceCreated = false;
 }
 
 void devices_load_config(void)
@@ -111,6 +107,10 @@ void devices_load_config(void)
 			case EDS_powerportAutomat_BLOCK_ID:
 				config_size = sizeof (eds_powerportAutomat_block_t);
 				data_size = sizeof (device_data_powerportAutomat);
+				break;
+			case EDS_ports_BLOCK_ID:
+				config_size = sizeof (eds_ports_block_t);
+				data_size = sizeof (device_data_ports);
 				break;
 			case EDS_schalter_BLOCK_ID:
 				config_size = sizeof (eds_schalter_block_t);
@@ -234,6 +234,9 @@ void devices_load_config(void)
 			case EDS_poti_BLOCK_ID:
 				poti_init( (device_data_poti*) p, it);
 				break;
+			case EDS_ports_BLOCK_ID:
+				ports_init( (device_data_ports*) p, it);
+				break;
 			case EDS_reedkontakt_BLOCK_ID: 
 				reedkontakt_init( (device_data_reedkontakt*) p, it); 
 				break;
@@ -261,18 +264,8 @@ void devices_load_config(void)
 			case EDS_zeitzone_BLOCK_ID: 
 				zeitzone_init( (device_data_zeitzone*) p, it); 
 				break;
-			case EDS_taster_BLOCK_ID: 
-				if ( ((device_data_taster*) p)->config.port > 15 )
-					hasInExt = 1; // es ist mindestens ein IOExtension-In-Port konfiguriert
-				break;
-			case EDS_powerport_BLOCK_ID: 
-				if ( ((device_data_powerport*) p)->config.port > 19 ) // fuer Guido's C820 (20 Ausgaenge)
-					hasOutExt = 1; // es ist mindestens ein IOExtension-Out-Port konfiguriert
-				break;
 		}
 	}
-
-	if (hasInExt || hasOutExt) initMCP23017 ();
 
 	// die verwendeten Bytes an RAM merken
 	device_data_ram_usage = device_data_allocated;

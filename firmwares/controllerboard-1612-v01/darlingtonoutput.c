@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <canix/syslog.h>
 #include "darlingtonoutput.h"
-#include "shiftio.h"
+#include "ports.h"
 
 void darlingtonoutput_init(void)
 {
@@ -27,8 +27,7 @@ uint8_t darlingtonoutput_getpin(uint8_t n)
 	}
 	else
 	{
-		//n -= 12; // n auf 0...95 bringen
-		return getShiftOutPinState(n);
+		return ports_getOutput(n);
 	}
 }
 
@@ -59,6 +58,6 @@ void darlingtonoutput_setpin(uint8_t n, uint8_t state)
 	else
 	{
 		//canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("chgShOutPinStat,n=%d,stat=%d"), n, state);
-		changeShiftOutPinState(n, state);
+		ports_setOutput(n, state);
 	}
 }

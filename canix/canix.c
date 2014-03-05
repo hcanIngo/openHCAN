@@ -25,6 +25,7 @@
 #include <avr/interrupt.h>
 #include <avr/wdt.h>
 #include <avr/pgmspace.h>
+#include <stdarg.h> // va_list, va_start, va_arg, va_end
 
 #include <canix/canix.h>
 #include <canix/mcp2515.h>
@@ -614,3 +615,23 @@ void canix_sleep_100th(uint8_t n)
 	}
 }
 
+void sendHESMessage(uint8_t n, ...)
+{
+	uint8_t i;
+	va_list vl;
+	va_start(vl, n);
+
+	canix_frame message;
+	message.src = canix_selfaddr();
+	message.dst = HCAN_MULTICAST_CONTROL;
+	message.proto = HCAN_PROTO_SFP;
+	message.data[0] = HCAN_SRV_HES;
+
+	for (i=0; i<n; i++)
+	{
+		message.data[i+1] = va_arg(vl, int);
+	}
+	va_end(vl);
+	message.size = n+1;
+	canix_frame_send_with_prio(&message, HCAN_PRIO_HI);
+}

@@ -1,3 +1,6 @@
+# hier stellen wir ATmega644 ein: 
+ARCH.inc
+
 # Backup
 ###################
 *~

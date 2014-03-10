@@ -46,15 +46,11 @@
 /* Achtung:
  * --------
  * Sind Input-Ports > 15 und oder Output-Pins > 11 konfiguriert,
- * so wird versucht der atmega die I2C-Devices zu erreichen. Wenn an IN0 und IN1 keine
+ * so wird versucht der ATmega die I2C-Devices zu erreichen. Wenn an IN0 und IN1 keine
  * 4,7 kOhm - Pullup's montiert sind macht der atmega Wdt-Resets!
  */
 
-#define MAXIMUM_NUMBER_OF_EXPANDER_BOARDS 4 // TODO spaeter ..._ICS 8
-
-#define MAX_NUM_OF_MCP23017_OUTPUT_PORTS 8 // 8 = maximal zwei IO-Exp32-Boards und
-#define MAX_NUM_OF_MCP23017_INPUT_PORTS 8  // 8 = maximal ein IN-Exp64-Board
-
+#define MAXIMUM_NUMBER_OF_EXPANDER_BOARDS 4
 
 #include <canix/eds.h>
 #include <inttypes.h>
@@ -69,7 +65,6 @@ typedef struct
 
 void ports_init(device_data_ports *p, eds_block_p it);
 
-// Service functions:
 extern bool portsDeviceCreated;
 extern bool expanderActive;
 

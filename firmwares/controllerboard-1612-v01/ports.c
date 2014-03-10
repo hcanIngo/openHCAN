@@ -26,7 +26,6 @@
 #include <hcan.h>
 #include <hcan_multicast.h>
 
-// #include "devices.h" // fuer hasInExt, hasOutExt
 #include "ports.h"
 #include "i2cmaster.h"
 #define MCP23x17_ADDR 0x40 // Adressierung: A2 bis A0 auf GND + WRITE
@@ -43,110 +42,160 @@
 #define MCP23x17_GPIOA    0x12 // choice the port A to read or write
 #define MCP23x17_GPIOB    0x13 // choice the port B to read or write
 
-static uint8_t outPortIsLatest = false; // false: MCP23017 outputs muessen geschrieben werden
-static uint8_t outPortState[MAX_NUM_OF_MCP23017_OUTPUT_PORTS] = {0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x00}; // default off
-static uint8_t inPortState[MAX_NUM_OF_MCP23017_INPUT_PORTS] = {0xFF,0xFF,0xFF,0xFF, 0xFF,0xFF,0xFF,0xFF}; // default off
+volatile static uint8_t valuesOfPortsOnExpBoard[MAXIMUM_NUMBER_OF_EXPANDER_BOARDS*4];
+volatile static uint8_t previousValuesOfPortsOnExpBoard[MAXIMUM_NUMBER_OF_EXPANDER_BOARDS*4];
+
 static inline void writeMCP23017port (uint8_t port, uint8_t address, uint8_t outputByte);
 
 
-//static uint8_t compatTable[] = {0,0,15,15}; // out,out,in,in (Expander 0 1 2 3) - verwendet Kompatibilitätsmodus (jedes Bit)
-// TODO: Per Funktionspointer (callback) entscheiden, welche Routinen verwendet werden
-
-
+static  uint8_t* expBoard; // CD expanderBoard z.B.  0,0,15,15 // out,out,in,in (Expander 0 1 2 3), Einzelbits
 bool portsDeviceCreated = false;
 bool expanderActive = false;
 
-static void configureMCP23017InputOrOutputPort (uint8_t port, uint8_t address)
-{
-	if (0 == i2c_start (MCP23x17_ADDR + (address<< 1) + I2C_WRITE))
-	{
-		if (MCP23x17_GPPUA == port  || MCP23x17_GPPUB == port)
-		{
-			// activate pull-up for input:
-			i2c_write (port);
-			i2c_write (0xff);
-			i2c_stop ();
-			// device accessible, set as input, address of expansion IC:
-			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Exp-IN:port=%d,adr=%d"),
-					port, address);
-		}
-		else if (MCP23x17_IODIRA == port || MCP23x17_IODIRB == port)
-		{
-			// configure port as output:
-			i2c_write (port);
-			i2c_write (0x00);
-			i2c_stop ();
-			// device accessible, set as output, address of expansion IC:
-			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Exp-OUT:port=%d,adr=%d"),
-					port, address);
 
-			 // switch outputs off:
-			if (MCP23x17_IODIRA == port)
-				writeMCP23017port (MCP23x17_GPIOA, address, 0x00);
-			else writeMCP23017port (MCP23x17_GPIOB, address, 0x00);
-		}
-		// else  error
-	}
-	else // failed to access device:
+// Bsp. fuer die FESTLEGUNG der HW-Konfiguration:
+//                                 |--------OUTPUT--------|  |---------INPUT--------|
+// portindex                        0  1  2  3   4  5  6  7   8  9 10 11  12 13 14 15
+// boardindex (fuer expBoard)       0            1            2            3
+//              expBoard            0            0           15           15            //     "    ,    "
+//          aus expBoard            0  0  0  0   0  0  0  0   1  1  1  1   1  1  1  1   // 0: Output, 1: Input
+static uint8_t expStartPins[] =  {12,20,28,36, 44,52,60,68, 16,24,32,40, 48,56,64,72}; // Startpinnummern
+// Adressen der MCP23x17            0  1  0  1   2  3  2  3   4  5  4  5   6  7  6  7
+// bank 0=A, 1=B                    A  A  B  B   A  A  B  B   A  A  B  B   A  A  B  B
+
+
+static inline void configurePortAsInput (uint8_t bank, uint8_t adr)
+{
+	if (0 == i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE))
 	{
-		i2c_stop ();
-		// device access failed , address of expansion IC:
-		canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("Exp:NotFound adr=%d"), address);
-		// TODO raus: sendHESMessage (2, HCAN_HES_EXPANDER_NOT_FOUND, address);
+		i2c_write(MCP23x17_IODIRA + bank); // select either IODIRA or IODIRB (via bank)
+		i2c_write(0xff); // if selected, the whole bank is set as input
+		i2c_stop();
+
+		// activate pull-up for input ports:
+		i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE);
+		i2c_write(MCP23x17_GPPUA + bank); // select either GPPUA or GPPUB via bank
+		i2c_write(0xff); // the whole bank gets pull-up
 	}
+	i2c_stop();
 }
 
+static inline void configurePortAsOutput (uint8_t bank, uint8_t adr)
+{
+	if (0 == i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE))
+	{
+		i2c_write(MCP23x17_IODIRA + bank); // select either IODIRA or IODIRB via bank
+		i2c_write(0x00); // if selected, set whole bank as output
+	}
+	i2c_stop();
+}
+
+bool isMCP23x17available (uint8_t boardindex, uint8_t adr)
+{
+	bool available = false;
+
+	// check for MCP23x17-IC:
+    if (0 == i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE)) available = true;
+    else
+    {
+    	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("noExp%d"), adr); // adr 0..7
+
+    	// gilt hier immer: if (expIOconfig[boardindex] != 255) // Board (2-MCP23x17-IC's) konfiguriert?
+    	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("%d,%d but configured)"), boardindex, adr);
+    }
+
+    i2c_stop();
+    return available;
+}
+
+/* Hinweis: Wird diese Funktion ohne Pullups an IN0 und IN1 ausgefuehrt,
+   so kommt es zu wdt-Resets. Daher ports-Device nur konfigurieren,
+   wenn auch eine IO-Exp. angeschlossen ist. */
 void ports_init (device_data_ports *p, eds_block_p it)
 {
-	/* Hinweis: Wird diese Funktion ohne Pullups an IN0 und IN1 ausgefuehrt,
-	   so kommt es zu wdt-Resets. Daher C1612-Board -IN-Pins > 15 und -Out-Pins > 12 nur
-	   konfigurieren, wenn auch eine IO-Exp. angeschlossen ist. */
-	uint8_t address;
-
-	// There can be only ONE ports Device:
 	if (portsDeviceCreated == true)
 	{
-		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Additional ports device ignored"));
+		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Additional ports configuration ignored"));
 		// TODO raus: sendHESMessage (1, HCAN_HES_ADDITIONAL_PORTS_DEVICE_IGNORED);
 		return;
 	}
+	portsDeviceCreated = true; // There can be only ONE ports Device
+	expanderActive = false;
 
 	i2c_init(); // SDA/SDL-Pins sind ueber I2C-master-Lib ATmegatypabhaengig festgelegt.
 
-
-	expanderActive = true; // sobald ein Ports-Device in der config exitiert (leider nicht in/out unterschieden)
-	// statt: checkAndConfig(p);
-
-	portsDeviceCreated = true;
-
-	if (expanderActive) // es ist mindestens ein IOExtension-Out-Port konfiguriert
+	uint8_t i;
+	for (i=0; i<4*MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; i++)
 	{
-		for (address=0; address<4; address++) // output port addresses 0,1,2,3
-		{
-			configureMCP23017InputOrOutputPort (MCP23x17_IODIRA, address);
-			configureMCP23017InputOrOutputPort (MCP23x17_IODIRB, address);
-		}
+		valuesOfPortsOnExpBoard[i] = 0;
+		previousValuesOfPortsOnExpBoard[i] = 255;
 	}
 
-	if (expanderActive) // es ist mindestens ein IOExtension-In-Port konfiguriert
+	expBoard = &p->config.expander0; // z.B. 0,255,15,15 (4x OUT, -, 4x IN, 4x IN)
+
+	uint8_t outBase, inBase;
+	if (p->config.base == 128)
 	{
-		for (address=4; address<8; address++) // input port addresses 4,5,6,7
+		// Zur Erzeugung der Startpinnummern (Ingo's Nummerierung):
+		outBase = 12;
+		inBase = 16;
+		// Bsp.:expStartPins[] = {12,20,28,36, 44,52,60,68, 16,24,32,40, 48,56,64,72};
+	}
+	else // Christoph's aktuelle Nummerierung:
+	{
+		outBase = inBase = 32;
+	}
+
+	uint8_t portindex = 0;
+	uint8_t boardindex;
+	uint8_t adr = 0;
+	uint8_t port;
+	uint8_t bank = 0; // A
+	for (boardindex=0; boardindex<MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; boardindex++) // boardindex: Index auf je 4-Ports (ein IO-Board)
+	{
+		if (expBoard[boardindex] != 255)
 		{
-			configureMCP23017InputOrOutputPort (MCP23x17_GPPUA, address);
-			configureMCP23017InputOrOutputPort (MCP23x17_GPPUB, address);
+			for (port=0; port<4; port++)
+			{
+				// TODO folgendes 3x wdh, wenn es nicht der Konfig entspricht:
+				if (isMCP23x17available(boardindex, adr))
+				{
+					expanderActive = true;
+					if ((expBoard[boardindex] & (1<< port)) != 0) // als INPUT konfiguriert?
+					{
+						canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("i:%d-%d"), port, adr);
+						expStartPins[portindex] = inBase + 8*portindex;
+						configurePortAsInput (bank, adr);
+					}
+					else // Bit ist 0, dann als OUTPUT konfiguriert:
+					{
+						canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("o:%d-%d"), port, adr);
+						expStartPins[portindex] = outBase + 8*portindex;
+						configurePortAsOutput (bank, adr);
+					}
+				}
+
+				if (port==3) bank = 0; // fuer port 0
+				if (port==1) {bank = 1; adr--;} // fuer port 2
+				else adr++;
+			}
+		}
+		else
+		{
+			adr += 2; // Board nicht konfiguriert
+			portindex += 4;
 		}
 	}
 }
 
-// port = MCP23x17_GPIOA or MCP23x17_GPIOB
-static inline uint8_t readMCP23017port (uint8_t port, uint8_t address)
+static inline uint8_t readMCP23017port (uint8_t bank, uint8_t adr)
 {
-	uint8_t inputByte = 0xFF;
-	if (0 == i2c_start (MCP23x17_ADDR + (address<< 1) + I2C_WRITE)) // address shifted because of: A2 A1 A0 R/W
+	uint8_t inputByte = 0xFF; // Taster nicht betaetigt, aber Reedkontakte offen
+	if (0 == i2c_start (MCP23x17_ADDR + adr + I2C_WRITE))
 	{
 		// read input at port:
-		i2c_write (port);
-		i2c_rep_start (MCP23x17_ADDR+(address<< 1) + I2C_READ);
+		i2c_write(MCP23x17_GPIOA + bank); // select either GPIOA or GPIOB via bank
+		i2c_rep_start (MCP23x17_ADDR + adr + I2C_READ);
 		inputByte = i2c_readNak ();
 	}
 	i2c_stop ();
@@ -156,202 +205,133 @@ static inline uint8_t readMCP23017port (uint8_t port, uint8_t address)
 }
 
 // n-tes Bit am port abfragen
-/* inPortState[i] gespeichert, damit diese Routine nicht fuer jedes Bit
-   die ein I2C-Read anstoessen muss -> in inPortState[i] pollen */
+/* valuesOfPortsOnExpanderBoard[i] gespeichert, damit diese Routine nicht fuer jedes Bit
+   die ein I2C-Read anstossen muss */
 inline uint8_t ports_getInput (uint8_t n)
 {
-	uint8_t inputByte = 0;
-	// inputByte fuer Port B ist zu spiegeln (auch beim IO-Exp32-Board)
+	uint8_t portindex = 0;
+	uint8_t boardindex;
+	uint8_t port;
+	for (boardindex=0; boardindex<MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; boardindex++) // boardindex: Index auf je 4-Ports (ein IO-Board)
+	{
+		if (expBoard[boardindex] != 255) // Board konfiguriert?
+		{
+			for (port=0; port<4; port++)
+			{
+				if ((expBoard[boardindex] & (1<< port)) != 0) // als INPUT konfiguriert?
+				{
+					if (n < (expStartPins[portindex]+8))
+					{
+						n -= expStartPins[portindex];
+						if (port > 1) n = 7 - n; // Port B: Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
+						return valuesOfPortsOnExpBoard[portindex] & (1<< n); // Bit abfragen
+					}
+				}
 
-	//sendHESMessage (2, 0x77, n);
-
-	if (n < 24) // 16..23
-	{
-		inputByte = inPortState[0];
-		n -= 16; // auf den Bereich 0-7 holen
-	}
-	else if (n < 32) // 24..31
-	{
-		inputByte = inPortState[2];
-		n -= 24; // auf den Bereich 0-7 holen
-	}
-	else if (n < 40) // 32..39
-	{
-		inputByte = inPortState[1];
-		n -= 32; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
-	}
-	else if (n < 48) // 40..47
-	{
-		inputByte = inPortState[3];
-		n -= 40; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
-	}
-	else if (n < 56) // 48..55
-	{
-		inputByte = inPortState[4];
-		n -= 48; // auf den Bereich 0-7 holen
-	}
-	else if (n < 64) // 56..63
-	{
-		inputByte = inPortState[6];
-		n -= 56; // auf den Bereich 0-7 holen
-	}
-	else if (n < 72) // 64..71
-	{
-		inputByte = inPortState[5];
-		n -= 64; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
-	}
-	else if (n < 80) // 72..79
-	{
-		inputByte = inPortState[7];
-		n -= 72; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
+				portindex++;
+			}
+		}
+		else portindex += 4; // Board nicht konfiguriert
 	}
 
-	return inputByte & (1<< n); // Bit abfragen
-}
-
-static inline void writeAllMCP23017Outputs (void)
-{
-	writeMCP23017port (MCP23x17_GPIOA, 0, outPortState[0]);
-	writeMCP23017port (MCP23x17_GPIOA, 1, outPortState[1]);
-	writeMCP23017port (MCP23x17_GPIOB, 0, outPortState[2]); // ggf todo nur auf konfigurierten Adressen schreiben
-	writeMCP23017port (MCP23x17_GPIOB, 1, outPortState[3]);
-
-	writeMCP23017port (MCP23x17_GPIOA, 2, outPortState[4]);
-	writeMCP23017port (MCP23x17_GPIOA, 3, outPortState[5]);
-	writeMCP23017port (MCP23x17_GPIOB, 2, outPortState[6]);
-	writeMCP23017port (MCP23x17_GPIOB, 3, outPortState[7]);
+	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("Exp:InPin %d NG"), n);
+	return 1; // Input-Pin nicht gefunden -> Taster nicht betaetigt, aber Reedkontakt offen!
 }
 
 inline void handlerForExpanderUpdate (void)
 {
-	if (!outPortIsLatest)
+	uint8_t portindex = 0;
+	uint8_t boardindex;
+	uint8_t adr = 0;
+	uint8_t port;
+	uint8_t bank = 0; // A
+	for (boardindex=0; boardindex<MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; boardindex++) // boardindex: Index auf je 4-Ports (ein IO-Board)
 	{
-		outPortIsLatest = true; // MCP23017 outputs written
-		writeAllMCP23017Outputs ();
+		if (expBoard[boardindex] != 255)
+		{
+			for (port=0; port<4; port++)
+			{
+				if ((expBoard[boardindex] & (1<< port)) != 0) // als INPUT konfiguriert?
+					valuesOfPortsOnExpBoard[portindex] = readMCP23017port (bank, adr<< 1);  // address shifted because of: A2 A1 A0 R/W
+				else // als OUTPUT konfiguriert:
+				if (previousValuesOfPortsOnExpBoard[portindex] != valuesOfPortsOnExpBoard[portindex])
+				{
+					writeMCP23017port (bank, adr, valuesOfPortsOnExpBoard[portindex]);
+					previousValuesOfPortsOnExpBoard[portindex] = valuesOfPortsOnExpBoard[portindex];
+				}
+
+				if (port==3) bank = 0; // fuer port 0
+				if (port==1) {bank = 1; adr--;} // fuer port 2
+				else adr++;
+				portindex++;
+			}
+		}
+		else
+		{
+			adr += 2; // Board nicht konfiguriert
+			portindex += 4;
+		}
 	}
-
-	// Alle MCP23x17-Inputs pollen/aufrufen, bevor die devices ihr Inputs abfragen:
-	inPortState[0] = readMCP23017port (MCP23x17_GPIOA, 4); // todo ggf. nur von bei init erreichbaren Adressen lesen
-	inPortState[1] = readMCP23017port (MCP23x17_GPIOB, 4);
-	inPortState[2] = readMCP23017port (MCP23x17_GPIOA, 5);
-	inPortState[3] = readMCP23017port (MCP23x17_GPIOB, 5);
-
-	inPortState[4] = readMCP23017port (MCP23x17_GPIOA, 6);
-	inPortState[5] = readMCP23017port (MCP23x17_GPIOB, 6);
-	inPortState[6] = readMCP23017port (MCP23x17_GPIOA, 7);
-	inPortState[7] = readMCP23017port (MCP23x17_GPIOB, 7);
 }
 
-// port = MCP23x17_GPIOA or MCP23x17_GPIOB
-// shift address because of R/W-Bit: A2 A1 A0 R/W
-static inline void writeMCP23017port (uint8_t port, uint8_t address, uint8_t outputByte)
+static inline void writeMCP23017port (uint8_t bank, uint8_t adr, uint8_t outputByte)
 {
-	if (0 == i2c_start (MCP23x17_ADDR + (address<< 1) + I2C_WRITE))
+	if (0 == i2c_start (MCP23x17_ADDR + (adr<< 1) + I2C_WRITE)) // shift address because of R/W-Bit: A2 A1 A0 R/W
 	{
-		// write output to port:
-		i2c_write (port);
-		i2c_write (outputByte);
+		i2c_write(MCP23x17_GPIOA + bank);
+		i2c_write (outputByte); // write output to port
 	}
 	i2c_stop ();
-
-	//sendHESMessage (4, 0x7B, port, address, outputByte); // 0x7B = 123
 }
 
-static inline uint8_t getMCP23017outport (uint8_t n, uint8_t * port, uint8_t * address, uint8_t * i)
+static inline uint8_t getMCP23017outportpin (uint8_t n, uint8_t * pportindex)
 {
-	if (n < 20)      // 12..19
+	uint8_t portindex = 0;
+	uint8_t boardindex;
+	uint8_t port;
+	for (boardindex=0; boardindex<MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; boardindex++) // boardindex: Index auf je 4-Ports (ein IO-Board)
 	{
-		*i = 0;
-		n -= 12; // auf den Bereich 0-7 holen
-		*port = MCP23x17_GPIOA;
-		*address = 0;
-	}
-	else if (n < 28) // 20..27
-	{
-		*i = 1;
-		n -= 20; // auf den Bereich 0-7 holen
-		*port = MCP23x17_GPIOA;
-		*address = 1;
-	}
-	else if (n < 36) // 28..35
-	{
-		*i = 2;
-		n -= 28; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins von Port B sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
-		*port = MCP23x17_GPIOB;
-		*address = 0;
-	}
-	else if (n < 44) // 36..43
-	{
-		*i = 3;
-		n -= 36; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins von Port B sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
-		*port = MCP23x17_GPIOB;
-		*address = 1;
-	}
-	else if (n < 51) // 44..51
-	{
-		*i = 4;
-		n -= 44; // auf den Bereich 0-7 holen
-		*port = MCP23x17_GPIOA;
-		*address = 2;
-	}
-	else if (n < 60) // 52..59
-	{
-		*i = 5;
-		n -= 52; // auf den Bereich 0-7 holen
-		*port = MCP23x17_GPIOA;
-		*address = 3;
-	}
-	else if (n < 74) // 66..73
-	{
-		*i = 6;
-		n -= 66; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins von Port B sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
-		*port = MCP23x17_GPIOB;
-		*address = 2;
-	}
-	else // (n < 82) // 74..81
-	{
-		*i = 7;
-		n -= 74; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins von Port B sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
-		*port = MCP23x17_GPIOB;
-		*address = 3;
+		if (expBoard[boardindex] != 255)
+		{
+			for (port=0; port<4; port++)
+			{
+				if (!((expBoard[boardindex] & (1<< port)) != 0)) // als OUTPUT konfiguriert?
+				{
+					if (n < (expStartPins[portindex]+8))
+					{
+						n -= expStartPins[portindex]; // auf den Bereich 0-7 holen
+						*pportindex = portindex;
+						return (port>1) ? (7 - n) : n; // Port B: Pins sind zu spiegeln (0 -> 7, 1 -> 6 etc.)
+					}
+				}
+
+				portindex++;
+			}
+		}
+		else portindex += 4; // Board nicht konfiguriert
 	}
 
-	return n;
+	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("Exp:OutPin %d NG"), n);
+	return 0; // Output-Pin nicht gefunden
 }
 
 inline void ports_setOutput (uint8_t n, uint8_t state)
 {
-	uint8_t address;
-	uint8_t port;
-	uint8_t i;
-	n = getMCP23017outport (n, &port, &address, &i);
+	uint8_t portindex;
+
+	n = getMCP23017outportpin (n, &portindex);
 
 	if (state)
-		outPortState[i] |= (1<< n);
+		valuesOfPortsOnExpBoard[portindex] |= (1<< n);
 	else
-	{
-		outPortState[i] &= ~(1<< n);
-		//canix_syslog_P(SYSLOG_PRIO_CRITICAL, PSTR("%x%x"), n, i);
-	}
-
-	outPortIsLatest = false; // false: MCP23017 outputs muessen geschrieben werden
+		valuesOfPortsOnExpBoard[portindex] &= ~(1<< n);
 }
 
 inline uint8_t ports_getOutput (uint8_t n)
 {
-	uint8_t address_dummy;
-	uint8_t port_dummy;
-	uint8_t i;
-	n = getMCP23017outport (n, &port_dummy, &address_dummy, &i);
+	uint8_t portindex;
+	n = getMCP23017outportpin (n, &portindex);
 
-	return outPortState[i] & (1<< n);
+	return valuesOfPortsOnExpBoard[portindex] & (1<< n);
 }
 

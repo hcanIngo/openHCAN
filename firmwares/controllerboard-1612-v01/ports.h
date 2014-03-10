@@ -50,50 +50,7 @@
  * 4,7 kOhm - Pullup's montiert sind macht der atmega Wdt-Resets!
  */
 
-
-/* 	Details														A2 A1 A0 (Adressbits)
-	-- Baugruppe 1: IO-Exp32 --
-	Output-Pin's (12...43)
-	1. IO-Exp32-IC6	IO0..7  A(12..19) und IO16..23 B(28..35)	y  x  0
-	1. IO-Exp32-IC5	IO8..15 A(20..27) und IO24..31 B(36..43)	y  x  1
-	mit x=0 und y=0, durch switches ON
-
-	-- Baugruppe 2: IO-Exp32 --
-	Output-Pin's (44...81)
-	2. IO-Exp32-IC6	IO0..7  A(44..51) und IO16..23 B(66..73)	y  x  0
-	2. IO-Exp32-IC5	IO8..15 A(52..59) und IO24..31 B(74..81)	y  x  1
-	mit x=1 (switch OFF) und y=0 (switch ON)
-
-	-- Baugruppe 3: IN-Exp64 --    (oder IO-Exp32, wenn dort y=1)
-	Input-Pin's (16...79)
-	3. IN-Exp64-IC1 IN0..7	 A(23..16) und IN8..15  B(24..31)	z  0  0  // IO-Exp32 mit x=0, y=1
-	3. IN-Exp64-IC2 IN16..23 A(39..32) und IN24..31 B(40..47)	z  0  1  // IO-Exp32 mit x=0, y=1
-	3. IN-Exp64-IC3 IN32..39 A(55..48) und IN40..47 B(56..63)	z  1  0  // IO-Exp32 mit x=1, y=1
-	3. IN-Exp64-IC4 IN48..55 A(71..64) und IN56..63 B(72..79)	z  1  1  // IO-Exp32 mit x=1, y=1
-	mit z=1 durch NICHT gesteckten Jumper
-
-	somit koennen folgende C1612-Board-Pins im EDS konfiguriert sein:
-	C1612-Board-Output-Pins (schreiben / lesen)
-		- 12..19 -> MCP23x17_GPIOA ->							0  0  0    0
-		- 20..27 -> MCP23x17_GPIOA ->							0  0  1    1
-		- 28..35 -> MCP23x17_GPIOB ->							0  0  0	   0
-		- 36..43 -> MCP23x17_GPIOB ->							0  0  1    1
-
-		- 44..51 -> MCP23x17_GPIOA ->							0  1  0    2
-		- 52..59 -> MCP23x17_GPIOA ->							0  1  1    3
-		- 66..73 -> MCP23x17_GPIOB ->							0  1  0	   2
-		- 74..81 -> MCP23x17_GPIOB ->							0  1  1    3
-
-	C1612-Board-In-Pins (lesen)
-		- 16..23 -> MCP23x17_GPIOA ->							1  0  0    4
-		- 24..31 -> MCP23x17_GPIOA ->							1  0  1    5
-		- 32..39 -> MCP23x17_GPIOB ->							1  0  0    4
-		- 40..47 -> MCP23x17_GPIOB ->							1  0  1    5
-		- 48..55 -> MCP23x17_GPIOA ->							1  1  0    6
-		- 56..63 -> MCP23x17_GPIOA ->							1  1  1    7
-		- 64..71 -> MCP23x17_GPIOB ->							1  1  0    6
-		- 72..79 -> MCP23x17_GPIOB ->							1  1  1    7
-*/
+#define MAXIMUM_NUMBER_OF_EXPANDER_BOARDS 4 // TODO spaeter ..._ICS 8
 
 #define MAX_NUM_OF_MCP23017_OUTPUT_PORTS 8 // 8 = maximal zwei IO-Exp32-Boards und
 #define MAX_NUM_OF_MCP23017_INPUT_PORTS 8  // 8 = maximal ein IN-Exp64-Board
@@ -115,8 +72,6 @@ void ports_init(device_data_ports *p, eds_block_p it);
 // Service functions:
 extern bool portsDeviceCreated;
 extern bool expanderActive;
-
-// void ports_darlingtonoutput_init(void);
 
 inline uint8_t ports_getInput(uint8_t portNumber);
 

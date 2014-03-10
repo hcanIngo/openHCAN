@@ -40,15 +40,12 @@ extern uint8_t device_data_size[];
 #elif MCU_atmega644 //mit doppelter EEPROM- und SRAM-Groesse 
 	#define MAX_PDEVICE_DATA        128
 	#define MAX_DEVICE_DATA        1536
-	#define MAX_MEM_CRITICAL_SIZE   512
+	#define MAX_MEM_CRITICAL_SIZE   256
 #endif
 
 extern uint8_t *pdevice_data[];
 extern uint8_t device_data[];
 extern uint16_t device_data_ram_usage;
-
-extern uint8_t hasInExt;
-extern uint8_t hasOutExt;
 
 void devices_load_config(void);
 

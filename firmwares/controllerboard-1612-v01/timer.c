@@ -58,6 +58,7 @@ void idle_handler(void)
 		timer_event_100th = 0;
 
 		if (expanderActive) handlerForExpanderUpdate ();
+		else if (portsDeviceCreated) configurePorts (); // Ausnahme: EMV-Sicherung
 
 		for (i = 0; i < MAX_PDEVICE_DATA; i++)
 		{

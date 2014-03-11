@@ -47,10 +47,10 @@ volatile static uint8_t previousValuesOfPortsOnExpBoard[MAXIMUM_NUMBER_OF_EXPAND
 
 static inline void writeMCP23017port (uint8_t port, uint8_t address, uint8_t outputByte);
 
-
-static  uint8_t* expBoard; // CD expanderBoard z.B.  0,0,15,15 // out,out,in,in (Expander 0 1 2 3), Einzelbits
 bool portsDeviceCreated = false;
 bool expanderActive = false;
+static  uint8_t* expBoard; // CD expanderBoard z.B.  0,0,15,15 // out,out,in,in (Expander 0 1 2 3), Einzelbits
+static uint8_t outBase, inBase;
 
 
 // Bsp. fuer die FESTLEGUNG der HW-Konfiguration:
@@ -98,54 +98,18 @@ bool isMCP23x17available (uint8_t boardindex, uint8_t adr)
     if (0 == i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE)) available = true;
     else
     {
-    	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("noExp%d"), adr); // adr 0..7
-
     	// gilt hier immer: if (expIOconfig[boardindex] != 255) // Board (2-MCP23x17-IC's) konfiguriert?
-    	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("%d,%d but configured)"), boardindex, adr);
+    	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("noExp%d, but configured %d)"), adr, boardindex); // adr 0..7
+    	/* Sollte ein Softreset nicht reichen, dann hier muss ggf. einmal
+    	   die Versorgungsspannung des MCP23x17 abgeschaltet werden! */
     }
 
     i2c_stop();
     return available;
 }
 
-/* Hinweis: Wird diese Funktion ohne Pullups an IN0 und IN1 ausgefuehrt,
-   so kommt es zu wdt-Resets. Daher ports-Device nur konfigurieren,
-   wenn auch eine IO-Exp. angeschlossen ist. */
-void ports_init (device_data_ports *p, eds_block_p it)
+void configurePorts (void)
 {
-	if (portsDeviceCreated == true)
-	{
-		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Additional ports configuration ignored"));
-		// TODO raus: sendHESMessage (1, HCAN_HES_ADDITIONAL_PORTS_DEVICE_IGNORED);
-		return;
-	}
-	portsDeviceCreated = true; // There can be only ONE ports Device
-	expanderActive = false;
-
-	i2c_init(); // SDA/SDL-Pins sind ueber I2C-master-Lib ATmegatypabhaengig festgelegt.
-
-	uint8_t i;
-	for (i=0; i<4*MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; i++)
-	{
-		valuesOfPortsOnExpBoard[i] = 0;
-		previousValuesOfPortsOnExpBoard[i] = 255;
-	}
-
-	expBoard = &p->config.expander0; // z.B. 0,255,15,15 (4x OUT, -, 4x IN, 4x IN)
-
-	uint8_t outBase, inBase;
-	if (p->config.base == 128)
-	{
-		// Zur Erzeugung der Startpinnummern (Ingo's Nummerierung):
-		outBase = 12;
-		inBase = 16;
-		// Bsp.:expStartPins[] = {12,20,28,36, 44,52,60,68, 16,24,32,40, 48,56,64,72};
-	}
-	else // Christoph's aktuelle Nummerierung:
-	{
-		outBase = inBase = 32;
-	}
-
 	uint8_t portindex = 0;
 	uint8_t boardindex;
 	uint8_t adr = 0;
@@ -157,7 +121,6 @@ void ports_init (device_data_ports *p, eds_block_p it)
 		{
 			for (port=0; port<4; port++)
 			{
-				// TODO folgendes 3x wdh, wenn es nicht der Konfig entspricht:
 				if (isMCP23x17available(boardindex, adr))
 				{
 					expanderActive = true;
@@ -186,6 +149,47 @@ void ports_init (device_data_ports *p, eds_block_p it)
 			portindex += 4;
 		}
 	}
+
+}
+
+/* Hinweis: Wird diese Funktion ohne Pullups an IN0 und IN1 ausgefuehrt,
+   so kommt es zu wdt-Resets. Daher ports-Device nur konfigurieren,
+   wenn auch ein IO-Expander angeschlossen ist! */
+void ports_init (device_data_ports *p, eds_block_p it)
+{
+	if (portsDeviceCreated == true)
+	{
+		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Additional ports configuration ignored"));
+		// TODO raus: sendHESMessage (1, HCAN_HES_ADDITIONAL_PORTS_DEVICE_IGNORED);
+		return;
+	}
+	portsDeviceCreated = true; // There can be only ONE ports Device
+	expanderActive = false;
+
+	i2c_init(); // SDA/SDL-Pins sind ueber I2C-master-Lib ATmegatypabhaengig festgelegt
+
+	uint8_t i;
+	for (i=0; i<4*MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; i++)
+	{
+		valuesOfPortsOnExpBoard[i] = 0;
+		previousValuesOfPortsOnExpBoard[i] = 255;
+	}
+
+	expBoard = &p->config.expander0; // z.B. 0,255,15,15 (4x OUT, -, 4x IN, 4x IN)
+
+	if (p->config.base == 128)
+	{
+		// Zur Erzeugung der Startpinnummern (Ingo's Nummerierung):
+		outBase = 12;
+		inBase = 16;
+		// Bsp.:expStartPins[] = {12,20,28,36, 44,52,60,68, 16,24,32,40, 48,56,64,72};
+	}
+	else // Christoph's aktuelle Nummerierung:
+	{
+		outBase = inBase = 32;
+	}
+
+	configurePorts ();
 }
 
 static inline uint8_t readMCP23017port (uint8_t bank, uint8_t adr)
@@ -234,7 +238,9 @@ inline uint8_t ports_getInput (uint8_t n)
 		else portindex += 4; // Board nicht konfiguriert
 	}
 
-	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("Exp:InPin %d NG"), n);
+
+	// Kommt bei Fehlkonfiguration des ports-Device extrem haeufig: canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Exp:InPin %d NG"), n);
+	expanderActive = false; // Ausnahme: EMV-Sicherung
 	return 1; // Input-Pin nicht gefunden -> Taster nicht betaetigt, aber Reedkontakt offen!
 }
 

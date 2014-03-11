@@ -64,6 +64,7 @@ typedef struct
 } device_data_ports;
 
 void ports_init(device_data_ports *p, eds_block_p it);
+void configurePorts (void);
 
 extern bool portsDeviceCreated;
 extern bool expanderActive;

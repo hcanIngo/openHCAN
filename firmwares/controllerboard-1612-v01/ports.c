@@ -49,7 +49,7 @@ static inline void writeMCP23017port (uint8_t port, uint8_t address, uint8_t out
 
 bool portsDeviceCreated = false;
 bool expanderActive = false;
-static  uint8_t* expBoard; // CD expanderBoard z.B.  0,0,15,15 // out,out,in,in (Expander 0 1 2 3), Einzelbits
+static  uint8_t* expBoard; // z.B.  0,0,15,15 // out,out,in,in (Expander 0 1 2 3); Einzelbits
 static uint8_t outBase, inBase;
 
 
@@ -202,9 +202,9 @@ static inline uint8_t readMCP23017port (uint8_t bank, uint8_t adr)
 		i2c_rep_start (MCP23x17_ADDR + adr + I2C_READ);
 		inputByte = i2c_readNak ();
 	}
+	else expanderActive = false; // Ausnahme: EMV-Sicherung
 	i2c_stop ();
 
-	//sendHESMessage (4, 0x7A, port, address, inputByte); // 0x7A = 122
 	return inputByte;
 }
 
@@ -240,7 +240,6 @@ inline uint8_t ports_getInput (uint8_t n)
 
 
 	// Kommt bei Fehlkonfiguration des ports-Device extrem haeufig: canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Exp:InPin %d NG"), n);
-	expanderActive = false; // Ausnahme: EMV-Sicherung
 	return 1; // Input-Pin nicht gefunden -> Taster nicht betaetigt, aber Reedkontakt offen!
 }
 

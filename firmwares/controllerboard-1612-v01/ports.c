@@ -115,6 +115,8 @@ void configurePorts (void)
 	uint8_t adr = 0;
 	uint8_t port;
 	uint8_t bank = 0; // A
+	uint8_t numberOfInputs = 0;
+	uint8_t numberOfOutputs = 0;
 	for (boardindex=0; boardindex<MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; boardindex++) // boardindex: Index auf je 4-Ports (ein IO-Board)
 	{
 		if (expBoard[boardindex] != 255)
@@ -126,17 +128,21 @@ void configurePorts (void)
 					expanderActive = true;
 					if ((expBoard[boardindex] & (1<< port)) != 0) // als INPUT konfiguriert?
 					{
-						canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("i:%d-%d"), port, adr);
-						expStartPins[portindex] = inBase + 8*portindex;
+						canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("i:%d-%d"), portindex, adr);
+						expStartPins[portindex] = inBase + 8*numberOfInputs;
 						configurePortAsInput (bank, adr);
+						numberOfInputs++;
 					}
 					else // Bit ist 0, dann als OUTPUT konfiguriert:
 					{
-						canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("o:%d-%d"), port, adr);
-						expStartPins[portindex] = outBase + 8*portindex;
+						canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("o:%d-%d"), portindex, adr);
+						expStartPins[portindex] = outBase + 8*numberOfOutputs;
 						configurePortAsOutput (bank, adr);
+						numberOfOutputs++;
 					}
 				}
+
+				portindex++;
 
 				if (port==3) bank = 0; // fuer port 0
 				if (port==1) {bank = 1; adr--;} // fuer port 2
@@ -237,7 +243,6 @@ inline uint8_t ports_getInput (uint8_t n)
 		}
 		else portindex += 4; // Board nicht konfiguriert
 	}
-
 
 	// Kommt bei Fehlkonfiguration des ports-Device extrem haeufig: canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Exp:InPin %d NG"), n);
 	return 1; // Input-Pin nicht gefunden -> Taster nicht betaetigt, aber Reedkontakt offen!

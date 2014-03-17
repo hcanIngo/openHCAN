@@ -49,7 +49,7 @@ void timer_handler(void)
 void idle_handler(void)
 {
 	uint8_t i;
-	uint16_t unusedSRAM; //in bytes
+	// uint16_t unusedSRAM; //in bytes
 
 	// 10msec Takt:
 	if (timer_event_100th)
@@ -161,12 +161,13 @@ void idle_handler(void)
 			}
 		}
 
+		/* vermutlich nicht ganz korrekt und per "EDS config RAM overflow" schon zum Teil abgedeckt:
 		unusedSRAM = get_mem_unused();
 		if( unusedSRAM < MAX_MEM_CRITICAL_SIZE )
 		{
 			canix_syslog_P(SYSLOG_PRIO_CRITICAL,
 					PSTR("mem_free: %d bytes"), unusedSRAM);
-		}
+		}*/
 	}
 }
 

@@ -39,7 +39,7 @@ extern uint8_t device_data_size[];
 #define MAX_MEM_CRITICAL_SIZE   256
 #elif MCU_atmega644 //mit doppelter EEPROM- und SRAM-Groesse 
 	#define MAX_PDEVICE_DATA        128
-	#define MAX_DEVICE_DATA        1536
+	#define MAX_DEVICE_DATA        2048
 	#define MAX_MEM_CRITICAL_SIZE   256
 #endif
 

@@ -36,7 +36,7 @@ libhcan++:
 	cd ../libhcan++ && $(MAKE)
 
 $(TARGET):$(OBJ) libhcan++
-	$(CXX) $(LD_FLAGS) -o $@ $(OBJ)
+	$(CXX) -o $@ $(OBJ) $(LD_FLAGS)
 	test -d ./binary_$(ARCH) || mkdir binary_$(ARCH)
 	mv $@ binary_$(ARCH)
 

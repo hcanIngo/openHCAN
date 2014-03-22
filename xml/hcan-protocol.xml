@@ -527,33 +527,33 @@
 
 			<message name="WECKER_SET" id="72"
 				description="Wecker incl Parameter" >
-				<param name="id" description="Wecker-ID" />
-				<param name="duration_hi" description="Timer in x Sekunden (MSB)" />
-				<param name="duration_lo" description="Timer in x Sekunden (LSB)" />				
+				<param pos="0" name="id" description="Wecker-ID" />
+				<param pos="1" name="duration_hi" description="Timer in x Sekunden (MSB)" />
+				<param pos="2" name="duration_lo" description="Timer in x Sekunden (LSB)" />				
 			</message>
 			<message name="WECKER_DETAILS_REQUEST" id="73"
 				description="Wecker incl Parameter" >
-				<param name="id" description="Wecker-ID" />
+				<param pos="0" name="id" description="Wecker-ID" />
 			</message>
 			<message name="WECKER_DETAILS" id="74"
 				description="Wecker incl Parameter" >
-				<param name="id" description="Wecker-ID" />
-				<param name="duration_hi" description="Timer in x Sekunden (MSB)" />
-				<param name="duration_lo" description="Timer in x Sekunden (LSB)" />
+				<param pos="0" name="id" description="Wecker-ID" />
+				<param pos="1" name="duration_hi" description="Timer in x Sekunden (MSB)" />
+				<param pos="2" name="duration_lo" description="Timer in x Sekunden (LSB)" />
 			</message>
 
 			<message name="HELLIGKEITS_INFO" id="71"
 				description="Liefert die Helligkeit am ADC (Aufloesung: 10Bit)" >
-				<param name="guppe" description="Helligkeits-Gruppe" />
-				<param name="brightness_hi" description="hi byte der Helligkeit" />
-				<param name="brightness_lo" description="lo hyte der Helligkeit" />
+				<param pos="0" name="guppe" description="Helligkeits-Gruppe" />
+				<param pos="1" name="brightness_hi" description="hi byte der Helligkeit" />
+				<param pos="2" name="brightness_lo" description="lo hyte der Helligkeit" />
 			</message>
 
 			<message name="POTI_POS_CHANGED" id="70"
 				description="Liefert die Position des Potis (Aufloesung: 10Bit)" >
-				<param name="guppe" description="Poti-Gruppe" />
-				<param name="pos_hi" description="hi byte der Position" />
-				<param name="pos_lo" description="lo hyte der Position" />
+				<param pos="0" name="guppe" description="Poti-Gruppe" />
+				<param pos="1" name="pos_hi" description="hi byte der Position" />
+				<param pos="2" name="pos_lo" description="lo hyte der Position" />
 			</message>
 
 			<message name="DCF77_ERROR" id="80"

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!DOCTYPE haus SYSTEM "/usr/share/hcan/installation.dtd">
+
+<!--
+
+Diese XML Datei beschreibt die HCAN Installation. Sie ist
+somit installationsspezifisch und befindet sich daher in
+/etc/hcan, nicht in /usr/share/hcan.
+
+Sie wird z.Z. von telican im contrl-Modus verwendet, um z.B. die
+Tab-Completion oder die Listen-Ansichten zu realisieren.
+
+-->
+
+<haus>
+	<board addr="164">
+		<powerport typ="lampe" gruppe="14" name="AB.Balkon" />
+	</board>
+	<board addr="162">
+		<powerport typ="lampe" gruppe="132" name="AB.Eingangstreppe" />
+		<powerport typ="lampe" gruppe="133" name="AB.Garagenhof" />
+		<powerport typ="lampe" gruppe="91" name="EG.Bad-Decke" />
+		<powerport typ="lampe" gruppe="137" name="EG.Windfang" />	
+		<powerport typ="lampe" gruppe="115" name="EG.Speisekammer" />		
+		<powerport typ="lampe" gruppe="101" name="EG.EssZi-Wand" />
+	</board>
+        <board addr="163">
+		<powerport typ="lampe" gruppe="100" name="EG.EssZi-Decke" />
+		<powerport typ="lampe" gruppe="104" name="EG.Kueche-RGB-Decke" />
+		<powerport typ="lampe" gruppe="69" name="EG.Kueche-Tuer" />
+		<powerport typ="lampe" gruppe="64" name="EG.ArbeitsZi-Wand-1" />
+		<powerport typ="lampe" gruppe="103" name="EG.ArbeitsZi-Wand-2" />
+	</board>
+	<board addr="162">
+		<powerport typ="lampe" gruppe="134" name="EG.WohnZi-Wand" />
+		<powerport typ="lampe" gruppe="141" name="EG.WohnZi-Decke" />
+		<powerport typ="lampe" gruppe="143" name="EG.WohnZi-Regalwand-RGB" />
+		<powerport typ="lampe" gruppe="152" name="EG.Flur-Leuchtstofflampen" />
+	</board>
+	<board addr="164">
+		<powerport typ="lampe" gruppe="30" name="OG.Bad-Decke" />
+		<powerport typ="lampe" gruppe="31" name="OG.Bad-Badewanne" />
+		<powerport typ="lampe" gruppe="33" name="OG.Bad-Wand" />
+		<powerport typ="lampe" gruppe="1" name="OG.K1-Decke-Schraege" />
+		<powerport typ="lampe" gruppe="2" name="OG.K1-Decke-Tuer" />
+		<powerport typ="lampe" gruppe="11" name="OG.K2-Decke-vorn" />
+		<powerport typ="lampe" gruppe="12" name="OG.K2-Decke-Balkon" />
+		<powerport typ="lampe" gruppe="21" name="OG.SchlafZi-Wand" />
+		<powerport typ="lampe" gruppe="36" name="OG.SchlafZi-Decke" />
+
+		<powerport typ="lampe" gruppe="37" name="DG.1" />
+		<powerport typ="lampe" gruppe="40" name="DG.2" />
+	</board>
+
+
+        <board addr="163">
+		<heizung gruppe="144" name="EG.Kueche-EssZi" />
+		<heizung gruppe="142" name="EG.Wohn-ArbeitsZi" />
+                <heizung gruppe="145" name="EG.Bad" />
+                <heizung gruppe="112" name="EG.Flur" />		
+
+        </board>
+	<board addr="164">
+		<heizung gruppe="147" name="OG.Bad" />
+                <heizung gruppe="148" name="OG.K1" />		
+		<heizung gruppe="149" name="OG.K2" />
+                <heizung gruppe="150" name="OG.SchlafZi" />
+	</board>
+
+
+	<board addr="162">
+		<tempsensor gruppe="92" name="EG.Bad" />
+		<tempsensor gruppe="90" name="EG.Kueche-EssZi" />
+	</board>
+        <board addr="163">
+		<tempsensor gruppe="89" name="EG.Wohn-ArbeitsZi" />
+		<tempsensor gruppe="93" name="EG.Flur" />
+	</board>
+	<board addr="164">
+		<tempsensor gruppe="51" name="OG.Bad" />
+		<tempsensor gruppe="200" name="OG.K1" />
+		<tempsensor gruppe="201" name="OG.K2" />
+		<tempsensor gruppe="66" name="OG.SchlafZi" />
+		<tempsensor gruppe="49" name="OG.Flur" />
+	</board>
+
+
+	<board addr="162">
+		<powerport typ="sonstige" gruppe="83" name="EG.Musikanlage" />
+		<powerport typ="sonstige" gruppe="76" name="EG.Videoprojektor" />
+        </board>
+	<board addr="165">
+		<powerport typ="sonstige" gruppe="75" name="EG.HI-Server" />
+		<powerport typ="sonstige" gruppe="87" name="AB.Garten-Brunnen-Pumpe" />
+		<powerport typ="sonstige" gruppe="107" name="KG.LAN-Drucker" />
+		<powerport typ="sonstige" gruppe="102" name="KG.Zentral-Heizung" />
+        </board>
+
+
+	<board addr="162">
+		<rolladen gruppe="71" name="EG.WohnZi-Leinwand" />	
+		<rolladen gruppe="70" name="EG.WohnZi-Tuer" />
+		<rolladen gruppe="73" name="EG.ArbeitsZi" />
+		<rolladen gruppe="72" name="EG.Flur" />
+		<rolladen gruppe="74" name="EG.Kueche" />
+		<rolladen gruppe="82" name="EG.Esszi-Tuer" />
+		<rolladen gruppe="80" name="EG.Esszi-neben-Tuer" />
+		<rolladen gruppe="84" name="EG.Esszi-West-links" />
+		<rolladen gruppe="88" name="EG.Esszi-West-Mitte" />
+		<rolladen gruppe="86" name="EG.Esszi-West-rechts" />
+        </board>
+	<board addr="164">
+		<rolladen gruppe="35" name="OG.Bad" />
+		<rolladen gruppe="7" name="OG.K1-Doppel-Fenster" />
+		<rolladen gruppe="9" name="OG.K1-Einzel-Fenster" />
+		<rolladen gruppe="17" name="OG.K2-Fenster" />
+		<rolladen gruppe="19" name="OG.K2-Balkon-Tuer" />
+		<rolladen gruppe="26" name="OG.SchlafZi-Fenster" />
+		<rolladen gruppe="28" name="OG.SchlafZi-Balkon-Tuer" />
+        </board>
+
+
+	<board addr="164">
+		<reedkontakt gruppe="34" name="OG.Bad-Fenster1" />
+		<reedkontakt gruppe="61" name="OG.Bad-Fenster2" />
+		<reedkontakt gruppe="3" name="OG.K1-Doppel-Fenster1" />
+		<reedkontakt gruppe="38" name="OG.K1-Doppel-Fenster2" />
+		<reedkontakt gruppe="4" name="OG.K1-Einzel-Fenster" />
+
+		<reedkontakt gruppe="15" name="OG.K2-Balkon-Tuer" />
+		<reedkontakt gruppe="24" name="OG.SchlafZi-Balkon-Tuer" />
+		<reedkontakt gruppe="58" name="OG.SchlafZi-Fenster1" />
+		<reedkontakt gruppe="25" name="OG.SchlafZi-Fenster2" />
+        </board>
+</haus>

@@ -1,0 +1,20 @@
+tuxgraphics v5.7
+
+http://tuxgraphics.org/common/src2/article09051/
+
+
+Angepasst: 
+- ip_config.h 
+
+- enc28j60.h
+1. #define ADDR_MASK_ETH        0x1F // statt nur ADDR_MASK, welches in canix verwendet ist
+
+- enc28j60.c  
+1.	#if defined(__AVR_ATmega644__)||defined(__AVR_ATmega644P__)
+	#define ENC28J60_CONTROL_CS PORTB3 //IL: ex PORTB4
+
+2.	// ggf. delay anpassen! #define F_CPU 12500000UL  // 12.5 MHz
+
+3. alle ADDR_MASK umbenannt in ADDR_MASK_ETH
+
+Die MAC befindet sich in der main.c

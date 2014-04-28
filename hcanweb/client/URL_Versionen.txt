@@ -1,0 +1,17 @@
+http://code.jquery.com/
+http://jquerymobile.com/download/  (zip herunterladen, z.B. jquery.mobile-1.4.2.zip)
+
+aktuell verwendet:
+------------------ 
+
+core:
+jquery.min.js = jquery-1.11.0.min.js (mit IE-Support)
+
+mobile: 
+jquery.mobile.min.js = jquery.mobile-1.4.2.min.js
+jquery.mobile.min.css = jquery.mobile-1.4.2.min.css
+---
+direkt verlinkbar per: 
+http://code.jquery.com/jquery-2.0.3.min.js
+http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js
+http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css

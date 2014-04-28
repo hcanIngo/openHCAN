@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!DOCTYPE haus SYSTEM "/usr/share/hcan/installation.dtd">
+
+<!--
+
+Diese XML Datei beschreibt die HCAN Installation. Sie ist
+somit installationsspezifisch und befindet sich daher in
+/etc/hcan, nicht in /usr/share/hcan.
+
+Sie wird z.Z. von telican im contrl-Modus verwendet, um z.B. die
+Tab-Completion oder die Listen-Ansichten zu realisieren.
+
+
+
+-->
+
+<haus>
+	<board addr="164">
+		<powerport typ="lampe" gruppe="14" name="AB.Bsp_Balkon" />
+	</board>
+	<board addr="162">
+		<powerport typ="lampe" gruppe="132" name="AB.Bsp_Lampe1" />
+		<powerport typ="lampe" gruppe="133" name="AB.Bsp_Garagenhof" />
+		<powerport typ="lampe" gruppe="91" name="EG.Bsp_Bad-Decke" />
+		<powerport typ="lampe" gruppe="137" name="EG.Bsp_Windfang" />	
+	</board>
+    <board addr="163">
+		<powerport typ="lampe" gruppe="104" name="EG.Bsp_Kueche-RGB-Decke" />
+	</board>
+	<board addr="164">
+		<powerport typ="lampe" gruppe="30" name="OG.Bsp_Bad-Decke" />
+		<powerport typ="lampe" gruppe="2" name="OG.Bsp_K1-Decke-Tuer" />
+	</board>
+
+
+    <board addr="163">
+		<heizung gruppe="144" name="EG.Bsp_Kueche" />
+    </board>
+	<board addr="164">
+		<heizung gruppe="147" name="OG.Bsp_Bad" />
+        <heizung gruppe="148" name="OG.Bsp_K1" />
+	</board>
+
+	<board addr="162">
+		<powerport typ="sonstige" gruppe="83" name="EG.Bsp_Musikanlage" />
+    </board>
+	<board addr="165">
+		<powerport typ="sonstige" gruppe="75" name="EG.Bsp_Server" />
+		<powerport typ="sonstige" gruppe="87" name="AB.Bsp_Garten-Brunnen-Pumpe" />
+    </board>
+
+	<board addr="162">
+		<rolladen gruppe="72" name="EG.Bsp_Flur" />
+    </board>
+	<board addr="164">
+		<rolladen gruppe="35" name="OG.Bsp_Bad" />
+		<rolladen gruppe="28" name="OG.Bsp_SchlafZi-Balkon-Tuer" />
+	</board>
+
+
+	<board addr="164">
+		<reedkontakt gruppe="4" name="OG.Bsp_K1-Einzel-Fenster" />
+		<reedkontakt gruppe="24" name="OG.Bsp_SchlafZi-Balkon-Tuer" />
+	</board>
+</haus>

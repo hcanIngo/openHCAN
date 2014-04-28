@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" href="javascript/jquery.mobile.min.css" />
+	<link rel="stylesheet" href="javascript/myIcons.css" />
+	
+    <script src="javascript/jquery.min.js"></script>
+    <script src="javascript/hcanweb.min.js"></script>
+    <script src="javascript/jquery.mobile.min.js"></script>
+</head>
+<body>
+	<div data-role="page" id="root">
+	</div> <!-- /page root -->
+
+	<div data-role="page" data-local-storage="true" data-theme="b" id="lampe" data-dom-cache="true" data-prev="rolladen" data-next="sonstige">
+		<div role="main" class="ui-content">
+			<header data-role="header" data-position="fixed">
+				<table border="0">
+				  <tr>
+					<td width="5%"> </td>
+					<td> Licht </td>
+					<td> <img id="Logo" src="javascript/images/my48/lampe.png"></img> </td>
+					<td width="20%"> </td>
+					<td> <select id="selectFilter" name="selectFilter" data-icon="myapp-filter" data-iconpos="left"></select> </td>
+					<td width="20%"></td>
+					<td align="right"> <a id="myLinkButtons" name="Einstellungen" data-prefetch="true" data-role="button" data-iconpos="notext" data-icon="gear">Einstellungen</a> </td>
+				  </tr>
+				</table>
+			</header>
+
+			<table id="deviceTable" border="0">			
+			</table>
+		</div> <!-- /ui content -->
+		
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li><a id="myLinkButtons" name="lampe" data-prefetch="true" data-icon="myapp-lampe">Licht</a></li>
+					<li><a id="myLinkButtons" name="sonstige" data-prefetch="true" data-icon="myapp-sonstige">Sonstige</a></li>
+					<li><a id="myLinkButtons" name="heizung" data-prefetch="true" data-icon="myapp-heizung">Heizung</a></li>
+					<li><a id="myLinkButtons" name="reedkontakt" data-prefetch="true" data-icon="myapp-reedkontakt">Fenster</a></li>
+					<li><a id="myLinkButtons" name="rolladen" data-prefetch="true" data-icon="myapp-rolladen">Rolladen</a></li>
+				</ul>
+			</div>
+	    </div> <!-- /footer -->
+   	</div> <!-- /page lampe -->
+
+ 	
+   	<div data-role="page" data-local-storage="true" data-theme="b" id="sonstige" data-dom-cache="true" data-prev="lampe" data-next="heizung">
+		<div role="main" class="ui-content">
+			<header data-role="header" data-position="fixed">
+				<table border="0">
+				  <tr>
+					<td width="5%"> </td>
+					<td> Sonstige </td>
+					<td> <img id="Logo" src="javascript/images/my48/sonstige.png"></img> </td>
+					<td width="20%"> </td>
+					<td> <select id="selectFilter" name="selectFilter" data-icon="myapp-filter" data-iconpos="left"></select> </td>
+					<td width="20%"></td>
+					<td align="right"> <a id="myLinkButtons" name="Einstellungen" data-prefetch="true" data-role="button" data-iconpos="notext" data-icon="gear">Einstellungen</a> </td>
+				  </tr>
+				</table>
+			</header>
+
+			<table id="deviceTable" border="0">			
+			</table>
+		</div> <!-- /ui content -->
+		
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li><a id="myLinkButtons" name="lampe" data-prefetch="true" data-icon="myapp-lampe">Licht</a></li>
+					<li><a id="myLinkButtons" name="sonstige" data-prefetch="true" data-icon="myapp-sonstige">Sonstige</a></li>
+					<li><a id="myLinkButtons" name="heizung" data-prefetch="true" data-icon="myapp-heizung">Heizung</a></li>
+					<li><a id="myLinkButtons" name="reedkontakt" data-prefetch="true" data-icon="myapp-reedkontakt">Fenster</a></li>
+					<li><a id="myLinkButtons" name="rolladen" data-prefetch="true" data-icon="myapp-rolladen">Rolladen</a></li>
+				</ul>
+			</div>
+	    </div> <!-- /footer -->
+   	</div> <!-- /page sonstige -->
+
+
+   	<div id="heizung" data-role="page" data-local-storage="true" data-theme="b" data-dom-cache="true" data-prev="sonstige" data-next="reedkontakt">
+		<div role="main" class="ui-content">
+			<header data-role="header" data-position="fixed">
+				<table border="0">
+				  <tr>
+					<td width="5%"> </td>
+					<td> Heizung </td>
+					<td> <img id="Logo" src="javascript/images/my48/heizung.png"></img> </td>
+					<td width="20%"> </td>
+					<td> <select id="selectFilter" name="selectFilter" data-icon="myapp-filter" data-iconpos="left"></select> </td>
+					<td width="20%"></td>
+					<td align="right"> <a id="myLinkButtons" name="Einstellungen" data-prefetch="true" data-role="button" data-iconpos="notext" data-icon="gear">Einstellungen</a> </td>
+				  </tr>
+				</table>
+			</header>
+			
+			<table border="0" id="deviceTable" name="deviceTable">			  
+			</table>
+
+			<input type="range" id="sliderStepInput" data-highlight="true" value="20" min="0" max="30" step="1" /> 
+	
+			<div id="controlHeizung" class="controlClassHeizung">
+				<fieldset data-role="controlgroup" id="ControlHeizung" data-type="horizontal">
+		    		<input name="rC_heizung" class="click-rC" id="rC_heizungInputAus" value="aus" type="radio">
+		    		<label for="rC_heizungInputAus">aus</label>
+		    		<input name="rC_heizung" class="click-rC" id="rC_heizungInputAuto" value="auto" checked="checked" type="radio">
+		    		<label for="rC_heizungInputAuto">auto</label>
+		    		<input name="rC_heizung" class="click-rC" id="rC_heizungInputTherm" value="therm" type="radio">
+		    		<label for="rC_heizungInputTherm">therm</label>
+		     		<input name="rC_heizung" class="click-rC" id="rC_heizungInputFrostLang" value="frostLang" type="radio">
+		    		<label for="rC_heizungInputFrostLang" data-iconpos="notext" data-icon="gear">*</label>
+				</fieldset>
+			</div>
+		</div> <!-- /ui content -->
+		
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li><a id="myLinkButtons" name="lampe" data-prefetch="true" data-icon="myapp-lampe">Licht</a></li>
+					<li><a id="myLinkButtons" name="sonstige" data-prefetch="true" data-icon="myapp-sonstige">Sonstige</a></li>
+					<li><a id="myLinkButtons" name="heizung" data-prefetch="true" data-icon="myapp-heizung">Heizung</a></li>
+					<li><a id="myLinkButtons" name="reedkontakt" data-prefetch="true" data-icon="myapp-reedkontakt">Fenster</a></li>
+					<li><a id="myLinkButtons" name="rolladen" data-prefetch="true" data-icon="myapp-rolladen">Rolladen</a></li>
+				</ul>
+			</div>
+	    </div> <!-- /footer -->
+   	</div> <!-- /page heizung -->
+
+
+   	<div id="reedkontakt" data-role="page" data-local-storage="true" data-theme="b" data-dom-cache="true" data-prev="heizung" data-next="rolladen">
+		<div role="main" class="ui-content">
+			<header data-role="header" data-position="fixed">
+				<table border="0">
+				  <tr>
+					<td width="5%"> </td>
+					<td> Geöffnete Fenster </td>
+					<td> <img id="Logo" src="javascript/images/my48/reedkontakt.png"></img> </td>
+					<td width="20%"> </td>
+					<td> <select id="selectFilter" name="selectFilter" data-icon="myapp-filter" data-iconpos="left"></select> </td>
+					<td width="20%"></td>
+					<td align="right"> <a id="myLinkButtons" name="Einstellungen" data-prefetch="true" data-role="button" data-iconpos="notext" data-icon="gear">Einstellungen</a> </td>
+				  </tr>
+				</table>
+			</header>
+				
+			<table border="0" id="deviceTable"  name="deviceTable">			  
+			</table>
+		</div> <!-- /ui content -->
+		
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li><a id="myLinkButtons" name="lampe" data-prefetch="true" data-icon="myapp-lampe">Licht</a></li>
+					<li><a id="myLinkButtons" name="sonstige" data-prefetch="true" data-icon="myapp-sonstige">Sonstige</a></li>
+					<li><a id="myLinkButtons" name="heizung" data-prefetch="true" data-icon="myapp-heizung">Heizung</a></li>
+					<li><a id="myLinkButtons" name="reedkontakt" data-prefetch="true" data-icon="myapp-reedkontakt">Fenster</a></li>
+					<li><a id="myLinkButtons" name="rolladen" data-prefetch="true" data-icon="myapp-rolladen">Rolladen</a></li>
+				</ul>
+			</div>
+	    </div> <!-- /footer -->
+   	</div> <!-- /page reedkontakt -->
+
+  	
+   	<div id="rolladen" data-role="page" data-local-storage="true" data-theme="b" data-dom-cache="true" data-prev="reedkontakt" data-next="lampe">
+		<div role="main" class="ui-content">
+			<header data-role="header" data-position="fixed">
+				<table border="0">
+				  <tr>
+					<td width="5%"> </td>
+					<td> Rolladen </td>
+					<td> <img id="Logo" src="javascript/images/my48/rolladen.png"></img> </td>
+					<td width="20%"> </td>
+					<td> <select id="selectFilter" name="selectFilter" data-icon="myapp-filter" data-iconpos="left"></select> </td>
+					<td width="20%"></td>
+					<td align="right"> <a id="myLinkButtons" name="Einstellungen" data-prefetch="true" data-role="button" data-iconpos="notext" data-icon="gear">Einstellungen</a> </td>
+				  </tr>
+				</table>
+			</header>
+			
+			<table border="0" id="deviceTable"  name="deviceTable">			  
+			</table>
+			
+			<input type="range" name="slider-step" id="sliderStepInput" data-highlight="true" value="100" min="1" max="100" step="1" /> 
+			<label for="slider-step">zu ... Schlitz ... Sonneschutz ... auf </label>
+		</div> <!-- /ui content -->
+
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li><a id="myLinkButtons" name="lampe" data-prefetch="true" data-icon="myapp-lampe">Licht</a></li>
+					<li><a id="myLinkButtons" name="sonstige" data-prefetch="true" data-icon="myapp-sonstige">Sonstige</a></li>
+					<li><a id="myLinkButtons" name="heizung" data-prefetch="true" data-icon="myapp-heizung">Heizung</a></li>
+					<li><a id="myLinkButtons" name="reedkontakt" data-prefetch="true" data-icon="myapp-reedkontakt">Fenster</a></li>
+					<li><a id="myLinkButtons" name="rolladen" data-prefetch="true" data-icon="myapp-rolladen">Rolladen</a></li>
+				</ul>
+			</div>
+	    </div> <!-- /footer -->
+   	</div> <!-- /page rolladen -->
+   	
+
+	<div data-role="page" data-local-storage="true" data-theme="b" id="Einstellungen" data-prev="lampe">
+		<div data-role="header">
+			<h1>Einstellungen</h1>
+			<a id="myZurueckButton" data-role="button" data-mini="false" data-iconpos="notext" data-icon="back">übernehmen und zurück</a>
+		</div>
+
+		<div role="main" class="ui-content">
+			<div data-role="fieldcontent">
+				<label for="CAN-Server">CAN-Server-Pfad (IP des C1612-Server):</label>
+				<input typ="text" id="serverURL" value="" type="url">
+			</div>
+			<div data-role="fieldcontent">
+				<label for="installationXML">Hausspezifische installation.xml auswählen:</label>
+				<input type="file" id="installationXMLdatei" name="files[]" />
+			</div>
+			<div data-role="fieldcontent">
+				<label for="FilterEintraege">Filtereinträge:</label>
+				<input typ="text" id="FilterEintraege" value="">
+			</div>
+			<div data-role="fieldcontent">
+				<button id="setDefaultsButton" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left">Defaultwerte setzen</button>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<label for="footerVersion">hcanweb</label>		
+				(c) 2014 Martin Kramer, Ingo Lages
+			</div>
+		</div>
+	</div> <!-- /page Einstellungen -->
+</body>
+</html>

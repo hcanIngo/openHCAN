@@ -208,7 +208,7 @@ static inline uint8_t readMCP23017port (uint8_t bank, uint8_t adr)
 		i2c_rep_start (MCP23x17_ADDR + adr + I2C_READ);
 		inputByte = i2c_readNak ();
 	}
-	else expanderActive = false; // Ausnahme: EMV-Sicherung
+	// else expanderActive = false; // Ausnahme: EMV-Sicherung
 	i2c_stop ();
 
 	return inputByte;

@@ -571,6 +571,23 @@ void canix_process_messages(void)
 	}
 }
 
+void canix_process_messages_withoutIdle(void)
+{
+	if (can_message_available())
+	{
+		uint32_t extid;
+		canix_frame frame;
+
+		// Frame einlesen
+		frame.size = can_read_message(&extid, (char *) &(frame.data[0]));
+		frame.dst = (extid >> 10) & ADDR_MASK;
+		frame.src = extid & ADDR_MASK;
+		frame.proto = (extid >> 20) & PROTO_MASK;
+
+		canix_deliver_frame(&frame);
+	}
+}
+
 void canix_mainloop(void)
 {
 	canix_loop_throughput_counter = 0;

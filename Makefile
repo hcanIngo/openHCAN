@@ -34,6 +34,7 @@ clean:
 	make firmware xx=clean parm2=MCU=atmega32
 	make firmware xx=clean parm2=MCU=atmega644
 	make firmwareOhneEds xx=clean
+	cd hcanweb; sudo make clean 
 
 dep:
 	make cppDienste xx=dep
@@ -45,7 +46,8 @@ all:
 	make firmware xx=all parm2=MCU=atmega32
 	make firmware xx=clean MCU=atmega644; make firmware xx=all MCU=atmega644
 	make firmwareOhneEds xx=clean; make firmwareOhneEds xx=all
-	
+	make hcanweb_client
+	make hcanweb_server
 	
 install:
 	make strukturen xx=install
@@ -71,6 +73,12 @@ cppDienste:
 	cd libhcandata/; sudo make dep; make $(xx)
 	cd hcanswd/; sudo make dep; make $(xx)
 	cd hcandq/; sudo make dep; make $(xx)
+	
+hcanweb_client: 
+	cd hcanweb; sudo make zip ver=unlabeled
+
+hcanweb_server:
+	cd hcanweb/server/C1612server; sudo make all
 
 firmware: 
 	cd hcanbl; sudo make $(xx) $(parm2)

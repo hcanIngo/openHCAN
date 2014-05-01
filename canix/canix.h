@@ -232,6 +232,7 @@ void canix_mainloop(void);
  * Idle Handler).
  */
 void canix_process_messages(void);
+void canix_process_messages_withoutIdle(void);
 
 /**
  * Sendet einen HCAN Frame. Dazu wird der Frame an den MCP2515

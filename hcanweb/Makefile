@@ -14,13 +14,18 @@ install:
 	make clean
 
 clean:
-	make clean_hcanweb
+	make clean_localServer
+	make clean_client
+	cd ./client; sudo rm -f app*.zip
 	make clean_C1612Server
+
+clean_client:
 	cd ./client/app/javascript; rm -f hcanweb.min.js
 	cd ./client/app/javascript; rm -f installationBsp.xml
 	cd ./client/jsSource; rm -f combined.js
+	cd ./client/jsSource; rm -f appVersion.js
 
-clean_hcanweb:
+clean_localServer:
 	sudo rm -f /usr/share/javascript/*.js
 	sudo rm -f /usr/share/css/*.css
 	sudo rm -f /usr/share/apache2/icons/*.css
@@ -87,14 +92,15 @@ not_min:
 
 zip: 
 	@echo -----client-zip erstellen---------
-	@echo Bsp.:  make zip ver=151
+	@echo Bsp.:  make zip ver=1
 	@echo ----------------------------------
 	make version
 	# 
 	@#make not_min
 	make min
-	cd ./client/app; /usr/bin/zip -r /home/il/Dropbox/HCAN/Hausautomatisierung_bak/hcanweb_Ajax_bak/app_$(ver).zip ./
-	make clean
+	@#cd ./client/app; /usr/bin/zip -r /home/il/Dropbox/HCAN/Hausautomatisierung_bak/hcanweb_Ajax_bak/app_$(ver).zip ./
+	cd ./client/app; /usr/bin/zip -r ../app_$(ver).zip ./
+	make clean_client
 
 version:
 	cd ./client/jsSource; echo 'var globalVersion = "hcanweb - Version 1.0 ('`date +%Y-%m-%d`')";' > appVersion.js

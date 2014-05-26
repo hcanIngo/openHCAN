@@ -8,11 +8,11 @@ function hookControlgroupEvents (pageObj) {
 		if (gueltigeDaten (pageObj, 'HeizungControlChange')) {
 			var dataToServer = {
 					cmd: controlValue,
-					newPage: "f",
+					newpage: "f",
 					page: pageObj.attr("id"),
-					selectedId: selectedId,
+					selid: selectedId,
 					ids: globalFilteredIds,
-					queryStates: "t"
+					qstates: "t"
 			}
 			getDeviceStatesFromServer(dataToServer, "HeizungControlChange", event);
 		}

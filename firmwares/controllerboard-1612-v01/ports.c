@@ -166,7 +166,6 @@ void ports_init (device_data_ports *p, eds_block_p it)
 	if (portsDeviceCreated == true)
 	{
 		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Additional ports configuration ignored"));
-		// TODO raus: sendHESMessage (1, HCAN_HES_ADDITIONAL_PORTS_DEVICE_IGNORED);
 		return;
 	}
 	portsDeviceCreated = true; // There can be only ONE ports Device

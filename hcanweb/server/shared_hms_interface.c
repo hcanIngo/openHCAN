@@ -29,6 +29,12 @@
 
 #include <string.h> // fuer strcmp
 
+static save_strcpy (char * destination,  const char * source, size_t num_max)
+{
+	strncpy (destination, source, num_max); // Teilkopie (nur num_max Zeichen)
+	destination[num_max] = '\0'; // Ende bzw. NULL-Zeichen manuell eingefuegt
+}
+
 uint8_t is (const char * a, const char * b)
 {
 	return strcmp (a, b) == 0;
@@ -56,35 +62,38 @@ void processCmd (t_query * query)
 
 void processQuery (t_query * query)
 {
-	strcpy (query->JSONbuf, ""); // initialisieren
+	save_strcpy (query->JSONbuf, "", 1); // initialisieren
 
 /*	if (query->selectedId == 255 && isnt (query->cmd,""))
 		return; // nach executeCmds liefert queryStates nur ein JSON-Element
 */
 	if (query->queryStates)
 		queryStates (query->JSONbuf, query->page, query->ids);
+	else
+		save_strcpy (query->JSONbuf, "noStateQuery", 13);
 }
 
 static void catJSONobj (char * JSONbuf, uint8_t id, const char * state)
 {
-	char JSONobj[10]; // z.B.: '"123":100'
+	size_t num = 11;
+	char JSONobj[num]; // z.B.: '"123":100'
 
-	if (is (JSONbuf, "")) sprintf (JSONobj, "\"%d\":%s", id, state); // nur beim ersten Element kein Komma
-	else sprintf (JSONobj, ",\"%d\":%s", id, state);
+	if (is (JSONbuf, "")) snprintf (JSONobj, num, "\"%d\":%s", id, state); // nur beim ersten Element kein Komma
+	else snprintf (JSONobj, num, ",\"%d\":%s", id, state);
 	strcat (JSONbuf, JSONobj);
 }
 
 void queryStates (char * JSONbuf, const char * page, uint8_t * ids)
 {
-	uint16_t state;
+	uint16_t state = 0;
 	uint8_t i = 0;
 	while (255 != ids[i]) // ueber alle ids
 	{
 		uint8_t id = ids[i];
 
-		if (id == 0 || id == 255)
+		if (id == 0)
 		{
-			// catJSONobj (JSONbuf, id, "ng");
+			// id 0 ueberspringen (ungueltig id)
 		}
 
 		else if (is (page, "lampe") || is (page, "sonstige"))
@@ -125,7 +134,16 @@ void queryStates (char * JSONbuf, const char * page, uint8_t * ids)
 
 		else
 		{
-			catJSONobj (JSONbuf, id, "queryDevicesZustand-Fehler");
+			save_strcpy (JSONbuf, "", 1); // initialisieren
+			catJSONobj (JSONbuf, id, "UD"); // unbekanntes Device
+			return; // queryStates beenden
+		}
+
+		if (0xffff == state)
+		{
+			save_strcpy (JSONbuf, "", 1); // initialisieren
+			catJSONobj (JSONbuf, id, "TO"); // TO = timeout while waiting for packet
+			return; // queryStates beenden
 		}
 
 		i++;

@@ -30,7 +30,7 @@ struct query {
 	char JSONbuf[200];
 	char cmd[10];
 	uint8_t selectedId;
-	uint8_t ids[IDS_LENGTH]; // abgeschlossen mit 255 (Ende-Kennzeichen)
+	uint8_t ids[IDS_LENGTH]; // wird im Server mit 255 abgeschlossen (Ende-Kennzeichen)
 
 	uint8_t queryStates; // true=1, false=0
 

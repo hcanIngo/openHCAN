@@ -69,7 +69,7 @@ function hookElementarPageEvents () {
 				if (globalLog) logIt ("pagebeforeshow="+page+": ** Defaultwerte fuer die Anzeige setzen.");
 				getPersitenzOrDefaults ();
 				$("label[for='footerVersion']").text(globalVersion);
-				$("#serverURL").val(globalCANserverURL); // http://localhost/cgi-bin/hcanweb   ODER   http://192.168.1.40/			
+				$("#serverURL").val(globalCANserverURL);			
 				$("#FilterEintraege").val(globalStrFilterEintraege); // AB,KG,EG,OG,DG,--
 				// $('#installationXMLdatei').val('...'); // bzw. .empty()
 			}
@@ -107,8 +107,9 @@ function hookPageLinkClick (pageObj) {
 	
 	$(pageObj).on("click", "#myLinkButtons", function(event) {
 		event.preventDefault();
-		if (globalPageChangeable) {
-			var page = $(this).attr("name");
+		var page = $(this).attr("name");
+		if (globalPageChangeable || "Einstellungen" === page) {		
+			globalPageChangeable = true; // fuer "Einstellungen", falls der C1612-Server nicht erreichbar ist
 			var pageObj = '#'+page;
 			if (globalLog) logIt ('myButton click, gehe zu '+page);
 			$.mobile.changePage(pageObj, {transition: "none", reverse: false});
@@ -120,7 +121,8 @@ function hookPageLinkClick (pageObj) {
 	$(pageObj).on("click", "#myZurueckButton", function(event) {
 		event.preventDefault();
 		if (globalLog) logIt ('myZurueckButton click, gehe zu '+pageObj.jqmData("prev"));
-		$.mobile.changePage('#'+pageObj.jqmData("prev"), {transition: "none", reverse: false});
+		var prevPage = '#'+pageObj.jqmData("prev");
+		$.mobile.changePage(prevPage, {transition: "none", reverse: false});
 		return false;
 	});
 }
@@ -194,6 +196,6 @@ function hookSettingspageEvents ()
 function updatePageControlElements (pageObj, state) {
 	var page = pageObj.attr("id");
 	if (page === 'rolladen' || page === 'heizung') {
-		$('#sliderStepInput', pageObj).val(state).slider("refresh"); // Slider an Devicezustand anpassen
+		$('#sliderStepInput', pageObj).val(state).slider().slider('refresh'); // Slider an Devicezustand anpassen
 	}
 }

@@ -16,7 +16,7 @@ install:
 clean:
 	make clean_localServer
 	make clean_client
-	cd ./client; sudo rm -f app*.zip
+	cd ./client; sudo rm -f *.zip
 	make clean_C1612Server
 
 clean_client:
@@ -77,6 +77,7 @@ install_libhcanServer:
 #	@# install ./server/libhcanServer/binary_$(ARCH)/$(TARGET) /usr/lib/cgi-bin/$(TARGET) # Apache2: /cgi-bin/hcanweb
 
 min:
+	make version ver=$(ver)
 	cd ./client/jsSource; cat *.js > combined.js
 	cd ./client/jsSource; /usr/bin/yui-compressor combined.js -o ../app/javascript/hcanweb.min.js
 	cd ./client/jsSource; sudo rm combined.js
@@ -84,6 +85,7 @@ min:
 	cd ./client; cp installation.xml ./app/installationBsp.xml
 
 not_min:
+	make version ver=$(ver)
 	cd ./client/jsSource; cat *.js > combined.js
 	cd ./client/jsSource; sudo cp -r --remove-destination combined.js ../app/javascript/hcanweb.min.js
 	#cd ./client/jsSource; sudo rm combined.js
@@ -92,18 +94,18 @@ not_min:
 
 zip: 
 	@echo -----client-zip erstellen---------
-	@echo Bsp.:  make zip ver=1
+	@echo Bsp.:  make zip ver=1.0
 	@echo ----------------------------------
-	make version
 	# 
 	@#make not_min
-	make min
+	make min ver=$(ver)
 	@#cd ./client/app; /usr/bin/zip -r /home/il/Dropbox/HCAN/Hausautomatisierung_bak/hcanweb_Ajax_bak/app_$(ver).zip ./
 	cd ./client/app; /usr/bin/zip -r ../app_$(ver).zip ./
-	make clean_client
+	@#make clean_client
 
 version:
-	cd ./client/jsSource; echo 'var globalVersion = "hcanweb - Version 1.0 ('`date +%Y-%m-%d`')";' > appVersion.js
+	echo APP-Version = $(ver)
+	cd ./client/jsSource; echo 'var globalVersion = "hcanweb - Version $(ver) ('`date +%Y-%m-%d`')";' > appVersion.js
 
 start_local_client:
 	@#epiphany-browser "./client/index.html" &

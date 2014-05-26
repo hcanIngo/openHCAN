@@ -207,6 +207,10 @@ void canix_reg_frame_callback(canix_frame_callback callback,
  */
 void canix_reg_idle_callback(canix_idle_callback callback);
 
+/** Loest die Registrierung eines Idle Callback Handler auf. */
+void canix_unreg_idle_callback(canix_idle_callback callback);
+
+
 /**
  * Registriert einen RTC Callback Handler. Dieser wird mit einer Frequenz
  * von 100Hz von der Timer0 ISR aufgerufen.

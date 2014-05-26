@@ -529,6 +529,24 @@ void canix_reg_idle_callback(canix_idle_callback callback)
 #endif
 }
 
+void canix_unreg_idle_callback(canix_idle_callback callback)
+{
+	uint8_t i;
+
+	for (i = 0; i < MAX_IDLE_CALLBACKS; i++)
+	{
+		if (idle_callback[i] == callback)
+		{
+			idle_callback[i] = 0; // unregister
+			return;
+		}
+	}
+
+#ifdef CANIX_SYSLOG
+	canix_syslog_P(SYSLOG_PRIO_CRITICAL, PSTR("idle: handler not registered"));
+#endif
+}
+
 void canix_reg_rtc_callback(canix_rtc_callback callback)
 {
 	uint8_t i;

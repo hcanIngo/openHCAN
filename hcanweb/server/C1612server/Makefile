@@ -9,19 +9,9 @@ OBJ_LOCAL := $(patsubst %.c,%.o,$(wildcard *.c))
 
 #Der atmega644 hat die doppelte EEPROM- und SRAM-Groesse gegenueber dem atmega32.
 export MCU_Server = atmega644
+
 TARGET = main
 adr = 166
-
-ifeq ($(MCU_Server),atmega644)
-	# atmega644 (64kbytes flash = 0 bis FFFF)
-	#JTAG-Enable: AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -e -U flash:w:"hcanBL_$(MCU_Server)/$(TARGET).hex" -U hfuse:w:0x90:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
-	AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -e -U flash:w:"C1612_$(MCU_Server)/$(TARGET).hex" -U hfuse:w:0xD0:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
-else
-	# atmega32 (32kbytes flash = 0 bis 7FFF)
-	MT_BOOTLOADER_ADDRESS = 7000
-	#JTAG-Enable: AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"hcanBL_$(MCU_Server)/$(TARGET).hex" -U hfuse:w:0x80:m -U lfuse:w:0x0f:m
-	AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"C1612_$(MCU_Server)/$(TARGET).hex" -U hfuse:w:0xC0:m -U lfuse:w:0x0f:m
-endif
 
 export CC = avr-gcc
 export OBJCOPY = avr-objcopy
@@ -83,8 +73,3 @@ load:
 	@echo -------------------------
 	telican -c $(adr) --arch $(MCU_Server) -e "flash C1612_$(MCU_Server)/$(TARGET).hex"
 	@#telican -a $(IP_HI) -c $(adr) --arch $(MCU_Server) -e "flash C1612_$(MCU_Server)/$(TARGET).hex"
-
-flash:
-	sudo $(AVRDUDE_FLASH)
-	#uisp -dlpt=/dev/parport0 --erase  -dprog=dapa
-	#uisp -dlpt=/dev/parport0 --upload if="hcanBL_$(MCU_Server)/$(TARGET).hex" -dprog=dapa  -v=3 --hash=32

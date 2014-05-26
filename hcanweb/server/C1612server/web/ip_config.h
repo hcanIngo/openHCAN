@@ -15,12 +15,17 @@
 #define IP_CONFIG_H
 
 // Debug:
-#define BAUDRATE 9600 // Baudrate der seriellen Schnittstelle
-#define USE_USART // DEBUG kann verwendet werden
-//#undef USE_USART
+// #define DEBUG_SER
+#undef DEBUG_SER
 
-//#define DEBUG usart_write	// mit Debugausgabe des Stack
-#define DEBUG(...) 			// ohne Debugausgabe des Stack
+#ifdef DEBUG_SER
+	#define DEBUG usart_write	// mit Debugausgabe des Stack
+	#define BAUDRATE 9600 // Baudrate der seriellen Schnittstelle
+	#define USE_USART // DEBUG kann verwendet werden
+#else
+	#define DEBUG(...) 		// ohne Debugausgabe des Stack
+	#undef USE_USART
+#endif
 
 
 //------------- functions in ip_arp_udp_tcp.c --------------

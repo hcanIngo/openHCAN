@@ -78,7 +78,7 @@ hcanweb_client:
 	cd hcanweb; sudo make zip ver=unlabeled
 
 hcanweb_server:
-	cd hcanweb/server/C1612server; sudo make all
+	cd hcanweb/server/C1612server; sudo make clean; sudo make all
 
 firmware: 
 	cd hcanbl; sudo make $(xx) $(parm2)

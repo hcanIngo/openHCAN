@@ -1,12 +1,13 @@
 // jQuery(document) alias $(document) 
 
+var globalLog = false; // logIt-Ausgaben aktivieren
+
 var globalCurrentPage = null;
 var globalCurrentPageSelectedFilter = null;
 var globalPages = ["lampe","sonstige","heizung","reedkontakt","rolladen","Einstellungen"];
 var globalState = "aus";
 var globalTyp = {}; // soll IdName der Devices aufnehmen (typ = "lampe" usw.)
 var globalPageChangeable = true;
-var globalLog = false;
 
 var globalXml = null; // haelt die xml-Daten aus der installation.xml
 
@@ -32,8 +33,8 @@ $( document ).on('mobileinit', function () {
     $.event.special.swipe.verticalDistanceThreshold = 150; // default: 75px - Swipe vertical displacement must be less than this.
     $.event.special.swipe.scrollSupressionThreshold = 20; // default: 10px - More than this horizontal displacement, and we will suppress scrolling.
 */
-    
-	//localStorage.clear(); // falls die App sich mal aufhaengt: Z.B. usb_ubuntu.txt oeffnen. Grr -> TODO
+
+	// localStorage.clear(); // falls die App sich mal aufhaengt: Z.B. usb_ubuntu.txt oeffnen. Grr
 	
 	getPersitenzOrDefaults ();
     hookElementarPageEvents ();

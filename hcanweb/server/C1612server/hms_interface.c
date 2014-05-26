@@ -161,7 +161,7 @@ static void device_can_callback (const canix_frame *frame)
 	}
 }
 
-void hauselektrik_handler (void)
+void hauselektrik_cmd_query (void)
 {
 	t_query * query = &global.query;
 
@@ -169,6 +169,7 @@ void hauselektrik_handler (void)
 	// Trennung von cmd und query (Hintergrund: ein Rolladen braucht bis er seine z.B. 80 % erreicht hat)
 	/* ggf. im Client: query.queryStates  ggf. nur noch nach got focus/betaetigung und 2s-Timeout */
 	processQuery (query);
+	DEBUG("\r\nprocessQuery done\r\n");
 }
 
 void hauselektrik_callback (const canix_frame *frame)
@@ -186,93 +187,89 @@ void hauselektrik_callback (const canix_frame *frame)
 	device_can_callback (frame);
 }
 
-static void receiveMessage (uint8_t deviceQuery, uint8_t id, uint16_t * status, uint16_t * x)
+static void receiveMessage (uint8_t deviceQuery, uint8_t id, uint16_t * pStatus, uint16_t * pX)
 {
 	// selektieren, auf welche CAN-Nachricht gewartet wird:
 	global.response.deviceQuery = deviceQuery; // quasi select (...)
 	global.response.updated = 0; // init mit nicht aktualisiert
 	global.response.id = id; // quasi select (...)
+	global.response.state = 0xffff; // timeout while waiting for packet
 
-	uint16_t counter = 65535; // x µs
+	uint16_t counter = 1000; // TO  maximal  65535; // x µs
 	while (counter--)
 	{
-		wdt_reset();
-		canix_process_messages_withoutIdle (); // somit kommt der hauselektrik_callback dran
+		wdt_enable (WDTO_8S); //wdt_reset ();
+		canix_process_messages (); // somit kommt der hauselektrik_callback dran
+		// canix_process_messages_withoutIdle (); // somit kommt der hauselektrik_callback dran
 		// ... und withoutIdle, damit der web_handler hier nicht aufgerufen wird
 		if (global.response.updated)
 		{
-			*status = global.response.state;
-			// ggf. x = &global.response.timer;
+			*pStatus = global.response.state;
+			// ggf. *pX = global.response.timer;
+			//DEBUG("\r\nid=%i %i\r\n", id, global.response.state);
 			return; // Antwort in weniger als counter x ms erhalten
 		}
 	}
+
+	wdt_enable (WDTO_2S); // wdt_reset ();
+	*pStatus = 0xffff;
+	DEBUG("\r\nTO\r\n"); // TO = timeout while waiting for packet
 }
 
 uint16_t queryState_specific (uint8_t query, uint8_t id)
 {
-	uint16_t status;
+	uint16_t status = 0xffff; // if timeout while waiting for packet
+	uint16_t timer = 0;
+	uint16_t* pStatus = &status;
+	uint16_t* pTimer = &timer;
+
 	if (HCAN_HES_POWER_GROUP_STATE_QUERY == query)
 	{
-		uint8_t timer;
-		sendMessage (HCAN_HES_POWER_GROUP_STATE_QUERY, id);
-		receiveMessage (HCAN_HES_POWER_GROUP_STATE_REPLAY, id, &status, (uint16_t *)&timer);
-		return (uint16_t)status;
+		sendMessage (query, id); // sendHESMessage (2, query, id);
+		receiveMessage (HCAN_HES_POWER_GROUP_STATE_REPLAY, id, pStatus, pTimer);
 	}
 	else if (HCAN_HES_HEIZUNG_DETAILS_REQUEST == query)
 	{
-		uint8_t timer;
-		sendMessage (HCAN_HES_HEIZUNG_DETAILS_REQUEST, id);
-		receiveMessage (HCAN_HES_HEIZUNG_DETAILS_REQUEST, id, &status, (uint16_t *)&timer);
-		return (uint16_t)status;
+		sendMessage (query, id); // sendHESMessage (2, query, id);
+		receiveMessage (HCAN_HES_HEIZUNG_DETAILS_REQUEST, id, pStatus, pTimer);
 	}
 	else if (HCAN_HES_ROLLADEN_POSITION_REQUEST == query)
 	{
-		uint8_t timer;
-		sendMessage (HCAN_HES_ROLLADEN_POSITION_REQUEST, id);
-		receiveMessage (HCAN_HES_ROLLADEN_POSITION_REPLAY, id, &status, (uint16_t *)&timer);
-		return (uint16_t)status;
+		sendMessage (query, id); // sendHESMessage (2, query, id);
+		receiveMessage (HCAN_HES_ROLLADEN_POSITION_REPLAY, id, pStatus, pTimer);
 	}
 	else if (HCAN_HES_REEDKONTAKT_STATE_QUERY == query)
 	{
-		uint8_t timer;
-		sendMessage (HCAN_HES_REEDKONTAKT_STATE_QUERY, id);
-		receiveMessage (HCAN_HES_REEDKONTAKT_STATE_REPLAY, id, &status, (uint16_t *)&timer);
-		return (uint16_t)status;
+		sendMessage (query, id); // sendHESMessage (2, query, id);
+		receiveMessage (HCAN_HES_REEDKONTAKT_STATE_REPLAY, id, pStatus, pTimer);
 	}
 	else if (HCAN_HES_1WIRE_TEMPERATURE_QUERY == query)
 	{
-		uint8_t timer;
-		sendMessage (HCAN_HES_1WIRE_TEMPERATURE_QUERY, id);
-		receiveMessage (HCAN_HES_1WIRE_TEMPERATURE_REPLAY, id, &status, (uint16_t *)&timer);
-		return (uint16_t)status;
+		sendMessage (query, id); // sendHESMessage (2, query, id);
+		receiveMessage (HCAN_HES_1WIRE_TEMPERATURE_REPLAY, id, pStatus, pTimer);
 	}
 
-	return 0; // Fehler
+	DEBUG("\r\nid=%i %i\r\n", id, status);
+	return status;
 }
 
 void executeCmd_specific (uint8_t id, uint8_t cmd, uint16_t x, uint16_t y)
 {
-	if (HCAN_HES_POWER_GROUP_ON == cmd)
-		sendMessage (cmd, id);
-
-	else if (HCAN_HES_POWER_GROUP_OFF == cmd)
-		sendMessage (cmd, id);
-
-	else if (HCAN_HES_HEIZUNG_SET_MODE_OFF == cmd)
-		sendMessage (cmd, id);
-
-	else if (HCAN_HES_HEIZUNG_SET_MODE_AUTOMATIK == cmd)
-		sendMessage (cmd, id);
+	if (	HCAN_HES_POWER_GROUP_ON == cmd
+		|| 	HCAN_HES_POWER_GROUP_OFF == cmd
+		|| 	HCAN_HES_HEIZUNG_SET_MODE_OFF == cmd
+		|| 	HCAN_HES_HEIZUNG_SET_MODE_AUTOMATIK == cmd)
+		sendMessage (cmd, id); // sendHESMessage (2, cmd, id);
 
 	else if (HCAN_HES_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS == cmd)
 	{
 		uint16_t dauer = x;
 		uint16_t temp = y;
-		sendMessage4 (cmd, id, temp>>8, temp, dauer>>8, dauer);
+		sendMessage4 (cmd, id, temp>>8, temp, dauer>>8, dauer); // sendHESMessage (6, cmd, id, (uint8_t)(temp>>8), (uint8_t)temp, (uint8_t)(dauer>>8), (uint8_t)dauer);
 	}
 	else if (HCAN_HES_ROLLADEN_POSITION_SET == cmd)
 	{
-		sendMessage1 (cmd, id, x); // x = Position zwischen 0 und 100
+		sendMessage1 (cmd, id, x); // x = Position zwischen 0 und 100   // sendHESMessage (3, cmd, id, (uint8_t)x); // x = Position zwischen 0 und 100
 	}
 	else
 	{

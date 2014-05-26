@@ -30,7 +30,7 @@
 struct selectedDevice {
 	uint8_t deviceQuery; // z.B. HCAN_HES_POWER_GROUP_STATE_REPLAY
 	uint8_t id; // gruppe
-	uint16_t state; // uint8_t state;
+	uint16_t state;
 	uint8_t updated;
 };
 
@@ -45,7 +45,7 @@ extern t_global global;
 uint16_t queryState_specific (uint8_t query, uint8_t id);
 void executeCmd_specific (uint8_t id, uint8_t cmd, uint16_t x, uint16_t y);
 
-void hauselektrik_handler (void);
+void hauselektrik_cmd_query (void);
 void hauselektrik_callback (const canix_frame *frame);
 
 #endif

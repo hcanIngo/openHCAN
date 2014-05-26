@@ -24,11 +24,11 @@ function sliderValueChanged (pageObj, value, location) {
 	if (gueltigeDaten (pageObj, location)) {
 		var dataToServer = {
 				cmd: value,
-				newPage: "f",
+				newpage: "f",
 				page: page,
-				selectedId: selectedId,
+				selid: selectedId,
 				ids: globalFilteredIds,
-				queryStates: (page === "rolladen") ? "f":"t"
+				qstates: "t" // (page === "rolladen") ? "f":"t"
 		}
 		getDeviceStatesFromServer(dataToServer, location, event);
 	}

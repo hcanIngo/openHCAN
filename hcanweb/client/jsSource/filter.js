@@ -47,11 +47,11 @@ function hookFilterEvents (pageObj) {
 			if (gueltigeDaten (pageObj, 'newFilter')) {
 				var dataToServer = {
 					cmd: "",
-					newPage: "f",
+					newpage: "f",
 					page: page,
-					selectedId: "", // nichts selektieren
+					selid: "", // nichts selektieren
 					ids: globalFilteredIds,
-					queryStates: "t"
+					qstates: "t"
 				}
 				getDeviceStatesFromServer(dataToServer, "FilterChange:"+filter, event); // page: lampe...
 			}
@@ -75,11 +75,11 @@ function getfilteredEntries (pageObj, event) {
 	if (gueltigeDaten (pageObj, 'hookPageShow')) {
 		var dataToServer = {
 				cmd: "",
-				newPage: "t",
+				newpage: "t",
 				page: pageObj.attr("id"),
-				selectedId: "", // keine Selektion
+				selid: "", // keine Selektion
 				ids: globalFilteredIds,
-				queryStates: "t"
+				qstates: "t"
 		}
 		getDeviceStatesFromServer(dataToServer, "getfilteredEntries", event);
 	}
@@ -134,5 +134,9 @@ function setFilterEntries (pageObj) {
 	if (nothingSelected) {
 		filter[0].selectedIndex = 0; // selektieren des ersten Elements (option:selected)	
 	}
-	filter.selectmenu("refresh"); // damit die Box den aktuellen Inhalt anzeigt
+
+	/* filter.selectmenu('refresh'); // damit die Box den aktuellen Inhalt anzeigt
+	 * Error: cannot call methods on selectmenu prior to initialization; attempted to call method 'refresh'
+	 * siehe http://www.gajotres.net/uncaught-error-cannot-call-methods-on-prior-to-initialization-attempted-to-call-method-refresh/ */
+	filter.selectmenu().selectmenu('refresh'); // damit die Box den aktuellen Inhalt anzeigt
 }

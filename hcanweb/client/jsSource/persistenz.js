@@ -16,7 +16,7 @@ function getPersitenzOrDefaults () {
 	globalCANserverURL = localStorage.getItem("CANserverURL");
 	if (globalLog) logIt ('CANserverURL: '+globalCANserverURL);
 	if (globalCANserverURL === null) {
-		globalCANserverURL = "http://192.168.1.40/"; // Default, or http://localhost/cgi-bin/hcanweb	
+		globalCANserverURL = "http://192.168.1.23/"; // Default, or http://localhost/cgi-bin/hcanweb	
 	}
 
 	globalStrFilterEintraege = localStorage.getItem("FilterEintraege");

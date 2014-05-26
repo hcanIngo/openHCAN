@@ -79,9 +79,9 @@ function getState_alle (page) {
 	return state;
 }
 
-function writeDeviceTable (serverIdState, pageObj) {
+function writeDeviceTable (serverIdState, pageObj, doUpdatePageControlElements) {
 	var page = pageObj.attr("id");
-	// if (globalLog) logIt ('fromServer: serverIdState: '+JSON.stringify(serverIdState, null, ' '));
+	if (globalLog) logIt ('fromServer: serverIdState: '+JSON.stringify(serverIdState, null, ' '));
 
 	var selectedId = $('.RowSelected', pageObj).attr("id");
 	// alert('selectedId=' + selectedId);
@@ -108,7 +108,9 @@ function writeDeviceTable (serverIdState, pageObj) {
 		var firstRow = $('.RowUnselected', pageObj).first();
 		firstRow.removeClass("RowUnselected").addClass("RowSelected"); // die erste Reihe selektieren
 		selectedId = $('.RowSelected', pageObj).attr("id");
-		if (('-?-' !== serverIdState) && ('255' !== selectedId)) {
+		if (doUpdatePageControlElements
+			&& ('-?-' !== serverIdState) 
+			&& ('255' !== selectedId)) {
 			updatePageControlElements (pageObj, serverIdState[selectedId]);
 		}
 	}

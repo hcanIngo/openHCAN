@@ -44,13 +44,13 @@
 
 #include <hms_interface.h> // fuer hauselektrik_callback
 
-#define LEDOFF PORTB|=(1<<PORTB1) // set
-#define LEDON PORTB&=~(1<<PORTB1) // set
-#define LEDISOFF PORTB&(1<<PORTB1) // check
+#define LEDOFF PORTB |= (1<<PORTB1) // set
+#define LEDON PORTB &= ~(1<<PORTB1) // set
+#define LEDISOFF PORTB & (1<<PORTB1) // check
 
 static uint8_t mymac[6] = {0x54,0x55,0x58,0x10,0x00,0x29};
-static uint8_t myStaticIP[4] = {192,168,1,40}; // http://192.168.1.40/
-static uint8_t myip[4]= {0,0,0,0}; // My own IP (DHCP will provide a value for it)
+// static uint8_t myip[4] = {192,168,1,23}; // http://192.168.1.23/ my static ip
+static uint8_t myip[4] = {0,0,0,0}; // My own IP (DHCP will provide a value for it)
 
 #define MYWWWPORT 80 // server listen port for www
 
@@ -59,111 +59,119 @@ static uint8_t buf[BUFFER_SIZE+1];
 
 static void handleDHCP (void)
 {
-	uint8_t rval=0;
+	uint8_t rval = 0;
     uint16_t plen;
 
 	LEDON;
     // DHCP handling. Get the initial IP (siehe dhcp_client.h)
-    init_mac(mymac);
-    while(rval==0)
+    init_mac (mymac);
+    while (rval==0)
     {
-    	wdt_reset();
-    	plen=enc28j60PacketReceive(BUFFER_SIZE, buf);
-		buf[BUFFER_SIZE]='\0';
-		rval=packetloop_dhcp_initial_ip_assignment(buf,plen,mymac[5]);
+    	wdt_reset ();
+    	plen = enc28j60PacketReceive (BUFFER_SIZE, buf);
+		buf[BUFFER_SIZE] = '\0';
+		rval = packetloop_dhcp_initial_ip_assignment (buf, plen, mymac[5]);
     }
     // we have an IP:
-    dhcp_get_my_ip(myip,0,0); // (0=NULL) we just want the IP, as a web server we do technically not need mask and gateway. Those fiels are only needed for a client.
-    DEBUG("\n\rmyIP=");
+    dhcp_get_my_ip (myip, 0, 0); // (0=NULL) we just want the IP, as a web server we do technically not need mask and gateway. Those fiels are only needed for a client.
     char strIP[30];
-    mk_net_str(strIP,myip,4,'.',10);
-    usart_write_str(strIP);
-    DEBUG("-E\n\r");
+    mk_net_str (strIP, myip, 4, '.', 10);
+    DEBUG("\n\rmyIP=%s\n\r", strIP);
     LEDOFF;
 }
 
-static uint16_t http200ok(void)
+static uint16_t http200ok (void)
 {
 	/* 	"Content-Type: text/html"
 	 	Origin http://localhost is not allowed by Access-Control-Allow-Origin.
 	 	Daher ist jsonp und "Content-Type: application/javascript" notwendig. */
-	return(fill_tcp_data_p(buf,0,PSTR("HTTP/1.0 200 OK\r\nContent-Type: application/javascript\r\nPragma: no-cache\r\n\r\n")));
+	return (fill_tcp_data_p (buf, 0, PSTR("HTTP/1.0 200 OK\r\nContent-Type: application/javascript\r\nPragma: no-cache\r\n\r\n")));
 }
 
-static void web_handler(void)
+static void web_handler (void)
 {
     uint16_t plen;
 	uint16_t dat_p;
 
 	// handle ping and wait for a tcp packet
-	plen=enc28j60PacketReceive(BUFFER_SIZE, buf);
-	buf[BUFFER_SIZE]='\0';
-	dat_p=packetloop_arp_icmp_tcp(buf,plen);
+	plen = enc28j60PacketReceive (BUFFER_SIZE, buf);
+	buf[BUFFER_SIZE] = '\0';
+	dat_p = packetloop_arp_icmp_tcp (buf, plen);
 
 	// dat_p will be unequal to zero if there is a valid  http get
-	if(dat_p==0){
-			// no http request
-			if (enc28j60linkup()){
-					LEDON;
-			}else{
-					LEDOFF;
-			}
-			return; //IL-while ist ausserhalb...: continue;
-	}
-	// tcp port 80 begin
-	if (strncmp("GET ",(char *)&(buf[dat_p]),4)!=0){
-			// head, post and other methods:
-			dat_p=http200ok();
-			dat_p=fill_tcp_data_p(buf,dat_p,PSTR("<h1>200 OK</h1>"));
-			goto SENDTCP;
+	if (0 == dat_p)
+	{
+		// no http request
+		if (enc28j60linkup()) LEDON;
+		else LEDOFF;
+
+		return;
 	}
 
-	// z.B.  http://192.168.1.40/?callback=myjp&cmd=aus&newpage=f&page=sonstige&selectedid=2&ids=33,83,102,76,75,2&querystates=t
+	// tcp port 80 begin
+	if (strncmp("GET ",(char *)&(buf[dat_p]),4) != 0)
+	{
+		// head, post and other methods:
+		dat_p = http200ok ();
+		dat_p = fill_tcp_data_p (buf, dat_p, PSTR("<h1>200 OK</h1>"));
+		www_server_reply (buf, plen); // send web page data
+		return; // tcp port 80 end
+	}
+
+	// z.B.
+	// http://192.168.1.23/?callback=myjp&cmd=&newpage=f&page=lampe&selid=91&ids=91,137,115,101,100,104,69,64,103,134,141,143,152&qstates=t
+	// http://192.168.1.23/?callback=myjp&cmd=aus&newpage=f&page=sonstige&selid=2&ids=33,83,102,76,75,2&qstates=t
+	// http://192.168.1.23/?callback=myjp&cmd=100&newpage=f&page=rolladen&selid=71&ids=71,126,146&qstates=t
 	char * input = (char *)&(buf[dat_p+4]);
 	// DEBUG("%s", input);
 	getAjaxInput (input, &(global.query)); // url-Analyse
 
+	if (!global.query.queryStates && strcmp (global.query.cmd, "") == 0)
+		DEBUG("\r\nInput-Err: %s\r\n", input);
+	else
+		DEBUG("\r\nInput ok\r\n");
+		// DEBUG("\r\nInput-ok: %s\r\n", input); // diese Ausgabe dauert so lange, sodass die Input-Daten wiederholt empfangen werden!
+
     // CS-ETH (PB3): CSACTIVE,CSPASSIVE // enc28j60WriteOp() usw. tun es schon :-)
 	can_enable_mcp2515 (); // CS-CAN (PB4): can_enable_mcp2515(), can_disable_mcp2515()
-    sei (); // enable interrupts: ISR(TIMER0_OVF_vect) {fuer den mcp2512}
-	hauselektrik_handler (); // processCmd, processQuery
+	sei (); // enable interrupts: ISR(TIMER0_OVF_vect) {fuer den mcp2512}
+	hauselektrik_cmd_query (); // processCmd, processQuery
 	cli (); // disable interrupts: ISR(TIMER0_OVF_vect) {fuer den mcp2512}
     can_disable_mcp2515 (); // damit der mcp2515 keine falschen Nachrichten interprtiert
 
-	plen=http200ok(); // "Content-Type: application/javascript"
-	plen=fill_tcp_data_p(buf, plen, PSTR("myjp({"));
-	plen=fill_tcp_data(buf, plen, global.query.JSONbuf);
-	plen=fill_tcp_data_p(buf, plen, PSTR("})"));
-SENDTCP:
-	www_server_reply(buf,plen); // send web page data
+	plen = http200ok (); // "Content-Type: application/javascript"
+	plen = fill_tcp_data_p (buf, plen, PSTR("myjp({"));
+	plen = fill_tcp_data (buf, plen, global.query.JSONbuf);
+	plen = fill_tcp_data_p (buf, plen, PSTR("})"));
+	www_server_reply (buf, plen); // send web page data
 	// tcp port 80 end
 }
 
-static void web_init(void)
+static void web_init (void)
 {
 	// set the clock speed to 8MHz
 	// set the clock prescaler. First write CLKPCE to enable setting of clock the
 	// next four instructions.
-	CLKPR=(1<<CLKPCE);
-	CLKPR=0; // 8 MHZ
-	_delay_loop_1(0); // 60us
-	DDRB|= (1<<DDB1); // LED, enable PB1, LED as output
+	CLKPR = (1<<CLKPCE);
+	CLKPR = 0; // 8 MHZ
+	_delay_loop_1 (0); // 60us
+	DDRB |= (1<<DDB1); // LED, enable PB1, LED as output
 	LEDOFF;
 
 	//initialize the hardware driver for the enc28j60
-	enc28j60Init(mymac);
-	enc28j60clkout(2); // change clkout from 6.25MHz to 12.5MHz
-	_delay_loop_1(0); // 60us
-	enc28j60PhyWrite(PHLCON,0x476); // Magjack leds configuration, see enc28j60 datasheet, page 11
+	enc28j60Init (mymac);
+	enc28j60clkout (2); // change clkout from 6.25MHz to 12.5MHz
+	_delay_loop_1 (0); // 60us
+	enc28j60PhyWrite (PHLCON, 0x476); // Magjack leds configuration, see enc28j60 datasheet, page 11
 
 	handleDHCP ();
 
 	//init the ethernet/ip layer:
-	init_udp_or_www_server(mymac,myip); // myStaticIP
-	www_server_port(MYWWWPORT);
+	init_udp_or_www_server (mymac, myip); // myStaticIP
+	www_server_port (MYWWWPORT);
 }
 
-static void wrap_web_init(void)
+static void wrap_web_init (void)
 {
 	/* Maßnahme zur gemeinsamen Nutzung des SPI-Busses:
 		A) Bei CS-ETH muss CS-CAN verhindert werden
@@ -172,23 +180,26 @@ static void wrap_web_init(void)
 		CS-CAN (PB4): can_enable_mcp2515(), can_disable_mcp2515()
 		CS-ETH (PB3): CSACTIVE,CSPASSIVE // enc28j60WriteOp() usw. tun es schon :-)
 	*/
-	can_disable_mcp2515(); // damit der mcp2515 keine falschen Nachrichten interprtiert
-	cli(); // disable interrupts: ISR(TIMER0_OVF_vect) {fuer den mcp2512}
-	web_init(); // enc28j60Init()->CS
-	can_enable_mcp2515();
-	sei(); // enable interrupts: ISR(TIMER0_OVF_vect) {fuer den mcp2512}
+	can_disable_mcp2515 (); // damit der mcp2515 keine falschen Nachrichten interprtiert
+	cli (); // disable interrupts: ISR(TIMER0_OVF_vect) {fuer den mcp2512}
+	web_init (); // enc28j60Init()->CS
+	can_enable_mcp2515 ();
+	sei (); // enable interrupts: ISR(TIMER0_OVF_vect) {fuer den mcp2512}
 }
 
-static void wrap_web_handler(void)
+static void wrap_web_handler (void)
 {
-    can_disable_mcp2515(); // damit der mcp2515 keine enc28j60-Nachrichten interprtiert
-    cli(); // disable interrupts
-    web_handler();
-    can_enable_mcp2515();
-    sei(); // enable interrupts
+	can_disable_mcp2515 (); // damit der mcp2515 keine enc28j60-Nachrichten interprtiert
+    cli (); // disable interrupts
+    canix_unreg_idle_callback (wrap_web_handler);
+    web_handler ();
+
+    canix_reg_idle_callback (wrap_web_handler);
+    can_enable_mcp2515 ();
+    sei (); // enable interrupts
 }
 
-int main(void)
+int main (void)
 {
 	/* 	Nachricht:HCAN_HMS_DEVICE_RESET des HCAN Frame Callback zum BL wegen eines Firmware-Load:
  	 	Nachricht:HCAN_HMS_DEVICE_RESET->canix_reset()->wdt_enable(WDTO_15MS) */

@@ -13,11 +13,11 @@ function hookTableClick (pageObj) {
 	
 				var dataToServer = {
 					cmd: state, 
-					newPage: "f",
+					newpage: "f",
 					page: pageObj.attr("id"),
-					selectedId: selectedId,
+					selid: selectedId,
 					ids: globalFilteredIds,
-					queryStates: "t"
+					qstates: "t"
 				}
 				getDeviceStatesFromServer(dataToServer, "switchChange", event);
 			}
@@ -53,11 +53,11 @@ function newSelection (pageObj, selected) {
 	if (gueltigeDaten (pageObj, 'newSelection')) {
 		var dataToServer = {
 			cmd: "",
-			newPage: "f",
+			newpage: "f",
 			page: pageObj.attr("id"),
-			selectedId: selected,
+			selid: selected,
 			ids: globalFilteredIds,
-			queryStates: "t" // (selected === 255) ? "f":"t"
+			qstates: "t" // (selected === 255) ? "f":"t"
     	}
     	getDeviceStatesFromServer(dataToServer, "newSelection", event);
 	}

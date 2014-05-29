@@ -66,28 +66,28 @@ static uint8_t expStartPins[] =  {12,20,28,36, 44,52,60,68, 16,24,32,40, 48,56,6
 
 static inline void configurePortAsInput (uint8_t bank, uint8_t adr)
 {
-	if (0 == i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE))
+	if (0 == i2c_start (MCP23x17_ADDR + (adr<< 1) + I2C_WRITE))
 	{
-		i2c_write(MCP23x17_IODIRA + bank); // select either IODIRA or IODIRB (via bank)
-		i2c_write(0xff); // if selected, the whole bank is set as input
-		i2c_stop();
+		i2c_write (MCP23x17_IODIRA + bank); // select either IODIRA or IODIRB (via bank)
+		i2c_write (0xff); // if selected, the whole bank is set as input
+		i2c_stop ();
 
 		// activate pull-up for input ports:
-		i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE);
-		i2c_write(MCP23x17_GPPUA + bank); // select either GPPUA or GPPUB via bank
-		i2c_write(0xff); // the whole bank gets pull-up
+		i2c_start (MCP23x17_ADDR + (adr<< 1) + I2C_WRITE);
+		i2c_write (MCP23x17_GPPUA + bank); // select either GPPUA or GPPUB via bank
+		i2c_write (0xff); // the whole bank gets pull-up
 	}
-	i2c_stop();
+	i2c_stop ();
 }
 
 static inline void configurePortAsOutput (uint8_t bank, uint8_t adr)
 {
-	if (0 == i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE))
+	if (0 == i2c_start (MCP23x17_ADDR + (adr<< 1) + I2C_WRITE))
 	{
-		i2c_write(MCP23x17_IODIRA + bank); // select either IODIRA or IODIRB via bank
-		i2c_write(0x00); // if selected, set whole bank as output
+		i2c_write (MCP23x17_IODIRA + bank); // select either IODIRA or IODIRB via bank
+		i2c_write (0x00); // if selected, set whole bank as output
 	}
-	i2c_stop();
+	i2c_stop ();
 }
 
 bool isMCP23x17available (uint8_t boardindex, uint8_t adr)
@@ -95,16 +95,14 @@ bool isMCP23x17available (uint8_t boardindex, uint8_t adr)
 	bool available = false;
 
 	// check for MCP23x17-IC:
-    if (0 == i2c_start(MCP23x17_ADDR + (adr<< 1) + I2C_WRITE)) available = true;
+    if (0 == i2c_start (MCP23x17_ADDR + (adr<< 1) + I2C_WRITE)) available = true;
     else
     {
     	// gilt hier immer: if (expIOconfig[boardindex] != 255) // Board (2-MCP23x17-IC's) konfiguriert?
-    	canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("noExp%d, but configured %d)"), adr, boardindex); // adr 0..7
-    	/* Sollte ein Softreset nicht reichen, dann hier muss ggf. einmal
-    	   die Versorgungsspannung des MCP23x17 abgeschaltet werden! */
+    	// Error @ configurePorts: canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("noExp%d, but configured %d)"), adr, boardindex); // adr 0..7
     }
 
-    i2c_stop();
+    i2c_stop ();
     return available;
 }
 
@@ -141,6 +139,13 @@ void configurePorts (void)
 						numberOfOutputs++;
 					}
 				}
+				else // Das Board (2 IC's) ist (sind) nicht ansprechbar:
+				{
+					expBoard[boardindex] = 255; // und wird daher aus der Konfiguration genommen
+					canix_syslog_P (SYSLOG_PRIO_DEBUG, PSTR("!%d-%d,%d"), portindex, adr, boardindex);
+			    	/* Sollte ein Softreset nicht reichen, dann hier muss ggf. einmal
+			    	   die Versorgungsspannung des MCP23x17 abgeschaltet werden! */
+				}
 
 				portindex++;
 
@@ -171,7 +176,7 @@ void ports_init (device_data_ports *p, eds_block_p it)
 	portsDeviceCreated = true; // There can be only ONE ports Device
 	expanderActive = false;
 
-	i2c_init(); // SDA/SDL-Pins sind ueber I2C-master-Lib ATmegatypabhaengig festgelegt
+	i2c_init (); // SDA/SDL-Pins sind ueber I2C-master-Lib ATmegatypabhaengig festgelegt
 
 	uint8_t i;
 	for (i=0; i<4*MAXIMUM_NUMBER_OF_EXPANDER_BOARDS; i++)
@@ -203,7 +208,7 @@ static inline uint8_t readMCP23017port (uint8_t bank, uint8_t adr)
 	if (0 == i2c_start (MCP23x17_ADDR + adr + I2C_WRITE))
 	{
 		// read input at port:
-		i2c_write(MCP23x17_GPIOA + bank); // select either GPIOA or GPIOB via bank
+		i2c_write (MCP23x17_GPIOA + bank); // select either GPIOA or GPIOB via bank
 		i2c_rep_start (MCP23x17_ADDR + adr + I2C_READ);
 		inputByte = i2c_readNak ();
 	}

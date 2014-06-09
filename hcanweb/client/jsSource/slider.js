@@ -28,7 +28,7 @@ function sliderValueChanged (pageObj, value, location) {
 				page: page,
 				selid: selectedId,
 				ids: globalFilteredIds,
-				qstates: "t" // (page === "rolladen") ? "f":"t"
+				qstates: (page === "rolladen") ? "f":"t"
 		}
 		getDeviceStatesFromServer(dataToServer, location, event);
 	}

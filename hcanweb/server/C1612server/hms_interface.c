@@ -155,7 +155,7 @@ static void device_can_callback (const canix_frame *frame)
 			if (frame->data[2] == global.response.id) // ist eine gesuchte gruppe
 			{
 				global.response.updated = 1;
-				global.response.state = frame->data[3];
+				global.response.state = ((frame->data[3]<<8)|frame->data[4])/16.0; // Ist-Temperatur
 			}
 		}
 	}

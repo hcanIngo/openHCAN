@@ -119,9 +119,9 @@ static void web_handler (void)
 	}
 
 	// z.B.
-	// http://192.168.1.23/?callback=myjp&cmd=&newpage=f&page=lampe&selid=91&ids=91,137,115,101,100,104,69,64,103,134,141,143,152&qstates=t
-	// http://192.168.1.23/?callback=myjp&cmd=aus&newpage=f&page=sonstige&selid=2&ids=33,83,102,76,75,2&qstates=t
-	// http://192.168.1.23/?callback=myjp&cmd=100&newpage=f&page=rolladen&selid=71&ids=71,126,146&qstates=t
+	// http://192.168.1.23/?callback=myjp&cmd=&d=lampe&setid=91&qid=91,137,115,101,100,104,69,64,103,134,141,143,152
+	// http://192.168.1.23/?callback=myjp&cmd=aus&d=sonstige&setid=2&qid=33,83,102,76,75,2
+	// http://192.168.1.23/?callback=myjp&cmd=100&d=rolladen&setid=71&qid=
 	char * input = (char *)&(buf[dat_p+4]);
 	// DEBUG("%s", input);
 	getAjaxInput (input, &(global.query)); // url-Analyse

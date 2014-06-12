@@ -6,13 +6,12 @@ function hookControlgroupEvents (pageObj) {
 		var selectedId = $('.RowSelected', pageObj).attr("id");
 		
 		if (gueltigeDaten (pageObj, 'HeizungControlChange')) {
+			var qstates = true;
 			var dataToServer = {
 					cmd: controlValue,
-					newpage: "f",
-					page: pageObj.attr("id"),
-					selid: selectedId,
-					ids: globalFilteredIds,
-					qstates: "t"
+					d: pageObj.attr("id"), // device
+					setid: selectedId,
+					qid: qstates ? globalFilteredIds : ""
 			}
 			getDeviceStatesFromServer(dataToServer, "HeizungControlChange", event);
 		}

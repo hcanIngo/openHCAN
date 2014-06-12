@@ -11,13 +11,12 @@ function hookTableClick (pageObj) {
 					state = (globalState === "aus") ? "ein":"aus"; // toggle
 				}
 	
+				var qstates = true;
 				var dataToServer = {
 					cmd: state, 
-					newpage: "f",
-					page: pageObj.attr("id"),
-					selid: selectedId,
-					ids: globalFilteredIds,
-					qstates: "t"
+					d: pageObj.attr("id"), // device
+					setid: selectedId,
+					qid: qstates ? globalFilteredIds : ""
 				}
 				getDeviceStatesFromServer(dataToServer, "switchChange", event);
 			}
@@ -51,13 +50,13 @@ function hookTableClick (pageObj) {
 
 function newSelection (pageObj, selected) {
 	if (gueltigeDaten (pageObj, 'newSelection')) {
+		var qstates = true;
+		// if (selected === 255) qstates = false;
 		var dataToServer = {
 			cmd: "",
-			newpage: "f",
-			page: pageObj.attr("id"),
-			selid: selected,
-			ids: globalFilteredIds,
-			qstates: "t" // (selected === 255) ? "f":"t"
+			d: pageObj.attr("id"), // device
+			setid: selected,
+			qid: qstates ? globalFilteredIds : ""
     	}
     	getDeviceStatesFromServer(dataToServer, "newSelection", event);
 	}

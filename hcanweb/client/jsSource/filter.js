@@ -45,13 +45,12 @@ function hookFilterEvents (pageObj) {
 			writeGlobalFilteredIds (pageObj, filter);
 			
 			if (gueltigeDaten (pageObj, 'newFilter')) {
+				var qstates = true;
 				var dataToServer = {
 					cmd: "",
-					newpage: "f",
-					page: page,
-					selid: "", // nichts selektieren
-					ids: globalFilteredIds,
-					qstates: "t"
+					d: page, // device
+					setid: "", // nichts selektieren
+					qid: qstates ? globalFilteredIds : ""
 				}
 				getDeviceStatesFromServer(dataToServer, "FilterChange:"+filter, event); // page: lampe...
 			}
@@ -73,13 +72,12 @@ function getfilteredEntries (pageObj, event) {
 	}
 	
 	if (gueltigeDaten (pageObj, 'hookPageShow')) {
+		var qstates = true;
 		var dataToServer = {
 				cmd: "",
-				newpage: "t",
-				page: pageObj.attr("id"),
-				selid: "", // keine Selektion
-				ids: globalFilteredIds,
-				qstates: "t"
+				d: pageObj.attr("id"), // device
+				setid: "", // keine Selektion
+				qid: qstates ? globalFilteredIds : ""
 		}
 		getDeviceStatesFromServer(dataToServer, "getfilteredEntries", event);
 	}

@@ -39,22 +39,15 @@ void getAjaxInput (char *str, t_query * query)
 		strcpy (query->cmd, strBuf);
 	else ok = 0;
 
-	if (find_key_val (str, strBuf, 20, "newpage")) // newPage
-	{
-		if ('f' == strBuf[0]) query->newPage = 0;
-		else query->newPage = 1;
-	}
-	else ok = 0;
-
-	if (find_key_val (str, strBuf, 20, "page"))
+	if (find_key_val (str, strBuf, 20, "d")) // device (= hcanweb-Page)
 		strcpy (query->page, strBuf);
 	else ok = 0;
 
-	if (find_key_val (str, strBuf, 20, "selid")) // selectedId
+	if (find_key_val (str, strBuf, 20, "setid")) // selectedId
 		query->selectedId = atoi (strBuf);
 	else ok = 0;
 
-	if (find_key_val (str, strBuf, IDS_LENGTH, "ids"))
+	if (find_key_val (str, strBuf, IDS_LENGTH, "qid"))
 	{
 		urldecode (strBuf); // konvertiert von '%2C' zu ','
 		uint8_t i = 0;
@@ -68,20 +61,17 @@ void getAjaxInput (char *str, t_query * query)
 		}
 		query->ids[i] = 255; // Ende-Kennzeichen
 
-		/* DEBUG("\r\nids:");
+		/* DEBUG("\r\nqid:");
 		for (i=0; i < IDS_LENGTH; i++)
 		{
 			DEBUG("%i,", query->ids[i]);
 			if (255 == query->ids[i]) break;
 		}
 		DEBUG("\r\n"); */
-	}
-	else ok = 0;
 
-	if (find_key_val (str, strBuf, 20, "qstates")) // queryStates
-	{
-		if ('f' == strBuf[0]) query->queryStates = 0;
-		else query->queryStates = 1;
+		if (query->ids[0] != 255)
+			query->queryStates = 1;
+		else query->queryStates = 0; // qid = "" -> keine Zustandsabfrage
 	}
 	else ok = 0;
 

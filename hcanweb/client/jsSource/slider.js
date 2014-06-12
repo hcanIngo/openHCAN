@@ -22,13 +22,13 @@ function sliderValueChanged (pageObj, value, location) {
 	
 	var page = pageObj.attr("id");
 	if (gueltigeDaten (pageObj, location)) {
+		var qstates = true; 
+		if (page === "rolladen") qstates = false;
 		var dataToServer = {
 				cmd: value,
-				newpage: "f",
-				page: page,
-				selid: selectedId,
-				ids: globalFilteredIds,
-				qstates: (page === "rolladen") ? "f":"t"
+				d: page, // device
+				setid: selectedId,
+				qid: qstates ? globalFilteredIds : ""
 		}
 		getDeviceStatesFromServer(dataToServer, location, event);
 	}

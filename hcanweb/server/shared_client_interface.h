@@ -34,7 +34,6 @@ struct query {
 
 	uint8_t queryStates; // true=1, false=0
 
-	uint8_t newPage; // true=1, false=0
 	char page[12];
 };
 typedef struct query t_query;

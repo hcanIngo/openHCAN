@@ -129,7 +129,7 @@ void queryStates (char * JSONbuf, const char * page, uint8_t * ids)
 			state = queryState_specific (HCAN_HES_1WIRE_TEMPERATURE_QUERY, id);
 			char temp[8];
 			sprintf (temp, "%d", state);
-			catJSONobj (JSONbuf, id, temp); // temp: ist-Temp
+			catJSONobj (JSONbuf, id, temp); // temp: ist-Temperatur
 		}
 
 		else

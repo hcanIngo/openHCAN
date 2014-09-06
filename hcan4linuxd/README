@@ -1,0 +1,8 @@
+This is the replacement for hcanhid if you want to use a system with a canbus adapter supported by can4linux
+I built it for use with the build in can adapter of the bananapi.
+As a prerequisite you have to build the can4linux kernel module.
+Get the kernel source from lemaker:
+Get the sources for can4linux:
+svn checkout http://svn.code.sf.net/p/can4linux/code/trunk can4linux-code
+and compile it with
+make TARGET=BANANAPI 

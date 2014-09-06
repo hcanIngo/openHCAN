@@ -1,8 +1,15 @@
 This is the replacement for hcanhid if you want to use a system with a canbus adapter supported by can4linux
-I built it for use with the build in can adapter of the bananapi.
+I built it for use with the build in can adapter of the bananapi. The Lubuntu distri I use contains some can drivers, but none for the integrated A20 chip.
+The adapter used contains only a 3.3V can transceiver like SN65HVD230D available on reichelt.de connected to pins 16, 18, +3.3V and GND.
 As a prerequisite you have to build the can4linux kernel module.
+
 Get the kernel source from lemaker:
+https://github.com/LeMaker/linux-bananapi.git
+I put the source in /root/linux-bananapi
+
 Get the sources for can4linux:
 svn checkout http://svn.code.sf.net/p/can4linux/code/trunk can4linux-code
 and compile it with
-make TARGET=BANANAPI 
+make TARGET=BANANAPI KDIR=/root/linux-bananapi/
+
+Now install the module and load it. In my config I have to use insmod --force can4linux because of some wrong kernel version info. Maybe you have to create the devices by using the make.

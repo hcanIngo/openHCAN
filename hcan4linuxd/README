@@ -13,3 +13,5 @@ and compile it with
 make TARGET=BANANAPI KDIR=/root/linux-bananapi/
 
 Now install the module and load it. In my config I have to use insmod --force can4linux because of some wrong kernel version info. Maybe you have to create the devices by using the make.
+
+http://wiki.openhcan.org/doku.php?id=hcan4linuxd

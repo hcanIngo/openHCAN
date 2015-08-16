@@ -18,17 +18,17 @@
  *  (c) 2006 by Martin Haller, mah (at) iuse (dot) org
  */
 
-#ifndef HCANFRAME_H
-#define HCANFRAME_H
+#ifndef FRAME_H
+#define FRAME_H
 
 #include <inttypes.h>
 
-typedef struct hcan_frame
+typedef struct
 {
 	uint32_t id;
 	uint32_t  size;
 	uint8_t  data[8];
-} hcan_Frame;
+} CANFrame;
 
 
 #endif

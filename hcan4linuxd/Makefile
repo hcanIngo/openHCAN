@@ -1,3 +1,10 @@
+include ../ARCH.inc
+include ARCH_letzter_Compilerlauf.inc
+
+ifneq ($(ARCH),$(last_ARCH))
+	CONDITIONAL_CLEAN=clean
+endif
+
 TARGET = hcan4linuxd
 OBJ = main.o
 
@@ -8,8 +15,6 @@ else
 	CXX = arm-linux-gnu-gcc
 endif
 
-CXX = gcc
-
 CFLAGS = -O2 -I. -Wall -g #-DDEBUG0
 
 
@@ -17,18 +22,20 @@ all: $(CONDITIONAL_CLEAN) $(TARGET)
 
 $(TARGET): $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $(OBJ)
-	strip $@
+	test -d ./binary_$(ARCH) || mkdir binary_$(ARCH)
+	mv $@ binary_$(ARCH)
+	strip binary_$(ARCH)/$@
 
 $(OBJ): %.o:%.c
 	$(CXX) $(CFLAGS) -o $@ -c $<
-    
+	
 clean:
 	rm -f *.o $(TARGET)
 	@echo last_ARCH=$(ARCH) > ARCH_letzter_Compilerlauf.inc
-	sudo rm -f $(TARGET)
+	sudo rm -f ./binary_$(ARCH)/$(TARGET)
 
 ctags:
 	ctags *.c *.h
 
 install:
-	sudo install $(TARGET) /usr/sbin
+	sudo install binary_$(ARCH)/$(TARGET) /usr/sbin

@@ -6,7 +6,7 @@
  * for more details.
  *
  * Copyright (c) 2001-2011 oe @ port GmbH Halle/Saale
- * Copyright (c) 2013 Heinz-Jürgen Oertel <hj.oertel@t-online.de>
+ * Copyright (c) 2013-2015 Heinz-JÃ¼rgen Oertel <hj.oertel@t-online.de>
  *------------------------------------------------------------------
  *
  */
@@ -14,7 +14,7 @@
 
 /**
 * \file can.h
-* \author Heinz-Jürgen Oertel
+* \author Heinz-JÃ¼rgen Oertel
 *
 * can4linux interface definitions
 *
@@ -27,11 +27,13 @@
 #define __CAN_H
 
 
-#define CAN4LINUXVERSION 0x0403 /* Version 4.3 */
+#define CAN4LINUXVERSION 0x0404 /* Version 4.4 */
 
 #ifndef __KERNEL__
 #include <sys/time.h>
 #endif
+#include <linux/types.h>
+
  /*---------- the can message structure */
 
 #if defined CANFD
@@ -54,7 +56,8 @@
 #define MSG_BOVR	(1<<7)		/**< receive/transmit buffer overflow */
 
 #define MSG_CANFD	(1<<8)		/**< Frame is a CAN FD frame */
-#define MSG_RESI	(1<<9)		/**< received Error Status Indicator */
+#define MSG_RBRS	(1<<9)		/**< Bit rate switch, frame with fast data phase */
+#define MSG_RESI	(1<<10)		/**< received Error Status Indicator */
 /**
 * mask used for detecting CAN errors in the canmsg_t flags field
 */
@@ -73,6 +76,7 @@
 *
 * For reporting errors the fields \e flags and \e id are used.
 */
+#if 0
 typedef struct {
 	/** flags, indicating or controlling special message properties */
 	int             flags;
@@ -87,6 +91,22 @@ typedef struct {
 	/**< data, 0...8 bytes for classic CAN
 	 and 0...64 bytes for CAN FD extended data frames */
 } canmsg_t;
+#else
+typedef struct {
+	/** flags, indicating or controlling special message properties */
+	__u32	flags;
+	__u32	cob;	 /**< CAN object number, used in Full CAN  */
+	__u32	id;	 /**< CAN message ID, 4 bytes
+	    if in receive mode an id 0xFFFF.FFFF is received,
+	    the driver reports an internal or CAN controller error condition.
+	    In this case the \e flags field has to be evaluated. */
+	struct timeval  timestamp;	/**< time stamp for received messages */
+	__u32	length;	 /**< number of bytes in the CAN message */
+	__u8	data[CAN_MSG_LENGTH] __attribute__((aligned(8)));
+	/**< data, 0...8 bytes for classic CAN
+	 and 0...64 bytes for CAN FD extended data frames */
+} canmsg_t;
+#endif
 
 
 
@@ -153,6 +173,7 @@ typedef struct can_statuspar {
 #define CAN_TYPE_XCANPS		9
 #define CAN_TYPE_DCAN		10
 #define CAN_TYPE_IFI_CAN_FD	11
+#define CAN_TYPE_ALLWINNER_CAN	12
 #define CAN_TYPE_VIRTUAL	100
 
 

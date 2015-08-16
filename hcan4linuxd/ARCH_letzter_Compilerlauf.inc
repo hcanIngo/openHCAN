@@ -1,1 +1,1 @@
-last_ARCH=
+last_ARCH=i386

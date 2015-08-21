@@ -262,9 +262,14 @@ int main(int argc, char ** argv)
 			if(debug) printf("wrote %d frame to can4linux\n", n);
 			if (n != 1)
 			{
-				fprintf(stderr, "could not send complete CAN packet (%d)!", n);
+				fprintf(stderr, "could not send complete CAN packet (%d) -> resetting can4linux-Baustein.!\n", n);
+				ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_STOP);
+				ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_CLEARBUFFERS);
+				ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_RESET);
+				ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_START);
 			}
-			packet_sent_to_c4l++;
+			else
+				packet_sent_to_c4l++;
 
 			frame_to_can4linux_busy = 0;
 		}
@@ -296,7 +301,12 @@ int main(int argc, char ** argv)
 				}
 				else
 				{
-					syslog(LOG_ERR, "buffer to Can4linux overflow");
+					syslog(LOG_ERR, "buffer to Can4linux overflow -> resetting can4linux-Baustein.\n");
+					ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_STOP);
+					ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_CLEARBUFFERS);
+					ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_RESET);
+					ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_START);
+					frame_to_can4linux_busy = 0;
 				}
 			}
 		}
@@ -311,6 +321,12 @@ int main(int argc, char ** argv)
 				if (cf4l.flags & MSG_BUSOFF) fprintf(stderr, " - BUSOFF\n");
 				else if (cf4l.flags & MSG_PASSIVE) fprintf(stderr, " - ERROR PASSIVE\n");
 				else fprintf(stderr, " Error %d\n", cf4l.flags);
+
+				syslog(LOG_ERR, "resetting can4linux-Baustein.\n");
+				ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_STOP);
+				ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_CLEARBUFFERS);
+				ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_RESET);
+				ioctl(can4linux_fd, CAN_IOCTL_COMMAND, CMD_START);
 			}
 			else
 			{

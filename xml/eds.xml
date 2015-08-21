@@ -58,7 +58,6 @@
 		runter fahren) muss. 
 	</block>
 
-
 	<block type="13" name="heizung" size="38">
 		<field datatype="uint8_t" name="id" pos="0" />
 		<field datatype="uint8_t" name="port" pos="1" />
@@ -226,26 +225,6 @@
 		Drehgeber (Poti) gesteuert werden.
 	</block>
 
-	<block type="25" name="schalter" size="3">
-		<field datatype="uint8_t" name="port" pos="0" />
-		<field datatype="uint8_t" name="feature" pos="1" />
-		<field datatype="uint8_t" name="gruppe" pos="2" />
-		Ein Schalter-Device kann z.Z. zum Schalten von
-		Powerports (Lampen,Steckdosen) verwendet werden.
-		Ist Bit 0 des feature Bytes gesetzt, so wird der am
-		port gelesene Zustand invertiert.
-		Ist Bit 1 des feature Bytes gesetzt, so ist der internen Pullup
-		am port deaktiviert.
-	</block>
-
-	<block type="28" name="zentralheizungspumpe" size="3">
-		<field datatype="uint8_t" name="port" pos="0" />
-		<field datatype="uint8_t" name="feature" pos="1" />
-		<field datatype="uint8_t" name="gruppe" pos="2" />
-		Ein zentralheizungspumpe-Device wird zum Schalten 
-		der Zentralheizungspumpe u"ber Powerport verwendet.
-	</block>
-
 	<block type="22" name="tastdimmer" size="11">
 		<field datatype="uint8_t" name="port" pos="0" />
 		<field datatype="uint8_t" name="feedback_guppe" pos="1" />
@@ -264,6 +243,33 @@
 		werden.
 	</block>
 
+	<block type="23" name="multitaster" size="13">
+		<field datatype="uint8_t" name="poti_gruppe" pos="0" />
+		<field datatype="uint8_t" name="taster_port" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="2" />
+		<field datatype="uint8_t" name="gruppe0" pos="3" />
+		<field datatype="uint8_t" name="gruppe1" pos="4" />
+		<field datatype="uint8_t" name="gruppe2" pos="5" />
+		<field datatype="uint8_t" name="gruppe3" pos="6" />
+		<field datatype="uint8_t" name="gruppe4" pos="7" />
+		<field datatype="uint8_t" name="gruppe5" pos="8" />
+		<field datatype="uint8_t" name="gruppe6" pos="9" />
+		<field datatype="uint8_t" name="gruppe7" pos="10" />
+		<field datatype="uint8_t" name="gruppe8" pos="11" />
+		<field datatype="uint8_t" name="gruppe9" pos="12" />
+		Der Multitaster sendet, wenn der Taster (taster_port) 
+		gedr"uckt werden, je nach Stellung der Potis
+		(welches in der poti_gruppe definiert ist)
+		mit einer seiner Gruppen (gruppe0 .. gruppe9). Die Skaleneinteilung
+		ergibt sich aus den konfigurierten Gruppen (d.h. gruppen, die != 255
+		sind).
+		Feature Bits (Aktivierung durch Setzen):
+		Bit 0: 	Anstelle der normalen Entprellzeit von 30msec wird
+			eine Entprellzeit von einer Sekunde verwendet.
+		Bit 1: 	Konfiguration als Rollladentaster auf.
+		Bit 2: 	Konfiguration als Rollladentaster ab.
+	</block>
+
 	<block type="24" name="rolladenSchlitzpos" size="3">
 		<field datatype="uint8_t" name="reed0" pos="0" />
 		<field datatype="uint8_t" name="reed1" pos="1" />
@@ -274,6 +280,18 @@
 		- zwei Einzelfensterreedkontakte einem Rolladen zugeordnet sind.
 	</block>
 
+	<block type="25" name="schalter" size="3">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="gruppe" pos="2" />
+		Ein Schalter-Device kann z.Z. zum Schalten von
+		Powerports (Lampen,Steckdosen) verwendet werden.
+		Ist Bit 0 des feature Bytes gesetzt, so wird der am
+		port gelesene Zustand invertiert.
+		Ist Bit 1 des feature Bytes gesetzt, so ist der internen Pullup
+		am port deaktiviert.
+	</block>
+	
 	<block type="26" name="helligkeitssensor" size="4">
 		<field datatype="uint8_t" name="port" pos="0" />
 		<field datatype="uint8_t" name="gruppe" pos="1" />
@@ -305,6 +323,14 @@
 		rolladen_soll_position =  40 (Rollladen Sonnenschutzposition)
 	</block>
 
+	<block type="28" name="zentralheizungspumpe" size="3">
+		<field datatype="uint8_t" name="port" pos="0" />
+		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="gruppe" pos="2" />
+		Ein zentralheizungspumpe-Device wird zum Schalten 
+		der Zentralheizungspumpe u"ber Powerport verwendet.
+	</block>
+	
 	<block type="29" name="powerportAutomat" size="8">
 		<field datatype="uint8_t" name="powerport_gruppe" pos="0" />
 		<field datatype="uint8_t" name="steller_gruppe" pos="1" />	
@@ -315,33 +341,6 @@
 		<field datatype="uint8_t" name="helligkeitswertueberschreitung" pos="7" />
 		Helligkeitswertueberschreitung=1: Reaktion auf U"berschreitung der helligkeitsschwelle
 		Helligkeitswertueberschreitung=0: Reaktion auf Unterschreitung der helligkeitsschwelle
-	</block>
-
-	<block type="23" name="multitaster" size="13">
-		<field datatype="uint8_t" name="poti_gruppe" pos="0" />
-		<field datatype="uint8_t" name="taster_port" pos="1" />
-		<field datatype="uint8_t" name="feature" pos="2" />
-		<field datatype="uint8_t" name="gruppe0" pos="3" />
-		<field datatype="uint8_t" name="gruppe1" pos="4" />
-		<field datatype="uint8_t" name="gruppe2" pos="5" />
-		<field datatype="uint8_t" name="gruppe3" pos="6" />
-		<field datatype="uint8_t" name="gruppe4" pos="7" />
-		<field datatype="uint8_t" name="gruppe5" pos="8" />
-		<field datatype="uint8_t" name="gruppe6" pos="9" />
-		<field datatype="uint8_t" name="gruppe7" pos="10" />
-		<field datatype="uint8_t" name="gruppe8" pos="11" />
-		<field datatype="uint8_t" name="gruppe9" pos="12" />
-		Der Multitaster sendet, wenn der Taster (taster_port) 
-		gedr"uckt werden, je nach Stellung der Potis
-		(welches in der poti_gruppe definiert ist)
-		mit einer seiner Gruppen (gruppe0 .. gruppe9). Die Skaleneinteilung
-		ergibt sich aus den konfigurierten Gruppen (d.h. gruppen, die != 255
-		sind).
-		Feature Bits (Aktivierung durch Setzen):
-		Bit 0: 	Anstelle der normalen Entprellzeit von 30msec wird
-			eine Entprellzeit von einer Sekunde verwendet.
-		Bit 1: 	Konfiguration als Rollladentaster auf.
-		Bit 2: 	Konfiguration als Rollladentaster ab.
 	</block>
 
 	<block type="30" name="rolladen_id_assignment" size="20">
@@ -503,6 +502,18 @@
 		<field datatype="uint8_t" name="in0" pos="0" />
 		<field datatype="uint8_t" name="out0" pos="1" />
 		<field datatype="uint8_t" name="process_order" pos="2" />
+	</block>
+
+	<block type="38" name="analogComparator" size="3">
+		<field datatype="uint8_t" name="aktivierenGruppe" pos="0" />
+		<field datatype="uint8_t" name="abschaltGruppe" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="2" />
+        Aktiviert wird der Vergleich durch eine A"nderung auf  
+        POWER_GROUP_ON des aktivierenGruppe -Powerport. 
+        Wird nach Aktivierung (+) > (-), erh"alt der
+        abschaltGruppe -Powerport ein POWER_GROUP_OFF.
+        Der positive Comparator-Eingang ist AIN0 (+).
+        Der negative Comparator-Eingang ist AIN1 (-).
 	</block>
 
 	<block type="50" name="ports" size="5">

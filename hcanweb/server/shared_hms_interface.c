@@ -185,9 +185,10 @@ void executeCmd (const char * page, uint8_t id, const char * cmd)
 	else if (is (page, "rolladen"))
 	{
 		uint8_t pos = atoi (cmd);
-		if (pos < 0 || pos > 100) return; // Fehler!
-
-		executeCmd_specific (id, HCAN_HES_ROLLADEN_POSITION_SET, pos, d);
+		if ((pos >= 0 && pos <= 100) || (pos >= 200 && pos <= 202) )
+		{
+			executeCmd_specific (id, HCAN_HES_ROLLADEN_POSITION_SET, pos, d);
+		}
 	}
 	else if (is (page, "reedkontakt") || is (page, "tempsensor"))
 	{}	//("sprich");

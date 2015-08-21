@@ -25,8 +25,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-in_addr_t hcand_ip = inet_addr("192.168.1.24"); // HI-Server
-//in_addr_t hcand_ip = inet_addr("127.0.0.1");
+in_addr_t hcand_ip = inet_addr("127.0.0.1"); // localhost
 
 uint16_t queryState_specific (uint8_t query, uint8_t id)
 {

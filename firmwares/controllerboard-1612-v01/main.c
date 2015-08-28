@@ -39,6 +39,9 @@ void hauselektrik_callback(const canix_frame *frame)
 		{
 			switch (*p)
 			{
+				case EDS_analogComparator_BLOCK_ID:
+					analogComparator_can_callback ( (device_data_analogComparator*) p, frame);
+					break;
 				case EDS_powerportAutomat_BLOCK_ID:
 					powerportAutomat_can_callback ( (device_data_powerportAutomat*) p, frame);
 					break;

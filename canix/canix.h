@@ -294,6 +294,8 @@ void canix_sleep_100th(uint8_t n);
 uint8_t canix_rxq_size(void);
 uint8_t canix_rxq_fetch_one(void);
 
+void sendHESMessage(uint8_t n, ...);
+
 typedef struct 
 {
 	uint8_t used;

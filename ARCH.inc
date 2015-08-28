@@ -28,7 +28,7 @@ export ARCH = i386
 export MCU = atmega644
 ######################
 
-# Choose HI-Interface-Server-IP for load firmware (eg. 192.168.1.24)
+# Choose HI-Interface-Server-IP for load firmware (eg. 192.168.1.78)
 ###########################
-export IP_HI = 192.168.1.24
+export IP_HI = 192.168.1.78
 ###########################

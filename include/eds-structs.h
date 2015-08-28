@@ -278,30 +278,6 @@ typedef struct {
 typedef struct {
     uint8_t           port;
 
-    uint8_t           feature;
-
-    uint8_t           gruppe;
-
-
-} eds_schalter_block_t;
-
-#define EDS_schalter_BLOCK_ID 25
-
-typedef struct {
-    uint8_t           port;
-
-    uint8_t           feature;
-
-    uint8_t           gruppe;
-
-
-} eds_zentralheizungspumpe_block_t;
-
-#define EDS_zentralheizungspumpe_BLOCK_ID 28
-
-typedef struct {
-    uint8_t           port;
-
     uint8_t           feedback_guppe;
 
     uint8_t           feature;
@@ -328,6 +304,38 @@ typedef struct {
 #define EDS_tastdimmer_BLOCK_ID 22
 
 typedef struct {
+    uint8_t           poti_gruppe;
+
+    uint8_t           taster_port;
+
+    uint8_t           feature;
+
+    uint8_t           gruppe0;
+
+    uint8_t           gruppe1;
+
+    uint8_t           gruppe2;
+
+    uint8_t           gruppe3;
+
+    uint8_t           gruppe4;
+
+    uint8_t           gruppe5;
+
+    uint8_t           gruppe6;
+
+    uint8_t           gruppe7;
+
+    uint8_t           gruppe8;
+
+    uint8_t           gruppe9;
+
+
+} eds_multitaster_block_t;
+
+#define EDS_multitaster_BLOCK_ID 23
+
+typedef struct {
     uint8_t           reed0;
 
     uint8_t           reed1;
@@ -338,6 +346,18 @@ typedef struct {
 } eds_rolladenSchlitzpos_block_t;
 
 #define EDS_rolladenSchlitzpos_BLOCK_ID 24
+
+typedef struct {
+    uint8_t           port;
+
+    uint8_t           feature;
+
+    uint8_t           gruppe;
+
+
+} eds_schalter_block_t;
+
+#define EDS_schalter_BLOCK_ID 25
 
 typedef struct {
     uint8_t           port;
@@ -378,6 +398,18 @@ typedef struct {
 #define EDS_rolladenAutomat_BLOCK_ID 27
 
 typedef struct {
+    uint8_t           port;
+
+    uint8_t           feature;
+
+    uint8_t           gruppe;
+
+
+} eds_zentralheizungspumpe_block_t;
+
+#define EDS_zentralheizungspumpe_BLOCK_ID 28
+
+typedef struct {
     uint8_t           powerport_gruppe;
 
     uint8_t           steller_gruppe;
@@ -396,38 +428,6 @@ typedef struct {
 } eds_powerportAutomat_block_t;
 
 #define EDS_powerportAutomat_BLOCK_ID 29
-
-typedef struct {
-    uint8_t           poti_gruppe;
-
-    uint8_t           taster_port;
-
-    uint8_t           feature;
-
-    uint8_t           gruppe0;
-
-    uint8_t           gruppe1;
-
-    uint8_t           gruppe2;
-
-    uint8_t           gruppe3;
-
-    uint8_t           gruppe4;
-
-    uint8_t           gruppe5;
-
-    uint8_t           gruppe6;
-
-    uint8_t           gruppe7;
-
-    uint8_t           gruppe8;
-
-    uint8_t           gruppe9;
-
-
-} eds_multitaster_block_t;
-
-#define EDS_multitaster_BLOCK_ID 23
 
 typedef struct {
     uint8_t           roll_id_0;
@@ -710,6 +710,18 @@ typedef struct {
 } eds_flappingfilter_agent_block_t;
 
 #define EDS_flappingfilter_agent_BLOCK_ID 37
+
+typedef struct {
+    uint8_t           aktivierenGruppe;
+
+    uint8_t           abschaltGruppe;
+
+    uint8_t           feature;
+
+
+} eds_analogComparator_block_t;
+
+#define EDS_analogComparator_BLOCK_ID 38
 
 typedef struct {
     uint8_t           base;

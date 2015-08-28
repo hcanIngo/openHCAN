@@ -3,6 +3,7 @@
 
 #include <canix/eds.h>
 
+#include "analogComparator.h"
 #include "dcf77-receiver.h"
 #include "dunstabzugport.h"
 #include "heizung.h"

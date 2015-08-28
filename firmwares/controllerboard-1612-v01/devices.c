@@ -80,6 +80,10 @@ void devices_load_config(void)
 				config_size = sizeof (eds_poti_block_t);
 				data_size = sizeof (device_data_poti);
 				break;
+			case EDS_analogComparator_BLOCK_ID:
+				config_size = sizeof (eds_analogComparator_block_t);
+				data_size = sizeof (device_data_analogComparator);
+				break;
 			case EDS_multitaster_BLOCK_ID:
 				config_size = sizeof (eds_multitaster_block_t);
 				data_size = sizeof (device_data_multitaster);
@@ -216,8 +220,11 @@ void devices_load_config(void)
 
 		switch (EDS_BLOCK_TYPE(it))
 		{
-			case EDS_dcf77_receiver_BLOCK_ID: 
-				dcf77_receiver_init( (device_data_dcf77_receiver*) p, it); 
+			case EDS_analogComparator_BLOCK_ID:
+				analogComparator_init( (device_data_analogComparator*) p, it);
+				break;
+			case EDS_dcf77_receiver_BLOCK_ID:
+				dcf77_receiver_init( (device_data_dcf77_receiver*) p, it);
 				break;
 			case EDS_dunstabzugport_BLOCK_ID: 
 				dunstabzugport_init( (device_data_dunstabzugport*) p, it); 

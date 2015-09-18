@@ -51,6 +51,7 @@ void rolladenAutomat_init(device_data_rolladenAutomat *p, eds_block_p it)
 	/* Wir gehen davon aus, das die Automatik aktiviert ist. Ist ein Schalter konfiguriert,  
 	 * so wird er auch seinen Zustand melden, wenn irgendein C1612-Board einen Reboot durchfuehrt. */
 	p->automatikEin = true;
+	sendHESMessage (1, HCAN_HES_SCHALTER_STATE_QUERY); // besser nachfragen
 
 	p->SchwellwertErkanntSecsCnt = 0; // Neustart
 	p->SchwellwertErkannt = HELLIGKEIT_IM_TOLERANZBEREICH;

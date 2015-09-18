@@ -42,7 +42,7 @@
  *  Der negative Comparator-Eingang ist AIN1. */
 
 static inline void sendMessage(uint8_t active, uint8_t anCompPowerport);
-static uint8_t abschaltGruppe;
+static volatile uint8_t abschaltGruppe;
 
 /** analogComparator_init wird fuer den konfigurierten analogComparator einmal aufgerufen. */
 void analogComparator_init(device_data_analogComparator *p, eds_block_p it)

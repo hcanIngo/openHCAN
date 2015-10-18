@@ -1,4 +1,4 @@
-OpenHab für openHCAN verwenden: 
+openHAB für openHCAN verwenden: 
 -------------------------------
 
 1. Den C1612-Server aufsetzen.
@@ -11,7 +11,7 @@ OpenHab für openHCAN verwenden:
 
 
 3. Falls die Openhab-Installation auf einen Bananapi erfolgen soll, dann 
-   den Bananapi entsprechend howTo_Bananapi_Einrichtung.txt einrichten.  
+   den Bananapi entsprechend Vorbereitung_Bananapi.txt einrichten.  
 
 
 4. Im Makefile folgende Einstellungen vornehmen: 

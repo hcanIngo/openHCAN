@@ -67,3 +67,12 @@ ARCH.inc
 *.log
 *.sql
 *.sqlite
+
+# Templates for openHAB #
+#########################
+installation.xml
+myconf.inc
+openhab.cfg
+staticPart.items
+staticPart.rules
+staticPart.sitemap

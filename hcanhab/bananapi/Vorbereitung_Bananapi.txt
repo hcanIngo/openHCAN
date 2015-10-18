@@ -14,10 +14,6 @@ default passwd root/pi
 passwd root -> **
 adduser tt
 ---
-02:0B:05:00:FB:C4 -> 192.168.1.29 -> bananapi
-02:93:06:C0:E1:7A -> 192.168.1.78 -> bananapi  (can4linux-Test)
-Immer nur einen aktiv im Heimnetz nutzen (gleicher Domainname: bananapi)!
----
 ssh root@bananapi
 ##################
 ssh tt@bananapi

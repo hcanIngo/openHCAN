@@ -1,0 +1,10 @@
+// Statische Itemanteile:
+
+Group:Switch:OR(ON, OFF) 	Lampen 		"Aktive Lampen [(%d)]"					(Alle)
+Group:Switch:OR(ON, OFF) 	Sonstige	"Aktive Sonstige [(%d)]"				(Alle)
+Group:Number:AVG 			Temperaturen	"Ø-Raumtemperatur [%.1f °C]" 	<temperature>	(Alle)
+Group:Contact:OR(OPEN, CLOSED) 		Fenster 	"Geöffnete Fenster [(%d)]"		<contact>		(Alle)
+Group:Number		 		Rolladen	"Rolläden [(%d)]" 			<rollershutter>	(Alle)
+Group:Number		 		Heizungen 	"Heizvorgabetemperatur [(%d)]"		<heating>		(Alle)
+
+DateTime 	Date	{ntp="Europe/Berlin:de_DE"}

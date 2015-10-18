@@ -1,0 +1,26 @@
+OpenHab für openHCAN verwenden: 
+-------------------------------
+
+1. Den C1612-Server aufsetzen.
+
+
+2. conf-Ordner in Verzeichnis xy legen und mindestens folgende Dateien anpassen:
+	- Openhab-Installationsdateien besorgen (http://www.openhab.org/getting-started/downloads.html)
+	- myconf.inc 
+	- installation.xml (nach vorgegebenen Schema anpassen)
+
+
+3. Falls die Openhab-Installation auf einen Bananapi erfolgen soll, dann 
+   den Bananapi entsprechend howTo_Bananapi_Einrichtung.txt einrichten.  
+
+
+4. Im Makefile folgende Einstellungen vornehmen: 
+	A) STATIC_CONFS = xy/conf  einstellen. 
+	   Bsp.-/Vorlagedateien siehe conf_templates. Diese werden bei "make installHabHcan" ueberschrieben!
+	B) ZIEL_PC = localhost   oder   ZIEL_PC = bananian  waehlen
+	C) make all
+
+
+5. Openhab starten (per Makefile ausführen):
+	- make start     (mit log-Datei: make start > ~/tmp/openhabMeldungen.txt)
+	- make run_webclient / app verwenden

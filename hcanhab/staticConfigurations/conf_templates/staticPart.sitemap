@@ -1,0 +1,13 @@
+// Statische Sitemapanteile:
+
+Frame {
+	Text label="Zusammenfassung" icon="pie" {
+		Switch item=Lampen mappings=[OFF="All Off"]
+		Switch item=Sonstige icon="socket" mappings=[OFF="All Off"]
+		Text item=Temperaturen
+		Group item=Fenster
+		Group item=Rolladen
+		Group item=Heizungen
+	}
+	Text item=Date label="Datum [%1$tA, %1$td.%1$tm.%1$tY]" icon="calendar"
+}

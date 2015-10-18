@@ -8,4 +8,4 @@ Verzeichnis-Info:
 
 "fix":  
 	Notwendige nicht generierte Dateien, die für die 
-    Openhabinstallation notwendig sind, aber keiner Anpassung bedürfen.
+    OpenHAB-Installation notwendig sind, aber keiner Anpassung bedürfen.

@@ -38,7 +38,7 @@ sudo reboot (shutdown -r now)
 ---
 logout
 ---
-apt-get install (Paketmanager)
+sudo apt-get install unzip (Paketmanager)
 ---
 make all
 make openhab_start_withScreen

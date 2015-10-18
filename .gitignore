@@ -76,3 +76,5 @@ openhab.cfg
 staticPart.items
 staticPart.rules
 staticPart.sitemap
+conf_templates/
+generated/

@@ -3,7 +3,7 @@ generateHabHcan:
 
 cleanHabHcan:
 	rm -f ../generated/*
-	
+
 HabHcan.sitemap: mk_HabHcan_sitemap.xsl $(HCAN_INSTALLATION)
 	xalan -in $(HCAN_INSTALLATION) -xsl mk_HabHcan_sitemap.xsl > ../generated/HabHcanDyn.sitemap
 	cat ../generated/HabHcanDyn.sitemap ../staticConfigurations/conf_templates/staticPart.sitemap > ../generated/hcan_cat.sitemap

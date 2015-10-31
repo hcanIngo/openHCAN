@@ -41,7 +41,7 @@ myopenhab:
 	@$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) less /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/webapps/static/uuid
 	@echo "\nsecret (notieren und mit q beenden):" 
 	@$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) less /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/webapps/static/secret
-	@ Hintergrund:  Inhalt von   webapps/static/uuid  und webapps/static/secret"
+	@echo "Hintergrund:  Inhalt von   webapps/static/uuid  und webapps/static/secret"
 	@echo "\n\n   @ https://my.openhab.org/ @ Account  beides eingetragen! "
 	@echo "\n Die beiden Dateien werden erst nach sh ./myOpenHabInstallation/start.sh -Aufruf angelegt (ssh bananapi@tt).\n\n"  
 	

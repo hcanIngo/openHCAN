@@ -10,9 +10,13 @@ export PT = 'spitzenPasswort'
 # - org.openhab.io.myopenhab-$(OPENHABVERSION).jar
 # - jdk-8u33-linux-arm-vfp-hflt.tar.gz 
 ##############################################################################
-export OPENHABDOWNLOADS = /home/...
+export OPENHABDOWNLOADS_DIR = /home/.../openhab_downloads
 ##############################################################################
 
+# Pfad zu hcanhab:
+##############################################################################
+export HCANHAB_DIR = /home/.../openHCAN/hcanhab
+##############################################################################
 
 # IP-Adresse C1612-Server:
 ##############################################################################

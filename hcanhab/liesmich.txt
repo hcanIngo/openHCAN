@@ -11,17 +11,19 @@ openHAB für openHCAN verwenden:
 
 
 3. Falls die Openhab-Installation auf einen Bananapi erfolgen soll, dann 
-   den Bananapi entsprechend bananapi/Vorbereitung_Bananapi.txt einrichten.  
+   den Bananapi entsprechend bananapi/Bananian_150x/Vorbereitung_Bananapi.txt einrichten.  
 
 
-4. Im Makefile folgende Einstellungen vornehmen: 
+4. Im MakefileDefines.inc folgende Einstellungen vornehmen: 
 	A) STATIC_CONFS = xy/conf  einstellen. 
 	   Bsp.-/Vorlagedateien siehe conf_templates. Diese werden bei "make installHabHcan" ueberschrieben!
 	B) ZIEL_PC = localhost   oder   ZIEL_PC = bananian  waehlen
 	C) Fuer localhost den ZIEL_USER anpassen
-	D) make all
+
+5. Makefile
+	- make all
 
 
-5. Openhab starten (per Makefile ausführen):
+6. Openhab starten (per Makefile ausführen):
 	- make start     (mit log-Datei: make start > ~/tmp/openhabMeldungen.txt)
 	- make run_webclient / app verwenden

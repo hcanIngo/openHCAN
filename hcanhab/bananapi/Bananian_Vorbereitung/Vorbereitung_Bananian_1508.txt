@@ -1,0 +1,105 @@
+Bananian (bananian-1508.img)
+---
+https://www.bananian.org/download
+Default login: 	bananapi/pi -> **
+---
+SD-Card vorbereiten: 
+sudo /bin/bash   (die bash als root)
+sudo dd if=/home/il/Downloads/bananian-1508.img of=/dev/mmcblk0 bs=1M && sync
+---
+SD-Card sichern:
+sudo dd if=/dev/mmcblk0 of=/home/il/Downloads/MyBananian-1508.img && sync
+---
+
+default passwd root/pi
+passwd root -> **
+---
+ssh root@bananapi
+---
+adduser tt
+---
+bananian-config (passwd, timezone: drei DE-Formate angewaehlt, default utf-8, ...)
+---
+chsh -s /bin/bash
+apt-get purge zsh -y     // zsh deinstallieren
+---
+apt-get install sudo     // sudo installieren als User root!
+usermod -a -G sudo tt    // da "sudo" das Recht hat, sudo zu nutzen, tt der Gruppe sudo hinzufügen; als User root (su root -> su tt)!
+---
+sudo reboot (shutdown -r now)
+---
+ssh root@bananapi
+---
+bananian-update
+---
+apt-get install git
+sudo apt-get install subversion   (svn)
+apt-get update
+apt-get upgrade
+sudo reboot
+---
+ssh root@bananapi
+---
+apt-get install build-essential   (z.B. für make)
+apt-get install u-boot-tools
+apt-get install libusb-1.0-0 libusb-1.0-0-dev git wget fakeroot kernel-package zlib1g-dev libncurses5-dev
+git clone https://github.com/Bananian/linux-bananapi
+cd /lib/modules/3.4.108-bananian
+ln -s /root/linux-bananapi build
+
+
+
+cd ~/linux-bananapi
+make menuconfig (exit, ohne sichern wenn das Menü erscheint. Somit keine veränderte Kernelconfig.)
+zcat /proc/config.gz > /root/linux-bananapi/.config
+make uImage modules     (Kernel-Module uebersetzen)
+
+svn checkout https://svn.code.sf.net/p/can4linux/code/trunk can4linux-code
+cd /root/can4linux-code/can4linux/
+ln -s /lib/modules/3.4.108-bananian /lib/modules/3.4.108+
+make TARGET=BANANAPI
+
+mount /dev/mmcblk0p1 /mnt
+cd /mnt
+mv uImage uImage.old
+mv /root/linux-bananapi/arch/arm/boot/uImage /mnt
+reboot
+
+insmod can4linux.ko
+cp can4linux.ko /lib/modules/3.4.108+/kernel/net/can/
+depmod -A -v
+modprobe -v can4linux
+echo „“ » /etc/modules ; echo „can4linux“ » /etc/modules
+reboot
+
+TODO: existiert nicht: 
+find /proc/sys/dev
+
+---
+ssh tt@bananapi
+---
+logout
+---
+make all
+make openhab_start_withScreen
+make install_oracle_arm_jre
+make openhab_autostartService
+# ggf. make myopenhab
+---
+ssh tt@bananapi
+reboot
+---
+audio:
+
+sudo apt-get install alsa-utils
+sudo nano /etc/asound.conf
+
+sudo speaker-test -twav -c2
+sudo aplay -c 2 -f S16_LE -r 44100 /dev/urandom
+
+sudo apt-get install mplayer
+mplayer -playlist http://mp3-live.swr3.de/swr3_m.m3u
+sudo adduser tt audio
+
+sudo apt-get install espeak
+espeak "Hallo"

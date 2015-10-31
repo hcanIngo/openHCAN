@@ -1,62 +1,49 @@
-# bananapi
-include ../Makefile
+# bananapi (mit Bananian 1504 und 1508)
+include $(HCANHAB_DIR)/MakefileDefines.inc
 
-ZIEL_OS = Bananian_1504
-OPENHAB_SERVICE = openhab
+START_SYSTEM = Sysvinit
+#START_SYSTEM = Systemd
+
+include $(HCANHAB_DIR)/bananapi/$(START_SYSTEM)/Makefile
 
 all:
-	cd ../localhost/; make unzip_openhab_installation
-	cd ../localhost/; make mv to=$(SCP_ZIEL_DIR)
+	cd $(HCANHAB_DIR)/localhost/; make unzip_openhab_installation
+	cd $(HCANHAB_DIR)/localhost/; make mv to=/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
 	#
 	make openhab_start_withScreen
-	# make install_oracle_arm_jre
-	# make openhab_autostartService
+	make autostart
 	# ggf. make myopenhab
+	@#
+	cd $(HCANHAB_DIR); make generateHabHcan
+	cd $(HCANHAB_DIR); make installHabHcan
+	@#
+	make install_oracle_arm_jre
+	# make reboot
 
-
-install_oracle_arm_jre: 
-	cd $(OPENHABDOWNLOADS); tar xfvz $(OPENHABDOWNLOADS)/jdk-8u33-linux-arm-vfp-hflt.tar.gz
+install_oracle_arm_jre:
+	@#cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u33-linux-arm-vfp-hflt.tar.gz
+	cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u65-linux-arm32-vfp-hflt.tar.gz
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/jdk1.8.0
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/myOpenHabInstallation
-	$(_SCP) $(OPENHABDOWNLOADS)/jdk1.8.0_33/* $(SCP_ZIEL_DIR)/../jdk1.8.0
+	@#$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_33/* $(SCP_ZIEL_DIR)/../jdk1.8.0
+	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_65/* $(SCP_ZIEL_DIR)/../jdk1.8.0
 	# Falls noetig, auf Bananapi: sudo chmod 755 /home/tt/jdk1.8.0/*
 
 openhab_start_withScreen:
 	@# Damit wird das richtige JDK verwendet und die Ausgaben von Screen gemanaged werden: 
 	@# screen -S 'OpenHAB Server' -dm /home/bananapi/jdk1.8.0/bin/java  in der start.sh (./Bananian_1504/start.sh) voranstellen
-	$(_SCP) ./$(ZIEL_OS)/start.sh $(SCP_ZIEL_DIR)/start.sh
-	$(_SCP) ./$(ZIEL_OS)/start_debug.sh $(SCP_ZIEL_DIR)/start_debug.sh
+	$(_SCP) $(HCANHAB_DIR)/bananapi/start.sh $(SCP_ZIEL_DIR)/start.sh
+	$(_SCP) $(HCANHAB_DIR)/bananapi/start_debug.sh $(SCP_ZIEL_DIR)/start_debug.sh
 
 myopenhab:
-	$(_SCP) $(OPENHABDOWNLOADS)/org.openhab.io.myopenhab-1.7.0.jar $(SCP_ZIEL_DIR)/addons/org.openhab.io.myopenhab.jar
-	@echo "\nuuid:" 
+	$(_SCP) $(OPENHABDOWNLOADS_DIR)/org.openhab.io.myopenhab-1.7.0.jar $(SCP_ZIEL_DIR)/addons/org.openhab.io.myopenhab.jar
+	@echo "\nuuid: (notieren und mit q beenden)" 
 	@$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) less /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/webapps/static/uuid
-	@echo "\nsecret:" 
+	@echo "\nsecret (notieren und mit q beenden):" 
 	@$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) less /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/webapps/static/secret
-	@echo "\n\n   @ https://my.openhab.org/  wird der Inhalt von  webapps/static/uuid  und webapps/static/secret    eingetragen! "
+	@ Hintergrund:  Inhalt von   webapps/static/uuid  und webapps/static/secret"
+	@echo "\n\n   @ https://my.openhab.org/ @ Account  beides eingetragen! "
 	@echo "\n Die beiden Dateien werden erst nach sh ./myOpenHabInstallation/start.sh -Aufruf angelegt (ssh bananapi@tt).\n\n"  
-
-openhab_autostartService:
-	$(_SCP) ./$(ZIEL_OS)/$(OPENHAB_SERVICE) $(SCP_ZIEL_DIR)/../$(OPENHAB_SERVICE)
-	#
-	make stop
-	#
-	# Auf dem Bananapi verschieben
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo mv ./$(OPENHAB_SERVICE) /etc/init.d/$(OPENHAB_SERVICE)
-	#
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo chmod a+x /etc/init.d/$(OPENHAB_SERVICE)
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo update-rc.d $(OPENHAB_SERVICE) defaults
 	
-########################	
 reboot:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo reboot
-
-start: 
-	make stop
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo /etc/init.d/$(OPENHAB_SERVICE) start
-
-stop: 
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo /etc/init.d/$(OPENHAB_SERVICE) stop
-
-state:
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo /etc/init.d/$(OPENHAB_SERVICE) status

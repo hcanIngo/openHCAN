@@ -1,47 +1,12 @@
-CONF = /home/il/Dropbox/HCAN/HI_SERVER/openhab_conf
-include $(CONF)/myconf.inc
+# main
+include ./MakefileDefines.inc
 
-#ZIEL_PC = localhost
-ZIEL_PC = bananapi
-
-ifeq ($(ZIEL_PC),localhost)
-	ZIEL_USER = il
-else ifeq  ($(ZIEL_PC),bananapi)
-	ZIEL_USER = tt
-endif
-
-ZIEL_ORDNER = myOpenHabInstallation
-OPENHABVERSION = 1.7.1
-SCP_ZIEL_DIR = $(ZIEL_USER)@$(ZIEL_PC):/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
-HCAN_INSTALLATION = installation.xml
+include $(HCANHAB_DIR)/$(ZIEL_PC)/Makefile
 
 # epiphany-browser, firefox, chromium-browser
 BROWSER = firefox
 URL = http://$(ZIEL_PC):8080/openhab.app?sitemap=hcan
 REMOTE_URL = https://my.openhab.org/openhab.app?sitemap=hcan
-
-
-all: 	
-	cd $(ZIEL_PC); make all	
-	make generateHabHcan
-	make installHabHcan
-
-########################
-_SSH = sshpass -p $(PT) ssh -t
-_SCP = sshpass -p $(PT) scp -r
-SCP_ZIEL_DIR = $(ZIEL_USER)@$(ZIEL_PC):/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
-########################	
-reboot:
-	cd $(ZIEL_PC); make reboot
-
-start: 
-	cd $(ZIEL_PC); make start
-
-stop: 
-	cd $(ZIEL_PC); make stop
-
-state:
-	cd $(ZIEL_PC); make state
 
 run_webclient: 
 	$(BROWSER) $(URL)

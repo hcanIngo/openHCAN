@@ -1,4 +1,5 @@
 #! /bin/sh
+########## Sysvinit ###########
 ### BEGIN INIT INFO
 # Provides:          openhab
 # Required-Start:    $remote_fs $syslog

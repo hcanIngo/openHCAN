@@ -34,7 +34,7 @@ sudo reboot (shutdown -r now)
 ---
 logout
 ---
-sudo apt-get install unzip (Paketmanager)
+sudo apt-get install irgendetwas (Paketmanager)
 ---
 make all
 make openhab_start_withScreen

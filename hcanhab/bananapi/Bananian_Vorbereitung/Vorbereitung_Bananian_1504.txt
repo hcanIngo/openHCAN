@@ -48,7 +48,7 @@ reboot
 audio:
 
 sudo apt-get install alsa-utils
-sudo nano /etc/asound.conf
+sudo nano /etc/asound.conf   // auf Headphone = 0 stellen
 
 sudo speaker-test -twav -c2
 sudo aplay -c 2 -f S16_LE -r 44100 /dev/urandom

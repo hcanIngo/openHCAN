@@ -22,6 +22,7 @@ generateHabHcan:
 	cd xsl; make generateHabHcan HCAN_INSTALLATION=$(CONF)/$(HCAN_INSTALLATION)
 	
 installHabHcan:	
+	make generateHabHcan
 	# persoenliche conf holen:
 	$(_SCP) $(CONF)/* ./staticConfigurations/conf_templates/
 	@# 

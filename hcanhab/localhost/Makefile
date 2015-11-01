@@ -5,7 +5,6 @@ all:
 	make unzip_openhab_installation
 	make mv to=/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
 	@#
-	cd $(HCANHAB_DIR); make generateHabHcan
 	cd $(HCANHAB_DIR); make installHabHcan
 
 unzip_openhab_installation:

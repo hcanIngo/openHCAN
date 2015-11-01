@@ -11,7 +11,7 @@ openHAB für openHCAN verwenden:
 
 
 3. Falls die Openhab-Installation auf einen Bananapi erfolgen soll, dann 
-   den Bananapi entsprechend bananapi/Bananian_150x/Vorbereitung_Bananapi.txt einrichten.  
+   den Bananapi entsprechend bananapi/Bananian_Vorbereitung/Vorbereitung_Bananapi_150x.txt einrichten.  
 
 
 4. Im MakefileDefines.inc folgende Einstellungen vornehmen: 

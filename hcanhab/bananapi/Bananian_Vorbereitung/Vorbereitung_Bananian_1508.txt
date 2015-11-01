@@ -83,7 +83,7 @@ logout
 make all
 make openhab_start_withScreen
 make install_oracle_arm_jre
-make openhab_autostartService
+make autostart
 # ggf. make myopenhab
 ---
 ssh tt@bananapi
@@ -92,7 +92,7 @@ reboot
 audio:
 
 sudo apt-get install alsa-utils
-sudo nano /etc/asound.conf
+sudo nano /etc/asound.conf   // auf Headphone = 0 stellen
 
 sudo speaker-test -twav -c2
 sudo aplay -c 2 -f S16_LE -r 44100 /dev/urandom
@@ -100,6 +100,7 @@ sudo aplay -c 2 -f S16_LE -r 44100 /dev/urandom
 sudo apt-get install mplayer
 mplayer -playlist http://mp3-live.swr3.de/swr3_m.m3u
 sudo adduser tt audio
+sudo reboot
 
 sudo apt-get install espeak
 espeak "Hallo"

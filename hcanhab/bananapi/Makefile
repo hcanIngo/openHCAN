@@ -14,7 +14,6 @@ all:
 	make autostart
 	# ggf. make myopenhab
 	@#
-	cd $(HCANHAB_DIR); make generateHabHcan
 	cd $(HCANHAB_DIR); make installHabHcan
 	@#
 	make install_oracle_arm_jre

@@ -3,12 +3,22 @@ Bananian (bananian-1508.img)
 https://www.bananian.org/download
 Default login: 	bananapi/pi -> **
 ---
-SD-Card vorbereiten: 
+auf SD-Card schreiben: 
 sudo /bin/bash   (die bash als root)
 sudo dd if=/home/il/Downloads/bananian-1508.img of=/dev/mmcblk0 bs=1M && sync
+-
+cat /media/60GB_usb20/MyBananian-1504.img.gz | gzip -dc | sudo dd of=/dev/mmcblk0 bs=1M && sync
+-
+Mehrfachdateien auf SD-Karte bringen: 
+cat /media/60GB_usb20/MyBananian-1504.img.gz* | gzip -dc | sudo dd of=/dev/mmcblk0 bs=1M && sync
 ---
-SD-Card sichern:
+Daten von der SD-Card sichern:
 sudo dd if=/dev/mmcblk0 of=/home/il/Downloads/MyBananian-1508.img && sync
+-
+sudo dd if=/dev/mmcblk0 | gzip -c > /media/60GB_usb20/MyBananian-1504.img.gz && sync
+-
+Maximale FAT32-Dateigroesse betraegt 4 GB. Daher: 
+sudo dd if=/dev/mmcblk0 | gzip -c | split -b 2000m - /media/60GB_usb20/MyBananian-1504.img.gz && sync
 ---
 
 default passwd root/pi
@@ -71,9 +81,6 @@ depmod -A -v
 modprobe -v can4linux
 echo „“ » /etc/modules ; echo „can4linux“ » /etc/modules
 reboot
-
-TODO: existiert nicht: 
-find /proc/sys/dev
 
 ---
 ssh tt@bananapi

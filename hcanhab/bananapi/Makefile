@@ -1,4 +1,4 @@
-# bananapi (mit Bananian 1504 und 1508)
+# bananapi (mit Bananian 1504)
 include $(HCANHAB_DIR)/MakefileDefines.inc
 
 START_SYSTEM = Sysvinit
@@ -12,12 +12,12 @@ all:
 	#
 	make openhab_start_withScreen
 	make autostart
-	# ggf. make myopenhab
 	@#
 	cd $(HCANHAB_DIR); make installHabHcan
 	@#
 	make install_oracle_arm_jre
 	# make reboot
+	# make myopenhab
 
 install_oracle_arm_jre:
 	@#cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u33-linux-arm-vfp-hflt.tar.gz

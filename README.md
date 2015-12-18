@@ -14,3 +14,5 @@ Motivation
 HCAN wurde aus der Motivation heraus entwickelt, eine freie (im Gegensatz zu einer proprietaeren) Hausautomatisierung zu realisieren. Primaer entwickle ich HCAN fuer unser Haus; dem OpenSource Gedanken folgendend ist es unter der GNU Public License veroeffentlicht.
 
 https://github.com/hcanIngo/openHCAN/wiki
+
+https://github.com/hcanIngo/openHCAN/wiki/Inhalt

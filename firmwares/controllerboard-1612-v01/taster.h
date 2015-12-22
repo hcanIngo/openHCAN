@@ -5,9 +5,11 @@
 #include <inttypes.h>
 #include <eds-structs.h>
 
-#define FEATURE_TASTER_ENTPRELL_1S  0 // Bit0 (das LSB)
-#define FEATURE_TASTER_ROLLADEN_AUF 1 // Bit1
-#define FEATURE_TASTER_ROLLADEN_ZU  2 // Bit2
+#define FEATURE_TASTER_ENTPRELL_1S   0 // Bit0 (das LSB)
+#define FEATURE_TASTER_ROLLADEN_AUF  1 // Bit1
+#define FEATURE_TASTER_ROLLADEN_ZU   2 // Bit2
+#define FEATURE_TASTER_POWERPORT_AN  3 // Bit3
+#define FEATURE_TASTER_POWERPORT_AUS 4 // Bit4
 
 typedef struct
 {

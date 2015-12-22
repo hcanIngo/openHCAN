@@ -12,6 +12,8 @@
 			eine Entprellzeit von einer Sekunde verwendet.
 		Bit 1: 	Konfiguration als Rollladentaster auf.
 		Bit 2: 	Konfiguration als Rollladentaster ab.
+		Bit 3: 	Flankenbetrieb: 1: Nur POWER_GROUP_ON Meldungen senden.
+		Bit 4: 	Flankenbetrieb: 2: Nur POWER_GROUP_OFF Meldungen senden.
 	</block>
 
 	<block type="11" name="powerport" size="6">

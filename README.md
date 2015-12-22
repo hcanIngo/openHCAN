@@ -1,6 +1,6 @@
-# openHCAN
+![logo_open](https://cloud.githubusercontent.com/assets/4243148/11915822/1885c376-a6b8-11e5-8410-8ad30d1e1734.png)
 
-HCAN ist eine Hausautomatisierungsloesung auf CAN-Bus Basis. Zielgruppe ist der versierte Anwender oder Enwickler.
+openHCAN ist eine Hausautomatisierungsloesung auf CAN-Bus Basis. Zielgruppe ist der versierte Anwender oder Enwickler.
 
 Die Hausautomatisierung besteht aus einer Reihe von Modulen, die ueber den CAN Bus miteinander kommunizieren. Die eigentliche Arbeit erledigen die Controller-Module: hier sind Relais zum Schalten von 230V-Lasten und Sensoren wie Taster, Reedkontakte, Temperatur-Sensoren etc angeschlossen.
 

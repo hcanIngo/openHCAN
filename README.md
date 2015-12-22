@@ -1,4 +1,4 @@
-![logo_open](https://cloud.githubusercontent.com/assets/4243148/11915822/1885c376-a6b8-11e5-8410-8ad30d1e1734.png)
+[![logo_open](https://cloud.githubusercontent.com/assets/4243148/11915822/1885c376-a6b8-11e5-8410-8ad30d1e1734.png)](https://github.com/hcanIngo/openHCAN/wiki)
 
 openHCAN ist eine Hausautomatisierungsloesung auf CAN-Bus Basis. Zielgruppe ist der versierte Anwender oder Entwickler.
 

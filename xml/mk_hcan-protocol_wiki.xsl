@@ -4,10 +4,9 @@
 	<xsl:output method="text" />
 
 	<xsl:template match="/hcan-protocols">
-======HCAN Protokoll Referenz======
+# HCAN Protokoll Referenz
 
-**ACHTUNG: Diese Datei wird automatisch generiert! Aenderungen gehen
-verloren!**
+**ACHTUNG: Diese Datei wird automatisch generiert! Aenderungen gehen verloren!**
 
 		<xsl:apply-templates select="protocol" />
 	</xsl:template>
@@ -17,7 +16,7 @@ verloren!**
 	</xsl:template>
 
 	<xsl:template match="service">
-======<xsl:value-of select="@name"/> - <xsl:value-of select="@description"/> (<xsl:value-of select="@id"/>)======
+# <xsl:value-of select="@name"/> - <xsl:value-of select="@description"/> (<xsl:value-of select="@id"/>)
 		<xsl:apply-templates select="message" />
 	</xsl:template>
 
@@ -29,10 +28,15 @@ verloren!**
 <xsl:value-of select="@details"/>
 </xsl:if>
 <xsl:if test="count(param) > 0">
-^Parameter^Beschreibung^<xsl:for-each select="*">
-|<xsl:value-of select="@name" />|<xsl:value-of select="@description" />|</xsl:for-each>
+<xsl:text>&#10;</xsl:text>
+Parameter|Beschreibung
+---------|------------
+<xsl:for-each select="*">
+  <xsl:value-of select="@name" />  |  <xsl:value-of select="@description" /><xsl:text>&#10;</xsl:text>
+</xsl:for-each>
 </xsl:if>
-\\ 
+<xsl:text>&#10;</xsl:text>
+
 </xsl:template>
 
 </xsl:stylesheet>

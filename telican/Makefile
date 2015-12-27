@@ -38,7 +38,7 @@ libhcan++:
 $(TARGET):$(OBJ) libhcan++
 	$(CXX) -o $@ $(OBJ) $(LD_FLAGS)
 	test -d ./binary_$(ARCH) || mkdir binary_$(ARCH)
-	mv $@ binary_$(ARCH)
+	sudo mv $@ binary_$(ARCH)
 
 $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<

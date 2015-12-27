@@ -10,7 +10,7 @@ else
 endif
 
 INC = -I.. -I. -I../include
-CXXFLAGS = -Wall -O2 $(INC) -g #-Werror 
+CXXFLAGS = -Wall -O2 $(INC) -fPIC #-Werror
 
 all: clean dep libhcandata.so
 

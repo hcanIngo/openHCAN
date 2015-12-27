@@ -36,7 +36,7 @@
 #define HCAN_HMS_DEVICE_TYPE_REQUEST   9
 
 // Liefert den Geraete-Typ
-// arch : 0 = Atmega8 1 = Atmega32
+// arch : 0 = Atmega8, 1 = Atmega32, 2 = Atmega644p
 // type : Hardware-Board-Typ
 #define HCAN_HMS_DEVICE_TYPE_REPLAY   10
 

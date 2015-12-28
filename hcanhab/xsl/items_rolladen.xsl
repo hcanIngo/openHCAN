@@ -14,7 +14,7 @@
 </xsl:template>
 
 <xsl:template match="rolladen">
-Rollershutter ROLLADEN_<xsl:value-of select="@name" /> 	"<!-- <xsl:copy-of select="$myRaum" />_ --><xsl:value-of select="substring-after(@name,'__')" /> [%d %%]" &lt;rollershutter&gt; (Rolladen) { http="&lt;[http://C1612server/?callback=myjp&amp;cmd=&amp;d=rolladen&amp;setid=&amp;qid=<xsl:value-of select="@gruppe" />:50000:JS(getRollershutterState.js)]" autoupdate="false"}
+Rollershutter ROLLADEN_<xsl:value-of select="@name" /> 	"<!-- <xsl:copy-of select="$myRaum" />_ --><xsl:value-of select="substring-after(@name,'__')" /> [%d %%]" &lt;rollershutter&gt; (Rolladen) { http="&lt;[http://C1612server/?callback=myjp&amp;cmd=&amp;d=rolladen&amp;setid=&amp;qid=<xsl:value-of select="@gruppe" />:50000:JS(getRollershutterState.js)]", autoupdate="false"}
 </xsl:template>
 
 

@@ -9,9 +9,6 @@
 
 <xsl:template match="/haus">
 // ------- GENERATED FROM installation.xml (c) Ingo Lages -----------------
-import org.openhab.core.library.types.*
-import org.openhab.core.persistence.*
-import org.openhab.model.script.actions.*
 	<xsl:apply-templates select="bereich/raum/board/rolladen"/>
 	<xsl:apply-templates select="bereich/board/rolladen"/>
 </xsl:template>

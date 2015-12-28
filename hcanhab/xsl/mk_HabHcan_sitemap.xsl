@@ -46,7 +46,7 @@ Frame {
 	</xsl:for-each>
 }
 
-<!-- }  folgt in der static-Datei -->
+<!-- }  Endeklammer der Gesamtsitemap (dyn.+ statische Anteile) erfolgt im Makefile -->
 </xsl:template>
 
 <xsl:template match="raum">

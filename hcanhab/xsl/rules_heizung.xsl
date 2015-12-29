@@ -14,28 +14,12 @@
 </xsl:template>
 
 <xsl:template match="heizung">
-rule "Heizung Ist-Temperatur"
-when
-	Item ISTTEMP_<xsl:value-of select="@name" /> received update <!-- TODO: Heizung-Temp-Item existiert noch nicht. Nur ein Tempsensor... -->
-then 
-	istTemp<xsl:value-of select="@name" /> = ISTTEMP_<xsl:value-of select="@name" />.state as DecimalType // der item-State
-	logInfo("", "istTemp<xsl:value-of select="@name" />: " + istTemp<xsl:value-of select="@name" />.toString)
-	// say("istTemp<xsl:value-of select="@name" />: " + istTemp<xsl:value-of select="@name" />.toString)
-	
-	
-	/* Den Item-State sofort anpassen (nicht das Pollen abwarten). Das Item muss auf autoupdate="false" stehen. 
-	   Sonst wuerde die Button-'+/-'-Reaktion zu langsam erfolgen. Funzt so, da es nicht zum rule-Aufruf HEIZUNG_... kommt: */
-	<!-- postUpdate("ISTSOLLTEMP_<xsl:value-of select="@name" />", sollTemp.toString) -->
-	// postUpdate("ISTSOLLTEMP_<xsl:value-of select="@name" />", /*istTemp<xsl:value-of select="@name" />.toString,*/ sollTemp<xsl:value-of select="@name" />.toString)
-end
-
-
 rule "Heizung Soll-Temperatur"
 when
-	Item ISTSOLLTEMP_<xsl:value-of select="@name" /> received command
+	Item SOLLTEMP_<xsl:value-of select="@name" /> received command
 	// Item muss autoupdate="false" haben, sodass wenn der Button in der Sitemap gedrückt wird, das item nicht den Button-State annimmt!
 then 
-	sollTemp<xsl:value-of select="@name" /> = ISTSOLLTEMP_<xsl:value-of select="@name" />.state as DecimalType // der item-State
+	sollTemp<xsl:value-of select="@name" /> = SOLLTEMP_<xsl:value-of select="@name" />.state as DecimalType // der item-State
 	if (receivedCommand==2) sollTemp<xsl:value-of select="@name" /> = sollTemp<xsl:value-of select="@name" /> + 1
 	if (receivedCommand==1) sollTemp<xsl:value-of select="@name" /> = sollTemp<xsl:value-of select="@name" /> - 1
 	
@@ -59,9 +43,9 @@ then
 	
 	
 	/* Den Item-State sofort anpassen (nicht das Pollen abwarten). Das Item muss auf autoupdate="false" stehen. 
-	   Sonst wuerde die Button-'+/-'-Reaktion zu langsam erfolgen. Funzt so, da es nicht zum rule-Aufruf HEIZUNG_... kommt: */
-	<!-- postUpdate("ISTSOLLTEMP_<xsl:value-of select="@name" />", sollTemp<xsl:value-of select="@name" />.toString) -->
-	postUpdate("ISTSOLLTEMP_<xsl:value-of select="@name" />", /*istTemp<xsl:value-of select="@name" />.toString,*/ sollTemp<xsl:value-of select="@name" />.toString)
+	   Sonst wuerde die Button-'+/-'-Reaktion zu langsam erfolgen. Funzt so, da es nicht zum rule-Aufruf SOLLTEMP_... kommt: */
+	<!-- postUpdate("SOLLTEMP_<xsl:value-of select="@name" />", sollTemp<xsl:value-of select="@name" />.toString) -->
+	postUpdate("SOLLTEMP_<xsl:value-of select="@name" />", /*istTemp<xsl:value-of select="@name" />.toString,*/ sollTemp<xsl:value-of select="@name" />.toString)
 end
 
 

@@ -18,7 +18,6 @@ import org.openhab.model.script.actions.*
 
 <xsl:template match="heizung">
 var Number sollTemp<xsl:value-of select="@name" /> <!-- Hinweis: Globale Variablen müssen am Anfahng stehen. -->
-var Number istTemp<xsl:value-of select="@name" />
 </xsl:template>
 
 

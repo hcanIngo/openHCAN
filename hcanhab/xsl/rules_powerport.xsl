@@ -32,11 +32,6 @@ then
 		   Sonst wuerde die Button-Reaktion zu langsam erfolgen. */
 		postUpdate("LAMPE_<xsl:value-of select="@name" />", "OFF");
 	}
-	
-	if (receivedCommand=="TOGGLE") {
-		logInfo("", "TOGGLE empfangen: " + "OK  --- ")
-		
-	}
 end
 	</xsl:when>
 	<xsl:otherwise> <!-- Sonstige -->
@@ -48,13 +43,13 @@ then
 		sendHttpGetRequest("http://C1612server/?callback=myjp&amp;cmd=ein&amp;d=sonstige&amp;setid=<xsl:value-of select="@gruppe" />&amp;qid=")
 		/* Den Item-State sofort anpassen (nicht das Pollen abwarten). Das Item muss auf autoupdate="false" stehen. 
 		   Sonst wuerde die Button-Reaktion zu langsam erfolgen. */
-		postUpdate(SONSTIGE_<xsl:value-of select="@name" />, "ON");
+		postUpdate("SONSTIGE_<xsl:value-of select="@name" />", "ON");
 	}
 	if (receivedCommand==OFF) {
 		sendHttpGetRequest("http://C1612server/?callback=myjp&amp;cmd=aus&amp;d=sonstige&amp;setid=<xsl:value-of select="@gruppe" />&amp;qid=")
 		/* Den Item-State sofort anpassen (nicht das Pollen abwarten). Das Item muss auf autoupdate="false" stehen. 
 		   Sonst wuerde die Button-Reaktion zu langsam erfolgen. */
-		postUpdate(SONSTIGE_<xsl:value-of select="@name" />, "OFF");
+		postUpdate("SONSTIGE_<xsl:value-of select="@name" />", "OFF");
 	}
 end
 	</xsl:otherwise>

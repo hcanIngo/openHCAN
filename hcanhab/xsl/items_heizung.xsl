@@ -15,8 +15,7 @@
 
 <xsl:template match="heizung">
 Number HEIZUNG_<xsl:value-of select="@name" /> 	"<xsl:value-of select="substring-after(@name,'__')" />" &lt;heating&gt;
-<!-- Number SOLLTEMP_<xsl:value-of select="@name" /> 	"<xsl:value-of select="substring-after(@name,'__')" /> [soll: %d °C]" &lt;temperature&gt; (Heizungen) { http="&lt;[http://C1612server/?callback=myjp&amp;cmd=&amp;d=heizung&amp;setid=&amp;qid=<xsl:value-of select="@gruppe" />:1000:JS(getState.js)]", autoupdate="false" } -->
-Number SOLLTEMP_<xsl:value-of select="@name" /> 	"<xsl:value-of select="substring-after(@name,'__')" /> [soll: %d °C]" &lt;temperature&gt; (Heizungen) { http="&lt;[http://C1612server/?callback=myjp&amp;cmd=&amp;d=heizung&amp;setid=&amp;qid=<xsl:value-of select="@gruppe" />:1000:JS(getState.js)]", autoupdate="false" }
+Number SOLLTEMP_<xsl:value-of select="@name" /> 	/*"<xsl:value-of select="substring-after(@name,'__')" /> [soll: %d °C]"*/ &lt;temperature&gt; (Heizungen) { http="&lt;[http://C1612server/?callback=myjp&amp;cmd=&amp;d=heizung&amp;setid=&amp;qid=<xsl:value-of select="@gruppe" />:1000:JS(getState.js)]", autoupdate="false" }
 </xsl:template>
 
 

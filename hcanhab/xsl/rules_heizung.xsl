@@ -14,7 +14,7 @@
 </xsl:template>
 
 <xsl:template match="heizung">
-rule "Heizung Soll-Temperatur"
+rule "Heizung Soll-Temperatur in OpenHab veraendert"
 when
 	Item SOLLTEMP_<xsl:value-of select="@name" /> received command
 	// Item muss autoupdate="false" haben, sodass wenn der Button in der Sitemap gedrückt wird, das item nicht den Button-State annimmt!
@@ -23,34 +23,29 @@ then
 	if (receivedCommand==2) sollTemp<xsl:value-of select="@name" /> = sollTemp<xsl:value-of select="@name" /> + 1
 	if (receivedCommand==1) sollTemp<xsl:value-of select="@name" /> = sollTemp<xsl:value-of select="@name" /> - 1
 	
-	if(sollTemp<xsl:value-of select="@name" />&lt;0)   sollTemp<xsl:value-of select="@name" /> = 0
+	if(sollTemp<xsl:value-of select="@name" />&lt;0)  sollTemp<xsl:value-of select="@name" /> = 0
 	if(sollTemp<xsl:value-of select="@name" />&gt;30) sollTemp<xsl:value-of select="@name" /> = 30
-	
-	<!-- TODO erst wenn kurze Zeit kein +/- bestätigt, dann erst die Temperatur anpassen (schneller die Reaktion sichtbar) (betätigt, dann einfach++) -->
 	
 	logInfo("", "sollTemp<xsl:value-of select="@name" />: " + sollTemp<xsl:value-of select="@name" />.toString)
 	// say("Solltemp: " + sollTemp<xsl:value-of select="@name" />.toString)
 	sendHttpGetRequest("http://C1612server/?callback=myjp&amp;cmd="+sollTemp<xsl:value-of select="@name" />.toString+"&amp;d=heizung&amp;setid=<xsl:value-of select="@gruppe" />&amp;qid=")
-	
-	<!-- Select-Box upate zu thermisch -->
-	<!-- TODO: Bei openhab-Start auf 2 = "auto" stellen -->
+
 	if (sollTemp<xsl:value-of select="@name" />&lt;11) {
-		postUpdate("HEIZUNG_<xsl:value-of select="@name" />", "3") // Sitemap-Switch-Item an die Situation anpassen: "Frostschutz"
+		postUpdate("HEIZUNG_<xsl:value-of select="@name" />", "3") // Sitemap-Select-Item an die Situation anpassen: "Frostschutz"
 	}
 	else {
-		postUpdate("HEIZUNG_<xsl:value-of select="@name" />", "1") // Sitemap-Switch-Item an die Situation anpassen: "therm"
+		postUpdate("HEIZUNG_<xsl:value-of select="@name" />", "1") // Sitemap-Select-Item an die Situation anpassen: "therm"
 	}
 	
 	
 	/* Den Item-State sofort anpassen (nicht das Pollen abwarten). Das Item muss auf autoupdate="false" stehen. 
 	   Sonst wuerde die Button-'+/-'-Reaktion zu langsam erfolgen. Funzt so, da es nicht zum rule-Aufruf SOLLTEMP_... kommt: */
-	<!-- postUpdate("SOLLTEMP_<xsl:value-of select="@name" />", sollTemp<xsl:value-of select="@name" />.toString) -->
-	postUpdate("SOLLTEMP_<xsl:value-of select="@name" />", /*istTemp<xsl:value-of select="@name" />.toString,*/ sollTemp<xsl:value-of select="@name" />.toString)
+	postUpdate("SOLLTEMP_<xsl:value-of select="@name" />", sollTemp<xsl:value-of select="@name" />.toString)
 end
 
 
 
-rule "Heizung" // 0=aus, 1=therm, 2=auto, 3=frost, 4=frostLang
+rule "Heizung OpenHab-Selektion veraendert" // 0=aus, 1=therm, 2=auto, 3=frost, 4=frostLang
 when
 	Item HEIZUNG_<xsl:value-of select="@name" /> received command
 then
@@ -62,10 +57,27 @@ then
 		case 3 : sendHttpGetRequest("http://C1612server/?callback=myjp&amp;cmd=frost&amp;d=heizung&amp;setid=<xsl:value-of select="@gruppe" />&amp;qid=")
 		case 4 : sendHttpGetRequest("http://C1612server/?callback=myjp&amp;cmd=frostLang&amp;d=heizung&amp;setid=<xsl:value-of select="@gruppe" />&amp;qid=")
 	}
+end
 
-	<!-- TODO Soll-Temperatur anpassen -->
+rule "Heizung - Aenderung des HCAN-Items"
+when 
+	Item HEIZUNG_<xsl:value-of select="@name" /> changed // Aenderung des HCAN-Items
+then
+	HEIZUNG_<xsl:value-of select="@name" />.state.toString // der item-State
+	logInfo("IL", "changed " + HEIZUNG_<xsl:value-of select="@name" />.toString)
+	      
+	if (HEIZUNG_<xsl:value-of select="@name" />.state.toString == "0") postUpdate("HEIZUNG_<xsl:value-of select="@name" />", "0") // Sitemap-Select-Item an die Situation anpassen: "aus"
+end
+
+rule "Startup"
+when 
+	System started
+then
+	logInfo("IL", "System started " + HEIZUNG_<xsl:value-of select="@name" />.toString)
+	
+	if (HEIZUNG_<xsl:value-of select="@name" />.state.toString == "0") postUpdate("HEIZUNG_<xsl:value-of select="@name" />", "0") // Sitemap-Select-Item an die Situation anpassen: "aus"
+	else postUpdate("HEIZUNG_<xsl:value-of select="@name" />", "2") // Sitemap-Select-Item an die Situation anpassen: "auto"
 end
 </xsl:template>
-
 
 </xsl:stylesheet>

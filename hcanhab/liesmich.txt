@@ -26,4 +26,4 @@ openHAB für openHCAN verwenden:
 
 6. Openhab starten (per Makefile ausführen):
 	- make start     (mit log-Datei: make start > ~/tmp/openhabMeldungen.txt)
-	- make run_webclient / app verwenden
+	- make run_webclient / oder z.B. Habdroid-App verwenden

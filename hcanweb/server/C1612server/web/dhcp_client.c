@@ -93,7 +93,7 @@ void make_dhcp_message_template(uint8_t *buf,const uint8_t transactionID)
         buf[UDP_DATA_P]=1;// message type = boot request
         buf[UDP_DATA_P+1]=1;// hw type
         buf[UDP_DATA_P+2]=6;// mac len
-        buf[UDP_DATA_P+i+3]=0;// hops
+        buf[UDP_DATA_P+3]=0;// hops
         // we use only one byte TIDs, we fill the first byte with 1 and
         // the rest with transactionID. The first byte is used to
         // distinguish inital requests from renew requests.

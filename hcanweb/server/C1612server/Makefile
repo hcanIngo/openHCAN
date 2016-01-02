@@ -71,5 +71,5 @@ load:
 	@echo -------------------------
 	@echo Bsp.:  make load adr=166
 	@echo -------------------------
-	telican -c $(adr) --arch $(MCU_Server) -e "flash C1612_$(MCU_Server)/$(TARGET).hex"
+	telican -a $(IP_HI) -c $(adr) --arch $(MCU_Server) -e "flash C1612_$(MCU_Server)/$(TARGET).hex"
 	@#telican -a $(IP_HI) -c $(adr) --arch $(MCU_Server) -e "flash C1612_$(MCU_Server)/$(TARGET).hex"

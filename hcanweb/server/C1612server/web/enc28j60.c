@@ -16,7 +16,12 @@
 #include "ip_config.h"
 #include "enc28j60.h"
 //
+#ifndef F_CPU
 // ggf. delay anpassen! #define F_CPU 12500000UL  // 12.5 MHz
+//#else 
+//#warning "F_CPU was already defined" 
+#endif
+
 #ifndef ALIBC_OLD
 #include <util/delay_basic.h>
 #else
@@ -316,13 +321,15 @@ uint8_t enc28j60linkup(void)
 void enc28j60PacketSend(uint16_t len, uint8_t* packet)
 {
         // Check no transmit in progress
-        while (enc28j60ReadOp(ENC28J60_READ_CTRL_REG, ECON1) & ECON1_TXRTS)
-        {
-                // Reset the transmit logic problem. See Rev. B4 Silicon Errata point 12.
-                if( (enc28j60Read(EIR) & EIR_TXERIF) ) {
-                        enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_TXRST);
-                        enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, ECON1, ECON1_TXRST);
-                }
+        while (enc28j60ReadOp(ENC28J60_READ_CTRL_REG, ECON1) & ECON1_TXRTS);
+        // 
+        // Reset the transmit logic problem. Unblock stall in the transmit logic.
+        // See Rev. B4 Silicon Errata point 12.
+        if( (enc28j60Read(EIR) & EIR_TXERIF) ) {
+                enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_TXRST);
+                enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, ECON1, ECON1_TXRST);
+                enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, EIR, EIR_TXERIF); 
+                _delay_loop_2(30000); // 10ms
         }
 	// Set the write pointer to start of transmit buffer area
 	enc28j60Write(EWRPTL, TXSTART_INIT&0xFF);

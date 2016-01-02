@@ -29,7 +29,7 @@
 // - Register address        (bits 0-4)
 // - Bank number        (bits 5-6)
 // - MAC/PHY indicator        (bit 7)
-#define ADDR_MASK_ETH        0x1F
+#define ADDR_MASK_ETH    0x1F
 #define BANK_MASK        0x60
 #define SPRD_MASK        0x80
 // All-bank registers

@@ -1,4 +1,4 @@
-tuxgraphics v5.7
+tuxgraphics v5.10
 
 http://tuxgraphics.org/common/src2/article09051/
 

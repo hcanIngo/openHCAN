@@ -20,7 +20,7 @@ ifeq ($(MCU),atmega644)
 	MT_BOOTLOADER_ADDRESS = F000
 	#JTAG-Enable: AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -e -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0x90:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
 	AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0xD0:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
-	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:r:flash.bin:r
+	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:r:flash.hex:r
 	AVRDUDE_ERASE_EEPROM = avrdude -c avrispmkII -p m644p -P usb -e
 else
 	# atmega32 (32kbytes flash = 0 bis 7FFF)
@@ -28,7 +28,7 @@ else
 	MT_BOOTLOADER_ADDRESS = 7000
 	#JTAG-Enable: AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0x80:m -U lfuse:w:0x0f:m
 	AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0xC0:m -U lfuse:w:0x0f:m
-	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:r:flash.bin:r
+	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:r:flash.hex:r
 	AVRDUDE_ERASE_EEPROM = avrdude -c avrispmkII -p m32 -P usb -e
 endif
 

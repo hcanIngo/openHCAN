@@ -109,11 +109,15 @@ static void rolladen_cmd_stop(device_data_rolladen *p)
 	{
 		p->last_dir = !p->last_dir; // Richtungswechsel (1-Taster-Betrieb)
 
-		if(is_calibration_active(p) && (pos == 0))
+		if(is_calibration_active(p))
 		{
-			// Untenlage (Pos. 0) kalibrieren:
-			p->laufzeit = 0;
-			p->summe_laufzeit = 0; // Erst nach Unten-/Obenabschaltung!
+			if (pos == 0)
+			{
+				p->laufzeit = 0; // Untenlage erreicht
+				p->summe_laufzeit = 0; // Erst nach Untenabschaltung die Kalibrierung beenden!
+			}
+			else if (pos == 100)
+				p->laufzeit = p->config.laufzeit; // Obenenlage erreicht
 		}
 	}
 }

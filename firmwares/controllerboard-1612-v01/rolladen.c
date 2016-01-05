@@ -30,11 +30,20 @@ static void rolladen_no_cmd(device_data_rolladen *p)
 
 void rolladen_init(device_data_rolladen *p, eds_block_p it)
 {
-	// wir wissen die aktuelle Position des Rolladen nicht
-	// Also wird der Status so gesetzt, dass rekalibriert wird
+	// Wir wissen die aktuelle Position des Rolladen nicht.
+	// Daher wird der Status so gesetzt, dass rekalibriert wird
 	p->summe_laufzeit = p->config.max_rekalib + 1;
+	p->laufzeit = p->config.laufzeit / 2; // und in der Mitte steht
+	// sodass sowohl ein AUF- als auch ein AB-Fahrauftrag den Rolladen
+	// vollstaendig AUF bzw. ZU faehrt.
+	// Bei einem Position-Set-Fahrauftrag wird niemals kalibriert.
 
-	p->laufzeit = p->config.laufzeit / 2; // Rolladen steht mittig (wird aber unten kalibriert)
+	// Abgeschlossen ist die Kalibrierung, wenn der Rolladen in Untenfahrt gestoppt wird.
+	// Wird eine Kalibrierfahrt vor Erreichen der Untenlage gestoppt, so liegen die
+	// virtuellen Endlagen falsch, der Rolladen kann nicht vollstaendig oeffnen.
+	// Vorraussetzung ist selbstverstaendlich die realitaetsnahe Konfiguration der
+	// tatsaechlichen Laufzeit.
+
 	p->soll_laufzeit = -1; // kein Soll
 
 	p->last_dir = p->soll_dir; // kein Richtungswechsel (1-Taster-Betrieb)
@@ -117,7 +126,7 @@ static void rolladen_cmd_stop(device_data_rolladen *p)
 				p->summe_laufzeit = 0; // Erst nach Untenabschaltung die Kalibrierung beenden!
 			}
 			else if (pos == 100)
-				p->laufzeit = p->config.laufzeit; // Obenenlage erreicht
+				p->laufzeit = p->config.laufzeit; // Obenlage erreicht
 		}
 	}
 }
@@ -200,7 +209,7 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 							rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
 						else
 							set_soll_laufzeit(p, ROLLADEN_DIR_AB);
-							if (p->soll_laufzeit != -1) // liegt soll-Position bereits vor?
+							if (p->soll_laufzeit != -1) // noch nicht in soll-Position?
 								rolladen_cmd_drive (p);
 						break;
 
@@ -209,7 +218,7 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 							rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
 						else
 							set_soll_laufzeit(p, ROLLADEN_DIR_AUF);
-							if (p->soll_laufzeit != -1) // liegt soll-Position bereits vor?
+							if (p->soll_laufzeit != -1) // noch nicht in soll-Position?
 								rolladen_cmd_drive (p);
 						break;
 
@@ -231,7 +240,7 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 			break;
 
 		case HCAN_HES_TASTER_DOWN: // Nur im 1-Taster-Betrieb verwendet
-			if (p->config.taster == frame->data[2])
+			if (is_group_in_rolladen(p, frame->data[2]))
 			{
 				if (p->blockingTimer) return; // Befehl abblocken
 
@@ -250,10 +259,8 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 			break;
 
 		case HCAN_HES_TASTER_UP: // Nur im 1-Taster-Betrieb verwendet
-			if (p->config.taster == frame->data[2])
-			{
+			if (is_group_in_rolladen(p, frame->data[2]))
 				p->change_dir_counter = -1; // abmelden (1-Taster-Betrieb)
-			}
 			break;
 
 		case HCAN_HES_ROLLADEN_DEFINE_POSITION:

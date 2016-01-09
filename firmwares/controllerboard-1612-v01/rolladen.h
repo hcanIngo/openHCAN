@@ -62,6 +62,7 @@ typedef struct
 
 	uint8_t blockingTimer; // Wartezeit, bevor das Power-/ bzw. das Dir-Relais angesprochen werden darf
 	int8_t change_dir_counter; // 1-Taster-Betrieb: Langes Stopp-Druecken fuehrt zu anschließendem Richtungswechsel
+	int8_t long_pressed_counter; // 2-Taster-Betrieb: Langes Fahr-ZU-Druecken fuehrt zur Kalibrierung in Untenlage
 } device_data_rolladen;
 
 

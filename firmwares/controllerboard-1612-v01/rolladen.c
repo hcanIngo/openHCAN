@@ -46,6 +46,9 @@ void rolladen_init(device_data_rolladen *p, eds_block_p it)
 
 	p->soll_laufzeit = -1; // kein Soll
 
+	p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
+	p->change_dir_counter = -1; // abmelden (1-Taster-Betrieb)
+
 	p->last_dir = p->soll_dir; // kein Richtungswechsel (1-Taster-Betrieb)
 	rolladen_no_cmd(p);
 }
@@ -69,7 +72,7 @@ static void rolladen_send_changed_info(device_data_rolladen *p)
 	message.proto = HCAN_PROTO_SFP;
 	message.data[0] = HCAN_SRV_HES;
 	message.data[1] = HCAN_HES_ROLLADEN_POSITION_CHANGED_INFO;
-	message.data[2] = p->config.gruppe0;
+	message.data[2] = p->config.taster;
 	message.data[3] = rolladen_get_position(p); // aktuelle Position in %
 	message.data[4] = 0; // Quelle des cmd: nicht verwendet
 	message.data[5] = 0; // Quelle des cmd: nicht verwendet
@@ -200,40 +203,58 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 		case HCAN_HES_ROLLADEN_POSITION_SET:
 			if (is_group_in_rolladen(p, frame->data[2]))
 			{
-				if (p->blockingTimer) return; // Befehl abblocken
-
 				switch (frame->data[3])
 				{
-					case 200: // ZU = 0 %
+					case 200: // Taster-Down im 2-Taster-Betrieb: ZU = 0 %
+						if (p->blockingTimer) return; // Befehl abblocken
+
 						if (p->power || p->soll_power)
 							rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
 						else
 							set_soll_laufzeit(p, ROLLADEN_DIR_AB);
 							if (p->soll_laufzeit != -1) // noch nicht in soll-Position?
+							{
+								p->long_pressed_counter = 10; // 1 s
 								rolladen_cmd_drive (p);
+							}
 						break;
 
-					case 201: // AUF = 100 %
+					case 201: // Taster-Down im 2-Taster-Betrieb: AUF = 100 %
+						if (p->blockingTimer) return; // Befehl abblocken
+
 						if (p->power || p->soll_power)
 							rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
 						else
 							set_soll_laufzeit(p, ROLLADEN_DIR_AUF);
 							if (p->soll_laufzeit != -1) // noch nicht in soll-Position?
+							{
+								p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
 								rolladen_cmd_drive (p);
+							}
 						break;
 
-					case 202: // HALT
+					case 202: // Taster-Down im 2-Taster-Betrieb: HALT
+						p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
 						rolladen_cmd_stop (p);
 						break;
 
-					default: // frame->data[3] = Positionsvorgabe in %
-						if (p->power || p->soll_power || p->soll_laufzeit == p->laufzeit)
-							return; // ignorieren, falls der Rolladen faehrt  oder  die Soll-Pos. schon hat
+					case 222: // Taster-Up im 2-Taster-Betrieb
+						p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
+						break;
 
-						p->soll_laufzeit = (int32_t) p->config.laufzeit * (int32_t) frame->data[3] / 100;
+					default: // frame->data[3] = Positionsvorgabe in %
+						if (p->blockingTimer) return; // Befehl abblocken
+
+						p->soll_laufzeit = (int32_t)p->config.laufzeit * frame->data[3] / 100;
+						// canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("s %d"), p->soll_laufzeit);
 						if (p->soll_laufzeit < 0) p->soll_laufzeit = 0;
 						if (p->soll_laufzeit > p->config.laufzeit) p->soll_laufzeit = p->config.laufzeit;
 
+						if (p->power || p->soll_power || p->soll_laufzeit == p->laufzeit)
+						{
+							p->soll_laufzeit = -1;
+							return; // ignorieren, falls der Rolladen faehrt  oder  die Soll-Pos. schon hat
+						}
 						rolladen_cmd_drive (p);
 				}
 			}
@@ -298,6 +319,15 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 // hier werden die anstehenden Rolladenauftraege jede 10-tel Sekunde verarbeitet/angestossen
 void rolladen_timer_handler(device_data_rolladen *p)
 {
+
+	//// Im 2-Taster-Betrieb manuell die Kalibrierung anstossen:
+	if (p->long_pressed_counter)  p->long_pressed_counter--;
+	else if (p->long_pressed_counter == 0)
+	{
+		p->summe_laufzeit = p->config.max_rekalib + 1; // Kalibrierung anstossen
+		p->long_pressed_counter = -1; // abmelden
+	}
+
 	//// Richtungswechsel im 1-Taster-Betrieb:
 	if (p->change_dir_counter)  p->change_dir_counter--;
 	else if (p->change_dir_counter == 0)

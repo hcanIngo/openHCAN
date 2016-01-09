@@ -48,11 +48,17 @@ void taster_timer_handler(device_data_taster *p)
 		// dann ein Schalter-Up Event senden:
 		if (p->pressed > 3)
 		{
-			// ...und z.B. kein Rollladentaster im 2-Tasterbetrieb konfiguriert ist:
-			if ( !(p->config.feature & (
-					  (1<<FEATURE_TASTER_ROLLADEN_ZU)
-					| (1<<FEATURE_TASTER_ROLLADEN_AUF)
-					| (1<<FEATURE_TASTER_POWERPORT_AN)
+			// ...und kein Flankenbetrieb konfiguriert ist:
+			if (p->config.feature &
+					 ((1<<FEATURE_TASTER_ROLLADEN_ZU)
+					| (1<<FEATURE_TASTER_ROLLADEN_AUF)) )
+			{
+				message.data[1] = HCAN_HES_ROLLADEN_POSITION_SET;
+				message.data[3] = 222; // "Taster up" im Rolladen 2-Taster-Betrieb
+				canix_frame_send_with_prio(&message, HCAN_PRIO_HI);
+			}
+			else if ( !(p->config.feature &
+					 ((1<<FEATURE_TASTER_POWERPORT_AN)
 					| (1<<FEATURE_TASTER_POWERPORT_AUS)  )) )
 			{
 				message.data[1] = HCAN_HES_TASTER_UP;
@@ -61,8 +67,7 @@ void taster_timer_handler(device_data_taster *p)
 			}
 		}
 
-		// Taste wurde losgelassen, also Zaehler zuruecksetzen
-		p->pressed = 0;
+		p->pressed = 0; // Taste wurde losgelassen, also Zaehler zuruecksetzen
 	}
 
 	if (p->config.feature & (1<<FEATURE_TASTER_ENTPRELL_1S))
@@ -101,5 +106,3 @@ void taster_timer_handler(device_data_taster *p)
 		canix_frame_send_with_prio(&message, HCAN_PRIO_HI);
 	}
 }
-
-

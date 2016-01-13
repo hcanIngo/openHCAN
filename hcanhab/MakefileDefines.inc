@@ -4,7 +4,7 @@ include $(CONF)/myconf.inc
 #ZIEL_PC = localhost
 ZIEL_PC = bananapi
 
-OPENHABVERSION = 1.7.1
+OPENHABVERSION = 1.8.0
 HCAN_INSTALLATION = installation.xml
 
 

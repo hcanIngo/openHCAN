@@ -7,17 +7,23 @@ START_SYSTEM = Sysvinit
 include $(HCANHAB_DIR)/bananapi/$(START_SYSTEM)/Makefile
 
 all:
+	make cleanZielOrdner
+	@#
 	cd $(HCANHAB_DIR)/localhost/; make unzip_openhab_installation
 	cd $(HCANHAB_DIR)/localhost/; make mv to=/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
-	#
+	@#
 	make openhab_start_withScreen
 	make autostart
 	@#
 	cd $(HCANHAB_DIR); make installHabHcan
 	@#
 	make install_oracle_arm_jre
+	@#
 	# make reboot
 	# make myopenhab
+
+cleanZielOrdner:
+	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) rm -f -R /home/$(ZIEL_USER)/$(ZIEL_ORDNER)
 
 install_oracle_arm_jre:
 	@#cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u33-linux-arm-vfp-hflt.tar.gz
@@ -35,7 +41,6 @@ openhab_start_withScreen:
 	$(_SCP) $(HCANHAB_DIR)/bananapi/start_debug.sh $(SCP_ZIEL_DIR)/start_debug.sh
 
 myopenhab:
-	$(_SCP) $(OPENHABDOWNLOADS_DIR)/org.openhab.io.myopenhab-1.7.0.jar $(SCP_ZIEL_DIR)/addons/org.openhab.io.myopenhab.jar
 	@echo "\nuuid: (notieren und mit q beenden)" 
 	@$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) less /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/webapps/static/uuid
 	@echo "\nsecret (notieren und mit q beenden):" 

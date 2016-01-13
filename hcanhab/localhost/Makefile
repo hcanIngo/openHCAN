@@ -23,7 +23,7 @@ unzip_openhab_installation:
 		org.openhab.binding.ntp-$(OPENHABVERSION).jar \
 		org.openhab.binding.exec-$(OPENHABVERSION).jar \
 		org.openhab.binding.weather-$(OPENHABVERSION).jar \
-		org.openhab.binding.enigma2-$(OPENHABVERSION).jar \
+		org.openhab.io.myopenhab-$(OPENHABVERSION).jar \
 		-d $(OPENHABDOWNLOADS_DIR)/tempinst/addons
 	@#
 	unzip -u $(OPENHABDOWNLOADS_DIR)/distribution-$(OPENHABVERSION)-addons.zip \
@@ -31,7 +31,7 @@ unzip_openhab_installation:
 		org.openhab.persistence.logging-$(OPENHABVERSION).jar \
 		org.openhab.persistence.exec-$(OPENHABVERSION).jar \
 		org.openhab.persistence.rrd4j-$(OPENHABVERSION).jar \
-		-d $(OPENHABDOWNLOADS_DIR)/tempinst/configurations/persistence
+		-d $(OPENHABDOWNLOADS_DIR)/tempinst/configurations/persistence		
 
 mv:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p $(to)

@@ -24,7 +24,9 @@ Frame {
 			<xsl:for-each select="board/rolladen | raum/board/rolladen">
 				<xsl:if test="(@sammel != '-')">
 				Frame label="<xsl:value-of select="substring-after(@name,'__')" />: " {  
-					Switch item=ROLLADEN_<xsl:value-of select="@name" /> label=" [%d %%]" icon="rollershutter" mappings=["STOP"="S","DOWN"="▼", "UP"="▲"/*, 60="☀", 83="Ξ"*/]
+					// Switch item=ROLLADEN_<xsl:value-of select="@name" /> label=" [%d %%]" icon="rollershutter" mappings=["STOP"="S","DOWN"="▼", "UP"="▲"/*, 60="☀", 83="Ξ"*/]
+					Switch item=ROLLADEN_<xsl:value-of select="@name" /> label=" [%d %%]" icon="rollershutter"
+					// Slider item=ROLLADEN_<xsl:value-of select="@name" /> label=" [%d %%]" icon="rollershutter"
 				}
 				</xsl:if>
 			</xsl:for-each>
@@ -120,7 +122,9 @@ Frame {
 
 <xsl:template match="rolladen">
 	Frame label="<xsl:value-of select="substring-after(@name,'__')" />: " {                <!-- Patch fuer Habdroid: U+2008 (punktbreites Leerzeichen vor [%d %%]) --> 
-		Switch item=ROLLADEN_<xsl:value-of select="@name" /> label=" [%d %%]" icon="rollershutter" mappings=["STOP"="S","DOWN"="▼", "UP"="▲"/*, 60="☀", 83="Ξ"*/]
+		// Switch item=ROLLADEN_<xsl:value-of select="@name" /> label=" [%d %%]" icon="rollershutter" mappings=["STOP"="S","DOWN"="▼", "UP"="▲"/*, 60="☀", 83="Ξ"*/]
+		// Switch item=ROLLADEN_<xsl:value-of select="@name" /> label=" [%d %%]" icon="rollershutter"
+		Slider item=ROLLADEN_<xsl:value-of select="@name" /> label=" [%d %%]" icon="rollershutter"
 	} 
 </xsl:template>
 

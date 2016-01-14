@@ -37,6 +37,8 @@ siehe: https://github.com/hcanIngo/openHCAN/wiki/Rolladensteuerbefehlsreaktionst
 
 #define MAX_ROLLADEN_GROUPS 4
 
+#define FEATURE_KALIBRIERUNG_OBEN   0 // Bit0 (das LSB)
+
 #define ROLLADEN_DIR_AUF 0
 #define ROLLADEN_DIR_AB  1
 
@@ -50,6 +52,7 @@ typedef struct
 	uint32_t summe_laufzeit; // bisher zurueckgelegte Strecke seit dem letzten Kalibrieren
 	int32_t laufzeit;        // Position des Rolladens in 10tel Sekunden, gemessen vom Stand "unten"
 	int32_t soll_laufzeit;   // Soll-Laufzeit des Rolladens in 10tel Sekunden, gemessen vom Stand "unten"
+	int32_t stoppuhr;
 
 	uint8_t dir;        // Ist-Zustand des dir-Relais
 	uint8_t soll_dir;   // Soll-Zustand des dir-Relais   (1 = zu, 0 = auf)

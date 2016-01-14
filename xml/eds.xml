@@ -58,6 +58,8 @@
 		\emph{max_rekalib} gibt an, nach wievielen zur"uckgelegten
 		10tel Sekunden der Rolladen sich neu kalibrien (d.h. ganz hoch oder 
 		runter fahren) muss. 
+		Ist das Feature-Bit 0 gesetzt, so wird die Obenlage kalibriert. 
+		Sonst die Untenlage. Kalibrierung der Obenlage fuer z.B. Raffstores. 
 	</block>
 
 	<block type="13" name="heizung" size="38">

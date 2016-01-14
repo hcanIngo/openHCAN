@@ -18,18 +18,9 @@
 #include <darlingtonoutput.h>
 #include <log.h>
 
-static void rolladen_no_cmd(device_data_rolladen *p)
-{
-	p->soll_dir = ROLLADEN_DIR_AUF; // Relais ist aus bei init
-	p->dir = p->soll_dir;
-	p->change_dir_counter = -1; // abmelden (1-Taster-Betrieb)
-
-	p->soll_power = 0;
-	p->power = p->soll_power;
-}
-
 void rolladen_init(device_data_rolladen *p, eds_block_p it)
 {
+	p->kalibrieren = 1;
 	// Wir wissen die aktuelle Position des Rolladen nicht.
 	// Daher wird der Status so gesetzt, dass rekalibriert wird
 	p->summe_laufzeit = p->config.max_rekalib + 1;
@@ -45,25 +36,30 @@ void rolladen_init(device_data_rolladen *p, eds_block_p it)
 	// tatsaechlichen Laufzeit.
 
 	p->soll_laufzeit = -1; // kein Soll
+	p->stoppuhr = 0;
 
-	p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
+	p->soll_dir = ROLLADEN_DIR_AUF; // Relais ist aus bei init
+	p->last_dir = p->soll_dir; // 1-Taster-Betrieb
+	p->dir = p->soll_dir;
+
+	p->soll_power = 0;
+	p->power = p->soll_power;
+
 	p->change_dir_counter = -1; // abmelden (1-Taster-Betrieb)
-
-	p->last_dir = p->soll_dir; // kein Richtungswechsel (1-Taster-Betrieb)
-	rolladen_no_cmd(p);
+	p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
 }
 
 static uint8_t rolladen_get_position(const device_data_rolladen *p)
 {
 	int32_t pos;
 	pos = 100 * p->laufzeit / p->config.laufzeit + 1; // +1 wegen Rundungsfehler
-	if (pos < 0) pos = 0;
-	if (pos > 100) pos = 100;
+	if (pos < 2) pos = 0;
+	if (pos > 98) pos = 100;
 
 	return pos;
 }
 
-static void rolladen_send_changed_info(device_data_rolladen *p)
+static void rolladen_send_changed_info(device_data_rolladen *p, uint8_t pos)
 {
 	canix_frame message;
 
@@ -73,7 +69,7 @@ static void rolladen_send_changed_info(device_data_rolladen *p)
 	message.data[0] = HCAN_SRV_HES;
 	message.data[1] = HCAN_HES_ROLLADEN_POSITION_CHANGED_INFO;
 	message.data[2] = p->config.taster;
-	message.data[3] = rolladen_get_position(p); // aktuelle Position in %
+	message.data[3] = pos; // aktuelle Position in %
 	message.data[4] = 0; // Quelle des cmd: nicht verwendet
 	message.data[5] = 0; // Quelle des cmd: nicht verwendet
 	message.size = 6;
@@ -94,99 +90,132 @@ static uint8_t is_group_in_rolladen(const device_data_rolladen *p, uint8_t group
 	return 0; // nicht gefunden
 }
 
-static uint8_t is_calibration_active(device_data_rolladen *p)
+static void calibration(device_data_rolladen *p)
 {
-	return (p->soll_laufzeit < -1) || (p->soll_laufzeit > p->config.laufzeit);
+	if (p->config.feature & (1<<FEATURE_KALIBRIERUNG_OBEN))
+	{
+		if (p->soll_laufzeit > p->config.laufzeit)
+		{
+			// in Oben-Lage kalibrieren:
+			p->laufzeit = p->config.laufzeit; // Obenlage erreicht
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("co"));
+
+			p->summe_laufzeit = 0; // Erst nach Untenabschaltung die Kalibrierung beenden!
+			p->kalibrieren = 0;
+		}
+	}
+	else if (p->soll_laufzeit < -1)
+	{
+		// in Unten-Lage kalibrieren:
+		p->laufzeit = 0; // Untenlage erreicht
+		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("cu"));
+
+		p->summe_laufzeit = 0; // Erst nach Untenabschaltung die Kalibrierung beenden!
+		p->kalibrieren = 0;
+	}
 }
 
 static void rolladen_cmd_stop(device_data_rolladen *p)
 {
+	uint8_t pos = rolladen_get_position(p);
+	if(pos == 0 || pos == 100) // untere oder obere Endlage erreicht?
+	{
+		// canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("r"));
+		p->last_dir = !p->dir; // Richtungswechsel (1-Taster-Betrieb)
+		p->change_dir_counter = -1; // abmelden (1-Taster-Betrieb)
+	}
+
+	if(p->kalibrieren) calibration(p);
+
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("dir=%d"), p->dir);
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("t=%d"), p->stoppuhr); // Stopp in 0=AUF, 1=ZU
+	p->stoppuhr = 0;
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("lz=%d"), p->laufzeit);
+	rolladen_send_changed_info(p, pos);
+
 	p->soll_power = 0;
 	p->exe_power = 1; // Halt-Auftrag: Power-Relais sofort aus
 
 	p->soll_dir = ROLLADEN_DIR_AUF; // nur um das Relais abzuschalten
-
 	// Wegen Dir-Umschaltung verzoegern?
-	if (p->dir == ROLLADEN_DIR_AB)
+	if (ROLLADEN_DIR_AB == p->dir)
 	{
 		p->blockingTimer = 5; // = 0,5 s (Dir-Relais sicher umschalten)
 		p->exe_dir = 0; // erst nach Zeitablauf
 	}
-	// else: Dir-Relais liegt schon richtig
+	// else Dir-Relais liegt schon richtig
 
 	p->soll_laufzeit = -1; // kein Soll
-
-	uint8_t pos = rolladen_get_position(p);
-	if(pos == 0 || pos == 100) // untere oder obere Endlage erreicht?
-	{
-		p->last_dir = !p->last_dir; // Richtungswechsel (1-Taster-Betrieb)
-
-		if(is_calibration_active(p))
-		{
-			if (pos == 0)
-			{
-				p->laufzeit = 0; // Untenlage erreicht
-				p->summe_laufzeit = 0; // Erst nach Untenabschaltung die Kalibrierung beenden!
-			}
-			else if (pos == 100)
-				p->laufzeit = p->config.laufzeit; // Obenlage erreicht
-		}
-	}
 }
 
 static void rolladen_cmd_drive(device_data_rolladen *p)
 {
 	p->soll_power = 1; // soll fahren
 
-	if (p->soll_laufzeit < p->laufzeit)
-	{
-		p->soll_dir = ROLLADEN_DIR_AB;
-		p->exe_dir = 1; // Fahr-Auftrag: Dir-Relais sofort um-/einschalten
-	}
-	else p->soll_dir = ROLLADEN_DIR_AUF; // Dir-Relais liegt schon richtig
-
-	p->last_dir = p->soll_dir; // fuer den 1-Taster-Betrieb
-
 	// Power-Ein verzoegern?
 	if (p->soll_dir == ROLLADEN_DIR_AB)
 	{
+		p->exe_dir = 1; // Fahr-Auftrag: Dir-Relais sofort um-/einschalten
+
 		p->blockingTimer = 5; // = 0,5 s (Dir-Relais sicher umschalten)
 		p->exe_power = 0; // erst nach Zeitablauf
 	}
-	else p->exe_power = 1; // da das Dir-Relais schon richtig liegt
-
+	else // ROLLADEN_DIR_AUF: Dir-Relais liegt schon richtig
+		p->exe_power = 1; // da das Dir-Relais schon richtig liegt
 }
 
-static void align_soll_laufzeit(device_data_rolladen *p, uint8_t soll_dir)
+static void extend_soll_laufzeit(device_data_rolladen *p)
 {
-	// Im Normalfall nur bis zur konfigurierten Laufzeitgrenze fahren
-	// und somit p->soll_laufzeit nicht veraendern (0 % = unten, 100 % = oben)
-
-	if(p->summe_laufzeit >= p->config.max_rekalib) // kalibrieren?
+	if (p->config.feature & (1<<FEATURE_KALIBRIERUNG_OBEN))
 	{
-		if(ROLLADEN_DIR_AB == soll_dir)
-			p->soll_laufzeit = -((int32_t) p->config.laufzeit * 50 / 100); // 0 = unten: hier 50% noch ins negative
-		else // AUF:
+		if(ROLLADEN_DIR_AUF == p->soll_dir)
+		{
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("eo"));
 			p->soll_laufzeit = ((int32_t)p->config.laufzeit * 150 / 100); // 100 = oben: hier 150% drauf: 200%
+			p->kalibrieren = 1;
+		}
+	}
+	else // unten kalibrieren:
+	{
+		if(ROLLADEN_DIR_AB == p->soll_dir)
+		{
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("eu"));
+			p->soll_laufzeit = -((int32_t) p->config.laufzeit * 50 / 100); // 0 = unten: hier 50% noch ins negative
+			p->kalibrieren = 1;
+		}
 	}
 }
 
-static void set_soll_laufzeit(device_data_rolladen *p, uint8_t soll_dir)
+static uint8_t set_soll_laufzeit(device_data_rolladen *p, uint8_t soll_dir)
 {
 	if(ROLLADEN_DIR_AB == soll_dir)
 	{
 		p->soll_laufzeit = 0; // ZU = 0 %
-		align_soll_laufzeit(p, soll_dir); // Fuer die Kalibrierung
 		if (p->laufzeit <= p->soll_laufzeit)
-			p->soll_laufzeit = -1; // soll-Position liegt schon vor
+		{
+			p->soll_laufzeit = -1;
+			return 0; // soll-Position liegt schon vor
+		}
+
+		p->soll_dir = soll_dir;
+		if (p->summe_laufzeit >= p->config.max_rekalib) // kalibrieren?
+			extend_soll_laufzeit(p); // Fuer die Kalibrierung
 	}
 	else // AUF:
 	{
 		p->soll_laufzeit = p->config.laufzeit; // AUF = 100 %
-		align_soll_laufzeit(p, soll_dir); // Fuer die Kalibrierung
 		if (p->laufzeit >= p->soll_laufzeit)
-			p->soll_laufzeit = -1; // soll-Position liegt schon vor
+		{
+			p->soll_laufzeit = -1;
+			return 0; // soll-Position liegt schon vor
+		}
+
+		p->soll_dir = soll_dir;
+		if (p->summe_laufzeit >= p->config.max_rekalib) // kalibrieren?
+			extend_soll_laufzeit(p); // Fuer die Kalibrierung
 	}
+
+	return 1;
 }
 
 void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
@@ -210,13 +239,12 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 
 						if (p->power || p->soll_power)
 							rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
-						else
-							set_soll_laufzeit(p, ROLLADEN_DIR_AB);
-							if (p->soll_laufzeit != -1) // noch nicht in soll-Position?
-							{
-								p->long_pressed_counter = 10; // 1 s
-								rolladen_cmd_drive (p);
-							}
+						else if (set_soll_laufzeit(p, ROLLADEN_DIR_AB))
+						{
+							// noch nicht in soll-Position:
+							p->long_pressed_counter = 10; // 1 s
+							rolladen_cmd_drive (p);
+						}
 						break;
 
 					case 201: // Taster-Down im 2-Taster-Betrieb: AUF = 100 %
@@ -224,29 +252,28 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 
 						if (p->power || p->soll_power)
 							rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
-						else
-							set_soll_laufzeit(p, ROLLADEN_DIR_AUF);
-							if (p->soll_laufzeit != -1) // noch nicht in soll-Position?
-							{
-								p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
-								rolladen_cmd_drive (p);
-							}
+						else if (set_soll_laufzeit(p, ROLLADEN_DIR_AUF)) // noch nicht in soll-Position?
+						{
+							// noch nicht in soll-Position:
+							p->long_pressed_counter = 10; // 1 s
+							rolladen_cmd_drive (p);
+						}
 						break;
 
-					case 202: // Taster-Down im 2-Taster-Betrieb: HALT
+					case 202: // HALT ueber Web-Interface
 						p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
 						rolladen_cmd_stop (p);
 						break;
 
 					case 222: // Taster-Up im 2-Taster-Betrieb
-						p->long_pressed_counter = -1; // abmelden (2-Taster-Betrieb)
+						p->long_pressed_counter = -1; // abmelden
 						break;
 
 					default: // frame->data[3] = Positionsvorgabe in %
 						if (p->blockingTimer) return; // Befehl abblocken
 
 						p->soll_laufzeit = (int32_t)p->config.laufzeit * frame->data[3] / 100;
-						// canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("s %d"), p->soll_laufzeit);
+						canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("s %d"), p->soll_laufzeit);
 						if (p->soll_laufzeit < 0) p->soll_laufzeit = 0;
 						if (p->soll_laufzeit > p->config.laufzeit) p->soll_laufzeit = p->config.laufzeit;
 
@@ -255,6 +282,10 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 							p->soll_laufzeit = -1;
 							return; // ignorieren, falls der Rolladen faehrt  oder  die Soll-Pos. schon hat
 						}
+
+						p->kalibrieren = 0; // nicht kalibrieren
+						if (p->soll_laufzeit < p->laufzeit)	p->soll_dir = ROLLADEN_DIR_AB;
+						else p->soll_dir = ROLLADEN_DIR_AUF;
 						rolladen_cmd_drive (p);
 				}
 			}
@@ -267,8 +298,8 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 
 				if (p->power)
 				{
-					rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
 					p->change_dir_counter = 7; // 0,7 s (1-Taster-Betrieb: Richtungswechsel, falls lange gedrueckt)
+					rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
 				}
 				else
 				{
@@ -319,17 +350,17 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 // hier werden die anstehenden Rolladenauftraege jede 10-tel Sekunde verarbeitet/angestossen
 void rolladen_timer_handler(device_data_rolladen *p)
 {
-
 	//// Im 2-Taster-Betrieb manuell die Kalibrierung anstossen:
-	if (p->long_pressed_counter)  p->long_pressed_counter--;
+	if (p->long_pressed_counter > 0)  p->long_pressed_counter--;
 	else if (p->long_pressed_counter == 0)
 	{
-		p->summe_laufzeit = p->config.max_rekalib + 1; // Kalibrierung anstossen
+		p->kalibrieren = 1; // kalibrieren per Taster-"ZU"
+		extend_soll_laufzeit (p);
 		p->long_pressed_counter = -1; // abmelden
 	}
 
 	//// Richtungswechsel im 1-Taster-Betrieb:
-	if (p->change_dir_counter)  p->change_dir_counter--;
+	if (p->change_dir_counter > 0)  p->change_dir_counter--;
 	else if (p->change_dir_counter == 0)
 	{
 		p->last_dir = !p->last_dir; // Richtungswechsel
@@ -378,7 +409,7 @@ void rolladen_timer_handler(device_data_rolladen *p)
 		darlingtonoutput_setpin(p->config.port_power, p->soll_power);
 		p->power = p->soll_power; // Relais nur bei Aenderung ansteuern
 		p->exe_power = 0; // Default: Relais nicht ansprechen
-
-		rolladen_send_changed_info(p);
 	}
+
+	if (p->power) p->stoppuhr++;
 }

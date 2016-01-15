@@ -38,7 +38,7 @@ Frame {
 	 		<xsl:for-each select="board/heizung | raum/board/heizung">
 				<xsl:if test="(@sammel != '-')">
 				Frame label="<xsl:value-of select="substring-after(@name,'__')" />: " {
-					Selection item=HEIZUNG_<xsl:value-of select="@name" /> label="Heiz-Modus" icon="heating" mappings=["0"="aus", "1"="therm (3 Std. 19°C)", "2"="auto", "3"="✳ (3 Std. 10°C)", "4"="✳ (11 Std. 10°C)"]
+					Selection item=HEIZUNG_<xsl:value-of select="@name" /> label="Heiz-Modus" icon="heating" mappings=["0"="aus", "1"="therm (3 Std.)", "2"="auto", "3"="✳ (3 Std.)", "4"="✳ (11 Std.)"]
 					Switch item=SOLLTEMP_<xsl:value-of select="@name" /> label="[soll: %d °C]" icon="temperature" mappings=["1"="−", "2"="+"]
 				}
 				</xsl:if>
@@ -130,7 +130,7 @@ Frame {
 
 <xsl:template match="heizung">
 	Frame label="<xsl:value-of select="substring-after(@name,'__')" />: " {
-		Selection item=HEIZUNG_<xsl:value-of select="@name" /> label="Heiz-Modus<!-- [%d]-->" icon="heating" mappings=["0"="aus", "1"="therm (3 Std. 19°C)", "2"="auto", "3"="✳ (3 Std. 10°C)", "4"="✳ (11 Std. 10°C)"]
+		Selection item=HEIZUNG_<xsl:value-of select="@name" /> label="Heiz-Modus<!-- [%d]-->" icon="heating" mappings=["0"="aus", "1"="therm (3 Std.)", "2"="auto", "3"="✳ (3 Std.)", "4"="✳ (11 Std.)"]
 		<!-- Switch visibility=[HEIZUNG_<xsl:value-of select="@name" />!=0] item=SOLLTEMP_<xsl:value-of select="@name" /> label="[%d °C, soll: %d °C]" icon="temperature"  mappings=["1"="−", "2"="+"]-->
 		<!-- Ggf. Setpoint  statt switch mappings=["1"="−", "2"="+"] -->
 		<!-- Setpoint item=SOLLTEMP_<xsl:value-of select="@name" /> label="[soll: %d °C]" icon="temperature"  minValue=10 maxValue=28 step=0.5  -->

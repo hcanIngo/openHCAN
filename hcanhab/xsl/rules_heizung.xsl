@@ -20,11 +20,14 @@ when
 	// Item muss autoupdate="false" haben, sodass wenn der Button in der Sitemap gedrückt wird, das item nicht den Button-State annimmt!
 then 
 	sollTemp<xsl:value-of select="@name" /> = SOLLTEMP_<xsl:value-of select="@name" />.state as DecimalType // der item-State
-	if (receivedCommand==2) sollTemp<xsl:value-of select="@name" /> = sollTemp<xsl:value-of select="@name" /> + 1
+	if (receivedCommand==2) {
+		if (sollTemp<xsl:value-of select="@name" />&lt;17) sollTemp<xsl:value-of select="@name" /> = 20
+		else sollTemp<xsl:value-of select="@name" /> = sollTemp<xsl:value-of select="@name" /> + 1
+	}
 	if (receivedCommand==1) sollTemp<xsl:value-of select="@name" /> = sollTemp<xsl:value-of select="@name" /> - 1
 	
-	if(sollTemp<xsl:value-of select="@name" />&lt;0)  sollTemp<xsl:value-of select="@name" /> = 0
-	if(sollTemp<xsl:value-of select="@name" />&gt;30) sollTemp<xsl:value-of select="@name" /> = 30
+	if (sollTemp<xsl:value-of select="@name" />&lt;0)  sollTemp<xsl:value-of select="@name" /> = 0
+	if (sollTemp<xsl:value-of select="@name" />&gt;30) sollTemp<xsl:value-of select="@name" /> = 30
 	
 	logInfo("", "sollTemp<xsl:value-of select="@name" />: " + sollTemp<xsl:value-of select="@name" />.toString)
 	// say("Solltemp: " + sollTemp<xsl:value-of select="@name" />.toString)

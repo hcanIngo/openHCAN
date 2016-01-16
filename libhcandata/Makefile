@@ -12,7 +12,7 @@ endif
 INC = -I.. -I. -I../include
 CXXFLAGS = -Wall -O2 $(INC) -fPIC #-Werror
 
-all: clean dep libhcandata.so
+all: clean libhcandata.so
 
 install:
 	sudo /usr/bin/install ./binary_$(ARCH)/libhcandata.so /usr/lib
@@ -33,6 +33,8 @@ $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
+	>.depend
+	make dep
 	sudo rm -f *.o ./binary_$(ARCH)/libhcandata.*
 
 ctags:

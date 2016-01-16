@@ -70,9 +70,9 @@ cDienste:
 cppDienste:	
 	cd libhcan++/; sudo make $(xx)
 	cd telican/; sudo make $(xx)
-	cd libhcandata/; sudo make dep; make $(xx)
-	cd hcanswd/; sudo make dep; make $(xx)
-	cd hcandq/; sudo make dep; make $(xx)
+	cd libhcandata/; make $(xx)
+	cd hcanswd/; make $(xx)
+	cd hcandq/; make $(xx)
 	
 hcanweb_client: 
 	cd hcanweb; sudo make zip ver=unlabeled

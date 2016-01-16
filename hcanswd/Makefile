@@ -20,7 +20,7 @@ endif
 INC = -I. -I.. -I../libhcan++ -I../libhcandata -I../include
 CXXFLAGS = -Wall -Werror -O2 $(INC) -g
 
-all: dep libhcan++ libhcandata hcanswd
+all: libhcan++ libhcandata hcanswd
 
 libhcan++:
 	ln -sf libhcan++.so.2.0 libhcan++.so
@@ -35,6 +35,8 @@ hcanswd: $(OBJ) libhcan++ libhcandata
 	mv $@ binary_$(ARCH)
 
 clean:
+	>.depend
+	make dep
 	rm -f *.o
 	sudo rm -f ./binary_$(ARCH)/hcanswd
 

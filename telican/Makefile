@@ -29,7 +29,7 @@ INC = -I. -I.. -I../libhcan++ -I../include `pkg-config libxml++-2.6 --cflags`
 CXXFLAGS = -Wall -Werror -O2 $(INC) -fPIC
 
 
-all: dep $(CONDITIONAL_CLEAN) libhcan++ $(TARGET)
+all: $(CONDITIONAL_CLEAN) libhcan++ $(TARGET)
 
 libhcan++:
 	ln -sf libhcan++.so.2.0 libhcan++.so
@@ -44,6 +44,8 @@ $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
+	>.depend
+	make dep
 	rm -f *.o $(TARGET)
 	#cd ../libhcan++ && make clean
 	sudo rm -f ./binary_$(ARCH)/$(TARGET)

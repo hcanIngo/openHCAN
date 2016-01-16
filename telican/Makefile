@@ -29,7 +29,7 @@ INC = -I. -I.. -I../libhcan++ -I../include `pkg-config libxml++-2.6 --cflags`
 CXXFLAGS = -Wall -Werror -O2 $(INC) -fPIC
 
 
-all: $(CONDITIONAL_CLEAN) libhcan++ $(TARGET)
+all: dep $(CONDITIONAL_CLEAN) libhcan++ $(TARGET)
 
 libhcan++:
 	ln -sf libhcan++.so.2.0 libhcan++.so

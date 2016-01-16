@@ -534,7 +534,7 @@ hcan_transport::recv_DEVICE_TYPE_REQUEST(const uint16_t src,
 	 * Liefert den Geraete-Typ
 	 * 
 	 * 
-	 * @param arch : 0 = Atmega8 1 = Atmega32
+	 * @param arch : 0 = Atmega8, 1 = Atmega32, 2 = Atmega644p
 	 *
 	 * 
 	 * @param type : Hardware-Board-Typ
@@ -562,7 +562,7 @@ hcan_transport::send_DEVICE_TYPE_REPLAY(const uint16_t src,
 	 * Liefert den Geraete-Typ
 	 * 
 	 * 
-	 * @param arch : 0 = Atmega8 1 = Atmega32
+	 * @param arch : 0 = Atmega8, 1 = Atmega32, 2 = Atmega644p
 	 *
 	 * 
 	 * @param type : Hardware-Board-Typ

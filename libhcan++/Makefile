@@ -27,7 +27,7 @@ endif
 
 
 
-all: $(CONDITIONAL_CLEAN) $(TARGET).so
+all: dep $(CONDITIONAL_CLEAN) $(TARGET).so
 
 install:
 	/usr/bin/install ./binary_$(ARCH)/$(TARGET).so /usr/lib

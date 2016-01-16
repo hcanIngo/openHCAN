@@ -20,7 +20,7 @@ endif
 INC = -I. -I.. -I../libhcan++ -I../libhcandata -I../include
 CXXFLAGS = -Wall -Werror -O2 $(INC) -g
 
-all: libhcan++ libhcandata hcanswd
+all: dep libhcan++ libhcandata hcanswd
 
 libhcan++:
 	ln -sf libhcan++.so.2.0 libhcan++.so

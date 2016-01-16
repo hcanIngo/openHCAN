@@ -1,0 +1,2 @@
+
+Alle hier enthaltenen Dateien sind generiert und sollen nicht ins git gebracht werden.

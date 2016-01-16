@@ -15,8 +15,8 @@ openHAB für openHCAN verwenden:
 
 
 4. Im MakefileDefines.inc folgende Einstellungen vornehmen: 
-	A) STATIC_CONFS = xy/conf  einstellen. 
-	   Bsp.-/Vorlagedateien siehe conf_templates. Diese werden bei "make installHabHcan" ueberschrieben!
+	A) CONF = xy/conf  einstellen. 
+	   Bsp.-/Vorlagedateien siehe conf_templates. 
 	B) ZIEL_PC = localhost   oder   ZIEL_PC = bananian  waehlen
 	C) Fuer localhost den ZIEL_USER anpassen
 

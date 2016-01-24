@@ -158,27 +158,6 @@ inline void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p, uint8_t 
 }
 
 
-
-// Mit Hilfe des Callbacks wird geprüft, ob eine HCAN_RTS Nachricht mit niedrigerem Level gesendet wurde.
-void dcf77_receiver_can_callback(const canix_frame *frame)
-{
-
-  if (frame->data[1] == HCAN_RTS_TIME_INFO) {
-    uint8_t i;
-    // Alle DCF77-Empfänger werden durchsucht und separat geprüft:
-    // (Der Code ist allerdings nicht dafür ausgelegt, daß mehr als ein DCF77-Device angeschlossen wird.)
-    for (i = 0; i < MAX_PDEVICE_DATA; i++)      {
-      device_data_dcf77_receiver *p = (device_data_dcf77_receiver *) pdevice_data[i];      
-      if (p && p->type == EDS_dcf77_receiver_BLOCK_ID)
-	// Wenn der Level der empfangenen Nachricht niedriger als der Level des Devices ist,
-	// wird dessen Zähler auf 0 gesetzt.
-	if (frame->data[2] < p->config.level)
-	  p->last_time_frame_received = 0;
-    }
-  }
-}
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 

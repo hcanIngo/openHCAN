@@ -9,6 +9,7 @@
 
 #include <devices.h>
 #include <timeservice.h>
+#include <dcf77_receiver.h>
 #include <hcan_multicast.h>
 
 inline void timeservice_timer_handler(device_data_timeservice *p, uint8_t zyklus)
@@ -69,30 +70,38 @@ void timeservice_can_callback(const canix_frame *frame)
 	switch (frame->data[1])
 	{
 		case HCAN_RTS_TIME_INFO : 
+		{
+			uint8_t i;
+			for (i = 0; i < MAX_PDEVICE_DATA; i++)
 			{
-				uint8_t i;
-				for (i = 0; i < MAX_PDEVICE_DATA; i++)
+				// if this is a timeservice instance:
+				device_data_timeservice *p = (device_data_timeservice *) pdevice_data[i];
+				if (p && p->type == EDS_timeservice_BLOCK_ID)
 				{
-					device_data_timeservice *p = (device_data_timeservice *) 
-						pdevice_data[i];
+					// now check, if the level is lower than our
+					// level:
 
-					// if this is a timeservice instance:
-					if (p && p->type == EDS_timeservice_BLOCK_ID)
+					if (frame->data[2] < p->config.level)
 					{
-						// now check, if the level is lower than our
-						// level:
-						
-						if (frame->data[2] < p->config.level)
-						{
-							// yes, there is a master outside in the CAN
-							// universe, so reset our counter:
+						// yes, there is a master outside in the CAN
+						// universe, so reset our counter:
 
-							p->last_time_frame_received = 0;
-						}
+						p->last_time_frame_received = 0;
 					}
 				}
+
+				// Hier wird geprüft, ob eine HCAN_RTS Nachricht mit niedrigerem Level gesendet wurde:
+				device_data_dcf77_receiver *p2 = (device_data_dcf77_receiver *) pdevice_data[i];
+				if (p2 && p2->type == EDS_dcf77_receiver_BLOCK_ID)
+				{
+					// Wenn der Level der empfangenen Nachricht niedriger als der Level des Devices ist,
+					// wird dessen Zähler auf 0 gesetzt.
+					if (frame->data[2] < p2->config.level)
+						p2->last_time_frame_received = 0;
+				}
 			}
-			break;
+		}
+		break;
 	}
 }
 

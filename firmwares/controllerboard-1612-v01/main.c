@@ -15,7 +15,6 @@
 #include "onewire.h"
 #include <timer.h>
 #include <timeservice.h>
-#include <dcf77_receiver.h>
 #include <darlingtonoutput.h>
 
 
@@ -94,9 +93,6 @@ int main(void)
 	// setup timeservice can frame handler
 	canix_reg_frame_callback(timeservice_can_callback, HCAN_MULTICAST_INFO,
 			HCAN_PROTO_SFP, HCAN_SRV_RTS);
-
-	// canix_reg_frame_callback(dcf77_receiver_can_callback, HCAN_MULTICAST_INFO,
-	// 		HCAN_PROTO_SFP, HCAN_SRV_RTS);
 
 	devices_load_config();
 	

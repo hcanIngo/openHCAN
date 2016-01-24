@@ -22,7 +22,8 @@ print_deviceList:
 devices_xml:
 	@#rm -f devices.xml
 	@#> devices.xml
-	@echo "<C1612-devicelist>" >	 devices.xml
+	@echo "<!-- AUTOMATICLY GENERATED FROM /device/Makefile -->" >	devices.xml
+	@echo "<C1612-devicelist>" >> devices.xml
 	@echo $(OBJ_DEVICES) >> devices.xml
 	@echo "</C1612-devicelist>" >> devices.xml
 

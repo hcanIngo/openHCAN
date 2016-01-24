@@ -6,7 +6,12 @@ Schritte zum neuen Device:
 2. Ggf. in openHCAN/xml/hcan-protocol.xml neue Messages definieren.
 
 3. In openHCAN/firmwares/controllerboard-1612-v01/devices folgende Dateien anlegen: 
-   - neuesDevice.h
-   - neuesDevice.c
-   
+   - NameDesDevice.h
+   - NameDesDevice.c
+
+4. In openHCAN/firmwares/controllerboard-1612-v01/
+   make clean; make all
+   ausfuehren, um die unter openHCAN/firmwares/controllerboard-1612-v01/devices
+   liegenden Devices einzubinden und alles zu uebersetzen und linken
+
 Hinweis: Devices im Verzeichnis "devicePool" werden nicht eingebunden.

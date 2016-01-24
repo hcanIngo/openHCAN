@@ -1,3 +1,4 @@
+<!-- AUTOMATICLY GENERATED FROM /device/Makefile -->
 <C1612-devicelist>
 <device name="analogComparator"></device> <device name="heizung"></device> <device name="helligkeitssensor"></device> <device name="lichtzone"></device> <device name="multitaster"></device> <device name="ports"></device> <device name="poti"></device> <device name="powerportAutomat"></device> <device name="powerport"></device> <device name="reedkontakt"></device> <device name="rolladenAutomat"></device> <device name="rolladen"></device> <device name="rolladenSchlitzpos"></device> <device name="schalter"></device> <device name="taster"></device> <device name="tempsensor"></device> <device name="zeitschaltuhr"></device> <device name="zeitzone"></device> <device name="zentralheizungspumpe"></device>
 </C1612-devicelist>

@@ -60,7 +60,6 @@ typedef struct
 
 void dcf77_receiver_init(device_data_dcf77_receiver* p, eds_block_p it);
 inline void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p, uint8_t zyklus);
-void dcf77_receiver_can_callback(const canix_frame *frame);
 
 // Routinen zur Signalauswertung:
 void scan_dcf77( device_data_dcf77_receiver *p );

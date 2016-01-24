@@ -5,6 +5,8 @@ include ../../ARCH.inc
 
 OBJ_LOCAL := $(patsubst %.c,%.o,$(wildcard *.c))
 
+OBJ_DEVICES := $(patsubst %.c,%.o,$(wildcard ./devices/*.c))
+
 .PHONY:	release
 
 #Der atmega644 hat die doppelte EEPROM- und SRAM-Groesse gegenueber dem atmega32.
@@ -20,7 +22,7 @@ OBJ     = ../../canix/canix.o ../../canix/mcp2515.o \
 		  ../../canix/hcan_rts.o ../../canix/syslog.o \
 		  ../../canix/eds.o \
 		  ../../canix/mem_check.o \
-		  $(OBJ_LOCAL)
+		  $(OBJ_LOCAL) $(OBJ_DEVICES)
 
 export F_CPU  = 3686400
 #export F_CPU  = 16000000
@@ -53,6 +55,7 @@ $(TARGET).out : $(OBJ)
 clean:
 	rm -f *.o *.map *.out ../../canix/*.o
 	sudo rm -f ./C1612_$(MCU)/*.hex
+	cd devices; rm -f *.o; make all
 
 ctags:
 	ctags *.c *.h ../../canix/*.c ../../canix/*.h ../../include/*.h
@@ -71,8 +74,3 @@ release:
 	make clean
 	make
 	sudo mv C1612_$(MCU)/$(TARGET).hex C1612_$(MCU)/controller1612-build-`cat buildver`-`date +%Y%m%d`.hex
-
-rolladen-statemachine.png : rolladen-statemachine.dot
-	dot -Tpng rolladen-statemachine.dot  > rolladen-statemachine.png
-
-

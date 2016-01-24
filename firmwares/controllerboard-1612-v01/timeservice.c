@@ -1,4 +1,3 @@
-#include <timeservice.h>
 #include <canix/syslog.h>
 #include <canix/rtc.h>
 #include <hcan.h>
@@ -9,11 +8,12 @@
 #include <avr/wdt.h>
 
 #include <devices.h>
+#include <timeservice.h>
 #include <hcan_multicast.h>
 
-// wird alle 1 sec aufgerufen, fuer jede timeservice-Instanz einmal
-void timeservice_timer_handler(device_data_timeservice *p)
+inline void timeservice_timer_handler(device_data_timeservice *p, uint8_t zyklus)
 {
+	if (zyklus != 1) return; // 1s-Zyklus verwendet
 
 	// Increment our counter
 	if (p->last_time_frame_received < 255)
@@ -63,7 +63,6 @@ void timeservice_timer_handler(device_data_timeservice *p)
 		}
 	}
 }
-
 
 void timeservice_can_callback(const canix_frame *frame)
 {

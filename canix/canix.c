@@ -568,7 +568,6 @@ void canix_reg_rtc_callback(canix_rtc_callback callback)
 void canix_process_messages(void)
 {
 	uint8_t i;
-
 	for (i = 0; i < MAX_IDLE_CALLBACKS; i++)
 	{
 		if (can_message_available())

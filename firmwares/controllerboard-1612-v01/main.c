@@ -12,14 +12,15 @@
 #include <avr/pgmspace.h>
 
 #include <devices.h>
+#include "onewire.h"
 #include <timer.h>
+#include <timeservice.h>
+#include <dcf77_receiver.h>
 #include <darlingtonoutput.h>
-#include <onewire.h>
 
-void hauselektrik_callback(const canix_frame *frame)
+
+void controllerboard_callback(const canix_frame *frame)
 {
-	uint8_t i;
-
 	// Dieser Handler wird fuer alle Destination Adressen ausgefuehrt
 	// daher muss gefiltert werden, was uns betrifft und was nicht:
 	if ( (frame->data[0] != HCAN_SRV_HES))
@@ -31,68 +32,6 @@ void hauselektrik_callback(const canix_frame *frame)
 				(frame->dst != HCAN_MULTICAST_INFO)))
 		// Diese Message ist nicht interessant, daher ignorieren
 		return;
-
-	for (i = 0; i < MAX_PDEVICE_DATA; i++)
-	{
-		uint8_t *p = (uint8_t *) pdevice_data[i];
-		if (p)
-		{
-			switch (*p)
-			{
-				case EDS_analogComparator_BLOCK_ID:
-					analogComparator_can_callback ( (device_data_analogComparator*) p, frame);
-					break;
-				case EDS_powerportAutomat_BLOCK_ID:
-					powerportAutomat_can_callback ( (device_data_powerportAutomat*) p, frame);
-					break;
-				case EDS_rolladenAutomat_BLOCK_ID:
-					rolladenAutomat_can_callback ( (device_data_rolladenAutomat*) p, frame);
-					break;
-				case EDS_dunstabzugport_BLOCK_ID: 
-					dunstabzugport_can_callback ( (device_data_dunstabzugport*) p, frame); 
-					break;
-				case EDS_heizung_BLOCK_ID: 
-					heizung_can_callback ( (device_data_heizung*) p, frame); 
-					break;
-				case EDS_lichtzone_BLOCK_ID: 
-					lichtzone_can_callback ( (device_data_lichtzone*) p, frame); 
-					break;
-				case EDS_multitaster_BLOCK_ID:
-					multitaster_can_callback ( (device_data_multitaster *)p, frame);
-					break;
-				case EDS_powerport_BLOCK_ID: 
-					powerport_can_callback ( (device_data_powerport*) p, frame); 
-					break;
-				case EDS_reedkontakt_BLOCK_ID: 
-					reedkontakt_can_callback ( (device_data_reedkontakt*) p, frame); 
-					break;
-				case EDS_rolladen_BLOCK_ID: 
-					rolladen_can_callback ( (device_data_rolladen*) p, frame); 
-					break;
-				case EDS_rolladenSchlitzpos_BLOCK_ID:
-					rolladenSchlitzpos_can_callback ( (device_data_rolladenSchlitzpos*) p, frame);
-					break;
-				case EDS_schalter_BLOCK_ID: 
-					schalter_can_callback ( (device_data_schalter*) p, frame); 
-					break;
-				case EDS_zentralheizungspumpe_BLOCK_ID:
-					zentralheizungspumpe_can_callback ( (device_data_zentralheizungspumpe*) p, frame);
-					break;
-				case EDS_tastdimmer_BLOCK_ID: 
-					tastdimmer_can_callback ( (device_data_tastdimmer*) p, frame); 
-					break;
-				case EDS_tempsensor_BLOCK_ID: 
-					tempsensor_can_callback ( (device_data_tempsensor*) p, frame); 
-					break;
-				case EDS_zeitschaltuhr_BLOCK_ID: 
-					zeitschaltuhr_can_callback ( (device_data_zeitschaltuhr*) p, frame); 
-					break;				
-				case EDS_zeitzone_BLOCK_ID: 
-					zeitzone_can_callback ( (device_data_zeitzone*) p, frame); 
-					break;
-			}
-		}
-	}
 
 	switch (frame->data[1])
 	{
@@ -148,13 +87,17 @@ int main(void)
 	canix_reg_frame_callback(hauselektrik_callback, -1, 
 			HCAN_PROTO_SFP, HCAN_SRV_HES);
 
+	canix_reg_frame_callback(controllerboard_callback, -1,
+			HCAN_PROTO_SFP, HCAN_SRV_HES);
+
+
 	// setup timeservice can frame handler
 	canix_reg_frame_callback(timeservice_can_callback, HCAN_MULTICAST_INFO,
 			HCAN_PROTO_SFP, HCAN_SRV_RTS);
 
-	canix_reg_frame_callback(dcf77_receiver_can_callback, HCAN_MULTICAST_INFO,
-	 		HCAN_PROTO_SFP, HCAN_SRV_RTS);
-	
+	// canix_reg_frame_callback(dcf77_receiver_can_callback, HCAN_MULTICAST_INFO,
+	// 		HCAN_PROTO_SFP, HCAN_SRV_RTS);
+
 	devices_load_config();
 	
 	canix_reg_rtc_callback(timer_handler);

@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <canix/syslog.h>
-#include "darlingtonoutput.h"
-#include "ports.h"
+#include <darlingtonoutput.h>
+#include "devices/ports.h"
 
 void darlingtonoutput_init(void)
 {

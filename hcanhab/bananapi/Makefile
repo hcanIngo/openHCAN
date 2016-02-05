@@ -26,13 +26,12 @@ cleanZielOrdner:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) rm -f -R /home/$(ZIEL_USER)/$(ZIEL_ORDNER)
 
 install_oracle_arm_jre:
-	@#cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u33-linux-arm-vfp-hflt.tar.gz
-	cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u65-linux-arm32-vfp-hflt.tar.gz
+	@#cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u65-linux-arm32-vfp-hflt.tar.gz
+	cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u71-linux-arm32-vfp-hflt.tar.gz
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/jdk1.8.0
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/myOpenHabInstallation
-	@#$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_33/* $(SCP_ZIEL_DIR)/../jdk1.8.0
-	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_65/* $(SCP_ZIEL_DIR)/../jdk1.8.0
-	# Falls noetig, auf Bananapi: sudo chmod 755 /home/tt/jdk1.8.0/*
+	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_71/* $(SCP_ZIEL_DIR)/../jdk1.8.0
+	# Falls noetig, auf dem Bananapi: sudo chmod 755 /home/tt/jdk1.8.0/*
 
 openhab_start_withScreen:
 	@# Damit wird das richtige JDK verwendet und die Ausgaben von Screen gemanaged werden: 

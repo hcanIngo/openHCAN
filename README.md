@@ -11,7 +11,7 @@ Zur Wartung und komfortableren Bedienung ist der CAN-Bus ueber das oben bereits 
 Fuer den eigentlichen Busbetrieb ist aber kein PC noetig - die Module sind voellig autark funktionsfaehig. Sollte also der Rechner ausfallen, so funktionieren Licht, Rollaeden, Heizung etc weiterhin.
 
 Motivation
-HCAN wurde aus der Motivation heraus entwickelt, eine freie (im Gegensatz zu einer proprietaeren) Hausautomatisierung zu realisieren. Primaer entwickle ich HCAN fuer unser Haus; dem OpenSource Gedanken folgendend ist es unter der GNU Public License veroeffentlicht.
+openHCAN wurde aus der Motivation heraus entwickelt, eine freie (im Gegensatz zu einer proprietaeren) Hausautomatisierung zu realisieren. Dem OpenSource Gedanken folgendend ist openHCAN unter der GNU Public License veroeffentlicht.
 
 [Mailingliste](https://groups.google.com/forum/?hl=de#!forum/openhcan) | 
 [Forum](http://openhcan.org) | 

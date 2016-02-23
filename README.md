@@ -4,7 +4,7 @@ openHCAN ist eine Hausautomatisierungsloesung auf CAN-Bus Basis. Zielgruppe ist 
 
 Die Hausautomatisierung besteht aus einer Reihe von Modulen, die ueber den CAN Bus miteinander kommunizieren. Die eigentliche Arbeit erledigen die Controller-Module: hier sind Relais zum Schalten von 230V-Lasten und Sensoren wie Taster, Reedkontakte, Temperatur-Sensoren etc angeschlossen.
 
-Bedient wird die Hausautomatisierung ueber die Bedienfelder, kleine Unterputz- Module mit einen LCD-Display und ein paar Tastern. Hier kann man z.B. die Raumtemperatur einstellen, Stati abfragen etc. Triviale Dinge wie Licht einschalten o.ae. kann natuerlich weiterhin per Taster gemacht werden.
+Bedient wird die Hausautomatisierung ueber eine Weboberflaeche, die Bedienfelder, kleine Unterputz- Module mit einen LCD-Display und ein paar Tastern. Hier kann man z.B. die Raumtemperatur einstellen, Stati abfragen etc. Triviale Dinge wie Licht einschalten o.ae. kann natuerlich weiterhin per Taster gemacht werden.
 
 Zur Wartung und komfortableren Bedienung ist der CAN-Bus ueber das oben bereits erwaehnte Hostinterface an einen Host-Rechner angebunden. Bisher existiert mit telican ein Werkzeug zur Wartung und Konfiguration.
 

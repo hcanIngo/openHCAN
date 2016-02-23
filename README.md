@@ -13,4 +13,7 @@ Fuer den eigentlichen Busbetrieb ist aber kein PC noetig - die Module sind voell
 Motivation
 HCAN wurde aus der Motivation heraus entwickelt, eine freie (im Gegensatz zu einer proprietaeren) Hausautomatisierung zu realisieren. Primaer entwickle ich HCAN fuer unser Haus; dem OpenSource Gedanken folgendend ist es unter der GNU Public License veroeffentlicht.
 
-https://github.com/hcanIngo/openHCAN/wiki
+[Mailingliste](https://groups.google.com/forum/?hl=de#!forum/openhcan) | 
+[Forum](http://openhcan.org) | 
+[Wiki] (https://github.com/hcanIngo/openHCAN) | 
+[Quellen] (https://github.com/hcanIngo/openHCAN/wiki)

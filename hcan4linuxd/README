@@ -1,4 +1,4 @@
 Dieses ist eine Alternative zum hcanhid auf dem Bananapi und can4linux-Kerneltreiber.
 
 Eine Anleitung die Bananian auf dem Bananapi verwendet findet sich hier: 
-http://wiki.openhcan.org/doku.php?id=bananapi
+https://github.com/hcanIngo/openHCAN/wiki/AnleitungCan4LinuxKernelErstellen

@@ -32,7 +32,7 @@
  
  
 
- Getestet mit folgende Compiler-Versionen:  
+ Getestet mit folgender Compiler-Versionen:  
  - gcc und g++ in der Version 4.4
  - libboost 1.46.1
  - avr-gcc-4.5.3

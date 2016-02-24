@@ -1,5 +1,9 @@
+Openhab: 
+Switch LAMPE_OG_K1__Decke_Tuer 	/*"Decke_Tuer [MAP(de.map):%s]"*/ (OG_K1, Lampen) { mqtt=">[bpiBroker:cb>/HES/10/:command:ON:2], [bpiBroker:cb>/HES/11/:command:OFF:2], <[bpiBroker:cb</HES/2/:state:TOGGLE], autoupdate=false" }
+
 MQTTlens: 
-- publish a topic="cb<", Msg=HES/1/1
+- publish a topic="cb<", Msg=HES/1/2
+                             HES/TOGGLE/GRUPPE
 - subscribe a topic="cb>"
 ...
 tt@bananapi:~/openHCAN/hcan4mqttc$ ./binary_i386/hcan4mqttc -D

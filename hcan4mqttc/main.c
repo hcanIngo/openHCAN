@@ -159,6 +159,8 @@ int main(int argc, char ** argv)
 		if (res == 0) // timeout
 		{
 			if(debug) printf("select timeout\n");
+			publishm (&info); // info.cf bereits befuellt
+			runm(&info); // TODO send to broker
 		}
 
 		// erst schreiben
@@ -167,10 +169,11 @@ int main(int argc, char ** argv)
 		{
 			if(debug) printf("info to broker (busy)\n");
 			publishm (&info); // info.cf bereits befuellt
+			runm(&info);
 			info_to_broker_busy = 0;
 		}
 
-		if (FD_ISSET(can4linux_fd, &wfd))
+		if (FD_ISSET(can4linux_fd, &wfd)) // TODO nur wenn wir einen Frame vom broker haben
 		{
 			int n = 0;
 			n = write(can4linux_fd, &frame_to_can4linux, 1); // write CANFrame, 1 = ein Frame (nicht ein Byte)
@@ -201,7 +204,7 @@ int main(int argc, char ** argv)
 				// frame_to_can4linux wurde in on_message() gefuellt
 				if(debug)
 				{
-					printf("recvd frame from broker: eid=%lu %d\n", frame_to_can4linux.id, frame_to_can4linux.length);
+					printf("recvd frame from broker: eid=%d %d\n", frame_to_can4linux.id, frame_to_can4linux.length);
 					printf("id: s%d d%d proto%d prio%d\n",
 						frame_to_can4linux.id & 0x3ff, // src
 						(frame_to_can4linux.id >> 10) & 0x3ff, // dest
@@ -247,11 +250,12 @@ int main(int argc, char ** argv)
 			}
 			else
 			{
-				if(debug) printf("recvd frame from can4linux: %lu %d\n", (long unsigned int)cf4l.id, cf4l.length);
+				if(debug) printf("recvd frame from can4linux");
+				assert(cf4l.length >= 0 && cf4l.length <= 8);
+				if(debug) printf("id=%lu, len=%d\n", (long unsigned int)cf4l.id, cf4l.length);
 				if(debug) printf("id: s%d d%d p%d p%d\n", cf4l.id & 0x3ff, (cf4l.id >> 10) & 0x3ff, (cf4l.id >> 20) & 0x07, (cf4l.id >> 24)  & 0x03);
 				if(debug) printf("flags: %s\n", (cf4l.flags & MSG_EXT) ? "MSG_EXT":"baseFormat");
 				if(debug) printf("data(hex): %x %x %x %x\n", cf4l.data[0], cf4l.data[1], cf4l.data[2], cf4l.data[3]);
-				assert(cf4l.length >= 0 && cf4l.length <= 8);
 
 				// Einen Frame von can4linux erhalten, versenden an den broker vorbereiten
 				if (!info_to_broker_busy)

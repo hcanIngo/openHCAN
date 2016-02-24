@@ -14,10 +14,7 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install libmosquitto-dev
 
-2. mosquitto_pub MQTT-Client:
-fuer mosquitto_pub (client) in tick.sh
-sudo apt-get install mosquitto-clients
 
-3. mosquitto MQTT-Broker (Datenvermittlungszentrale):
+2. mosquitto MQTT-Broker (Datenvermittlungszentrale):
 sudo apt-get install mosquitto
 -> startet automatisch.  Kontrolle: ps -A | grep mosq

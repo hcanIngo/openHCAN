@@ -38,6 +38,10 @@ void initm(struct client_info *info)
 	struct mosquitto *m = mosquitto_new("cb_client", true, udata);
 	TRACE("mosquitto_new -> new cb_client\n");
 
+	int major, minor, revision;
+	mosquitto_lib_version(&major, &minor, &revision);
+	if(debug) printf("mosquitto-lib-version: %d.%d.%d\n", major, minor, revision);
+
 	if (m == NULL)
 	{
 		exitm("init() failure\n");
@@ -51,6 +55,8 @@ void initm(struct client_info *info)
 	{
 		exitm("connectm() failure\n");
 	}
+
+
 }
 
 // Callback, wenn die Verbindung zum Broker steht: Dann wird abonniert
@@ -87,8 +93,8 @@ static inline uint8_t get_proto(uint32_t extid)
 
 void publishm(struct client_info *info)
 {
-	char from_cb[16];
-	char from_cb_tmp[32];
+	char from_cb[64];
+	char from_cb_tmp[128];
 	size_t payloadlen = 0;
 
 	if (info->cf.size > 8)
@@ -109,12 +115,13 @@ void publishm(struct client_info *info)
 			}
 			payloadlen = strlen(from_cb);
 
-			TRACE("cb>: %s size=%d\n", from_cb, payloadlen); // topic "cb>" (vom CAN-Bus)
+			TRACE("cb>: %s size=%u\n", from_cb, payloadlen); // topic "cb>" (vom CAN-Bus)
 			int res = mosquitto_publish(info->m, NULL, "cb>", payloadlen,
 					from_cb, 0, false);
 			if (res != MOSQ_ERR_SUCCESS)
 			{
-				exitm("publish\n");
+				TRACE("ERROR: res=%d\n", res);
+				exitm("exit @ publish\n");
 			}
 		}
 		else
@@ -132,7 +139,7 @@ static void on_message(struct mosquitto *m, void *udata, const struct mosquitto_
 		return;
 	}
 	TRACE(":) got message @ %s: (%d, QoS %d, %s) '%s'\n", msg->topic,
-			msg->payloadlen, msg->qos, msg->retain ? "R" : "!r", msg->payload);
+			msg->payloadlen, msg->qos, msg->retain ? "R" : "!r", (char *)msg->payload);
 
 	struct client_info *info = (struct client_info *) udata;
 

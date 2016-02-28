@@ -36,6 +36,8 @@ void initm(struct client_info *info)
 
 	// Mosquitto-Client mit dem Namen "cb_client" (= CAN-Bus-Client)
 	struct mosquitto *m = mosquitto_new("cb_client", true, udata);
+	mosquitto_max_inflight_messages_set(m, 1); // qos=1
+	// mosquitto_tls_set() // SSL/TLS
 	TRACE("mosquitto_new -> new cb_client\n");
 
 	int major, minor, revision;

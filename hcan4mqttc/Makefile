@@ -18,8 +18,8 @@ else
 	LDFLAGS += -lmosquitto
 endif
 
-CFLAGS = -I. -Wall -g #-DDEBUG0 -O2
-CFLAGS += -DDEBUG
+CFLAGS = -I. -Wall -g #-O2
+#CFLAGS += -DDEBUG
 
 all: $(CONDITIONAL_CLEAN) $(TARGET)
 

@@ -38,7 +38,7 @@
 #include <lcdstatemachine.h>
 
 // Fuer die Heizungs-Modi-Konstanten
-#include "../controllerboard-1612-v01/heizung.h"
+#include "../controllerboard-1612-v01/devices/heizung.h"
 
 //Standardwerte festlegen:
 const uint16_t VORGABE_TEMPERATUR_FROSTSCHUTZ = 10*16; // 10 °C (fixer Faktor 16, da in 16tel Grad)

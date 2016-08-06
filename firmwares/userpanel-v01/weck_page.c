@@ -38,9 +38,6 @@
 #include <hcan-def.h>
 #include <lcdstatemachine.h>
 
-// Fuer die Powerport-Feature-Konstanten
-#include "../controllerboard-1612-v01/powerport.h"
-
 volatile uint8_t weck_details_expected = 0;
 volatile uint8_t weck_details_weck_id = 0;
 volatile uint16_t weck_details_dauer = 0;

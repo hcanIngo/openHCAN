@@ -25,7 +25,7 @@
 #include <eds-structs.h>
 
 // Fuer die Powerport-Feature-Konstanten
-#include "../controllerboard-1612-v01/powerport.h"
+#include "../controllerboard-1612-v01/devices/powerport.h"
 /* POWERPORT_FEATURE_WECK_VERZOEGERT_EIN	4 //Bit4
  * POWERPORT_FEATURE_WECK_AUTO_AUS			5 //Bit5 */
 

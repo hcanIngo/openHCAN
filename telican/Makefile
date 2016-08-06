@@ -26,7 +26,8 @@ else
 endif
 
 INC = -I. -I.. -I../libhcan++ -I../include `pkg-config libxml++-2.6 --cflags`
-CXXFLAGS = -Wall -Werror -O2 $(INC) -fPIC
+CXXFLAGS = -Wall -O2 $(INC) -fPIC
+# wegen deprecated auto_ptr:  CXXFLAGS += -Werror
 
 
 all: $(CONDITIONAL_CLEAN) libhcan++ $(TARGET)

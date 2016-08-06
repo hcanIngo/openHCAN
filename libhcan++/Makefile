@@ -15,7 +15,8 @@ OBJ = traceable_error.o frame.o frame_message_description.o \
 	  dynaddress.o utils.o oap_driver.o oap_access.o oap_desc.o 
 
 INC = -I.. -I. -I../include `pkg-config libxml++-2.6 --cflags`
-CXXFLAGS = -Wall -Werror -O2 $(INC) -fPIC
+CXXFLAGS = -Wall -O2 $(INC) -fPIC
+# wegen deprecated auto_ptr:  CXXFLAGS += -Werror
 
 ifeq ($(ARCH),i386)	
 	CXX = g++

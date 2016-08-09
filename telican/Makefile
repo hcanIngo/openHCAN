@@ -6,6 +6,7 @@ ifneq ($(ARCH),$(last_ARCH))
 	CONDITIONAL_CLEAN=clean	dep
 endif
 
+#DEBUG = aktiv
 TARGET = telican
 OBJ = main.o readlinepp.o control.o readline_completer.o \
 	  readline_completion_generator.o \
@@ -20,14 +21,20 @@ LD_FLAGS = -Wl,--export-dynamic -L ../libhcan++/binary_$(ARCH) \
 		   `pkg-config libxml++-2.6 --libs` -fPIC
 
 ifeq ($(ARCH),i386)	
-	CXX = g++
+	CXX = g++ #-m32
 else	
 	CXX = arm-linux-gnu-g++	
 endif
 
 INC = -I. -I.. -I../libhcan++ -I../include `pkg-config libxml++-2.6 --cflags`
-CXXFLAGS = -Wall -O2 $(INC) -fPIC
-# wegen deprecated auto_ptr:  CXXFLAGS += -Werror
+
+ifeq ($(DEBUG),aktiv)	
+	CXXFLAGS = -Wall -g -O0 $(INC) -fPIC
+else	
+	CXXFLAGS = -Wall -O0 $(INC) -fPIC
+	# als 64-Bit-Prozess fuehrt -O2 zum Segmentation fault:   CXXFLAGS = -Wall -O2 $(INC) -fPIC
+	# wegen deprecated auto_ptr:  CXXFLAGS += -Werror
+endif
 
 
 all: $(CONDITIONAL_CLEAN) libhcan++ $(TARGET)

@@ -22,9 +22,10 @@ generateHabHcan:
 	cd xsl; make generateHabHcan HCAN_INSTALLATION=$(CONF)/$(HCAN_INSTALLATION)
 	
 installHabHcan:	
-	make generateHabHcan
 	# persoenliche conf holen:
 	$(_SCP) $(CONF)/* ./staticConfigurations/conf_templates/
+	@#
+	make generateHabHcan
 	@# 
 	# IP des C1612-Servers eintragen:
 	find ./staticConfigurations/conf_templates/*.* -type f -exec sed -i "s/C1612server/$(C1612ServerIP)/g" {} \;

@@ -24,7 +24,6 @@ void rolladen_init(device_data_rolladen *p, eds_block_p it)
 	p->laufzeit = p->config.laufzeit / 2; // und in der Mitte steht
 	// sodass sowohl ein AUF- als auch ein AB-Fahrauftrag den Rolladen
 	// vollstaendig AUF bzw. ZU faehrt.
-	// Bei einem Position-Set-Fahrauftrag wird niemals kalibriert.
 
 	// Abgeschlossen ist die Kalibrierung, wenn der Rolladen in Untenfahrt gestoppt wird.
 	// Wird eine Kalibrierfahrt vor Erreichen der Untenlage gestoppt, so liegen die
@@ -87,6 +86,43 @@ static uint8_t is_group_in_rolladen(const device_data_rolladen *p, uint8_t group
 	return 0; // nicht gefunden
 }
 
+// Soll-Laufzeit anpassen und Kalibrierkennung setzen
+static void prepare_calibration(device_data_rolladen *p)
+{
+	if (p->kalibrieren) // bereits gesetzt?
+	{
+		// Unabhaengig vom Feature wird nach Reboot die Oben- oder Untenlage kalibriert:
+		if(ROLLADEN_DIR_AUF == p->soll_dir)
+		{
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("ro"));
+			p->soll_laufzeit = ((int32_t)p->config.laufzeit * 150 / 100); // 100 = oben: hier 150% drauf: 200%
+		}
+		else // ROLLADEN_DIR_AB -> unten kalibrieren
+		{
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("ru"));
+			p->soll_laufzeit = -((int32_t) p->config.laufzeit * 50 / 100); // 0 = unten: hier 50% noch ins negative
+		}
+	}
+	else if (p->config.feature & (1<<FEATURE_KALIBRIERUNG_OBEN))
+	{
+		if(ROLLADEN_DIR_AUF == p->soll_dir)
+		{
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("eo"));
+			p->soll_laufzeit = ((int32_t)p->config.laufzeit * 150 / 100); // 100 = oben: hier 150% drauf: 200%
+			p->kalibrieren = 1;
+		}
+	}
+	else // unten kalibrieren:
+	{
+		if(ROLLADEN_DIR_AB == p->soll_dir)
+		{
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("eu"));
+			p->soll_laufzeit = -((int32_t) p->config.laufzeit * 50 / 100); // 0 = unten: hier 50% noch ins negative
+			p->kalibrieren = 1;
+		}
+	}
+}
+
 static void calibration(device_data_rolladen *p)
 {
 	if (p->config.feature & (1<<FEATURE_KALIBRIERUNG_OBEN))
@@ -120,9 +156,10 @@ static void rolladen_cmd_stop(device_data_rolladen *p)
 		// canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("r"));
 		p->last_dir = !p->dir; // Richtungswechsel (1-Taster-Betrieb)
 		p->change_dir_counter = -1; // abmelden (1-Taster-Betrieb)
-	}
 
-	if(p->kalibrieren) calibration(p);
+		if(p->kalibrieren) calibration(p); // Endlage unten oder oben kalibrieren
+	}
+	else p->kalibrieren = 0;
 
 	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("dir=%d"), p->dir);
 	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("t=%d"), p->stoppuhr); // Stopp in 0=AUF, 1=ZU
@@ -161,28 +198,6 @@ static void rolladen_cmd_drive(device_data_rolladen *p)
 		p->exe_power = 1; // da das Dir-Relais schon richtig liegt
 }
 
-static void extend_soll_laufzeit(device_data_rolladen *p)
-{
-	if (p->config.feature & (1<<FEATURE_KALIBRIERUNG_OBEN))
-	{
-		if(ROLLADEN_DIR_AUF == p->soll_dir)
-		{
-			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("eo"));
-			p->soll_laufzeit = ((int32_t)p->config.laufzeit * 150 / 100); // 100 = oben: hier 150% drauf: 200%
-			p->kalibrieren = 1;
-		}
-	}
-	else // unten kalibrieren:
-	{
-		if(ROLLADEN_DIR_AB == p->soll_dir)
-		{
-			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("eu"));
-			p->soll_laufzeit = -((int32_t) p->config.laufzeit * 50 / 100); // 0 = unten: hier 50% noch ins negative
-			p->kalibrieren = 1;
-		}
-	}
-}
-
 static uint8_t set_soll_laufzeit(device_data_rolladen *p, uint8_t soll_dir)
 {
 	if(ROLLADEN_DIR_AB == soll_dir)
@@ -193,10 +208,6 @@ static uint8_t set_soll_laufzeit(device_data_rolladen *p, uint8_t soll_dir)
 			p->soll_laufzeit = -1;
 			return 0; // soll-Position liegt schon vor
 		}
-
-		p->soll_dir = soll_dir;
-		if (p->summe_laufzeit >= p->config.max_rekalib) // kalibrieren?
-			extend_soll_laufzeit(p); // Fuer die Kalibrierung
 	}
 	else // AUF:
 	{
@@ -206,11 +217,12 @@ static uint8_t set_soll_laufzeit(device_data_rolladen *p, uint8_t soll_dir)
 			p->soll_laufzeit = -1;
 			return 0; // soll-Position liegt schon vor
 		}
-
-		p->soll_dir = soll_dir;
-		if (p->summe_laufzeit >= p->config.max_rekalib) // kalibrieren?
-			extend_soll_laufzeit(p); // Fuer die Kalibrierung
 	}
+
+	p->soll_dir = soll_dir;
+
+	if (p->summe_laufzeit >= p->config.max_rekalib) // kalibrieren?
+		prepare_calibration(p); // Fuer die Kalibrierung
 
 	return 1;
 }
@@ -353,8 +365,7 @@ inline void rolladen_timer_handler(device_data_rolladen *p, uint8_t zyklus)
 	if (p->long_pressed_counter > 0)  p->long_pressed_counter--;
 	else if (p->long_pressed_counter == 0)
 	{
-		p->kalibrieren = 1; // kalibrieren per Taster-"ZU"
-		extend_soll_laufzeit (p);
+		prepare_calibration (p); // kalibrieren per Taster-"ZU" oder "AUF"
 		p->long_pressed_counter = -1; // abmelden
 	}
 

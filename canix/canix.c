@@ -147,7 +147,7 @@ uint8_t canix_rxq_put_one(void)
 	return 0;
 }
 
-#define CANIX_VERSION "0.9.5"
+#define CANIX_VERSION "0.9.6"
 
 /**
  * CANIX Versionsstring
@@ -607,6 +607,15 @@ void canix_process_messages_withoutIdle(void)
 
 void canix_mainloop(void)
 {
+    canix_frame message;
+    message.src = canix_selfaddr();
+    message.dst = HCAN_MULTICAST_CONTROL;
+    message.proto = HCAN_PROTO_SFP;
+    message.data[0] = HCAN_SRV_HES;
+    message.data[1] = HCAN_HES_BOARD_ACTIVE;
+    message.size = 2;
+    canix_frame_send_with_prio(&message, HCAN_PRIO_HI);
+
 	canix_loop_throughput_counter = 0;
 
 	while (1)

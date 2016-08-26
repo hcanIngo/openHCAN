@@ -3405,13 +3405,12 @@ hcan_transport::recv_TASTER_UP(const uint16_t src,
 
 
 	/**
-	 * HCAN_HES_SCHALTER_STATE_QUERY kommt immer wenn ein C1612 gerade hochgelaufen ist (reboot)
+	 * Das Device meldet seinen Hochlauf.
 	 * 
 	 * 
 	 */
 void
-hcan_transport::send_SCHALTER_STATE_QUERY(const uint16_t src,
-					  const uint16_t dst)
+hcan_transport::send_BOARD_ACTIVE(const uint16_t src, const uint16_t dst)
 {
     uint8_t         data[] = {
 	5,
@@ -3424,13 +3423,12 @@ hcan_transport::send_SCHALTER_STATE_QUERY(const uint16_t src,
 }
 
 	/**
-	 * HCAN_HES_SCHALTER_STATE_QUERY kommt immer wenn ein C1612 gerade hochgelaufen ist (reboot)
+	 * Das Device meldet seinen Hochlauf.
 	 * 
 	 * 
 	 */
 void
-hcan_transport::recv_SCHALTER_STATE_QUERY(const uint16_t src,
-					  const uint16_t dst)
+hcan_transport::recv_BOARD_ACTIVE(const uint16_t src, const uint16_t dst)
 {
     uint8_t         data[] = {
 	5,
@@ -4517,6 +4515,143 @@ hcan_transport::recv_ROLLADEN_POSITION_CHANGED_INFO(const uint16_t src,
     *cmdsrc_hi = f.data(4);
 
     *cmdsrc_lo = f.data(5);
+
+}
+
+
+
+	/**
+	 * Schalter ist an
+	 * 
+	 * 
+	 * @param gruppe : Gruppe
+	 *
+	 * 
+	 */
+void
+hcan_transport::send_SCHALTER_GROUP_ON(const uint16_t src,
+				       const uint16_t dst, uint8_t gruppe)
+{
+    uint8_t         data[] = {
+	5,
+	25,
+	gruppe,
+    };
+    assert(8 >= sizeof(data));
+
+    frame           f(src, dst, 1, data, sizeof(data));
+    f.write_to(socket(), m_hcand_ip);
+}
+
+	/**
+	 * Schalter ist an
+	 * 
+	 * 
+	 * @param gruppe : Gruppe
+	 *
+	 * 
+	 */
+void
+hcan_transport::recv_SCHALTER_GROUP_ON(const uint16_t src,
+				       const uint16_t dst,
+				       uint8_t * gruppe)
+{
+    uint8_t         data[] = {
+	5,
+	25,
+
+	0,
+    };
+
+    frame           f = recv_frame(dst);
+
+    if (src)
+	if (f.src() != src)
+	    throw           transport_error
+		("unexpected packet received: src is wrong");
+    if (f.size() != sizeof(data))
+	throw          
+	    transport_error("unexpected size in packet received");
+    if (f.data(0) != 5)
+	throw          
+	    transport_error
+	    ("unexpected packet received: service id is wrong");
+    if (f.data(1) != 25)
+	throw          
+	    transport_error
+	    ("unexpected packet received: commmand id is wrong");
+
+
+    *gruppe = f.data(2);
+
+}
+
+
+
+	/**
+	 * Schalter ist aus
+	 * 
+	 * 
+	 * @param gruppe : Gruppe
+	 *
+	 * 
+	 */
+void
+hcan_transport::send_SCHALTER_GROUP_OFF(const uint16_t src,
+					const uint16_t dst,
+					uint8_t gruppe)
+{
+    uint8_t         data[] = {
+	5,
+	26,
+	gruppe,
+    };
+    assert(8 >= sizeof(data));
+
+    frame           f(src, dst, 1, data, sizeof(data));
+    f.write_to(socket(), m_hcand_ip);
+}
+
+	/**
+	 * Schalter ist aus
+	 * 
+	 * 
+	 * @param gruppe : Gruppe
+	 *
+	 * 
+	 */
+void
+hcan_transport::recv_SCHALTER_GROUP_OFF(const uint16_t src,
+					const uint16_t dst,
+					uint8_t * gruppe)
+{
+    uint8_t         data[] = {
+	5,
+	26,
+
+	0,
+    };
+
+    frame           f = recv_frame(dst);
+
+    if (src)
+	if (f.src() != src)
+	    throw           transport_error
+		("unexpected packet received: src is wrong");
+    if (f.size() != sizeof(data))
+	throw          
+	    transport_error("unexpected size in packet received");
+    if (f.data(0) != 5)
+	throw          
+	    transport_error
+	    ("unexpected packet received: service id is wrong");
+    if (f.data(1) != 26)
+	throw          
+	    transport_error
+	    ("unexpected packet received: commmand id is wrong");
+
+
+    *gruppe = f.data(2);
 
 }
 

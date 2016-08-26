@@ -55,49 +55,9 @@ devices_load_config(void)
 
 	switch (EDS_BLOCK_TYPE(it)) {
 
-	case EDS_analogComparator_BLOCK_ID:
-	    config_size = sizeof(eds_analogComparator_block_t);
-	    data_size = sizeof(device_data_analogComparator);
-	    break;
-
-	case EDS_heizung_BLOCK_ID:
-	    config_size = sizeof(eds_heizung_block_t);
-	    data_size = sizeof(device_data_heizung);
-	    break;
-
-	case EDS_helligkeitssensor_BLOCK_ID:
-	    config_size = sizeof(eds_helligkeitssensor_block_t);
-	    data_size = sizeof(device_data_helligkeitssensor);
-	    break;
-
-	case EDS_lichtzone_BLOCK_ID:
-	    config_size = sizeof(eds_lichtzone_block_t);
-	    data_size = sizeof(device_data_lichtzone);
-	    break;
-
-	case EDS_multitaster_BLOCK_ID:
-	    config_size = sizeof(eds_multitaster_block_t);
-	    data_size = sizeof(device_data_multitaster);
-	    break;
-
-	case EDS_ports_BLOCK_ID:
-	    config_size = sizeof(eds_ports_block_t);
-	    data_size = sizeof(device_data_ports);
-	    break;
-
-	case EDS_poti_BLOCK_ID:
-	    config_size = sizeof(eds_poti_block_t);
-	    data_size = sizeof(device_data_poti);
-	    break;
-
-	case EDS_powerportAutomat_BLOCK_ID:
-	    config_size = sizeof(eds_powerportAutomat_block_t);
-	    data_size = sizeof(device_data_powerportAutomat);
-	    break;
-
-	case EDS_powerport_BLOCK_ID:
-	    config_size = sizeof(eds_powerport_block_t);
-	    data_size = sizeof(device_data_powerport);
+	case EDS_zentralheizungspumpe_BLOCK_ID:
+	    config_size = sizeof(eds_zentralheizungspumpe_block_t);
+	    data_size = sizeof(device_data_zentralheizungspumpe);
 	    break;
 
 	case EDS_reedkontakt_BLOCK_ID:
@@ -105,9 +65,19 @@ devices_load_config(void)
 	    data_size = sizeof(device_data_reedkontakt);
 	    break;
 
+	case EDS_multitaster_BLOCK_ID:
+	    config_size = sizeof(eds_multitaster_block_t);
+	    data_size = sizeof(device_data_multitaster);
+	    break;
+
 	case EDS_rolladenAutomat_BLOCK_ID:
 	    config_size = sizeof(eds_rolladenAutomat_block_t);
 	    data_size = sizeof(device_data_rolladenAutomat);
+	    break;
+
+	case EDS_analogComparator_BLOCK_ID:
+	    config_size = sizeof(eds_analogComparator_block_t);
+	    data_size = sizeof(device_data_analogComparator);
 	    break;
 
 	case EDS_rolladen_BLOCK_ID:
@@ -115,19 +85,24 @@ devices_load_config(void)
 	    data_size = sizeof(device_data_rolladen);
 	    break;
 
-	case EDS_rolladenSchlitzpos_BLOCK_ID:
-	    config_size = sizeof(eds_rolladenSchlitzpos_block_t);
-	    data_size = sizeof(device_data_rolladenSchlitzpos);
+	case EDS_zeitzone_BLOCK_ID:
+	    config_size = sizeof(eds_zeitzone_block_t);
+	    data_size = sizeof(device_data_zeitzone);
 	    break;
 
-	case EDS_schalter_BLOCK_ID:
-	    config_size = sizeof(eds_schalter_block_t);
-	    data_size = sizeof(device_data_schalter);
+	case EDS_lichtzone_BLOCK_ID:
+	    config_size = sizeof(eds_lichtzone_block_t);
+	    data_size = sizeof(device_data_lichtzone);
 	    break;
 
-	case EDS_taster_BLOCK_ID:
-	    config_size = sizeof(eds_taster_block_t);
-	    data_size = sizeof(device_data_taster);
+	case EDS_powerportAutomat_BLOCK_ID:
+	    config_size = sizeof(eds_powerportAutomat_block_t);
+	    data_size = sizeof(device_data_powerportAutomat);
+	    break;
+
+	case EDS_ports_BLOCK_ID:
+	    config_size = sizeof(eds_ports_block_t);
+	    data_size = sizeof(device_data_ports);
 	    break;
 
 	case EDS_tempsensor_BLOCK_ID:
@@ -135,19 +110,44 @@ devices_load_config(void)
 	    data_size = sizeof(device_data_tempsensor);
 	    break;
 
+	case EDS_rolladenSchlitzpos_BLOCK_ID:
+	    config_size = sizeof(eds_rolladenSchlitzpos_block_t);
+	    data_size = sizeof(device_data_rolladenSchlitzpos);
+	    break;
+
+	case EDS_poti_BLOCK_ID:
+	    config_size = sizeof(eds_poti_block_t);
+	    data_size = sizeof(device_data_poti);
+	    break;
+
+	case EDS_helligkeitssensor_BLOCK_ID:
+	    config_size = sizeof(eds_helligkeitssensor_block_t);
+	    data_size = sizeof(device_data_helligkeitssensor);
+	    break;
+
+	case EDS_powerport_BLOCK_ID:
+	    config_size = sizeof(eds_powerport_block_t);
+	    data_size = sizeof(device_data_powerport);
+	    break;
+
+	case EDS_heizung_BLOCK_ID:
+	    config_size = sizeof(eds_heizung_block_t);
+	    data_size = sizeof(device_data_heizung);
+	    break;
+
+	case EDS_schalter_BLOCK_ID:
+	    config_size = sizeof(eds_schalter_block_t);
+	    data_size = sizeof(device_data_schalter);
+	    break;
+
 	case EDS_zeitschaltuhr_BLOCK_ID:
 	    config_size = sizeof(eds_zeitschaltuhr_block_t);
 	    data_size = sizeof(device_data_zeitschaltuhr);
 	    break;
 
-	case EDS_zeitzone_BLOCK_ID:
-	    config_size = sizeof(eds_zeitzone_block_t);
-	    data_size = sizeof(device_data_zeitzone);
-	    break;
-
-	case EDS_zentralheizungspumpe_BLOCK_ID:
-	    config_size = sizeof(eds_zentralheizungspumpe_block_t);
-	    data_size = sizeof(device_data_zentralheizungspumpe);
+	case EDS_taster_BLOCK_ID:
+	    config_size = sizeof(eds_taster_block_t);
+	    data_size = sizeof(device_data_taster);
 	    break;
 
 	default:
@@ -217,53 +217,49 @@ devices_load_config(void)
 
 	switch (EDS_BLOCK_TYPE(it)) {
 
-	case EDS_analogComparator_BLOCK_ID:
-	    analogComparator_init((device_data_analogComparator *) p, it);
-	    break;
-
-	case EDS_heizung_BLOCK_ID:
-	    heizung_init((device_data_heizung *) p, it);
-	    break;
-
-	case EDS_helligkeitssensor_BLOCK_ID:
-	    helligkeitssensor_init((device_data_helligkeitssensor *) p,
-				   it);
-	    break;
-
-	case EDS_lichtzone_BLOCK_ID:
-	    lichtzone_init((device_data_lichtzone *) p, it);
-	    break;
-
-	case EDS_multitaster_BLOCK_ID:
-	    multitaster_init((device_data_multitaster *) p, it);
-	    break;
-
-	case EDS_ports_BLOCK_ID:
-	    ports_init((device_data_ports *) p, it);
-	    break;
-
-	case EDS_poti_BLOCK_ID:
-	    poti_init((device_data_poti *) p, it);
-	    break;
-
-	case EDS_powerportAutomat_BLOCK_ID:
-	    powerportAutomat_init((device_data_powerportAutomat *) p, it);
-	    break;
-
-	case EDS_powerport_BLOCK_ID:
-	    powerport_init((device_data_powerport *) p, it);
+	case EDS_zentralheizungspumpe_BLOCK_ID:
+	    zentralheizungspumpe_init((device_data_zentralheizungspumpe *)
+				      p, it);
 	    break;
 
 	case EDS_reedkontakt_BLOCK_ID:
 	    reedkontakt_init((device_data_reedkontakt *) p, it);
 	    break;
 
+	case EDS_multitaster_BLOCK_ID:
+	    multitaster_init((device_data_multitaster *) p, it);
+	    break;
+
 	case EDS_rolladenAutomat_BLOCK_ID:
 	    rolladenAutomat_init((device_data_rolladenAutomat *) p, it);
 	    break;
 
+	case EDS_analogComparator_BLOCK_ID:
+	    analogComparator_init((device_data_analogComparator *) p, it);
+	    break;
+
 	case EDS_rolladen_BLOCK_ID:
 	    rolladen_init((device_data_rolladen *) p, it);
+	    break;
+
+	case EDS_zeitzone_BLOCK_ID:
+	    zeitzone_init((device_data_zeitzone *) p, it);
+	    break;
+
+	case EDS_lichtzone_BLOCK_ID:
+	    lichtzone_init((device_data_lichtzone *) p, it);
+	    break;
+
+	case EDS_powerportAutomat_BLOCK_ID:
+	    powerportAutomat_init((device_data_powerportAutomat *) p, it);
+	    break;
+
+	case EDS_ports_BLOCK_ID:
+	    ports_init((device_data_ports *) p, it);
+	    break;
+
+	case EDS_tempsensor_BLOCK_ID:
+	    tempsensor_init((device_data_tempsensor *) p, it);
 	    break;
 
 	case EDS_rolladenSchlitzpos_BLOCK_ID:
@@ -271,29 +267,33 @@ devices_load_config(void)
 				    it);
 	    break;
 
+	case EDS_poti_BLOCK_ID:
+	    poti_init((device_data_poti *) p, it);
+	    break;
+
+	case EDS_helligkeitssensor_BLOCK_ID:
+	    helligkeitssensor_init((device_data_helligkeitssensor *) p,
+				   it);
+	    break;
+
+	case EDS_powerport_BLOCK_ID:
+	    powerport_init((device_data_powerport *) p, it);
+	    break;
+
+	case EDS_heizung_BLOCK_ID:
+	    heizung_init((device_data_heizung *) p, it);
+	    break;
+
 	case EDS_schalter_BLOCK_ID:
 	    schalter_init((device_data_schalter *) p, it);
-	    break;
-
-	case EDS_taster_BLOCK_ID:
-	    taster_init((device_data_taster *) p, it);
-	    break;
-
-	case EDS_tempsensor_BLOCK_ID:
-	    tempsensor_init((device_data_tempsensor *) p, it);
 	    break;
 
 	case EDS_zeitschaltuhr_BLOCK_ID:
 	    zeitschaltuhr_init((device_data_zeitschaltuhr *) p, it);
 	    break;
 
-	case EDS_zeitzone_BLOCK_ID:
-	    zeitzone_init((device_data_zeitzone *) p, it);
-	    break;
-
-	case EDS_zentralheizungspumpe_BLOCK_ID:
-	    zentralheizungspumpe_init((device_data_zentralheizungspumpe *)
-				      p, it);
+	case EDS_taster_BLOCK_ID:
+	    taster_init((device_data_taster *) p, it);
 	    break;
 
 
@@ -328,47 +328,17 @@ hauselektrik_callback(const canix_frame * frame)
 	if (p) {
 	    switch (*p) {
 
-	    case EDS_analogComparator_BLOCK_ID:
-		analogComparator_can_callback((device_data_analogComparator
-					       *) p, frame);
-		break;
-
-	    case EDS_heizung_BLOCK_ID:
-		heizung_can_callback((device_data_heizung *) p, frame);
-		break;
-
-	    case EDS_helligkeitssensor_BLOCK_ID:
-		helligkeitssensor_can_callback((device_data_helligkeitssensor *) p, frame);
-		break;
-
-	    case EDS_lichtzone_BLOCK_ID:
-		lichtzone_can_callback((device_data_lichtzone *) p, frame);
-		break;
-
-	    case EDS_multitaster_BLOCK_ID:
-		multitaster_can_callback((device_data_multitaster *) p,
-					 frame);
-		break;
-
-	    case EDS_ports_BLOCK_ID:
-		ports_can_callback((device_data_ports *) p, frame);
-		break;
-
-	    case EDS_poti_BLOCK_ID:
-		poti_can_callback((device_data_poti *) p, frame);
-		break;
-
-	    case EDS_powerportAutomat_BLOCK_ID:
-		powerportAutomat_can_callback((device_data_powerportAutomat
-					       *) p, frame);
-		break;
-
-	    case EDS_powerport_BLOCK_ID:
-		powerport_can_callback((device_data_powerport *) p, frame);
+	    case EDS_zentralheizungspumpe_BLOCK_ID:
+		zentralheizungspumpe_can_callback((device_data_zentralheizungspumpe *) p, frame);
 		break;
 
 	    case EDS_reedkontakt_BLOCK_ID:
 		reedkontakt_can_callback((device_data_reedkontakt *) p,
+					 frame);
+		break;
+
+	    case EDS_multitaster_BLOCK_ID:
+		multitaster_can_callback((device_data_multitaster *) p,
 					 frame);
 		break;
 
@@ -377,20 +347,30 @@ hauselektrik_callback(const canix_frame * frame)
 					      *) p, frame);
 		break;
 
+	    case EDS_analogComparator_BLOCK_ID:
+		analogComparator_can_callback((device_data_analogComparator
+					       *) p, frame);
+		break;
+
 	    case EDS_rolladen_BLOCK_ID:
 		rolladen_can_callback((device_data_rolladen *) p, frame);
 		break;
 
-	    case EDS_rolladenSchlitzpos_BLOCK_ID:
-		rolladenSchlitzpos_can_callback((device_data_rolladenSchlitzpos *) p, frame);
+	    case EDS_zeitzone_BLOCK_ID:
+		zeitzone_can_callback((device_data_zeitzone *) p, frame);
 		break;
 
-	    case EDS_schalter_BLOCK_ID:
-		schalter_can_callback((device_data_schalter *) p, frame);
+	    case EDS_lichtzone_BLOCK_ID:
+		lichtzone_can_callback((device_data_lichtzone *) p, frame);
 		break;
 
-	    case EDS_taster_BLOCK_ID:
-		taster_can_callback((device_data_taster *) p, frame);
+	    case EDS_powerportAutomat_BLOCK_ID:
+		powerportAutomat_can_callback((device_data_powerportAutomat
+					       *) p, frame);
+		break;
+
+	    case EDS_ports_BLOCK_ID:
+		ports_can_callback((device_data_ports *) p, frame);
 		break;
 
 	    case EDS_tempsensor_BLOCK_ID:
@@ -398,17 +378,37 @@ hauselektrik_callback(const canix_frame * frame)
 					frame);
 		break;
 
+	    case EDS_rolladenSchlitzpos_BLOCK_ID:
+		rolladenSchlitzpos_can_callback((device_data_rolladenSchlitzpos *) p, frame);
+		break;
+
+	    case EDS_poti_BLOCK_ID:
+		poti_can_callback((device_data_poti *) p, frame);
+		break;
+
+	    case EDS_helligkeitssensor_BLOCK_ID:
+		helligkeitssensor_can_callback((device_data_helligkeitssensor *) p, frame);
+		break;
+
+	    case EDS_powerport_BLOCK_ID:
+		powerport_can_callback((device_data_powerport *) p, frame);
+		break;
+
+	    case EDS_heizung_BLOCK_ID:
+		heizung_can_callback((device_data_heizung *) p, frame);
+		break;
+
+	    case EDS_schalter_BLOCK_ID:
+		schalter_can_callback((device_data_schalter *) p, frame);
+		break;
+
 	    case EDS_zeitschaltuhr_BLOCK_ID:
 		zeitschaltuhr_can_callback((device_data_zeitschaltuhr *) p,
 					   frame);
 		break;
 
-	    case EDS_zeitzone_BLOCK_ID:
-		zeitzone_can_callback((device_data_zeitzone *) p, frame);
-		break;
-
-	    case EDS_zentralheizungspumpe_BLOCK_ID:
-		zentralheizungspumpe_can_callback((device_data_zentralheizungspumpe *) p, frame);
+	    case EDS_taster_BLOCK_ID:
+		taster_can_callback((device_data_taster *) p, frame);
 		break;
 
 	    }

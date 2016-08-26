@@ -47,14 +47,13 @@ void powerportAutomat_init(device_data_powerportAutomat *p, eds_block_p it)
 	/* Wir gehen davon aus, das die Automatik aktiviert ist. Ist ein Schalter konfiguriert,  
 	 * so wird er auch seinen Zustand melden, wenn irgendein C1612-Board einen Reboot durchfuehrt. */
 	p->automatikEin = true;
-	sendHESMessage (1, HCAN_HES_SCHALTER_STATE_QUERY); // besser nachfragen
 }
 
 void powerportAutomat_can_callback(device_data_powerportAutomat *p, const canix_frame *frame)
 {
 	switch (frame->data[1])
 	{
-		case HCAN_HES_POWER_GROUP_ON :
+		case HCAN_HES_SCHALTER_GROUP_ON :
 			if ( (p->config.automatikEin_schalter_gruppe != 255) &&
 			     (frame->data[2] == p->config.automatikEin_schalter_gruppe) )
 			{
@@ -67,7 +66,7 @@ void powerportAutomat_can_callback(device_data_powerportAutomat *p, const canix_
 			}
 			break;
 
-		case HCAN_HES_POWER_GROUP_OFF :
+		case HCAN_HES_SCHALTER_GROUP_OFF :
 			if ( (p->config.automatikEin_schalter_gruppe != 255) &&
 			     (frame->data[2] == p->config.automatikEin_schalter_gruppe) )
 			{

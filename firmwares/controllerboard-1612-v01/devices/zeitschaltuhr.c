@@ -28,7 +28,6 @@ void zeitschaltuhr_init(device_data_zeitschaltuhr *p, eds_block_p it)
 	/* Wir gehen davon aus, das die Automatik aktiviert ist. Ist ein Schalter konfiguriert,  
 	 * so wird er auch seinen Zustand melden, wenn irgendein C1612-Board einen Reboot durchfuehrt. */
 	p->automatikEin = true;
-	sendHESMessage (1, HCAN_HES_SCHALTER_STATE_QUERY); // besser nachfragen
 }
 
 inline void zeitschaltuhr_timer_handler(device_data_zeitschaltuhr *p, uint8_t zyklus)
@@ -103,14 +102,14 @@ void zeitschaltuhr_can_callback(device_data_zeitschaltuhr *p, const canix_frame 
 {
 	switch (frame->data[1])
 	{
-		case HCAN_HES_POWER_GROUP_ON :
+		case HCAN_HES_SCHALTER_GROUP_ON :
 			if (frame->data[2] == p->config.automatikEin_schalter_gruppe)
 			{
 				p->automatikEin = true;
 			}
 			break;
 
-		case HCAN_HES_POWER_GROUP_OFF :
+		case HCAN_HES_SCHALTER_GROUP_OFF :
 			if (frame->data[2] == p->config.automatikEin_schalter_gruppe)
 			{
 				p->automatikEin = false;

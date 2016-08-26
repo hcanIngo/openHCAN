@@ -461,10 +461,10 @@ namespace       hcan {
 				       uint8_t * gruppe, uint8_t * index);
 
 
-	void            send_SCHALTER_STATE_QUERY(const uint16_t src,
-						  const uint16_t dst);
-	void            recv_SCHALTER_STATE_QUERY(const uint16_t src,
-						  const uint16_t dst);
+	void            send_BOARD_ACTIVE(const uint16_t src,
+					  const uint16_t dst);
+	void            recv_BOARD_ACTIVE(const uint16_t src,
+					  const uint16_t dst);
 
 
 	void            send_POWER_GROUP_ON(const uint16_t src,
@@ -606,6 +606,22 @@ namespace       hcan {
 							    cmdsrc_hi,
 							    uint8_t *
 							    cmdsrc_lo);
+
+
+	void            send_SCHALTER_GROUP_ON(const uint16_t src,
+					       const uint16_t dst,
+					       uint8_t gruppe);
+	void            recv_SCHALTER_GROUP_ON(const uint16_t src,
+					       const uint16_t dst,
+					       uint8_t * gruppe);
+
+
+	void            send_SCHALTER_GROUP_OFF(const uint16_t src,
+						const uint16_t dst,
+						uint8_t gruppe);
+	void            recv_SCHALTER_GROUP_OFF(const uint16_t src,
+						const uint16_t dst,
+						uint8_t * gruppe);
 
 
 	void            send_1WIRE_DISCOVER(const uint16_t src,

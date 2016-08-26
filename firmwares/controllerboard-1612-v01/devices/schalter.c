@@ -69,10 +69,10 @@ inline void schalter_timer_handler(device_data_schalter *p, uint8_t zyklus)
 
 void schalter_can_callback(device_data_schalter *p, const canix_frame *frame)
 {
-	if (frame->data[1] == HCAN_HES_SCHALTER_STATE_QUERY)
+	if (frame->data[1] == HCAN_HES_BOARD_ACTIVE)
 	{
-		/* HCAN_HES_SCHALTER_STATE_QUERY kommt immer wenn ein C1612 gerade hochgelaufen ist (reboot), 
-		 * damit devices (z. B. powerports) dieses Boards, welche von Schaltern beeinflusst werden,
+		/* HCAN_HES_BOARD_ACTIVE kommt immer wenn ein C1612 gerade hochgelaufen ist,
+		 * damit devices (z. B. powerports), welche von Schaltern beeinflusst werden,
 		 * ihren von der Schalterstellung abhaengigen Zustand initial erhalten.
 		 * schalter_can_callback wird in main.c fuer jedes Schalter-Device einmal aufgerufen. */
 		if(p->config.gruppe != 255)
@@ -102,8 +102,8 @@ static inline void sendMessage(device_data_schalter *p, uint8_t active)
 	message.dst = HCAN_MULTICAST_CONTROL;
 	message.proto = HCAN_PROTO_SFP;
 	message.data[0] = HCAN_SRV_HES;
-	if(active)	message.data[1] = HCAN_HES_POWER_GROUP_ON;
-	else		message.data[1] = HCAN_HES_POWER_GROUP_OFF;
+	if(active)	message.data[1] = HCAN_HES_SCHALTER_GROUP_ON;
+	else		message.data[1] = HCAN_HES_SCHALTER_GROUP_OFF;
 	message.data[2] = p->config.gruppe;
 	message.size = 3;
 	canix_frame_send_with_prio(&message, HCAN_PRIO_HI);

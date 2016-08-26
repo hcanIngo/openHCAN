@@ -220,9 +220,8 @@
 // index : Index des Taster-Ports
 #define HCAN_HES_TASTER_UP   2
 
-// HCAN_HES_SCHALTER_STATE_QUERY kommt immer wenn ein C1612 gerade
-// hochgelaufen ist (reboot)
-#define HCAN_HES_SCHALTER_STATE_QUERY   4
+// Das Device meldet seinen Hochlauf.
+#define HCAN_HES_BOARD_ACTIVE   4
 
 // Reaktion: Power-Port(s) schalten sich an
 // gruppe : Gruppe
@@ -289,6 +288,14 @@
 // cmdsrc_hi : Source-Adresse des Befehls (0 = manuell ueber Taster), MSB
 // cmdsrc_lo : LSB
 #define HCAN_HES_ROLLADEN_POSITION_CHANGED_INFO   24
+
+// Schalter ist an
+// gruppe : Gruppe
+#define HCAN_HES_SCHALTER_GROUP_ON   25
+
+// Schalter ist aus
+// gruppe : Gruppe
+#define HCAN_HES_SCHALTER_GROUP_OFF   26
 
 // Veranlasst einen 1Wire Scan an gebenen Pin
 // pin : Pin ID des 1Wire Ports im Bereich [0..7]

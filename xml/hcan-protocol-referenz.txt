@@ -360,9 +360,9 @@ gruppe  |  Taster-Gruppe
 index  |  Index des Taster-Ports
 
 
-**SCHALTER_STATE_QUERY (4)**
+**BOARD_ACTIVE (4)**
 
-HCAN_HES_SCHALTER_STATE_QUERY kommt immer wenn ein C1612 gerade hochgelaufen ist (reboot)
+Das Device meldet seinen Hochlauf.
 
 **POWER_GROUP_ON (10)**
 
@@ -492,6 +492,24 @@ gruppe  |  Gruppe
 position  |  Position im Bereich [0..100]; 100% = oben
 cmdsrc_hi  |  Source-Adresse des Befehls (0 = manuell ueber Taster), MSB
 cmdsrc_lo  |  LSB
+
+
+**SCHALTER_GROUP_ON (25)**
+
+Schalter ist an
+
+Parameter|Beschreibung
+---------|------------
+gruppe  |  Gruppe
+
+
+**SCHALTER_GROUP_OFF (26)**
+
+Schalter ist aus
+
+Parameter|Beschreibung
+---------|------------
+gruppe  |  Gruppe
 
 
 **1WIRE_DISCOVER (30)**

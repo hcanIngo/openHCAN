@@ -7,43 +7,43 @@
 
 #include <canix/eds.h>
 
-#include "devices/analogComparator.h"
-
-#include "devices/heizung.h"
-
-#include "devices/helligkeitssensor.h"
-
-#include "devices/lichtzone.h"
-
-#include "devices/multitaster.h"
-
-#include "devices/ports.h"
-
-#include "devices/poti.h"
-
-#include "devices/powerportAutomat.h"
-
-#include "devices/powerport.h"
+#include "devices/zentralheizungspumpe.h"
 
 #include "devices/reedkontakt.h"
 
+#include "devices/multitaster.h"
+
 #include "devices/rolladenAutomat.h"
+
+#include "devices/analogComparator.h"
 
 #include "devices/rolladen.h"
 
-#include "devices/rolladenSchlitzpos.h"
+#include "devices/zeitzone.h"
 
-#include "devices/schalter.h"
+#include "devices/lichtzone.h"
 
-#include "devices/taster.h"
+#include "devices/powerportAutomat.h"
+
+#include "devices/ports.h"
 
 #include "devices/tempsensor.h"
 
+#include "devices/rolladenSchlitzpos.h"
+
+#include "devices/poti.h"
+
+#include "devices/helligkeitssensor.h"
+
+#include "devices/powerport.h"
+
+#include "devices/heizung.h"
+
+#include "devices/schalter.h"
+
 #include "devices/zeitschaltuhr.h"
 
-#include "devices/zeitzone.h"
-
-#include "devices/zentralheizungspumpe.h"
+#include "devices/taster.h"
 
 // definiert die Groesse der verschiedenen Device-Configs im EEPROM
 extern uint8_t  device_config_size[];

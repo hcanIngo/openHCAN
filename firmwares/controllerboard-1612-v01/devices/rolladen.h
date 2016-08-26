@@ -48,6 +48,7 @@ typedef struct
 	uint8_t type;
 	eds_rolladen_block_t config;
 
+	uint8_t mute;            // Aktiv: Rolladen kann Kommandos entgegennehmen; oder mute=1
 	uint8_t kalibrieren;     // Kalibrierung wird durchgefuehrt = 1, sonst = 0
 	uint32_t summe_laufzeit; // bisher zurueckgelegte Strecke seit dem letzten Kalibrieren
 	int32_t laufzeit;        // Position des Rolladens in 10tel Sekunden, gemessen vom Stand "unten"

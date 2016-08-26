@@ -16,13 +16,14 @@
 		Bit 4: 	Flankenbetrieb: 2: Nur POWER_GROUP_OFF Meldungen senden.
 	</block>
 
-	<block type="11" name="powerport" size="6">
+	<block type="11" name="powerport" size="7">
 		<field datatype="uint8_t" name="port" pos="0" />
 		<field datatype="uint8_t" name="feature" pos="1" />
 		<field datatype="uint8_t" name="gruppe0" pos="2" />
 		<field datatype="uint8_t" name="gruppe1" pos="3" />
 		<field datatype="uint8_t" name="gruppe2" pos="4" />
-		<field datatype="uint8_t" name="gruppe3" pos="5" />
+		<field datatype="uint8_t" name="timer" pos="5" />
+		<field datatype="uint8_t" name="mute" pos="6" />
 		Ein Powerport schaltet ein Relais, das wiederum 230V
 		Verbraucher schaltet. Im Normalfall ist das entweder
 		eine Lampe oder eine Steckdose. 
@@ -31,12 +32,12 @@
 		Bit 1:	Verz"ogert ein (z.B. Badzimmerl"ufter)
 		Bit 2:	Automatisch aus (z.B. Speisekammerl"ufter, Haust"urklingel, Treppenhausbeleuchtung)
 		Bit 3:	Nachlauf (z.B. Beamersteckdose)
-			Fuer Bits 1-3 ist in gruppe3 ist die Nachlaufzeit
+			Fuer Bits 1-3 ist in timer ist die Nachlaufzeit
 			in Sekunden einzutragen (max. 255 Sekunden).
 		Bit 4 und 5: Benoetigt fuer Wecker (weck_page) und frei zu halten.
 	</block>
 
-	<block type="12" name="rolladen" size="13">
+	<block type="12" name="rolladen" size="14">
 		<field datatype="uint8_t" name="port_power" pos="0" />
 		<field datatype="uint8_t" name="port_dir" pos="1" />
 		<field datatype="uint8_t" name="taster" pos="2" />
@@ -48,6 +49,7 @@
 		<field datatype="uint8_t" name="gruppe1" pos="10" />
 		<field datatype="uint8_t" name="gruppe2" pos="11" />
 		<field datatype="uint8_t" name="gruppe3" pos="12" />
+		<field datatype="uint8_t" name="mute" pos="13" />
 		Ein Rolladen wird "uber zwei Relais gesteuert 
 		(port_power, port_dir). Der Powerport schaltet den Motor ein/aus,
 		der Dirport (Direction Port) schaltet zwischen den Laufrichtungen

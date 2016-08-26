@@ -65,18 +65,6 @@ void controllerboard_callback(const canix_frame *frame)
 	}
 }
 
-static inline void sendSchalterStateQuery(void)
-{
-	canix_frame message;
-	message.src = canix_selfaddr();
-	message.dst = HCAN_MULTICAST_CONTROL;
-	message.proto = HCAN_PROTO_SFP;
-	message.data[0] = HCAN_SRV_HES;
-	message.data[1] = HCAN_HES_SCHALTER_STATE_QUERY;
-	message.size = 2;
-	canix_frame_send_with_prio(&message, HCAN_PRIO_HI);
-}
-
 int main(void)
 {
 	darlingtonoutput_init();
@@ -99,7 +87,6 @@ int main(void)
 	canix_reg_rtc_callback(timer_handler);
 	canix_reg_idle_callback(idle_handler);
 	
-	sendSchalterStateQuery(); // alle Schalter am CAN-Bus abfragen
 	canix_mainloop();
 	return 0;
 }

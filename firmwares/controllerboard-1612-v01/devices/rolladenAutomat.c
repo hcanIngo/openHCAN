@@ -49,7 +49,6 @@ void rolladenAutomat_init(device_data_rolladenAutomat *p, eds_block_p it)
 	/* Wir gehen davon aus, das die Automatik aktiviert ist. Ist ein Schalter konfiguriert,  
 	 * so wird er auch seinen Zustand melden, wenn irgendein C1612-Board einen Reboot durchfuehrt. */
 	p->automatikEin = true;
-	sendHESMessage (1, HCAN_HES_SCHALTER_STATE_QUERY); // besser nachfragen
 
 	p->SchwellwertErkanntSecsCnt = 0; // Neustart
 	p->SchwellwertErkannt = HELLIGKEIT_IM_TOLERANZBEREICH;
@@ -131,14 +130,14 @@ void rolladenAutomat_can_callback(device_data_rolladenAutomat *p, const canix_fr
 {
 	switch (frame->data[1])
 	{
-		case HCAN_HES_POWER_GROUP_ON :
+		case HCAN_HES_SCHALTER_GROUP_ON :
 			if (frame->data[2] == p->config.automatikEin_schalter_gruppe)
 			{
 				p->automatikEin = true;
 			}
 			break;
 
-		case HCAN_HES_POWER_GROUP_OFF :
+		case HCAN_HES_SCHALTER_GROUP_OFF :
 			if (frame->data[2] == p->config.automatikEin_schalter_gruppe)
 			{
 				p->automatikEin = false;

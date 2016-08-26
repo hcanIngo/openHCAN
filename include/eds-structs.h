@@ -32,7 +32,9 @@ typedef struct {
 
     uint8_t           gruppe2;
 
-    uint8_t           gruppe3;
+    uint8_t           timer;
+
+    uint8_t           mute;
 
 
 } eds_powerport_block_t;
@@ -61,6 +63,8 @@ typedef struct {
     uint8_t           gruppe2;
 
     uint8_t           gruppe3;
+
+    uint8_t           mute;
 
 
 } eds_rolladen_block_t;

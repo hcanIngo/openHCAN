@@ -17,7 +17,7 @@ traceable_error::traceable_error(const string &s) :
 	// Exception nicht mehr so aufgebaut ist:
 	//
 	
-	//m_trace = create_stack_trace();
+	m_trace = create_stack_trace();
 }
 
 traceable_error::~traceable_error() throw ()

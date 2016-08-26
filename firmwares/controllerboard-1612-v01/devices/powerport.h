@@ -6,7 +6,7 @@
 #include <inttypes.h>
 #include <eds-structs.h>
 
-#define MAX_POWERPORT_GROUPS 4
+#define MAX_POWERPORT_GROUPS 3
 
 #define FALLENDE_FLANKE 	0 // powerport 1->0
 #define STEIGENDE_FLANKE 	1 // powerport 0->1
@@ -33,6 +33,8 @@ typedef struct
 {
 	uint8_t type;
 	eds_powerport_block_t config;
+
+	uint8_t mute;            // Aktiv: Powerport kann Kommandos entgegennehmen; oder mute=1
 	uint16_t countDownTimer; // ungleich 0 -> Timer aktiv
 	uint8_t bistableRelaisState; // sichert den aktuellen Schaltzustand eines bistabilen Relais
 } device_data_powerport;
@@ -57,11 +59,6 @@ void powerport_set(device_data_powerport *p, uint8_t state);
  * Liefert den aktuellen Zustand des Powerports
  */
 uint8_t powerport_get(const device_data_powerport *p);
-
-/**
- * Liefert != 0, falls der Powerport in der genannten Gruppe ist
- */
-uint8_t powerport_is_in_group(const device_data_powerport *p, uint8_t group);
 
 /**
  * Sendet den aktuellen Status als Info Message mit der pirmaeren

@@ -16,18 +16,24 @@
 #include <avr/wdt.h>
 
 
+void powerport_init(device_data_powerport *p, eds_block_p it)
+{
+	p->mute = 0; // aktiv
+	p->countDownTimer = 0; // Timer aus
+}
+
 void powerport_setup_timer(device_data_powerport *p)
 {
 	// Timer initialisieren: Wenn das MSB == 1, dann
 	// ist der Timerwert in Sekunden, ansonsten in Minuten
-	if (p->config.gruppe3 & 0x80)
+	if (p->config.timer & 0x80)
 	{
 		// der Wert ist in Sekunden:
-		p->countDownTimer = p->config.gruppe3 & 0x7f;
+		p->countDownTimer = p->config.timer & 0x7f;
 	}
 	else
 	{
-		p->countDownTimer = (p->config.gruppe3 * 60);
+		p->countDownTimer = (p->config.timer * 60);
 	}
 }
 
@@ -99,11 +105,6 @@ void powerport_toggle(device_data_powerport *p)
 	}
 }
 
-void powerport_init(device_data_powerport *p, eds_block_p it)
-{
-	p->countDownTimer = 0; // Timer aus
-}
-
 /** Der powerport_timer_handler wird einmal pro Sekunde aufgerufen
  *  und ist zustaendig fuer das Ein- und Ausschalten des Powerports. */
 inline void powerport_timer_handler(device_data_powerport *p, uint8_t zyklus)
@@ -156,24 +157,19 @@ uint8_t powerport_get(const device_data_powerport *p)
 	return darlingtonoutput_getpin(p->config.port);
 }
 
-uint8_t powerport_is_in_group(const device_data_powerport *p, uint8_t group)
+static uint8_t is_in_group(const device_data_powerport *p, uint8_t group)
 {
 	uint8_t i;
 	uint8_t *gruppen;
-	uint8_t maxPowerportGruppen = MAX_POWERPORT_GROUPS;
+	uint8_t maxDeviceGruppen = MAX_POWERPORT_GROUPS;
 
 	// die 255 ist der Ersatzwert und wird ignoriert!
 	if (group == 255)
 		return 0;
 	
-	if (   (p->config.feature & (1<<POWERPORT_FEATURE_VERZOEGERT_EIN))
-		|| (p->config.feature & (1<<POWERPORT_FEATURE_AUTO_AUS))
-		|| (p->config.feature & (1<<POWERPORT_FEATURE_NACHLAUF)) )
-		maxPowerportGruppen--; //letzte Gruppe ist als Timerwert verwendet
-
 	gruppen = (uint8_t *) &(p->config.gruppe0);
 
-	for (i = 0; i < maxPowerportGruppen; i++)
+	for (i = 0; i < maxDeviceGruppen; i++)
 	{
 		if (gruppen[i] == group)
 			return 1;
@@ -191,18 +187,20 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 	answer.proto = HCAN_PROTO_SFP;
 	answer.data[0] = HCAN_SRV_HES;
 
-	if (powerport_is_in_group(p, frame->data[2]))
+	if (is_in_group(p, frame->data[2]))
 	{
 		switch (frame->data[1])
 		{
 			case HCAN_HES_TASTER_DOWN :
-				powerport_toggle(p);
+				if (!p->mute) powerport_toggle(p);
 				break;
 			case HCAN_HES_POWER_GROUP_ON :
-				set_powerport_or_timer(p, STEIGENDE_FLANKE); //es soll eingeschaltet werden
+			case HCAN_HES_SCHALTER_GROUP_ON :
+				if (!p->mute) set_powerport_or_timer(p, STEIGENDE_FLANKE); //es soll eingeschaltet werden
 				break;
 			case HCAN_HES_POWER_GROUP_OFF :
-				set_powerport_or_timer(p, FALLENDE_FLANKE); //es soll abgeschaltet werden
+			case HCAN_HES_SCHALTER_GROUP_OFF :
+				if (!p->mute) set_powerport_or_timer(p, FALLENDE_FLANKE); //es soll abgeschaltet werden
 				break;
 			// Achtung: Impulsausgaben liefern 0,
 			// obwohl bistabile Relais ggf. an sind!
@@ -255,6 +253,12 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 				}
 		}
 	}
+	else if (p->config.mute == frame->data[2])
+	{
+		if (HCAN_HES_SCHALTER_GROUP_ON == frame->data[1]) p->mute = 0; // Powerport aktiv
+		else if (HCAN_HES_SCHALTER_GROUP_OFF == frame->data[1]) p->mute = 1; // Powerport passiv (per Taster nicht aenderbar)
+	}
+
 }
 
 void powerport_send_state_info(device_data_powerport *p)

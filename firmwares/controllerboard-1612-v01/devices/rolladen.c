@@ -17,6 +17,7 @@
 
 void rolladen_init(device_data_rolladen *p, eds_block_p it)
 {
+	p->mute = 0; // aktiv
 	p->kalibrieren = 1;
 	// Wir wissen die aktuelle Position des Rolladen nicht.
 	// Daher wird der Status so gesetzt, dass rekalibriert wird
@@ -244,7 +245,7 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 				switch (frame->data[3])
 				{
 					case 200: // Taster-Down im 2-Taster-Betrieb: ZU = 0 %
-						if (p->blockingTimer) return; // Befehl abblocken
+						if (p->mute || p->blockingTimer) return; // Befehl abblocken
 
 						if (p->power || p->soll_power)
 							rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
@@ -257,7 +258,7 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 						break;
 
 					case 201: // Taster-Down im 2-Taster-Betrieb: AUF = 100 %
-						if (p->blockingTimer) return; // Befehl abblocken
+						if (p->mute || p->blockingTimer) return; // Befehl abblocken
 
 						if (p->power || p->soll_power)
 							rolladen_cmd_stop (p); // anhalten, falls der Rolladen faehrt
@@ -279,7 +280,7 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 						break;
 
 					default: // frame->data[3] = Positionsvorgabe in %
-						if (p->blockingTimer) return; // Befehl abblocken
+						if (p->mute || p->blockingTimer) return; // Befehl abblocken
 
 						p->soll_laufzeit = (int32_t)p->config.laufzeit * frame->data[3] / 100;
 						canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("s %d"), p->soll_laufzeit);
@@ -303,7 +304,7 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 		case HCAN_HES_TASTER_DOWN: // Nur im 1-Taster-Betrieb verwendet
 			if (is_group_in_rolladen(p, frame->data[2]))
 			{
-				if (p->blockingTimer) return; // Befehl abblocken
+				if (p->mute || p->blockingTimer) return; // Befehl abblocken
 
 				if (p->power)
 				{
@@ -351,6 +352,20 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 				answer.data[3] = rolladen_get_position(p);
 				answer.size = 4;
 				canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
+			}
+			break;
+
+		case HCAN_HES_SCHALTER_GROUP_ON:
+			if (p->config.mute == frame->data[2])
+			{
+				p->mute = 0; // Rolladen aktiv
+			}
+			break;
+
+		case HCAN_HES_SCHALTER_GROUP_OFF:
+			if (p->config.mute == frame->data[2])
+			{
+				p->mute = 1; // Rolladen passiv (per Taster nicht verfahrbar)
 			}
 			break;
 	}

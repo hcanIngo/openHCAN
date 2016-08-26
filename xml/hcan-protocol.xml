@@ -210,7 +210,6 @@
 			<message name="RX_TX_STATS_RESET" id="49"
 				description="Setzt alle RX/TX Stats Counter zurueck" >
 			</message>
-
 		</service>
 
 		<service name="SLS" description="Syslog Service" id="4">
@@ -250,8 +249,8 @@
 				<param pos="1" name="index" description="Index des Taster-Ports" />
 			</message>
 
-			<message name="SCHALTER_STATE_QUERY" id="4"
-				description="HCAN_HES_SCHALTER_STATE_QUERY kommt immer wenn ein C1612 gerade hochgelaufen ist (reboot)" >
+			<message name="BOARD_ACTIVE" id="4"
+				description="Das Device meldet seinen Hochlauf." >
 			</message>
 			
 			<message name="POWER_GROUP_ON" id="10"
@@ -330,6 +329,16 @@
 				<param pos="1" name="position" description="Position im Bereich [0..100]; 100% = oben" />
 				<param pos="2" name="cmdsrc_hi" description="Source-Adresse des Befehls (0 = manuell ueber Taster), MSB" />
 				<param pos="3" name="cmdsrc_lo" description="LSB" />
+			</message>
+
+			<message name="SCHALTER_GROUP_ON" id="25"
+				description="Schalter ist an" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+
+			<message name="SCHALTER_GROUP_OFF" id="26"
+				description="Schalter ist aus" >
+				<param pos="0" name="gruppe" description="Gruppe" />
 			</message>
 
 			<message name="1WIRE_DISCOVER" id="30"

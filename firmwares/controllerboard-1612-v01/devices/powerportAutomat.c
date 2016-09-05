@@ -53,7 +53,7 @@ void powerportAutomat_can_callback(device_data_powerportAutomat *p, const canix_
 {
 	switch (frame->data[1])
 	{
-		case HCAN_HES_SCHALTER_GROUP_ON :
+		case HCAN_HES_SCHALTER_ON :
 			if ( (p->config.automatikEin_schalter_gruppe != 255) &&
 			     (frame->data[2] == p->config.automatikEin_schalter_gruppe) )
 			{
@@ -66,7 +66,7 @@ void powerportAutomat_can_callback(device_data_powerportAutomat *p, const canix_
 			}
 			break;
 
-		case HCAN_HES_SCHALTER_GROUP_OFF :
+		case HCAN_HES_SCHALTER_OFF :
 			if ( (p->config.automatikEin_schalter_gruppe != 255) &&
 			     (frame->data[2] == p->config.automatikEin_schalter_gruppe) )
 			{

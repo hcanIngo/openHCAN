@@ -195,11 +195,11 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 				if (!p->mute) powerport_toggle(p);
 				break;
 			case HCAN_HES_POWER_GROUP_ON :
-			case HCAN_HES_SCHALTER_GROUP_ON :
+			case HCAN_HES_SCHALTER_ON :
 				if (!p->mute) set_powerport_or_timer(p, STEIGENDE_FLANKE); //es soll eingeschaltet werden
 				break;
 			case HCAN_HES_POWER_GROUP_OFF :
-			case HCAN_HES_SCHALTER_GROUP_OFF :
+			case HCAN_HES_SCHALTER_OFF :
 				if (!p->mute) set_powerport_or_timer(p, FALLENDE_FLANKE); //es soll abgeschaltet werden
 				break;
 			// Achtung: Impulsausgaben liefern 0,
@@ -255,8 +255,8 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 	}
 	else if (p->config.mute == frame->data[2])
 	{
-		if (HCAN_HES_SCHALTER_GROUP_ON == frame->data[1]) p->mute = 0; // Powerport aktiv
-		else if (HCAN_HES_SCHALTER_GROUP_OFF == frame->data[1]) p->mute = 1; // Powerport passiv (per Taster nicht aenderbar)
+		if (HCAN_HES_SCHALTER_ON == frame->data[1]) p->mute = 0; // Powerport aktiv
+		else if (HCAN_HES_SCHALTER_OFF == frame->data[1]) p->mute = 1; // Powerport passiv (per Taster nicht aenderbar)
 	}
 
 }

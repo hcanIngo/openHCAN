@@ -102,14 +102,14 @@ void zeitschaltuhr_can_callback(device_data_zeitschaltuhr *p, const canix_frame 
 {
 	switch (frame->data[1])
 	{
-		case HCAN_HES_SCHALTER_GROUP_ON :
+		case HCAN_HES_SCHALTER_ON :
 			if (frame->data[2] == p->config.automatikEin_schalter_gruppe)
 			{
 				p->automatikEin = true;
 			}
 			break;
 
-		case HCAN_HES_SCHALTER_GROUP_OFF :
+		case HCAN_HES_SCHALTER_OFF :
 			if (frame->data[2] == p->config.automatikEin_schalter_gruppe)
 			{
 				p->automatikEin = false;

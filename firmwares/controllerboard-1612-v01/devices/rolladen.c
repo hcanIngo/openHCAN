@@ -355,14 +355,14 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 			}
 			break;
 
-		case HCAN_HES_SCHALTER_GROUP_ON:
+		case HCAN_HES_SCHALTER_ON:
 			if (p->config.mute == frame->data[2])
 			{
 				p->mute = 0; // Rolladen aktiv
 			}
 			break;
 
-		case HCAN_HES_SCHALTER_GROUP_OFF:
+		case HCAN_HES_SCHALTER_OFF:
 			if (p->config.mute == frame->data[2])
 			{
 				p->mute = 1; // Rolladen passiv (per Taster nicht verfahrbar)

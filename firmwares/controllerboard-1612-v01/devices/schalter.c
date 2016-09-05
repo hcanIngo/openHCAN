@@ -48,14 +48,17 @@ inline void schalter_timer_handler(device_data_schalter *p, uint8_t zyklus)
 
 	// µC-interner-Pullup am Eingangport aktiv:
 	// Wenn Schalter high liefert, dann ist der Pin 0, ansonsten 1
-	uint8_t active = ! inputport_read(p, p->config.port);
+	uint8_t active = inputport_read(p, p->config.port) == 0;
 
-	if ((active && FALLING == p->lastEdge) || 	// Zustandswechsel 0->1?
-		(!active && RISING == p->lastEdge))		// Zustandswechsel 1->0?
+	if (p->newState != 3)
 	{
-		// Schalterstellung geaendert:
-		if (p->newState < 255)
-			p->newState++; // Entprellschutz
+		if ((active && FALLING == p->lastEdge) || 	// Zustandswechsel 0->1?
+			(!active && RISING == p->lastEdge))		// Zustandswechsel 1->0?
+		{
+			// Schalterstellung geaendert:
+			if (p->newState < 255)
+				p->newState++; // Entprellschutz
+		}
 	}
 
 
@@ -77,10 +80,7 @@ void schalter_can_callback(device_data_schalter *p, const canix_frame *frame)
 		 * schalter_can_callback wird in main.c fuer jedes Schalter-Device einmal aufgerufen. */
 		if(p->config.gruppe != 255)
 		{
-			if( ! inputport_read(p, p->config.port) ) // active?
-				sendMessage(p, 1);
-			else
-				sendMessage(p, 0);
+			p->newState = 3; // sodass im schalter_timer_handler der aktuelle Zustand gesendet wird
 		}
 	}
 }
@@ -102,8 +102,8 @@ static inline void sendMessage(device_data_schalter *p, uint8_t active)
 	message.dst = HCAN_MULTICAST_CONTROL;
 	message.proto = HCAN_PROTO_SFP;
 	message.data[0] = HCAN_SRV_HES;
-	if(active)	message.data[1] = HCAN_HES_SCHALTER_GROUP_ON;
-	else		message.data[1] = HCAN_HES_SCHALTER_GROUP_OFF;
+	if(active)	message.data[1] = HCAN_HES_SCHALTER_ON;
+	else		message.data[1] = HCAN_HES_SCHALTER_OFF;
 	message.data[2] = p->config.gruppe;
 	message.size = 3;
 	canix_frame_send_with_prio(&message, HCAN_PRIO_HI);

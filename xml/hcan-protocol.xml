@@ -331,12 +331,12 @@
 				<param pos="3" name="cmdsrc_lo" description="LSB" />
 			</message>
 
-			<message name="SCHALTER_GROUP_ON" id="25"
+			<message name="SCHALTER_ON" id="25"
 				description="Schalter ist an" >
 				<param pos="0" name="gruppe" description="Gruppe" />
 			</message>
 
-			<message name="SCHALTER_GROUP_OFF" id="26"
+			<message name="SCHALTER_OFF" id="26"
 				description="Schalter ist aus" >
 				<param pos="0" name="gruppe" description="Gruppe" />
 			</message>

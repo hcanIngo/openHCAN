@@ -7,7 +7,7 @@ echo $build > buildver
 echo "Release is Build# $build"
 
 (
-	echo "mah, `date`"
+	echo "il, `date`"
 	echo "- released build $build"
 	echo 
 ) >> build-history

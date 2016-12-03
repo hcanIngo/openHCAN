@@ -19,12 +19,14 @@
 ##############################################################################
 
 include ./ARCH.inc
+.PHONY: tools
 
 alles:
 	make clean
 	make dep
 	make all
 	make install
+	make tools
 
 
 clean:
@@ -34,7 +36,8 @@ clean:
 	make firmware xx=clean parm2=MCU=atmega32
 	make firmware xx=clean parm2=MCU=atmega644
 	make firmwareOhneEds xx=clean
-	cd hcanweb; sudo make clean 
+	cd hcanweb; sudo make clean
+	cd tools; sudo make clean 
 
 dep:
 	make cppDienste xx=dep
@@ -89,7 +92,8 @@ firmwareOhneEds:
 	cd firmwares/hostinterface-v02; sudo make $(xx)
 	cd firmwares/usv-modul; sudo make $(xx)
 
-
+tools:
+	cd tools; sudo make all
 
 release: 
 	cd firmwares/controllerboard-1612-v01; sudo make release MCU=atmega32

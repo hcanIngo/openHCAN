@@ -3,7 +3,7 @@
 # Hinweise:
 #
 # Es muss sichergestellt sein, dass alle IDs eindeutig sind, d.h. nicht
-# mechfach vorkommen.
+# mehrfach vorkommen.
 
 set -e
 

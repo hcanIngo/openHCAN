@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ip="127.0.0.1"
+
 if [ "$#" != 2 ]; then
 	echo "Aufruf: $0 <file> <address>"
 	exit 1
@@ -19,7 +21,7 @@ if [ -f $1 ]; then
 		case $i in 
 			j)
 				echo "Konfiguration wird uebertragen..."
-				telican -c $2 -r $1 -e ''
+				telican -a $ip -c $2 -r $1 -e ''
 				echo "... fertig. Bitte Konfiguration manuell pruefen"
 				echo "und neu laden ('reload')."
 				exit 0

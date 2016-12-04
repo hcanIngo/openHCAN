@@ -494,7 +494,7 @@ cmdsrc_hi  |  Source-Adresse des Befehls (0 = manuell ueber Taster), MSB
 cmdsrc_lo  |  LSB
 
 
-**SCHALTER_GROUP_ON (25)**
+**SCHALTER_ON (25)**
 
 Schalter ist an
 
@@ -503,7 +503,7 @@ Parameter|Beschreibung
 gruppe  |  Gruppe
 
 
-**SCHALTER_GROUP_OFF (26)**
+**SCHALTER_OFF (26)**
 
 Schalter ist aus
 

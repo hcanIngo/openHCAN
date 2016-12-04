@@ -4,8 +4,9 @@ include $(CONF)/myconf.inc
 #ZIEL_PC = localhost
 ZIEL_PC = bananapi
 
-OPENHABVERSION = 1.8.1
+OPENHABVERSION = 1.8.3
 HCAN_INSTALLATION = installation.xml
+#HCAN_INSTALLATION = installation_Test.xml
 
 
 ifeq ($(ZIEL_PC),localhost)

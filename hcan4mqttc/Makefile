@@ -44,7 +44,8 @@ install:
 	install binary_$(ARCH)/$(TARGET) /usr/sbin
 	
 run: 
-	./binary_i386/$(TARGET) -D
+	./binary_i386/$(TARGET)
+	@#./binary_i386/$(TARGET) -D
 	
 ZIEL_PC = bananapi
 ZIEL_USER = tt

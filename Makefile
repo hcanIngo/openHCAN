@@ -37,7 +37,6 @@ clean:
 	make firmware xx=clean parm2=MCU=atmega644
 	make firmwareOhneEds xx=clean
 	cd hcanweb; sudo make clean
-	cd tools; sudo make clean 
 
 dep:
 	make cppDienste xx=dep

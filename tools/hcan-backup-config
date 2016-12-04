@@ -1,7 +1,5 @@
 #!/bin/bash
 
-ip="127.0.0.1"
-
 if [ "$#" != 1 ]; then
 	echo "Aufruf: $0 <address>"
 	exit 1
@@ -25,7 +23,7 @@ echo "# Format the EEROM to have a clean start..."
 echo "Format"
 echo
 echo "# Config START"
-telican -a $ip -c $1 -e "show conf"
+telican -c $1 -e "show conf"
 echo "# Config END"
 
 ) > backup-board-$1-`date +%Y%m%d`.cf

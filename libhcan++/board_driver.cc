@@ -407,7 +407,7 @@ void board_driver::cmd_flash (const string &filename)
 			 *
 			 * Der gesamte zu flashende Bereich (size) wird in
 			 * Bloecke aufgeteilt. Jeder Block ist eine Groesse von m_page_size
-			 * und ist vom Typ der MCU abhaengig (z.Z. nur Atmega32).
+			 * und ist vom Typ der MCU abhaengig (Atmega32 oder Atmega644p).
 			 *
 			 * Jeder Block muss auf der MCU "auf einen Rutsch" ins Flash
 			 * geschrieben werden. Dazu wird der Block bei der Uebertragung
@@ -473,7 +473,7 @@ void board_driver::cmd_flash (const string &filename)
 						index += 4;
 					}
 
-					// afer each complete line, wait for ACK
+					// after each complete line, wait for ACK
 					m_tcon.recv_FLASH_BUFFER_FILL_ACK(m_bcon.dst(), 
 							m_bcon.src());
 				}

@@ -10,6 +10,11 @@
 #define HEIZUNG_MODE_THERMOSTAT   2
 #define HEIZUNG_MODE_AUTOMATIK    3
 
+//PID
+#define SOLLISTWERTE			3
+#define ABSTANDPIDMESSUNGEN		30		// 60 sekunden
+#define PWMCHANGEFREQENCY		300		// 300 Sekunden
+
 /**
  * Falls 2 HK parallel angesteuert werden, kann durch
  * Setzen dieses Feature-Bits erwirkt werden, dass bei
@@ -38,8 +43,10 @@ typedef struct
 	uint16_t pwm_width;
 	uint16_t pwm_end;
 	uint8_t waermebedarf_counter;
+	uint16_t pwm_change_counter;
 	uint8_t received_interval_counter;
 	int16_t measure_value;
+	int16_t destination_value;
 	uint16_t duration_counter;   // remaining time in Manual/Thermostat-Mode
 	int16_t thermostat_temp;    // Soll-Temperatur im Thermostat-Modus
 	uint8_t reed_heiz_stop_counter;
@@ -52,6 +59,17 @@ typedef struct
 	 * Waermeanforderung gesendet.
 	 */
 	uint16_t ventilpflege_counter;
+	// PID
+	uint8_t pfaktor;	// als 1/100
+	uint8_t ifaktor;	// als 1/100
+	uint8_t dfaktor;	// als 1/100
+	uint8_t pidcounter;			// sekunden seit der letzen messung/aufzeichnung
+	int32_t pidvalue;
+	//int16_t sollist0;	// letzter Soll - ist als 1/16 Grad
+	//int16_t sollist1;	// vorletzter Soll - ist als 1/16 Grad
+	//int16_t sollist2;	// vorvorletzter Soll - ist als 1/16 Grad
+	int16_t sollist[SOLLISTWERTE]; // Soll - ist als 1/16 Grad
+	uint8_t sollistIndex;
 } device_data_heizung;
 
 void heizung_init(device_data_heizung *p, eds_block_p it);

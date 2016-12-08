@@ -78,9 +78,9 @@ void canix_syslog_P(uint8_t prio, const char *fmt, ...)
 			message.size = payload_counter;
 			payload_counter = 0;
 			canix_frame_send(&message);
+			canix_sleep_100th(1);
 		}
 
-		canix_sleep_100th(1);
 	}
 }
 

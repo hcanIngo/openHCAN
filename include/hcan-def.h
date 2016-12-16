@@ -120,8 +120,8 @@
 #define HCAN_HMS_CAN_EC_QUERY   35
 
 // Liefert die CAN Error Counter Staende
-// REC : RX Error Counter
-// TEC : TX Error Counter
+// hi : TX Error Counter, Hi Teil
+// lo : TX Error Counter, Lo Teil
 #define HCAN_HMS_CAN_EC_REPLAY   36
 
 // Errechnet die CRC16 Pruefsumme ueber den Flash bis zur angegebenen
@@ -296,6 +296,14 @@
 // Schalter ist aus
 // gruppe : Gruppe
 #define HCAN_HES_SCHALTER_OFF   26
+
+// Mute ist aktiviert (passiver Zustand)
+// gruppe : Gruppe
+#define HCAN_HES_MUTE_ON   27
+
+// Mute ist deaktiviert (aktiver Zustand)
+// gruppe : Gruppe
+#define HCAN_HES_MUTE_OFF   28
 
 // Veranlasst einen 1Wire Scan an gebenen Pin
 // pin : Pin ID des 1Wire Ports im Bereich [0..7]

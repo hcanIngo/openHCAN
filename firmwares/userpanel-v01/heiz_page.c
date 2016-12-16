@@ -353,8 +353,12 @@ void heiz_page_print_page(eds_heiz_page_block_t *p)
 
 	if (heiz_page_state == STATE_VIEW)
 	{
-		if (get_heiz_details(p->heiz_id, &mode, &rate, &Tsoll, 
-					&dauer, (uint16_t *) &Tist) != 0)
+		uint8_t Fehler = get_heiz_details(p->heiz_id, &mode, &rate, &Tsoll, &dauer, (uint16_t *) &Tist);
+
+		if (EDS_heiz_page_BLOCK_ID != lcdstate.active_page.block_type)
+			return; // Die Seite ist inzwischen eine Andere
+
+		if (Fehler != 0)
 		{
 			// vermutlich keine Antwort gekommen
 			snprintf_P(s,sizeof(s)-1,
@@ -475,7 +479,7 @@ void heiz_page_can_callback(eds_heiz_page_block_t *p,
 				if (heiz_details_expected &&
 						(frame->data[2] == heiz_details_heiz_id))
 				{
-					// es weren Heiz Details erwartet und die Heizungs-ID
+					// es werden Heiz Details erwartet und die Heizungs-ID
 					// passt auch; das muss also die erwartete Message
 					// sein
 					heiz_details_expected &= ~0x01;

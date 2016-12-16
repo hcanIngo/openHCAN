@@ -1,6 +1,6 @@
 INDENT_OPTS = -orig -ci4
 
-all: eds.xml hcan-protocol.xml validate hcan-def.h hcan_transport.h hcan_transport.cc eds-structs.h oap-def.h hcan-protocol-referenz.txt
+all: eds.sql eds.xml hcan-protocol.xml validate hcan-def.h oap-def.h hcan_transport.h hcan_transport.cc eds-structs.h oap-def.h hcan-protocol-referenz.txt
 
 install:
 	test -d /usr/share/hcan || mkdir /usr/share/hcan 
@@ -44,9 +44,15 @@ hcan-protocol-referenz.txt: mk_hcan-protocol_wiki.xsl hcan-protocol.xml
 	xalan -in hcan-protocol.xml -xsl mk_hcan-protocol_wiki.xsl \
 	> hcan-protocol-referenz.txt
 
+eds.sql: mk_eds_sql.xsl eds.xml
+	xalan -in eds.xml -xsl mk_eds_sql.xsl -indent 0 | \
+	indent $(INDENT_OPTS) | sed 's/SED_DELETE/ /g' > eds.sql
+
+
 clean:
-	rm -f hcan-def.h hcan_transport.h hcan_transport.cc \
-	frame_message_description.h eds_desc.cc eds-structs.h
+	rm -f hcan-def.h oap-def.h hcan_transport.h hcan_transport.cc \
+	frame_message_description.h eds_desc.cc eds-structs.h \
+	hcan-protocol-referenz.txt eds.sql
 
 .PHONY: validate
 

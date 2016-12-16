@@ -9,6 +9,17 @@ include ../../ARCH.inc
 #export MCU = atmega644
 TARGET = main
 
+ifeq ($(MCU),atmega644)
+	# atmega644 (64kbytes flash = 0 bis FFFF)
+	# 0xF000 for firmware, 2048 words boot size
+	AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:w:"UI_$(MCU)/$(TARGET).hex" -U hfuse:w:0xD0:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
+else
+	# atmega32 (32kbytes flash = 0 bis 7FFF)
+	# 0x7000 for firmware,  2048 words boot size
+	AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:w:"UI_$(MCU)/$(TARGET).hex" -U hfuse:w:0xC0:m -U lfuse:w:0x0f:m
+endif
+
+
 export CC = avr-gcc
 export OBJCOPY = avr-objcopy
 OBJ     = main.o ../../canix/canix.o ../../canix/mcp2515.o \
@@ -18,7 +29,8 @@ OBJ     = main.o ../../canix/canix.o ../../canix/mcp2515.o \
 		  ../../canix/mem_check.o \
 		  timer.o lcd.o lcdctrl.o keys.o lcdstatemachine.o \
 		  heiz_page.o gesamt_heiz_page.o rolladen_page.o taster_page.o powerport_page.o \
-		  fenster_monitor_page.o temp_anzeige_page.o weck_page.o
+		  fenster_monitor_page.o temp_anzeige_page.o weck_page.o \
+		  reedkontakt_monitor.o lampen_monitor.o sonstige_monitor.o heiz_monitor.o mute_monitor.o
 
 export F_CPU  = 3686400
 export F_CAN   = 8000000
@@ -38,8 +50,8 @@ INC = -I. -I../../canix -I../.. -I../../include
 CFLAGS= $(GCCFLAGS) $(INC) $(DEFINES)
 
 all: $(TARGET).hex
-	test -d ./UI_$(MCU) || mkdir UI_$(MCU)
-	mv $(TARGET).hex UI_$(MCU)
+	sudo test -d ./UI_$(MCU) || mkdir UI_$(MCU)
+	sudo mv $(TARGET).hex UI_$(MCU)
 
 $(TARGET).hex : $(TARGET).out
 	$(OBJCOPY) -R .eeprom -O ihex $(TARGET).out $(TARGET).hex 
@@ -49,7 +61,7 @@ $(TARGET).out : $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET).out -Wl,-Map,$(TARGET).map $(OBJ) $(LDFLAGS)
 
 clean:
-	rm -f *.o *.map *.out ../../canix/*.o
+	sudo rm -f *.o *.map *.out ../../canix/*.o
 	sudo rm -f ./UI_$(MCU)/*.hex
 
 ctags:
@@ -60,7 +72,8 @@ load:
 	@echo -------------------------
 	@echo Bsp.:  make load adr=71
 	@echo -------------------------
-	telican -a $(IP_HI) -c $(adr) --arch $(MCU) -e "flash UI_$(MCU)/$(TARGET).hex"
+	# --polite-time 60
+	telican -a $(IP_HI) -c $(adr) -C --arch $(MCU) --ignore-type -e "flash UI_$(MCU)/$(TARGET).hex"
 
 release:
 	../../tools/mkrelease
@@ -68,6 +81,6 @@ release:
 	make
 	mv UI_$(MCU)/$(TARGET).hex UI_$(MCU)/userpanel-build-`cat buildver`-`date +%Y%m%d`.hex
 
-rolladen-statemachine.png : rolladen-statemachine.dot
-	dot -Tpng rolladen-statemachine.dot  > rolladen-statemachine.png
+flash:
+	sudo $(AVRDUDE_FLASH)
 

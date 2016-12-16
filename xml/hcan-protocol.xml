@@ -132,8 +132,8 @@
 
 			<message name="CAN_EC_REPLAY" id="36"
 				description="Liefert die CAN Error Counter Staende" >
-				<param pos="0" name="REC" description="RX Error Counter" />
-				<param pos="1" name="TEC" description="TX Error Counter" />
+				<param pos="0" name="hi" description="TX Error Counter, Hi Teil" />
+				<param pos="1" name="lo" description="TX Error Counter, Lo Teil" />
 			</message>
 
 			<message name="FLASH_CRC16_QUERY" id="37"
@@ -338,6 +338,16 @@
 
 			<message name="SCHALTER_OFF" id="26"
 				description="Schalter ist aus" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+
+			<message name="MUTE_ON" id="27"
+				description="Mute ist aktiviert (passiver Zustand)" >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+
+			<message name="MUTE_OFF" id="28"
+				description="Mute ist deaktiviert (aktiver Zustand)" >
 				<param pos="0" name="gruppe" description="Gruppe" />
 			</message>
 

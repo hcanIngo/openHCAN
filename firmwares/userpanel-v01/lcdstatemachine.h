@@ -13,6 +13,11 @@
 #define ERROR_PAGE_PAGE_STACK_OVERFLOW     4
 #define ERROR_PAGE_PAGE_STACK_UNDERFLOW    5
 #define ERROR_PAGE_SHORTCUTS_MISSING       6
+#define ERROR_CONF_REEDKONTAKTE_MISSING    7
+#define ERROR_CONF_LAMPEN_MISSING    	   8
+#define ERROR_CONF_SONSTIGE_MISSING        9
+#define ERROR_CONF_MUTE_MISSING        10
+#define ERROR_CONF_HEIZUNG_MISSING        11
 
 typedef struct
 {
@@ -45,6 +50,31 @@ typedef struct
 	uint8_t F[8];
 } userpanel_shortcuts_t;
 
+typedef struct
+{
+	uint8_t reed[24];
+} userpanel_reedkontakte_t;
+
+typedef struct
+{
+	uint8_t lampe[24];
+} userpanel_lampen_t;
+
+typedef struct
+{
+	uint8_t sonstiges[24];
+} userpanel_sonstige_t;
+
+typedef struct
+{
+	uint8_t mute[24];
+} userpanel_mute_t;
+
+typedef struct
+{
+	uint8_t heizung[24];
+} userpanel_heizungen_t;
+
 extern lcdstate_t lcdstate;
 
 #define STATE_VIEW                         0
@@ -62,5 +92,7 @@ void load_error_page(uint8_t code);
 // wird im Sekundentakt aufgerufen
 void lcdstatemachine_timer_handler(void);
 void lcdstatemachine_can_callback(const canix_frame *frame);
+
+void print_screensaver_page(void);
 
 #endif

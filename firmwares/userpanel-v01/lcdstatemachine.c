@@ -24,9 +24,13 @@
 #include <powerport_page.h>
 #include <fenster_monitor_page.h>
 #include <temp_anzeige_page.h>
+#include <reedkontakt_monitor.h>
+#include <lampen_monitor.h>
+#include <sonstige_monitor.h>
+#include <heiz_monitor.h>
+#include <mute_monitor.h>
 
 lcdstate_t lcdstate;
-
 
 volatile uint8_t keypress_time;
 uint8_t lcd_led_countdown;
@@ -51,7 +55,6 @@ uint8_t page_stack_ptr = 0;
 
 void page_path_stack_push(uint8_t page_id)
 {
-
 	if (page_stack_ptr >= 7)
 	{
 		load_error_page(ERROR_PAGE_PAGE_STACK_OVERFLOW);
@@ -98,7 +101,6 @@ void load_page(uint8_t page)
 
 	EDS_foreach_block_between(it, EDS_PAGE_ID_START, EDS_PAGE_ID_END)
 	{
-
 		uint8_t page_id;
 
 		// War testweise noetig, um den Bug (siehe /prj/tickets/TID0938/Log)
@@ -214,11 +216,13 @@ void goto_first_child_page(void)
 void print_screensaver_page(void)
 {
 	char s[32];
+	char sz[6];
 	char tag[6];
+	uint8_t replaceTerm = 0; // 0-Terminierung mit Leerzeichen ersetzen
 
 	switch (canix_rtc_clock.day_of_week)
 	{
-		case 1 : strcpy_P(tag,PSTR("Mon")); break;
+		case 1 : strcpy_P(tag,PSTR("Mo")); break;
 		case 2 : strcpy_P(tag,PSTR("Di")); break;
 		case 3 : strcpy_P(tag,PSTR("Mi")); break;
 		case 4 : strcpy_P(tag,PSTR("Do")); break;
@@ -227,15 +231,85 @@ void print_screensaver_page(void)
 		case 7 : strcpy_P(tag,PSTR("So")); break;
 	}
 
-	snprintf(s,sizeof(s)-1,"%s, %02d.%02d.%d",tag,
+	snprintf(s,sizeof(s)-1,"%s,%02d.%02d.%d     ",tag, // Leerzeichen, sodass '\0' das 17.Zeichen ist
 			canix_rtc_clock.day_of_month,
 			canix_rtc_clock.month_of_year,
-			canix_rtc_clock.year + 2000);
+			canix_rtc_clock.year /*+ 2000*/);
+
+	uint8_t pos = 16;
+	// Heizungs-Solltemperatur:
+	uint8_t nHeizungenUeber0Grad = get_count_Tsoll_greater(0);
+	if (0 < nHeizungenUeber0Grad)
+	{
+		uint8_t nHeizungenUeber15Grad = get_count_Tsoll_greater(15);
+		if (0 < nHeizungenUeber15Grad)
+		{
+			//  mindestens eine Tsoll > 15°C (Heizbetrieb)
+			snprintf(sz, sizeof(sz)," H%d", nHeizungenUeber15Grad);
+		}
+		else
+		{
+			// mindestens eine Tsoll > 0°C (Frostschutz)
+			snprintf(sz, sizeof(sz)," h%d", nHeizungenUeber0Grad);
+		}
+		pos -= strlen(sz);
+		strcpy(&s[pos], sz);
+	}
+	// sonst sind die Heizungen alle AUS.
+
 	lcd_gotoxy(0,0);
 	lcd_puts(s);
-	snprintf(s,sizeof(s)-1,"%02d:%02d Uhr", 
-			canix_rtc_clock.hour,
-			canix_rtc_clock.minute);
+
+
+	// --- Zeile 2 ---:
+	snprintf(s, sizeof(s)-1, "%02d:%02d           ", canix_rtc_clock.hour, canix_rtc_clock.minute);
+
+	pos = 16; // zeigt auf letztes Zeichen + 1
+	uint8_t nFenster = get_count_reedkontakt_states(); // Anzahl offen
+	if (0 < nFenster)
+	{
+		snprintf(sz, sizeof(sz)," F%d", nFenster);
+		pos -= strlen(sz);
+		strcpy(&s[pos], sz);
+	}
+
+	uint8_t nLampen = get_count_lampen_states(); // Anzahl eingeschaltet
+	if (0 < nLampen)
+	{
+		if (pos != 16) replaceTerm = 1;
+		snprintf(sz, sizeof(sz)," L%d", nLampen);
+		pos -= strlen(sz);
+		strcpy(&s[pos], sz);
+		if (replaceTerm)
+			s[strlen(s)] = ' '; // Terminierung durch snprintf wieder mit Leerzeichen ersetzen
+	}
+
+	uint8_t nSonstige = get_count_sonstige_states(); // Anzahl eingeschaltet
+	if (0 < nSonstige)
+	{
+		if (pos != 16) replaceTerm = 1;
+		snprintf(sz, sizeof(sz), " S%d", nSonstige);
+		pos -= strlen(sz);
+		strcpy(&s[pos], sz);
+		if (replaceTerm)
+			s[strlen(s)] = ' '; // Terminierung durch snprintf wieder mit Leerzeichen ersetzen
+	}
+
+	uint8_t nPassiv = get_count_mute_states(); // irgendetwas passiv?
+	if (0 < nPassiv)
+	{
+		if (pos != 16) replaceTerm = 1;
+
+		snprintf(sz, sizeof(sz),"P%d", nPassiv);
+		pos -= strlen(sz);
+		strcpy(&s[pos], sz);
+
+		if (replaceTerm)
+			s[strlen(s)] = ' '; // Terminierung durch snprintf wieder mit Leerzeichen ersetzen
+	}
+
+	if (pos == 16) strcpy(&s[6], "Uhr"); // keine andere Anzeige
+
 	lcd_gotoxy(0,1);
 	lcd_puts(s);
 }
@@ -287,6 +361,16 @@ void print_page(void)
 					case ERROR_PAGE_SHORTCUTS_MISSING :
 						strncpy_P(s,PSTR("shortcuts error"),sizeof(s)-1);
 						break;
+					case ERROR_CONF_REEDKONTAKTE_MISSING :
+						strncpy_P(s,PSTR("conf reedkontakt"),sizeof(s)-1);
+						break;
+					case ERROR_CONF_LAMPEN_MISSING :
+						strncpy_P(s,PSTR("conf lampen"),sizeof(s)-1);
+						break;
+					case ERROR_CONF_SONSTIGE_MISSING :
+						strncpy_P(s,PSTR("conf sonstige"),sizeof(s)-1);
+						break;
+
 				}
 				lcd_gotoxy(0,1);
 				lcd_puts(s);
@@ -294,9 +378,10 @@ void print_page(void)
 			break;
 
 		case EDS_screensaver_page_BLOCK_ID :
+		{
 			print_screensaver_page();
 			break;
-
+		}
 		case EDS_dir_page_BLOCK_ID :
 			print_dir_page();
 			break;
@@ -472,6 +557,10 @@ void key_down_event(uint8_t key)
 		powerport_page_handle_key_down_event((eds_powerport_page_block_t *)
 				&lcdstate.active_page.page_id, key);
 	}
+/* TODO raus	else if (lcdstate.active_page.block_type == EDS_screensaver_page_BLOCK_ID)
+	{
+		powerport_monitor__handle_key_down_event(key);
+	}*/
 	else
 	{
 		if (lcdstate.state == STATE_VIEW)
@@ -576,6 +665,16 @@ void key_up_event(uint8_t key)
 
 void lcdstatemachine_can_callback(const canix_frame *frame)
 {
+	if (lcdstate.active_page.block_type == EDS_screensaver_page_BLOCK_ID)
+	{
+
+	}
+	monitor_heiz_can_callback(frame);
+	monitor_reedkontakt_can_callback(frame);
+	monitor_lampen_can_callback(frame);
+	monitor_sonstige_can_callback(frame);
+	monitor_mute_can_callback(frame);
+
 	if (lcdstate.active_page.block_type == EDS_heiz_page_BLOCK_ID)
 		heiz_page_can_callback( (eds_heiz_page_block_t *) 
 				&lcdstate.active_page.page_id, frame);

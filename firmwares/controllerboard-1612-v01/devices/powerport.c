@@ -194,14 +194,17 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 			case HCAN_HES_TASTER_DOWN :
 				if (!p->mute) powerport_toggle(p);
 				break;
+
 			case HCAN_HES_POWER_GROUP_ON :
 			case HCAN_HES_SCHALTER_ON :
 				if (!p->mute) set_powerport_or_timer(p, STEIGENDE_FLANKE); //es soll eingeschaltet werden
 				break;
+
 			case HCAN_HES_POWER_GROUP_OFF :
 			case HCAN_HES_SCHALTER_OFF :
 				if (!p->mute) set_powerport_or_timer(p, FALLENDE_FLANKE); //es soll abgeschaltet werden
 				break;
+
 			// Achtung: Impulsausgaben liefern 0,
 			// obwohl bistabile Relais ggf. an sind!
 			// -> Bistabile Relais nur fuer Steckdosen verwenden!
@@ -221,6 +224,7 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 					canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 				}
 				break;
+
 			case HCAN_HES_WECKER_SET :
 				if (p->config.gruppe0 == frame->data[2]) //=weck_id
 				{
@@ -237,6 +241,7 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 					}
 				}
 				break;
+
 			case HCAN_HES_WECKER_DETAILS_REQUEST :
 				{
 					if (p->config.gruppe0 == frame->data[2]) // =weck_id
@@ -247,18 +252,19 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 						answer.data[4] = p->countDownTimer; // LSB
 						answer.size = 5;
 						canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
-						break;
-
 					}
 				}
+				break;
 		}
 	}
-	else if (p->config.mute == frame->data[2])
-	{
-		if (HCAN_HES_SCHALTER_ON == frame->data[1]) p->mute = 0; // Powerport aktiv
-		else if (HCAN_HES_SCHALTER_OFF == frame->data[1]) p->mute = 1; // Powerport passiv (per Taster nicht aenderbar)
-	}
 
+	if (p->config.mute == frame->data[2])
+	{
+		if (HCAN_HES_MUTE_OFF == frame->data[1])
+			p->mute = 0; // Powerport aktiv
+		else if (HCAN_HES_MUTE_ON == frame->data[1])
+			p->mute = 1; // Powerport passiv (per Taster nicht aenderbar)
+	}
 }
 
 void powerport_send_state_info(device_data_powerport *p)

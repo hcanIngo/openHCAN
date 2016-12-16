@@ -354,20 +354,14 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 				canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
 			}
 			break;
+	}
 
-		case HCAN_HES_SCHALTER_ON:
-			if (p->config.mute == frame->data[2])
-			{
-				p->mute = 0; // Rolladen aktiv
-			}
-			break;
-
-		case HCAN_HES_SCHALTER_OFF:
-			if (p->config.mute == frame->data[2])
-			{
-				p->mute = 1; // Rolladen passiv (per Taster nicht verfahrbar)
-			}
-			break;
+	if (p->config.mute == frame->data[2])
+	{
+		if (HCAN_HES_MUTE_OFF == frame->data[1])
+			p->mute = 0; // Rolladen aktiv
+		else if (HCAN_HES_MUTE_ON == frame->data[1])
+			p->mute = 1; // Rolladen passiv (per Taster nicht verfahrbar)
 	}
 }
 

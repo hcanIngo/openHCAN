@@ -102,8 +102,18 @@ static inline void sendMessage(device_data_schalter *p, uint8_t active)
 	message.dst = HCAN_MULTICAST_CONTROL;
 	message.proto = HCAN_PROTO_SFP;
 	message.data[0] = HCAN_SRV_HES;
-	if(active)	message.data[1] = HCAN_HES_SCHALTER_ON;
-	else		message.data[1] = HCAN_HES_SCHALTER_OFF;
+	if(active)
+	{
+		if(p->config.feature & (1<<FEATURE_SCHALTER_MUTE))
+			message.data[1] = HCAN_HES_MUTE_ON;
+		else message.data[1] = HCAN_HES_SCHALTER_ON;
+	}
+	else
+	{
+		if(p->config.feature & (1<<FEATURE_SCHALTER_MUTE))
+			message.data[1] = HCAN_HES_MUTE_OFF;
+		else message.data[1] = HCAN_HES_SCHALTER_OFF;
+	}
 	message.data[2] = p->config.gruppe;
 	message.size = 3;
 	canix_frame_send_with_prio(&message, HCAN_PRIO_HI);

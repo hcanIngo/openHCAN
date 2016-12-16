@@ -50,10 +50,9 @@ const uint16_t VORGABE_DAUER_THERMOSTAT = 4*3600;      //  4 h  (fixer Faktor 36
 
 
 volatile uint16_t gesamt_heiz_details_dauer = 0;
-
-uint8_t gesamt_heiz_details_mode_edit;
-int16_t gesamt_heiz_details_Tsoll_edit;
-uint16_t gesamt_heiz_details_dauer_edit;
+volatile uint8_t gesamt_heiz_details_mode_edit;
+volatile int16_t gesamt_heiz_details_Tsoll_edit;
+volatile uint16_t gesamt_heiz_details_dauer_edit;
 
 /*
  * es gibt 3 Subpages: 0,1,2
@@ -142,16 +141,19 @@ void set_gesamt_heiz_edited_details(eds_gesamt_heiz_page_block_t *p)
 				
 	}
 	
-	//an alle Heizungen:
+	// an alle Heizungen:
 	uint8_t i;
 	uint8_t *heiz_id;
 	heiz_id = (uint8_t *) &(p->heiz_id0);
 	for (i = 0; i < MAX_HEIZ_IDS; i++)
 	{
-		if(heiz_id[i] != 255)
+		if (heiz_id[i] != 255)
 		{
 			message.data[2] = heiz_id[i];
 			canix_frame_send_with_prio(&message, HCAN_PRIO_HI);
+
+			canix_sleep_100th(10); // 100msec Pause
+			wdt_reset();
 		}
 	}
 }

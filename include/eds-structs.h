@@ -1120,6 +1120,276 @@ typedef struct {
 #define EDS_gesamt_heiz_page_BLOCK_ID 110
 
 typedef struct {
+    uint8_t           reed0;
+
+    uint8_t           reed1;
+
+    uint8_t           reed2;
+
+    uint8_t           reed3;
+
+    uint8_t           reed4;
+
+    uint8_t           reed5;
+
+    uint8_t           reed6;
+
+    uint8_t           reed7;
+
+    uint8_t           reed8;
+
+    uint8_t           reed9;
+
+    uint8_t           reed10;
+
+    uint8_t           reed11;
+
+    uint8_t           reed12;
+
+    uint8_t           reed13;
+
+    uint8_t           reed14;
+
+    uint8_t           reed15;
+
+    uint8_t           reed16;
+
+    uint8_t           reed17;
+
+    uint8_t           reed18;
+
+    uint8_t           reed19;
+
+    uint8_t           reed20;
+
+    uint8_t           reed21;
+
+    uint8_t           reed22;
+
+    uint8_t           reed23;
+
+
+} eds_userpanel_reedkontakte_block_t;
+
+#define EDS_userpanel_reedkontakte_BLOCK_ID 111
+
+typedef struct {
+    uint8_t           lampe0;
+
+    uint8_t           lampe1;
+
+    uint8_t           lampe2;
+
+    uint8_t           lampe3;
+
+    uint8_t           lampe4;
+
+    uint8_t           lampe5;
+
+    uint8_t           lampe6;
+
+    uint8_t           lampe7;
+
+    uint8_t           lampe8;
+
+    uint8_t           lampe9;
+
+    uint8_t           lampe10;
+
+    uint8_t           lampe11;
+
+    uint8_t           lampe12;
+
+    uint8_t           lampe13;
+
+    uint8_t           lampe14;
+
+    uint8_t           lampe15;
+
+    uint8_t           lampe16;
+
+    uint8_t           lampe17;
+
+    uint8_t           lampe18;
+
+    uint8_t           lampe19;
+
+    uint8_t           lampe20;
+
+    uint8_t           lampe21;
+
+    uint8_t           lampe22;
+
+    uint8_t           lampe23;
+
+
+} eds_userpanel_lampen_block_t;
+
+#define EDS_userpanel_lampen_BLOCK_ID 112
+
+typedef struct {
+    uint8_t           sonstiges0;
+
+    uint8_t           sonstiges1;
+
+    uint8_t           sonstiges2;
+
+    uint8_t           sonstiges3;
+
+    uint8_t           sonstiges4;
+
+    uint8_t           sonstiges5;
+
+    uint8_t           sonstiges6;
+
+    uint8_t           sonstiges7;
+
+    uint8_t           sonstiges8;
+
+    uint8_t           sonstiges9;
+
+    uint8_t           sonstiges10;
+
+    uint8_t           sonstiges11;
+
+    uint8_t           sonstiges12;
+
+    uint8_t           sonstiges13;
+
+    uint8_t           sonstiges14;
+
+    uint8_t           sonstiges15;
+
+    uint8_t           sonstiges16;
+
+    uint8_t           sonstiges17;
+
+    uint8_t           sonstiges18;
+
+    uint8_t           sonstiges19;
+
+    uint8_t           sonstiges20;
+
+    uint8_t           sonstiges21;
+
+    uint8_t           sonstiges22;
+
+    uint8_t           sonstiges23;
+
+
+} eds_userpanel_sonstige_block_t;
+
+#define EDS_userpanel_sonstige_BLOCK_ID 113
+
+typedef struct {
+    uint8_t           mute0;
+
+    uint8_t           mute1;
+
+    uint8_t           mute2;
+
+    uint8_t           mute3;
+
+    uint8_t           mute4;
+
+    uint8_t           mute5;
+
+    uint8_t           mute6;
+
+    uint8_t           mute7;
+
+    uint8_t           mute8;
+
+    uint8_t           mute9;
+
+    uint8_t           mute10;
+
+    uint8_t           mute11;
+
+    uint8_t           mute12;
+
+    uint8_t           mute13;
+
+    uint8_t           mute14;
+
+    uint8_t           mute15;
+
+    uint8_t           mute16;
+
+    uint8_t           mute17;
+
+    uint8_t           mute18;
+
+    uint8_t           mute19;
+
+    uint8_t           mute20;
+
+    uint8_t           mute21;
+
+    uint8_t           mute22;
+
+    uint8_t           mute23;
+
+
+} eds_userpanel_mute_block_t;
+
+#define EDS_userpanel_mute_BLOCK_ID 114
+
+typedef struct {
+    uint8_t           heizung0;
+
+    uint8_t           heizung1;
+
+    uint8_t           heizung2;
+
+    uint8_t           heizung3;
+
+    uint8_t           heizung4;
+
+    uint8_t           heizung5;
+
+    uint8_t           heizung6;
+
+    uint8_t           heizung7;
+
+    uint8_t           heizung8;
+
+    uint8_t           heizung9;
+
+    uint8_t           heizung10;
+
+    uint8_t           heizung11;
+
+    uint8_t           heizung12;
+
+    uint8_t           heizung13;
+
+    uint8_t           heizung14;
+
+    uint8_t           heizung15;
+
+    uint8_t           heizung16;
+
+    uint8_t           heizung17;
+
+    uint8_t           heizung18;
+
+    uint8_t           heizung19;
+
+    uint8_t           heizung20;
+
+    uint8_t           heizung21;
+
+    uint8_t           heizung22;
+
+    uint8_t           heizung23;
+
+
+} eds_userpanel_heizungen_block_t;
+
+#define EDS_userpanel_heizungen_BLOCK_ID 115
+
+typedef struct {
     uint8_t           level;
 
     uint16_t          takeover_time;

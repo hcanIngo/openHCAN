@@ -16,8 +16,8 @@
 #include <keys.h>
 #include <timer.h>
 #include <lcdstatemachine.h>
-
 #include <eds.h>
+#include "lampen_monitor.h"
 
 #define USERPANEL_VERSION "0.9.5"
 const char userpanel_version[] PROGMEM = "USERPANEL_VERSION_" \

@@ -792,6 +792,141 @@
 		mit der viele Heizung/Heizzone gleichartig gesteuert werden.
 	</block>
 
+	<block type="111" name="userpanel_reedkontakte" size="24">
+		<field datatype="uint8_t" name="reed0" pos="0" />
+		<field datatype="uint8_t" name="reed1" pos="1" />
+		<field datatype="uint8_t" name="reed2" pos="2" />
+		<field datatype="uint8_t" name="reed3" pos="3" />
+		<field datatype="uint8_t" name="reed4" pos="4" />
+		<field datatype="uint8_t" name="reed5" pos="5" />
+		<field datatype="uint8_t" name="reed6" pos="6" />
+		<field datatype="uint8_t" name="reed7" pos="7" />
+		<field datatype="uint8_t" name="reed8" pos="8" />
+		<field datatype="uint8_t" name="reed9" pos="9" />
+		<field datatype="uint8_t" name="reed10" pos="10" />
+		<field datatype="uint8_t" name="reed11" pos="11" />
+		<field datatype="uint8_t" name="reed12" pos="12" />
+		<field datatype="uint8_t" name="reed13" pos="13" />
+		<field datatype="uint8_t" name="reed14" pos="14" />
+		<field datatype="uint8_t" name="reed15" pos="15" />
+		<field datatype="uint8_t" name="reed16" pos="16" />
+		<field datatype="uint8_t" name="reed17" pos="17" />
+		<field datatype="uint8_t" name="reed18" pos="18" />
+		<field datatype="uint8_t" name="reed19" pos="19" />
+		<field datatype="uint8_t" name="reed20" pos="20" />
+		<field datatype="uint8_t" name="reed21" pos="21" />
+		<field datatype="uint8_t" name="reed22" pos="22" />
+		<field datatype="uint8_t" name="reed23" pos="23" />
+	</block>
+
+	<block type="112" name="userpanel_lampen" size="24">
+		<field datatype="uint8_t" name="lampe0" pos="0" />
+		<field datatype="uint8_t" name="lampe1" pos="1" />
+		<field datatype="uint8_t" name="lampe2" pos="2" />
+		<field datatype="uint8_t" name="lampe3" pos="3" />
+		<field datatype="uint8_t" name="lampe4" pos="4" />
+		<field datatype="uint8_t" name="lampe5" pos="5" />
+		<field datatype="uint8_t" name="lampe6" pos="6" />
+		<field datatype="uint8_t" name="lampe7" pos="7" />
+		<field datatype="uint8_t" name="lampe8" pos="8" />
+		<field datatype="uint8_t" name="lampe9" pos="9" />
+		<field datatype="uint8_t" name="lampe10" pos="10" />
+		<field datatype="uint8_t" name="lampe11" pos="11" />
+		<field datatype="uint8_t" name="lampe12" pos="12" />
+		<field datatype="uint8_t" name="lampe13" pos="13" />
+		<field datatype="uint8_t" name="lampe14" pos="14" />
+		<field datatype="uint8_t" name="lampe15" pos="15" />
+		<field datatype="uint8_t" name="lampe16" pos="16" />
+		<field datatype="uint8_t" name="lampe17" pos="17" />
+		<field datatype="uint8_t" name="lampe18" pos="18" />
+		<field datatype="uint8_t" name="lampe19" pos="19" />
+		<field datatype="uint8_t" name="lampe20" pos="20" />
+		<field datatype="uint8_t" name="lampe21" pos="21" />
+		<field datatype="uint8_t" name="lampe22" pos="22" />
+		<field datatype="uint8_t" name="lampe23" pos="23" />
+	</block>
+	
+	<block type="113" name="userpanel_sonstige" size="24">
+		<field datatype="uint8_t" name="sonstiges0" pos="0" />
+		<field datatype="uint8_t" name="sonstiges1" pos="1" />
+		<field datatype="uint8_t" name="sonstiges2" pos="2" />
+		<field datatype="uint8_t" name="sonstiges3" pos="3" />
+		<field datatype="uint8_t" name="sonstiges4" pos="4" />
+		<field datatype="uint8_t" name="sonstiges5" pos="5" />
+		<field datatype="uint8_t" name="sonstiges6" pos="6" />
+		<field datatype="uint8_t" name="sonstiges7" pos="7" />
+		<field datatype="uint8_t" name="sonstiges8" pos="8" />
+		<field datatype="uint8_t" name="sonstiges9" pos="9" />
+		<field datatype="uint8_t" name="sonstiges10" pos="10" />
+		<field datatype="uint8_t" name="sonstiges11" pos="11" />
+		<field datatype="uint8_t" name="sonstiges12" pos="12" />
+		<field datatype="uint8_t" name="sonstiges13" pos="13" />
+		<field datatype="uint8_t" name="sonstiges14" pos="14" />
+		<field datatype="uint8_t" name="sonstiges15" pos="15" />
+		<field datatype="uint8_t" name="sonstiges16" pos="16" />
+		<field datatype="uint8_t" name="sonstiges17" pos="17" />
+		<field datatype="uint8_t" name="sonstiges18" pos="18" />
+		<field datatype="uint8_t" name="sonstiges19" pos="19" />
+		<field datatype="uint8_t" name="sonstiges20" pos="20" />
+		<field datatype="uint8_t" name="sonstiges21" pos="21" />
+		<field datatype="uint8_t" name="sonstiges22" pos="22" />
+		<field datatype="uint8_t" name="sonstiges23" pos="23" />
+	</block>
+
+	<block type="114" name="userpanel_mute" size="24">
+		<field datatype="uint8_t" name="mute0" pos="0" />
+		<field datatype="uint8_t" name="mute1" pos="1" />
+		<field datatype="uint8_t" name="mute2" pos="2" />
+		<field datatype="uint8_t" name="mute3" pos="3" />
+		<field datatype="uint8_t" name="mute4" pos="4" />
+		<field datatype="uint8_t" name="mute5" pos="5" />
+		<field datatype="uint8_t" name="mute6" pos="6" />
+		<field datatype="uint8_t" name="mute7" pos="7" />
+		<field datatype="uint8_t" name="mute8" pos="8" />
+		<field datatype="uint8_t" name="mute9" pos="9" />
+		<field datatype="uint8_t" name="mute10" pos="10" />
+		<field datatype="uint8_t" name="mute11" pos="11" />
+		<field datatype="uint8_t" name="mute12" pos="12" />
+		<field datatype="uint8_t" name="mute13" pos="13" />
+		<field datatype="uint8_t" name="mute14" pos="14" />
+		<field datatype="uint8_t" name="mute15" pos="15" />
+		<field datatype="uint8_t" name="mute16" pos="16" />
+		<field datatype="uint8_t" name="mute17" pos="17" />
+		<field datatype="uint8_t" name="mute18" pos="18" />
+		<field datatype="uint8_t" name="mute19" pos="19" />
+		<field datatype="uint8_t" name="mute20" pos="20" />
+		<field datatype="uint8_t" name="mute21" pos="21" />
+		<field datatype="uint8_t" name="mute22" pos="22" />
+		<field datatype="uint8_t" name="mute23" pos="23" />
+	</block>
+
+	<block type="115" name="userpanel_heizungen" size="24">
+		<field datatype="uint8_t" name="heizung0" pos="0" />
+		<field datatype="uint8_t" name="heizung1" pos="1" />
+		<field datatype="uint8_t" name="heizung2" pos="2" />
+		<field datatype="uint8_t" name="heizung3" pos="3" />
+		<field datatype="uint8_t" name="heizung4" pos="4" />
+		<field datatype="uint8_t" name="heizung5" pos="5" />
+		<field datatype="uint8_t" name="heizung6" pos="6" />
+		<field datatype="uint8_t" name="heizung7" pos="7" />
+		<field datatype="uint8_t" name="heizung8" pos="8" />
+		<field datatype="uint8_t" name="heizung9" pos="9" />
+		<field datatype="uint8_t" name="heizung10" pos="10" />
+		<field datatype="uint8_t" name="heizung11" pos="11" />
+		<field datatype="uint8_t" name="heizung12" pos="12" />
+		<field datatype="uint8_t" name="heizung13" pos="13" />
+		<field datatype="uint8_t" name="heizung14" pos="14" />
+		<field datatype="uint8_t" name="heizung15" pos="15" />
+		<field datatype="uint8_t" name="heizung16" pos="16" />
+		<field datatype="uint8_t" name="heizung17" pos="17" />
+		<field datatype="uint8_t" name="heizung18" pos="18" />
+		<field datatype="uint8_t" name="heizung19" pos="19" />
+		<field datatype="uint8_t" name="heizung20" pos="20" />
+		<field datatype="uint8_t" name="heizung21" pos="21" />
+		<field datatype="uint8_t" name="heizung22" pos="22" />
+		<field datatype="uint8_t" name="heizung23" pos="23" />
+	</block>
+
 	<block type="200" name="dcf77_receiver" size="7">
 		<field datatype="uint8_t" name="level" pos="0" />
 		<field datatype="uint16_t" name="takeover_time" pos="1" />

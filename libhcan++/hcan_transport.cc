@@ -1860,23 +1860,23 @@ hcan_transport::recv_CAN_EC_QUERY(const uint16_t src, const uint16_t dst)
 	 * Liefert die CAN Error Counter Staende
 	 * 
 	 * 
-	 * @param REC : RX Error Counter
+	 * @param hi : TX Error Counter, Hi Teil
 	 *
 	 * 
-	 * @param TEC : TX Error Counter
+	 * @param lo : TX Error Counter, Lo Teil
 	 *
 	 * 
 	 */
 void
 hcan_transport::send_CAN_EC_REPLAY(const uint16_t src,
 				   const uint16_t dst,
-				   uint8_t REC, uint8_t TEC)
+				   uint8_t hi, uint8_t lo)
 {
     uint8_t         data[] = {
 	1,
 	36,
-	REC,
-	TEC,
+	hi,
+	lo,
     };
     assert(8 >= sizeof(data));
 
@@ -1888,17 +1888,17 @@ hcan_transport::send_CAN_EC_REPLAY(const uint16_t src,
 	 * Liefert die CAN Error Counter Staende
 	 * 
 	 * 
-	 * @param REC : RX Error Counter
+	 * @param hi : TX Error Counter, Hi Teil
 	 *
 	 * 
-	 * @param TEC : TX Error Counter
+	 * @param lo : TX Error Counter, Lo Teil
 	 *
 	 * 
 	 */
 void
 hcan_transport::recv_CAN_EC_REPLAY(const uint16_t src,
 				   const uint16_t dst,
-				   uint8_t * REC, uint8_t * TEC)
+				   uint8_t * hi, uint8_t * lo)
 {
     uint8_t         data[] = {
 	1,
@@ -1928,9 +1928,9 @@ hcan_transport::recv_CAN_EC_REPLAY(const uint16_t src,
 	    ("unexpected packet received: commmand id is wrong");
 
 
-    *REC = f.data(2);
+    *hi = f.data(2);
 
-    *TEC = f.data(3);
+    *lo = f.data(3);
 
 }
 
@@ -4643,6 +4643,140 @@ hcan_transport::recv_SCHALTER_OFF(const uint16_t src,
 	    transport_error
 	    ("unexpected packet received: service id is wrong");
     if (f.data(1) != 26)
+	throw          
+	    transport_error
+	    ("unexpected packet received: commmand id is wrong");
+
+
+    *gruppe = f.data(2);
+
+}
+
+
+
+	/**
+	 * Mute ist aktiviert (passiver Zustand)
+	 * 
+	 * 
+	 * @param gruppe : Gruppe
+	 *
+	 * 
+	 */
+void
+hcan_transport::send_MUTE_ON(const uint16_t src,
+			     const uint16_t dst, uint8_t gruppe)
+{
+    uint8_t         data[] = {
+	5,
+	27,
+	gruppe,
+    };
+    assert(8 >= sizeof(data));
+
+    frame           f(src, dst, 1, data, sizeof(data));
+    f.write_to(socket(), m_hcand_ip);
+}
+
+	/**
+	 * Mute ist aktiviert (passiver Zustand)
+	 * 
+	 * 
+	 * @param gruppe : Gruppe
+	 *
+	 * 
+	 */
+void
+hcan_transport::recv_MUTE_ON(const uint16_t src,
+			     const uint16_t dst, uint8_t * gruppe)
+{
+    uint8_t         data[] = {
+	5,
+	27,
+
+	0,
+    };
+
+    frame           f = recv_frame(dst);
+
+    if (src)
+	if (f.src() != src)
+	    throw           transport_error
+		("unexpected packet received: src is wrong");
+    if (f.size() != sizeof(data))
+	throw          
+	    transport_error("unexpected size in packet received");
+    if (f.data(0) != 5)
+	throw          
+	    transport_error
+	    ("unexpected packet received: service id is wrong");
+    if (f.data(1) != 27)
+	throw          
+	    transport_error
+	    ("unexpected packet received: commmand id is wrong");
+
+
+    *gruppe = f.data(2);
+
+}
+
+
+
+	/**
+	 * Mute ist deaktiviert (aktiver Zustand)
+	 * 
+	 * 
+	 * @param gruppe : Gruppe
+	 *
+	 * 
+	 */
+void
+hcan_transport::send_MUTE_OFF(const uint16_t src,
+			      const uint16_t dst, uint8_t gruppe)
+{
+    uint8_t         data[] = {
+	5,
+	28,
+	gruppe,
+    };
+    assert(8 >= sizeof(data));
+
+    frame           f(src, dst, 1, data, sizeof(data));
+    f.write_to(socket(), m_hcand_ip);
+}
+
+	/**
+	 * Mute ist deaktiviert (aktiver Zustand)
+	 * 
+	 * 
+	 * @param gruppe : Gruppe
+	 *
+	 * 
+	 */
+void
+hcan_transport::recv_MUTE_OFF(const uint16_t src,
+			      const uint16_t dst, uint8_t * gruppe)
+{
+    uint8_t         data[] = {
+	5,
+	28,
+
+	0,
+    };
+
+    frame           f = recv_frame(dst);
+
+    if (src)
+	if (f.src() != src)
+	    throw           transport_error
+		("unexpected packet received: src is wrong");
+    if (f.size() != sizeof(data))
+	throw          
+	    transport_error("unexpected size in packet received");
+    if (f.data(0) != 5)
+	throw          
+	    transport_error
+	    ("unexpected packet received: service id is wrong");
+    if (f.data(1) != 28)
 	throw          
 	    transport_error
 	    ("unexpected packet received: commmand id is wrong");

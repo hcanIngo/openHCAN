@@ -272,10 +272,10 @@ namespace       hcan {
 
 	void            send_CAN_EC_REPLAY(const uint16_t src,
 					   const uint16_t dst,
-					   uint8_t REC, uint8_t TEC);
+					   uint8_t hi, uint8_t lo);
 	void            recv_CAN_EC_REPLAY(const uint16_t src,
 					   const uint16_t dst,
-					   uint8_t * REC, uint8_t * TEC);
+					   uint8_t * hi, uint8_t * lo);
 
 
 	void            send_FLASH_CRC16_QUERY(const uint16_t src,
@@ -622,6 +622,20 @@ namespace       hcan {
 	void            recv_SCHALTER_OFF(const uint16_t src,
 					  const uint16_t dst,
 					  uint8_t * gruppe);
+
+
+	void            send_MUTE_ON(const uint16_t src,
+				     const uint16_t dst, uint8_t gruppe);
+	void            recv_MUTE_ON(const uint16_t src,
+				     const uint16_t dst,
+				     uint8_t * gruppe);
+
+
+	void            send_MUTE_OFF(const uint16_t src,
+				      const uint16_t dst, uint8_t gruppe);
+	void            recv_MUTE_OFF(const uint16_t src,
+				      const uint16_t dst,
+				      uint8_t * gruppe);
 
 
 	void            send_1WIRE_DISCOVER(const uint16_t src,

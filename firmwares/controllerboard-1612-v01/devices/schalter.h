@@ -29,6 +29,7 @@
 
 #define FEATURE_SCHALTER_INVERTIEREN  0 // Bit0 (the LSB)
 #define FEATURE_SCHALTER_PULLUP_AUS   1 // Bit1
+#define FEATURE_SCHALTER_MUTE		  2 // Bit2
 
 typedef struct
 {

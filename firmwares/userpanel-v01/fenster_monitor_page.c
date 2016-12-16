@@ -43,10 +43,9 @@ void fenster_monitor_insert_reed_state(eds_fenster_monitor_page_block_t *p,
  * die Ergebnisse in fenster_monitor_reed_state; liefert die Anzahl der
  * offenen Reedkontakte zurueck
  */
-uint8_t fenster_monitor_collect_reed_states(eds_fenster_monitor_page_block_t 
-		*p)
+uint8_t fenster_monitor_collect_reed_states(eds_fenster_monitor_page_block_t *p)
 {
-	uint8_t i,n_reed_open;
+	uint8_t i, n_reed_open;
 	uint8_t *reeds = (uint8_t *)(&p->reed0);
 
 	// Ergebnis-Array initialisieren:
@@ -100,20 +99,21 @@ void fenster_monitor_page_print_page(eds_fenster_monitor_page_block_t *p)
 {
 	char s[32];
 
-	// LCD Bildschirm loeschen
-	lcd_clrscr();
+	lcd_clrscr(); // LCD Bildschirm loeschen
 
-	snprintf_P(s,sizeof(s)-1,
-					PSTR("Fenster:"));
+	snprintf_P(s, sizeof(s)-1, PSTR("Fenster:"));
 	lcd_gotoxy(0,0);
 	lcd_puts(s);
 
-	snprintf_P(s,sizeof(s)-1,
-					PSTR(" %d offen"), fenster_monitor_collect_reed_states(p));
 
-	lcd_gotoxy(0,1);
-	lcd_puts(s);
-
+	uint8_t anzOffen = fenster_monitor_collect_reed_states(p); // das ist unterbrechbar!
+	if (EDS_fenster_monitor_page_BLOCK_ID == lcdstate.active_page.block_type)
+	{
+		// Falls die Seite inzwischen noch nicht gewechselt wurde:
+		snprintf_P(s, sizeof(s)-1, PSTR(" %d offen"), anzOffen);
+		lcd_gotoxy(0,1);
+		lcd_puts(s);
+	}
 }
 
 void fenster_monitor_page_can_callback(eds_fenster_monitor_page_block_t *p,

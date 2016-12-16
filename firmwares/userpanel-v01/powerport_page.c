@@ -166,8 +166,8 @@ void powerport_page_can_callback(eds_powerport_page_block_t *p,
 						}
 						else
 						{
-							snprintf_P(s,sizeof(s), PSTR("[%s %3dmin]"), 
-									frame->data[3] ? "aus in" : "bis ein", frame->data[4]);
+							snprintf_P(s,sizeof(s), PSTR("[%s]...%dmin"),
+									frame->data[3] ? "ein" : "aus", frame->data[4]);
 							
 						}
 						lcd_gotoxy(0,1); // ex 4,1
@@ -186,8 +186,6 @@ void powerport_page_can_callback(eds_powerport_page_block_t *p,
 				{
 					if (frame->data[2] == p->gruppe)
 					{
-						char s[16];
-
 						if ((frame->data[3] == 0) && (frame->data[4] == 0))
 						{
 							powerport_page_timer = 0;
@@ -202,7 +200,8 @@ void powerport_page_can_callback(eds_powerport_page_block_t *p,
 								frame->data[4]) + 30) / 60;
 						}
 
-						snprintf_P(s,sizeof(s), PSTR(",%3dmin]"), 
+						char s[16];
+						snprintf_P(s,sizeof(s), PSTR(",%dmin]"),
 								powerport_page_timer);
 						lcd_gotoxy(8,1);
 						lcd_puts(s);

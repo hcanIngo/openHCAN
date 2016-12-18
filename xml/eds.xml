@@ -927,6 +927,17 @@
 		<field datatype="uint8_t" name="heizung23" pos="23" />
 	</block>
 
+	<block type="116" name="leave_come_page" size="8">
+		<field datatype="uint8_t" name="page_id" pos="0" />
+		<field datatype="uint8_t" name="parent_id" pos="1" />
+		<field datatype="uint8_t" name="next_id" pos="2" />
+		<field datatype="uint8_t" name="prev_id" pos="3" />
+		<field datatype="uint8_t" name="ignore0" pos="4" />
+		<field datatype="uint8_t" name="ignore1" pos="5" />
+		<field datatype="uint8_t" name="ignore2" pos="6" />
+		<field datatype="uint8_t" name="ignore3" pos="7" />
+	</block>
+
 	<block type="200" name="dcf77_receiver" size="7">
 		<field datatype="uint8_t" name="level" pos="0" />
 		<field datatype="uint16_t" name="takeover_time" pos="1" />

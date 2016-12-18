@@ -30,7 +30,8 @@ OBJ     = main.o ../../canix/canix.o ../../canix/mcp2515.o \
 		  timer.o lcd.o lcdctrl.o keys.o lcdstatemachine.o \
 		  heiz_page.o gesamt_heiz_page.o rolladen_page.o taster_page.o powerport_page.o \
 		  fenster_monitor_page.o temp_anzeige_page.o weck_page.o \
-		  reedkontakt_monitor.o lampen_monitor.o sonstige_monitor.o heiz_monitor.o mute_monitor.o
+		  reedkontakt_monitor.o lampen_monitor.o sonstige_monitor.o \
+		  heiz_monitor.o mute_monitor.o leave_come_page.o
 
 export F_CPU  = 3686400
 export F_CAN   = 8000000

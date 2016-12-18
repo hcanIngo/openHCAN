@@ -16,8 +16,9 @@
 #define ERROR_CONF_REEDKONTAKTE_MISSING    7
 #define ERROR_CONF_LAMPEN_MISSING    	   8
 #define ERROR_CONF_SONSTIGE_MISSING        9
-#define ERROR_CONF_MUTE_MISSING        10
+#define ERROR_CONF_MUTE_MISSING        	  10
 #define ERROR_CONF_HEIZUNG_MISSING        11
+#define ERROR_PAGE_LEAVE_COME_MISSING     12
 
 typedef struct
 {
@@ -74,6 +75,11 @@ typedef struct
 {
 	uint8_t heizung[24];
 } userpanel_heizungen_t;
+
+typedef struct
+{
+	uint8_t ignore[4];
+} userpanel_ignore_t;
 
 extern lcdstate_t lcdstate;
 

@@ -65,7 +65,7 @@ static void init_monitor_heiz_request_states(void)
 	{
 		if (c.heizung[i] != 255) // ist es ein konfigurierte Heizung?
 		{
-			// Nach Kontakt-Status fragen; die Ergebnisse kommen asynchron
+			// Nach Status fragen; die Ergebnisse kommen asynchron
 			// ueber den CAN Handler rein
 			canix_frame message;
 			message.src = canix_selfaddr();
@@ -99,8 +99,8 @@ static void monitor_insert_heiz_state(uint8_t gruppe, uint16_t Tsoll)
 	{
 		if (gruppe == c.heizung[i])
 		{
-			//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("g%d %d"), i, Tsoll);
 			monitor_Tsoll[i] = Tsoll >> 4; // ganzzahlig durch 16 geteilt
+			//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("H[%d]=%d°C"), i, monitor_Tsoll[i]);
 		}
 	}
 }

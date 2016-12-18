@@ -1390,6 +1390,28 @@ typedef struct {
 #define EDS_userpanel_heizungen_BLOCK_ID 115
 
 typedef struct {
+    uint8_t           page_id;
+
+    uint8_t           parent_id;
+
+    uint8_t           next_id;
+
+    uint8_t           prev_id;
+
+    uint8_t           ignore0;
+
+    uint8_t           ignore1;
+
+    uint8_t           ignore2;
+
+    uint8_t           ignore3;
+
+
+} eds_leave_come_page_block_t;
+
+#define EDS_leave_come_page_BLOCK_ID 116
+
+typedef struct {
     uint8_t           level;
 
     uint16_t          takeover_time;

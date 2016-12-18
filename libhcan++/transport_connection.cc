@@ -91,7 +91,8 @@ frame transport_connection::recv_frame (const uint16_t dst)
 
 	struct timeval tv;
 	tv.tv_sec = 0;
-	tv.tv_usec = 500000; /* IL: vergroessert, da grosse Firmware
+	tv.tv_usec = 800000; // bis 2016-12-04:  500000;
+	/* IL: vergroessert, da grosse Firmware
 	(padded size 25856 byte) zum Timeout fuehrte; ex: 300000
 	"warning: no firmware crc16 check support (update bootloader!)" */
 

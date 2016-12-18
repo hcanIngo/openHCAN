@@ -65,7 +65,7 @@ static void init_monitor_sonstige_request_states(void)
 	{
 		if (c.sonstiges[i] != 255) // konfiguriert?
 		{
-			// Nach Kontakt-Status fragen; die Ergebnisse kommen asynchron
+			// Nach Status fragen; die Ergebnisse kommen asynchron
 			// ueber den CAN Handler rein
 			canix_frame message;
 			message.src = canix_selfaddr();

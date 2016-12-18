@@ -65,7 +65,7 @@ static void init_monitor_lampen_request_states(void)
 	{
 		if (c.lampe[i] != 255) // ist es ein konfigurierte Lampe?
 		{
-			// Nach Kontakt-Status fragen; die Ergebnisse kommen asynchron
+			// Nach Status fragen; die Ergebnisse kommen asynchron
 			// ueber den CAN Handler rein
 			canix_frame message;
 			message.src = canix_selfaddr();

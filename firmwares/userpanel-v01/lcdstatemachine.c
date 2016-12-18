@@ -29,6 +29,7 @@
 #include <sonstige_monitor.h>
 #include <heiz_monitor.h>
 #include <mute_monitor.h>
+#include <leave_come_page.h>
 
 lcdstate_t lcdstate;
 
@@ -378,10 +379,14 @@ void print_page(void)
 			break;
 
 		case EDS_screensaver_page_BLOCK_ID :
-		{
 			print_screensaver_page();
 			break;
-		}
+
+		case EDS_leave_come_page_BLOCK_ID :
+			leave_come_page_print_page((eds_leave_come_page_block_t *)
+					&lcdstate.active_page.page_id);
+			break;
+
 		case EDS_dir_page_BLOCK_ID :
 			print_dir_page();
 			break;
@@ -557,10 +562,11 @@ void key_down_event(uint8_t key)
 		powerport_page_handle_key_down_event((eds_powerport_page_block_t *)
 				&lcdstate.active_page.page_id, key);
 	}
-/* TODO raus	else if (lcdstate.active_page.block_type == EDS_screensaver_page_BLOCK_ID)
+	else if (lcdstate.active_page.block_type == EDS_leave_come_page_BLOCK_ID)
 	{
-		powerport_monitor__handle_key_down_event(key);
-	}*/
+		leave_come_page_handle_key_down_event((eds_leave_come_page_block_t *)
+				&lcdstate.active_page.page_id, key);
+	}
 	else
 	{
 		if (lcdstate.state == STATE_VIEW)
@@ -676,7 +682,7 @@ void lcdstatemachine_can_callback(const canix_frame *frame)
 	monitor_mute_can_callback(frame);
 
 	if (lcdstate.active_page.block_type == EDS_heiz_page_BLOCK_ID)
-		heiz_page_can_callback( (eds_heiz_page_block_t *) 
+		heiz_page_can_callback( (eds_heiz_page_block_t *)
 				&lcdstate.active_page.page_id, frame);
 
 	if (lcdstate.active_page.block_type == EDS_weck_page_BLOCK_ID)

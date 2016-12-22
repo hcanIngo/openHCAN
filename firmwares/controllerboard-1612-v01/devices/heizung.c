@@ -386,7 +386,12 @@ static void heizung_send_details(device_data_heizung *p, const canix_frame *fram
 {
 	canix_frame answer;
 	answer.src = canix_selfaddr();
-	answer.dst = frame->src;
+
+	if (HCAN_HES_HEIZUNG_DETAILS_REQUEST == frame->data[1])
+		answer.dst = frame->src; // an den Anfragenden zuruecksenden
+	else
+		answer.dst = HCAN_MULTICAST_INFO; // statt frame->src, info auch an z.B. userpanel
+
 	answer.proto = HCAN_PROTO_SFP;
 	answer.data[0] = HCAN_SRV_HES;
 
@@ -527,7 +532,7 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			{
 				if (p->config.id == frame->data[2])
 				{
-					heizung_send_details(p, frame);
+					heizung_send_details(p, frame); // TODO
 				}
 			}
 			break;

@@ -1,3 +1,22 @@
+/*
+ *  This file is part of the HCAN tools suite.
+ *
+ *  HCAN is free software; you can redistribute it and/or modify it under
+ *  the terms of the GNU General Public License as published by the Free
+ *  Software Foundation; either version 2 of the License, or (at your
+ *  option) any later version.
+ *
+ *  HCAN is distributed in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ *  for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with HCAN; if not, write to the Free Software Foundation, Inc., 51
+ *  Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
+ *
+ *  (c) 2017 by Ingo Lages, i (dot) lages (at) gmx (dot) de
+ */
 #include "heiz_monitor.h"
 
 #include <lcdstatemachine.h>
@@ -100,43 +119,36 @@ static void monitor_insert_heiz_state(uint8_t gruppe, uint16_t Tsoll)
 		if (gruppe == c.heizung[i])
 		{
 			monitor_Tsoll[i] = Tsoll >> 4; // ganzzahlig durch 16 geteilt
-			//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("H[%d]=%d°C"), i, monitor_Tsoll[i]);
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("%d=%d=%d"), i, gruppe, monitor_Tsoll[i]);
 		}
 	}
 }
 
 void monitor_heiz_can_callback(const canix_frame *frame)
 {
+	int16_t Tsoll;
+
 	if (!heiz_configured)
 		return;
 
 	switch (frame->data[1])
 	{
-		case HCAN_HES_BOARD_ACTIVE:
+		case HCAN_HES_BOARD_ACTIVE :
 			init_monitor_heiz_request_states(); // noch Hochlauf, sonst warten wir auf _STATE_CHANGE
 			break;
 
 		case HCAN_HES_HEIZUNG_MODE_OFF_DETAILS :
+			monitor_insert_heiz_state(frame->data[2], 0); // Tsoll = 0
+			break;
+
 		case HCAN_HES_HEIZUNG_MODE_MANUAL_DETAILS :
+			monitor_insert_heiz_state(frame->data[2], 1); // keine Solltemp. nur direkt eine "rate"
+			break;
+
 		case HCAN_HES_HEIZUNG_MODE_THERMOSTAT_DETAILS :
 		case HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS :
-			{
-				int16_t Tsoll = 0;
-				switch (frame->data[1])
-				{
-					case HCAN_HES_HEIZUNG_MODE_OFF_DETAILS :
-						Tsoll = 0;
-						break;
-					case HCAN_HES_HEIZUNG_MODE_MANUAL_DETAILS :
-						Tsoll = 1; // keine Solltemp. nur direkt eine "rate"
-						break;
-					case HCAN_HES_HEIZUNG_MODE_THERMOSTAT_DETAILS :
-					case HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS :
-						Tsoll = (frame->data[3] << 8) | frame->data[4];
-						break;
-				}
-				monitor_insert_heiz_state(frame->data[2], (uint16_t)Tsoll);
-			}
+			Tsoll = (frame->data[3] << 8) | frame->data[4];
+			monitor_insert_heiz_state(frame->data[2], (uint16_t)Tsoll);
 			break;
 	}
 }

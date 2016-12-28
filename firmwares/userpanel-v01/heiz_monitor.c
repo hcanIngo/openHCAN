@@ -43,19 +43,29 @@
 volatile uint8_t heiz_configured = 1; // ersteinmal aktivieren
 volatile uint8_t monitor_Tsoll[24];
 
-uint8_t get_count_Tsoll_greater(uint8_t TsollSchwelle)
+void get_count_Tsoll(uint8_t *nUeber0Grad, uint8_t *nUeber15Grad)
 {
-	uint8_t n_TsollGreater = 0;
+	*nUeber0Grad = 0;
+	*nUeber15Grad = 0;
 	uint8_t i;
 	for (i = 0; i < 24; i++)
 	{
-		if ((monitor_Tsoll[i] > TsollSchwelle) && (monitor_Tsoll[i] != 255))
-			n_TsollGreater++;
+		if (monitor_Tsoll[i] != 255)
+		{
+			if ((monitor_Tsoll[i] > 15)) // > 15°C
+			{
+				(*nUeber15Grad)++;
+				canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("H%d"), i);
+			}
+			else if (monitor_Tsoll[i] > 0) // > 0°C
+			{
+				(*nUeber0Grad)++;
+				canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("h%d"), i);
+			}
+		}
 	}
-
-	//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("c%d"), n_TsollGreater);
-	return n_TsollGreater;
 }
+
 
 /**
  * Fragt alle konfigurierten Heizungen nach ihrem Status und sammelt
@@ -119,7 +129,7 @@ static void monitor_insert_heiz_state(uint8_t gruppe, uint16_t Tsoll)
 		if (gruppe == c.heizung[i])
 		{
 			monitor_Tsoll[i] = Tsoll >> 4; // ganzzahlig durch 16 geteilt
-			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("%d=%d=%d"), i, gruppe, monitor_Tsoll[i]);
+			//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("%d=%d=%d"), i, gruppe, monitor_Tsoll[i]);
 		}
 	}
 }

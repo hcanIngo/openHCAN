@@ -50,7 +50,10 @@ uint8_t get_count_sonstige_states(void)
 	for (i = 0; i < 24; i++)
 	{
 		if (monitor_sonstige_state[i] && (monitor_sonstige_state[i] != 255))
+		{
 			n_powerport_on++;
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("S%d"), i);
+		}
 	}
 
 	//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("c%d"), n_powerport_on);

@@ -179,12 +179,15 @@ static void leave_come_page_set_sonstige_aus(void)
  */
 static uint8_t leave_come_page_get_state (void)
 {
+	uint8_t nUeber0Grad, nUeber15Grad;
+	get_count_Tsoll(&nUeber0Grad, &nUeber15Grad);
+
 	if (   (0 < get_count_lampen_states())
 		|| (0 < get_count_sonstige_states())
-		|| (0 < get_count_Tsoll_greater(15)))
+		|| (0 < nUeber15Grad))
 		return STATE_LEAVE;
 
-	else if (0 < get_count_Tsoll_greater(0)) // Frostschutz aktiv?
+	else if (0 < nUeber0Grad) // Frostschutz aktiv?
 		return STATE_COME;
 
 	return STATE_NO_ACTION;

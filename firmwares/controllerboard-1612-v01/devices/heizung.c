@@ -524,16 +524,16 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 
 		case HCAN_HES_HEIZUNG_SET_MODE_AUTOMATIK:
 			if (p->config.id == frame->data[2])
+			{
 				p->mode = HEIZUNG_MODE_AUTOMATIK;
-			heizung_send_details(p, frame);
+				heizung_send_details(p, frame);
+			}
 			break;
 
 		case HCAN_HES_HEIZUNG_DETAILS_REQUEST :
+			if (p->config.id == frame->data[2])
 			{
-				if (p->config.id == frame->data[2])
-				{
-					heizung_send_details(p, frame); // TODO
-				}
+				heizung_send_details(p, frame);
 			}
 			break;
 
@@ -616,7 +616,6 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 				// eines unserer Fenster geoeffnet wurde:
 				
 				uint8_t i;
-
 				for (i = 0; i < 8; i++) // es gibt 8 Reedkontakt-Eintrage...
 				{
 					uint8_t reed_gruppe;

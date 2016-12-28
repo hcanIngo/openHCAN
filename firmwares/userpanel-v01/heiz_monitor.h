@@ -5,7 +5,7 @@
 #include <canix/canix.h>
 #include <eds-structs.h>
 
-uint8_t get_count_Tsoll_greater(uint8_t TsollSchwelle);
+void get_count_Tsoll(uint8_t *nUeber0Grad, uint8_t *nUeber15Grad);
 void monitor_heiz_can_callback(const canix_frame *frame);
 
 #endif

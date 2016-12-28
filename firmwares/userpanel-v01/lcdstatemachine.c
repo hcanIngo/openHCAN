@@ -239,20 +239,19 @@ void print_screensaver_page(void)
 
 	uint8_t pos = 16;
 	// Heizungs-Solltemperatur:
-	uint8_t nHeizungenUeber0Grad = get_count_Tsoll_greater(0);
-	if (0 < nHeizungenUeber0Grad)
+	uint8_t nUeber0Grad, nUeber15Grad;
+	get_count_Tsoll(&nUeber0Grad, &nUeber15Grad);
+	if (0 < nUeber15Grad)
 	{
-		uint8_t nHeizungenUeber15Grad = get_count_Tsoll_greater(15);
-		if (0 < nHeizungenUeber15Grad)
-		{
-			//  mindestens eine Tsoll > 15°C (Heizbetrieb)
-			snprintf(sz, sizeof(sz)," H%d", nHeizungenUeber15Grad);
-		}
-		else
-		{
-			// mindestens eine Tsoll > 0°C (Frostschutz)
-			snprintf(sz, sizeof(sz)," h%d", nHeizungenUeber0Grad);
-		}
+		//  mindestens eine Tsoll > 15°C (Heizbetrieb)
+		snprintf(sz, sizeof(sz)," H%d", nUeber15Grad);
+		pos -= strlen(sz);
+		strcpy(&s[pos], sz);
+	}
+	else if (0 < nUeber0Grad)
+	{
+		// mindestens eine Tsoll > 0°C (Frostschutz)
+		snprintf(sz, sizeof(sz)," h%d", nUeber0Grad);
 		pos -= strlen(sz);
 		strcpy(&s[pos], sz);
 	}

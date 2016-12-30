@@ -42,6 +42,7 @@ typedef struct
 	int16_t measure_value;
 	uint16_t duration_counter;   // remaining time in Manual/Thermostat-Mode
 	int16_t thermostat_temp;    // Soll-Temperatur im Thermostat-Modus
+	int16_t last_soll_temp;    // Soll-Temperatur im Thermostat-Modus
 	uint8_t reed_heiz_stop_counter;
 	/**
 	 * Wenn die Heizung zu einer bestimmten Tageszeit (abhaengig von der

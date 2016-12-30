@@ -28,6 +28,7 @@ void heizung_init(device_data_heizung *p, eds_block_p it)
 	p->ventilpflege_counter = 0;
 	canix_syslog_P(SYSLOG_PRIO_DEBUG,
 			PSTR("heizung_init: %d"), p->config.id);
+	p->last_soll_temp = -1;
 }
 
 /** 
@@ -210,6 +211,84 @@ void heizung_check_ventilpflege(device_data_heizung *p)
 	}
 }
 
+static void heizung_send_details(device_data_heizung *p, const uint16_t answerDst)
+{
+	canix_frame answer;
+	answer.src = canix_selfaddr();
+	answer.dst = answerDst; // an den Anfragenden zuruecksenden per empf->src, oder HCAN_MULTICAST_INFO
+	answer.proto = HCAN_PROTO_SFP;
+	answer.data[0] = HCAN_SRV_HES;
+
+	switch (p->mode)
+	{
+		case HEIZUNG_MODE_OFF :
+			answer.data[1] = HCAN_HES_HEIZUNG_MODE_OFF_DETAILS;
+			answer.data[2] = p->config.id;
+			answer.size = 3;
+			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
+			break;
+
+		case HEIZUNG_MODE_MANUAL :
+			answer.data[1] = HCAN_HES_HEIZUNG_MODE_MANUAL_DETAILS;
+			answer.data[2] = p->config.id;
+			answer.data[3] = p->manual_rate;
+			answer.data[4] = p->duration_counter >> 8;
+			answer.data[5] = p->duration_counter;
+			answer.size = 6;
+			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
+			break;
+
+		case HEIZUNG_MODE_THERMOSTAT :
+			answer.data[1] = HCAN_HES_HEIZUNG_MODE_THERMOSTAT_DETAILS;
+			answer.data[2] = p->config.id;
+			answer.data[3] = p->thermostat_temp >> 8;
+			answer.data[4] = p->thermostat_temp;
+			answer.data[5] = p->duration_counter >> 8;
+			answer.data[6] = p->duration_counter;
+			answer.size = 7;
+			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
+			break;
+
+		case HEIZUNG_MODE_AUTOMATIK :
+			{
+				int8_t index;
+				index = heizung_get_matching_zeitzone_index(p);
+				if (index != -1)
+				{
+					// we got an zeitzone which matches
+					int16_t master_value = 0;
+					solltemp_line_t *zeitzone =
+						(solltemp_line_t *)
+						&(p->config.zeitzone0_id);
+
+					master_value = zeitzone[index].temp;
+					answer.data[1] =
+						HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
+					answer.data[2] = p->config.id;
+					answer.data[3] = master_value >> 8;
+					answer.data[4] = master_value;
+					answer.data[5] = heizung_get_matching_zeitzone_id(p);
+					answer.size = 6;
+				}
+				else
+				{
+					canix_syslog_P(SYSLOG_PRIO_ERROR,
+							PSTR("zeitzone: no match!"));
+
+					answer.data[1] =
+						HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
+					answer.data[2] = p->config.id;
+					answer.data[3] = 0;
+					answer.data[4] = 0;
+					answer.data[5] = 0;
+					answer.size = 6;
+				}
+				canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
+			}
+			break;
+	}
+}
+
 /**
  * this timer handler is called every second
  */
@@ -237,6 +316,7 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 			// stellen:
 			//
 			p->mode = HEIZUNG_MODE_AUTOMATIK;
+			heizung_send_details(p, HCAN_MULTICAST_INFO); // Mode-Wechsel melden
 		}
 	}
 
@@ -313,9 +393,13 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 							// we got an zeitzone which matches
 							solltemp_line_t *solltemp_line = (solltemp_line_t*) 
 								&(p->config.zeitzone0_id);
-							heizung_set_pwm_by_temp(p, 
-									solltemp_line[index].temp,
-									p->measure_value);
+							heizung_set_pwm_by_temp(p, solltemp_line[index].temp, p->measure_value);
+
+							if (p->last_soll_temp != solltemp_line[index].temp) // Solltemperatur-Aenderung?
+							{
+								heizung_send_details(p, HCAN_MULTICAST_INFO); // infomiere darueber
+								p->last_soll_temp = solltemp_line[index].temp;
+							}
 						}
 						else
 						{
@@ -382,94 +466,6 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 	}
 }
 
-static void heizung_send_details(device_data_heizung *p, const canix_frame *frame)
-{
-	canix_frame answer;
-	answer.src = canix_selfaddr();
-
-	if (HCAN_HES_HEIZUNG_DETAILS_REQUEST == frame->data[1])
-		answer.dst = frame->src; // an den Anfragenden zuruecksenden
-	else
-		answer.dst = HCAN_MULTICAST_INFO; // statt frame->src, info auch an z.B. userpanel
-
-	answer.proto = HCAN_PROTO_SFP;
-	answer.data[0] = HCAN_SRV_HES;
-
-	switch (p->mode)
-	{
-		case HEIZUNG_MODE_OFF :
-			answer.data[1] =
-				HCAN_HES_HEIZUNG_MODE_OFF_DETAILS;
-			answer.data[2] = p->config.id;
-			answer.size = 3;
-			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
-			break;
-
-		case HEIZUNG_MODE_MANUAL :
-			answer.data[1] =
-				HCAN_HES_HEIZUNG_MODE_MANUAL_DETAILS;
-			answer.data[2] = p->config.id;
-			answer.data[3] = p->manual_rate;
-			answer.data[4] = p->duration_counter >> 8;
-			answer.data[5] = p->duration_counter;
-			answer.size = 6;
-			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
-			break;
-
-		case HEIZUNG_MODE_THERMOSTAT :
-			answer.data[1] =
-				HCAN_HES_HEIZUNG_MODE_THERMOSTAT_DETAILS;
-			answer.data[2] = p->config.id;
-			answer.data[3] = p->thermostat_temp >> 8;
-			answer.data[4] = p->thermostat_temp;
-			answer.data[5] = p->duration_counter >> 8;
-			answer.data[6] = p->duration_counter;
-			answer.size = 7;
-			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
-			break;
-
-		case HEIZUNG_MODE_AUTOMATIK :
-			{
-				int8_t index;
-				index = heizung_get_matching_zeitzone_index(p);
-				if (index != -1)
-				{
-					// we got an zeitzone which matches
-					int16_t master_value = 0;
-					solltemp_line_t *zeitzone =
-						(solltemp_line_t *)
-						&(p->config.zeitzone0_id);
-
-					master_value = zeitzone[index].temp;
-					answer.data[1] =
-						HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
-					answer.data[2] = frame->data[2];
-					answer.data[3] = master_value >> 8;
-					answer.data[4] = master_value;
-					answer.data[5] =
-						heizung_get_matching_zeitzone_id(p);
-					answer.size = 6;
-				}
-				else
-				{
-					canix_syslog_P(SYSLOG_PRIO_ERROR,
-							PSTR("zeitzone: no match!"));
-
-					answer.data[1] =
-						HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
-					answer.data[2] = frame->data[2];
-					answer.data[3] = 0;
-					answer.data[4] = 0;
-					answer.data[5] = 0;
-					answer.size = 6;
-				}
-				canix_frame_send_with_prio(&answer,
-						HCAN_PRIO_HI);
-			}
-			break;
-	}
-}
-
 void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 {
 	canix_frame answer;
@@ -498,8 +494,10 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 
 		case HCAN_HES_HEIZUNG_SET_MODE_OFF :
 			if (p->config.id == frame->data[2])
+			{
 				p->mode = HEIZUNG_MODE_OFF;
-				heizung_send_details(p, frame);
+				heizung_send_details(p, HCAN_MULTICAST_INFO);
+			}
 			break;
 
 		case HCAN_HES_HEIZUNG_SET_MODE_MANUAL :
@@ -508,7 +506,7 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 				p->mode = HEIZUNG_MODE_MANUAL;
 				p->manual_rate = frame->data[3];
 				p->duration_counter = (frame->data[4] << 8) | frame->data[5];
-				heizung_send_details(p, frame);
+				heizung_send_details(p, HCAN_MULTICAST_INFO);
 			}
 			break;
 
@@ -518,7 +516,7 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 				p->mode = HEIZUNG_MODE_THERMOSTAT;
 				p->thermostat_temp = (frame->data[3] << 8) | frame->data[4];
 				p->duration_counter = (frame->data[5] << 8) | frame->data[6];
-				heizung_send_details(p, frame);
+				heizung_send_details(p, HCAN_MULTICAST_INFO);
 			}
 			break;
 
@@ -526,14 +524,14 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			if (p->config.id == frame->data[2])
 			{
 				p->mode = HEIZUNG_MODE_AUTOMATIK;
-				heizung_send_details(p, frame);
+				heizung_send_details(p, HCAN_MULTICAST_INFO);
 			}
 			break;
 
 		case HCAN_HES_HEIZUNG_DETAILS_REQUEST :
 			if (p->config.id == frame->data[2])
 			{
-				heizung_send_details(p, frame);
+				heizung_send_details(p, frame->src);
 			}
 			break;
 

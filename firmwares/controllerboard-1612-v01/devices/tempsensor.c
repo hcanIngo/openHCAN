@@ -87,7 +87,7 @@ inline void tempsensor_timer_handler(device_data_tempsensor *p, uint8_t zyklus)
 		if (tempsensor_str2id(p->config.ow_id, id) != 0)
 		{
 			canix_syslog_P(SYSLOG_PRIO_ERROR, 
-					PSTR("tempsensor: invalid sensor id"));
+					PSTR("tempsensor.%s: invalid sensor id[%c %c %c %c]"), p->config.ow_id, id[0],id[1],id[2],id[3]);
 			return;
 		}
 
@@ -106,7 +106,7 @@ inline void tempsensor_timer_handler(device_data_tempsensor *p, uint8_t zyklus)
 		if (tempsensor_str2id(p->config.ow_id, id) != 0)
 		{
 			canix_syslog_P(SYSLOG_PRIO_ERROR, 
-					PSTR("tempsensor: invalid sensor id"));
+					PSTR("tempsensor-%s: invalid sensor id[%c %c %c %c]"), p->config.ow_id, id[0],id[1],id[2],id[3]);
 			return;
 		}
 

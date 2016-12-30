@@ -45,7 +45,7 @@ const uint16_t VORGABE_TEMPERATUR_FROSTSCHUTZ = 10*16; // 10 °C (fixer Faktor 1
 const uint16_t VORGABE_DAUER_FROSTSCHUTZ = 64800;      // 18 h (18*3600, fixer Faktor 3600, da in Sekunden)
 const uint16_t VORGABE_DAUER_FROSTSCHUTZ_KURZ = 10800; //  3 h ( 3*3600, fixer Faktor 3600, da in Sekunden)
 
-const uint16_t VORGABE_TEMPERATUR_THERMOSTAT = 18*16;  // 18 °C (fixer Faktor 16, da in 16tel Grad)
+const uint16_t VORGABE_TEMPERATUR_THERMOSTAT = 21*16;  // 18 °C (fixer Faktor 16, da in 16tel Grad)
 const uint16_t VORGABE_DAUER_THERMOSTAT = 4*3600;      //  4 h  (fixer Faktor 3600, da in Sekunden)
 
 

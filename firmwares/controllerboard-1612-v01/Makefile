@@ -65,7 +65,7 @@ load:
 	@echo -------------------------
 	@echo Bsp.:  make load adr=161
 	@echo -------------------------
-	telican -a $(IP_HI) -c $(adr) --arch $(MCU) -e "flash C1612_$(MCU)/$(TARGET).hex"
+	telican -a $(IP_HI) -C -c $(adr) --arch $(MCU) -e "flash C1612_$(MCU)/$(TARGET).hex"
 	#telican --polite-time 2 -a $(IP_HI) -c $(adr) --arch $(MCU) -e "flash C1612_$(MCU)/$(TARGET).hex"
 	#telican -c $(adr) --arch $(MCU) -e "flash C1612_$(MCU)/$(TARGET).hex"
 

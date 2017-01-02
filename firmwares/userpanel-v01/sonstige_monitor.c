@@ -38,11 +38,12 @@
 #include <hcan-def.h>
 #include <lcdstatemachine.h>
 #include <canix/syslog.h>
+#include <leave_come_page.h>
 
 volatile uint8_t sonstige_configured = 1; // ersteinmal aktivieren
 volatile uint8_t monitor_sonstige_state[24];
 
-uint8_t get_count_sonstige_states(void)
+uint8_t get_count_sonstige_states(uint8_t ignore)
 {
 	// eingeschaltet zaehlen:
 	uint8_t n_powerport_on = 0;
@@ -51,8 +52,15 @@ uint8_t get_count_sonstige_states(void)
 	{
 		if (monitor_sonstige_state[i] && (monitor_sonstige_state[i] != 255))
 		{
-			n_powerport_on++;
-			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("S%d"), i);
+			if (ignore && (monitor_sonstige_state[i] == leave_come_page_get_ignore(i))) // soll ignoriert werden?
+			{
+				// diese Sonstige-Gruppe soll ignoriert werden (nicht mitgezaehlt)
+			}
+			else
+			{
+				n_powerport_on++;
+				canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("S%d"), i);
+			}
 		}
 	}
 

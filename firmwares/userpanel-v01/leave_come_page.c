@@ -28,7 +28,7 @@ const uint16_t LEAVE_COME_VORGABE_DAUER_FROSTSCHUTZ = 64800;      // 18 h (18*36
 
 volatile uint8_t leave_come_state;
 
-static uint8_t leave_come_page_get_ignore(uint8_t gruppe)
+uint8_t leave_come_page_get_ignore(uint8_t gruppe)
 {
 	eds_block_p it = eds_find_next_block((eds_block_p)0, EDS_leave_come_page_BLOCK_ID);
 	if (!it)
@@ -115,7 +115,7 @@ static void leave_come_page_set_lampen_aus(void)
 	// ueber alle Lampen iterieren:
 	for (i = 0; i < 24; i++)
 	{
-		if (c.lampe[i] != 255 && !leave_come_page_get_ignore(i)) // ist es ein konfigurierte Lampe?
+		if (c.lampe[i] != 255 && !leave_come_page_get_ignore(i)) // konfiguriert und soll nicht ignoriert werden?
 		{
 			// Nach Kontakt-Status fragen; die Ergebnisse kommen asynchron
 			// ueber den CAN Handler rein
@@ -151,7 +151,7 @@ static void leave_come_page_set_sonstige_aus(void)
 	uint8_t i;
 	for (i = 0; i < 24; i++)
 	{
-		if (c.sonstiges[i] != 255 && !leave_come_page_get_ignore(i)) // konfiguriert?
+		if (c.sonstiges[i] != 255 && !leave_come_page_get_ignore(i)) // konfiguriert und soll nicht ignoriert werden?
 		{
 			// Nach Kontakt-Status fragen; die Ergebnisse kommen asynchron
 			// ueber den CAN Handler rein
@@ -182,15 +182,19 @@ static uint8_t leave_come_page_get_state (void)
 	uint8_t nUeber0Grad, nUeber15Grad;
 	get_count_Tsoll(&nUeber0Grad, &nUeber15Grad);
 
-	if (   (0 < get_count_lampen_states())
-		|| (0 < get_count_sonstige_states())
-		|| (0 < nUeber15Grad))
-		return STATE_LEAVE;
+	if (0 < nUeber15Grad) // Heizbetrieb?
+		return LEAVE_HEATED;
 
-	else if (0 < nUeber0Grad) // Frostschutz aktiv?
-		return STATE_COME;
+	if (0 < nUeber0Grad) // Frostschutz aktiv?
+		return COME_HEATED;
 
-	return STATE_NO_ACTION;
+	// bei abgeschalteter Heizung (im Sommer):
+	if ((0 < get_count_lampen_states()) || (0 < get_count_sonstige_states(1))) // Verbraucher aktiv? (Hinweis: sonstige ohne ignore)
+		return LEAVE_HEATING_IS_OFF;
+	else
+		return COME_HEATING_IS_OFF;
+
+	return NO_ACTION;
 }
 
 void leave_come_page_handle_key_down_event(
@@ -202,15 +206,26 @@ void leave_come_page_handle_key_down_event(
 	}
 	if (key == KEY_OK)
 	{
-		if (STATE_LEAVE == leave_come_state)
+		switch (leave_come_state)
 		{
-			leave_come_page_set_heizung(HEIZUNG_MODE_THERMOSTAT_FROSTSCHUTZ);
-			leave_come_page_set_lampen_aus();
-			leave_come_page_set_sonstige_aus(); // Garage per ignore herausnehmbar
-		}
-		else if (STATE_COME == leave_come_state)
-		{
-			leave_come_page_set_heizung(HCAN_HES_HEIZUNG_SET_MODE_AUTOMATIK);
+			case LEAVE_HEATED :
+				leave_come_page_set_lampen_aus();
+				leave_come_page_set_sonstige_aus(); // Garage per ignore herausnehmbar
+				leave_come_page_set_heizung(HEIZUNG_MODE_THERMOSTAT_FROSTSCHUTZ);
+				break;
+
+			case LEAVE_HEATING_IS_OFF :
+				leave_come_page_set_lampen_aus();
+				leave_come_page_set_sonstige_aus(); // Garage per ignore herausnehmbar
+				break;
+
+			case COME_HEATED :
+				leave_come_page_set_heizung(HCAN_HES_HEIZUNG_SET_MODE_AUTOMATIK);
+				break;
+
+			case COME_HEATING_IS_OFF :
+				goto_page_up(); // keine Aktion
+				return;
 		}
 
 		lcdctrl_blink();
@@ -233,9 +248,10 @@ void leave_come_page_print_page(eds_leave_come_page_block_t *p)
 	             fuer Heizungen?"
 	*/
 	leave_come_state = leave_come_page_get_state ();
-	if (STATE_LEAVE == leave_come_state)
+	if (   (LEAVE_HEATED == leave_come_state)
+		|| (LEAVE_HEATING_IS_OFF == leave_come_state))
 		snprintf_P(s, sizeof(s)-1, PSTR("Verbraucher"));
-	else if (STATE_COME == leave_come_state)
+	else if (COME_HEATED == leave_come_state)
 		snprintf_P(s, sizeof(s)-1, PSTR("Automatik-Modus"));
 	else
 		snprintf_P(s, sizeof(s)-1, PSTR("keine Aktion"));
@@ -244,9 +260,10 @@ void leave_come_page_print_page(eds_leave_come_page_block_t *p)
 	lcd_puts(s);
 
 	// 2. Zeile:
-	if (STATE_LEAVE == leave_come_state)
+	if (   (LEAVE_HEATED == leave_come_state)
+		|| (LEAVE_HEATING_IS_OFF == leave_come_state))
 		snprintf_P(s, sizeof(s)-1, PSTR("abschalten?"));
-	else if (STATE_COME == leave_come_state)
+	else if (COME_HEATED == leave_come_state)
 		snprintf_P(s, sizeof(s)-1, PSTR("fuer Heizungen?"));
 	else
 		snprintf_P(s, sizeof(s)-1, PSTR("notwendig"));

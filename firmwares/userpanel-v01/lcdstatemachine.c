@@ -284,7 +284,7 @@ void print_screensaver_page(void)
 			s[strlen(s)] = ' '; // Terminierung durch snprintf wieder mit Leerzeichen ersetzen
 	}
 
-	uint8_t nSonstige = get_count_sonstige_states(); // Anzahl eingeschaltet
+	uint8_t nSonstige = get_count_sonstige_states(0); // Anzahl eingeschaltet (0 = ignore)
 	if (0 < nSonstige)
 	{
 		if (pos != 16) replaceTerm = 1;

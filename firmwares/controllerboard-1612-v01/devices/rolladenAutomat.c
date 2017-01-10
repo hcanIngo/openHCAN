@@ -166,13 +166,20 @@ static inline void sendMessage(device_data_rolladenAutomat *p)
 	}
 	else
 	{
+		uint8_t sollPos = p->config.rolladen_soll_position;
+
 		message.src = canix_selfaddr();
 		message.dst = HCAN_MULTICAST_CONTROL;
 		message.proto = HCAN_PROTO_SFP;
 		message.data[0] = HCAN_SRV_HES;
 		message.data[2] = p->config.rolladen_gruppe;
 		message.data[1] = HCAN_HES_ROLLADEN_POSITION_SET;
-		message.data[3] = p->config.rolladen_soll_position; // gewuenschte Rollladenposition: Pos=0=0%=zu
+
+		// gewuenschte Rollladenposition: Pos=0=0%=zu:
+		if (sollPos >= 100)    message.data[3] = 201; // auf, sodass kalibriert werden kann
+		else if (sollPos <= 0) message.data[3] = 200; // zu,  sodass kalibriert werden kann
+		else                   message.data[3] = sollPos;
+
 		message.size    = 4;
 
 		canix_frame_send(&message);

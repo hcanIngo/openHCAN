@@ -41,8 +41,8 @@ INC = -I. -I../../canix -I../.. -I../../include
 CFLAGS= $(GCCFLAGS) $(INC) $(DEFINES)
 
 all: $(TARGET).hex
-	test -d ./C1612_$(MCU) || mkdir C1612_$(MCU)
-	mv $(TARGET).hex ./C1612_$(MCU)/
+	sudo test -d ./C1612_$(MCU) || mkdir C1612_$(MCU)
+	sudo mv $(TARGET).hex ./C1612_$(MCU)/
 	ls ./C1612_$(MCU)/*.*
 
 $(TARGET).hex : $(TARGET).out

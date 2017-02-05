@@ -24,4 +24,4 @@ install:
 
 # -s 512 -d 35 -p 1
 run: 
-	./hcanextid -D -s 512 -d 35 -p 1
+	./hcanextid -D -s 509 -d 35 -p 1

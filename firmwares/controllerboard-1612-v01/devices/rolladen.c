@@ -344,6 +344,22 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 			}
 			break;
 
+		case HCAN_HES_DEVICE_STATES_REQUEST :
+			{
+				if(p->config.taster != 255)
+				{
+					wdt_reset();
+					canix_sleep_100th(10); // 100msec Pause
+
+					answer.data[1] = HCAN_HES_ROLLADEN_POSITION_REPLAY;
+					answer.data[2] = frame->data[2];
+					answer.data[3] = rolladen_get_position(p);
+					answer.size = 4;
+					canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
+				}
+			}
+			break;
+
 		case HCAN_HES_ROLLADEN_POSITION_REQUEST:
 			if (is_group_in_rolladen(p, frame->data[2]))
 			{

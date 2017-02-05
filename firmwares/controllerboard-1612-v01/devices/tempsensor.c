@@ -186,6 +186,28 @@ void tempsensor_can_callback(device_data_tempsensor *p,
 				}
 			}
 			break;
+
+		case HCAN_HES_DEVICE_STATES_REQUEST :
+			{
+				if(p->config.gruppe != 255)
+				{
+					wdt_reset();
+					canix_sleep_100th(10); // 100msec Pause
+
+					canix_frame message;
+					message.src = canix_selfaddr();
+					message.dst = frame->src;
+					message.proto = HCAN_PROTO_SFP;
+					message.data[0] = HCAN_SRV_HES;
+					message.data[1] = HCAN_HES_1WIRE_TEMPERATURE_REPLAY;
+					message.data[2] = p->config.gruppe; // wird in main.c fuer jedes Device einmal aufgerufen
+					message.data[3] = p->temperature >> 8;
+					message.data[4] = p->temperature;
+					message.size    = 5;
+					canix_frame_send(&message);
+				}
+			}
+			break;
 	}
 }
 

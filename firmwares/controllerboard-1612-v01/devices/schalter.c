@@ -80,6 +80,7 @@ void schalter_can_callback(device_data_schalter *p, const canix_frame *frame)
 		 * schalter_can_callback wird in main.c fuer jedes Schalter-Device einmal aufgerufen. */
 		if(p->config.gruppe != 255)
 		{
+			canix_sleep_100th(10); // 100msec Pause
 			p->newState = 3; // sodass im schalter_timer_handler der aktuelle Zustand gesendet wird
 		}
 	}

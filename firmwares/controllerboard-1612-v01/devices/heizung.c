@@ -5,6 +5,7 @@
 #include <canix/syslog.h>
 #include <hcan.h>
 
+#include <avr/wdt.h>
 #include <avr/eeprom.h>
 
 #include "heizung.h"
@@ -525,6 +526,16 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			{
 				p->mode = HEIZUNG_MODE_AUTOMATIK;
 				heizung_send_details(p, HCAN_MULTICAST_INFO);
+			}
+			break;
+
+		case  HCAN_HES_DEVICE_STATES_REQUEST:
+			if(p->config.id != 255)
+			{
+				wdt_reset();
+				canix_sleep_100th(10); // 100msec Pause
+
+				heizung_send_details(p, frame->src);
 			}
 			break;
 

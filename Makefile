@@ -93,6 +93,7 @@ firmwareOhneEds:
 
 tools:
 	cd tools; sudo make all
+	cd tools/hcanextid; sudo make all
 
 release: 
 	cd firmwares/controllerboard-1612-v01; sudo make release MCU=atmega32

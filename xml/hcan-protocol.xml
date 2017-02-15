@@ -575,6 +575,11 @@
 				<param pos="2" name="pos_lo" description="lo hyte der Position" />
 			</message>
 
+			<message name="DEVICE_STATES_REQUEST" id="75"
+				description="Sendet der MQTT-Client, nach Connect zum Broker und CAN-Bus. 
+				Daraufhin erhaelt der Broker zeitnah alle CAN-Bus-Devicezustaende von den C1612-Controllern." >
+			</message>
+
 			<message name="DCF77_ERROR" id="80"
 				description="Meldet die festgestellten Fehler der letzten Empfangsminute" >
 				<param pos="0" name="id" description="Identifikation des DCF77-Moduls" />

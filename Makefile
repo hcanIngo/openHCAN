@@ -68,6 +68,8 @@ cDienste:
 	cd hcand/; sudo make $(xx)
 	cd hcanhid/; sudo make $(xx)
 	cd hcanaddressd/; sudo make $(xx)
+	cd hcansocketd/; sudo make $(xx)
+	cd hcan4mqttpc/; sudo make $(xx)
 
 cppDienste:	
 	cd libhcan++/; sudo make $(xx)

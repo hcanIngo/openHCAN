@@ -80,8 +80,7 @@ int main(int argc, char ** argv)
 	int nwritten;
 
 	strcpy(device, "can0");
-    //strcpy(brokerHost_ip, "192.168.1.78"); // "localhost"
-    strcpy(brokerHost_ip, "m2m.eclipse.org");
+    strcpy(brokerHost_ip, "localhost"); // "192.168.1.78", "localhost", "m2m.eclipse.org"
 
     // Optionen parsen:
     if (parse_options(argc,argv) != 0)
@@ -160,7 +159,6 @@ int main(int argc, char ** argv)
                 }
                 else
                 {
-                    //TRACE("received can frame: %u %d\n", (uint32_t)canFrame.can_id, canFrame.can_dlc);
                     if(((canBufWIdx+1)&(BUFFERSIZE-1)) == canBufRIdx)
                     {
                         TRACE("no rx-can-buffer left\n");
@@ -170,21 +168,6 @@ int main(int argc, char ** argv)
                     	canRxBuf[canBufWIdx].can_id = canFrame.can_id & CAN_EFF_MASK;
 						canRxBuf[canBufWIdx].can_dlc = canFrame.can_dlc;
 						memcpy(canRxBuf[canBufWIdx].data, canFrame.data, canFrame.can_dlc);
-
-						/* // TEST:
-						char str[200];
-						memset(str, '\0', sizeof(str)); // WICHTIG!
-						snprintf(str, 30, "msg=%d(%d), len=%d", canFrame.data[1], canRxBuf[--canBufWIdx].data[1], canFrame.can_dlc);
-						*/
-						/*
-						snprintf(str, 16, ".%x", (uint16_t)canRxBuf[canBufWIdx].can_id);
-						int i;
-						for (i=0; i<canRxBuf[canBufWIdx].can_dlc; i++)
-						{
-							snprintf(&str[strlen(str)], 16, ", %u", canRxBuf[canBufWIdx].data[i]);
-						}
-						TRACE("rx cb>: str=%s\n", str);
-						*/
 
 						canBufWIdx++;
 						canBufWIdx &= BUFFERSIZE-1;
@@ -198,7 +181,6 @@ int main(int argc, char ** argv)
 
         	if (FD_ISSET(sock_mqtt, &recv_fdset))
             {
-				// TRACE("rx@sock_mqtt\n");
         		if(((mqttBufWIdx+1)&(BUFFERSIZE-1)) == mqttBufRIdx)
 				{
 					 TRACE("no rx-mqtt-buffer left\n");
@@ -220,30 +202,13 @@ int main(int argc, char ** argv)
 					publishMqttMsg("cb>", (unsigned char*)str, strLen); // topic "cb>" (vom CAN-Bus)
 				}
 
-				/*
-				TRACE("-> A N D (underTest) publishing can 2 MQTT-Broker\n");
-				memset(str, '\0', sizeof(str)); // WICHTIG!
-				//snprintf(buf, 16, "0x%x", (uint16_t)(16<<&mqttRxBuf[mqttBufRIdx].id));
-				snprintf(str, 16, ".%x", (uint16_t)canRxBuf[canBufRIdx].can_id);
-				int i;
-				for (i=0; i<canRxBuf[canBufRIdx].can_dlc; i++)
-				{
-					snprintf(&str[strlen(str)], 16, ", %u", canRxBuf[mqttBufRIdx].data[i]);
-				}
-				TRACE("str=%s", str);
-				publishMqttMsg("cb>", (unsigned char*)str, strlen(str)); // topic "cb>" (vom CAN-Bus)
-				*/
-
 				canBufRIdx++;
 				canBufRIdx &= BUFFERSIZE-1;
 			}
 
 			if ((mqttBufWIdx != mqttBufRIdx) && FD_ISSET(sock_mqtt, &send_fdset)) // something from 2send:  mqtt-broker --->  cb?
 			{
-				nwritten = write(sock_can, &mqttRxBuf[mqttBufRIdx], sizeof(struct can_frame)); // TODO schreibt immer alle Datenbytes!!!!
-				//int sizeToWrite = sizeof(struct can_frame) - 8 + mqttRxBuf[mqttBufRIdx].can_dlc;
-				//nwritten = write(sock_can, &mqttRxBuf[mqttBufRIdx], sizeToWrite);
-				//if (nwritten == sizeToWrite)
+				nwritten = write(sock_can, &mqttRxBuf[mqttBufRIdx], sizeof(struct can_frame));
 				if (nwritten == sizeof(struct can_frame))
 				{
 					if(debug)
@@ -259,20 +224,6 @@ int main(int argc, char ** argv)
 						}
 						TRACE("cb<--mqtt %s\n", str);
 					}
-
-					/*
-					TRACE("->   A N D (underTest)   publishing reading from MQTT (to MQTT-Broker)\n");
-					char buf[200];
-					//snprintf(buf, 16, "0x%x", (uint16_t)(16<<&mqttRxBuf[mqttBufRIdx].id));
-					snprintf(buf, 16, ".%x", (uint16_t)mqttRxBuf[mqttBufRIdx].id);
-					int i;
-					for (i=0; i<mqttRxBuf[mqttBufRIdx].size; i++)
-					{
-						snprintf(&buf[strlen(buf)], 16, ", %u", mqttRxBuf[mqttBufRIdx].data[i]);
-					}
-					TRACE("buf=%s", buf);
-					publishMqttMsg("cb>", (unsigned char*)buf, strlen(buf)); // topic "cb>" (vom CAN-Bus)
-					*/
 
 					mqttBufRIdx++;
 					mqttBufRIdx &= BUFFERSIZE-1;

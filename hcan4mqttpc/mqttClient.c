@@ -30,11 +30,10 @@
 #include "../hcan4mqttpc/MQTTPacket/src/MQTTPacket.h"
 #include "../include/hcan-def.h"
 
-
-// Dieser MQTT-Client baut eine Verbindung zum Broker (localhost:1883) auf:
-// - abonniert (subscribes) das Thema (topic) "cb<". Daher Nachrichten an den CAN-Bus.
-// - veroeffentlicht (publishes) alle HES-Nachrichten unter dem Thema (topic) "cb>". Daher Nachrichten vom CAN-Bus.
-
+/* Dieser MQTT-Client baut eine Verbindung zum Broker auf (z.B. localhost:1883):
+ - abonniert (subscribes) das Thema (topic) "cb<". Daher Nachrichten an den CAN-Bus.
+ - veroeffentlicht (publishes) bestimmte HES-Nachrichten unter dem Thema (topic) "cb>". Daher Nachrichten vom CAN-Bus.
+*/
 unsigned char buf[200]; // fuer das Serialisieren / Deserialisieren
 
 
@@ -248,9 +247,7 @@ void recvMqttMsg(void)
 
 	memset(buf, '\0', sizeof(buf)); // WICHTIG!
 	int rc = MQTTPacket_read(buf, sizeof(buf), recv_callback);
-	//TRACE(" %d ", rc);
 
-	// TODO transport_getdata() has a built-in 1 second timeout
 	if (rc == PUBLISH) // message?
 	{
 		unsigned char dup;

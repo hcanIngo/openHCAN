@@ -102,13 +102,6 @@ int getMessage4cb (char * msg, struct can_frame * msg4cb)
 				msg4cb->data[2] = atoi(token); // Heizungs-ID
 				return 3;
 			}
-	/*		else if (is(token, "man")) // TODO, da ungenutzt in OH2
-			{
-				frame_to_socketcan->data[1] = HCAN_HES_HEIZUNG_SET_MODE_MANUAL;
-				token = strtok(NULL, "/"); if(NULL == token) return 0;
-				frame_to_socketcan->data[2] = atoi(token); // Heizungs-ID
-				return 3;
-			}*/
 		}
 
 		else if (is(token, "RQ")) // Request Device-States
@@ -202,9 +195,6 @@ size_t catHesTopic4Broker(char * str, const struct can_frame * cf)
 			temp =	((cf->data[3]<<8)|cf->data[4]) / 16.0; // Temperaturwert
 			return snprintf(str, maxSize, "%d/H/auto/%.1f", cf->data[2], temp);
 /*
-		case HCAN_HES_HEIZUNG_MODE_MANUAL_DETAILS:
-			return snprintf(str, maxSize, "%d/H/man/%.1f", cf->data[2], temp); // TODO, da ungenutzt in OH2
-
 		case HCAN_HES_HEIZUNG_TIST_REPLAY:
 			return snprintf(str, maxSize, "HES/HeizTemp");  // TODO, da ungenutzt in OH2
 */

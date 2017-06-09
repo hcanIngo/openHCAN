@@ -131,7 +131,7 @@ void reedkontakt_can_callback(device_data_reedkontakt *p,
 			canix_sleep_100th(10); // 100msec Pause
 
 			answer.data[1] = HCAN_HES_REEDKONTAKT_STATE_REPLAY;
-			answer.data[2] = frame->data[2]; // wird in main.c fuer jedes Device einmal aufgerufen
+			answer.data[2] = p->config.gruppe; // wird in main.c fuer jedes Device einmal aufgerufen
 			answer.data[3] = tasterport_read(p->config.port) != 0;
 			answer.size    = 4;
 			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);

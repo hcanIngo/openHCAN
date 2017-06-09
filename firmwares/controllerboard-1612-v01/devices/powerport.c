@@ -265,7 +265,7 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 			canix_sleep_100th(10); // 100msec Pause
 
 			answer.data[1] = HCAN_HES_POWER_GROUP_STATE_REPLAY;
-			answer.data[2] = frame->data[2]; // wird in main.c fuer jedes Device einmal aufgerufen
+			answer.data[2] = p->config.gruppe0; // wird in main.c fuer jedes Device einmal aufgerufen
 			answer.data[3] = powerport_get(p) != 0;
 			// UI-PowerPortPage kann einen Timerwert bis zum Schalten anzeigen:
 			if(p->countDownTimer) answer.data[4] = (p->countDownTimer/60) + 1;

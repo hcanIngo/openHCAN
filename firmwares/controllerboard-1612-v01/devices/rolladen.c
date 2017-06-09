@@ -352,7 +352,7 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 					canix_sleep_100th(10); // 100msec Pause
 
 					answer.data[1] = HCAN_HES_ROLLADEN_POSITION_REPLAY;
-					answer.data[2] = frame->data[2];
+					answer.data[2] = p->config.taster;
 					answer.data[3] = rolladen_get_position(p);
 					answer.size = 4;
 					canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);

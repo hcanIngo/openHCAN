@@ -656,7 +656,7 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			break;
 
 		case HCAN_HES_DEVICE_STATES_REQUEST:
-			if(p->config.id != 255)
+			if((p->type == EDS_heizung_BLOCK_ID) && (p->config.id != 255))
 			{
 				wdt_reset();
 				canix_sleep_100th(10); // 100msec Pause

@@ -40,7 +40,11 @@ export GCCFLAGS = -mmcu=$(MCU) -Wall -Werror -Wstrict-prototypes -Os \
 INC = -I. -I../../canix -I../.. -I../../include
 CFLAGS= $(GCCFLAGS) $(INC) $(DEFINES)
 
-all: $(TARGET).hex
+all:
+	cd devices; make all
+	make allX
+
+allX: $(TARGET).hex
 	sudo test -d ./C1612_$(MCU) || mkdir C1612_$(MCU)
 	sudo mv $(TARGET).hex ./C1612_$(MCU)/
 	ls ./C1612_$(MCU)/*.*
@@ -55,7 +59,7 @@ $(TARGET).out : $(OBJ)
 clean:
 	rm -f *.o *.map *.out ../../canix/*.o
 	sudo rm -f ./C1612_$(MCU)/*.hex
-	cd devices; rm -f *.o; make all
+	cd devices; rm -f *.o
 
 ctags:
 	ctags *.c *.h ../../canix/*.c ../../canix/*.h ../../include/*.h

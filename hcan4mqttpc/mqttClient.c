@@ -209,13 +209,13 @@ void initMqtt(char *brokerHost_ip)
 	if(sock_mqtt < 0)
 		exitMqtt("sock_mqtt < 0\n");
 
-	TRACE("initMQTT: connect to brokerHost_ip-name=%s, port=%d\n", brokerHost_ip, port);
+	TRACE("initMQTT: connect to broker=%s, port=%d\n", brokerHost_ip, port);
 
 	data.clientID.cstring = "cb_client";
 	data.keepAliveInterval = 20;
 	data.cleansession = 1;
-	data.username.cstring = "testuser"; // TODO auch im broker
-	data.password.cstring = "testpassword";
+	data.username.cstring = "hcan";
+	data.password.cstring = "n_A_c";
 	data.MQTTVersion = 4;
 
 	int len = MQTTSerialize_connect(buf, sizeof(buf), &data);

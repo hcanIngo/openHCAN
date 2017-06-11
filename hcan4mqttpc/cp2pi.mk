@@ -1,9 +1,9 @@
 # Verwendung per:  make --makefile=cp2pi.mk installMqtt
 
-TARGET = hcan4mqttc
+TARGET = hcan4mqttpc
 
 CONF = /home/il/Dropbox/HCAN/HI_SERVER/openhab2_conf_mqtt
-include $(CONF)/myconf.inc	
+include $(CONF)/myconf.inc
 ZIEL_PC = bananapi
 ZIEL_USER = tt
 

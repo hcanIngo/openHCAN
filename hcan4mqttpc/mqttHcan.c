@@ -88,11 +88,11 @@ int getMessage4cb (char * msg, struct can_frame * msg4cb)
 				msg4cb->data[2] = atoi(token); // Heizungs-ID
 				token = strtok(NULL, "/"); if(NULL == token) return 0;
 				uint16_t temp = (uint16_t) (16 * atof(token));
-				msg4cb->data[2] = temp>>8; // temp_hi : Soll-Temperatur (MSB)
-				msg4cb->data[3] = temp; // temp_li : Soll-Temperatur (LSB)
+				msg4cb->data[3] = temp>>8; // temp_hi : Soll-Temperatur (MSB)
+				msg4cb->data[4] = temp; // temp_li : Soll-Temperatur (LSB)
 				uint16_t dauer = 65000; // TODO von OH erhalten!
-				msg4cb->data[4] = dauer>>8; // duration_hi : Restdauer (MSB), 0 = unbegrenzt
-				msg4cb->data[5] = dauer; // duration_lo : Restdauer (LSB)
+				msg4cb->data[5] = dauer>>8; // duration_hi : Restdauer (MSB), 0 = unbegrenzt
+				msg4cb->data[6] = dauer; // duration_lo : Restdauer (LSB)
 				return 6;
 			}
 			else if (is(token, "auto"))

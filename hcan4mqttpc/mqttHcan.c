@@ -93,7 +93,7 @@ int getMessage4cb (char * msg, struct can_frame * msg4cb)
 				uint16_t dauer = 65000; // TODO von OH erhalten!
 				msg4cb->data[5] = dauer>>8; // duration_hi : Restdauer (MSB), 0 = unbegrenzt
 				msg4cb->data[6] = dauer; // duration_lo : Restdauer (LSB)
-				return 6;
+				return 7;
 			}
 			else if (is(token, "auto"))
 			{

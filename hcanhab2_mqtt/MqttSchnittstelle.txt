@@ -1,0 +1,41 @@
+aus OH2-Sicht -Mitschnitt per MQTTlens-
+---------------------------------------
+- subscribe a topic="cb<" 
+
+
+Schnittstellenbeschreibung (Bsp.):
+==================================
+
+Info's:
+-------
+cb> 91/ON POWER_GROUP_STATE_INFO, 91=Gr
+cb> 91/OFF 
+
+cb> 91/Ro/DOWN
+cb> 91/Ro/UP
+cb> 91/Ro/STOP
+cb> 91/Ro/100     100=Pos
+
+cb> 91/T/20.6
+
+cb> 91/OPEN
+cb> 91/CLOSED
+
+cb> 91/H/aus
+cb> 91/H/therm/20.6
+cb> 91/H/auto/20.6
+
+
+schalten: 
+---------
+cb< ON/91         POWER_GROUP_ON, 91=Gr  // @ OH2-Gui Schalter aendern
+cb< OFF/91
+
+cb< Ro/91/100
+cb< Ro/91/100     100=Pos
+
+cb< H/aus/91
+cb< H/therm/91/20.6
+cb< H/auto/91
+
+cb< RQ            Request Device-States

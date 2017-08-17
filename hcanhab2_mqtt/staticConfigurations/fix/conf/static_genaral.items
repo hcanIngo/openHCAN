@@ -1,0 +1,3 @@
+
+// Request Device-States: 
+String HCAN_HES_DEVICE_STATES_REQUEST {mqtt=">[bpiBroker:cb<:command:REQ:RQ]"}

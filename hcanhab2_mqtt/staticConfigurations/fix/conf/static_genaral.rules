@@ -1,0 +1,9 @@
+rule "Initialize all items"
+when
+	System started
+then
+	createTimer(now.plusSeconds(30)) [|
+	    logInfo("Initializer", "Request the items states...")
+		HCAN_HES_DEVICE_STATES_REQUEST.sendCommand("REQ")
+	]
+end

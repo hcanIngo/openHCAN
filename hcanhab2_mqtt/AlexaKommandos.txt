@@ -1,0 +1,9 @@
+Bsp. für Sprach-Kommandos
+-------------------------
+Alexa 
+- schalte Büro Tür-Licht ein -> tts: "OK" 
+- schalte Büro Tür-Licht aus -> tts: "OK"
+
+- stelle die Heizung im Büro auf 23 Grad-> tts: "Büro ist im automatischen Modus. Die Solltemperatur ist 23 Grad."
+
+- wie ist die Temperatur im Büro -> tts: "Büro reagiert gerade nicht"

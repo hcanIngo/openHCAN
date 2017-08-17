@@ -1,0 +1,11 @@
+Verzeichnis-Info:
+
+"conf_templates": 
+	Hier sind nur Beispieldateien enthalten, die das 
+    Grundgerüst für die eigene Openhab-Anpassung bilden.
+    Diese werden bei "make installHabHcan" ueberschrieben!
+
+
+"fix":  
+	Notwendige nicht generierte Dateien, die für die 
+    OpenHAB-Installation notwendig sind, aber keiner Anpassung bedürfen.

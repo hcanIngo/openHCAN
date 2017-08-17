@@ -1,0 +1,17 @@
+[Unit]
+Description=Starts and stops the openHAB Home Automation Bus
+Documentation=http://www.openhab.org
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+GuessMainPID=yes
+User=tt
+ExecStart=/home/tt/myOpenHabInstallation/start.sh
+ExecStop=kill -SIGINT $MAINPID
+Restart=on-failure
+WorkingDirectory=/home/tt/myOpenHabInstallation
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,38 @@
+Download:
+https://github.com/openhab/openhab2-addons/tree/master/addons
+---
+/var/log/openhab2/openhab.log
+---
+help
+
+log:set DEBUG org.openhab.binding.mqtt
+log:display
+
+smarthome:status REEDKONTAKT_OG_Bad__B_Doppelfenster1
+smarthome:status LAMPE_OG_Buero__Decke_Schraege
+smarthome:status LAMPE_OG_Buero__Decke_Tuer 
+smarthome:status LAMPE_EG_Bad__Decke
+
+smarthome:status TEMPERATUR_OG_K2__K2
+smarthome:status TEMPERATUR_OG_K1__K1_Heizung
+
+smarthome:send LAMPE_OG_Buero__Decke_Tuer ON
+---
+config:edit org.openhab.mqtt
+config:property-list
+---
+https://home.myopenhab.org/rest/items/LAMPE_OG_Buero__Decke_Tuer
+
+
+bundle:list -s |grep http
+bundle:list -s |grep mqtt
+185 | Active   |  80 | 1.9.0.201701150210    | openHAB MQTT Binding
+
+bundle:list -s |grep hue
+187 | Active   |  80 | 2.0.0.201701151645    | Hue Emulation Service
+
+https://github.com/openhab/openhab-distro/issues/82
+feature:install openhab-runtime-compat1x
+
+
+bundle:info

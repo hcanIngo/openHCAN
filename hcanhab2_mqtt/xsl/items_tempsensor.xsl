@@ -18,9 +18,8 @@
 </xsl:template>
 
 <xsl:template match="tempsensor">
-// getaggt geht: 
-// in Heizung verwendet:    
-//ist in Heizung enthalten: Number TEMPERATUR_<xsl:value-of select="@name" /> 	"<xsl:value-of select="@stt" />-Sensor [%.1f °C]" &lt;temperature&gt; (Temperaturen) [ "CurrentTemperature" ] {mqtt="&lt;[bpiBroker:cb&gt;:state:JS(getTemp.js):<xsl:value-of select="@gruppe" />/T/.*]", autoupdate="true"}
+// TEMPERATUR-* ist in Heizung getaggt, fuer die Sprach-Abfrage:    
+Number TEMPERATUR_<xsl:value-of select="@name" /> 	"<xsl:value-of select="@stt" />-Sensor [%.1f °C]" &lt;temperature&gt; (Temperaturen) {mqtt="&lt;[bpiBroker:cb&gt;:state:JS(getTemp.js):<xsl:value-of select="@gruppe" />/T/.*]", autoupdate="true"}
 </xsl:template>
 
 

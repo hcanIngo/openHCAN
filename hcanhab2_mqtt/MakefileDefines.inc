@@ -7,8 +7,8 @@ OPENHABVERSION = openhab-2.1.0
 HCAN_INSTALLATION = installation.xml
 
 
-ZIEL_PC = localhost
-#ZIEL_PC = bananapi
+#ZIEL_PC = localhost
+ZIEL_PC = bananapi
 
 ifeq ($(ZIEL_PC),localhost)
 	ZIEL_USER = il

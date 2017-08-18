@@ -17,49 +17,6 @@
 <xsl:template match="heizung">
 
 
-//rule "Heizung Soll-Temperatur Vorgabe vom CAN-Bus erhalten"
-//when
-//	Item SOLLTEMP_<xsl:value-of select="@name" /> received update
-//then 
-//	sollTemp<xsl:value-of select="@name" /> = SOLLTEMP_<xsl:value-of select="@name" />.state as DecimalType
-//	SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(sollTemp<xsl:value-of select="@name" />) // sitemap-Aktu.
-//	SOLLTEMP_<xsl:value-of select="@name" />.sendCommand(sollTemp<xsl:value-of select="@name" />) // mqtt-cmd
-//end
-
-
-//rule "Heizung Soll-Temperatur in OpenHab veraendert"
-//when
-//	Item SOLLTEMP_<xsl:value-of select="@name" /> received command
-//	// Item muss autoupdate="false" haben, sodass wenn der Button in der Sitemap gedrückt wird, das item nicht den Button-State annimmt!
-//then 
-//	var int tempSetpoint = (SOLLTEMP_<xsl:value-of select="@name" />.state as DecimalType).intValue
-//	logInfo("IL-+", "tempSetpoint: " + tempSetpoint.toString)
-//	logInfo("IL-+", "sollTemp<xsl:value-of select="@name" />: " + sollTemp<xsl:value-of select="@name" />.toString)
-//	
-//	if (tempSetpoint &gt; sollTemp<xsl:value-of select="@name" />) // wurde erhoeht (++)
-//	{
-//		if (tempSetpoint &lt; 17)
-//		{
-//			tempSetpoint = 20 // Sprung auf 20°C
-//		}
-//	}
-//	else // veringert (--): 
-//	{
-//		
-//	}
-//	
-//	sollTemp<xsl:value-of select="@name" /> = tempSetpoint
-//	HEIZMODE_<xsl:value-of select="@name" />.sendCommand("3") // Therm
-//	
-//	if (sollTemp<xsl:value-of select="@name" />&lt;0)  sollTemp<xsl:value-of select="@name" /> = 0
-//	if (sollTemp<xsl:value-of select="@name" />&gt;30) sollTemp<xsl:value-of select="@name" /> = 30
-//	
-//	// Den Item-State sofort anpassen (nicht das Pollen abwarten). Das Item muss auf autoupdate="false" stehen. 
-//	// Sonst wuerde die Button-'+/-'-Reaktion zu langsam erfolgen. Funzt so, da es nicht zum rule-Aufruf SOLLTEMP_... kommt:
-//	SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(tempSetpoint) // sitemap-Aktu.
-//	//SOLLTEMP_<xsl:value-of select="@name" />.sendCommand(tempSetpoint) // mqtt-cmd  ??
-//end
-
 rule "Heizung OpenHab-Selektion veraendert"
 when
 	Item HEIZMODE_<xsl:value-of select="@name" /> received command

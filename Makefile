@@ -36,7 +36,7 @@ clean:
 	make firmware xx=clean parm2=MCU=atmega32
 	make firmware xx=clean parm2=MCU=atmega644
 	make firmwareOhneEds xx=clean
-	cd hcanweb; sudo make clean
+	sudo find -type f -name ".depend" | xargs rm -f
 
 dep:
 	make cppDienste xx=dep
@@ -48,8 +48,6 @@ all:
 	make firmware xx=all parm2=MCU=atmega32
 	make firmware xx=clean MCU=atmega644; make firmware xx=all MCU=atmega644
 	make firmwareOhneEds xx=clean; make firmwareOhneEds xx=all
-	make hcanweb_client
-	make hcanweb_server
 	
 install:
 	make strukturen xx=install
@@ -66,7 +64,6 @@ strukturen:
 cDienste: 
 	#@ per Datei ./ARCH.inc   echo "export ARCH = i386" > ARCH.inc #i386 statt arm
 	cd hcand/; sudo make $(xx)
-	cd hcanhid/; sudo make $(xx)
 	cd hcanaddressd/; sudo make $(xx)
 	cd hcansocketd/; sudo make $(xx)
 	cd hcan4mqttpc/; sudo make $(xx)
@@ -77,20 +74,13 @@ cppDienste:
 	cd libhcandata/; make $(xx)
 	cd hcanswd/; make $(xx)
 	cd hcandq/; make $(xx)
-	
-hcanweb_client: 
-	cd hcanweb; sudo make zip ver=unlabeled
-
-hcanweb_server:
-	cd hcanweb/server/C1612server; sudo make clean; sudo make all
 
 firmware: 
 	cd hcanbl; sudo make $(xx) $(parm2)
 	cd firmwares/controllerboard-1612-v01; sudo make $(xx) $(parm2)
 	cd firmwares/userpanel-v01; sudo make $(xx) $(parm2)
 
-firmwareOhneEds:	
-	cd firmwares/hostinterface-v02; sudo make $(xx)
+firmwareOhneEds:
 	cd firmwares/usv-modul; sudo make $(xx)
 
 tools:
@@ -102,5 +92,4 @@ release:
 	cd firmwares/controllerboard-1612-v01; sudo make release MCU=atmega644
 	cd firmwares/userpanel-v01; sudo make release MCU=atmega32
 	cd firmwares/userpanel-v01; sudo make release MCU=atmega644
-	cd firmwares/hostinterface-v02; sudo make release
 	cd firmwares/usv-modul; sudo make release	

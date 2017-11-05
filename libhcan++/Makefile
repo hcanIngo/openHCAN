@@ -55,8 +55,6 @@ $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	>.depend
-	make dep
 	rm -f *.o
 	@echo last_ARCH=$(ARCH) > ARCH_letzter_Compilerlauf.inc
 	sudo rm -f ./binary_$(ARCH)/$(TARGET).*

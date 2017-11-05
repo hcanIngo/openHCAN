@@ -50,9 +50,12 @@ eds.sql: mk_eds_sql.xsl eds.xml
 
 
 clean:
-	rm -f hcan-def.h oap-def.h hcan_transport.h hcan_transport.cc \
-	frame_message_description.h eds_desc.cc eds-structs.h \
-	hcan-protocol-referenz.txt eds.sql
+	sudo rm -f oap-def.h frame_message_description.h eds_desc.cc eds-structs.h \
+	hcan-protocol-referenz.txt eds.sql \
+	hcan-def.h hcan_transport.h hcan_transport.cc
+	#
+	cd ../include; sudo rm -f hcan-def.h
+	cd ../libhcan++; sudo rm -f hcan_transport.h hcan_transport.cc
 
 .PHONY: validate
 

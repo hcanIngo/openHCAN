@@ -26,16 +26,18 @@ alles:
 	make dep
 	make all
 	make install
-	make tools
+	make tools xx=all
 
 
 clean:
-	make strukturen xx=clean
 	make cDienste xx=clean
 	make cppDienste xx=clean
 	make firmware xx=clean parm2=MCU=atmega32
 	make firmware xx=clean parm2=MCU=atmega644
 	make firmwareOhneEds xx=clean
+	make strukturen xx=clean
+	make tools xx=clean
+	#
 	sudo find -type f -name ".depend" | xargs rm -f
 
 dep:
@@ -69,11 +71,11 @@ cDienste:
 	cd hcan4mqttpc/; sudo make $(xx)
 
 cppDienste:	
-	cd libhcan++/; sudo make $(xx)
-	cd telican/; sudo make $(xx)
-	cd libhcandata/; make $(xx)
-	cd hcanswd/; make $(xx)
-	cd hcandq/; make $(xx)
+	cd libhcan++/; test -d .depend || sudo echo "" > .depend; sudo make $(xx)
+	cd telican/; test -d .depend || sudo echo "" > .depend; sudo make $(xx)
+	cd libhcandata/; test -d .depend || sudo echo "" > .depend; make $(xx)
+	cd hcanswd/; test -d .depend || sudo echo "" > .depend; make $(xx)
+	cd hcandq/; test -d .depend || sudo echo "" > .depend; make $(xx)
 
 firmware: 
 	cd hcanbl; sudo make $(xx) $(parm2)
@@ -84,8 +86,8 @@ firmwareOhneEds:
 	cd firmwares/usv-modul; sudo make $(xx)
 
 tools:
-	cd tools; sudo make all
-	cd tools/hcanextid; sudo make all
+	cd tools; sudo make $(xx)
+	cd tools/hcanextid; sudo make $(xx)
 
 release: 
 	cd firmwares/controllerboard-1612-v01; sudo make release MCU=atmega32

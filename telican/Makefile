@@ -52,8 +52,6 @@ $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	>.depend
-	make dep
 	rm -f *.o $(TARGET)
 	#cd ../libhcan++ && make clean
 	sudo rm -f ./binary_$(ARCH)/$(TARGET)

@@ -33,8 +33,6 @@ $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	>.depend
-	make dep
 	sudo rm -f *.o ./binary_$(ARCH)/libhcandata.*
 
 ctags:

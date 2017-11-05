@@ -35,8 +35,6 @@ hcanswd: $(OBJ) libhcan++ libhcandata
 	mv $@ binary_$(ARCH)
 
 clean:
-	>.depend
-	make dep
 	rm -f *.o
 	sudo rm -f ./binary_$(ARCH)/hcanswd
 

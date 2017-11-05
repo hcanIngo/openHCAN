@@ -59,7 +59,8 @@ $(TARGET).out : $(OBJ)
 clean:
 	rm -f *.o *.map *.out ../../canix/*.o
 	sudo rm -f ./C1612_$(MCU)/*.hex
-	cd devices; rm -f *.o
+	rm -f devices.c devices.h timer.c
+	cd devices; rm -f *.o devices.xml
 
 ctags:
 	ctags *.c *.h ../../canix/*.c ../../canix/*.h ../../include/*.h

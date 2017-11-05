@@ -1,1 +1,0 @@
-export ARCH = i386

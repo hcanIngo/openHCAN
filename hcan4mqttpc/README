@@ -14,5 +14,5 @@ Testmoeglichkeit z.B. per MQTTLens
 2. publish   a topic="cb<", Msg=ON/2
 
 ...
-tt@bananapi:~/openHCAN/hcan4mqttc$ ./binary_i386/hcan4mqttc -D
+tt@bananapi:~/openHCAN/hcan4mqttc$ ./hcan4mqttc -D
 ...

@@ -33,8 +33,9 @@
  
 
  Getestet mit folgender Compiler-Versionen:  
- - gcc und g++ in der Version 4.4
- - libboost 1.46.1
- - avr-gcc-4.5.3
- 
+ - clang-4.0
+ - libclang1-4.0
+ - libclang-common-4.0-dev
+ - llvm-4.0
+ - avr-gcc-4.9.2
  

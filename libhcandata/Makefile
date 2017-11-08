@@ -1,39 +1,29 @@
-include ../ARCH.inc
+TARGET = libhcandata
+OBJ = file_format_v1.o data_file_writer.o data_storage.o data_file.o data_query.o
 
-OBJ = file_format_v1.o data_file_writer.o data_storage.o data_file.o \
-		data_query.o
-
-ifeq ($(ARCH),i386)	
-	CXX = g++
-else	
-	CXX = arm-linux-gnu-g++	
-endif
+CXX = g++
 
 INC = -I.. -I. -I../include
 CXXFLAGS = -Wall -O2 $(INC) -fPIC #-Werror
 
-all: clean libhcandata.so
+all: $(TARGET).so
 
 install:
-	sudo /usr/bin/install ./binary_$(ARCH)/libhcandata.so /usr/lib
-	sudo ln -fs /usr/lib/libhcandata.so /usr/lib/libhcandata.so.2
-	sudo ln -fs /usr/lib/libhcandata.so /usr/lib/libhcandata.so.2.0
+	sudo /usr/bin/install ./$(TARGET).so /usr/lib
+	sudo ln -fs /usr/lib/$(TARGET).so /usr/lib/$(TARGET).so.2
+	sudo ln -fs /usr/lib/$(TARGET).so /usr/lib/$(TARGET).so.2.0
 
-libhcandata.so: $(OBJ)
-	$(CXX) -shared -o $@ -Wl,-soname,libhcandata.so $(OBJ)
-	test -d ./binary_$(ARCH) || mkdir binary_$(ARCH)
-	mv libhcandata.so binary_$(ARCH)
+$(TARGET).so: $(OBJ)
+	$(CXX) -shared -o $@ -Wl,-soname,$(TARGET).so $(OBJ)
 
-libhcandata.a: $(OBJ)
+$(TARGET).a: $(OBJ)
 	$(ARXX) rcs $@ $(OBJ)
-	test -d ./binary_$(ARCH) || mkdir binary_$(ARCH)
-	mv $@ binary_$(ARCH)
 
 $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	sudo rm -f *.o ./binary_$(ARCH)/libhcandata.*
+	sudo rm -f *.o ./$(TARGET).*
 
 ctags:
 	ctags *.cc *.h

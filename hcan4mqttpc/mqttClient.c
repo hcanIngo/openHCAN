@@ -124,7 +124,7 @@ static int transport_open(char* addr, int port)
 // Fehlerausgabe und beenden
 static void exitMqtt(const char* msg)
 {
-	TRACE(msg);
+	TRACE("%s", msg);
 	shutdown(sock_mqtt, SHUT_WR);
 	recv(sock_mqtt, NULL, (size_t)0, 0);
 	close(sock_mqtt);

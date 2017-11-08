@@ -15,20 +15,15 @@
 ##  with HCAN; if not, write to the Free Software Foundation, Inc., 51
 ##  Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
 ##
-##  (c) 2010 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
+##  (c) 2017 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
 ##############################################################################
-
-# Choose services architecture i386 or arm (arm isn't complete supported): 
-##################
-export ARCH = i386
-##################
 
 # Choose firmware architecture atmega32 or atmega644 (for C1612 and UI): 
 ######################
 export MCU = atmega644
 ######################
 
-# Choose HI-Interface-Server-IP for load firmware (eg. 192.168.1.78)
+# Choose CAN-Server-IP for load firmware (eg. 192.168.1.42)
 ###########################
-export IP_HI = 192.168.1.78
+export IP_HI = 192.168.1.42
 ###########################

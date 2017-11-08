@@ -101,7 +101,7 @@ int main(int argc, char ** argv)
 {
     int nwritten;
 
-    struct timeval last_time,this_time;
+    struct timeval last_time;
 
     strcpy(hcand_ip, "127.0.0.1");
     strcpy(device, "can0");
@@ -202,7 +202,7 @@ int main(int argc, char ** argv)
                     exit(1);
                 }
                 else {
-                    if(debug) printf("received udpframe: %lu %d\n", HcanFrame.id, HcanFrame.size);
+                    if(debug) printf("received udpframe: %u %d\n", HcanFrame.id, HcanFrame.size);
                     if(((canBufferWPtr+1)&(BUFFERSIZE-1)) == canBufferRPtr) {
                         printf("no buffer left\n");
                     } else {
@@ -222,7 +222,7 @@ int main(int argc, char ** argv)
                     exit(1);
                 }
                 else {
-                    if(debug) printf("received can frame: %lu %d\n", CanFrame.can_id, CanFrame.can_dlc);
+                    if(debug) printf("received can frame: %u %d\n", CanFrame.can_id, CanFrame.can_dlc);
                     if(((hcanBufferWPtr+1)&(BUFFERSIZE-1)) == hcanBufferRPtr) {
                         printf("no buffer left\n");
                     } else {

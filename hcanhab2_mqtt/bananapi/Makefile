@@ -1,4 +1,4 @@
-# bananapi (mit Bananian 1504)
+# bananapi (mit Armbian)
 include $(HCANHAB_DIR)/MakefileDefines.inc
 
 START_SYSTEM = Systemd

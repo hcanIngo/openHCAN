@@ -64,18 +64,18 @@ strukturen:
 	cd xml; sudo make $(xx)
 
 cDienste: 
-	#@ per Datei ./ARCH.inc   echo "export ARCH = i386" > ARCH.inc #i386 statt arm
-	cd hcand/; sudo make $(xx)
-	cd hcanaddressd/; sudo make $(xx)
-	cd hcansocketd/; sudo make $(xx)
-	cd hcan4mqttpc/; sudo make $(xx)
+	cd hcand; sudo make $(xx)
+	cd hcanaddressd; sudo make $(xx)
+	cd hcansocketd; sudo make $(xx)
+	cd hcan4mqttpc; sudo make $(xx)
 
 cppDienste:	
-	cd libhcan++/; test -d .depend || sudo echo "" > .depend; sudo make $(xx)
-	cd telican/; test -d .depend || sudo echo "" > .depend; sudo make $(xx)
-	cd libhcandata/; test -d .depend || sudo echo "" > .depend; make $(xx)
-	cd hcanswd/; test -d .depend || sudo echo "" > .depend; make $(xx)
-	cd hcandq/; test -d .depend || sudo echo "" > .depend; make $(xx)
+	cd libhcan++; test -d .depend || sudo echo "" > .depend; sudo make $(xx)
+	cd telican; test -d .depend || sudo echo "" > .depend; sudo make $(xx)
+	cd libhcandata; test -d .depend || sudo echo "" > .depend; make $(xx)
+	cd check_hcan; test -d .depend || sudo echo "" > .depend; sudo make $(xx)
+	cd hcanswd; test -d .depend || sudo echo "" > .depend; make $(xx)
+	cd hcandq; test -d .depend || sudo echo "" > .depend; make $(xx)
 
 firmware: 
 	cd hcanbl; sudo make $(xx) $(parm2)

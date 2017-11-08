@@ -1,26 +1,21 @@
-.PHONY: libhcan++ libhcandata
+PHONY: libhcan++ libhcandata
 
-include ../ARCH.inc
-
+TARGET = hcanswd
 OBJ = main.o
 
 LD_FLAGS = -Wl,--export-dynamic \
-			-L ../libhcandata/binary_$(ARCH) -lhcandata \
-			-L ../libhcan++/binary_$(ARCH) -lhcan++ \
+			-L ../libhcandata -lhcandata \
+			-L ../libhcan++ -lhcan++ \
 			-lboost_program_options \
 			-lboost_regex \
 			`pkg-config libxml++-2.6 --libs`
 
-ifeq ($(ARCH),i386)	
-	CXX = g++
-else	
-	CXX = arm-linux-gnu-g++	
-endif
+CXX = g++
 
 INC = -I. -I.. -I../libhcan++ -I../libhcandata -I../include
 CXXFLAGS = -Wall -Werror -O2 $(INC) -g
 
-all: libhcan++ libhcandata hcanswd
+all: libhcan++ libhcandata $(TARGET)
 
 libhcan++:
 	ln -sf libhcan++.so.2.0 libhcan++.so
@@ -29,20 +24,18 @@ libhcan++:
 libhcandata:
 	cd ../libhcandata && $(MAKE)
 
-hcanswd: $(OBJ) libhcan++ libhcandata
+$(TARGET): $(OBJ) libhcan++ libhcandata
 	$(CXX) -o $@ $(OBJ) $(LD_FLAGS) 
-	test -d ./binary_$(ARCH) || mkdir binary_$(ARCH)
-	mv $@ binary_$(ARCH)
 
 clean:
-	rm -f *.o
-	sudo rm -f ./binary_$(ARCH)/hcanswd
+	rm -f *.o $(TARGET)
 
 ctags:
 	ctags *.cc *.h ../libhcan++/*.cc ../libhcan++/*.h ../libhcandata/*.cc ../libhcandata/*.h
 
 install:
-	cd binary_$(ARCH); sudo install hcanswd /usr/sbin
+	# strip ./$(TARGET)
+	sudo install ./$(TARGET) /usr/sbin
 
 dep:
 	(for i in *.cc; do echo; $(CXX) -M -MG $(INC) $$i; done) > .depend

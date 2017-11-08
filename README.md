@@ -13,9 +13,7 @@ Fuer den eigentlichen Busbetrieb ist aber kein PC noetig - die Module sind voell
 openHCAN wurde aus der Motivation heraus entwickelt, eine freie (im Gegensatz zu einer proprietaeren) Hausautomatisierung zu realisieren. Dem OpenSource Gedanken folgendend ist openHCAN unter der GNU Public License veroeffentlicht.
 
 
-Den Code direkt auf Euer System bekommt ihr mit (Vorrausgesetzt die git-Tools sind installiert): 
-
-git clone https://github.com/hcanIngo/openHCAN.git
+Den Code direkt aufs eigene System:  git clone https://github.com/hcanIngo/openHCAN.git
 
 
 

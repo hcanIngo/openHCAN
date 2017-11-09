@@ -1,7 +1,7 @@
 TARGET = libhcandata
 OBJ = file_format_v1.o data_file_writer.o data_storage.o data_file.o data_query.o
 
-CXX = g++
+CXX = clang
 
 INC = -I.. -I. -I../include
 CXXFLAGS = -Wall -O2 $(INC) -fPIC #-Werror

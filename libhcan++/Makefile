@@ -21,7 +21,7 @@ else
 	# als 64-Bit-Prozess fuehrt -O2 zum Segmentation fault:   CXXFLAGS = -Wall -O2 $(INC) -fPIC
 endif
 CXXFLAGS += -fPIC
-# wegen deprecated auto_ptr:  CXXFLAGS += -Werror
+CXXFLAGS += -Werror
 
 all: $(TARGET).so
 

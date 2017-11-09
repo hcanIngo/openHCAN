@@ -11,7 +11,7 @@ CXX = g++
 
 INC = -I. -I.. -I../libhcan++ -I../include
 CXXFLAGS = -Wall -O2 $(INC)
-# wegen deprecated auto_ptr:  CXXFLAGS += -Werror
+CXXFLAGS += -Werror
 
 all: libhcan++ $(TARGET)
 

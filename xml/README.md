@@ -2,4 +2,4 @@
 
 [Wiki -> HCAN-Protokoll](https://github.com/hcanIngo/openHCAN/wiki/hcan-protocol)
 
-[Wiki -> Protokolle-Ref. (z. B. OAP): ](https://github.com/hcanIngo/openHCAN/wiki/hcan-protocol-referenz)
+[Wiki -> Protokolle-Ref. (z. B. OAP)](https://github.com/hcanIngo/openHCAN/wiki/hcan-protocol-referenz)

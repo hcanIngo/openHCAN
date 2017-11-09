@@ -1,9 +1,0 @@
-This is the replacement for hcanhid if you want to use a system with a canbus adapter supported by socketcan.
-I built it for use with the MCP2515 can adapter on a raspberry pi. 
-I don't know if there is a working kernel module in the actual kernel. If not, you may be able to get one by recompiling the kernel sources
-
-The configuration is done by loading the SPI module because the mcp2515 is connected via SPI
-/sbin/modprobe spi_bcm2708
-then configure the can interface with the ip command:
-/sbin/ip link set can0 up type can bitrate 125000
-

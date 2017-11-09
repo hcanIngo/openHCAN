@@ -73,7 +73,7 @@ namespace hcan
 			virtual bool exec_command (context &c, const string &cmd);
 	};
 
-	typedef std::auto_ptr<board_driver> board_driver_p;
+	typedef std::shared_ptr<board_driver> board_driver_p;
 };
 
 // Experimentelles Feature

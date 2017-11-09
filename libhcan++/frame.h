@@ -24,7 +24,6 @@ using namespace std;
 
 namespace hcan
 {
-
 	class io_error : public traceable_error
 	{
 		public:
@@ -97,6 +96,6 @@ namespace hcan
 			void print(bool numeric, bool color, 
 					const std::string &prefix = "") const;
 	};
-};
+}
 
 #endif

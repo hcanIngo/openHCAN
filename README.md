@@ -14,9 +14,9 @@ openHCAN wurde aus der Motivation heraus entwickelt, eine freie (im Gegensatz zu
 
 Den Code direkt aufs eigene System:  git clone https://github.com/hcanIngo/openHCAN.git 
 
-[wiki -> Entwicklungsumgebung einrichten](https://github.com/hcanIngo/openHCAN/wiki/entwicklungsumgebung_installieren)
+[Entwicklungsumgebung einrichten](https://github.com/hcanIngo/openHCAN/wiki/entwicklungsumgebung_installieren)
 
-[wiki -> Systemueberblick](https://github.com/hcanIngo/openHCAN/wiki/systemueberblick)
+[Systemueberblick](https://github.com/hcanIngo/openHCAN/wiki/systemueberblick)
 
 
 [![logo](https://cloud.githubusercontent.com/assets/4243148/11906546/aa26f62e-a5cd-11e5-9f51-9ae772fecefe.jpg)](http://hcaningo.github.io/openHCAN/)

@@ -21,10 +21,17 @@ CAN-Interface-Konfiguration:
 Test:
 -----
 can0 at index 15
+
 Wrote 16 bytes
+
 Wrote 16 bytes
+
 received can frame: 2198900840 5
+
 send hcan frame
+
 received can frame: 2148569186 5
+
 send hcan frame
+
 received can frame: 2148569186 5

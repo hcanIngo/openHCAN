@@ -1,1 +1,1 @@
-[Wiki -> Controller-1612](https://github.com/hcanIngo/openHCAN/wiki/controller_1612)
+[Wiki -> Bedienfeld](https://github.com/hcanIngo/openHCAN/wiki/bedienfeld)

@@ -28,7 +28,11 @@ main.hex : main.out
 main.out : $(OBJ)
 	$(CC) $(CFLAGS) -o main.out -Wl,-Map,main.map $(OBJ) $(LDFLAGS)
 
+i_clean_canix:
+	cd ../../canix; rm -f *.o *.d *.lst
+
 clean:
+	make i_clean_canix
 	rm -f *.o *.map *.out *.hex ../../canix/*.o
 
 ctags:

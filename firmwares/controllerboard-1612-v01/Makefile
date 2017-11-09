@@ -56,11 +56,11 @@ $(TARGET).hex : $(TARGET).out
 $(TARGET).out : $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET).out -Wl,-Map,$(TARGET).map $(OBJ) $(LDFLAGS)
 
-clean_canix:
+i_clean_canix:
 	cd ../../canix; rm -f *.o *.d *.lst 
 
 clean:
-	make clean_canix
+	make i_clean_canix
 	rm -f *.o *.map *.out
 	sudo rm -f ./C1612_$(MCU)/*.hex
 	rm -f devices.c devices.h timer.c

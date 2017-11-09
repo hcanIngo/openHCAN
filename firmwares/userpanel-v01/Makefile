@@ -61,8 +61,13 @@ $(TARGET).hex : $(TARGET).out
 $(TARGET).out : $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET).out -Wl,-Map,$(TARGET).map $(OBJ) $(LDFLAGS)
 
+
+i_clean_canix:
+	cd ../../canix; rm -f *.o *.d *.lst
+
 clean:
-	sudo rm -f *.o *.map *.out ../../canix/*.o
+	make i_clean_canix
+	sudo rm -f *.o *.map *.out
 	sudo rm -f ./UI_$(MCU)/*.hex
 
 ctags:

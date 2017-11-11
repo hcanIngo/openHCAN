@@ -1,1 +1,1 @@
-[Wiki -> hcandq](https://github.com/hcanIngo/openHCAN/wiki/hcandq)
+[hcandq](https://github.com/hcanIngo/openHCAN/wiki/hcandq)

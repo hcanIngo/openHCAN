@@ -1,1 +1,1 @@
-[Wiki -> Bedienfeld](https://github.com/hcanIngo/openHCAN/wiki/bedienfeld)
+[Bedienfeld](https://github.com/hcanIngo/openHCAN/wiki/bedienfeld)

@@ -1,1 +1,1 @@
-[Wiki -> hcanaddressd](https://github.com/hcanIngo/openHCAN/wiki/hcanaddressd)
+[hcanaddressd](https://github.com/hcanIngo/openHCAN/wiki/hcanaddressd)

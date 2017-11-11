@@ -1,4 +1,4 @@
-[Wiki -> hcansocketd: Hostinterface](https://github.com/hcanIngo/openHCAN/wiki/hcanhid)
+[hcansocketd: Hostinterface](https://github.com/hcanIngo/openHCAN/wiki/hcanhid)
 
 
 hcansocketd bildet den Softwareanteil des Hostinterfaces. Geeignet fuer CAN-Bus-Adapter die SocketCAN unterstuetzen. Z.B.:

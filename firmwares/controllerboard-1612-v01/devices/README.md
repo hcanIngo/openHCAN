@@ -1,4 +1,4 @@
-[Wiki -> Device](https://github.com/hcanIngo/openHCAN/wiki/device)
+[Device](https://github.com/hcanIngo/openHCAN/wiki/device)
 
 Hinweis: Devices im Verzeichnis "devicePool" werden nicht eingebunden.
 

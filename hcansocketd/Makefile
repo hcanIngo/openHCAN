@@ -9,7 +9,7 @@ all:
 	
 clean:
 	rm -f $(TARGET)
-	test -d ./scanBuild || sudo rm -R ./scanBuild
+	rm -fR ./scanBuild
 
 install:
 	strip $(TARGET)

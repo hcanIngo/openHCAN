@@ -1,1 +1,1 @@
-[Wiki -> openHAB](https://github.com/hcanIngo/openHCAN/wiki/hcanhab)
+[openHAB](https://github.com/hcanIngo/openHCAN/wiki/hcanhab)

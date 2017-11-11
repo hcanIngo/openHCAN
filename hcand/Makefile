@@ -1,23 +1,16 @@
 TARGET = hcand
-OBJ = main.o socket.o
-CFLAGS = -O2 -I. -Wall -g #-DDEBUG0
+SRC = main.c socket.c
 
 CXX = clang
+CFLAGS = -O2 -I. -Wall -g #-DDEBUG0
 
-all: $(TARGET)
-
-$(TARGET): $(OBJ)
-	$(CXX) $(LDFLAGS) -o $@ $(OBJ)
-
-$(OBJ): %.o:%.c
-	$(CXX) $(CFLAGS) -o $@ -c $<
+all:
+	$(CXX) $(CFLAGS) -o $(TARGET) $(SRC)
 	
 clean:
-	rm -f *.o $(TARGET)
-
-ctags:
-	ctags *.c *.h
+	rm -f $(TARGET)
+	test -d ./scanBuild || sudo rm -R ./scanBuild
 
 install:
-	strip ./$(TARGET)
-	sudo install ./$(TARGET) /usr/sbin
+	strip $(TARGET)
+	sudo install $(TARGET) /usr/sbin

@@ -1,39 +1,28 @@
 TARGET = hcan4mqttpc
-OBJ  = main.o mqttClient.o mqttHcan.o
-OBJ += ./MQTTPacket/src/MQTTConnectClient.o 
-OBJ += ./MQTTPacket/src/MQTTSerializePublish.o
-OBJ += ./MQTTPacket/src/MQTTPacket.o
-OBJ += ./MQTTPacket/src/MQTTSubscribeClient.o
-OBJ += ./MQTTPacket/src/MQTTDeserializePublish.o
+
+SRC  = main.c mqttClient.c mqttHcan.c
+SRC += ./MQTTPacket/src/MQTTConnectClient.c 
+SRC += ./MQTTPacket/src/MQTTSerializePublish.c
+SRC += ./MQTTPacket/src/MQTTPacket.c
+SRC += ./MQTTPacket/src/MQTTSubscribeClient.c
+SRC += ./MQTTPacket/src/MQTTDeserializePublish.c
 
 CXX = clang
 
 CFLAGS  = -I. -Wall -g -Os
-CFLAGS += -DDEBUG
-CFLAGS += -I ./MQTTPacket/src
+#CFLAGS += -DDEBUG
+#CFLAGS += -I ./MQTTPacket/src
 
-all: $(TARGET)
-
-$(TARGET): $(OBJ)
-	$(CXX) -o $@ $(OBJ)
-
-$(OBJ): %.o:%.c
-	$(CXX) $(CFLAGS) -o $@ -c $<
+all:
+	$(CXX) $(CFLAGS) -o $(TARGET) $(SRC)
 	
 clean:
-	rm -f *.o $(TARGET)
-	cd ./MQTTPacket/src; rm -f *.o
-
-ctags:
-	ctags *.c *.h
+	rm -f $(TARGET)
+	test -d ./scanBuild || sudo rm -R ./scanBuild
 
 install:
-	strip ./$(TARGET)
+	strip $(TARGET)
 	sudo install $(TARGET) /usr/sbin
-
-analyse: # clang Static Analyzer -> Report
-	# scan-build ./configure” (für autoconf-Projekte)
-	scan-build make
 	
 run: 
-	./$(TARGET) -D
+	$(TARGET) -D

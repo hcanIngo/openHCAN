@@ -1,25 +1,16 @@
 TARGET = hcansocketd
-OBJ = main.o
+SRC = main.c
 
 CXX = clang
-
 CFLAGS = -O2 -I. -Wall -g #-DDEBUG0
 
-
-all: $(CONDITIONAL_CLEAN) $(TARGET)
-
-$(TARGET): $(OBJ)
-	$(CXX) $(LDFLAGS) -o $@ $(OBJ)
-
-$(OBJ): %.o:%.c
-	$(CXX) $(CFLAGS) -o $@ -c $<
-    
+all:
+	$(CXX) $(CFLAGS) -o $(TARGET) $(SRC)
+	
 clean:
-	rm -f *.o $(TARGET)
-
-ctags:
-	ctags *.c *.h
+	rm -f $(TARGET)
+	test -d ./scanBuild || sudo rm -R ./scanBuild
 
 install:
-	strip ./$(TARGET)
+	strip $(TARGET)
 	sudo install $(TARGET) /usr/sbin

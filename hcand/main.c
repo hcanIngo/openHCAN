@@ -140,14 +140,13 @@ int main()
 	while (1)
 	{
 		int i;
-		int nread;
 		CANFrame f;
 		size_t size;
 		struct sockaddr_in peer;
 
 		bzero(&peer,sizeof(peer));
 		size = sizeof(peer);
-		nread = recvfrom(sock_fd, &f, sizeof(f), 0, (struct sockaddr*)&peer,
+		recvfrom(sock_fd, &f, sizeof(f), 0, (struct sockaddr*)&peer,
 				&size);
 
 		// 1. Schauen, ob wir von diesem schon mal was bekommen haben

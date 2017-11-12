@@ -1,51 +1,47 @@
 # Makfile fuer versuchsboard1
 # 
-#
-
 .PHONY:	release
 
+SRC = $(patsubst %.c, %.c , $(wildcard *.c))
+SRC += $(patsubst %.c, %.c , $(wildcard ../../canix/*.c))
+
 MCU     = atmega32
-CC      = avr-gcc
+TARGET  = main
+
 OBJCOPY = avr-objcopy
-OBJ     = main.o usvstatemachine.o darlingtonoutput.o \
-		  ../../canix/canix.o ../../canix/mcp2515.o \
-		  ../../canix/tools.o ../../canix/hcan_hms.o \
-		  led.o
+CXX     = avr-gcc
 
 F_CPU   = 3686400
 F_CAN   = 8000000
 CAN_SPEED = 125000
 
-CFLAGS= -mmcu=$(MCU) -Wall -Werror -Wstrict-prototypes -Os -mcall-prologues \
-		-DF_CPU=$(F_CPU) -DF_CAN=$(F_CAN) -DCAN_SPEED=$(CAN_SPEED) \
-		-I. -I../../canix -I../.. -I../../include -DMCU_$(MCU) \
-		-DCANIX_HMS
 
-main.hex : main.out 
-	$(OBJCOPY) -R .eeprom -O ihex main.out main.hex 
-	avr-size main.hex
+DEFINES = -DMCU_$(MCU) -DF_CPU=$(F_CPU) -DF_CAN=$(F_CAN) -DCAN_SPEED=$(CAN_SPEED) \
+          -DCANIX_SYSLOG -DCANIX_HMS -DCANIX_RTS -DCANIX_EDS
 
-main.out : $(OBJ)
-	$(CC) $(CFLAGS) -o main.out -Wl,-Map,main.map $(OBJ) $(LDFLAGS)
+CFLAGS =  -mmcu=$(MCU) -Wall -Werror -Wstrict-prototypes -Os -mcall-prologues
+CFLAGS += -I. -I../../canix -I../.. -I../../include
+CFLAGS += $(DEFINES)
 
-i_clean_canix:
-	cd ../../canix; rm -f *.o *.d *.lst
+$(TARGET).hex : $(TARGET).out 
+	$(OBJCOPY) -R .eeprom -O ihex $(TARGET).out $(TARGET).hex 
+	avr-size $(TARGET).hex
+
+$(TARGET).out : $(OBJ)
+	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) -Wl,-Map,$(TARGET).map
 
 clean:
-	make i_clean_canix
-	rm -f *.o *.map *.out *.hex ../../canix/*.o
+	cd ../../canix; rm -f *.d *.lst
+	rm -f *.map *.out *.hex
 
-ctags:
-	ctags *.c *.h ../../canix/*.c ../../canix/*.h ../../include/*.h
+all: $(TARGET).hex
 
-all: main.hex
-
-load: main.hex
-	telican -s 853 -c 400 -e "flash main.hex"
+load: $(TARGET).hex
+	telican -s 853 -c 400 -e "flash $(TARGET).hex"
 
 release:
 	../../tools/mkrelease
 	make clean
 	make
-	mv main.hex usv-build-`cat buildver`-`date +%Y%m%d`.hex
+	mv $(TARGET).hex usv-build-`cat buildver`-`date +%Y%m%d`.hex
 

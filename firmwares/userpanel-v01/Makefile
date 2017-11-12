@@ -1,12 +1,8 @@
 # Makfile fuer UI
 # 
-#
-include ../../ARCH.inc
 .PHONY:	release
+include ../../ARCH.inc
 
-#Der atmega644 hat die doppelte EEPROM- und SRAM-Groesse gegenueber dem atmega32.
-#export MCU = atmega32
-#export MCU = atmega644
 TARGET = main
 
 ifeq ($(MCU),atmega644)
@@ -19,59 +15,39 @@ else
 	AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:w:"UI_$(MCU)/$(TARGET).hex" -U hfuse:w:0xC0:m -U lfuse:w:0x0f:m
 endif
 
+SRC = $(patsubst %.c, %.c , $(wildcard *.c))
+SRC += $(patsubst %.c, %.c , $(wildcard ../../canix/*.c))
 
-export CC = avr-gcc
-export OBJCOPY = avr-objcopy
-OBJ     = main.o ../../canix/canix.o ../../canix/mcp2515.o \
-		  ../../canix/tools.o ../../canix/hcan_hms.o \
-		  ../../canix/hcan_rts.o ../../canix/syslog.o \
-		  ../../canix/eds.o \
-		  ../../canix/mem_check.o \
-		  timer.o lcd.o lcdctrl.o keys.o lcdstatemachine.o \
-		  heiz_page.o gesamt_heiz_page.o rolladen_page.o taster_page.o powerport_page.o \
-		  fenster_monitor_page.o temp_anzeige_page.o weck_page.o \
-		  reedkontakt_monitor.o lampen_monitor.o sonstige_monitor.o \
-		  heiz_monitor.o mute_monitor.o leave_come_page.o
+OBJCOPY = avr-objcopy
+CXX = avr-gcc
 
-export F_CPU  = 3686400
-export F_CAN   = 8000000
-export CAN_SPEED = 125000
+F_CPU  = 3686400
+F_CAN   = 8000000
+CAN_SPEED = 125000
 
-#export FEATURES = -DBIGMEMUSAGE
+DEFINES = -DMCU_$(MCU) -DF_CPU=$(F_CPU) -DF_CAN=$(F_CAN) -DCAN_SPEED=$(CAN_SPEED) \
+          -DCANIX_SYSLOG -DCANIX_HMS -DCANIX_RTS -DCANIX_EDS
+#DEFINES += -DBIGMEMUSAGE
 
-export DEFINES = -DMCU_$(MCU) \
-        -DF_CPU=$(F_CPU) -DF_CAN=$(F_CAN) -DCAN_SPEED=$(CAN_SPEED) \
-        -DCANIX_SYSLOG -DCANIX_HMS -DCANIX_RTS \
-        -DCANIX_EDS $(FEATURES)
-
-export GCCFLAGS = -mmcu=$(MCU) -Wall -Werror -Wstrict-prototypes -Os \
-        -mcall-prologues
-
-INC = -I. -I../../canix -I../.. -I../../include
-CFLAGS= $(GCCFLAGS) $(INC) $(DEFINES)
+CFLAGS =  -mmcu=$(MCU) -Wall -Werror -Wstrict-prototypes -Os -mcall-prologues
+CFLAGS += -I. -I../../canix -I../.. -I../../include
+CFLAGS += $(DEFINES)
 
 all: $(TARGET).hex
 	sudo test -d ./UI_$(MCU) || mkdir UI_$(MCU)
 	sudo mv $(TARGET).hex UI_$(MCU)
 
-$(TARGET).hex : $(TARGET).out
+$(TARGET).hex: $(TARGET).out
 	$(OBJCOPY) -R .eeprom -O ihex $(TARGET).out $(TARGET).hex 
 	avr-size $(TARGET).hex
 
-$(TARGET).out : $(OBJ)
-	$(CC) $(CFLAGS) -o $(TARGET).out -Wl,-Map,$(TARGET).map $(OBJ) $(LDFLAGS)
-
-
-i_clean_canix:
-	cd ../../canix; rm -f *.o *.d *.lst
+$(TARGET).out:
+	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) -Wl,-Map,$(TARGET).map
 
 clean:
-	make i_clean_canix
-	sudo rm -f *.o *.map *.out
-	sudo rm -f ./UI_$(MCU)/*.hex
-
-ctags:
-	ctags *.c *.h ../../canix/*.c ../../canix/*.h ../../include/*.h
+	cd ../../canix; rm -f *.d *.lst
+	sudo rm -f *.map *.out
+	sudo rm -fR ./UI_$(MCU)
 
 load:
 	make all

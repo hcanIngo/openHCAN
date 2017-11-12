@@ -1,14 +1,12 @@
 # Makfile fuer BL
 # 
-#
 include ../ARCH.inc
-#MCU     = atmega32
-#MCU     = atmega644
-CC      = avr-gcc
+
+CXX     = avr-gcc
 OBJCOPY = avr-objcopy
 
 TARGET = main
-OBJ     = $(TARGET).o
+SRC    = $(TARGET).c
 		 
 F_CPU   = 3686400
 F_CAN	= 8000000
@@ -37,14 +35,13 @@ CFLAGS= -mmcu=$(MCU) -Wall -Wstrict-prototypes -Os -mcall-prologues \
 		-fshort-enums -DF_CPU=$(F_CPU) -DF_CAN=$(F_CAN) -DCAN_SPEED=$(CAN_SPEED)
 
 # Linker flags.
-#  -Wl,...:     tell GCC to pass this to linker.
-#    -Map:      create map file
-#    --cref:    add cross reference to  map file
+#  -Wl,...:   tell GCC to pass this to linker.
+#  -Map:      create map file
+#  --cref:    add cross reference to  map file
 LDFLAGS = -Wl,-Map=$(TARGET).map,--cref
 
 ################## BOOTLOADER ######################
-# MT_BOOTLOADER_ADDRESS (=Start of Boot Loader section
-# in bytes - not words) is defined above.
+# MT_BOOTLOADER_ADDRESS =Start of bootloader section in bytes - not words
 LDFLAGS += -Wl,--section-start=.text=$(MT_BOOTLOADER_ADDRESS)
 
 all: $(TARGET).hex
@@ -56,7 +53,7 @@ $(TARGET).hex : $(TARGET).out
 	$(OBJCOPY) -R .eeprom -O ihex $(TARGET).out $(TARGET).hex 
 
 $(TARGET).out : $(OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET).out -Wl,-Map,$(TARGET).map $(OBJ)
+	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) $(LDFLAGS)
 
 flash:
 	sudo $(AVRDUDE_FLASH)
@@ -74,8 +71,5 @@ read_flash:
 
 clean:
 	rm -f *.o *.map *.out
-	sudo rm -f ./hcanBL_$(MCU)/*.hex
-
-ctags:
-	ctags *.c *.h
+	sudo rm -fR ./hcanBL_$(MCU)
 

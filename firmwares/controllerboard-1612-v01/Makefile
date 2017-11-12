@@ -21,7 +21,7 @@ F_CAN   = 8000000
 CAN_SPEED = 125000
 
 DEFINES = -DMCU_$(MCU) -DF_CPU=$(F_CPU) -DF_CAN=$(F_CAN) -DCAN_SPEED=$(CAN_SPEED) \
-          -DCANIX_SYSLOG -DCANIX_HMS -DCANIX_RTS -DCANIX_EDS $(FEATURES)
+          -DCANIX_SYSLOG -DCANIX_HMS -DCANIX_RTS -DCANIX_EDS
 
 CFLAGS =  -mmcu=$(MCU) -Wall -Werror -Wstrict-prototypes -Os -mcall-prologues
 CFLAGS += -I. -I../../canix -I../.. -I../../include
@@ -34,7 +34,6 @@ all:
 allX: $(TARGET).hex
 	sudo test -d ./C1612_$(MCU) || mkdir C1612_$(MCU)
 	sudo mv $(TARGET).hex ./C1612_$(MCU)
-	ls ./C1612_$(MCU)/*.*
 
 $(TARGET).hex: $(TARGET).out
 	$(OBJCOPY) -R .eeprom -O ihex $(TARGET).out $(TARGET).hex 
@@ -44,10 +43,10 @@ $(TARGET).out:
 	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) -Wl,-Map,$(TARGET).map
 
 clean:
-	cd ../../canix; rm -f *.o *.d *.lst
-	rm -f *.map *.out
+	cd ../../canix; rm -f *.d *.lst
+	sudo rm -f *.map *.out
 	sudo rm -fR ./C1612_$(MCU)
-	rm -f devices.c devices.h timer.c
+	sudo rm -f devices.c devices.h timer.c
 	cd devices; rm -f devices.xml
 
 load:

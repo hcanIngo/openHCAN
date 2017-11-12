@@ -1,6 +1,6 @@
 A = "<device name=\"
 E = \"></device>"
-OBJ_DEVICES := $(patsubst %.c, $(A)%$(E) , $(wildcard *.c))
+DEVICES := $(patsubst %.c, $(A)%$(E) , $(wildcard *.c))
 
 
 INDENT_OPTS = -orig -ci4
@@ -17,14 +17,14 @@ all:
 	@#less ../timer.c
 
 print_deviceList:
-	@echo DeviceList: $(OBJ_DEVICES)
+	@echo DeviceList: $(DEVICES)
 
 devices_xml:
 	@#rm -f devices.xml
 	@#> devices.xml
 	@echo "<!-- AUTOMATICLY GENERATED FROM /device/Makefile -->" >	devices.xml
 	@echo "<C1612-devicelist>" >> devices.xml
-	@echo $(OBJ_DEVICES) >> devices.xml
+	@echo $(DEVICES) >> devices.xml
 	@echo "</C1612-devicelist>" >> devices.xml
 
 devices_h: mk_devices_h.xsl devices.xml

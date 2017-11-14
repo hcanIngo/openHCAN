@@ -1,4 +1,4 @@
-# Makfile fuer BL
+# firmware bootloader
 # 
 include ../ARCH.inc
 

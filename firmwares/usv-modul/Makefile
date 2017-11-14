@@ -20,8 +20,11 @@ DEFINES = -DMCU_$(MCU) -DF_CPU=$(F_CPU) -DF_CAN=$(F_CAN) -DCAN_SPEED=$(CAN_SPEED
           -DCANIX_SYSLOG -DCANIX_HMS -DCANIX_RTS -DCANIX_EDS
 
 CFLAGS =  -mmcu=$(MCU) -Wall -Werror -Wstrict-prototypes -Os -mcall-prologues
+# clang:  CFLAGS  = --target=avr -march=$(MCU) -Wall -Werror -Wstrict-prototypes -Os
 CFLAGS += -I. -I../../canix -I../.. -I../../include
 CFLAGS += $(DEFINES)
+
+all: $(TARGET).hex
 
 $(TARGET).hex : $(TARGET).out 
 	$(OBJCOPY) -R .eeprom -O ihex $(TARGET).out $(TARGET).hex 
@@ -31,10 +34,8 @@ $(TARGET).out : $(OBJ)
 	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) -Wl,-Map,$(TARGET).map
 
 clean:
-	cd ../../canix; rm -f *.d *.lst
+	cd ../../canix; rm -f *.lst
 	rm -f *.map *.out *.hex
-
-all: $(TARGET).hex
 
 load: $(TARGET).hex
 	telican -s 853 -c 400 -e "flash $(TARGET).hex"

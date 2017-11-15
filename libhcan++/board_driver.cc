@@ -122,7 +122,6 @@ bool board_driver::exec_command (context &c, const string &command)
 			uptime -= hours * 3600;
 
 			int minutes = uptime / 60;
-			uptime -= minutes * 60;
 
 			cout << days << " days, "
 				<< hours << ":" << setw(2) << setfill ('0')

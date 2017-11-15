@@ -60,6 +60,8 @@ install:
 
 staticAnalyse: 
 	make cDienste xx="scan-build -o ./scanBuild make all -j4"
+	@# avr-clang notwendig:   make firmware xx="scan-build -o ./scanBuild make all -j4"
+	@# allSrc fuer alle umsetzen:   make cppDienste xx="scan-build -o ./scanBuild make allSrc -j4"
 
 strukturen:
 	cd xml; $(xx)
@@ -71,8 +73,8 @@ cDienste:
 	cd hcan4mqttpc; $(xx)
 
 cppDienste:	
-	cd libhcan++; test -d .depend || sudo echo "" > .depend; $(xx)
-	cd telican; test -d .depend || sudo echo "" > .depend; $(xx)
+	cd libhcan++; $(xx)
+	cd telican; $(xx)
 	cd libhcandata; test -d .depend || sudo echo "" > .depend; $(xx)
 	cd check_hcan; test -d .depend || sudo echo "" > .depend; $(xx)
 	cd hcanswd; test -d .depend || sudo echo "" > .depend; $(xx)

@@ -25,7 +25,6 @@ board_error::board_error (const string &s) :
 board_connection::board_connection (transport_connection &tcon,
 		uint16_t src, uint16_t dst, bool ignore_type, uint8_t arch) :
 	m_tcon(tcon),
-	m_driver(0),
 	m_src(src),
 	m_dst(dst)
 {

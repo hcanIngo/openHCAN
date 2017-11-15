@@ -78,23 +78,26 @@ static int transport_open(char* addr, int port)
 			res = res->ai_next;
 		}
 
+		if (NULL != result)
+		{
 #if defined(AF_INET6)
-		if (result->ai_family == AF_INET6)
-		{
-			address6.sin6_port = htons(port);
-			address6.sin6_family = family = AF_INET6;
-			address6.sin6_addr = ((struct sockaddr_in6*)(result->ai_addr))->sin6_addr;
-		}
-		else
+			if (result->ai_family == AF_INET6)
+			{
+				address6.sin6_port = htons(port);
+				address6.sin6_family = family = AF_INET6;
+				address6.sin6_addr = ((struct sockaddr_in6*)(result->ai_addr))->sin6_addr;
+			}
+			else
 #endif
-		if (result->ai_family == AF_INET)
-		{
-			address.sin_port = htons(port);
-			address.sin_family = family = AF_INET;
-			address.sin_addr = ((struct sockaddr_in*)(result->ai_addr))->sin_addr;
+			if (result->ai_family == AF_INET)
+			{
+				address.sin_port = htons(port);
+				address.sin_family = family = AF_INET;
+				address.sin_addr = ((struct sockaddr_in*)(result->ai_addr))->sin_addr;
+			}
+			else
+				rc = -1;
 		}
-		else
-			rc = -1;
 
 		freeaddrinfo(result);
 	}

@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <inttypes.h>
+#include <tr1/memory> // fuer shared_ptr
 
 using namespace std;
 
@@ -73,7 +74,7 @@ namespace hcan
 			virtual bool exec_command (context &c, const string &cmd);
 	};
 
-	typedef std::shared_ptr<board_driver> board_driver_p;
+	typedef std::tr1::shared_ptr<board_driver> board_driver_p;
 };
 
 // Experimentelles Feature

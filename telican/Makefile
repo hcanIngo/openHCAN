@@ -4,6 +4,7 @@
 
 TARGET = telican
 
+SRC = $(patsubst %.cc, %.cc , $(wildcard *.cc))
 OBJ = $(patsubst %.cc,%.o,$(wildcard *.cc))
 
 LD_FLAGS = -Wl,--export-dynamic -L ../libhcan++ \
@@ -27,6 +28,9 @@ $(TARGET):$(OBJ) libhcan++
 $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
+allSrc:
+	$(CXX) $(CXXFLAGS) -o $(SRC) -o $(TARGET) $(LD_FLAGS)
+	
 clean:
 	rm -f *.o $(TARGET)
 

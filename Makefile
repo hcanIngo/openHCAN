@@ -23,7 +23,6 @@ include ./ARCH.inc
 
 alles:
 	make clean
-	make dep
 	make all
 	make install
 	make tools xx="sudo make all"
@@ -37,10 +36,7 @@ clean:
 	make firmwareOhneEds xx="sudo make clean"
 	make tools xx="sudo make clean"
 	#
-	sudo find -type f -name ".depend" | xargs rm -f
-
-dep:
-	make cppDienste xx="sudo make dep"
+	@#sudo find -type f -name ".depend" | xargs rm -f
 
 all:
 	make strukturen xx="make all"
@@ -60,8 +56,11 @@ install:
 
 staticAnalyse: 
 	make cDienste xx="scan-build -o ./scanBuild make all -j4"
+	make cppDienste xx="scan-build -o ./scanBuild make allSrc -j4"
 	@# avr-clang notwendig:   make firmware xx="scan-build -o ./scanBuild make all -j4"
-	@# allSrc fuer alle umsetzen:   make cppDienste xx="scan-build -o ./scanBuild make allSrc -j4"
+	
+staticAnalyseClean:
+	sudo find -type f -name "scanBuild" | xargs rm -f
 
 strukturen:
 	cd xml; $(xx)
@@ -75,10 +74,10 @@ cDienste:
 cppDienste:	
 	cd libhcan++; $(xx)
 	cd telican; $(xx)
-	cd libhcandata; test -d .depend || sudo echo "" > .depend; $(xx)
-	cd check_hcan; test -d .depend || sudo echo "" > .depend; $(xx)
-	cd hcanswd; test -d .depend || sudo echo "" > .depend; $(xx)
-	cd hcandq; test -d .depend || sudo echo "" > .depend; $(xx)
+	cd libhcandata; $(xx)
+	cd check_hcan; $(xx)
+	cd hcanswd; $(xx)
+	cd hcandq; $(xx)
 
 firmware: 
 	cd hcanbl; $(xx) $(parm2)

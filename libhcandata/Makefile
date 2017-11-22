@@ -1,5 +1,9 @@
+# libhcandata
+#
 TARGET = libhcandata
-OBJ = file_format_v1.o data_file_writer.o data_storage.o data_file.o data_query.o
+
+SRC = $(patsubst %.cc, %.cc , $(wildcard *.cc))
+OBJ = $(patsubst %.cc,%.o,$(wildcard *.cc))
 
 CXX = clang
 
@@ -16,23 +20,14 @@ install:
 $(TARGET).so: $(OBJ)
 	$(CXX) -shared -o $@ -Wl,-soname,$(TARGET).so $(OBJ)
 
-$(TARGET).a: $(OBJ)
-	$(ARXX) rcs $@ $(OBJ)
-
 $(OBJ): %.o:%.cc
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
+	
+allSrc: 
+	$(CXX) $(CXXFLAGS) -o $(SRC) -shared -o $(TARGET).so -fPIC -Wl,-soname,$(TARGET).so -Wl,-Map=$(TARGET).map
 
 clean:
-	sudo rm -f *.o ./$(TARGET).*
-
-ctags:
-	ctags *.cc *.h
-
-dep:
-	(for i in *.cc; do echo; $(CXX) -M -MG $(INC) $$i; done) > .depend
+	sudo rm -f *.o $(TARGET).*
 
 doc:
 	doxygen
-
-include .depend
-

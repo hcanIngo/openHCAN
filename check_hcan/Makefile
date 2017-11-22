@@ -1,7 +1,10 @@
+# check_hcan
+#
 .PHONY: libhcan++
 
 TARGET = check_hcan
 OBJ = main.o
+SRC = main.cc
 
 LD_FLAGS = -Wl,--export-dynamic -L ../libhcan++ \
 		   -lhcan++ -lboost_program_options -lboost_regex \
@@ -9,8 +12,8 @@ LD_FLAGS = -Wl,--export-dynamic -L ../libhcan++ \
 
 CXX = g++
 
-INC = -I. -I.. -I../libhcan++ -I../include
-CXXFLAGS = -Wall -O2 $(INC)
+CXXFLAGS = -Wall -O2
+CXXFLAGS += -I. -I.. -I../libhcan++ -I../include
 CXXFLAGS += -Werror
 
 all: libhcan++ $(TARGET)
@@ -22,19 +25,15 @@ libhcan++:
 $(TARGET): $(OBJ) libhcan++
 	$(CXX) -o $@ $(OBJ) $(LD_FLAGS) 
 
+allSrc:
+	$(CXX) $(CXXFLAGS) -o $(SRC) -o $(TARGET) $(LD_FLAGS)
+
 clean:
-	rm -f *.o
+	rm -f *.o $(TARGET)
 	cd ../libhcan++ && make clean
 
-ctags:
-	ctags *.cc *.h ../libhcan++/*.cc ../libhcan++/*.h
 
 install:
 	#strip ./$(TARGET)
 	install $(TARGET) /usr/bin
-
-dep:
-	(for i in *.cc; do echo; $(CXX) -M -MG $(INC) $$i; done) > .depend
-
-include .depend
 

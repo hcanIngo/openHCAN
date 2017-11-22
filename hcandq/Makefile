@@ -1,19 +1,21 @@
+# hcandq
+#
 .PHONY: libhcan++ libhcandata
 
 TARGET = hcandq
 OBJ = main.o
+SRC = main.cc
 
 LD_FLAGS = -Wl,--export-dynamic \
-			-L ../libhcandata -lhcandata \
-			-L ../libhcan++ -lhcan++ \
-			-lboost_program_options \
-			-lboost_regex \
+			-L ../libhcandata -lhcandata -L ../libhcan++ -lhcan++ \
+			-lboost_program_options -lboost_regex \
 			`pkg-config libxml++-2.6 --libs`
 
 CXX = g++
 
-INC = -I. -I.. -I../libhcan++ -I../libhcandata -I../include
-CXXFLAGS = -Wall -Werror -O2 $(INC) -g
+CXXFLAGS  = -Wall -Werror -O2 
+CXXFLAGS += -I. -I.. -I../libhcan++ -I../libhcandata -I../include
+CXXFLAGS += -g
 
 all: libhcan++ libhcandata $(TARGET)
 
@@ -27,19 +29,14 @@ libhcandata:
 $(TARGET): $(OBJ) libhcan++ libhcandata
 	$(CXX) -o $@ $(OBJ) $(LD_FLAGS)
 
+allSrc:
+	$(CXX) $(CXXFLAGS) -o $(SRC) -o $(TARGET) $(LD_FLAGS)
+
 clean:
 	rm -f *.o
-	sudo rm -f ./$(TARGET)
-
-ctags:
-	ctags *.cc *.h ../libhcan++/*.cc ../libhcan++/*.h ../libhcandata/*.cc ../libhcandata/*.h
+	sudo rm -f $(TARGET)
 
 install:
 	strip $(TARGET)
 	sudo install $(TARGET) /usr/bin
-
-dep:
-	(for i in *.cc; do echo; $(CXX) -M -MG $(INC) $$i; done) > .depend
-
-include .depend
 

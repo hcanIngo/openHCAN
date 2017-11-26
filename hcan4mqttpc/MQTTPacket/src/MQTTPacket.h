@@ -88,19 +88,19 @@ typedef struct
 
 int MQTTstrlen(MQTTString mqttstring);
 
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTConnect.h"
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTPublish.h"
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTSubscribe.h"
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTUnsubscribe.h"
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTFormat.h"
+#include "MQTTConnect.h"
+#include "MQTTPublish.h"
+#include "MQTTSubscribe.h"
+#include "MQTTUnsubscribe.h"
+#include "MQTTFormat.h"
 
-int MQTTSerialize_ack(unsigned char* buf, int buflen, unsigned char type, unsigned char dup, unsigned short packetid);
-int MQTTDeserialize_ack(unsigned char* packettype, unsigned char* dup, unsigned short* packetid, unsigned char* buf, int buflen);
+DLLExport int MQTTSerialize_ack(unsigned char* buf, int buflen, unsigned char type, unsigned char dup, unsigned short packetid);
+DLLExport int MQTTDeserialize_ack(unsigned char* packettype, unsigned char* dup, unsigned short* packetid, unsigned char* buf, int buflen);
 
 int MQTTPacket_len(int rem_len);
-int MQTTPacket_equals(MQTTString* a, char* b);
+DLLExport int MQTTPacket_equals(MQTTString* a, char* b);
 
-int MQTTPacket_encode(unsigned char* buf, int length);
+DLLExport int MQTTPacket_encode(unsigned char* buf, int length);
 int MQTTPacket_decode(int (*getcharfn)(unsigned char*, int), int* value);
 int MQTTPacket_decodeBuf(unsigned char* buf, int* value);
 

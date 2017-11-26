@@ -1,17 +1,13 @@
 TARGET = hcan4mqttpc
 
-SRC  = main.c mqttClient.c mqttHcan.c
-SRC += ./MQTTPacket/src/MQTTConnectClient.c 
-SRC += ./MQTTPacket/src/MQTTSerializePublish.c
-SRC += ./MQTTPacket/src/MQTTPacket.c
-SRC += ./MQTTPacket/src/MQTTSubscribeClient.c
-SRC += ./MQTTPacket/src/MQTTDeserializePublish.c
+
+SRC = $(patsubst %.c, %.c , $(wildcard *.c))
+SRC += $(patsubst %.c, %.c , $(wildcard ./MQTTPacket/src/*.c))
 
 CXX = clang
 
 CFLAGS  = -I. -Wall -g -Os
-#CFLAGS += -DDEBUG
-#CFLAGS += -I ./MQTTPacket/src
+CFLAGS += -DDEBUG
 
 all:
 	$(CXX) $(CFLAGS) -o $(TARGET) $(SRC)

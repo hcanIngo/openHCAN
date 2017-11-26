@@ -17,8 +17,8 @@
 #if !defined(MQTTFORMAT_H)
 #define MQTTFORMAT_H
 
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTPacket.h"
-#include "../../../hcan4mqttpc/MQTTPacket/src/StackTrace.h"
+#include "StackTrace.h"
+#include "MQTTPacket.h"
 
 const char* MQTTPacket_getName(unsigned short packetid);
 int MQTTStringFormat_connect(char* strbuf, int strbuflen, MQTTPacket_connectData* data);

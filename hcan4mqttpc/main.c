@@ -53,7 +53,7 @@ int parse_options(int argc, char ** argv)
         {
             case 'd':
                 strncpy(device,optarg,sizeof(device)-1);
-                fprintf(stderr,"serial device: %s\n",device);
+                fprintf(stderr,"serial can device: %s\n",device);
                 break;
             case 'c':
                 strncpy(brokerHost_ip,optarg,sizeof(brokerHost_ip)-1);
@@ -68,6 +68,7 @@ int parse_options(int argc, char ** argv)
                 fprintf(stderr, "usage: %s [options]\n", basename(argv[0]));
                 fprintf(stderr, "  -d  can device (default: can0)\n");
                 fprintf(stderr, "  -c  connect to hcand IP \n");
+                fprintf(stderr, "  -D  aktiviere Debugausgaben\n");
                 return 1;
         }
     }

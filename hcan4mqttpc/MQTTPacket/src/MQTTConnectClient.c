@@ -14,9 +14,10 @@
  *    Ian Craggs - initial API and implementation and/or initial documentation
  *******************************************************************************/
 
+#include "MQTTPacket.h"
+#include "StackTrace.h"
+
 #include <string.h>
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTPacket.h"
-#include "../../../hcan4mqttpc/MQTTPacket/src/StackTrace.h"
 
 /**
   * Determines the length of the MQTT connect packet that would be produced using the supplied connect options.

@@ -7,7 +7,7 @@ Installationsabhaendigkeiten:
 
 2. mosquitto MQTT-Broker (Datenvermittlungszentrale):
 sudo apt-get install mosquitto
--> mosquitto startet automatisch.  Kontrolle: ps -A | grep mosq
+-> mosquitto startet automatisch.  Kontrolle: systemctl status mosquitto
 -----------------------------
 
 Testmoeglichkeit z.B. per MQTTLens 
@@ -16,5 +16,5 @@ Testmoeglichkeit z.B. per MQTTLens
 
 
 ...
-tt@bananapi:~/openHCAN/hcan4mqttc$ ./hcan4mqttc -D
+tt@bananapi:~/openHCAN/hcan4mqttcp$ ./hcan4mqttpc -D
 ...

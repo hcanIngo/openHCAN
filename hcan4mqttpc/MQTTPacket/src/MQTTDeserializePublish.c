@@ -14,9 +14,9 @@
  *    Ian Craggs - initial API and implementation and/or initial documentation
  *******************************************************************************/
 
+#include "StackTrace.h"
+#include "MQTTPacket.h"
 #include <string.h>
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTPacket.h"
-#include "../../../hcan4mqttpc/MQTTPacket/src/StackTrace.h"
 
 #define min(a, b) ((a < b) ? 1 : 0)
 

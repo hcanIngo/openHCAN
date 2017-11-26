@@ -15,9 +15,10 @@
  *    Ian Craggs - fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=453144
  *******************************************************************************/
 
+#include "MQTTPacket.h"
+#include "StackTrace.h"
+
 #include <string.h>
-#include "../../../hcan4mqttpc/MQTTPacket/src/MQTTPacket.h"
-#include "../../../hcan4mqttpc/MQTTPacket/src/StackTrace.h"
 
 
 /**

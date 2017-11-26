@@ -1,0 +1,15 @@
+[Unit]
+Description=OpenHCAN: Homeautomation CAN (Systemd)
+
+[Service]
+Type=forking
+GuessMainPID=yes
+ExecStart=/home/tt/startHcanDienste.sh
+ExecStop=/usr/bin/kill -SIGKILL $MAINPID
+ExecStopPost=
+User=tt
+Group=daemon
+WorkingDirectory=/home/tt
+
+[Install]
+WantedBy=multi-user.target

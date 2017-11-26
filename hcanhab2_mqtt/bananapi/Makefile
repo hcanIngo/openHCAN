@@ -1,15 +1,20 @@
 # bananapi (mit Armbian)
+#
 include $(HCANHAB_DIR)/MakefileDefines.inc
 
 START_SYSTEM = Systemd
 
 include $(HCANHAB_DIR)/bananapi/$(START_SYSTEM)/Makefile
 
+SCP_ZIEL_DIR = $(ZIEL_USER)@$(ZIEL_PC):/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
+
 all:
+	@# Voraussetzung: ZIEL_PC = localhost  ->  make all
+	@# 
 	make cleanZielOrdner
 	@#
 	cd $(HCANHAB_DIR)/localhost/; make unzip_openhab_installation
-	cd $(HCANHAB_DIR)/localhost/; make mv to=/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
+	cd $(HCANHAB_DIR)/localhost/; make moveIt OHInstZiel=/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
 	@#
 	make openhab_start_withScreen
 	make autostart
@@ -25,11 +30,11 @@ cleanZielOrdner:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) rm -f -R /home/$(ZIEL_USER)/$(ZIEL_ORDNER)
 
 install_oracle_arm_jre:
-	@#cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u71-linux-arm32-vfp-hflt.tar.gz
-	cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u131-linux-arm32-vfp-hflt.tar.gz
+	@#cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u131-linux-arm32-vfp-hflt.tar.gz
+	cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u151-linux-arm32-vfp-hflt.tar.gz
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/jdk1.8.0
 	#$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/myOpenHabInstallation
-	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_131/* $(SCP_ZIEL_DIR)/../jdk1.8.0
+	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_151/* $(SCP_ZIEL_DIR)/../jdk1.8.0
 	# Falls noetig, auf dem Bananapi: sudo chmod 755 /home/tt/jdk1.8.0/*
 
 openhab_start_withScreen:

@@ -1,6 +1,6 @@
 # main
+#
 include ./MakefileDefines.inc
-
 include $(HCANHAB_DIR)/$(ZIEL_PC)/Makefile
 
 # epiphany-browser, firefox, chromium-browser
@@ -8,7 +8,6 @@ BROWSER = firefox
 #URL = http://$(ZIEL_PC):8080/classicui/app?sitemap=hcan
 URL = http://$(ZIEL_PC):8080/basicui/app?sitemap=hcan
 # http://$(ZIEL_PC):8080/ui/index.html  # zur Konfiguration
-
 
 run_webclient: 
 	$(BROWSER) $(URL)
@@ -24,11 +23,12 @@ generateHabHcan:
 	
 installHabHcan:	
 	# persoenliche conf holen:
+	mkdir -p ./staticConfigurations/conf_templates
 	$(_SCP) $(CONF)/* ./staticConfigurations/conf_templates/
 	@#
 	make generateHabHcan
 	@#
-	# persoenliche nochmal conf holen:
+	# persoenliche conf nochmal holen:
 	$(_SCP) $(CONF)/* ./staticConfigurations/conf_templates/
 	@#
 	# statische allgemein gueltige conf holen:  
@@ -49,8 +49,6 @@ installationXml4telican:
 	test -d /etc/hcan || sudo mkdir /etc/hcan 
 	sudo cp $(CONF)/$(HCAN_INSTALLATION) /etc/hcan/
 
-# TODO: wird nicht geleert vor der Neuerstellung:  hcanhab2_mqtt/staticConfigurations/conf_templates
-# TODO: was ist mit dem Folgendem: ?
 sInstallHabHcan_onlyStaticConf:	
 	# persoenliche conf holen:
 	$(_SCP) $(CONF)/*.items ./staticConfigurations/conf_templates/

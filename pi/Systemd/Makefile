@@ -62,7 +62,7 @@ pwMosq_1:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo mv /home/$(ZIEL_USER)/pwmosq.txt /etc/mosquitto/pwmosq.txt
 pwMosq_2: 
 	# Eintrag einfuegen, sodass die pw-Datei verwendet wird: 
-	$(_SCP) ../mosquitto_pw.conf $(ZIEL_USER)@$(ZIEL_PC):/home/$(ZIEL_USER)/
+	$(_SCP) ./mosquitto_pw.conf $(ZIEL_USER)@$(ZIEL_PC):/home/$(ZIEL_USER)/
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo mv /home/$(ZIEL_USER)/mosquitto_pw.conf /etc/mosquitto/conf.d/
 	# Kontrolle
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) less /etc/mosquitto/conf.d/mosquitto_pw.conf

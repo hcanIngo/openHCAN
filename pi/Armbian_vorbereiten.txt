@@ -5,9 +5,9 @@ https://dl.armbian.com/bananapi/nightly/  Armbian_5.34.171121_Bananapi_Debian_st
 SD-Card vorbereiten: 
 sudo dd if=/home/ingo/Downloads/Armbian_5.34.171121_Bananapi_Debian_stretch_next_4.13.14.img of=/dev/mmcblk0 bs=1M && sync
 ---
- default user=root passwd=1234
+default user=root passwd=1234
 ssh root@bananapi
- automatisch per Nachfrage: passwd fuer root; adduser tt;   pw=t*t
+automatisch per Nachfrage: passwd fuer root; adduser tt
 
 logout
 ##################

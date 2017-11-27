@@ -8,10 +8,10 @@ OBJ = $(patsubst %.cc,%.o,$(wildcard *.cc))
 CXX = g++ #-m32
 #CXXFLAGS = -Wall
 #CXXFLAGS += -O0   # als 64-Bit-Prozess fuehrt -O2 zum Segmentation fault
-## Debug aktivieren:	CXXFLAGS += -g
+#CXXFLAGS += -g    # Debug aktivieren
 CXXFLAGS += -I.. -I. -I../include `pkg-config libxml++-2.6 --cflags`
-#CXXFLAGS += -Werror
-#CXXFLAGS += -fPIC
+CXXFLAGS += -Werror
+CXXFLAGS += -fPIC
 
 all: $(TARGET).so
 

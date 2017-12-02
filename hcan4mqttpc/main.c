@@ -67,7 +67,7 @@ int parse_options(int argc, char ** argv)
             default:
                 fprintf(stderr, "usage: %s [options]\n", basename(argv[0]));
                 fprintf(stderr, "  -d  can device (default: can0)\n");
-                fprintf(stderr, "  -c  connect to hcand IP \n");
+                fprintf(stderr, "  -c  connect to MQTT-Broker-Host IP\n");
                 fprintf(stderr, "  -D  aktiviere Debugausgaben\n");
                 return 1;
         }

@@ -1,0 +1,11 @@
+// Statische Ruleanteile:
+
+rule "Startup"
+when 
+	System started
+then
+	createTimer(now.plusSeconds(5)) [|
+		logInfo("openHab", "rebooted")
+		say("openHab rebooted")
+	]
+end

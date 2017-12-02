@@ -1,0 +1,15 @@
+// Statische Sitemapanteile:
+Frame label="♫ Media" {
+	Selection item=Radio_Station label="Web-Radio" icon="network" mappings=[0=aus, 1=HR3, 2=SWR3, 3=FFH, 4=DLFw, 5=DLFk, 6=DLF, 7=NdrBS, 8="doorbell.mp3"]
+}
+
+Frame {
+	Text label="Zusammenfassung" icon="pie" {
+		Switch item=Lampen mappings=[OFF="alle aus"]
+		Switch item=Sonstige icon="socket" mappings=[OFF="alle aus"]
+		Text item=Temperaturen
+		Group item=Fenster
+		Group item=Rolladen
+		Group item=Heizungen
+	}
+}

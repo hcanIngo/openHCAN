@@ -20,3 +20,10 @@ mplayer -playlist http://mp3-live.swr3.de/swr3_m.m3u   // stereo test
 
 sudo alsamixer // Lautstaerke einstellen (M->Mute off)
 ---
+Zeitzone einstellen: 
+sudo dpkg-reconfigure tzdata
+sudo apt-get install ntpdate
+sudo ntpdate -u de.pool.ntp.org
+---
+Manuell:
+sudo date 11172013

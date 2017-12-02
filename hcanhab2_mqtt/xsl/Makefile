@@ -2,8 +2,7 @@ generateHabHcan:
 	make cleanHabHcan; make HabHcan.sitemap; make all.items; make all.rules
 
 cleanHabHcan:
-	rm -f ../generated/*
-	rm -f ../generated
+	rm -fR ../generated
 
 HabHcan.sitemap: mk_HabHcan_sitemap.xsl $(HCAN_INSTALLATION)
 	mkdir -p ../generated

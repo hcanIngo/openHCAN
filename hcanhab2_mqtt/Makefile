@@ -14,7 +14,7 @@ run_webclient:
 
 ########################
 clean:
-	rm -f ./staticConfigurations/conf_templates/*
+	rm -fR ./staticConfigurations/conf_templates
 	cd xsl; make cleanHabHcan
 
 generateHabHcan: 

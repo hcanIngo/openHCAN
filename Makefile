@@ -35,6 +35,7 @@ clean:
 	make firmware xx="sudo make clean" parm2=MCU=atmega644
 	make firmwareOhneEds xx="sudo make clean"
 	make tools xx="sudo make clean"
+	cd hcanhab2_mqtt; make clean
 	#
 	@#sudo find -type f -name ".depend" | xargs rm -f
 

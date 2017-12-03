@@ -4,7 +4,7 @@ openHAB2 für openHCAN verwenden - [hcanhab](https://github.com/hcanIngo/openHCA
 1. Den Bananapi einrichten (siehe [pi](https://github.com/hcanIngo/openHCAN/tree/master/pi/Systemd)).
 
 
-2. conf-Ordner in Verzeichnis xy legen und mindestens folgende Dateien anpassen:
+2. conf-Ordner (=BeispielKonfiguration) in Verzeichnis xy legen und mindestens folgende Dateien anpassen:
 	- Openhab-Installationsdateien besorgen (http://www.openhab.org/downloads.html)
 	- [myconf.inc](https://github.com/hcanIngo/openHCAN/tree/master/hcanhab2_mqtt/BeispielKonfiguration/myconf.inc)
 	- [installation.xml nach vorgegebenen Schema anpassen](https://github.com/hcanIngo/openHCAN/tree/master/hcanhab2_mqtt/BeispielKonfiguration/installation.xml)

@@ -1,6 +1,4 @@
-[openHAB2](https://github.com/hcanIngo/openHCAN/wiki/hcanhab)
-
-openHAB2 für openHCAN verwenden: 
+openHAB2 für openHCAN verwenden - [hcanhab](https://github.com/hcanIngo/openHCAN/wiki/hcanhab)
 --------------------------------
 
 1. Den Bananapi einrichten (siehe [pi](https://github.com/hcanIngo/openHCAN/tree/master/pi/Systemd)).

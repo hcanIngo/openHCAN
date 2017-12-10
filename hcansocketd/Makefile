@@ -1,7 +1,7 @@
 TARGET = hcansocketd
 SRC = main.c
 
-CXX = clang
+CXX = gcc
 CFLAGS = -O2 -I. -Wall -g #-DDEBUG0
 
 all:

@@ -1,7 +1,7 @@
 TARGET = hcanaddressd
 SRC = main.c socket.c
 
-CXX = clang
+CXX = gcc
 CFLAGS = -O2 -I. -Wall -g #-DDEBUG0
 
 all:

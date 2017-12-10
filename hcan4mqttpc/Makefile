@@ -4,7 +4,7 @@ TARGET = hcan4mqttpc
 SRC = $(patsubst %.c, %.c , $(wildcard *.c))
 SRC += $(patsubst %.c, %.c , $(wildcard ./MQTTPacket/src/*.c))
 
-CXX = clang
+CXX = gcc
 
 CFLAGS  = -I. -Wall -g -Os
 CFLAGS += -DDEBUG

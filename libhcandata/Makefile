@@ -5,7 +5,7 @@ TARGET = libhcandata
 SRC = $(patsubst %.cc, %.cc , $(wildcard *.cc))
 OBJ = $(patsubst %.cc,%.o,$(wildcard *.cc))
 
-CXX = clang
+CXX = g++
 
 INC = -I.. -I. -I../include
 CXXFLAGS = -Wall -O2 $(INC) -fPIC #-Werror

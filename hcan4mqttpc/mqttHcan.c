@@ -21,6 +21,7 @@
 
 #include "../include/hcan-def.h"
 #include <linux/can.h>
+#include <string.h>
 #include "../hcan4mqttpc/mqttClient.h"
 
 static bool is(const char *topic, const char *key)

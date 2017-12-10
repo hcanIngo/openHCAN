@@ -135,9 +135,9 @@ static void exitMqtt(const char* msg)
 }
 
 // message: cb< broker (Empfangsbearbeitung einer der abonnierten Nachrichten)
-void createMsg4cb(unsigned char* msg)
+void createMsg4cb(char* msg)
 {
-	int msgLen = getMessage4cb ((char *)msg, &mqttRxBuf[mqttBufWIdx]);
+	int msgLen = getMessage4cb (msg, &mqttRxBuf[mqttBufWIdx]);
 	if (msgLen) // eine bekannte Msg
 	{
 		//mqttRxBuf[mqttBufWIdx].can_id = 0x108DFF; // src: 511, dst: 35=HCAN_MULTICAST_CONTROL, proto: 1=SFP, Prio:0=high
@@ -266,7 +266,7 @@ void recvMqttMsg(void)
 		{
 			// got message:
 			TRACE("cb<--msg form mqtt-broker: %.*s\n", payloadlen_rx, payload_rx);
-			createMsg4cb(payload_rx); // mqttBufWIdx++, falls msg 4 cb
+			createMsg4cb((char*)payload_rx); // mqttBufWIdx++, falls msg 4 cb
 		}
 	}
 }

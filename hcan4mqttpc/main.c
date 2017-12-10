@@ -119,7 +119,9 @@ int main(int argc, char ** argv)
        Mit Empfang von "HCAN_HES_DEVICE_STATES_REQUEST"
        senden alle C1612-Controller alle ihre konfigurierten
        Lampen-, Sonstige-, Rolladen-, Heizungs- Zustaende. */
-    createMsg4cb((unsigned char*)"RQ");
+    char msg[3];
+    strncpy(msg, "RQ", sizeof msg);
+    createMsg4cb(msg);
 
     fd_set recv_fdset;
     fd_set send_fdset;

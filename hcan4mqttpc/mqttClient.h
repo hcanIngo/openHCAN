@@ -64,7 +64,7 @@ extern uint8_t debug;
 #endif
 
 void initMqtt(char *brokerHost_ip);
-void createMsg4cb(unsigned char* msg);
+void createMsg4cb(char* msg);
 int publishMqttMsg(char* pubTopic, const unsigned char* payload, const int payloadlen);
 void recvMqttMsg(void);
 void endMqtt(void);

@@ -14,13 +14,16 @@ openHCAN wurde aus der Motivation heraus entwickelt, eine freie (im Gegensatz zu
 
 Den Code direkt aufs eigene System:  git clone https://github.com/hcanIngo/openHCAN.git 
 
-[Entwicklungsumgebung einrichten](https://github.com/hcanIngo/openHCAN/wiki/entwicklungsumgebung_installieren), [Systemueberblick](https://github.com/hcanIngo/openHCAN/wiki/systemueberblick), [News](https://github.com/hcanIngo/openHCAN/wiki), [Terminologie](https://github.com/hcanIngo/openHCAN/wiki/terminologie), [Bezugsquellen](https://github.com/hcanIngo/openHCAN/wiki/bezugsquellen)
+[Entwicklungsumgebung](https://github.com/hcanIngo/openHCAN/wiki/entwicklungsumgebung_installieren), 
+[Systemueberblick](https://github.com/hcanIngo/openHCAN/wiki/systemueberblick), 
+[News](https://github.com/hcanIngo/openHCAN/wiki), 
+[Terminologie](https://github.com/hcanIngo/openHCAN/wiki/terminologie), 
+[Bezugsquellen](https://github.com/hcanIngo/openHCAN/wiki/bezugsquellen)
 
 
 [![logo](https://cloud.githubusercontent.com/assets/4243148/11906546/aa26f62e-a5cd-11e5-9f51-9ae772fecefe.jpg)](http://hcaningo.github.io/openHCAN/)
 
 [Mailingliste](https://groups.google.com/forum/?hl=de#!forum/openhcan) | 
-[Forum](http://openhcan.org) | 
 [Wiki](https://github.com/hcanIngo/openHCAN/wiki) | 
 [Quellen](https://github.com/hcanIngo/openHCAN) | 
 [Webseite](http://hcaningo.github.io/openHCAN/)

@@ -54,7 +54,7 @@ clean:
 	hcan-protocol-referenz.txt eds.sql \
 	hcan-def.h hcan_transport.h hcan_transport.cc
 	#
-	cd ../include; sudo rm -f hcan-def.h
+	cd ../include; sudo rm -f hcan-def.h eds-structs.h oap-def.h
 	cd ../libhcan++; sudo rm -f hcan_transport.h hcan_transport.cc
 
 .PHONY: validate

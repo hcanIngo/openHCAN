@@ -101,8 +101,6 @@ int main(int argc, char ** argv)
 {
     int nwritten;
 
-    struct timeval last_time;
-
     strcpy(hcand_ip, "127.0.0.1");
     strcpy(device, "can0");
 
@@ -169,7 +167,6 @@ int main(int argc, char ** argv)
 
     // Durchsatz zaehlen
     packet_sent = 0;
-    last_time = get_time();
 
     fd_set recv_fdset;
     fd_set send_fdset;

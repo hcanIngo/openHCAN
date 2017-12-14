@@ -138,8 +138,9 @@ static inline uint8_t getMittlererWaermebedarf(device_data_zentralheizungspumpe 
 	}
 	else
 	{
-		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("WB=%d, i=%d"), (uint8_t) (gesamtWaermebedarf / i), i);
-		return (uint8_t) gesamtWaermebedarf / i;
+		uint8_t mittlereWaermebedarf = gesamtWaermebedarf / i;
+		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("WB_%d/%i=%d"), gesamtWaermebedarf, i, mittlereWaermebedarf);
+		return mittlereWaermebedarf;
 	}
 }
 

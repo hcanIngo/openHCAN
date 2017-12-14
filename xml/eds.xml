@@ -329,12 +329,11 @@
 		rolladen_soll_position =  40 (Rollladen Sonnenschutzposition)
 	</block>
 
-	<block type="28" name="zentralheizungspumpe" size="3">
-		<field datatype="uint8_t" name="port" pos="0" />
-		<field datatype="uint8_t" name="feature" pos="1" />
-		<field datatype="uint8_t" name="gruppe" pos="2" />
+	<block type="28" name="zentralheizungspumpe" size="2">
+		<field datatype="uint8_t" name="feature" pos="0" />
+		<field datatype="uint8_t" name="gruppe" pos="1" />
 		Ein zentralheizungspumpe-Device wird zum Schalten 
-		der Zentralheizungspumpe u"ber Powerport verwendet.
+		der zentralen Heizkreispumpe u"ber Powerport verwendet.
 	</block>
 	
 	<block type="29" name="powerportAutomat" size="8">

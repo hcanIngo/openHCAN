@@ -22,6 +22,7 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 	switch (arch)
 	{
 		case HCAN_ARCH_ATMEGA32 :
+		case HCAN_COMP_ARCH_ATMEGA32 :
 			switch (type)
 			{
 				case 4 : // Controllerboard-1612 v01
@@ -41,6 +42,7 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 			};
 
 			case HCAN_ARCH_ATMEGA644P :
+			case HCAN_COMP_ARCH_ATMEGA644P :
 				switch (type)
 				{
 					case 4 : // Controllerboard-1612 v01

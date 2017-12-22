@@ -1,4 +1,4 @@
-#include <atmega32_board_driver.h>
+#include <atmega_board_driver.h>
 #include <board_driver.h>
 #include <board_connection.h>
 #include <transport_connection.h>
@@ -12,17 +12,17 @@ using namespace hcan;
 using namespace std;
 
 
-atmega32_board_driver::atmega32_board_driver (board_connection &bcon, uint16_t page_size) :
+atmega_board_driver::atmega_board_driver (board_connection &bcon, uint16_t page_size) :
 	board_driver(bcon)
 {
 	m_page_size = page_size;
 }
 
-atmega32_board_driver::~atmega32_board_driver()
+atmega_board_driver::~atmega_board_driver()
 {
 }
 
-bool atmega32_board_driver::show_help ()
+bool atmega_board_driver::show_help ()
 {
 	board_driver::show_help();
 
@@ -32,7 +32,7 @@ bool atmega32_board_driver::show_help ()
 	return true;
 }
 
-bool atmega32_board_driver::exec_command (context &c, const string &command)
+bool atmega_board_driver::exec_command (context &c, const string &command)
 {
 	if (board_driver::exec_command(c,command))
 		return true;

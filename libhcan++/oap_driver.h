@@ -1,7 +1,7 @@
 #ifndef OAP_DRIVER_H
 #define OAP_DRIVER_H
 
-#include <atmega32_board_driver.h>
+#include <atmega_board_driver.h>
 #include <libhcan++/traceable_error.h>
 #include <libhcan++/eds_connection.h>
 #include <libhcan++/oap_access.h>

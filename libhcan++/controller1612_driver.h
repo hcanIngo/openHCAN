@@ -1,7 +1,7 @@
 #ifndef CONTROLLER1612_DRIVER_H
 #define CONTROLLER1612_DRIVER_H
 
-#include <atmega32_board_driver.h>
+#include <atmega_board_driver.h>
 #include <libhcan++/traceable_error.h>
 #include <libhcan++/eds_connection.h>
 #include <libhcan++/oap_driver.h>
@@ -14,7 +14,7 @@ namespace hcan
 			controller1612_error(const string &);
 	};
 
-	class controller1612_driver : public atmega32_board_driver 
+	class controller1612_driver : public atmega_board_driver 
 	{
 		protected:
 			eds_connection m_econ;

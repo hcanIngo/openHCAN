@@ -2,8 +2,7 @@
 #include <driver_factory.h>
 
 #include <board_driver.h>
-#include <atmega8_board_driver.h>
-#include <atmega32_board_driver.h>
+#include <atmega_board_driver.h>
 #include <controller1612_driver.h>
 #include <userpanel_driver.h>
 #include <usv_driver.h>
@@ -38,7 +37,7 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 				default :
 					cerr << "warning: unknown board type id " << int(type)
 						<< ", using generic atmega32 driver..." << endl;
-					return board_driver_p(new atmega32_board_driver(bcon));
+					return board_driver_p(new atmega_board_driver(bcon));
 			};
 
 			case HCAN_ARCH_ATMEGA644P :
@@ -58,7 +57,7 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 					default :
 						cerr << "warning: unknown board type id " << int(type)
 							<< ", using generic atmega644p driver..." << endl;
-						return board_driver_p(new atmega32_board_driver(bcon));
+						return board_driver_p(new atmega_board_driver(bcon));
 				};
 
 				case HCAN_ARCH_ATMEGA328P :
@@ -77,7 +76,7 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 						default :
 							cerr << "warning: unknown board type id " << int(type)
 								<< ", using generic atmega328p driver..." << endl;
-							return board_driver_p(new atmega32_board_driver(bcon));
+							return board_driver_p(new atmega_board_driver(bcon));
 					};
 
 		default : // unknown arch

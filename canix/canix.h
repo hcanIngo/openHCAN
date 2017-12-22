@@ -17,7 +17,7 @@
  *
  *  (c) 2006 by Martin Haller, mah (at) iuse (dot) org
  *
- *  Adapted for ATmega328 and ATmega644:
+ *  Adapted for ATmega328p and ATmega644p:
  *  (c) 2010/2017 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
  */
 

@@ -1,7 +1,7 @@
 #ifndef USV_DRIVER_H
 #define USV_DRIVER_H
 
-#include <atmega32_board_driver.h>
+#include <atmega_board_driver.h>
 #include <libhcan++/traceable_error.h>
 
 namespace hcan
@@ -12,7 +12,7 @@ namespace hcan
 			usv_error(const string &);
 	};
 
-	class usv_driver : public atmega32_board_driver 
+	class usv_driver : public atmega_board_driver 
 	{
 		private:
 			void print_U_stats(uint16_t n, const string &name);

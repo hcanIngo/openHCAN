@@ -13,9 +13,9 @@ adr = 1022
 OBJCOPY = avr-objcopy
 CXX = avr-gcc
 
-ifeq ($(MCU),atmega328)
+ifeq ($(MCU),atmega328p)
 	F_CPU = 16000000
-else # MCU_atmega32 || MCU_atmega644
+else # MCU_atmega32 || MCU_atmega644p
 	F_CPU = 3686400
 endif
 

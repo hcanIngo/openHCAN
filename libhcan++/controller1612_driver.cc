@@ -19,7 +19,7 @@ controller1612_error::controller1612_error(const string &s) :
 }
 
 controller1612_driver::controller1612_driver (board_connection &bcon, uint16_t page_size) :
-	atmega32_board_driver(bcon, page_size),
+	atmega_board_driver(bcon, page_size),
 	m_econ(bcon),
 	m_oap_driver(bcon)
 {
@@ -31,7 +31,7 @@ controller1612_driver::~controller1612_driver()
 
 bool controller1612_driver::show_help ()
 {
-	atmega32_board_driver::show_help();
+	atmega_board_driver::show_help();
 	hcan::eds_show_help();
 	m_oap_driver.show_help();
 
@@ -48,7 +48,7 @@ bool controller1612_driver::show_help ()
 
 bool controller1612_driver::exec_command (context &c, const string &command)
 {
-	if (atmega32_board_driver::exec_command(c, command))
+	if (atmega_board_driver::exec_command(c, command))
 		return true;
 
 	if (hcan::eds_exec_cmd(m_bcon, m_econ, c, command))

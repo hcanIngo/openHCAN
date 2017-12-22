@@ -216,7 +216,7 @@
 			<message name="BOOT_RESETFLAG_LOG" id="1"
 				description="Meldet den Wert des Resetflag-Registers direkt nach dem Booten"
 				details="1: Power-on Reset 2: External Reset 4: Brown-Out Reset 8: Watchdog Reset">
-				<param pos="0" name="flag" description="siehe Atmega8 Referenz-Handbuch, S.39" />
+				<param pos="0" name="flag" description="siehe Atmega Referenz-Handbuch" />
 			</message>
 			<message name="FIRMWARE_CRC16_ERROR" id="2"
 				description="Meldet eine fehlerhafte CRC16 Firmware Pruefsumme">

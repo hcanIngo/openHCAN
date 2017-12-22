@@ -8,11 +8,16 @@ OBJCOPY = avr-objcopy
 TARGET = main
 SRC    = $(TARGET).c
 		 
-F_CPU   = 3686400
+ifeq ($(MCU),atmega328p)
+	F_CPU = 16000000
+else # MCU_atmega32 || MCU_atmega644p
+	F_CPU = 3686400
+endif
+
 F_CAN	= 8000000
 CAN_SPEED = 125000
 
-ifeq ($(MCU),atmega644)
+ifeq ($(MCU),atmega644p)
 	# atmega644 (64kbytes flash = 0 bis FFFF)
 	# 0xF000 for firmware, 2048 words boot size
 	MT_BOOTLOADER_ADDRESS = F000
@@ -21,7 +26,7 @@ ifeq ($(MCU),atmega644)
 	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:r:flash.hex:r
 	AVRDUDE_ERASE_EEPROM = avrdude -c avrispmkII -p m644p -P usb -e
 else
-	# atmega32 oder atmega328 (32kbytes flash = 0 bis 7FFF)
+	# atmega32 oder atmega328p (32kbytes flash = 0 bis 7FFF)
 	# 0x7000 for firmware,  2048 words boot size
 	MT_BOOTLOADER_ADDRESS = 7000
 	#JTAG-Enable: AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0x80:m -U lfuse:w:0x0f:m

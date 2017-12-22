@@ -1,7 +1,7 @@
 #ifndef USERPANEL_DRIVER_H
 #define USERPANEL_DRIVER_H
 
-#include <atmega32_board_driver.h>
+#include <atmega_board_driver.h>
 #include <libhcan++/traceable_error.h>
 #include <libhcan++/eds_connection.h>
 
@@ -13,7 +13,7 @@ namespace hcan
 			userpanel_error(const string &);
 	};
 
-	class userpanel_driver : public atmega32_board_driver 
+	class userpanel_driver : public atmega_board_driver 
 	{
 		private:
 			eds_connection m_econ;

@@ -5,12 +5,12 @@ include ../../ARCH.inc
 
 TARGET = main
 
-ifeq ($(MCU),atmega644)
-	# atmega644 (64kbytes flash = 0 bis FFFF)
+ifeq ($(MCU),atmega644p)
+	# atmega644p (64kbytes flash = 0 bis FFFF)
 	# 0xF000 for firmware, 2048 words boot size
 	AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:w:"UI_$(MCU)/$(TARGET).hex" -U hfuse:w:0xD0:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
 else
-	# atmega32 oder atmega328 (32kbytes flash = 0 bis 7FFF)
+	# atmega32 oder atmega328p (32kbytes flash = 0 bis 7FFF)
 	# 0x7000 for firmware,  2048 words boot size
 	AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:w:"UI_$(MCU)/$(TARGET).hex" -U hfuse:w:0xC0:m -U lfuse:w:0x0f:m
 endif
@@ -21,9 +21,9 @@ SRC += $(patsubst %.c, %.c , $(wildcard ../../canix/*.c))
 OBJCOPY = avr-objcopy
 CXX = avr-gcc
 
-ifeq ($(MCU),atmega328)
+ifeq ($(MCU),atmega328p)
 	F_CPU = 16000000
-else # MCU_atmega32 || MCU_atmega644
+else # MCU_atmega32 || MCU_atmega644p
 	F_CPU = 3686400
 endif
 

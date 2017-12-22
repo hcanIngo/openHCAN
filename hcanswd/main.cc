@@ -65,13 +65,22 @@ string generate_filename()
 	return string(s) + ".hdump";
 }
 
-void run_archive_mode(const string &dir)
+void run_archive_mode(const string &dir, bool mkdir)
 {
 	while (! signal_quit)
 	{
 		transport_connection tp(inet_addr("127.0.0.1"));
 
 		const string filename = generate_filename();
+		
+		if(mkdir)
+		{
+			int exitcode = system(("mkdir -p " +  dir).c_str());
+			if(exitcode != 0)
+			{
+				throw traceable_error("Failed to create directory");
+			}
+		}
 
 		data_file_writer dfw(dir + "/" + filename);
 		while (! (signal_quit || signal_reload))
@@ -124,7 +133,10 @@ void handle_given_options (const po::parsed_options &options,
 	{
 		if (map.count("dir"))
 		{
-			run_archive_mode(map["dir"].as<string>());
+			bool mkdir = false;
+			if(map.count("mkdir"))
+				mkdir = true;
+			run_archive_mode(map["dir"].as<string>(), mkdir);
 		}
 		else
 			throw traceable_error("--dir missing");
@@ -159,6 +171,7 @@ int main(int argc, char *argv[])
 			("archive-mode", "Archive mode logs to directory ")
 			("out,o", po::value<string>(), "standard mode: file to store data to")
 			("dir", po::value<string>(), "archive mode: directory to store data to")
+			("mkdir", "Create Directory when not present")
 			;
 
 		po::options_description config_file_options;

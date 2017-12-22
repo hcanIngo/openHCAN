@@ -12,14 +12,14 @@ openHAB2 für openHCAN verwenden - [hcanhab](https://github.com/hcanIngo/openHCA
 
 3. Im MakefileDefines.inc folgende Einstellungen vornehmen: 
 	- CONF = xy/conf  einstellen (wo die eigene "openHCAN/hcanhab2_mqtt/BeispielKonfiguration/" liegt). 
-	- ZIEL_PC = localhost   oder   ZIEL_PC = bananian  waehlen
-	- Fuer localhost den ZIEL_USER anpassen
+	- ZIEL_PC = localhost   oder   ZIEL_PC = bananapi  waehlen
+	- Fuer localhost: ZIEL_USER anpassen
 
 
 4. Makefile
-	- make all
+	- make all  @  openHCAN/hcanhab2_mqtt/
 
 
-4. Openhab starten (per Makefile ausführen):
-	- make start     (mit log-Datei: make start > ~/tmp/openhabMeldungen.txt)
-	- make run_webclient / oder z.B. Habdroid-App verwenden
+5. Openhab starten (per Makefile ausführen):
+	- Fuer localhost: make start     (mit log-Datei: make start > ~/tmp/openhabMeldungen.txt)
+	- make run_webclient   oder z.B. Habdroid-App verwenden

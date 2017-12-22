@@ -18,10 +18,11 @@
 ##  (c) 2017 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
 ##############################################################################
 
-# Choose firmware architecture atmega32 or atmega644 (for C1612 and UI): 
-######################
-export MCU = atmega644
-######################
+# Choose firmware architecture atmega328p, atmega32 or atmega644p (for C1612 and UI):
+# see attribute "__AVR_ATmega644P__", ...
+#######################
+export MCU = atmega644p
+#######################
 
 # Choose CAN-Server-IP for load firmware (eg. 192.168.1.42)
 ###########################

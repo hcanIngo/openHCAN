@@ -54,40 +54,11 @@
 ////#include <avr/signal.h>
 #include <avr/wdt.h>
 
-#include "chipdef.h"
 #include "mcp2515.h"
 #include "mcp2515_defs.h"
 
 #include "canix.h"
 #include "tools.h"
-
-#ifdef MCU_atmega8
-
-#define SPI_PORT_DDR DDRB
-#define SPI_PORT     PORTB
-#define SPI_MISO    4
-#define SPI_MOSI    3
-#define SPI_SCK     5
-#define SPI_CS_PORT_DDR DDRD
-#define SPI_CS_PORT     PORTD
-#define SPI_CS		3
-
-#elif (MCU_atmega32 || MCU_atmega644)
-
-#define SPI_PORT_DDR DDRB
-#define SPI_PORT     PORTB
-#define SPI_MISO    6
-#define SPI_MOSI    5
-#define SPI_SCK     7
-#define SPI_CS_PORT_DDR DDRB
-#define SPI_CS_PORT     PORTB
-#define SPI_CS		4
-
-#else
-
-#error "NO MCU type defined"
-
-#endif
 
 #define MCP2515_OK         (0)
 #define MCP2515_FAIL       (1)

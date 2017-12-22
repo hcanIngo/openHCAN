@@ -27,10 +27,10 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#ifdef MCU_atmega32
+#if defined(__AVR_ATmega32__)
 	#define AC_REG SFIOR
 	#define AC_INT ADC_vect
-#elif MCU_atmega644
+#elif defined(__AVR_ATmega328P__) || defined(__AVR_ATmega644P__)
 	#define AC_REG ADCSRB
 	#define AC_INT ANALOG_COMP_vect
 #endif
@@ -51,12 +51,16 @@ void analogComparator_init(device_data_analogComparator *p, eds_block_p it)
 	// -> negativer Comparator-Eingang ist AIN1 = PB3
 
 	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("I"));
+#if defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
 	PORTB &= ~ (0x0f | (1<< PB2) | (1<< PB3)); 	// Darlington Ports ausschalten
-	// und fuer PB2 und PB3 den Pullup ausschalten
-	DDRB &= ~ (1<< PB2); // Modus Input setzen
-	DDRB &= ~ (1<< PB3); // Modus Input setzen
-#ifdef MCU_atmega32
-#elif MCU_atmega644
+	DDRB &= ~ (1<< PB2); // Modus Input setzen (Pullup ausschalten)
+	DDRB &= ~ (1<< PB3); // Modus Input setzen (Pullup ausschalten)
+#elif defined(__AVR_ATmega328P__)
+	PORTD &= ~ (0x0f | (1<< PD6) | (1<< PD7)); 	// Darlington Ports ausschalten (TODO ist 0x0f ok)
+	DDRD &= ~ (1<< PD6); // Modus Input setzen (Pullup ausschalten)
+	DDRD &= ~ (1<< PD7); // Modus Input setzen (Pullup ausschalten)
+#endif
+#if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega644P__)
 	DIDR1 |= (1<< AIN0D); // Deaktivieren des digitalen Eingangspuffers
 	DIDR1 |= (1<< AIN1D); //      "
 #endif

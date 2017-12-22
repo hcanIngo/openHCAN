@@ -15,8 +15,10 @@ void keys_init(void)
 	int i;
 
 	// Activate Key-Swtiches: Configure to input, enable internal pull-up
+#if defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
 	DDRA &= ~ 0x3f;
 	PORTA |= 0x3f;
+#endif
 
 	DDRD &= ~ 0xcf;
 	PORTD |= 0xcf;
@@ -32,7 +34,11 @@ uint16_t keys_key_pressed(void)
 {
 	uint16_t flags;
 
-	flags = (PINA << 8) | PIND;
+	flags = PIND;
+#if defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
+	flags |= (PINA << 8);
+#endif
+
 	flags = (~flags) & KEY_MASK;
 	return flags;
 }

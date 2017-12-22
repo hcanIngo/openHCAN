@@ -17,8 +17,8 @@
  *
  *  (c) 2006 by Martin Haller, mah (at) iuse (dot) org
  *
- *  Adapted for ATmega644:
- *  (c) 2010 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
+ *  Adapted for ATmega328 and ATmega644:
+ *  (c) 2010/2017 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
  */
 
 #ifndef CANIX_H
@@ -30,7 +30,7 @@
  * @author 	Martin Haller
  * @date	13.3.2006
  *
- * @brief	enth�lt Funktionen des CANIX Frameworks
+ * @brief	enthaelt Funktionen des CANIX Frameworks
  *
  * CANIX ist ein Framework, das versucht, alle Gemeinsamkeiten der Firmwares
  * zu umspannen. Dazu gehoeren:

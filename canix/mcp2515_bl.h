@@ -17,9 +17,8 @@
  *
  *  (c) 2006 by Martin Haller, mah (at) iuse (dot) org
  */
-
-#ifndef _MCP2515_H_
-#define _MCP2515_H_ 1
+#ifndef _MCP2515_BL_H_
+#define _MCP2515_BL_H_ 1
 
 /**
  * @brief	SPI Kommandos
@@ -311,7 +310,7 @@
 /**
  * @brief	Bitdefinition von RXB1CTRL
  *
- * @see		RXM1, RXM0, RXRTR und FILHIT0 sind schon für RXB0CTRL definiert
+ * @see		RXM1, RXM0, RXRTR und FILHIT0 sind schon fï¿½r RXB0CTRL definiert
  */
 #define FILHIT2		2
 #define FILHIT1		1
@@ -393,4 +392,28 @@
 #define CAN_EID     0x40
 
 
-#endif // _MCP2515_H_
+#define SPI_PORT_DDR DDRB
+#define SPI_PORT     PORTB
+
+
+#if defined(__AVR_ATmega328P__)
+#define SPI_MISO    4
+#define SPI_MOSI    3
+#define SPI_SCK     5
+#define SPI_CS_PORT_DDR DDRB
+#define SPI_CS_PORT     PORTB
+#define SPI_CS		2
+
+#elif defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
+#define SPI_MISO    6
+#define SPI_MOSI    5
+#define SPI_SCK     7
+#define SPI_CS_PORT_DDR DDRB
+#define SPI_CS_PORT     PORTB
+#define SPI_CS		4
+
+#else
+#error "NO MCU type defined"
+#endif
+
+#endif // _MCP2515_BL_H_

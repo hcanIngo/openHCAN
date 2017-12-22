@@ -24,10 +24,10 @@
 #include <avr/pgmspace.h>
 #include <avr/eeprom.h>
 #include <util/crc16.h>
+#include <avr/signature.h>
 
-#include "chipdef.h"
-#include "mcp2515.h"
-#include "mcp2515_defs.h"
+#include "../canix/mcp2515_defs.h"
+#include "../canix/mcp2515_bl.h"
 
 #define CANIX_NO_LED_SETUP
 //#define CANIX_LED_SETUP2
@@ -43,12 +43,6 @@
 
 void (*jump_to_app)(void) = 0x0000;
 
-#define SPI_PORT_DDR DDRB
-#define SPI_PORT     PORTB
-#define SPI_MISO    6
-#define SPI_MOSI    5
-#define SPI_SCK     7
-#define SPI_CS		4
 
 #define MCP2515_OK         (0)
 #define MCP2515_FAIL       (1)
@@ -386,18 +380,18 @@ int main(void)
 	uint32_t id1;
 	uint32_t id2;
 	uint16_t addr;
-#if defined (__AVR_ATmega8__) || (__AVR_ATmega32__)
+#if defined (__AVR_ATmega328P__) || (__AVR_ATmega32__)
 	uint8_t i;
 	#define SIZE_OF_FLASHBUFFER SPM_PAGESIZE
 	#if SIZE_OF_FLASHBUFFER > 255
 	#error
 	#endif
-#elif defined (__AVR_ATmega644__)
+#elif defined (__AVR_ATmega644P__)
 	uint16_t i;
 	#define SIZE_OF_FLASHBUFFER SPM_PAGESIZE
 	#if SIZE_OF_FLASHBUFFER > 511
-#error
-#endif
+	#error
+	#endif
 #endif
 	uint8_t flash_buffer[SIZE_OF_FLASHBUFFER];
 
@@ -420,10 +414,10 @@ int main(void)
 		(self_addr) | ((uint32_t)(1) <<20);
 	data[0] = 4; // Syslog Service
 	data[1] = 1; // Boot Resetflag Log
-#if defined (__AVR_ATmega32__) || (__AVR_ATmega8__)
+#if defined (__AVR_ATmega32__)
 	data[2] = MCUCSR;
 	MCUCSR = 0; // Reset Register Flags resetten
-#elif defined (__AVR_ATmega644__)
+#elif defined (__AVR_ATmega328P__) || (__AVR_ATmega644P__)
 	data[2] = MCUSR;
 	MCUSR = 0; // Reset Register Flags resetten
 #endif
@@ -469,15 +463,25 @@ int main(void)
 					case 8 : // Device Load App (HCAN_HMS_DEVICE_LOAD_APP)
 						jump_to_app();
 					case 9 : // HCAN_HMS_DEVICE_TYPE_REQUEST
-						data[1] = 10; //HCAN_HMS_DEVICE_TYPE_REPLAY
-#if defined (__AVR_ATmega8__)
+						data[1] = 10; // HCAN_HMS_DEVICE_TYPE_REPLAY
+
 						data[2] = 0;
-#elif defined (__AVR_ATmega32__)
-						data[2] = 1;
-#elif defined (__AVR_ATmega644__)
-						data[2] = 2;
+						if (SIGNATURE_1 == 0x95 && SIGNATURE_2 == 0x02)
+							data[2] += 0x10; // µC-Signatur: __AVR_ATmega32__
+						else if (SIGNATURE_1 == 0x96 && SIGNATURE_2 == 0x0A)
+							data[2] += 0x20; // µC-Signatur: __AVR_ATmega644P__
+						else if (SIGNATURE_1 == 0x95 && SIGNATURE_2 == 0x0F)
+							data[2] += 0x30; // µC-Signatur: __AVR_ATmega328P__
+
+#if defined (__AVR_ATmega32__)
+							data[2] += 0x01; // compiliert fuer __AVR_ATmega32__
+#elif defined (__AVR_ATmega644P__)
+							data[2] += 0x02;
+#elif defined (__AVR_ATmega328P__)
+							data[2] += 0x03;
 #endif
-						data[3] = eeprom_read_byte((uint8_t *)4); //4=EEPR_BOARD_TYPE
+
+						data[3] = eeprom_read_byte((uint8_t *)4); // 4=EEPR_BOARD_TYPE
 						size = 4;
 						goto _send;
 					case 16 : // Flash Buffer Fill (HCAN_HMS_FLASH_BUFFER_FILL)

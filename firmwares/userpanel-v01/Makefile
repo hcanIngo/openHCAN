@@ -10,7 +10,7 @@ ifeq ($(MCU),atmega644)
 	# 0xF000 for firmware, 2048 words boot size
 	AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:w:"UI_$(MCU)/$(TARGET).hex" -U hfuse:w:0xD0:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
 else
-	# atmega32 (32kbytes flash = 0 bis 7FFF)
+	# atmega32 oder atmega328 (32kbytes flash = 0 bis 7FFF)
 	# 0x7000 for firmware,  2048 words boot size
 	AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:w:"UI_$(MCU)/$(TARGET).hex" -U hfuse:w:0xC0:m -U lfuse:w:0x0f:m
 endif
@@ -21,7 +21,12 @@ SRC += $(patsubst %.c, %.c , $(wildcard ../../canix/*.c))
 OBJCOPY = avr-objcopy
 CXX = avr-gcc
 
-F_CPU  = 3686400
+ifeq ($(MCU),atmega328)
+	F_CPU = 16000000
+else # MCU_atmega32 || MCU_atmega644
+	F_CPU = 3686400
+endif
+
 F_CAN   = 8000000
 CAN_SPEED = 125000
 
@@ -44,9 +49,11 @@ $(TARGET).hex: $(TARGET).out
 $(TARGET).out:
 	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) -Wl,-Map,$(TARGET).map
 
-clean:
-	cd ../../canix; rm -f *.d *.lst
+clean_part:
 	sudo rm -f *.map *.out
+
+clean:
+	make clean_part
 	sudo rm -fR ./UI_$(MCU)
 
 load:
@@ -56,12 +63,6 @@ load:
 	@echo -------------------------
 	# --polite-time 60
 	telican -a $(IP_HI) -c $(adr) -C --arch $(MCU) --ignore-type -e "flash UI_$(MCU)/$(TARGET).hex"
-
-release:
-	../../tools/mkrelease
-	make clean
-	make
-	mv UI_$(MCU)/$(TARGET).hex UI_$(MCU)/userpanel-build-`cat buildver`-`date +%Y%m%d`.hex
 
 flash:
 	sudo $(AVRDUDE_FLASH)

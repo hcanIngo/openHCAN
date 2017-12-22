@@ -12,9 +12,19 @@
 #include "onewire.h"
 
 #define W1_PIN  ow_pin
-#define W1_IN   PINA
-#define W1_OUT  PORTA
-#define W1_DDR  DDRA
+
+#if defined(__AVR_ATmega328P__)
+	#define W1_IN   PIND
+	#define W1_OUT  PORTD
+	#define W1_DDR  DDRD
+#elif defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
+	#define W1_IN   PINA
+	#define W1_OUT  PORTA
+	#define W1_DDR  DDRA
+#endif
+
+
+
 
 uint8_t ow_pin = 0;
 

@@ -616,8 +616,6 @@ void load_shortcut_page(uint8_t n)
 void save_shortcut_page(uint8_t n)
 {
 	eds_block_p it;
-
-	// TODO: assert(n >= 0 && n <= 4);
 	
 	it = eds_find_next_block((eds_block_p)0,
 			EDS_userpanel_shortcuts_BLOCK_ID);

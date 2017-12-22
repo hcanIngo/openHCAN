@@ -11,7 +11,12 @@ TARGET  = main
 OBJCOPY = avr-objcopy
 CXX     = avr-gcc
 
-F_CPU   = 3686400
+ifeq ($(MCU),atmega328)
+	F_CPU = 16000000
+else # MCU_atmega32 || MCU_atmega644
+	F_CPU = 3686400
+endif
+
 F_CAN   = 8000000
 CAN_SPEED = 125000
 
@@ -39,10 +44,4 @@ clean:
 
 load: $(TARGET).hex
 	telican -s 853 -c 400 -e "flash $(TARGET).hex"
-
-release:
-	../../tools/mkrelease
-	make clean
-	make
-	mv $(TARGET).hex usv-build-`cat buildver`-`date +%Y%m%d`.hex
 

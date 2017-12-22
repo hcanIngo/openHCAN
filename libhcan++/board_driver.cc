@@ -406,7 +406,7 @@ void board_driver::cmd_flash (const string &filename)
 			 *
 			 * Der gesamte zu flashende Bereich (size) wird in
 			 * Bloecke aufgeteilt. Jeder Block ist eine Groesse von m_page_size
-			 * und ist vom Typ der MCU abhaengig (Atmega32 oder Atmega644p).
+			 * und ist vom Typ der MCU abhaengig (Atmega328, Atmega32 oder Atmega644).
 			 *
 			 * Jeder Block muss auf der MCU "auf einen Rutsch" ins Flash
 			 * geschrieben werden. Dazu wird der Block bei der Uebertragung
@@ -669,6 +669,7 @@ void board_driver::cmd_show_system()
 		case 0 : cout << "AVR Atmega8"; break;
 		case 1 : cout << "AVR Atmega32"; break;
 		case 2 : cout << "AVR Atmega644"; break;
+		case 3 : cout << "AVR Atmega328"; break;
 		default : cout << "unknown";
 	}
 

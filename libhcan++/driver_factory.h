@@ -17,8 +17,7 @@ namespace hcan
 			driver_error (const string &s);
 	};
 
-	enum { HCAN_ARCH_ATMEGA8 = 0, HCAN_ARCH_ATMEGA32 = 1, HCAN_ARCH_ATMEGA644 = 2,
-			HCAN_ARCH_AUTODETECT = 255 };
+	enum { HCAN_ARCH_ATMEGA32 = 0x11, HCAN_ARCH_ATMEGA644P = 0x22, HCAN_ARCH_ATMEGA328P = 0x33, HCAN_ARCH_AUTODETECT = 255 };
 
 	class driver_factory 
 	{

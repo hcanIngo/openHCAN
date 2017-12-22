@@ -116,7 +116,7 @@ autostartHcanDienste:
 
 start: 
 	make stop
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo systemctl start $(SERVICE) 
+	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo systemctl start $(SERVICE)
 
 stop: 
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo systemctl stop $(SERVICE)

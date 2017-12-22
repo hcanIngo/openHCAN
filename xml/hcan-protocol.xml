@@ -38,7 +38,7 @@
 
 			<message name="DEVICE_TYPE_REPLAY" id="10"
 				description="Liefert den Geraete-Typ">
-				<param pos="0" name="arch" description="0 = Atmega8, 1 = Atmega32, 2 = Atmega644p" />
+				<param pos="0" name="arch" description="0x11 = Atmega32, 0x22 = Atmega644p, 0x33 = Atmega328p" />
 				<param pos="1" name="type" description="Hardware-Board-Typ" />
 			</message>
 

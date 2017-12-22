@@ -13,14 +13,14 @@
 #define EDS_START ((uint8_t *) 32)
 #define EDS_DATA_START (EDS_START + 2)
 
-#ifdef MCU_atmega32
+#if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32__)
 	#define EDS_DATA_END 1023 //0x3ff
-#elif MCU_atmega644 //mit doppelter EEPROM- und SRAM-Groesse
+#elif defined(__AVR_ATmega644P__) // mit doppelter EEPROM- und SRAM-Groesse
 	#define EDS_DATA_END 2047 //0x7ff
 #endif
 #define EDS_END   ((uint8_t *) EDS_DATA_END)
 
-// Rueckgabewerte des EDS Routinen:
+// Rueckgabewerte der EDS Routinen:
 #define EDS_OK                        0
 #define EDS_NOT_FORMATED              1
 #define EDS_INVALID_POINTER           2

@@ -63,13 +63,23 @@ void canix_SFP_HMS_handler(const canix_frame *frame)
 			break;
 		case HCAN_HMS_DEVICE_TYPE_REQUEST :
 			answer.data[1] = HCAN_HMS_DEVICE_TYPE_REPLAY;
-#if defined (__AVR_ATmega8__)
+
 			answer.data[2] = 0;
-#elif defined (__AVR_ATmega32__)
-			answer.data[2] = 1;
-#elif defined (__AVR_ATmega644__)
-			answer.data[2] = 2;
+			if (SIGNATURE_1 == 0x95 && SIGNATURE_2 == 0x02)
+				answer.data[2] += 0x10; // µC-Signatur: __AVR_ATmega32__
+			else if (SIGNATURE_1 == 0x96 && SIGNATURE_2 == 0x0A)
+				answer.data[2] += 0x20; // µC-Signatur: __AVR_ATmega644P__
+			else if (SIGNATURE_1 == 0x95 && SIGNATURE_2 == 0x0F)
+				answer.data[2] += 0x30; // µC-Signatur: __AVR_ATmega328P__
+
+#if defined (__AVR_ATmega32__)
+			answer.data[2] += 0x01; // compiliert fuer __AVR_ATmega32__
+#elif defined (__AVR_ATmega644P__)
+			answer.data[2] += 0x02;
+#elif defined (__AVR_ATmega328P__)
+			answer.data[2] += 0x03;
 #endif
+
 			answer.data[3] = eeprom_read_byte((uint8_t *)EEPR_BOARD_TYPE);
 			answer.size = 4;
 			canix_frame_send(&answer);

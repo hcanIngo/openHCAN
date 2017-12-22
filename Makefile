@@ -31,11 +31,12 @@ clean:
 	make strukturen xx="sudo make clean"
 	make cDienste xx="sudo make clean"
 	make cppDienste xx="sudo make clean"
+	make firmware xx="sudo make clean" parm2=MCU=atmega328p
 	make firmware xx="sudo make clean" parm2=MCU=atmega32
-	make firmware xx="sudo make clean" parm2=MCU=atmega644
+	make firmware xx="sudo make clean" parm2=MCU=atmega644p
 	make firmwareOhneEds xx="sudo make clean"
 	make tools xx="sudo make clean"
-	@# wuerde "Dropbox-Pfad" erzwingen:  cd hcanhab2_mqtt; make clean
+	@# folgendes wuerde den "Dropbox-Pfad" erzwingen:  cd hcanhab2_mqtt; make clean
 	#
 	@#sudo find -type f -name ".depend" | xargs rm -f
 
@@ -43,8 +44,9 @@ all:
 	make strukturen xx="make all"
 	make cDienste xx="make all"
 	make cppDienste xx="make all"
-	make firmware xx="make all" parm2=MCU=atmega32
-	make firmware xx="sudo make clean" MCU=atmega644; make firmware xx="make all" MCU=atmega644
+	make firmware xx="make all" parm2=MCU=atmega328p;  make firmware xx="sudo make clean_part" parm2=MCU=atmega328p	
+	make firmware xx="make all" parm2=MCU=atmega32;    make firmware xx="sudo make clean_part" parm2=MCU=atmega32
+	make firmware xx="make all" parm2=MCU=atmega644p;  make firmware xx="sudo make clean_part" parm2=MCU=atmega644p
 	make firmwareOhneEds xx="sudo make clean"; make firmwareOhneEds xx="make all"
 	
 install:
@@ -91,10 +93,3 @@ firmwareOhneEds:
 tools:
 	cd tools; $(xx)
 	cd tools/hcanextid; $(xx)
-
-release: 
-	cd firmwares/controllerboard-1612-v01; sudo make release MCU=atmega32
-	cd firmwares/controllerboard-1612-v01; sudo make release MCU=atmega644
-	cd firmwares/userpanel-v01; sudo make release MCU=atmega32
-	cd firmwares/userpanel-v01; sudo make release MCU=atmega644
-	cd firmwares/usv-modul; sudo make release	

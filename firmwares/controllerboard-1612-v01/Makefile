@@ -7,16 +7,18 @@ SRC = $(patsubst %.c, %.c , $(wildcard *.c))
 SRC += $(patsubst %.c, %.c , $(wildcard ./devices/*.c))
 SRC += $(patsubst %.c, %.c , $(wildcard ../../canix/*.c))
 
-#Der atmega644 hat die doppelte EEPROM- und SRAM-Groesse gegenueber dem atmega32.
-#export MCU = atmega32
-#export MCU = atmega644
 TARGET = main
 adr = 1022
 
 OBJCOPY = avr-objcopy
 CXX = avr-gcc
 
-F_CPU  = 3686400
+ifeq ($(MCU),atmega328)
+	F_CPU = 16000000
+else # MCU_atmega32 || MCU_atmega644
+	F_CPU = 3686400
+endif
+
 F_CAN   = 8000000
 CAN_SPEED = 125000
 
@@ -42,9 +44,11 @@ $(TARGET).hex: $(TARGET).out
 $(TARGET).out:
 	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) -Wl,-Map,$(TARGET).map
 
-clean:
-	cd ../../canix; rm -f *.d *.lst
+clean_part:
 	sudo rm -f *.map *.out
+
+clean:
+	make clean_part
 	sudo rm -fR ./C1612_$(MCU)
 	sudo rm -f devices.c devices.h timer.c
 	cd devices; rm -f devices.xml
@@ -56,9 +60,3 @@ load:
 	@echo -------------------------
 	telican -a $(IP_HI) -C -c $(adr) --arch $(MCU) -e "flash C1612_$(MCU)/$(TARGET).hex"
 	#telican --polite-time 2 -a $(IP_HI) -c $(adr) --arch $(MCU) -e "flash C1612_$(MCU)/$(TARGET).hex"
-
-release:
-	../../tools/mkrelease
-	make clean
-	make
-	sudo mv C1612_$(MCU)/$(TARGET).hex C1612_$(MCU)/controller1612-build-`cat buildver`-`date +%Y%m%d`.hex

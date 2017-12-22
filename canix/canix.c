@@ -17,8 +17,8 @@
  *
  *  (c) 2006 by Martin Haller, mah (at) iuse (dot) org
  *
- *  Adapted for ATmega644:
- *  (c) 2010 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
+ *  Adapted for ATmega328p and ATmega644p:
+ *  (c) 2010/2017 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
  */
 #include <avr/io.h>
 #include <avr/eeprom.h>
@@ -185,10 +185,10 @@ void canix_rtc_init(void)
 	canix_rtc_clock.year = 0;
 
 	// Timer programmieren:
-#ifdef MCU_atmega32
+#if defined(__AVR_ATmega32__)
 	TCCR0 = (1<<CS00)|(1<<CS02); // Divider 1024
 	TIMSK = (1<<TOIE0); // Timer0 Interrupt einschalten
-#elif MCU_atmega644
+#elif defined(__AVR_ATmega328P__) || defined(__AVR_ATmega644P__)
 	TCCR0B = (1<<CS00)|(1<<CS02); // Divider
 	TIMSK0 = (1<<TOIE0); // Timer0 Interrupt einschalten
 #endif

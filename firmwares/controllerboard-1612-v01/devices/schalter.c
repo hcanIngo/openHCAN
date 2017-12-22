@@ -130,8 +130,7 @@ static inline uint8_t inputport_read(device_data_schalter *p, uint8_t n)
 	{
 		// Pins sind 1:1 von PORTC auszulesen
 
-		// Modus Input setzen
-		DDRC &= ~ (1<< n);
+		DDRC &= ~ (1<< n); // Modus Input setzen
 
 		if(p->config.feature & (1<<FEATURE_SCHALTER_PULLUP_AUS))
 		    PORTC &= ~ (1<< n); // Pullup ausschalten
@@ -140,25 +139,21 @@ static inline uint8_t inputport_read(device_data_schalter *p, uint8_t n)
 
 		return PINC & (1<< n);
 	}
-	else if (n < 16)
+#if defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
+   	else if (n < 16)
 	{
-		// auf den Bereich 0-7 holen:
-		n &= 0x07;
-
-		// Pins sind zu spiegel ( 0 -> 7, 1 -> 6 etc.)
-		n = 7 - n;
-
-		// Modus Input setzen
-		DDRA &= ~ (1<< n);
+		n &= 0x07; // auf den Bereich 0-7 holen
+		n = 7 - n; // Pins sind zu spiegel ( 0 -> 7, 1 -> 6 etc.)
+		DDRA &= ~ (1<< n); // Modus Input setzen
 
 		if(p->config.feature & (1<<FEATURE_SCHALTER_PULLUP_AUS))
 		    PORTA &= ~ (1<< n); // Pullup ausschalten
 		else
 		    PORTA |= (1<< n); // Pullup einschalten
 		
-
 		return PINA & (1<< n);
 	}
+#endif
 	else if (n < 244)
 	{
 		return ports_getInput (n); // n-tes Bit abfragen

@@ -120,7 +120,6 @@ uint8_t installation_data::lampe_gruppe_by_name(const string &name)
 			+ name + "')]");
 }
 
-// TODO sonstige_gruppe_by_name muesste es in lampe_command.cc geben
 uint8_t installation_data::sonstige_gruppe_by_name(const string &name)
 {
 	return query_gruppe("//powerport[(@typ='sonstige') and (@name='"

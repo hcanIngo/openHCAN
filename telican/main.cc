@@ -286,12 +286,12 @@ void handle_given_options (const po::parsed_options &options,
 			if (map.count("arch"))
 			{
 				const string arch_name = map["arch"].as<string>();
-				if (arch_name == "atmega8")
-					arch = hcan::HCAN_ARCH_ATMEGA8;
-				else if (arch_name == "atmega32")
+				if (arch_name == "atmega32")
 					arch = hcan::HCAN_ARCH_ATMEGA32;
-				else if (arch_name == "atmega644")
-					arch = hcan::HCAN_ARCH_ATMEGA644;
+				else if (arch_name == "atmega644p")
+					arch = hcan::HCAN_ARCH_ATMEGA644P;
+				else if (arch_name == "atmega328p")
+					arch = hcan::HCAN_ARCH_ATMEGA328P;
 				else
 				{
 					cerr << "unknown arch!\n";
@@ -448,7 +448,7 @@ int main (int argc, char *argv[])
 			 "sends flood pings to the given destination")
 			("connect,c", po::value<uint16_t>(), "connect to given destination")
 			("ignore-type", "ignore the remote type if device does not answer")
-			("arch", po::value<string>(), "set arch: [atmega8|atmega32|atmega644] ")
+			("arch", po::value<string>(), "set arch: [atmega328|atmega32|atmega644] ")
 			("exec,e", po::value<string>(), "execute the given command(s)")
 			("src,s", po::value<uint16_t>(), "use given hcan source address")
 			("read,r", po::value<string>(), "read commands from given file")

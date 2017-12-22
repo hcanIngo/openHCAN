@@ -21,7 +21,7 @@ ifeq ($(MCU),atmega644)
 	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:r:flash.hex:r
 	AVRDUDE_ERASE_EEPROM = avrdude -c avrispmkII -p m644p -P usb -e
 else
-	# atmega32 (32kbytes flash = 0 bis 7FFF)
+	# atmega32 oder atmega328 (32kbytes flash = 0 bis 7FFF)
 	# 0x7000 for firmware,  2048 words boot size
 	MT_BOOTLOADER_ADDRESS = 7000
 	#JTAG-Enable: AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0x80:m -U lfuse:w:0x0f:m
@@ -68,8 +68,10 @@ erase_eeprom:
 read_flash:
 	sudo $(AVRDUDE_READ_FLASH)
 
+clean_part:
+	sudo rm -f *.map *.out
 
 clean:
-	rm -f *.o *.map *.out
+	make clean_part
 	sudo rm -fR ./hcanBL_$(MCU)
 

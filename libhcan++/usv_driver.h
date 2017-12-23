@@ -19,7 +19,7 @@ namespace hcan
 		protected:
 			virtual bool show_help ();
 		public:
-			usv_driver (board_connection &bcon);
+			usv_driver (board_connection &bcon, uint16_t page_size=128);
 			virtual ~usv_driver();
 			virtual bool exec_command (context &c, const string &);
 	};

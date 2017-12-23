@@ -668,12 +668,10 @@ void board_driver::cmd_show_system()
 	switch (arch)
 	{
 		case HCAN_ARCH_ATMEGA32 :
-		case HCAN_COMP_ARCH_ATMEGA32 :
 			cout << "avr atmega32";
 			break;
 
 		case HCAN_ARCH_ATMEGA644P :
-		case HCAN_COMP_ARCH_ATMEGA644P :
 			cout << "avr atmega644p";
 			break;
 

@@ -18,9 +18,10 @@ usv_error::usv_error(const string &s) :
 {
 }
 
-usv_driver::usv_driver (board_connection &bcon) :
+usv_driver::usv_driver (board_connection &bcon, uint16_t page_size) :
 	atmega_board_driver(bcon)
 {
+	m_page_size = page_size;
 }
 
 usv_driver::~usv_driver()

@@ -1,7 +1,3 @@
-# hier stellen wir ATmega644 ein: 
-ARCH.inc
-.depend
-
 # Backup
 ###################
 *~
@@ -20,7 +16,7 @@ ARCH.inc
 *.lst
 *.hex
 *.out
-*.map
+# *.map
 
 
 # Packages #

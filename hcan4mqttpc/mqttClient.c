@@ -231,6 +231,7 @@ void initMqtt(char *brokerHost_ip)
 		unsigned char sessionPresent, connack_rc;
 		if (MQTTDeserialize_connack(&sessionPresent, &connack_rc, buf, sizeof(buf)) != 1 || connack_rc != 0)
 		{
+			TRACE("connack_rc=%d @ MQTTDeserialize_connack\n", connack_rc);
 			exitMqtt("Unable to connect to MQTT-broker\n");
 		}
 	}

@@ -55,7 +55,7 @@ all: $(TARGET).hex
 	sudo mv $(TARGET).hex hcanBL_$(MCU)
 
 $(TARGET).hex : $(TARGET).out 
-	$(OBJCOPY) -R .eeprom -O ihex $(TARGET).out $(TARGET).hex 
+	$(OBJCOPY) -R .eeprom -R .signature -O ihex $(TARGET).out $(TARGET).hex 
 
 $(TARGET).out : $(OBJ)
 	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) $(LDFLAGS)

@@ -6,8 +6,6 @@ START_SYSTEM = Systemd
 
 include $(HCANHAB_DIR)/bananapi/$(START_SYSTEM)/Makefile
 
-SCP_ZIEL_DIR = $(ZIEL_USER)@$(ZIEL_PC):/home/$(ZIEL_USER)/$(ZIEL_ORDNER)
-
 all:
 	@# Voraussetzung: ZIEL_PC = localhost  ->  make all
 	@# 

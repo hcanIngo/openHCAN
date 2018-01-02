@@ -19,3 +19,4 @@ ZIEL_ORDNER = myOpenHabInstallation
 
 _SSH = sudo sshpass -p $(PT) ssh -t
 _SCP = sudo sshpass -p $(PT) scp -r
+SCP_ZIEL_DIR = $(ZIEL_USER)@$(ZIEL_PC):/home/$(ZIEL_USER)/$(ZIEL_ORDNER)

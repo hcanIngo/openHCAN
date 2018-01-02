@@ -46,24 +46,7 @@ installHabHcan:
 	$(_SCP) ./staticConfigurations/conf_templates/*.rules $(SCP_ZIEL_DIR)/conf/rules/
 
 installationXml4telican:
-	test -d /etc/hcan || sudo mkdir /etc/hcan 
-	sudo cp $(CONF)/$(HCAN_INSTALLATION) /etc/hcan/
+	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /etc/hcan 
+	$(_SCP) $(CONF)/$(HCAN_INSTALLATION) /etc/hcan/
 
-sInstallHabHcan_onlyStaticConf:	
-	# persoenliche conf holen:
-	$(_SCP) $(CONF)/*.items ./staticConfigurations/conf_templates/
-	$(_SCP) $(CONF)/*.rules ./staticConfigurations/conf_templates/
-	@# 
-	# IP des C1612-Servers eintragen:
-	find ./staticConfigurations/conf_templates/*.* -type f -exec sed -i "s/C1612server/$(C1612ServerIP)/g" {} \;
-	@# 
-	echo "sitemap hcan label="" { // Beginn der Sitemap" > ./staticConfigurations/conf_templates/staticPart.sitemap	
-	cat $(CONF)/*.sitemap >> ./staticConfigurations/conf_templates/staticPart.sitemap
-	echo "} // Endeklammer der Gesamtsitemap" >> ./staticConfigurations/conf_templates/staticPart.sitemap
-	$(_SCP) ./staticConfigurations/conf_templates/staticPart.sitemap $(SCP_ZIEL_DIR)/conf/sitemaps/hcan.sitemap
-	@# 
-	$(_SCP) ./staticConfigurations/fix/transform/*.* $(SCP_ZIEL_DIR)/conf/transform/
-	$(_SCP) ./staticConfigurations/conf_templates/*.cfg $(SCP_ZIEL_DIR)/conf/services/
-	$(_SCP) ./staticConfigurations/conf_templates/*.items $(SCP_ZIEL_DIR)/conf/items/
-	$(_SCP) ./staticConfigurations/conf_templates/*.rules $(SCP_ZIEL_DIR)/conf/rules/
 	

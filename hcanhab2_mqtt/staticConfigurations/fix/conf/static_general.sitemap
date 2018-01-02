@@ -1,0 +1,9 @@
+
+Frame {
+	Text label="Zusammenfassung" icon="pie" {
+		Switch item=Lampen mappings=[OFF="alle aus"]
+		Switch item=Sonstige icon="socket" mappings=[OFF="alle aus"]
+		Text item=Temperaturen
+		Group item=Fenster
+	}
+}

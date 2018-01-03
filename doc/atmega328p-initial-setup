@@ -1,0 +1,55 @@
+
+Wie wird ein Atmega328p initialisiert ?
+---------------------------------------
+
+- externen Osz einschalten
+- Bootloader auf 4k
+- Jump-to-Bootloader on reset
+- Bootload Speicher schuetzen
+- WD Enabled
+- Brownout Detection enabled
+
+__________________________________________________________________
+dazu Fuse Hi Byte wie folgt programmieren (von Bit 7 zu bit 0):
+- RSTDISBL:         1         - External Reset Disable
+- DWEN:             1         - debugWIRE Enable
+- SPIEN:            0 (progr) - Enable Serial Program and Data Downloading
+- WDTON:            0 (progr) - Watchdog Timer Always On
+- EESAVE:           1         - EEPROM memory is preserved through the Chip Erase
+- BOOTSZ1:          0 (progr) - Select Boot Size
+- BOOTSZ0:          0 (progr)
+- BOOTRST:          0 (progr) - Select Reset Vector
+
+-> fuse hi byte = 0xC8
+__________________________________________________________________
+Fuse Lo Byte:
+- CKDIV8:           1         - Divide clock by 8
+- CKOUT:            1         - Clock output
+- SUT1:             1         - Select start-up time: Crystal Oscillator  14CK+65ms -> SUT[1:0] = 11
+- SUT0:             1                                 slowly rising power
+- CKSEL3:           1         - Select Clock source: 16MHz -> CKSEL[3:1] = 111
+- CKSEL2:           1 
+- CKSEL1:           1 
+- CKSEL0:           1 
+
+-> fuse lo byte = 0xFF
+
+__________________________________________________________________
+Fuse Extended Byte:
+- -/-  
+- -/-  
+- -/-  
+- -/-  
+- -/-
+- BODLEVEL2:         1
+- BODLEVEL1:         0 (progr)- Brown-out Detector trigger level: 101 = 2.7 V
+- BODLEVEL0:         1                1
+
+-> efuse = 0xFD
+
+Fuses auslesen: 
+avrdude -c avrispmkII -p atmega328p -P usb
+--> E:FD, H:DA, L:FF
+
+avrdude und dem ATMEL-ISP-Programmer mkII: 
+avrdude -c avrispmkII -p atmega328p -P usb -U flash:w:"/hcanbl/hcanBL_atmega328p/main.hex" -U hfuse:w:0xC8:m -U lfuse:w:0xFF:m -U efuse:w:0xFD:m

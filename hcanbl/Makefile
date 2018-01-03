@@ -21,19 +21,29 @@ ifeq ($(MCU),atmega644p)
 	# atmega644 (64kbytes flash = 0 bis FFFF)
 	# 0xF000 for firmware, 2048 words boot size
 	MT_BOOTLOADER_ADDRESS = F000
-	#JTAG-Enable: AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -e -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0x90:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
-	AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0xD0:m -U lfuse:w:0xc7:m -U efuse:w:0xfc:m
+	# JTAG-Enable:                                                                                                      hfuse:w:0x90:m
+	AVRDUDE_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U efuse:w:0xFC:m -U hfuse:w:0xD0:m -U lfuse:w:0xC7:m
 	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p m644p -P usb -U flash:r:flash.hex:r
 	AVRDUDE_ERASE_EEPROM = avrdude -c avrispmkII -p m644p -P usb -e
+else ifeq ($(MCU),atmega328p)
+ 	# atmega328p (32kbytes flash = 0 bis 7FFF)
+	# 0x7000 for firmware (bytes boot size),  2048 words boot size
+	MT_BOOTLOADER_ADDRESS = 7000
+	AVRDUDE_READ_FUSES = avrdude -c avrispmkII -p $(MCU) -P usb
+	# JTAG-Enable (debugWIRE Enable):                                                                                    hfuse:w:0x88:m
+	AVRDUDE_FLASH = avrdude -c avrispmkII -p $(MCU) -P usb -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U efuse:w:0xFD:m -U hfuse:w:0xC8:m -U lfuse:w:0xFF:m
+	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p $(MCU) -P usb -U flash:r:flash.hex:r
+	AVRDUDE_ERASE_EEPROM = avrdude -c avrispmkII -p $(MCU) -P usb -e
 else
-	# atmega32 oder atmega328p (32kbytes flash = 0 bis 7FFF)
+	# atmega32 (32kbytes flash = 0 bis 7FFF)
 	# 0x7000 for firmware,  2048 words boot size
 	MT_BOOTLOADER_ADDRESS = 7000
-	#JTAG-Enable: AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -e -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0x80:m -U lfuse:w:0x0f:m
+	# JTAG-Enable:                                                                                  hfuse:w:0x80:m -U
 	AVRDUDE_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:w:"hcanBL_$(MCU)/$(TARGET).hex" -U hfuse:w:0xC0:m -U lfuse:w:0x0f:m
 	AVRDUDE_READ_FLASH = avrdude -c avrispmkII -p m32 -P usb -U flash:r:flash.hex:r
 	AVRDUDE_ERASE_EEPROM = avrdude -c avrispmkII -p m32 -P usb -e
 endif
+
 
 CFLAGS= -mmcu=$(MCU) -Wall -Wstrict-prototypes -Os -mcall-prologues \
 		-std=gnu99 -funsigned-char -funsigned-bitfields -fpack-struct \
@@ -61,17 +71,14 @@ $(TARGET).out : $(OBJ)
 	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) $(LDFLAGS)
 
 flash:
-	sudo $(AVRDUDE_FLASH)
-	#uisp -dlpt=/dev/parport0 --erase  -dprog=dapa
-	#uisp -dlpt=/dev/parport0 --upload if="hcanBL_$(MCU)/$(TARGET).hex" -dprog=dapa  -v=3 --hash=32
+	$(AVRDUDE_FLASH)
 
 erase_eeprom:
 	sudo $(AVRDUDE_ERASE_EEPROM)
-	#uisp -dlpt=/dev/parport0 --erase --segment=eeprom -dprog=dapa
 
 # BL und FW lesen (alles was im flash-Speicher enthalten ist)
 read_flash:
-	sudo $(AVRDUDE_READ_FLASH)
+	$(AVRDUDE_READ_FLASH)
 
 clean_part:
 	sudo rm -f *.map *.out

@@ -16,7 +16,4 @@ Fuse Lo Byte:
 -> fuse lo byte = 0xe6
 
 
-sudo 'avrdude -c avrispmkII -p m644p -P usb -e -U flash:w:"./hcanbl/hcanBL_atmega644/main.hex" -U hfuse:w:0xd0:m -U lfuse:w:0xe6:m'
-
-sudo, da "su" für die Nutzung von avrdude erfrderlich ist.
-
+avrdude -c avrispmkII -p m644p -P usb -e -U flash:w:"./hcanbl/hcanBL_atmega644/main.hex" -U hfuse:w:0xd0:m -U lfuse:w:0xe6:m

@@ -48,8 +48,13 @@ void darlingtonoutput_setpin(uint8_t n, uint8_t state)
 		if (state)	PORTB |= (1<< n);
 		else 		PORTB &= ~ (1<< n);
 	}
-#endif
-
+	else
+	{
+		//canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("chgShOutPinStat,n=%d,stat=%d"), n, state);
+		ports_setOutput(n, state);
+	}
+#elif defined(__AVR_ATmega328P__)
 	//canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("chgShOutPinStat,n=%d,stat=%d"), n, state);
 	ports_setOutput(n, state);
+#endif
 }

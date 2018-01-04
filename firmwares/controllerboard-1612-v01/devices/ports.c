@@ -190,7 +190,12 @@ void ports_init (device_data_ports *p, eds_block_p it)
 
 	expBoard = &p->config.expander0; // z.B. 0,255,15,15 (4x OUT, -, 4x IN, 4x IN)
 
-	if (p->config.base == 128)
+	if (p->config.base == 16) // fuer das C1416-Board
+	{
+		outBase = 0;
+		inBase = 15;
+	}
+	else if (p->config.base == 128)
 	{
 		// Zur Erzeugung der Startpinnummern (Ingo's Nummerierung):
 		outBase = 12;

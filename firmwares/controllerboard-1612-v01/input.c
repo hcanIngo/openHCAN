@@ -34,13 +34,13 @@ uint8_t inputport_read(uint8_t pullup, uint8_t n)
 #elif defined(__AVR_ATmega328P__)
    	switch (n)
 	{
-		case 3:
 		case 4:
-			if (expanderActive) return 0; // expander @ PC3, PC4
+		case 5:
+			if (expanderActive) return 0; // expander @ PC4, PC5
 		case 0:
 		case 1:
 		case 2:
-		case 5:
+		case 3:
 		case 6:
 		case 7:
 			DDRC &= ~ (1<< n); // Modus Input setzen

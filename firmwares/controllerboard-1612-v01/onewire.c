@@ -14,9 +14,9 @@
 #define W1_PIN  ow_pin
 
 #if defined(__AVR_ATmega328P__)
-	#define W1_IN   PIND
-	#define W1_OUT  PORTD
-	#define W1_DDR  DDRD
+	#define W1_IN   PINC
+	#define W1_OUT  PORTC
+	#define W1_DDR  DDRC
 #elif defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
 	#define W1_IN   PINA
 	#define W1_OUT  PORTA
@@ -25,18 +25,22 @@
 
 
 
-
 uint8_t ow_pin = 0;
 
 void ow_setpin(uint8_t pin)
 {
-	// Umordnen der Pins:
-	// AD0 = 15, AD7 = 8
-	ow_pin = (15 - pin);
+#if defined(__AVR_ATmega328P__)
+	ow_pin = pin; // Pins 0...3: PC0/ADC0 ... PC3/ADC3
+#elif defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
+	ow_pin = (15 - pin); // Umordnen der Pins: AD0=15, AD7=8
+#endif
 }
 
 uint8_t ow_getpin(void)
 {
+#if defined(__AVR_ATmega328P__)
+	return ow_pin;
+#endif
 	return (15 - ow_pin);
 }
 

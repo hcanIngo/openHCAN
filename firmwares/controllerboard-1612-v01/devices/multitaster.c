@@ -25,8 +25,8 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "tasterinput.h"
 #include "multitaster.h"
+#include "../input.h"
 
 /* multitaster.c empfaengt Tasterbotschaften und wertet Potitelegramme aus. 
  * Beim Aussenden des Taster-down/up-Ereignisses wird der letzte 
@@ -71,7 +71,7 @@ inline void multitaster_timer_handler(device_data_multitaster *p, uint8_t zyklus
 	uint8_t time;
 
 	// Wenn Taste gedrueckt ist, dann ist der Pin 0, ansonsten 1
-	uint8_t status = ! tasterport_read(p->config.taster_port);
+	uint8_t status = !inputport_read(1, p->config.taster_port);
 
 	// Message schon mal vorbereiten:
 	message.src = canix_selfaddr();

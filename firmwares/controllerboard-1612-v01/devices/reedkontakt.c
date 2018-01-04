@@ -15,7 +15,7 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 
-#include "tasterinput.h"
+#include "../input.h"
 
 void reedkontakt_init(device_data_reedkontakt *p, eds_block_p it)
 {
@@ -23,7 +23,7 @@ void reedkontakt_init(device_data_reedkontakt *p, eds_block_p it)
 	// aus der id ableiten:
 	p->timer_counter = p->config.gruppe & 0x07;
 
-	p->last_state = tasterport_read(p->config.port) != 0;
+	p->last_state = inputport_read(1, p->config.port) != 0;
 }
 
 inline void reedkontakt_timer_handler(device_data_reedkontakt *p, uint8_t zyklus)
@@ -56,27 +56,27 @@ inline void reedkontakt_timer_handler(device_data_reedkontakt *p, uint8_t zyklus
 	
 	// Etwas seltsamer Vergleich; ist aber noetig, damit "wahre Werte", die
 	// ungleich 1 sind, verarbeitet werden koennen!
-	if ((tasterport_read(p->config.port) != 0) !=  p->last_state)
+	if ((inputport_read(1, p->config.port) != 0) !=  p->last_state)
 	{
 		// Zustand hat sich geaendert; also Meldung versenden:
 
 		canix_frame message;
 
-		p->last_state = tasterport_read(p->config.port) != 0;
+		p->last_state = inputport_read(1, p->config.port) != 0;
 		message.src = canix_selfaddr();
 		message.dst = HCAN_MULTICAST_INFO;
 		message.proto = HCAN_PROTO_SFP;
 		message.data[0] = HCAN_SRV_HES;
 		message.data[1] = HCAN_HES_REEDKONTAKT_STATE_CHANGE;
 		message.data[2] = p->config.gruppe;
-		message.data[3] = tasterport_read(p->config.port) != 0;
+		message.data[3] = inputport_read(1, p->config.port) != 0;
 		message.size    = 4;
 		canix_frame_send_with_prio(&message, HCAN_PRIO_HI);
 	}
 
 	// Hier wird jede Sekunde der Kontakt geprueft, allerdings nur alle
 	// 10sec ein "Open" gesendet
-	if ((p->config.modus) && (tasterport_read(p->config.port)))
+	if ((p->config.modus) && (inputport_read(1, p->config.port)))
 	{
 		if (p->timer_counter == 0)
 		{
@@ -110,17 +110,13 @@ void reedkontakt_can_callback(device_data_reedkontakt *p,
 
 	if (p->config.gruppe == frame->data[2])
 	{
-		switch (frame->data[1])
+		if (HCAN_HES_REEDKONTAKT_STATE_QUERY == frame->data[1])
 		{
-			case HCAN_HES_REEDKONTAKT_STATE_QUERY:
-				{
-					answer.data[1] = HCAN_HES_REEDKONTAKT_STATE_REPLAY;
-					answer.data[2] = frame->data[2];
-					answer.data[3] = tasterport_read(p->config.port) != 0;
-					answer.size    = 4;
-					canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
-				}
-				break;
+			answer.data[1] = HCAN_HES_REEDKONTAKT_STATE_REPLAY;
+			answer.data[2] = frame->data[2];
+			answer.data[3] = inputport_read(1, p->config.port) != 0;
+			answer.size    = 4;
+			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
 		}
 	}
 	else if (HCAN_HES_DEVICE_STATES_REQUEST == frame->data[1])
@@ -132,7 +128,7 @@ void reedkontakt_can_callback(device_data_reedkontakt *p,
 
 			answer.data[1] = HCAN_HES_REEDKONTAKT_STATE_REPLAY;
 			answer.data[2] = p->config.gruppe; // wird in main.c fuer jedes Device einmal aufgerufen
-			answer.data[3] = tasterport_read(p->config.port) != 0;
+			answer.data[3] = inputport_read(1, p->config.port) != 0;
 			answer.size    = 4;
 			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
 		}

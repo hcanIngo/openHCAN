@@ -13,7 +13,7 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 
-#include <tasterinput.h>
+#include "../input.h"
 #include <darlingtonoutput.h>
 
 void taster_init(device_data_taster *p, eds_block_p it) {}
@@ -26,7 +26,7 @@ inline void taster_timer_handler(device_data_taster *p, uint8_t zyklus)
 	uint8_t time;
 
 	// Wenn Taste gedrueckt ist, dann ist der Pin 0, ansonsten 1
-	uint8_t status = ! tasterport_read(p->config.port);
+	uint8_t status = !inputport_read(1, p->config.port);
 
 	// Message schon mal vorbereiten:
 	message.src = canix_selfaddr();

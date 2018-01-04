@@ -1,7 +1,7 @@
 /************************************************************************/
-/*									*/
-/*			DCF77 Time Information Receiver			*/
-/*									*/
+/*									                                    */
+/*			DCF77 Time Information Receiver			                    */
+/*									                                    */
 /*              Author: Peter Dannegger                                 */
 /*                      danni@specs.de                                  */
 /*                                                                      */
@@ -29,7 +29,7 @@
 #include <hcan_multicast.h>
 #include "dcf77_receiver.h"
 #include "darlingtonoutput.h"
-#include "tasterinput.h"
+#include <input.h>
 #include <avr/pgmspace.h>
 
 #define code PROGMEM
@@ -163,11 +163,7 @@ inline void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p, uint8_t 
 
 void dcf77_handler(device_data_dcf77_receiver *p)
 {
-
-  uint8_t dcf77_input;
-
-
-  dcf77_input = tasterport_read(p->config.port);
+  uint8_t dcf77_input = inputport_read(1, p->config.port);
 
   if( p->dcf77_time != 0xFF ) {			// bei 255 Ticks mit dem Zählen aufhören, sonst würde die Rechnung durcheinander kommen
     p->dcf77_time++;           

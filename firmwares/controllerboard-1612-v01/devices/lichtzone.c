@@ -12,7 +12,6 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 
-#include "tasterinput.h"
 #include "darlingtonoutput.h"
 #include <hcan_multicast.h>
 

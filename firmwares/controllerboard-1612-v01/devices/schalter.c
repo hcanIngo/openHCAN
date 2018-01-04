@@ -32,59 +32,9 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 
-#include <devices.h>
+#include "../input.h"
 
 void schalter_init(device_data_schalter *p, eds_block_p it) {}
-
-static inline void sendMessage(device_data_schalter *p, uint8_t active);
-
-// Liefert den Zustand des angegebenen Inputports; der Wertebereich fuer n ist [0..15]
-static inline uint8_t inputport_read(device_data_schalter *p, uint8_t n);
-
-
-inline void schalter_timer_handler(device_data_schalter *p, uint8_t zyklus)
-{
-	if (zyklus != 10) return; // 10tel-Sekunden-Zyklus verwendet
-
-	// µC-interner-Pullup am Eingangport aktiv:
-	// Wenn Schalter high liefert, dann ist der Pin 0, ansonsten 1
-	uint8_t active = inputport_read(p, p->config.port) == 0;
-
-	if (p->newState != 3)
-	{
-		if ((active && FALLING == p->lastEdge) || 	// Zustandswechsel 0->1?
-			(!active && RISING == p->lastEdge))		// Zustandswechsel 1->0?
-		{
-			// Schalterstellung geaendert:
-			if (p->newState < 255)
-				p->newState++; // Entprellschutz
-		}
-	}
-
-
-	if (p->newState == 3) // mind. 30msec veraenderte Schalterstellung
-	{
-		sendMessage(p, active);
-		p->newState = 0;
-	}
-}
-
-
-void schalter_can_callback(device_data_schalter *p, const canix_frame *frame)
-{
-	if (frame->data[1] == HCAN_HES_BOARD_ACTIVE)
-	{
-		/* HCAN_HES_BOARD_ACTIVE kommt immer wenn ein C1612 gerade hochgelaufen ist,
-		 * damit devices (z. B. powerports), welche von Schaltern beeinflusst werden,
-		 * ihren von der Schalterstellung abhaengigen Zustand initial erhalten.
-		 * schalter_can_callback wird in main.c fuer jedes Schalter-Device einmal aufgerufen. */
-		if(p->config.gruppe != 255)
-		{
-			canix_sleep_100th(10); // 100msec Pause
-			p->newState = 3; // sodass im schalter_timer_handler der aktuelle Zustand gesendet wird
-		}
-	}
-}
 
 static inline void sendMessage(device_data_schalter *p, uint8_t active)
 {
@@ -120,44 +70,47 @@ static inline void sendMessage(device_data_schalter *p, uint8_t active)
 	canix_frame_send_with_prio(&message, HCAN_PRIO_HI);
 }
 
-static inline uint8_t inputport_read(device_data_schalter *p, uint8_t n)
+inline void schalter_timer_handler(device_data_schalter *p, uint8_t zyklus)
 {
-	if (expanderActive && (n < 2))
-	{
-    	return 0;
-  	}
-   	if (n < 8)
-	{
-		// Pins sind 1:1 von PORTC auszulesen
+	if (zyklus != 10) return; // 10tel-Sekunden-Zyklus verwendet
 
-		DDRC &= ~ (1<< n); // Modus Input setzen
+	// µC-interner-Pullup am Eingangport aktiv:
+	// Wenn Schalter high liefert, dann ist der Pin 0, ansonsten 1
+	uint8_t pullup = p->config.feature & (1<<FEATURE_SCHALTER_PULLUP_AUS);
+	uint8_t active = inputport_read(pullup, p->config.port) == 0;
 
-		if(p->config.feature & (1<<FEATURE_SCHALTER_PULLUP_AUS))
-		    PORTC &= ~ (1<< n); // Pullup ausschalten
-		else
-		    PORTC |= (1<< n); // Pullup einschalten
-
-		return PINC & (1<< n);
-	}
-#if defined(__AVR_ATmega32__) || defined(__AVR_ATmega644P__)
-   	else if (n < 16)
+	if (p->newState != 3)
 	{
-		n &= 0x07; // auf den Bereich 0-7 holen
-		n = 7 - n; // Pins sind zu spiegel ( 0 -> 7, 1 -> 6 etc.)
-		DDRA &= ~ (1<< n); // Modus Input setzen
-
-		if(p->config.feature & (1<<FEATURE_SCHALTER_PULLUP_AUS))
-		    PORTA &= ~ (1<< n); // Pullup ausschalten
-		else
-		    PORTA |= (1<< n); // Pullup einschalten
-		
-		return PINA & (1<< n);
-	}
-#endif
-	else if (n < 244)
-	{
-		return ports_getInput (n); // n-tes Bit abfragen
+		if ((active && FALLING == p->lastEdge) || 	// Zustandswechsel 0->1?
+			(!active && RISING == p->lastEdge))		// Zustandswechsel 1->0?
+		{
+			// Schalterstellung geaendert:
+			if (p->newState < 255)
+				p->newState++; // Entprellschutz
+		}
 	}
 
-	return 0;
+
+	if (p->newState == 3) // mind. 30msec veraenderte Schalterstellung
+	{
+		sendMessage(p, active);
+		p->newState = 0;
+	}
+}
+
+
+void schalter_can_callback(device_data_schalter *p, const canix_frame *frame)
+{
+	if (frame->data[1] == HCAN_HES_BOARD_ACTIVE)
+	{
+		/* HCAN_HES_BOARD_ACTIVE kommt immer wenn ein C1612 gerade hochgelaufen ist,
+		 * damit devices (z. B. powerports), welche von Schaltern beeinflusst werden,
+		 * ihren von der Schalterstellung abhaengigen Zustand initial erhalten.
+		 * schalter_can_callback wird in main.c fuer jedes Schalter-Device einmal aufgerufen. */
+		if(p->config.gruppe != 255)
+		{
+			canix_sleep_100th(10); // 100msec Pause
+			p->newState = 3; // sodass im schalter_timer_handler der aktuelle Zustand gesendet wird
+		}
+	}
 }

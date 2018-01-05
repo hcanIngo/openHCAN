@@ -37,7 +37,7 @@ Felder.
 	cp eds_desc.cc ../libhcan++/
 	mah@grobi:~/src/hcan/xml> 
 
-- nun kann die Controller-1612 (oder eine andere EDS verwendende Firmware)
+- nun kann die Controllerboard (oder eine andere EDS verwendende Firmware)
   angepasst werden
 - die Datei ../../include/eds-structs.h ist in unserem Falle veraendert worden;
   die Struct eds_heizung_block_t z.B. hat die neuen Felder erhalten

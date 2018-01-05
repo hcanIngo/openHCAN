@@ -52,7 +52,7 @@
  *
  * Es wird aber \a nicht die Time-Master Funktion uebernommen, wenn eine
  * Weile keine Time-Meldungen mehr kommen. Dieses Feature ist z.Z. nur
- * in der Controller-1612 Firmware implementiert.
+ * in der Controllerboard Firmware implementiert.
  *
  * Auch werden Zeit-Anfrage beantwortet:
  * - HCAN_RTS_TIME_REQUEST

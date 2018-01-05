@@ -16,7 +16,7 @@ Benoetigte Elektronik und Software
   beschreiche ich die Einrichtung unter Debian Etch)
 - das HCAN-Hostinterface-v02 (im Folgenden HI genannt), fertig aufgebaut
 - ein USB-Kabel
-- einen Controller-1612 (im Folgenden Controller genannt), fertig aufgebaut
+- einen Controllerboard (im Folgenden Controller genannt), fertig aufgebaut
 - ein Labor- oder sonstiges Netzteil, das 24V von sich gibt
 - Einige Kabel, 2 Stueck 120Ohm Abschlusswiderstaende fuer den CAN-Bus
 - Multimeter und ggfls weiteres Messequipment
@@ -54,8 +54,8 @@ ein passendes Programmierkabel[1] benoetigt.
   Hierbei sollte kein Fehler auftreten; es liegt nun eine main.hex Datei im
   Verzeichnis.
 
-- Controller-1612 Firmware compilieren:
-  $ cd firmware/controller-1612
+- Controllerboard Firmware compilieren:
+  $ cd firmware/controllerboard
   $ make
   Hierbei sollte kein Fehler auftreten; es liegt nun eine main.hex Datei im
   Verzeichnis.
@@ -90,7 +90,7 @@ um welche Geschwindigkeit es sich handelt - weitere Infos bekommt er nur vom
 FT245 - somit erklaert sich das Verhalten.
 
 Die 24V-Spannungsversorgung an den Controller und das HI anschliessen; Ergebnis
-pruefen: Beim Controller-1612 muss nun die kleine LED leuchten, ebenso die
+pruefen: Beim Controllerboard muss nun die kleine LED leuchten, ebenso die
 Power-LED beim HI.
 
 Danach dann den CAN Bus aufbauen: CAN-Hi und CAN-Lo jeweils verbinden, CAN-Hi
@@ -233,7 +233,7 @@ sending ping packets from 512 to 300...
  [5] 17 msec
 $ 
 
-Jetzt wird die Controller-1612 Firmware ueber den CAN Bus geflashed. Dazu wird
+Jetzt wird die Controllerboard Firmware ueber den CAN Bus geflashed. Dazu wird
 die main.hex-Datei, die zuvor compiliert wurde, benoetigt.
 
 $ telican -c 300 -e "flash main.hex"
@@ -262,7 +262,7 @@ $
 
 Herzlichen Glueckwunsch! 
 
-Wer jetzt noch weiter machen will ;-), der kann im Kapitel 3 "Controller-1612"
+Wer jetzt noch weiter machen will ;-), der kann im Kapitel 3 "Controllerboard"
 ueber die Konfiguration weiterlesen.
 
 

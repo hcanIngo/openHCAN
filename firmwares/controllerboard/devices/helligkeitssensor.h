@@ -17,20 +17,24 @@
  *
  *  (c) 2010 by Martin Kramer and Ingo Lages, i (dot) lages (at) gmx (dot) de
  */
-#ifndef WECK_PAGE_H
-#define WECK_PAGE_H
+#ifndef HELLIGKEITSSENSOR_H
+#define HELLIGKEITSSENSOR_H
 
+#include <canix/eds.h>
 #include <inttypes.h>
-#include <canix/canix.h>
 #include <eds-structs.h>
+#include "../../controllerboard/floatingAverage.h"
 
-// Fuer die Powerport-Feature-Konstanten
-#include "../controllerboard/devices/powerport.h"
-/* POWERPORT_FEATURE_WECK_VERZOEGERT_EIN	4 //Bit4
- * POWERPORT_FEATURE_WECK_AUTO_AUS			5 //Bit5 */
+typedef struct
+{
+	uint8_t type;
+	eds_helligkeitssensor_block_t config;
+	uint16_t secsUntilNextSend; // zyklisch Helligkeitsnachrichten versenden
+	tFloatAvgFilter filterBrightness; // Speicher des gleitenden Mittelwerts zur Glättung
+} device_data_helligkeitssensor;
 
-void weck_page_handle_key_down_event(eds_weck_page_block_t *p, uint8_t key);
-void weck_page_print_page(eds_weck_page_block_t *p);
-void weck_page_can_callback(eds_weck_page_block_t *p, const canix_frame *frame);
+void helligkeitssensor_init(device_data_helligkeitssensor *p, eds_block_p it);
+inline void helligkeitssensor_timer_handler(device_data_helligkeitssensor *p, uint8_t zyklus);
+void helligkeitssensor_can_callback(device_data_helligkeitssensor *p, const canix_frame *frame);
 
 #endif

@@ -19,7 +19,7 @@
 #include <lcdstatemachine.h>
 
 // Fuer die Heizungs-Modi-Konstanten
-#include "../controllerboard-1612-v01/devices/heizung.h"
+#include "../controllerboard/devices/heizung.h"
 
 volatile uint8_t heiz_details_expected = 0;
 volatile uint8_t heiz_details_heiz_id = 0;

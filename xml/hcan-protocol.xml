@@ -577,7 +577,7 @@
 
 			<message name="DEVICE_STATES_REQUEST" id="75"
 				description="Sendet der MQTT-Client, nach Connect zum Broker und CAN-Bus. 
-				Daraufhin erhaelt der Broker zeitnah alle CAN-Bus-Devicezustaende von den C1612-Controllern." >
+				Daraufhin erhaelt der Broker zeitnah alle CAN-Bus-Devicezustaende von den Controllerboard." >
 			</message>
 
 			<message name="DCF77_ERROR" id="80"

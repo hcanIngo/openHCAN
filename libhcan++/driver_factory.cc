@@ -3,7 +3,7 @@
 
 #include <board_driver.h>
 #include <atmega_board_driver.h>
-#include <controller1612_driver.h>
+#include <controllerboard_driver.h>
 #include <userpanel_driver.h>
 #include <usv_driver.h>
 
@@ -25,15 +25,15 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 			switch (type)
 			{
 				case 4 : // Controllerboard-1612 v01
-					return board_driver_p(new controller1612_driver(bcon));
+					return board_driver_p(new controllerboard_driver(bcon));
 				case 5 : // Userpanel v01
 					return board_driver_p(new userpanel_driver(bcon));
 				case 6 : // USV Controller1612-Module
 					return board_driver_p(new usv_driver(bcon));
 				case 7 : // Heizungssteuerung Controllerboard-1612 v01
-					return board_driver_p(new controller1612_driver(bcon));
+					return board_driver_p(new controllerboard_driver(bcon));
 				case 8 : // Wetterstation Controllerboard-1612 v01
-					return board_driver_p(new controller1612_driver(bcon));
+					return board_driver_p(new controllerboard_driver(bcon));
 				default :
 					cerr << "warning: unknown board type id " << int(type)
 						<< ", using generic atmega32 driver..." << endl;
@@ -45,15 +45,15 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 				switch (type)
 				{
 					case 4 : // Controllerboard-1612 v01
-						return board_driver_p(new controller1612_driver(bcon, page_size));
+						return board_driver_p(new controllerboard_driver(bcon, page_size));
 					case 5 : // Userpanel v01
 						return board_driver_p(new userpanel_driver(bcon, page_size));
 					case 6 : // USV Controller1612-Module
 						return board_driver_p(new usv_driver(bcon, page_size));
 					case 7 : // Heizungssteuerung Controllerboard-1612 v01
-						return board_driver_p(new controller1612_driver(bcon, page_size));
+						return board_driver_p(new controllerboard_driver(bcon, page_size));
 					case 8 : // Wetterstation Controllerboard-1612 v01
-						return board_driver_p(new controller1612_driver(bcon, page_size));
+						return board_driver_p(new controllerboard_driver(bcon, page_size));
 					default :
 						cerr << "warning: unknown board type id " << int(type)
 							<< ", using generic atmega644p driver..." << endl;
@@ -64,15 +64,15 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 					switch (type)
 					{
 						case 4 : // Controllerboard-1612 v01
-							return board_driver_p(new controller1612_driver(bcon));
+							return board_driver_p(new controllerboard_driver(bcon));
 						case 5 : // Userpanel v01
 							return board_driver_p(new userpanel_driver(bcon));
 						case 6 : // USV Controller1612-Module
 							return board_driver_p(new usv_driver(bcon));
 						case 7 : // Heizungssteuerung Controllerboard-1612 v01
-							return board_driver_p(new controller1612_driver(bcon));
+							return board_driver_p(new controllerboard_driver(bcon));
 						case 8 : // Wetterstation Controllerboard-1612 v01
-							return board_driver_p(new controller1612_driver(bcon));
+							return board_driver_p(new controllerboard_driver(bcon));
 						default :
 							cerr << "warning: unknown board type id " << int(type)
 								<< ", using generic atmega328p driver..." << endl;

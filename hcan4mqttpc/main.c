@@ -117,7 +117,7 @@ int main(int argc, char ** argv)
     /* "RQ": Nachricht "HES_DEVICE_STATES_REQUEST" an den CAN-Bus
 
        Mit Empfang von "HCAN_HES_DEVICE_STATES_REQUEST"
-       senden alle C1612-Controller alle ihre konfigurierten
+       senden alle Controllerboards alle ihre konfigurierten
        Lampen-, Sonstige-, Rolladen-, Heizungs- Zustaende. */
     char msg[3];
     strncpy(msg, "RQ", sizeof msg);

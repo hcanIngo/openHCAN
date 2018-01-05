@@ -47,8 +47,8 @@ inline void taster_timer_handler(device_data_taster *p, uint8_t zyklus)
 	}
 	else
 	{
-		// Wenn Schalter-Down schon gesendet wurde,
-		// dann ein Schalter-Up Event senden:
+		// Wenn Taster-Down schon gesendet wurde,
+		// dann ein Taster-Up Event senden:
 		if (p->pressed > 3)
 		{
 			// ...und kein Flankenbetrieb konfiguriert ist:

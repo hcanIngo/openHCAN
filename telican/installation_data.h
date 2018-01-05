@@ -3,7 +3,7 @@
 
 #include <string>
 #include <libxml++/parsers/domparser.h>
-#include <stdint.h> //fuer g++-4.4: uint8_t
+#include <stdint.h>
 
 using namespace std;
 using namespace xmlpp;

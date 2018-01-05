@@ -64,5 +64,11 @@ load:
 	#telican --polite-time 2 -a $(IP_HI) -c $(adr) --arch $(MCU) -e "flash $(MCU_DIR)/$(TARGET).hex"
 
 enableDebugWIRE_atmega328p:
-	avrdude -c avrispmkII -p $(MCU) -P usb -U hfuse:w:0x88:m
+	avrdude -c avrispmkII -p $(MCU) -B 12000 -P usb -U hfuse:w:0x88:m
+	
+disableDebugWIRE_atmega328p:
+	@# moeglich:  atmelice, atmelice_isp, atmelice_dw
+	avrdude -c atmelice_dw -p $(MCU) -P usb -U hfuse:w:0xC8:m
+	
+	
 

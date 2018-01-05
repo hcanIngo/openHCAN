@@ -76,7 +76,7 @@ inline void schalter_timer_handler(device_data_schalter *p, uint8_t zyklus)
 
 	// µC-interner-Pullup am Eingangport aktiv:
 	// Wenn Schalter high liefert, dann ist der Pin 0, ansonsten 1
-	uint8_t pullup = p->config.feature & (1<<FEATURE_SCHALTER_PULLUP_AUS);
+	uint8_t pullup = !(p->config.feature & (1<<FEATURE_SCHALTER_PULLUP_AUS));
 	uint8_t active = inputport_read(pullup, p->config.port) == 0;
 
 	if (p->newState != 3)

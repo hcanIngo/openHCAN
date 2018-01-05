@@ -55,6 +55,7 @@ namespace hcan
 			virtual void cmd_flash (const string &filename);
 			virtual uint16_t cmd_getaddress ();
 			virtual void cmd_setaddress (const uint16_t address);
+			virtual void cmd_setboardtyp (const uint16_t boardtyp);
 			virtual void cmd_reset();
 			virtual uint32_t cmd_getuptime();
 			virtual uint8_t cmd_getstate();

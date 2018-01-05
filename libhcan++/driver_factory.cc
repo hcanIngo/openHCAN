@@ -24,15 +24,15 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 		case HCAN_ARCH_ATMEGA32 :
 			switch (type)
 			{
-				case 4 : // Controllerboard-1612 v01
+				case HCAN_BOARDTYP_C1612 : // Controllerboard-1612 v01
 					return board_driver_p(new controllerboard_driver(bcon));
-				case 5 : // Userpanel v01
+				case HCAN_BOARDTYP_UI : // Userpanel v01
 					return board_driver_p(new userpanel_driver(bcon));
-				case 6 : // USV Controller1612-Module
+				case HCAN_BOARDTYP_USV : // USV Controller1612-Module
 					return board_driver_p(new usv_driver(bcon));
-				case 7 : // Heizungssteuerung Controllerboard-1612 v01
+				case HCAN_BOARDTYP_ZENTRALHEIZUNG : // Heizungssteuerung Controllerboard-1612 v01
 					return board_driver_p(new controllerboard_driver(bcon));
-				case 8 : // Wetterstation Controllerboard-1612 v01
+				case HCAN_BOARDTYP_WETTERSTATION : // Wetterstation Controllerboard-1612 v01
 					return board_driver_p(new controllerboard_driver(bcon));
 				default :
 					cerr << "warning: unknown board type id " << int(type)
@@ -44,16 +44,10 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 				page_size = 256;
 				switch (type)
 				{
-					case 4 : // Controllerboard-1612 v01
+					case HCAN_BOARDTYP_C1612 : // Controllerboard-1612 v01
 						return board_driver_p(new controllerboard_driver(bcon, page_size));
-					case 5 : // Userpanel v01
+					case HCAN_BOARDTYP_UI : // Userpanel v01
 						return board_driver_p(new userpanel_driver(bcon, page_size));
-					case 6 : // USV Controller1612-Module
-						return board_driver_p(new usv_driver(bcon, page_size));
-					case 7 : // Heizungssteuerung Controllerboard-1612 v01
-						return board_driver_p(new controllerboard_driver(bcon, page_size));
-					case 8 : // Wetterstation Controllerboard-1612 v01
-						return board_driver_p(new controllerboard_driver(bcon, page_size));
 					default :
 						cerr << "warning: unknown board type id " << int(type)
 							<< ", using generic atmega644p driver..." << endl;
@@ -63,16 +57,8 @@ board_driver_p driver_factory::make_driver (board_connection &bcon,
 				case HCAN_ARCH_ATMEGA328P :
 					switch (type)
 					{
-						case 4 : // Controllerboard-1612 v01
-							return board_driver_p(new controllerboard_driver(bcon));
-						case 5 : // Userpanel v01
-							return board_driver_p(new userpanel_driver(bcon));
-						case 6 : // USV Controller1612-Module
-							return board_driver_p(new usv_driver(bcon));
-						case 7 : // Heizungssteuerung Controllerboard-1612 v01
-							return board_driver_p(new controllerboard_driver(bcon));
-						case 8 : // Wetterstation Controllerboard-1612 v01
-							return board_driver_p(new controllerboard_driver(bcon));
+						case HCAN_BOARDTYP_C1416 :
+							return board_driver_p(new controllerboard_driver(bcon, page_size));
 						default :
 							cerr << "warning: unknown board type id " << int(type)
 								<< ", using generic atmega328p driver..." << endl;

@@ -45,6 +45,7 @@ bool board_driver::show_help ()
 		"	dump ee <address>                  dumps a eeprom range\n" <<
 		"	set ee <address> <value>           save value to eeprom\n" <<
 		"	set address <hcan-address>         save a new hcan address\n" <<
+		"	set boardtyp <hcan-boardtyp>       save a new hcan boardtyp [3=C1416|4=C1612|5=UI]\n" <<
 		"	set sysloglevel <level>            set the syslog level\n" <<
 		"	bootloader                         boot into bootloader\n" <<
 		"	loadapp                            load the application\n" <<
@@ -173,11 +174,18 @@ bool board_driver::exec_command (context &c, const string &command)
 			return true;
 		}
 
+		if (s == "boardtyp")
+		{
+			uint16_t value;
+			sin >> value;
+			cmd_setboardtyp(value);
+			return true;
+		}
+
 		if (s == "sysloglevel")
 		{
 			uint16_t level;
 			sin >> level;
-
 			cmd_setsysloglevel(level);
 			return true;
 		}
@@ -580,6 +588,24 @@ void board_driver::cmd_setaddress (const uint16_t address)
 		cerr << "error: value written to eeprom does not match read";
 }
 
+void board_driver::cmd_setboardtyp (const uint16_t boardtyp)
+{
+	if (   HCAN_BOARDTYP_HI == boardtyp
+		|| HCAN_BOARDTYP_C1416 == boardtyp
+		|| HCAN_BOARDTYP_C1612 == boardtyp
+		|| HCAN_BOARDTYP_UI == boardtyp
+		|| HCAN_BOARDTYP_USV == boardtyp
+		|| HCAN_BOARDTYP_ZENTRALHEIZUNG == boardtyp
+		|| HCAN_BOARDTYP_WETTERSTATION == boardtyp)
+	{
+		write_eeprom_word_le(4, boardtyp);
+
+		if (read_eeprom_word_le(4) != boardtyp)
+			cerr << "error: boardtyp-value written to eeprom does not match read";
+	}
+	else
+		cerr << "error: boardtyp=" << boardtyp << " unkown!";
+}
 
 void board_driver::cmd_setsysloglevel(uint16_t level)
 {
@@ -654,14 +680,13 @@ void board_driver::cmd_show_system()
 	cout << "Board :         ";
 	switch (type)
 	{
-		case 1 : cout << "Versuchsboard1 v02"; break;
-		case 2 : cout << "Host-Interface v01, serial"; break;
-		case 3 : cout << "Controllerboard-88 v01"; break;
-		case 4 : cout << "Controllerboard-1612 v01"; break;
-		case 5 : cout << "Userpanel-v01"; break;
-		case 6 : cout << "USV Controller"; break;
-		case 7 : cout << "Heizungssteuerung"; break;
-		case 8 : cout << "Wetterstation"; break;
+		case HCAN_BOARDTYP_HI : cout << "Host-Interface v01, serial"; break;
+		case HCAN_BOARDTYP_C1416 : cout << "Controllerboard-1416"; break;
+		case HCAN_BOARDTYP_C1612 : cout << "Controllerboard-1612 v01"; break;
+		case HCAN_BOARDTYP_UI : cout << "Userpanel-v01"; break;
+		case HCAN_BOARDTYP_USV : cout << "USV Controller"; break;
+		case HCAN_BOARDTYP_ZENTRALHEIZUNG : cout << "Zentralheizungssteuerung"; break;
+		case HCAN_BOARDTYP_WETTERSTATION : cout << "Wetterstation"; break;
 		default : cout << "unknown";
 	}
 	cout << endl << "MCU :           ";

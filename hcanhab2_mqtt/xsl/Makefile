@@ -26,9 +26,6 @@ RULE_FILES := $(patsubst rules_%.xsl,%.rules,$(wildcard rules_*.xsl))
 	
 all.rules: $(RULE_FILES)
 	echo RULE_FILES: $(RULE_FILES)
-	# 
-	cat ../generated/heizungGlobalVariablen.rules ../generated/heizung.rules > ../generated/heizung_cat.rules
-	cd ../generated/; rm -f heizungGlobalVariablen.rules heizung.rules
 
 $(RULE_FILES): %.rules: rules_%.xsl
 	xalan -in $(HCAN_INSTALLATION) -xsl $<    >  ../generated/$@

@@ -22,9 +22,9 @@ cb> 91/OPEN
 cb> 91/CLOSED
 
 cb> 91/H/aus
-cb> 91/H/therm/20.6
 cb> 91/H/auto/20.6
-
+cb> 91/H/therm/20.6			ohne Zeitangabe unbegrenzt    
+cb> 91/H/therm/20.6/2.5 	2.5= fuer 2.5h
 
 schalten: 
 ---------

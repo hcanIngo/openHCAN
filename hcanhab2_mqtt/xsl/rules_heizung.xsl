@@ -21,39 +21,35 @@ rule "Heizung OpenHab-Selektion veraendert"
 when
 	Item HEIZMODE_<xsl:value-of select="@name" /> received command
 then
- 	//logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: " + receivedCommand.toString)
-
  	if(receivedCommand == "1") { // Aus
 		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Aus")
-		// HEIZMODE_<xsl:value-of select="@name" />.sendCommand("1")
-		sollTemp<xsl:value-of select="@name" /> = 0
-		SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(sollTemp<xsl:value-of select="@name" />) // sitemap-Aktu.
+		SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(0) // "sitemap-Aktu."
 		return
 	}
 	else if(receivedCommand == "2") { // Auto
 		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Auto")
-		// HEIZMODE_<xsl:value-of select="@name" />.sendCommand("2")
 		return
 	}
 	else if(receivedCommand == "3") { // Therm
-		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Therm")
-		sollTemp<xsl:value-of select="@name" /> = 20.5	
+		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Therm unbegr")
+		SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(20.5) // "sitemap-Aktu."
+		SOLLTEMP_DAUER_<xsl:value-of select="@name" />.sendCommand("20.5/0.0") // mqtt-cmd (0= fuer unbegrenzte Zeit)
 	}
-	else if(receivedCommand == "4") { // ✳ (3 Std.)
-		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Frost kurz")
-		// TODO Schnittstelle zu mqttPahoClient erweitern um Dauer
-		sollTemp<xsl:value-of select="@name" /> = 10	
+	else if(receivedCommand == "33") { // Therm (3 Std.)
+		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Therm 3h")
+		SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(20.5) // "sitemap-Aktu."
+		SOLLTEMP_DAUER_<xsl:value-of select="@name" />.sendCommand("20.5/3.0") // mqtt-cmd
 	}
-	else if(receivedCommand == "5") { // ✳ lange
-		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Frost lang")
-		// TODO Schnittstelle zu mqttPahoClient erweitern um Dauer
-		sollTemp<xsl:value-of select="@name" /> = 10	
-	}	
-	
-	logInfo("IL@HM Solltemp angepasst ", "sollTemp<xsl:value-of select="@name" />: " + sollTemp<xsl:value-of select="@name" />.toString)
-	
-	//SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(sollTemp<xsl:value-of select="@name" />) // sitemap-Aktu.
-	SOLLTEMP_<xsl:value-of select="@name" />.sendCommand(sollTemp<xsl:value-of select="@name" />) // mqtt-cmd
+	else if(receivedCommand == "4") {
+		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Frost unbegr")
+		SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(10) // "sitemap-Aktu."
+		SOLLTEMP_DAUER_<xsl:value-of select="@name" />.sendCommand("10/0.0") // mqtt-cmd (0= fuer unbegrenzte Zeit)
+	}
+	else if(receivedCommand == "34") { // ✳ (3 Std.)
+		logInfo("IL-HM", "HEIZMODE_<xsl:value-of select="@name" />: Frost 3h")
+		SOLLTEMP_<xsl:value-of select="@name" />.postUpdate(10) // "sitemap-Aktu."
+		SOLLTEMP_DAUER_<xsl:value-of select="@name" />.sendCommand("10/3.0") // mqtt-cmd
+	}			
 end
 
 </xsl:template>

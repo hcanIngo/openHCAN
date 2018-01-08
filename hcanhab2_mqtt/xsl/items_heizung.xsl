@@ -28,15 +28,8 @@
 Group <xsl:value-of select="substring-before(@name,'__')" /> "<xsl:value-of select="@stt" />" (Heizungen) [ "Thermostat" ]
 Number TEMPERATUR_<xsl:value-of select="@name" /> 	"<xsl:value-of select="substring-after(@name,'__')" /> [%.1f °C]" &lt;temperature&gt; (<xsl:value-of select="substring-before(@name,'__')" />) [ "CurrentTemperature" ] {mqtt="&lt;[bpiBroker:cb&gt;:state:JS(getTemp.js):<xsl:value-of select="@gruppe" />/T/.*]", autoupdate="true"}
 Number SOLLTEMP_<xsl:value-of select="@name" /> &lt;temperature&gt; (<xsl:value-of select="substring-before(@name,'__')" />) [ "TargetTemperature" ] {mqtt="&lt;[bpiBroker:cb&gt;:state:JS(getSolltemp.js):<xsl:value-of select="@gruppe" />/H/(auto|therm)/.*], &gt;[bpiBroker:cb&lt;:command:*:H/therm/<xsl:value-of select="@gruppe" />/${command}]", autoupdate="true"}
+String SOLLTEMP_DAUER_<xsl:value-of select="@name" /> {mqtt="&gt;[bpiBroker:cb&lt;:command:*:H/therm/<xsl:value-of select="@gruppe" />/${command}]"}
 String HEIZMODE_<xsl:value-of select="@name" /> 	"<xsl:value-of select="substring-after(@name,'__')" />" &lt;heating&gt; (<xsl:value-of select="substring-before(@name,'__')" />) [ "homekit:HeatingCooling" ] {mqtt="&lt;[bpiBroker:cb&gt;:state:JS(getHeizmodeState.js):<xsl:value-of select="@gruppe" />/H/.*], &gt;[bpiBroker:cb&lt;:command:1:H/aus/<xsl:value-of select="@gruppe" />], &gt;[bpiBroker:cb&lt;:command:2:H/auto/<xsl:value-of select="@gruppe" />]", autoupdate="true"}
-
-
-/* OH-Bsp von https://github.com/openhab/openhab-alexa
-Group gDownstairsThermostat "Downstairs Thermostat" (gFF) [ "Thermostat" ]
-Number DownstairsThermostatCurrentTemp "Downstairs Thermostat Current Temperature" (gDownstairsThermostat) [ "CurrentTemperature" ]
-Number DownstairsThermostatTargetTemperature "Downstairs Thermostat Target Temperature" (gDownstairsThermostat) [ "TargetTemperature" ]
-String DownstairsThermostatHeatingCoolingMode "Downstairs Thermostat Heating/Cooling Mode" (gDownstairsThermostat) [ "homekit:HeatingCooling" ]
-*/
 
 </xsl:template>
 

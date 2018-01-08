@@ -23,6 +23,5 @@ moveIt:
 	rm -f -R $(OPENHABDOWNLOADS_DIR)/tempinst
 
 start: 
-	make stop
 	sh /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/start.sh
 	@# sh /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/start_debug.sh

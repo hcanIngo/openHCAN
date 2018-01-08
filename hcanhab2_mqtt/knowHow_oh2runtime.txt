@@ -13,8 +13,10 @@ smarthome:status LAMPE_OG_Buero__Decke_Schraege
 smarthome:status LAMPE_OG_Buero__Decke_Tuer 
 smarthome:status LAMPE_EG_Bad__Decke
 
-smarthome:status TEMPERATUR_OG_K2__K2
-smarthome:status TEMPERATUR_OG_K1__K1_Heizung
+smarthome:status TEMPERATUR_OG_K1__K1
+smarthome:status SOLLDAUER_OG_K1__K1
+smarthome:status SOLLTEMP_OG_K1__K1
+smarthome:status HEIZMODE_OG_K1__K1
 
 smarthome:send LAMPE_OG_Buero__Decke_Tuer ON
 ---

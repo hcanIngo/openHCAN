@@ -88,10 +88,13 @@ int getMessage4cb (char * msg, struct can_frame * msg4cb)
 				token = strtok(NULL, "/"); if(NULL == token) return 0;
 				msg4cb->data[2] = atoi(token); // Heizungs-ID
 				token = strtok(NULL, "/"); if(NULL == token) return 0;
-				uint16_t temp = (uint16_t) (16 * atof(token));
+				uint16_t temp = (uint16_t) (16.0f * atof(token));
 				msg4cb->data[3] = temp>>8; // temp_hi : Soll-Temperatur (MSB)
 				msg4cb->data[4] = temp; // temp_li : Soll-Temperatur (LSB)
-				uint16_t dauer = 65000; // TODO von OH erhalten!
+
+				uint16_t dauer = 0; // 0 = ohne Zeitangabe unbegrenzt (falls der naechste Token fehlt)
+				token = strtok(NULL, "/");
+				if(NULL != token) dauer = (uint16_t) (3600.0f * atof(token)); // hours -> secs
 				msg4cb->data[5] = dauer>>8; // duration_hi : Restdauer (MSB), 0 = unbegrenzt
 				msg4cb->data[6] = dauer; // duration_lo : Restdauer (LSB)
 				return 7;
@@ -153,6 +156,7 @@ static inline uint8_t isItTopic4Broker(uint8_t msg4broker)
 size_t catHesTopic4Broker(char * str, const struct can_frame * cf)
 {
 	float temp = 0;
+	float dauer = 0;
 	const size_t maxSize = 30;
 	switch (cf->data[1])
 	{
@@ -190,8 +194,9 @@ size_t catHesTopic4Broker(char * str, const struct can_frame * cf)
 		case HCAN_HES_HEIZUNG_MODE_OFF_DETAILS:
 			return snprintf(str, maxSize, "%d/H/aus", cf->data[2]);
 		case HCAN_HES_HEIZUNG_MODE_THERMOSTAT_DETAILS:
-			temp =	((cf->data[3]<<8)|cf->data[4]) / 16.0; // Temperaturwert
-			return snprintf(str, maxSize, "%d/H/therm/%.1f", cf->data[2], temp);
+			temp =	(float)((cf->data[3]<<8)|cf->data[4]) / 16.0; // Temperaturwert
+			dauer =	(float)((cf->data[5]<<8)|cf->data[6]) / 3600.0; // Dauer
+			return snprintf(str, maxSize, "%d/H/therm/%.1f/%.1f", cf->data[2], temp, dauer);
 		case HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS:
 			temp =	((cf->data[3]<<8)|cf->data[4]) / 16.0; // Temperaturwert
 			return snprintf(str, maxSize, "%d/H/auto/%.1f", cf->data[2], temp);

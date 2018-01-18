@@ -1,5 +1,5 @@
 /* Bsp. input: '148/H/therm/16.5/2.8'  mit 148=gruppe
-	output Mode: 1,2,3,33,4,5 als String */
+	output Mode: 1,2,3,33,4,34 als String */
 var res = input.split("/",5);
 var rtn = "ng";
 

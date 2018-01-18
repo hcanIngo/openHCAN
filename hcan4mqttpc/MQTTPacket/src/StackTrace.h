@@ -19,7 +19,11 @@
 #define STACKTRACE_H_
 
 #include <stdio.h>
-#define NOSTACKTRACE 1
+#ifdef DEBUG
+	#define NOSTACKTRACE 0
+#else
+	#define NOSTACKTRACE 1
+#endif
 
 #if defined(NOSTACKTRACE)
 #define FUNC_ENTRY

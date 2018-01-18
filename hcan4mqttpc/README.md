@@ -17,4 +17,6 @@ Testmoeglichkeit z.B. per MQTTLens
 
 ...
 tt@bananapi:~/openHCAN/hcan4mqttcp$ ./hcan4mqttpc -D
+
+top -u tt
 ...

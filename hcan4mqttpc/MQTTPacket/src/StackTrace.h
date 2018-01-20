@@ -20,7 +20,7 @@
 
 #include <stdio.h>
 #ifdef DEBUG
-	#define NOSTACKTRACE 0
+	#undef NOSTACKTRACE
 #else
 	#define NOSTACKTRACE 1
 #endif
@@ -54,7 +54,9 @@
 #define FUNC_EXIT_MED_RC(x) StackTrace_exit(__FUNCTION__, __LINE__, &x, TRACE_MEDIUM)
 #define FUNC_EXIT_MAX_RC(x) StackTrace_exit(__FUNCTION__, __LINE__, &x, TRACE_MAXIMUM)
 #else
-#define FUNC_ENTRY StackTrace_entry(__func__, __LINE__, TRACE_MINIMUM)
+//#define FUNC_ENTRY StackTrace_entry(__func__, __LINE__, TRACE_MINIMUM)
+#define FUNC_ENTRY
+
 #define FUNC_ENTRY_NOLOG StackTrace_entry(__func__, __LINE__, -1)
 #define FUNC_ENTRY_MED StackTrace_entry(__func__, __LINE__, TRACE_MEDIUM)
 #define FUNC_ENTRY_MAX StackTrace_entry(__func__, __LINE__, TRACE_MAXIMUM)
@@ -62,7 +64,9 @@
 #define FUNC_EXIT_NOLOG StackTrace_exit(__func__, __LINE__, NULL, -1)
 #define FUNC_EXIT_MED StackTrace_exit(__func__, __LINE__, NULL, TRACE_MEDIUM)
 #define FUNC_EXIT_MAX StackTrace_exit(__func__, __LINE__, NULL, TRACE_MAXIMUM)
-#define FUNC_EXIT_RC(x) StackTrace_exit(__func__, __LINE__, &x, TRACE_MINIMUM)
+//#define FUNC_EXIT_RC(x) StackTrace_exit(__func__, __LINE__, &x, TRACE_MINIMUM)
+#define FUNC_EXIT_RC(x)
+
 #define FUNC_EXIT_MED_RC(x) StackTrace_exit(__func__, __LINE__, &x, TRACE_MEDIUM)
 #define FUNC_EXIT_MAX_RC(x) StackTrace_exit(__func__, __LINE__, &x, TRACE_MAXIMUM)
 

@@ -15,7 +15,7 @@
  *  with HCAN; if not, write to the Free Software Foundation, Inc., 51
  *  Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  *
- *  (c) 2016 Ingo Lages, i dot Lages (at) gmx (dot) de
+ *  (c) 2018 Ingo Lages, i dot Lages (at) gmx (dot) de
  */
 #include <syslog.h>
 #include <fcntl.h>
@@ -78,8 +78,6 @@ int parse_options(int argc, char ** argv)
 
 int main(int argc, char ** argv)
 {
-	int nwritten;
-
 	strcpy(device, "can0");
     strcpy(brokerHost_ip, "localhost"); // "192.168.1.78", "localhost", "m2m.eclipse.org"
 
@@ -98,10 +96,8 @@ int main(int argc, char ** argv)
     }
     struct ifreq canIfr;
     struct sockaddr_can canAddr;
-    struct can_frame canFrame;
-    memset(&canIfr, 0x0, sizeof(canIfr));
-    memset(&canAddr, 0x0, sizeof(canAddr));
-    memset(&canFrame, 0x0, sizeof(canFrame));
+    memset(&canIfr, 0, sizeof(canIfr));
+    memset(&canAddr, 0, sizeof(canAddr));
 
     strcpy(canIfr.ifr_name, device);
     ioctl(sock_can, SIOCGIFINDEX, &canIfr);
@@ -126,7 +122,6 @@ int main(int argc, char ** argv)
     fd_set recv_fdset;
     fd_set send_fdset;
     int max_fd;
-    int nread;
     struct timeval timeout;
     max_fd = sock_mqtt;
     if(sock_can > max_fd)
@@ -134,7 +129,7 @@ int main(int argc, char ** argv)
 
     while (1)
     {
-        timeout.tv_sec = 0;
+        timeout.tv_sec = 2;
         timeout.tv_usec = 500000;
         FD_ZERO(&recv_fdset);
         FD_ZERO(&send_fdset);
@@ -150,9 +145,9 @@ int main(int argc, char ** argv)
         {
             if (FD_ISSET(sock_can, &recv_fdset)) // cb -> hcan4mqttpc::canRxBuf[canBufWIdx]
             {
-                // read a frame from can:
+            	struct can_frame canFrame;
             	memset(&canFrame, 0, sizeof(struct can_frame)); // WICHTIG!
-            	nread = recv(sock_can, &canFrame, sizeof(struct can_frame), MSG_WAITALL);
+            	int nread = recv(sock_can, &canFrame, sizeof(struct can_frame), MSG_WAITALL); // read a frame from can
                 if (nread != sizeof(struct can_frame))
                 {
                     syslog(LOG_ERR, "could not read full packet from can, dropping...\n");
@@ -184,7 +179,7 @@ int main(int argc, char ** argv)
         			recvMqttMsg(); // ggf. mqttBufWIdx++
             }
 
-			if ((canBufWIdx != canBufRIdx) && FD_ISSET(sock_can, &send_fdset)) // something to send:  cb --> mqtt-broker?
+			if (canBufWIdx != canBufRIdx) // something to send:  cb --> mqtt-broker?
 			{
 				char str[200];
 				memset(str, '\0', sizeof(str)); // WICHTIG!
@@ -199,9 +194,9 @@ int main(int argc, char ** argv)
 				canBufRIdx &= BUFFERSIZE-1;
 			}
 
-			if ((mqttBufWIdx != mqttBufRIdx) && FD_ISSET(sock_mqtt, &send_fdset)) // something to send:  mqtt-broker --->  cb?
+			if (mqttBufWIdx != mqttBufRIdx) // something to send:  mqtt-broker --->  cb?
 			{
-				nwritten = write(sock_can, &mqttRxBuf[mqttBufRIdx], sizeof(struct can_frame));
+				int nwritten = write(sock_can, &mqttRxBuf[mqttBufRIdx], sizeof(struct can_frame));
 				if (nwritten == sizeof(struct can_frame))
 				{
 					if(debug)
@@ -224,7 +219,10 @@ int main(int argc, char ** argv)
 					syslog(LOG_ERR,"could not send complete CAN packet: written=%d, data-size=%d!\n", nwritten, mqttRxBuf[mqttBufRIdx].can_dlc);
         	}
         }
-        else if (0 == rtn)  TRACE("select-timeout\n");
+        else if (0 == rtn)
+        {
+        	TRACE("select-timeout\n");
+        }
         else if (-1 == rtn) TRACE("select-errno=%d\n", errno);
         else                TRACE("select-rtn=%d unerwartet\n", rtn);
     }

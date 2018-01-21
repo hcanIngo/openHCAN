@@ -42,6 +42,9 @@ uint8_t canBufRIdx = 0;
 uint8_t mqttBufWIdx = 0;
 uint8_t mqttBufRIdx = 0;
 uint8_t debug = 0;
+uint8_t debugWay = 0;
+
+enum { eRxFromCb=0x01, eRxFromMqtt=0x10, eTx2cb=0x02, eTx2mqtt=0x20 };
 
 int parse_options(int argc, char ** argv)
 {
@@ -204,6 +207,7 @@ int main(int argc, char ** argv)
         if(canBufWIdx != canBufRIdx) FD_SET(sock_can, &send_fdset);
         if(mqttBufWIdx != mqttBufRIdx) FD_SET(sock_mqtt, &send_fdset);
 
+        debugWay = 0;
         int rtn = select (max_fd+1, &recv_fdset, &send_fdset, NULL, &timeout);
         if(rtn > 0) // no timeout?
         {
@@ -212,13 +216,26 @@ int main(int argc, char ** argv)
         		if(((canBufWIdx+1)&(BUFFERSIZE-1)) == canBufRIdx) TRACE("no rx-can-buffer left\n");
         		else
         			rxFromCb();
+
+        		debugWay |= eRxFromCb;
             }
 
         	if (FD_ISSET(sock_mqtt, &recv_fdset))
             {
         		if(((mqttBufWIdx+1)&(BUFFERSIZE-1)) == mqttBufRIdx) TRACE("no rx-mqtt-buffer left\n");
         		else
-        			rxFromMqtt(); // ggf. mqttBufWIdx++
+        		{
+        			int rc = rxFromMqtt(); // ggf. mqttBufWIdx++
+        			if (rc == -1)
+        			{
+        				shutdown(sock_mqtt, SHUT_WR);
+        				recv(sock_mqtt, NULL, (size_t)0, 0);
+        				close(sock_mqtt);
+        				initMqtt(brokerHost_ip); // ...keepAliveInterval
+        			}
+        		}
+
+        		debugWay |= eRxFromMqtt;
             }
 
 			if (canBufWIdx != canBufRIdx) // something to send:  cb -> mqtt-broker?
@@ -226,6 +243,8 @@ int main(int argc, char ** argv)
 				tx2mqtt();
 				canBufRIdx++;
 				canBufRIdx &= BUFFERSIZE-1;
+
+				debugWay |= eTx2mqtt;
 			}
 
 			if (mqttBufWIdx != mqttBufRIdx) // something to send:  mqtt-broker ->  cb?
@@ -233,7 +252,13 @@ int main(int argc, char ** argv)
 				tx2cb();
 				mqttBufRIdx++;
 				mqttBufRIdx &= BUFFERSIZE-1;
+
+				debugWay |= eTx2cb;
         	}
+
+			if (debugWay) TRACE("select-rtn=%d 0x%x\n", rtn, debugWay);
+			else		  TRACE("select-rtn=%d\n", rtn);
+
         }
         else if (0 == rtn)
         {

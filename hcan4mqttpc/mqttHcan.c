@@ -214,15 +214,15 @@ uint8_t msgOfInterest4broker(const struct can_frame * cf)
 {
 	if (2 > cf->can_dlc)
 	{
-		//TRACE("can_dlc=%d NG -> not published\n", cf->can_dlc);
+		TRACE("can_dlc=%d NG\n", cf->can_dlc);
 		return 0;
 	}
 
 	uint8_t msgOfInterest =    (1 == get_proto(cf->can_id)) // proto = 1 (=SFP) ?
 							&& (5 == cf->data[0]) 		 // 5=HES  von SFP
 							&& isItTopic4Broker(cf->data[1]);
-/*	if (!msgOfInterest)
-		TRACE("nicht SFP-HES oder kein Topic fuer den Broker -> not published\n");
-*/
+	if (!msgOfInterest)
+		TRACE("not for broker cf[0]=%d\n", cf->data[0]);
+
 	return msgOfInterest;
 }

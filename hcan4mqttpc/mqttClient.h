@@ -54,6 +54,7 @@ extern struct can_frame mqttRxBuf[BUFFERSIZE];
 extern uint8_t mqttBufWIdx;
 extern uint8_t mqttBufRIdx;
 extern uint8_t debug;
+extern uint8_t debugWay;
 
 #ifdef DEBUG
 #define TRACE(...) do { if(debug) printf(__VA_ARGS__); } while (0)
@@ -66,7 +67,7 @@ extern uint8_t debug;
 void initMqtt(char *brokerHost_ip);
 void createMsg4cb(char* msg);
 int publishMqttMsg(char* pubTopic, const unsigned char* payload, const int payloadlen);
-void rxFromMqtt(void);
+int rxFromMqtt(void);
 void endMqtt(void);
 
 #endif

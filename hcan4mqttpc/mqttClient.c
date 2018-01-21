@@ -215,7 +215,7 @@ void initMqtt(char *brokerHost_ip)
 	TRACE("initMQTT: connect to broker=%s, port=%d\n", brokerHost_ip, port);
 
 	data.clientID.cstring = "cb_client";
-	data.keepAliveInterval = 20;
+	data.keepAliveInterval = 40;
 	data.cleansession = 1;
 	data.username.cstring = "hcan";
 	data.password.cstring = "n_A_c";
@@ -245,7 +245,7 @@ void initMqtt(char *brokerHost_ip)
 }
 
 // write to mqttBuf   (publish: cb -> broker)
-void rxFromMqtt(void)
+int rxFromMqtt(void)
 {
 	int payloadlen_rx = 0; // keine Nachricht
 
@@ -266,10 +266,15 @@ void rxFromMqtt(void)
 		if (0 < payloadlen_rx)
 		{
 			// got message:
-			TRACE("cb<--msg form mqtt-broker: %.*s\n", payloadlen_rx, payload_rx);
+			TRACE("cb<--msg from mqtt-broker: %.*s\n", payloadlen_rx, payload_rx);
 			createMsg4cb((char*)payload_rx); // mqttBufWIdx++, falls msg 4 cb
 		}
+		else TRACE("mqttPUBLISH-Err: payloadlen_rx=%d\n", payloadlen_rx);
 	}
+	else
+		TRACE("mqttRead: rc=%d\n", rc); // z.B. DISCONNECT
+
+	return rc;
 }
 
 int publishMqttMsg(char* pubTopic, const unsigned char* payload, const int payloadlen)

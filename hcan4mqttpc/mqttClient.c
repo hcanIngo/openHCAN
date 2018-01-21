@@ -244,8 +244,8 @@ void initMqtt(char *brokerHost_ip)
 	onMQTTBrokerConnected(); // Verbindung steht -> Broker-Nachrichten abonnieren
 }
 
-// publish: cb -> broker
-void recvMqttMsg(void)
+// write to mqttBuf   (publish: cb -> broker)
+void rxFromMqtt(void)
 {
 	int payloadlen_rx = 0; // keine Nachricht
 

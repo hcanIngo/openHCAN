@@ -55,13 +55,16 @@ int parse_options(int argc, char ** argv)
                 strncpy(device,optarg,sizeof(device)-1);
                 fprintf(stderr,"serial can device: %s\n",device);
                 break;
+
             case 'c':
                 strncpy(brokerHost_ip,optarg,sizeof(brokerHost_ip)-1);
                 fprintf(stderr,"MQTT-Broker-Host-IP: %s\n",brokerHost_ip);
                 break;
+
             case 'D':
                 debug = 1;
                 break;
+
             case '?':
             case 'h':
             default:
@@ -74,6 +77,67 @@ int parse_options(int argc, char ** argv)
     }
 
     return 0;
+}
+
+// write to canBuf
+static void rxFromCb(void)
+{
+	struct can_frame canFrame;
+	memset(&canFrame, 0, sizeof(struct can_frame)); // WICHTIG!
+	int nread = recv(sock_can, &canFrame, sizeof(struct can_frame), MSG_WAITALL); // read a frame from can
+	if (nread != sizeof(struct can_frame))
+	{
+		syslog(LOG_ERR, "could not read full packet from can, dropping...\n");
+		TRACE("could not read full packet from can, dropping...\n");
+		exit (1);
+	}
+	else if (msgOfInterest4broker(&canFrame))
+	{
+		canRxBuf[canBufWIdx].can_id = canFrame.can_id & CAN_EFF_MASK;
+		canRxBuf[canBufWIdx].can_dlc = canFrame.can_dlc;
+		memcpy(canRxBuf[canBufWIdx].data, canFrame.data, canFrame.can_dlc);
+
+		canBufWIdx++;
+		canBufWIdx &= BUFFERSIZE-1;
+	}
+	// else TRACE("not a msg for broker\n");
+}
+
+// read from canBuf
+static void tx2mqtt(void)
+{
+	char str[200];
+	memset(str, '\0', sizeof(str)); // WICHTIG!
+	int strLen = catHesTopic4Broker(str, &canRxBuf[canBufRIdx]);
+	if (0 < strLen)
+	{
+		TRACE("cb> mqtt %s\n", str);
+		publishMqttMsg("cb>", (unsigned char*)str, strLen); // topic "cb>" (vom CAN-Bus)
+	}
+}
+
+// read from mqttBuf
+static void tx2cb(void)
+{
+	int nwritten = write(sock_can, &mqttRxBuf[mqttBufRIdx], sizeof(struct can_frame));
+	if (nwritten == sizeof(struct can_frame))
+	{
+		if(debug)
+		{
+			// TEST-Ausgabe:
+			char str[200];
+			memset(str, '\0', sizeof(str)); // WICHTIG!
+			snprintf(str, 16, ".%x", (uint16_t)mqttRxBuf[mqttBufRIdx].can_id);
+			int i;
+			for (i=0; i<mqttRxBuf[mqttBufRIdx].can_dlc; i++)
+			{
+				snprintf(&str[strlen(str)], 16, ", %u", mqttRxBuf[mqttBufRIdx].data[i]);
+			}
+			TRACE("cb<--mqtt %s\n", str);
+		}
+	}
+	else
+		syslog(LOG_ERR,"could not send complete CAN packet: written=%d, data-size=%d!\n", nwritten, mqttRxBuf[mqttBufRIdx].can_dlc);
 }
 
 int main(int argc, char ** argv)
@@ -143,80 +207,32 @@ int main(int argc, char ** argv)
         int rtn = select (max_fd+1, &recv_fdset, &send_fdset, NULL, &timeout);
         if(rtn > 0) // no timeout?
         {
-            if (FD_ISSET(sock_can, &recv_fdset)) // cb -> hcan4mqttpc::canRxBuf[canBufWIdx]
+            if (FD_ISSET(sock_can, &recv_fdset))
             {
-            	struct can_frame canFrame;
-            	memset(&canFrame, 0, sizeof(struct can_frame)); // WICHTIG!
-            	int nread = recv(sock_can, &canFrame, sizeof(struct can_frame), MSG_WAITALL); // read a frame from can
-                if (nread != sizeof(struct can_frame))
-                {
-                    syslog(LOG_ERR, "could not read full packet from can, dropping...\n");
-                    TRACE("could not read full packet from can, dropping...\n");
-                    exit (1);
-                }
-                else
-                {
-                    if(((canBufWIdx+1)&(BUFFERSIZE-1)) == canBufRIdx)
-                        TRACE("no rx-can-buffer left\n");
-                    else if (msgOfInterest4broker(&canFrame))
-					{
-                    	canRxBuf[canBufWIdx].can_id = canFrame.can_id & CAN_EFF_MASK;
-						canRxBuf[canBufWIdx].can_dlc = canFrame.can_dlc;
-						memcpy(canRxBuf[canBufWIdx].data, canFrame.data, canFrame.can_dlc);
-
-						canBufWIdx++;
-						canBufWIdx &= BUFFERSIZE-1;
-					}
-                    // else TRACE("not a msg for broker\n");
-                }
-            }
-
-        	if (FD_ISSET(sock_mqtt, &recv_fdset)) // mqtt-Broker -> hcan4mqttpc::mqttRxBuf[mqttBufWIdx]
-            {
-        		if(((mqttBufWIdx+1)&(BUFFERSIZE-1)) == mqttBufRIdx)
-        			TRACE("no rx-mqtt-buffer left\n");
+        		if(((canBufWIdx+1)&(BUFFERSIZE-1)) == canBufRIdx) TRACE("no rx-can-buffer left\n");
         		else
-        			recvMqttMsg(); // ggf. mqttBufWIdx++
+        			rxFromCb();
             }
 
-			if (canBufWIdx != canBufRIdx) // something to send:  cb --> mqtt-broker?
-			{
-				char str[200];
-				memset(str, '\0', sizeof(str)); // WICHTIG!
-				int strLen = catHesTopic4Broker(str, &canRxBuf[canBufRIdx]);
-				if (0 < strLen)
-				{
-					TRACE("cb> mqtt %s\n", str);
-					publishMqttMsg("cb>", (unsigned char*)str, strLen); // topic "cb>" (vom CAN-Bus)
-				}
+        	if (FD_ISSET(sock_mqtt, &recv_fdset))
+            {
+        		if(((mqttBufWIdx+1)&(BUFFERSIZE-1)) == mqttBufRIdx) TRACE("no rx-mqtt-buffer left\n");
+        		else
+        			rxFromMqtt(); // ggf. mqttBufWIdx++
+            }
 
+			if (canBufWIdx != canBufRIdx) // something to send:  cb -> mqtt-broker?
+			{
+				tx2mqtt();
 				canBufRIdx++;
 				canBufRIdx &= BUFFERSIZE-1;
 			}
 
-			if (mqttBufWIdx != mqttBufRIdx) // something to send:  mqtt-broker --->  cb?
+			if (mqttBufWIdx != mqttBufRIdx) // something to send:  mqtt-broker ->  cb?
 			{
-				int nwritten = write(sock_can, &mqttRxBuf[mqttBufRIdx], sizeof(struct can_frame));
-				if (nwritten == sizeof(struct can_frame))
-				{
-					if(debug)
-					{
-						// TEST-Ausgabe:
-						char str[200];
-						memset(str, '\0', sizeof(str)); // WICHTIG!
-						snprintf(str, 16, ".%x", (uint16_t)mqttRxBuf[mqttBufRIdx].can_id);
-						int i;
-						for (i=0; i<mqttRxBuf[mqttBufRIdx].can_dlc; i++)
-						{
-							snprintf(&str[strlen(str)], 16, ", %u", mqttRxBuf[mqttBufRIdx].data[i]);
-						}
-						TRACE("cb<--mqtt %s\n", str);
-					}
-					mqttBufRIdx++;
-					mqttBufRIdx &= BUFFERSIZE-1;
-				}
-				else
-					syslog(LOG_ERR,"could not send complete CAN packet: written=%d, data-size=%d!\n", nwritten, mqttRxBuf[mqttBufRIdx].can_dlc);
+				tx2cb();
+				mqttBufRIdx++;
+				mqttBufRIdx &= BUFFERSIZE-1;
         	}
         }
         else if (0 == rtn)

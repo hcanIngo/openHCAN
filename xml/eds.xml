@@ -233,7 +233,7 @@
 
 	<block type="22" name="tastdimmer" size="11">
 		<field datatype="uint8_t" name="port" pos="0" />
-		<field datatype="uint8_t" name="feedback_guppe" pos="1" />
+		<field datatype="uint8_t" name="feedback_gruppe" pos="1" />
 		<field datatype="uint8_t" name="feature" pos="2" />
 		<field datatype="uint8_t" name="gruppe0" pos="3" />
 		<field datatype="uint8_t" name="gruppe1" pos="4" />

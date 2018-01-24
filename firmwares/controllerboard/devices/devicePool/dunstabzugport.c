@@ -1,8 +1,8 @@
-#include "../../../controllerboard/devices/devicePool/dunstabzugport.h"
+#include "../../controllerboard/devices/dunstabzugport.h"
 
 #include <canix/syslog.h>
 #include <hcan.h>
-#include "../../../controllerboard/darlingtonoutput.h"
+#include "../../controllerboard/darlingtonoutput.h"
 
 void dunstabzugport_init(device_data_dunstabzugport *p, eds_block_p it)
 {

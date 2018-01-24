@@ -1,4 +1,4 @@
-#include "../../../controllerboard/devices/devicePool/tastdimmer.h"
+#include "../../controllerboard/devices/tastdimmer.h"
 
 #include <canix/syslog.h>
 #include <hcan.h>
@@ -15,8 +15,7 @@
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
 
-#include "../../../controllerboard/darlingtonoutput.h"
-#include "../../../controllerboard/darlingtonoutput.h"
+#include "../../controllerboard/darlingtonoutput.h"
 
 void tastdimmer_init(device_data_tastdimmer *p, eds_block_p it) {}
 

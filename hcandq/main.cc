@@ -35,6 +35,15 @@ void print_frame(data_file_frame_entry &fe)
 		cout << ts << " tempsensor: " << (uint16_t)fe.data[2] << " temp: " 
 			<< temp << std::endl;
 	}
+	else if (interpret && (fe.proto == HCAN_PROTO_SFP) &&
+			(fe.data[0] == HCAN_SRV_HES) &&
+			(fe.data[1] == HCAN_HES_HELLIGKEITS_INFO))
+	{
+		float brightness;
+		brightness = (int16_t)((fe.data[3]<< 8)|fe.data[4]);
+		cout << ts << " helligkeitssensor: " << (uint16_t)fe.data[2] << " helligkeit: "
+			<< brightness << std::endl;
+	}
 	else
 		f.print(numeric,color,string(ts));
 }

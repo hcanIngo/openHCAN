@@ -67,8 +67,14 @@ void devices_load_config(void)
 				break;
 	</xsl:for-each>
 			default: 
-				// Falls wir den Block Typ nicht kennen, dann
-				// weiter mit dem naechsten Block...
+				// Falls wir den Block Typ (ausser 255) nicht kennen, dann
+				// geben wir eine Syslog Meldung aus
+				// laden aber weiter
+				if (EDS_BLOCK_TYPE(it) != 255)
+				{
+					canix_syslog_P(SYSLOG_PRIO_ERROR,
+						PSTR(&quot;EDS_BLOCK_TYPE unknown:%d EDS Addr:%d&quot;), EDS_BLOCK_TYPE(it), it);
+				}
 				continue;
 
 		}

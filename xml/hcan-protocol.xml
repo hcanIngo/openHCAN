@@ -547,8 +547,9 @@
 			<message name="WECKER_SET" id="72"
 				description="Wecker incl Parameter" >
 				<param pos="0" name="id" description="Wecker-ID" />
-				<param pos="1" name="duration_hi" description="Timer in x Sekunden (MSB)" />
-				<param pos="2" name="duration_lo" description="Timer in x Sekunden (LSB)" />				
+				<param pos="1" name="feature" description="folgenden Dezimal Werte sind zu senden: Verzoegert_ein: 4 oder Auto_aus: 5" />
+				<param pos="2" name="duration_hi" description="Timer in x Sekunden (MSB)" />
+				<param pos="3" name="duration_lo" description="Timer in x Sekunden (LSB)" />				
 			</message>
 			<message name="WECKER_DETAILS_REQUEST" id="73"
 				description="Wecker incl Parameter" >
@@ -563,14 +564,14 @@
 
 			<message name="HELLIGKEITS_INFO" id="71"
 				description="Liefert die Helligkeit am ADC (Aufloesung: 10Bit)" >
-				<param pos="0" name="guppe" description="Helligkeits-Gruppe" />
+				<param pos="0" name="gruppe" description="Helligkeits-Gruppe" />
 				<param pos="1" name="brightness_hi" description="hi byte der Helligkeit" />
 				<param pos="2" name="brightness_lo" description="lo hyte der Helligkeit" />
 			</message>
 
 			<message name="POTI_POS_CHANGED" id="70"
 				description="Liefert die Position des Potis (Aufloesung: 10Bit)" >
-				<param pos="0" name="guppe" description="Poti-Gruppe" />
+				<param pos="0" name="gruppe" description="Poti-Gruppe" />
 				<param pos="1" name="pos_hi" description="hi byte der Position" />
 				<param pos="2" name="pos_lo" description="lo hyte der Position" />
 			</message>
@@ -587,7 +588,7 @@
 			</message>
 
 			<message name="DCF77_PULSE_DURATION" id="81"
-				description="Liefert die Länge des letzten Pulse in 1/100s" >
+				description="Liefert die LÃ¤nge des letzten Pulse in 1/100s" >
 				<param pos="0" name="id" description="Identifikation des DCF77-Moduls" />
 				<param pos="1" name="length" description="Pulslaenge" />
 			</message>

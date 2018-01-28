@@ -35,6 +35,14 @@
 
 #include "../include/hcanframe.h"
 
+#ifdef DEBUG
+#define TRACE(...) do { if(debug) printf(__VA_ARGS__); } while (0)
+#define RETURN(...) do { if(debug) printf(__VA_ARGS__); return;} while (0)
+#else
+#define TRACE(...)
+#define RETURN(...)
+#endif
+
 #define BUFFERSIZE 16 // must be power of two
 #define INVALID_SOCKET -1
 
@@ -58,8 +66,10 @@ static int parse_options(int argc, char ** argv)
 {
     int opt; /* it's actually going to hold a char */
 
-    while ((opt = getopt(argc, argv, "Dd:c:N")) > 0) {
-        switch (opt) {
+    while ((opt = getopt(argc, argv, "Dd:c:N")) > 0)
+    {
+        switch (opt)
+        {
             case 'd':
                 strncpy(device,optarg,sizeof(device)-1);
                 fprintf(stderr,"serial can device: %s\n",device);
@@ -99,6 +109,8 @@ static uint32_t make_id(uint16_t src, uint16_t dst, uint8_t proto, uint8_t prio)
 
 static void initHcan(void)
 {
+	TRACE("initHcan\n");
+
 	if ((sock_hcan = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
 	{
 		perror("error while opening hcan socket");
@@ -114,7 +126,8 @@ static void initHcan(void)
 
 static void initSocketcan(struct sockaddr_in * sin)
 {
-    memset(&sin, 0, sizeof(sin));
+	TRACE("initSocketcan\n");
+
     sin->sin_family = AF_INET;
     sin->sin_addr.s_addr = inet_addr(hcand_ip);
     sin->sin_port = htons(3600);
@@ -138,7 +151,7 @@ static void initSocketcan(struct sockaddr_in * sin)
         exit(-3);
     }
 
-    if(debug) printf("%s at index %d\n", device, can_ifr.ifr_ifindex);
+    TRACE("%s at index %d\n", device, can_ifr.ifr_ifindex);
     canTxBuf[canBufWIdx].can_id  = make_id(35, 35, 1, 0) | CAN_EFF_FLAG;
     canTxBuf[canBufWIdx].can_dlc = 2;
     canTxBuf[canBufWIdx].data[0] = 0x11;
@@ -156,10 +169,10 @@ static int rxFromHcan(void)
 	int nread = recv(sock_hcan, &hcanFrame, sizeof(hcanFrame), MSG_WAITALL); // read a frame from hcan
 	if (nread == sizeof(hcanFrame))
     {
-    	if(debug) printf("received udpframe: %u %d\n", hcanFrame.id, hcanFrame.size);
+		TRACE("received udpframe: %u %d\n", hcanFrame.id, hcanFrame.size);
 
         if(((canBufWIdx+1)&(BUFFERSIZE-1)) == canBufRIdx)
-            printf("no can buffer left\n");
+        	TRACE("no can buffer left\n");
 
         else
         {
@@ -190,10 +203,10 @@ static int rxFromCb(void)
 	int nread = recv(sock_can, &canFrame, sizeof(struct can_frame), MSG_WAITALL); // read a frame from can
     if (nread == sizeof(struct can_frame))
     {
-        if(debug) printf("received can frame: %u %d\n", canFrame.can_id, canFrame.can_dlc);
+    	TRACE("received can frame: %u %d\n", canFrame.can_id, canFrame.can_dlc);
 
         if(((hcanBufWIdx+1)&(BUFFERSIZE-1)) == hcanBufRIdx)
-        	printf("no hcan buffer left\n");
+        	TRACE("no hcan buffer left\n");
 
         else
         {
@@ -219,7 +232,7 @@ static int rxFromCb(void)
 // read from canTxBuf
 static void tx2hcan(void)
 {
-	if(debug) printf("tx2hcan - send can frame\n");
+	TRACE("tx2hcan - send can frame\n");
 
 	int nwritten = write(sock_can, &canTxBuf[canBufRIdx], sizeof(struct can_frame));
 
@@ -230,7 +243,7 @@ static void tx2hcan(void)
 // read from hcanTxBuf
 static void tx2cb(struct sockaddr_in sin)
 {
-	if(debug) printf("tx2cb - send hcan frame\n");
+	TRACE("tx2cb - send hcan frame\n");
 
 	int nwritten = sendto(sock_hcan, &hcanTxBuf[hcanBufRIdx], sizeof(CANFrame), 0,
                 (struct sockaddr *) &sin, sizeof(sin));
@@ -254,6 +267,7 @@ int main(int argc, char ** argv)
     initHcan();
 
     struct sockaddr_in sin;
+    memset(&sin, 0, sizeof(sin));
     initSocketcan(&sin); // hcand_ip, device
 
     fd_set recv_fdset;

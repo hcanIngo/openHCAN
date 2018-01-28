@@ -547,8 +547,9 @@
 			<message name="WECKER_SET" id="72"
 				description="Wecker incl Parameter" >
 				<param pos="0" name="id" description="Wecker-ID" />
-				<param pos="1" name="duration_hi" description="Timer in x Sekunden (MSB)" />
-				<param pos="2" name="duration_lo" description="Timer in x Sekunden (LSB)" />				
+				<param pos="1" name="feature" description="folgenden Dezimal Werte sind zu senden: Verzoegert_ein: 4 oder Auto_aus: 5" />
+				<param pos="2" name="duration_hi" description="Timer in x Sekunden (MSB)" />
+				<param pos="3" name="duration_lo" description="Timer in x Sekunden (LSB)" />				
 			</message>
 			<message name="WECKER_DETAILS_REQUEST" id="73"
 				description="Wecker incl Parameter" >
@@ -587,7 +588,7 @@
 			</message>
 
 			<message name="DCF77_PULSE_DURATION" id="81"
-				description="Liefert die Länge des letzten Pulse in 1/100s" >
+				description="Liefert die LÃ¤nge des letzten Pulse in 1/100s" >
 				<param pos="0" name="id" description="Identifikation des DCF77-Moduls" />
 				<param pos="1" name="length" description="Pulslaenge" />
 			</message>

@@ -564,14 +564,14 @@
 
 			<message name="HELLIGKEITS_INFO" id="71"
 				description="Liefert die Helligkeit am ADC (Aufloesung: 10Bit)" >
-				<param pos="0" name="guppe" description="Helligkeits-Gruppe" />
+				<param pos="0" name="gruppe" description="Helligkeits-Gruppe" />
 				<param pos="1" name="brightness_hi" description="hi byte der Helligkeit" />
 				<param pos="2" name="brightness_lo" description="lo hyte der Helligkeit" />
 			</message>
 
 			<message name="POTI_POS_CHANGED" id="70"
 				description="Liefert die Position des Potis (Aufloesung: 10Bit)" >
-				<param pos="0" name="guppe" description="Poti-Gruppe" />
+				<param pos="0" name="gruppe" description="Poti-Gruppe" />
 				<param pos="1" name="pos_hi" description="hi byte der Position" />
 				<param pos="2" name="pos_lo" description="lo hyte der Position" />
 			</message>

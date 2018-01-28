@@ -1,3 +1,20 @@
+/*
+ *  This file is part of the HCAN tools suite.
+ *
+ *  HCAN is free software; you can redistribute it and/or modify it under
+ *  the terms of the GNU General Public License as published by the Free
+ *  Software Foundation; either version 2 of the License, or (at your
+ *  option) any later version.
+ *
+ *  HCAN is distributed in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ *  for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with HCAN; if not, write to the Free Software Foundation, Inc., 51
+ *  Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
+ */
 #include <stdint.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -15,50 +32,29 @@
 #include <sys/ioctl.h>
 #include <linux/can.h>
 #include <linux/can/raw.h>
-#include "hcanframe.h"
+
+#include "../include/hcanframe.h"
 
 #define BUFFERSIZE 16 // must be power of two
+#define INVALID_SOCKET -1
 
-int sock_inet;
-int sock_can;
-int max_fds;
-fd_set fdset;
-
-int packet_sent;
-int packet_recvd;
+int sock_hcan = INVALID_SOCKET;
+int sock_can = INVALID_SOCKET;
 
 char device[128];
 char hcand_ip[128];
 
-uint8_t noinit = 0;
-struct can_frame canBuffer[BUFFERSIZE];
-struct hcan_frame hcanBuffer[BUFFERSIZE];
-uint8_t canBufferWPtr = 0;
-uint8_t canBufferRPtr = 0;
-uint8_t hcanBufferWPtr = 0;
-uint8_t hcanBufferRPtr = 0;
-struct can_frame CanFrame;
-struct hcan_frame HcanFrame;
+struct can_frame canTxBuf[BUFFERSIZE];
+CANFrame hcanTxBuf[BUFFERSIZE];
+uint8_t canBufWIdx = 0;
+uint8_t canBufRIdx = 0;
+uint8_t hcanBufWIdx = 0;
+uint8_t hcanBufRIdx = 0;
+
 uint8_t debug = 0;
 
 
-struct timeval get_time()
-{
-    struct timeval this_time;
-    int res;
-
-    res = gettimeofday(&this_time,0);
-    assert(res == 0);
-    return this_time;
-}
-
-int time_diff_usec(struct timeval *t1, struct timeval *t2)
-{
-    return (t1->tv_sec * 1000000 + t1->tv_usec) -
-        (t2->tv_sec * 1000000 + t2->tv_usec);
-}
-
-int parse_options(int argc, char ** argv)
+static int parse_options(int argc, char ** argv)
 {
     int opt; /* it's actually going to hold a char */
 
@@ -66,21 +62,25 @@ int parse_options(int argc, char ** argv)
         switch (opt) {
             case 'd':
                 strncpy(device,optarg,sizeof(device)-1);
-                fprintf(stderr,"serial device: %s\n",device);
+                fprintf(stderr,"serial can device: %s\n",device);
                 break;
+
             case 'c':
                 strncpy(hcand_ip,optarg,sizeof(hcand_ip)-1);
                 fprintf(stderr,"hcand ip: %s\n",hcand_ip);
                 break;
+
             case 'D':
                 debug = 1;
                 break;
+
             case '?':
             case 'h':
             default:
                 fprintf(stderr, "usage: %s [options]\n", basename(argv[0]));
                 fprintf(stderr, "  -d  can device (default: can0)\n");
                 fprintf(stderr, "  -c  connect to hcand IP \n");
+                fprintf(stderr, "  -D  aktiviere Debugausgaben\n");
                 return 1;
         }
     }
@@ -88,8 +88,8 @@ int parse_options(int argc, char ** argv)
     return 0;
 }
 
-
-uint32_t make_id(uint16_t src, uint16_t dst, uint8_t proto, uint8_t prio) {
+static uint32_t make_id(uint16_t src, uint16_t dst, uint8_t proto, uint8_t prio)
+{
     uint32_t extid = (src & 0x3ff) |
                 ((dst & 0x3ff) << 10) |
                 ((proto & 0x07) << 20) | 
@@ -97,10 +97,150 @@ uint32_t make_id(uint16_t src, uint16_t dst, uint8_t proto, uint8_t prio) {
     return extid;
 }
 
+static void initHcan(void)
+{
+	if ((sock_hcan = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
+	{
+		perror("error while opening hcan socket");
+		exit(-1);
+	}
+
+	hcanTxBuf[hcanBufWIdx].id  = make_id(0, 0, 0, 0);
+    hcanTxBuf[hcanBufWIdx].size = 0;
+
+    hcanBufWIdx++; // "wir haben was eingelesen" -> tx
+    hcanBufWIdx &= BUFFERSIZE-1;
+}
+
+static void initSocketcan(struct sockaddr_in * sin)
+{
+    memset(&sin, 0, sizeof(sin));
+    sin->sin_family = AF_INET;
+    sin->sin_addr.s_addr = inet_addr(hcand_ip);
+    sin->sin_port = htons(3600);
+
+    if ((sock_can = socket(PF_CAN, SOCK_RAW, CAN_RAW)) < 0)
+    {
+       perror("error while opening can socket\n");
+       exit(-2);
+    }
+
+    struct ifreq can_ifr;
+    strcpy(can_ifr.ifr_name, device);
+    ioctl(sock_can, SIOCGIFINDEX, &can_ifr);
+
+    struct sockaddr_can can_addr;
+    can_addr.can_family  = AF_CAN;
+    can_addr.can_ifindex = can_ifr.ifr_ifindex;
+    if (bind(sock_can, (struct sockaddr *)&can_addr, sizeof(can_addr)) < 0)
+    {
+        perror("error in socket bind\n");
+        exit(-3);
+    }
+
+    if(debug) printf("%s at index %d\n", device, can_ifr.ifr_ifindex);
+    canTxBuf[canBufWIdx].can_id  = make_id(35, 35, 1, 0) | CAN_EFF_FLAG;
+    canTxBuf[canBufWIdx].can_dlc = 2;
+    canTxBuf[canBufWIdx].data[0] = 0x11;
+    canTxBuf[canBufWIdx].data[1] = 0x22;
+
+    canBufWIdx++; // "wir haben was eingelesen" -> tx
+    canBufWIdx &= BUFFERSIZE-1;
+}
+
+// write to canTxBuf
+static int rxFromHcan(void)
+{
+	CANFrame hcanFrame;
+	memset(&hcanFrame, 0, sizeof(hcanFrame));
+	int nread = recv(sock_hcan, &hcanFrame, sizeof(hcanFrame), MSG_WAITALL); // read a frame from hcan
+	if (nread == sizeof(hcanFrame))
+    {
+    	if(debug) printf("received udpframe: %u %d\n", hcanFrame.id, hcanFrame.size);
+
+        if(((canBufWIdx+1)&(BUFFERSIZE-1)) == canBufRIdx)
+            printf("no can buffer left\n");
+
+        else
+        {
+            canTxBuf[canBufWIdx].can_id = hcanFrame.id | CAN_EFF_FLAG;
+            canTxBuf[canBufWIdx].can_dlc = hcanFrame.size;
+            memcpy(canTxBuf[canBufWIdx].data, hcanFrame.data, hcanFrame.size);
+            canBufWIdx++;
+            canBufWIdx &= BUFFERSIZE-1;
+        }
+    }
+    else if (nread == -1)
+    	return -1;
+
+    else
+    {
+        syslog(LOG_ERR, "could not read full packet from hcand, dropping...\n");
+        exit(1);
+    }
+
+	return -1;
+}
+
+// write to hcanTxBuf
+static int rxFromCb(void)
+{
+	struct can_frame canFrame;
+	memset(&canFrame, 0, sizeof(canFrame));
+	int nread = recv(sock_can, &canFrame, sizeof(struct can_frame), MSG_WAITALL); // read a frame from can
+    if (nread == sizeof(struct can_frame))
+    {
+        if(debug) printf("received can frame: %u %d\n", canFrame.can_id, canFrame.can_dlc);
+
+        if(((hcanBufWIdx+1)&(BUFFERSIZE-1)) == hcanBufRIdx)
+        	printf("no hcan buffer left\n");
+
+        else
+        {
+            hcanTxBuf[hcanBufWIdx].id = canFrame.can_id & CAN_EFF_MASK;
+            hcanTxBuf[hcanBufWIdx].size = canFrame.can_dlc;
+            memcpy(hcanTxBuf[hcanBufWIdx].data, canFrame.data, canFrame.can_dlc);
+            hcanBufWIdx++;
+            hcanBufWIdx &= BUFFERSIZE-1;
+        }
+    }
+    else if (nread == -1)
+    	return -1;
+
+    else
+    {
+    	syslog(LOG_ERR, "could not read full packet from can, dropping...\n");
+        exit(1);
+    }
+
+    return -1;
+}
+
+// read from canTxBuf
+static void tx2hcan(void)
+{
+	if(debug) printf("tx2hcan - send can frame\n");
+
+	int nwritten = write(sock_can, &canTxBuf[canBufRIdx], sizeof(struct can_frame));
+
+	if (nwritten != sizeof(struct can_frame))
+        syslog(LOG_ERR,"could not send complete CAN packet !");
+}
+
+// read from hcanTxBuf
+static void tx2cb(struct sockaddr_in sin)
+{
+	if(debug) printf("tx2cb - send hcan frame\n");
+
+	int nwritten = sendto(sock_hcan, &hcanTxBuf[hcanBufRIdx], sizeof(CANFrame), 0,
+                (struct sockaddr *) &sin, sizeof(sin));
+
+	if (nwritten != sizeof(CANFrame))
+        syslog(LOG_ERR,"could not send complete UDP packet !");
+}
+
 int main(int argc, char ** argv)
 {
-    int nwritten;
-
     strcpy(hcand_ip, "127.0.0.1");
     strcpy(device, "can0");
 
@@ -108,145 +248,65 @@ int main(int argc, char ** argv)
     if (parse_options(argc,argv) != 0)
         exit (1);
 
-    openlog("hcanhid",LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
+    openlog("hcansocketd",LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
             LOG_LOCAL7);
 
-    if( (sock_inet = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0) {
-        perror("Error while opening socket");
-        return(-1);
-    }
+    initHcan();
+
     struct sockaddr_in sin;
-    memset(&sin, 0, sizeof(sin));
-    sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = inet_addr(hcand_ip);
-    sin.sin_port = htons(3600);
-
-    if( (sock_can = socket(PF_CAN, SOCK_RAW, CAN_RAW)) < 0) {
-        perror("Error while opening socket");
-       return(-2);
-    }
-    struct sockaddr_can can_addr;
-    struct can_frame CanFrame;
-    struct ifreq can_ifr;
-
-    strcpy(can_ifr.ifr_name, device);
-    ioctl(sock_can, SIOCGIFINDEX, &can_ifr);
-
-    can_addr.can_family  = AF_CAN;
-    can_addr.can_ifindex = can_ifr.ifr_ifindex;
-    if(debug) printf("%s at index %d\n", device, can_ifr.ifr_ifindex);
-    if(bind(sock_can, (struct sockaddr *)&can_addr, sizeof(can_addr)) < 0) {
-        perror("Error in socket bind");
-        return(-3);
-    }
-    canBuffer[0].can_id  = make_id(35, 35, 1, 0) | CAN_EFF_FLAG;
-    canBuffer[0].can_dlc = 2;
-    canBuffer[0].data[0] = 0x11;
-    canBuffer[0].data[1] = 0x22;
- 
-    nwritten = write(sock_can, &canBuffer[0], sizeof(struct can_frame));
- 
-    if(debug) printf("Wrote %d bytes\n", nwritten);
-    if (nwritten != sizeof(struct can_frame)) {
-        syslog(LOG_ERR,"could not send complete CAN packet !");
-        exit(-4);
-    }
-
- 
-    hcanBuffer[0].id  = make_id(0, 0, 0, 0);
-    hcanBuffer[0].size = 0;
-    nwritten = sendto(sock_inet, &hcanBuffer[0], sizeof(struct hcan_frame), 0,
-            (struct sockaddr *) &sin, sizeof(sin));
-
-    if(debug) printf("Wrote %d bytes\n", nwritten);
-    if (nwritten != sizeof(struct hcan_frame)) {
-        syslog(LOG_ERR,"could not send complete UDP packet !");
-        exit(-5);
-    }
-
-
-    // Durchsatz zaehlen
-    packet_sent = 0;
+    initSocketcan(&sin); // hcand_ip, device
 
     fd_set recv_fdset;
     fd_set send_fdset;
-    int max_fd;
-    int nread;
-    struct timeval timeout;
-    max_fd = sock_inet;
-    if(sock_can > max_fd)
-        max_fd = sock_can;
 
-    while (1) {
-        int ret;
-        timeout.tv_sec = 0;
+    struct timeval timeout;
+    int max_fd = sock_hcan;
+    if(sock_can > max_fd) max_fd = sock_can;
+
+    while (1)
+    {
+        timeout.tv_sec = 2;
         timeout.tv_usec = 500000;
         FD_ZERO(&recv_fdset);
         FD_ZERO(&send_fdset);
-        FD_SET(sock_inet, &recv_fdset);
+
+        FD_SET(sock_hcan, &recv_fdset);
         FD_SET(sock_can, &recv_fdset);
-        if(hcanBufferWPtr != hcanBufferRPtr)
-        	FD_SET(sock_inet, &send_fdset);
-        if(canBufferWPtr != canBufferRPtr)
-        	FD_SET(sock_can, &send_fdset);
-        ret = select (max_fd + 1, &recv_fdset, &send_fdset, NULL, &timeout);
-        if(ret > 0) {// no timeout
-            if (FD_ISSET(sock_inet, &recv_fdset)) {
-                // read a frame from inet;
-                nread = recv(sock_inet, &HcanFrame, sizeof(HcanFrame), MSG_WAITALL);
-                if (nread != sizeof(HcanFrame)) {
-                    syslog(LOG_ERR, "could not read full packet from server, dropping...");
-                    exit(1);
-                }
-                else {
-                    if(debug) printf("received udpframe: %u %d\n", HcanFrame.id, HcanFrame.size);
-                    if(((canBufferWPtr+1)&(BUFFERSIZE-1)) == canBufferRPtr) {
-                        printf("no buffer left\n");
-                    } else {
-                        canBuffer[canBufferWPtr].can_id = HcanFrame.id | CAN_EFF_FLAG;
-                        canBuffer[canBufferWPtr].can_dlc = HcanFrame.size;
-                        memcpy(canBuffer[canBufferWPtr].data, HcanFrame.data, HcanFrame.size);
-                        canBufferWPtr++;
-                        canBufferWPtr &= BUFFERSIZE-1;
-                    }
-                }
+        if(hcanBufWIdx != hcanBufRIdx) FD_SET(sock_hcan, &send_fdset);
+        if(canBufWIdx != canBufRIdx) FD_SET(sock_can, &send_fdset);
+
+        int ret = select (max_fd + 1, &recv_fdset, &send_fdset, NULL, &timeout);
+        if (ret > 0) // no timeout?
+        {
+            if (FD_ISSET(sock_hcan, &recv_fdset))
+            {
+            	int rc = rxFromHcan();
+    			if (rc == -1)
+    			{
+    				shutdown(sock_hcan, SHUT_WR);
+    				recv(sock_hcan, NULL, (size_t)0, 0);
+    				close(sock_hcan);
+    				initHcan(); // ...keepAliveInterval
+    			}
             }
-            if (FD_ISSET(sock_can, &recv_fdset)) {
-                // read a frame from can;
-                nread = recv(sock_can, &CanFrame, sizeof(struct can_frame), MSG_WAITALL);
-                if (nread != sizeof(struct can_frame)) {
-                    syslog(LOG_ERR, "could not read full packet from can, dropping...");
-                    exit(1);
-                }
-                else {
-                    if(debug) printf("received can frame: %u %d\n", CanFrame.can_id, CanFrame.can_dlc);
-                    if(((hcanBufferWPtr+1)&(BUFFERSIZE-1)) == hcanBufferRPtr) {
-                        printf("no buffer left\n");
-                    } else {
-                        hcanBuffer[hcanBufferWPtr].id = CanFrame.can_id & CAN_EFF_MASK;
-                        hcanBuffer[hcanBufferWPtr].size = CanFrame.can_dlc;
-                        memcpy(hcanBuffer[hcanBufferWPtr].data, CanFrame.data, CanFrame.can_dlc);
-                        hcanBufferWPtr++;
-                        hcanBufferWPtr &= BUFFERSIZE-1;
-                    }
-                }
+
+            if (FD_ISSET(sock_can, &recv_fdset))
+            {
+            	rxFromCb();
             }
-            if ((canBufferWPtr != canBufferRPtr) && FD_ISSET(sock_can, &send_fdset)) {
-                nwritten = write(sock_can, &canBuffer[canBufferRPtr], sizeof(struct can_frame));
-                if(debug) printf("send can frame\n");
-                if (nwritten != sizeof(struct can_frame))
-                    syslog(LOG_ERR,"could not send complete CAN packet !");
-                canBufferRPtr++;
-                canBufferRPtr &= BUFFERSIZE-1;
+
+            if (canBufWIdx != canBufRIdx)
+            {
+            	tx2hcan();
+                canBufRIdx++;
+                canBufRIdx &= BUFFERSIZE-1;
             }
-            if ((hcanBufferWPtr != hcanBufferRPtr) && FD_ISSET(sock_inet, &send_fdset)) {
-                nwritten = sendto(sock_inet, &hcanBuffer[hcanBufferRPtr], sizeof(struct hcan_frame), 0,
-                            (struct sockaddr *) &sin, sizeof(sin));
-                if(debug) printf("send hcan frame\n");
-                if (nwritten != sizeof(struct hcan_frame))
-                    syslog(LOG_ERR,"could not send complete UDP packet !");
-                hcanBufferRPtr++;
-                hcanBufferRPtr &= BUFFERSIZE-1;
+
+            if (hcanBufWIdx != hcanBufRIdx)
+            {
+            	tx2cb(sin);
+                hcanBufRIdx++;
+                hcanBufRIdx &= BUFFERSIZE-1;
             }
         }
     }

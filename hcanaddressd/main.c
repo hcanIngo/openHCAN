@@ -45,6 +45,8 @@
 #include <arpa/inet.h>
 
 #include "main.h"
+
+#include "../include/hcanframe.h"
 #include "socket.h"
 
 

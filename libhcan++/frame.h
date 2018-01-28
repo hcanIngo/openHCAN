@@ -13,6 +13,8 @@
 #include <string>
 #include <map>
 
+#include "../include/hcanframe.h"
+
 #ifdef __WIN32__
 #include <winsock2.h>
 #else
@@ -32,13 +34,6 @@ namespace hcan
 
 	class frame
 	{
-		typedef struct
-		{
-			uint32_t id;
-			uint32_t  size;
-			uint8_t  data[8];
-		} CANFrame;
-
 		public:
 			enum prio { prio_hi = 0, prio_lo = 3 }; 
 			/** 

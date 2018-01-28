@@ -21,13 +21,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-typedef struct
-{
-	uint32_t id;
-	uint32_t  size;
-	uint8_t  data[8];
-} CANFrame;
-
 #define MAX_PEER 32
 
 // Timeout nach 5 minuten

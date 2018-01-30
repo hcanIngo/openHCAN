@@ -32,6 +32,7 @@
 #include <sys/ioctl.h>
 #include <linux/can.h>
 #include <linux/can/raw.h>
+#include <errno.h>
 
 #include "../include/hcanframe.h"
 
@@ -162,14 +163,14 @@ static void initSocketcan(struct sockaddr_in * sin)
 }
 
 // write to canTxBuf
-static int rxFromHcan(void)
+inline static int rxFromHcan(void)
 {
 	CANFrame hcanFrame;
 	memset(&hcanFrame, 0, sizeof(hcanFrame));
 	int nread = recv(sock_hcan, &hcanFrame, sizeof(hcanFrame), MSG_WAITALL); // read a frame from hcan
 	if (nread == sizeof(hcanFrame))
     {
-		TRACE("received udpframe: %u %d\n", hcanFrame.id, hcanFrame.size);
+		TRACE("recv hcanUdpFr %u %d\n", hcanFrame.id, hcanFrame.size);
 
         if(((canBufWIdx+1)&(BUFFERSIZE-1)) == canBufRIdx)
         	TRACE("no can buffer left\n");
@@ -192,18 +193,18 @@ static int rxFromHcan(void)
         exit(1);
     }
 
-	return -1;
+	return 0; // ok
 }
 
 // write to hcanTxBuf
-static int rxFromCb(void)
+inline static int rxFromCb(void)
 {
 	struct can_frame canFrame;
 	memset(&canFrame, 0, sizeof(canFrame));
 	int nread = recv(sock_can, &canFrame, sizeof(struct can_frame), MSG_WAITALL); // read a frame from can
     if (nread == sizeof(struct can_frame))
     {
-    	TRACE("received can frame: %u %d\n", canFrame.can_id, canFrame.can_dlc);
+    	TRACE("recv canfr %u %d\n", canFrame.can_id, canFrame.can_dlc);
 
         if(((hcanBufWIdx+1)&(BUFFERSIZE-1)) == hcanBufRIdx)
         	TRACE("no hcan buffer left\n");
@@ -230,9 +231,9 @@ static int rxFromCb(void)
 }
 
 // read from canTxBuf
-static void tx2hcan(void)
+inline static void tx2hcan(void)
 {
-	TRACE("tx2hcan - send can frame\n");
+	TRACE("tx2hcan\n");
 
 	int nwritten = write(sock_can, &canTxBuf[canBufRIdx], sizeof(struct can_frame));
 
@@ -241,9 +242,9 @@ static void tx2hcan(void)
 }
 
 // read from hcanTxBuf
-static void tx2cb(struct sockaddr_in sin)
+inline static void tx2cb(struct sockaddr_in sin)
 {
-	TRACE("tx2cb - send hcan frame\n");
+	TRACE("tx2cb\n");
 
 	int nwritten = sendto(sock_hcan, &hcanTxBuf[hcanBufRIdx], sizeof(CANFrame), 0,
                 (struct sockaddr *) &sin, sizeof(sin));
@@ -289,8 +290,8 @@ int main(int argc, char ** argv)
         if(hcanBufWIdx != hcanBufRIdx) FD_SET(sock_hcan, &send_fdset);
         if(canBufWIdx != canBufRIdx) FD_SET(sock_can, &send_fdset);
 
-        int ret = select (max_fd + 1, &recv_fdset, &send_fdset, NULL, &timeout);
-        if (ret > 0) // no timeout?
+        int rtn = select (max_fd + 1, &recv_fdset, &send_fdset, NULL, &timeout);
+        if (rtn > 0) // no timeout?
         {
             if (FD_ISSET(sock_hcan, &recv_fdset))
             {
@@ -323,6 +324,12 @@ int main(int argc, char ** argv)
                 hcanBufRIdx &= BUFFERSIZE-1;
             }
         }
+        else if (0 == rtn)
+        {
+        	TRACE("select-timeout\n");
+        }
+        else if (-1 == rtn) TRACE("select-errno=%d\n", errno);
+        else                TRACE("select-rtn=%d unerwartet\n", rtn);
     }
 
     return 0;

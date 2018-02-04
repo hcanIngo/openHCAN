@@ -16,7 +16,7 @@
 void heizung_init(device_data_heizung *p, eds_block_p it)
 {
 	p->it = it;
-	p->mode = HEIZUNG_MODE_OFF;
+	p->mode = HEIZUNG_MODE_AUTOMATIK;
 	p->manual_rate = 0;
 	p->pwm_counter = 0;
 	p->pwm_width = 0;

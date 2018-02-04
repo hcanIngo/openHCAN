@@ -181,7 +181,7 @@ size_t catHesTopic4Broker(char * str, const struct can_frame * cf)
 
 		case HCAN_HES_1WIRE_TEMPERATURE:
 		case HCAN_HES_1WIRE_TEMPERATURE_REPLAY:
-			temp =	((cf->data[3]<<8)|cf->data[4]) / 16.0; // Temperaturwert
+			temp =	(((signed char)cf->data[3]<<8)|cf->data[4]) / 16.0; // Temperaturwert
 			return snprintf(str, maxSize, "%d/T/%.1f", cf->data[2], temp); // mit einer Nachkommastelle
 
 		/*case HCAN_HES_REEDKONTAKT_OFFEN:

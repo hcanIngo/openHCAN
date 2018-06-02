@@ -28,11 +28,12 @@ cleanZielOrdner:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) rm -f -R /home/$(ZIEL_USER)/$(ZIEL_ORDNER)
 
 install_oracle_arm_jre:
-	@#cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u131-linux-arm32-vfp-hflt.tar.gz
-	cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u151-linux-arm32-vfp-hflt.tar.gz
+	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) rm -f -R /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/../jdk1.8.0
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/jdk1.8.0
-	#$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/myOpenHabInstallation
-	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_151/* $(SCP_ZIEL_DIR)/../jdk1.8.0
+	@#
+	@# zuvor:                                                    jdk-8u151-linux-arm32-vfp-hflt.tar.gz
+	@# cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u171-linux-arm32-vfp-hflt.tar.gz
+	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_171/* $(SCP_ZIEL_DIR)/../jdk1.8.0
 	# Falls noetig, auf dem Bananapi: sudo chmod 755 /home/tt/jdk1.8.0/*
 
 openhab_start_withScreen:

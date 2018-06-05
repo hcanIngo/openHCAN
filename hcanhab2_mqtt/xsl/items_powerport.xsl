@@ -28,12 +28,12 @@
 <xsl:template match="powerport">
 		<xsl:choose>
 		<xsl:when test="(@typ = 'lampe')">
-Switch LAMPE_<xsl:value-of select="@name" /> "<xsl:value-of select="@stt" />-Licht" &lt;light&gt; (<xsl:value-of select="substring-before(@name,'__')" />, Lampen) [ "Lighting" ] {mqtt="&gt;[bpiBroker:cb&lt;:command:ON:ON/<xsl:value-of select="@gruppe" />], &gt;[bpiBroker:cb&lt;:command:OFF:OFF/<xsl:value-of select="@gruppe" />], &lt;[bpiBroker:cb&gt;:state:ON:<xsl:value-of select="@gruppe" />/ON], &lt;[bpiBroker:cb&gt;:state:OFF:<xsl:value-of select="@gruppe" />/OFF]", autoupdate="true"}
+Switch LAMPE_<xsl:value-of select="@name" /> "<xsl:value-of select="@stt" />-Licht" &lt;light&gt; (<xsl:value-of select="substring-before(@name,'__')" />, Lampen) ["Lighting"] {mqtt="&gt;[bpiBroker:cb&lt;:command:ON:ON/<xsl:value-of select="@gruppe" />], &gt;[bpiBroker:cb&lt;:command:OFF:OFF/<xsl:value-of select="@gruppe" />], &lt;[bpiBroker:cb&gt;:state:ON:<xsl:value-of select="@gruppe" />/ON], &lt;[bpiBroker:cb&gt;:state:OFF:<xsl:value-of select="@gruppe" />/OFF]", autoupdate="true"}
 		</xsl:when>
 		<xsl:otherwise>	
 
 //Switch SONSTIGE_<xsl:value-of select="@name" /> (<xsl:value-of select="substring-before(@name,'__')" />, Sonstige) {mqtt="&gt;[bpiBroker:cb&lt;:command:ON:ON/<xsl:value-of select="@gruppe" />], &gt;[bpiBroker:cb&lt;:command:OFF:OFF/<xsl:value-of select="@gruppe" />], &lt;[bpiBroker:cb&gt;:state:ON:<xsl:value-of select="@gruppe" />/ON], &lt;[bpiBroker:cb&gt;:state:OFF:<xsl:value-of select="@gruppe" />/OFF]", autoupdate="true"}
-Switch SONSTIGE_<xsl:value-of select="@name" /> "<xsl:value-of select="@stt" />" &lt;switch&gt; (<xsl:value-of select="substring-before(@name,'__')" />, Sonstige) [ "Switchable" ] {mqtt="&gt;[bpiBroker:cb&lt;:command:ON:ON/<xsl:value-of select="@gruppe" />], &gt;[bpiBroker:cb&lt;:command:OFF:OFF/<xsl:value-of select="@gruppe" />], &lt;[bpiBroker:cb&gt;:state:ON:<xsl:value-of select="@gruppe" />/ON], &lt;[bpiBroker:cb&gt;:state:OFF:<xsl:value-of select="@gruppe" />/OFF]", autoupdate="true"}
+Switch SONSTIGE_<xsl:value-of select="@name" /> "<xsl:value-of select="@stt" />" &lt;switch&gt; (<xsl:value-of select="substring-before(@name,'__')" />, Sonstige) ["Switchable"] {mqtt="&gt;[bpiBroker:cb&lt;:command:ON:ON/<xsl:value-of select="@gruppe" />], &gt;[bpiBroker:cb&lt;:command:OFF:OFF/<xsl:value-of select="@gruppe" />], &lt;[bpiBroker:cb&gt;:state:ON:<xsl:value-of select="@gruppe" />/ON], &lt;[bpiBroker:cb&gt;:state:OFF:<xsl:value-of select="@gruppe" />/OFF]", autoupdate="true"}
 		</xsl:otherwise>
 		</xsl:choose>
 

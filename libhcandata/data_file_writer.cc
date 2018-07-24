@@ -69,7 +69,8 @@ void data_file_writer::write_frame(
 	for (int i = 0; i < 8; i++)
 		frame.data[i] = data[i];
 
-	write(m_fd,&frame,sizeof(frame));
+	if(write(m_fd,&frame,sizeof(frame)) != sizeof(frame))
+		throw traceable_error("error could not send frame");
 }
 
 
@@ -82,7 +83,8 @@ void data_file_writer::setup_file()
 	header.size = sizeof(header);
 	header.magic = DATA_FILE_MAGIC_1;
 	header.magic2 = DATA_FILE_MAGIC_2;
-	write(m_fd,&header,sizeof(header));
+	if(write(m_fd,&header,sizeof(header)) != sizeof(header))
+		throw traceable_error("error could not write Header block");
 
 	// 2. Data Block anlegen:
 	
@@ -91,7 +93,8 @@ void data_file_writer::setup_file()
 	datablock.size = sizeof(datablock);
 	datablock.first_timestamp = time(0);
 	datablock.last_timestamp = 0;
-	write(m_fd,&datablock,sizeof(datablock));
+	if(write(m_fd,&datablock,sizeof(datablock)) != sizeof(datablock))
+		throw traceable_error("error could not write Data block");
 }
 
 void data_file_writer::write_data_block(int data_pos,
@@ -103,13 +106,15 @@ void data_file_writer::write_data_block(int data_pos,
 		throw traceable_error(strerror(errno));
 
 	// Daten Block zurueckschreiben
-	write(m_fd,data,sizeof(data_file_header_block_v1_t));
+	if (write(m_fd,data,sizeof(data_file_header_block_v1_t)) != sizeof(data_file_header_block_v1_t))
+		throw traceable_error("error could not write Data block");
 }
 
 data_file_frame_entry data_file_writer::read_frame()
 {
 	data_file_frame_entry frame;
-	read(m_fd,&frame,sizeof(frame));
+	if (read(m_fd,&frame,sizeof(frame)) < 0)
+		throw traceable_error("error could not read frame");
 	return frame;
 }
 
@@ -129,7 +134,8 @@ void data_file_writer::sync()
 	
 	// Header Block einlesen
 	data_file_header_block_v1_t header;
-	read(m_fd,&header,sizeof(header));
+	if (read(m_fd,&header,sizeof(header)) < 0)
+		throw traceable_error("error could not read header block");
 
 	// An den Anfang des Data Blocks spulen
 	off_t data_pos = lseek(m_fd, header.size, SEEK_SET);
@@ -138,7 +144,8 @@ void data_file_writer::sync()
 
 	// erste Bytes des Data Blocks einlesen
 	data_file_data_block_t data;
-	read(m_fd,&data,sizeof(data));
+	if (read(m_fd,&data,sizeof(data)) < 0)
+		throw traceable_error("error could not read first byte");
 
 	// Groesse des Datablocks berechnen
 	size_t size = end_pos - data_pos;
@@ -189,7 +196,8 @@ void data_file_writer::check_if_file_valid()
 
 	// Header Block einlesen und pruefen:
 	data_file_header_block_v1_t header;
-	read(m_fd,&header,sizeof(header));
+	if (read(m_fd,&header,sizeof(header)) < 0)
+		throw traceable_error("error could not read and verify header block");
 
 	if (header.magic != DATA_FILE_MAGIC_1)
 		throw traceable_error("wrong DATA_FILE_MAGIC_1 value");
@@ -207,7 +215,8 @@ void data_file_writer::check_if_file_valid()
 
 	// Data Block einlesen und pruefen:
 	data_file_data_block_t data;
-	read(m_fd,&data,sizeof(data));
+	if (read(m_fd,&data,sizeof(data)) < 0)
+		throw traceable_error("error could not read and verify Data block");
 
 	if (data.type != data_file_type_data)
 		throw traceable_error("wrong data block type");

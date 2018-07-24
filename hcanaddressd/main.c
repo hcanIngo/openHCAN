@@ -140,8 +140,14 @@ int main()
 					}
 					else
 					{
-						syslog(LOG_INFO,"assigned %d...\n",new_address);
-						write(peer_sock,&new_address,4);
+						if(write(peer_sock,&new_address,4) == 4)
+						{
+							syslog(LOG_INFO,"assigned %d...\n",new_address);
+						}
+						else
+						{
+							syslog(LOG_ERR,"Error sending address %d client\n",new_address);
+						}
 					}
 				}
 			}

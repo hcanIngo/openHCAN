@@ -143,7 +143,7 @@ int main()
 	{
 		int i;
 		CANFrame f;
-		size_t size;
+		socklen_t size;
 		struct sockaddr_in peer;
 
 		bzero(&peer,sizeof(peer));

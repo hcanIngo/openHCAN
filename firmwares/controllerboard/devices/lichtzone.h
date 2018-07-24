@@ -61,7 +61,7 @@ typedef struct
 
 void lichtzone_init(device_data_lichtzone *p, eds_block_p it);
 void lichtzone_can_callback(device_data_lichtzone *p, const canix_frame *frame);
-inline void lichtzone_timer_handler(device_data_lichtzone *p, uint8_t zyklus);
+extern void lichtzone_timer_handler(device_data_lichtzone *p, uint8_t zyklus);
 
 #endif
 

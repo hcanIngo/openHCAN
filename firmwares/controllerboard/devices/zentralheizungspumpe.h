@@ -54,7 +54,7 @@ typedef struct
 } device_data_zentralheizungspumpe;
 
 void zentralheizungspumpe_init(device_data_zentralheizungspumpe *p, eds_block_p it);
-inline void zentralheizungspumpe_timer_handler(device_data_zentralheizungspumpe *p, uint8_t zyklus);
+extern void zentralheizungspumpe_timer_handler(device_data_zentralheizungspumpe *p, uint8_t zyklus);
 void zentralheizungspumpe_can_callback(device_data_zentralheizungspumpe *p, const canix_frame *frame);
 
 #endif

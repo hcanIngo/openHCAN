@@ -39,7 +39,7 @@ typedef struct
 } device_data_poti;
 
 void poti_init(device_data_poti *p, eds_block_p it);
-inline void poti_timer_handler(device_data_poti *p, uint8_t zyklus);
+extern void poti_timer_handler(device_data_poti *p, uint8_t zyklus);
 void poti_can_callback(device_data_poti *p, const canix_frame *frame);
 
 #endif

@@ -20,7 +20,7 @@ typedef struct
 } device_data_taster;
 
 void taster_init(device_data_taster *p, eds_block_p it);
-inline void taster_timer_handler(device_data_taster *p, uint8_t zyklus);
+extern void taster_timer_handler(device_data_taster *p, uint8_t zyklus);
 void taster_can_callback(device_data_taster *p, const canix_frame *frame);
 
 #endif

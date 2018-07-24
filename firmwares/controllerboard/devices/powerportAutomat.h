@@ -38,6 +38,6 @@ typedef struct
 
 void powerportAutomat_init(device_data_powerportAutomat *p, eds_block_p it);
 void powerportAutomat_can_callback(device_data_powerportAutomat *p, const canix_frame *frame);
-inline void powerportAutomat_timer_handler(device_data_powerportAutomat *p, uint8_t zyklus);
+extern void powerportAutomat_timer_handler(device_data_powerportAutomat *p, uint8_t zyklus);
 
 #endif

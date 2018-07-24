@@ -33,7 +33,7 @@ typedef struct device_data_analogComparator
 
 
 void analogComparator_init(device_data_analogComparator *p, eds_block_p it);
-inline void analogComparator_timer_handler(device_data_analogComparator *p, uint8_t zyklus);
+extern void analogComparator_timer_handler(device_data_analogComparator *p, uint8_t zyklus);
 void analogComparator_can_callback(device_data_analogComparator *p, const canix_frame *frame);
 
 #endif

@@ -17,6 +17,6 @@ typedef struct
 
 void dunstabzugport_init(device_data_dunstabzugport *p, eds_block_p it);
 void dunstabzugport_can_callback(device_data_dunstabzugport *p, const canix_frame *frame);
-inline void dunstabzugport_timer_handler(device_data_dunstabzugport *p, uint8_t zyklus);
+extern void dunstabzugport_timer_handler(device_data_dunstabzugport *p, uint8_t zyklus);
 
 #endif

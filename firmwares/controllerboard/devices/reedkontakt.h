@@ -21,7 +21,7 @@ typedef struct
 } device_data_reedkontakt;
  
 void reedkontakt_init(device_data_reedkontakt *p, eds_block_p it);
-inline void reedkontakt_timer_handler(device_data_reedkontakt *p, uint8_t zyklus);
+extern void reedkontakt_timer_handler(device_data_reedkontakt *p, uint8_t zyklus);
 void reedkontakt_can_callback(device_data_reedkontakt *p, 
 		const canix_frame *frame);
 

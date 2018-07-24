@@ -56,7 +56,7 @@ typedef struct
 } device_data_rolladenAutomat;
 
 void rolladenAutomat_init(device_data_rolladenAutomat *p, eds_block_p it);
-inline void rolladenAutomat_timer_handler(device_data_rolladenAutomat *p, uint8_t zyklus);
+extern void rolladenAutomat_timer_handler(device_data_rolladenAutomat *p, uint8_t zyklus);
 void rolladenAutomat_can_callback(device_data_rolladenAutomat *p, const canix_frame *frame);
 
 #endif

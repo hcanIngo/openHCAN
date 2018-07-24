@@ -65,18 +65,18 @@ typedef struct
 
 void ports_init(device_data_ports *p, eds_block_p it);
 void ports_can_callback(device_data_ports *p, const canix_frame *frame);
-inline void ports_timer_handler(device_data_ports *p, uint8_t zyklus);
+extern void ports_timer_handler(device_data_ports *p, uint8_t zyklus);
 
 void configurePorts (void);
 
 extern bool portsDeviceCreated;
 extern bool expanderActive;
 
-inline uint8_t ports_getInput(uint8_t portNumber);
+extern uint8_t ports_getInput(uint8_t portNumber);
 
-inline void ports_setOutput(uint8_t n, uint8_t state);
-inline uint8_t ports_getOutput(uint8_t n);
+extern void ports_setOutput(uint8_t n, uint8_t state);
+extern uint8_t ports_getOutput(uint8_t n);
 
-inline void handlerForExpanderUpdate(void);
+extern void handlerForExpanderUpdate(void);
 
 #endif

@@ -21,7 +21,7 @@ void zeitzone_init(device_data_zeitzone *p, eds_block_p it);
 uint8_t zeitzone_matches(uint8_t zeitzone_id);
 
 void zeitzone_can_callback(device_data_zeitzone *p, const canix_frame *frame);
-inline void zeitzone_timer_handler(device_data_zeitzone *p, uint8_t zyklus);
+extern void zeitzone_timer_handler(device_data_zeitzone *p, uint8_t zyklus);
 
 #endif
 

@@ -71,7 +71,7 @@ typedef struct
 
 
 void rolladen_init(device_data_rolladen *p, eds_block_p it);
-inline void rolladen_timer_handler(device_data_rolladen *p, uint8_t zyklus);
+extern void rolladen_timer_handler(device_data_rolladen *p, uint8_t zyklus);
 void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame);
 
 #endif

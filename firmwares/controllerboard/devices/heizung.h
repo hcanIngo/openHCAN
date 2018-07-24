@@ -75,6 +75,6 @@ typedef struct
 
 void heizung_init(device_data_heizung *p, eds_block_p it);
 void heizung_can_callback(device_data_heizung *p, const canix_frame *frame);
-inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus);
+extern void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus);
 
 #endif

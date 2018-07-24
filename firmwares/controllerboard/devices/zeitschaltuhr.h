@@ -25,7 +25,7 @@ typedef struct
 } device_data_zeitschaltuhr;
 
 void zeitschaltuhr_init(device_data_zeitschaltuhr *p, eds_block_p it);
-inline void zeitschaltuhr_timer_handler(device_data_zeitschaltuhr *p, uint8_t zyklus);
+extern void zeitschaltuhr_timer_handler(device_data_zeitschaltuhr *p, uint8_t zyklus);
 void zeitschaltuhr_can_callback(device_data_zeitschaltuhr *p, const canix_frame *frame);
 
 #endif

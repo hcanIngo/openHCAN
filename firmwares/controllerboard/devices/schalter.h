@@ -41,7 +41,7 @@ typedef struct
 
 void schalter_init(device_data_schalter *p, eds_block_p it);
 void schalter_can_callback(device_data_schalter *p, const canix_frame *frame);
-inline void schalter_timer_handler(device_data_schalter *p, uint8_t zyklus);
+extern void schalter_timer_handler(device_data_schalter *p, uint8_t zyklus);
 
 #endif
 

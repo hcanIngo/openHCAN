@@ -40,7 +40,7 @@ typedef struct
 } device_data_powerport;
 
 void powerport_init(device_data_powerport *p, eds_block_p it);
-inline void powerport_timer_handler(device_data_powerport *p, uint8_t zyklus);
+extern void powerport_timer_handler(device_data_powerport *p, uint8_t zyklus);
 void powerport_can_callback(device_data_powerport *p, const canix_frame *frame);
 
 /**

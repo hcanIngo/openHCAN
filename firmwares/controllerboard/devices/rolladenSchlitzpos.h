@@ -39,7 +39,7 @@ typedef struct
 } device_data_rolladenSchlitzpos;
 
 void rolladenSchlitzpos_init(device_data_rolladenSchlitzpos *p, eds_block_p it);
-inline void rolladenSchlitzpos_timer_handler(device_data_rolladenSchlitzpos *p, uint8_t zyklus);
+extern void rolladenSchlitzpos_timer_handler(device_data_rolladenSchlitzpos *p, uint8_t zyklus);
 void rolladenSchlitzpos_can_callback(device_data_rolladenSchlitzpos *p,
 		const canix_frame *frame);
 

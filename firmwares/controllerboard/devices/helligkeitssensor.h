@@ -34,7 +34,7 @@ typedef struct
 } device_data_helligkeitssensor;
 
 void helligkeitssensor_init(device_data_helligkeitssensor *p, eds_block_p it);
-inline void helligkeitssensor_timer_handler(device_data_helligkeitssensor *p, uint8_t zyklus);
+extern void helligkeitssensor_timer_handler(device_data_helligkeitssensor *p, uint8_t zyklus);
 void helligkeitssensor_can_callback(device_data_helligkeitssensor *p, const canix_frame *frame);
 
 #endif

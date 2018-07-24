@@ -59,7 +59,7 @@ typedef struct
 #define TICK_ERROR 2 // Flankenuebergaenge werden mit einer Ungenauigkeit von bis zu 2 Ticks erfasst 
 
 void dcf77_receiver_init(device_data_dcf77_receiver* p, eds_block_p it);
-inline void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p, uint8_t zyklus);
+extern void dcf77_receiver_timer_handler(device_data_dcf77_receiver *p, uint8_t zyklus);
 
 // Routinen zur Signalauswertung:
 void scan_dcf77( device_data_dcf77_receiver *p );

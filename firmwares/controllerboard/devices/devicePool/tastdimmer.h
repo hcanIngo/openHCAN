@@ -20,6 +20,6 @@ uint8_t tastdimmer_is_in_group(const device_data_tastdimmer *p, uint8_t group);
 
 void tastdimmer_init(device_data_tastdimmer *p, eds_block_p it);
 void tastdimmer_can_callback(device_data_tastdimmer *p, const canix_frame *frame);
-inline void tastdimmer_timer_handler(device_data_tastdimmer *p, uint8_t zyklus);
+extern void tastdimmer_timer_handler(device_data_tastdimmer *p, uint8_t zyklus);
 
 #endif

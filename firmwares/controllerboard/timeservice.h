@@ -24,7 +24,7 @@ typedef struct
 } device_data_timeservice;
 
 void timeservice_can_callback(const canix_frame *frame);
-inline void timeservice_timer_handler(device_data_timeservice *p, uint8_t zyklus);
+extern void timeservice_timer_handler(device_data_timeservice *p, uint8_t zyklus);
 
 #endif
 

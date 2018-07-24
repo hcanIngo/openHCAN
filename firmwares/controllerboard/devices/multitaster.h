@@ -41,7 +41,7 @@ typedef struct
 } device_data_multitaster;
 
 void multitaster_init(device_data_multitaster *p, eds_block_p it);
-inline void multitaster_timer_handler(device_data_multitaster *p, uint8_t zyklus);
+extern void multitaster_timer_handler(device_data_multitaster *p, uint8_t zyklus);
 void multitaster_can_callback(device_data_multitaster *p, const canix_frame *frame);
 
 #endif

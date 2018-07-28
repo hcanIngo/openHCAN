@@ -11,8 +11,14 @@
  In der Datei ARCH.inc ggf. zuvor die gewuenschte/verwendete Architektur einstellen.
   
  ______________________________________________________
- Aktuell verwendete Compiler-Versionen (Ubuntu 17.04):  
- - clang 4.0
- - gcc 6.3.0
- - avr-gcc 4.9.2
+ Aktuell verwendete Compiler-Versionen 
  
+ Ubuntu 18.04 (Desktop-/Laptop-PC):  
+ - clang 6.0.0-1ubuntu2
+ - gcc 7.3.0-16ubuntu3
+ - avr-gcc 5.4.0
+
+ Armbian 5.34 (Bananapi):  
+ - clang 3.8.1-24
+ - gcc 6.3.0-18+deb9u1
+ - avr-gcc 4.9.2

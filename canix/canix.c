@@ -373,12 +373,7 @@ uint8_t canix_init(void)
 	for (i = 0; i < MAX_RTC_CALLBACKS; i++)
 		rtc_callback[i] = (canix_rtc_callback) 0;
 
-#ifdef CANIX_LED_SETUP1
 	canix_led_init_ports();
-#endif
-#ifdef CANIX_LED_SETUP2
-	canix_led_init_ports();
-#endif
 
 	// Eingangsbuffer leeren
 	for (i = 0; i < CANIX_QUEUE_SIZE; i++)

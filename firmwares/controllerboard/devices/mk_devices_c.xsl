@@ -51,6 +51,7 @@ void devices_load_config(void)
 	devices_init();
 
 	eds_block_p it;
+	unknown_device_found = 0;
 
 	EDS_foreach_block_between(it,1,255)
 	{
@@ -74,6 +75,7 @@ void devices_load_config(void)
 				{
 					canix_syslog_P(SYSLOG_PRIO_ERROR,
 						PSTR(&quot;EDS_BLOCK_TYPE unknown:%d EDS Addr:%d&quot;), EDS_BLOCK_TYPE(it), it);
+					unknown_device_found = 1;
 				}
 				continue;
 

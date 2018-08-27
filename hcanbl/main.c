@@ -29,8 +29,7 @@
 #include "../canix/mcp2515_defs.h"
 #include "../canix/mcp2515_bl.h"
 
-#define CANIX_NO_LED_SETUP
-//#define CANIX_LED_SETUP2
+//#define CANIX_NO_LED_SETUP
 #include "../canix/led.h"
 
 #include "../include/hcan_multicast.h"

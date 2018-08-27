@@ -30,6 +30,7 @@ extern uint8_t device_data_size[];
 extern uint8_t *pdevice_data[];
 extern uint8_t device_data[];
 extern uint16_t device_data_ram_usage;
+uint8_t  unknown_device_found;
 
 void devices_load_config(void);
 void hauselektrik_callback(const canix_frame *frame);

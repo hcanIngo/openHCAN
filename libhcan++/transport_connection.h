@@ -35,6 +35,7 @@ namespace hcan
 			virtual ~transport_connection() throw ();
 			void keep_connection_alive();
 			void ping(uint16_t src, uint16_t dst);
+			void ping_once(uint16_t src, uint16_t dst);
 			void flood_ping(uint16_t src, uint16_t dst, const int load);
 			void dump(bool numeric, bool color);
 			void templog();

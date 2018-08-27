@@ -216,6 +216,46 @@ void transport_connection::flood_ping(uint16_t src, uint16_t dst,
 	}
 }
 
+void transport_connection::ping_once(uint16_t src, uint16_t dst)
+{
+	cout << "sending one ping packet from " << src << " to " 
+		<< dst << "..." << endl;
+
+	try
+	{
+#ifndef __WIN32__
+		struct timeval starttv,endtv;
+		gettimeofday(&starttv,0);
+#endif
+
+		send_PING_REQUEST(src,dst);
+		recv_PING_REPLAY(dst,src);
+
+#ifndef __WIN32__
+		gettimeofday(&endtv,0);
+
+		uint64_t diff = (endtv.tv_sec * 1000000 + endtv.tv_usec) -
+			(starttv.tv_sec * 1000000 + starttv.tv_usec);
+
+		cout << " [" << (1) << "] " << (diff / 1000) << " msec";
+#else
+		cout << " [" << (1) << "] ";
+#endif
+
+	}
+	catch (const transport_error &e)
+	{
+		// we are pinging, so ignore possible timeouts
+		keep_connection_alive();
+	}
+#ifndef __WIN32__
+	usleep (200000);
+#else
+	_sleep(200);
+#endif
+	cout << endl;
+}
+
 
 volatile bool done = false;
 
@@ -307,7 +347,10 @@ void transport_connection::syslog()
 					// yes, there is already something; now add the
 					// string received
 
-					it->second.msg += f.data_as_string();
+					if(f.data_as_string()[0] == it->second.prio)
+						it->second.msg += f.data_as_string().substr(1);
+					else
+						it->second.msg += f.data_as_string();
 
 					// now check it the string we have built is complete:
 					const string s = it->second.msg;
@@ -342,7 +385,7 @@ void transport_connection::syslog()
 				else
 				{
 					// no, it is the first packet
-					messages[f.src()].msg = f.data_as_string();
+					messages[f.src()].msg = f.data_as_string().substr(1);
 					messages[f.src()].prio = f.data_as_string()[0];
 				}
 			}

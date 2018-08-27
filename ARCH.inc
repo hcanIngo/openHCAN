@@ -28,3 +28,7 @@ export MCU = atmega644p
 ###########################
 export IP_HI = 192.168.1.42
 ###########################
+
+# z.B. -DhcanXYZ
+export GLOBAL_DEFINES = 
+###########################

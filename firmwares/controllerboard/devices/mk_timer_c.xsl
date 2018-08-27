@@ -142,6 +142,15 @@ void idle_handler(void)
 			}
 		}
 
+		if (unknown_device_found > 0) { // wenn ein unbekanntest Device gefunden wurde, ist die Variable 1
+			unknown_device_found++; // dann zaehlen wir die Sek. hoch ...
+		}
+		if(unknown_device_found == 10) { // ... und nach 10 Sek. kommt eine Syslogmeldung
+			canix_syslog_P(SYSLOG_PRIO_ERROR,
+				PSTR(&quot;unknown EDS_BLOCK_TYPE found. See Boot MSG&quot;));
+			unknown_device_found = 1; // und im naechsten Durchlauf wieder hochzaehlen bis 10 ...
+		}
+
 		/* vermutlich nicht ganz korrekt und per "EDS config RAM overflow" schon zum Teil abgedeckt:
 		unusedSRAM = get_mem_unused();
 		if( unusedSRAM &lt; MAX_MEM_CRITICAL_SIZE )

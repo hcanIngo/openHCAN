@@ -30,26 +30,26 @@ void heizung_init(device_data_heizung *p, eds_block_p it)
 	p->ventilpflege_counter = 0;
 	p->last_soll_temp = -1;
 
-        //PID
-        p->pidcounter = ABSTANDPIDMESSUNGEN;
-        p->pfaktor = 30; // 1/100; 30 == 0,3
-        p->ifaktor = 50; // 1/100; 50 == 0,5
-        p->dfaktor = 30; // 1/100; 30 == 0,3
-        p->sollistIndex = 0;
+	//PID
+	p->pidcounter = ABSTANDPIDMESSUNGEN;
+	p->pfaktor = 30; // 1/100; 30 == 0,3
+	p->ifaktor = 50; // 1/100; 50 == 0,5
+	p->dfaktor = 30; // 1/100; 30 == 0,3
+	p->sollistIndex = 0;
 
-		uint8_t i;
-        for (i = 0; i < SOLLISTWERTE; i++)
-        {
-                p->sollist[i] = 0;
-        }
+	uint8_t i;
+	for (i = 0; i < SOLLISTWERTE; i++)
+	{
+			p->sollist[i] = 0;
+	}
 
-		canix_syslog_P(SYSLOG_PRIO_DEBUG,
-			PSTR("heizung_init: %d"), p->config.id);
-        canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_p:%d"), p->pfaktor);
-        canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_i:%d"), p->ifaktor);
-        canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_d:%d"), p->dfaktor);
-        canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_abstandPid:%d"), ABSTANDPIDMESSUNGEN);
-        canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_SOLLISTWERTE:%d"), SOLLISTWERTE);
+	canix_syslog_P(SYSLOG_PRIO_DEBUG,
+		PSTR("heizung_init: %d"), p->config.id);
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_p:%d"), p->pfaktor);
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_i:%d"), p->ifaktor);
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_d:%d"), p->dfaktor);
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_abstandPid:%d"), ABSTANDPIDMESSUNGEN);
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_SOLLISTWERTE:%d"), SOLLISTWERTE);
 }
 
 /** 
@@ -64,7 +64,6 @@ void heizung_update_heizstop(device_data_heizung *p)
 	{
 		canix_syslog_P(SYSLOG_PRIO_DEBUG,
 				PSTR("Heizstop aktiv (id=%d)"), p->config.id);
-
 
 		// Heizung ganz ausschalten
 		p->pwm_end = p->config.pwm_periode;

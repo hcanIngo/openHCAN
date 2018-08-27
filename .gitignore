@@ -16,7 +16,7 @@
 *.lst
 *.hex
 *.out
-# *.map
+*.map
 
 
 # Packages #

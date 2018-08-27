@@ -1,4 +1,4 @@
-[Device](https://github.com/hcanIngo/openHCAN/wiki/device)
+siehe [Device-Beschreibung](https://github.com/hcanIngo/openHCAN/wiki/device)
 
 Hinweis: Devices im Verzeichnis "devicePool" werden nicht eingebunden.
 

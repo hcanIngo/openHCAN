@@ -352,15 +352,61 @@ void board_driver::cmd_flash (const string &filename)
 	// Verschiedene Atmega MCUs haben unterschiedliche Page-Sizes
 	assert(m_page_size);
 
+	uint8_t arch, type;
+	m_tcon.send_DEVICE_TYPE_REQUEST(m_bcon.src(), m_bcon.dst());
+	m_tcon.recv_DEVICE_TYPE_REPLAY(m_bcon.dst(), m_bcon.src(), &arch, &type);
+
+	uint16_t maxsize = 0;
+	cout << endl << "MCU: ";
+	switch (arch)
+	{
+		case HCAN_ARCH_ATMEGA32 :
+			cout << "avr atmega32" << endl;
+			maxsize = 28672;
+			break;
+
+		case HCAN_ARCH_ATMEGA328P :
+			cout << "avr atmega328p" << endl;
+			maxsize = 28672;
+			break;
+
+		case HCAN_ARCH_ATMEGA644P :
+			cout << "avr atmega644p" << endl;
+			maxsize = 61440; // 61440 byte bei 4096 byte bootloader 			57344 byte bei 8192 byte bootloader
+			break;
+
+		default :
+			cout << "unknown" << endl;
+	}
+
+	cout << "Max hex file size: " << maxsize << " bytes." << endl;
+
 	// Das zu flashende Hexfile laden
 	ihexfile hexfile;
 	hexfile.load(filename,m_page_size);
 	size_t size = hexfile.size();
 
 	vector<uint8_t> data = hexfile.data();
-	cout << filename << " read; padded size = "  << hexfile.size() 
+	cout <<  endl << filename << " read; padded size = "  << hexfile.size()
 		<< " bytes." << endl;
 	cout << "crc16 is " << hexfile.crc16() << endl;
+
+	if(maxsize == 0)
+	{
+		string x;
+		while(1)
+		{
+			cout << "Warning: Cannot dertimine max hexfile size! Flash at own risk? [Y/n]";
+			getline (cin, x);
+			if(x == "n") return;
+			else if(x == "Y") break;
+		}
+	}
+	else if (hexfile.size() > maxsize)
+	{
+		cout << "Critical error: Hexfile to large for flash! Max size: " << maxsize << " bytes" << endl;
+		return;
+	}
 
 	bool incremental_flash_active = false;
 

@@ -37,7 +37,7 @@ namespace hcan
 			void ping(uint16_t src, uint16_t dst);
 			void ping_once(uint16_t src, uint16_t dst);
 			void flood_ping(uint16_t src, uint16_t dst, const int load);
-			void dump(bool numeric, bool color);
+			void dump(bool numeric, bool color, bool syslog);
 			void templog();
 			void syslog();
 			void send(const frame &f);

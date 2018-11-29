@@ -133,6 +133,7 @@ Modi:
 --templog
 --syslog
 --dump
+--dump-no-syslog
 --ping
 --floodping
 --pingonce
@@ -188,10 +189,17 @@ void handle_given_options (const po::parsed_options &options,
 		hcan::transport_connection con(hcand_ip);
 		const bool numeric = map.count("numeric");
 		const bool nocolor = map.count("nocolor");
-		con.dump(numeric, !nocolor);
+		con.dump(numeric, !nocolor, true);
 		exit(0);
 	}
-
+        if (map.count("dump-no-syslog"))
+        {
+                hcan::transport_connection con(hcand_ip);
+                const bool numeric = map.count("numeric");
+                const bool nocolor = map.count("nocolor");
+                con.dump(numeric, !nocolor, false);
+                exit(0);
+        }
 
 	// Standard NonPolite
 	if (map.count("polite-time"))
@@ -469,6 +477,7 @@ int main (int argc, char *argv[])
 			("help,h", "shows the available options")
 			("ip-address,a", po::value<string>(),  "IP adress of hcand (default 127.0.0.1)")
 			("dump,d", "dump mode; dump all messages")
+			("dump-no-syslog,D", "dump mode; dump all messages; exept of syslog messages")
 			("nocolor", "no color in dump mode")
 			("numeric,n", "in dump mode, print frame data as numbers")
 			("ping,p", po::value<uint16_t>(), 

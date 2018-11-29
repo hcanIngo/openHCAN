@@ -397,7 +397,7 @@ void transport_connection::syslog()
 	}
 }
 
-void transport_connection::dump(bool numeric, bool color)
+void transport_connection::dump(bool numeric, bool color, bool syslog)
 {
 	// this fills the frame_message_description vector
 	// (see mk_frame_message_description_h.xsl for details)
@@ -410,6 +410,10 @@ void transport_connection::dump(bool numeric, bool color)
 		{
 			const frame f = frame::read_from(m_socket);
 			keep_connection_alive();
+			if ((!syslog) && (f.proto() == 3) && (f.dst() == HCAN_MULTICAST_SYSLOG))
+			{
+				continue;
+			}
 
 			f.print(numeric,color,"");
 

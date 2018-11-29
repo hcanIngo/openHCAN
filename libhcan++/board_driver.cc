@@ -379,7 +379,14 @@ void board_driver::cmd_flash (const string &filename)
 			cout << "unknown" << endl;
 	}
 
-	cout << "Max hex file size: " << maxsize << " bytes." << endl;
+	if(maxsize == 0)
+	{
+		cout << "Max hex file size unknown!" << endl;
+	}
+	else
+	{
+		cout << "Max hex file size: " << maxsize << " bytes." << endl;
+	}
 
 	// Das zu flashende Hexfile laden
 	ihexfile hexfile;
@@ -387,19 +394,19 @@ void board_driver::cmd_flash (const string &filename)
 	size_t size = hexfile.size();
 
 	vector<uint8_t> data = hexfile.data();
-	cout <<  endl << filename << " read; padded size = "  << hexfile.size()
+	cout << endl << filename << " read; padded size = " << hexfile.size()
 		<< " bytes." << endl;
 	cout << "crc16 is " << hexfile.crc16() << endl;
 
 	if(maxsize == 0)
 	{
-		string x;
+		string answer;
 		while(1)
 		{
 			cout << "Warning: Cannot dertimine max hexfile size! Flash at own risk? [Y/n]";
-			getline (cin, x);
-			if(x == "n") return;
-			else if(x == "Y") break;
+			getline (cin, answer);
+			if(answer == "n") return;
+			else if(answer == "Y") break;
 		}
 	}
 	else if (hexfile.size() > maxsize)

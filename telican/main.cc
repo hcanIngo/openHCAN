@@ -135,6 +135,7 @@ Modi:
 --dump
 --ping
 --floodping
+--pingonce
 --connect
 --control // Default, wenn nichts angegeben ist
 
@@ -255,6 +256,34 @@ void handle_given_options (const po::parsed_options &options,
 		hcan::transport_connection con(hcand_ip);
 
 		con.flood_ping(src, dst,100);
+		exit(0);
+	}
+
+	if (map.count("pingonce"))
+	{
+		// bei ping muss die Zeit gemessen werden; hier keinen Polite
+		// Mode aktivieren!
+		hcan::frame::polite_mode = false;
+
+		// setup the destination address of our peer board
+		uint16_t dst = map["pingonce"].as<uint16_t>();
+
+		// 0 bedeutet: bei hcanaddressd eine Adresse reservieren
+		uint16_t src = 0;
+
+		hcan::dynaddress dynsrc(hcand_ip);
+
+		if (map.count("src"))
+			src = map["src"].as<uint16_t>();
+		else
+		{
+			dynsrc.allocate();
+			src = dynsrc();
+		}
+
+		hcan::transport_connection con(hcand_ip);
+
+		con.ping_once(src, dst);
 		exit(0);
 	}
 
@@ -446,6 +475,8 @@ int main (int argc, char *argv[])
 			 "sends ping frames to the given destination")
 			("floodping,P", po::value<uint16_t>(), 
 			 "sends flood pings to the given destination")
+			("pingonce", po::value<uint16_t>(),
+			 "sends one ping to the given destination")
 			("connect,c", po::value<uint16_t>(), "connect to given destination")
 			("ignore-type", "ignore the remote type if device does not answer")
 			("arch", po::value<string>(), "set arch: [atmega328p|atmega32|atmega644p] ")

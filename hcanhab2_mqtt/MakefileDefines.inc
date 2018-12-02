@@ -1,4 +1,4 @@
-CONF = /home/ingo/Dropbox/HCAN/HI_SERVER/openhab2_conf_mqtt
+CONF = /home/il/Dropbox/HCAN/HI_SERVER/openhab2_conf_mqtt
 include $(CONF)/myconf.inc
 
 OPENHABVERSION = openhab-2.3.0
@@ -9,7 +9,7 @@ HCAN_INSTALLATION = installation.xml
 ZIEL_PC = bananapi
 
 ifeq ($(ZIEL_PC),localhost)
-	ZIEL_USER = ingo
+	ZIEL_USER = il
 else ifeq  ($(ZIEL_PC),bananapi)
 	ZIEL_USER = tt
 endif

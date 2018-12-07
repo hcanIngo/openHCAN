@@ -35,6 +35,10 @@
 #define LED_PORT_DDR DDRD
 #endif
 
+#if defined(__AVR_ATmega644P__)
+#define CANIX_NO_LED_SETUP
+#endif
+
 #ifdef CANIX_NO_LED_SETUP
 
 #define canix_led_enable(LED)

@@ -4,7 +4,6 @@ Alexa
 - schalte Büro Tür-Licht ein -> tts: "OK" 
 - schalte Büro Tür-Licht aus -> tts: "OK"
 
-- stelle die Heizung im Büro auf 23 Grad-> tts: "automatischer Modus ist auf 23 Grad gestellt"
-  (ggf. muss "Grad" weggelassen werden: "stelle die Heizung im Büro auf 23")
+- stelle Wohnzimmer auf 23 Grad  -> tts: "automatischer Modus ist auf 23 Grad gestellt"
 
 - wie ist die Temperatur in der Küche -> tts: "Die Temperatur von Küche ist 22,6 Grad"

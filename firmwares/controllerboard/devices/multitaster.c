@@ -156,7 +156,11 @@ void multitaster_can_callback(device_data_multitaster *p,
 			{
 				if ( adcValue <= (i * p->oneScale) )
 				{
-					p->lastPotiPos = i-1; //d.h. befindet sich bis zum (i-1). Skalenstrich
+					if ( adcValue == 0 ) //d.h. befindet sich am unteren Anschlag
+						p->lastPotiPos = 0; //bei adcValue = 0 waere auch i = 0 und das wuerde zu lastPotiPos = 0-1 fuhren
+					else
+						p->lastPotiPos = i-1; //d.h. befindet sich bis zum (i-1). Skalenstrich
+
 					//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("PotiPos=%d"), p->lastPotiPos);
 					break; //break die "for-Loop"
 				}

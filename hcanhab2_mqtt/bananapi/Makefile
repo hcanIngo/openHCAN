@@ -31,17 +31,14 @@ install_oracle_arm_jre:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) rm -f -R /home/$(ZIEL_USER)/$(ZIEL_ORDNER)/../jdk1.8.0
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) mkdir -p /home/$(ZIEL_USER)/jdk1.8.0
 	@#
-	@# zuvor:                                                    jdk-8u151-linux-arm32-vfp-hflt.tar.gz
-	@# cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u171-linux-arm32-vfp-hflt.tar.gz
-	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_171/* $(SCP_ZIEL_DIR)/../jdk1.8.0
+	@# zuvor:                                                    jdk-8u171-linux-arm32-vfp-hflt.tar.gz
+	cd $(OPENHABDOWNLOADS_DIR); tar xfvz $(OPENHABDOWNLOADS_DIR)/jdk-8u191-linux-arm32-vfp-hflt.tar.gz
+	$(_SCP) $(OPENHABDOWNLOADS_DIR)/jdk1.8.0_191/* $(SCP_ZIEL_DIR)/../jdk1.8.0
 	# Falls noetig, auf dem Bananapi: sudo chmod 755 /home/tt/jdk1.8.0/*
 
 openhab_start_withScreen:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo apt-get install screen mc vim git htop
 	@# Damit wird das richtige JDK verwendet und die Ausgaben von Screen gemanaged werden: 
-	@# screen -S 'OpenHAB Server' -dm /home/bananapi/jdk1.8.0/bin/java  in der start.sh (./Bananian_1504/start.sh) voranstellen
-	$(_SCP) $(HCANHAB_DIR)/bananapi/start.sh $(SCP_ZIEL_DIR)/start.sh
-	$(_SCP) $(HCANHAB_DIR)/bananapi/start_debug.sh $(SCP_ZIEL_DIR)/start_debug.sh
 	$(_SCP) $(HCANHAB_DIR)/bananapi/setenv $(SCP_ZIEL_DIR)/runtime/bin/setenv
 
 myopenhab:

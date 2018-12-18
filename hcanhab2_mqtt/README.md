@@ -5,7 +5,7 @@ openHAB2 für openHCAN verwenden - [hcanhab](https://github.com/hcanIngo/openHCA
 
 
 2. conf-Ordner (=BeispielKonfiguration) in Verzeichnis xy legen und mindestens folgende Dateien anpassen:
-	- Openhab-Installationsdateien besorgen (http://www.openhab.org/downloads.html)
+	- Openhab-Installationsdatei "openhab-2.4.0.zip" besorgen (https://www.openhab.org/download/)
 	- [myconf.inc](https://github.com/hcanIngo/openHCAN/tree/master/hcanhab2_mqtt/BeispielKonfiguration/myconf.inc)
 	- [installation.xml nach vorgegebenen Schema anpassen](https://github.com/hcanIngo/openHCAN/tree/master/hcanhab2_mqtt/BeispielKonfiguration/installation.xml)
 
@@ -20,6 +20,13 @@ openHAB2 für openHCAN verwenden - [hcanhab](https://github.com/hcanIngo/openHCA
 	- make all  @  openHCAN/hcanhab2_mqtt/
 
 
+
 5. Openhab starten (per Makefile ausführen):
 	- Fuer localhost: make start     (mit log-Datei: make start > ~/tmp/openhabMeldungen.txt)
 	- make run_webclient   oder z.B. Habdroid-App verwenden
+
+6.  - auf dem Bananapi openhab manuell starten:
+	  -> ssh tt@bananapi
+	  -> ./myOpenHabInstallation/start.sh  
+	  -> feature:install openhab-runtime-compat1x (binding-mqtt1 - 1.13.0  ermoeglichen)
+    

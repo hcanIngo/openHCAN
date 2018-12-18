@@ -4,7 +4,7 @@ export PT = 'spitzenPasswort'
 
 # Pfad zu den Openhab-Installationsdateien:
 #
-# - openhab-2.1.0.zip
+# - openhab-2.4.0.zip
 # - jdk-8u151-linux-arm32-vfp-hflt.tar.gz
 ##############################################################################
 export OPENHABDOWNLOADS_DIR = /home/misterX/Downloads/openhab_downloads

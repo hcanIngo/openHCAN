@@ -49,16 +49,23 @@ bool lampe_command::exec(const string &line)
 				i != lampen.end(); i++)
 		{
 			// Lampen-Gruppe besorgen:
-			uint8_t gruppe = global_installation_data.lampe_gruppe_by_name(*i);
+			uint8_t gruppe_query = global_installation_data.lampe_gruppe_by_name(*i);
 
 			uint8_t status;
 			uint8_t timer;
 			m_tcon.send_POWER_GROUP_STATE_QUERY(m_src,
-					HCAN_MULTICAST_CONTROL,gruppe);
-			m_tcon.recv_POWER_GROUP_STATE_REPLAY(0, m_src, &gruppe, &status, &timer);
+					HCAN_MULTICAST_CONTROL,gruppe_query);
+			
+			uint8_t gruppe_replay;
+			// Da hier theoretisch auch das Replay des vorherigen Querys kommen kann,
+			// wird der Recive Vorgang solange ausgefuehrt bis die richtige Gruppe kommt.
+			do {
+				m_tcon.recv_POWER_GROUP_STATE_REPLAY(0, m_src,
+						&gruppe_replay, &status, &timer);
+			} while (gruppe_query != gruppe_replay);
 
 
-			cout << setw(4) << setfill(' ') << (int)gruppe
+			cout << setw(4) << setfill(' ') << (int)gruppe_replay
 				<< "     " << (status != 0 ? "ein" : " - ")  
 				<< "      " << *i << endl;
 		}

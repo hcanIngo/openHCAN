@@ -293,7 +293,7 @@ const eds_block_fields_t &eds_block::fields() const
 	return m_desc.fields;
 }
 
-const string &eds_block::field_datatype(const string &key) const
+const string eds_block::field_datatype(const string &key) const
 {
 	const eds_block_field_desc_t &field_desc = 
 		get_block_field_desc_by_key(m_desc, key);

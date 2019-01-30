@@ -98,24 +98,29 @@ void eds_cmd_set_field(board_connection &bcon, eds_connection &econ,
 		const string &key, const string &value)
 {
 	eds_block &block = econ.block_by_address(address);
+	string field_datatype = block.field_datatype(key);
 
-	if (block.field_datatype(key) == "char")
+	if (field_datatype == "char")
 	{
 		block.set_field_str(key,value);
 	}
-	else if (block.field_datatype(key) == "uint16_t")
+	else if (field_datatype == "uint16_t")
 	{
 		istringstream ss(value);
 		int v;
 		ss >> v;
 		block.set_field_uint16(key, (uint16_t) v);
 	}
-	else
+	else if (field_datatype == "uint16_t")
 	{
 		istringstream ss(value);
 		int v;
 		ss >> v;
 		block.set_field_uint8(key, (uint8_t) v);
+	}
+	else
+	{
+		cout << "unknown eds field type: " << field_datatype << endl;
 	}
 }
 

@@ -86,6 +86,7 @@ firmware:
 	cd hcanbl; $(xx) $(parm2)
 	cd firmwares/controllerboard; $(xx) $(parm2)
 	cd firmwares/userpanel-v01; $(xx) $(parm2)
+#	cd firmwares/ws2812-modul; $(xx) $(parm2)
 
 firmwareOhneEds:
 	cd firmwares/usv-modul; $(xx)

@@ -18,24 +18,28 @@ using namespace std;
 namespace hcan
 {
 
-void eds_cmd_list(board_connection &bcon, eds_connection &econ, context &c)
+void eds_cmd_list(board_connection &bcon, eds_connection &econ, context &c, uint16_t address)
 {
-	if (c.mode == context::normal)
+	if (c.mode == context::normal || address != 0)
 	{
 		for (eds_connection::eds_blocks::const_iterator i = 
 				econ.blocks().begin(); i != econ.blocks().end(); i++)
 		{
+			if(address != 0 && i->address() != address) continue;
+			
 			cout << "{" << i->type_name() << "}@" << i->address() << endl;
 		}
 	}
 
-	if (c.mode == context::edit)
+	if (c.mode == context::edit || address != 0)
 	{
 		eds_block &block = econ.block_by_address(c.eds_block_address);
 
 		for (eds_block_fields_t::const_iterator i =
 				block.fields().begin(); i != block.fields().end(); i++)
 		{
+			if(address != 0 && c.eds_block_address != address) continue;
+			
 			if (i->datatype == "char")
 			{
 				cout << "char[" << i->size << "] " << i->name 
@@ -125,11 +129,12 @@ void eds_cmd_set_field(board_connection &bcon, eds_connection &econ,
 }
 
 void eds_cmd_show_conf(board_connection &bcon, eds_connection &econ, 
-		context &c)
+		context &c, const string &type)
 {
 	for (eds_connection::eds_blocks::iterator i = 
 			econ.blocks().begin(); i != econ.blocks().end(); i++)
 	{
+		if (type != "" && i->type_name() != type) continue;
 		cout << "# EDS-Address: " << i->address() << endl;
 		cout << "create " << i->type_name() << endl;
 
@@ -165,14 +170,20 @@ bool eds_exec_cmd(board_connection &bcon, eds_connection &econ,
 
 		if (s == "conf")
 		{
-			eds_cmd_show_conf(bcon, econ, c);
+			eds_cmd_show_conf(bcon, econ, c, "");
+			return true;
+		}
+		else if (s == "all")
+		{
+			sin >> s;
+			eds_cmd_show_conf(bcon, econ, c, s);
 			return true;
 		}
 	}
 	if ((s == "list") && 
 			((c.mode == context::normal) || (c.mode == context::edit)))
 	{
-		eds_cmd_list(bcon, econ, c);
+		eds_cmd_list(bcon, econ, c, 0);
 		return true;
 	}
 
@@ -182,6 +193,15 @@ bool eds_exec_cmd(board_connection &bcon, eds_connection &econ,
 		sin >> address;
 
 		eds_cmd_edit(bcon, econ, c,address);
+		return true;
+	}
+	
+	if (s == "print")
+	{
+		uint16_t address;
+		sin >> address;
+
+		eds_cmd_list(bcon, econ, c, address);
 		return true;
 	}
 
@@ -259,6 +279,7 @@ bool eds_show_help ()
 		"	defragment            EDS: Defragmentiert das EEPROM\n" <<
 		"	Format                EDS: (!) Formatiert das EEPROM (!) \n" <<
 		"	show conf             EDS: Zeigt alle Bloecke an \n" <<
+		"	show all <x>          EDS: Zeigt alle Bloecke vom Typ <x> an  n" <<
 		
 	endl;
 

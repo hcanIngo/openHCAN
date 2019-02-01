@@ -93,3 +93,9 @@ hcansocketd/hcansocketd
 hcanswd/hcanswd
 telican/telican
 tools/hcanextid/hcanextid
+
+firmwares/ws2812-modul/*
+!firmwares/ws2812-modul/main.c
+!firmwares/ws2812-modul/Makefile
+firmwares/ws2812-modul/devices/*
+!firmwares/ws2812-modul/devices/ws2812b.*

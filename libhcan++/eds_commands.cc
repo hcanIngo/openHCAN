@@ -115,7 +115,7 @@ void eds_cmd_set_field(board_connection &bcon, eds_connection &econ,
 		ss >> v;
 		block.set_field_uint16(key, (uint16_t) v);
 	}
-	else if (field_datatype == "uint16_t")
+	else if (field_datatype == "uint8_t")
 	{
 		istringstream ss(value);
 		int v;

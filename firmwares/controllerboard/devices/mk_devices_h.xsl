@@ -12,6 +12,8 @@
 #define DEVICES_H
 
 #include &lt;canix/eds.h&gt;
+#include "dcf77_receiver.h"
+#include "timeservice.h"
 	<xsl:apply-templates select="device" />
 // definiert die Groesse der verschiedenen Device-Configs im EEPROM
 extern uint8_t device_config_size[];

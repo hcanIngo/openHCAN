@@ -20,80 +20,111 @@ namespace hcan
 
 void eds_cmd_list(board_connection &bcon, eds_connection &econ, context &c, uint16_t address)
 {
-	if (c.mode == context::normal || address != 0)
+	try
 	{
-		for (eds_connection::eds_blocks::const_iterator i = 
-				econ.blocks().begin(); i != econ.blocks().end(); i++)
+		if (c.mode == context::normal || address != 0)
 		{
-			if(address != 0 && i->address() != address) continue;
-			
-			cout << "{" << i->type_name() << "}@" << i->address() << endl;
+			for (eds_connection::eds_blocks::const_iterator i =
+					econ.blocks().begin(); i != econ.blocks().end(); i++)
+			{
+				if(address != 0 && i->address() != address) continue;
+
+				cout << "{" << i->type_name() << "}@" << i->address() << endl;
+			}
+		}
+
+		if (c.mode == context::edit || address != 0)
+		{
+			uint16_t adressToList;
+			if(address == 0) adressToList = c.eds_block_address;
+			else adressToList = address;
+
+			eds_block &block = econ.block_by_address(adressToList);
+
+			for (eds_block_fields_t::const_iterator i =
+					block.fields().begin(); i != block.fields().end(); i++)
+			{
+				if(address != 0 && adressToList != address) continue;
+
+				if (i->datatype == "char")
+				{
+					cout << "char[" << i->size << "] " << i->name
+						<< " '" << block.strfield(i->name) << "'" << endl;
+				}
+				else if (i->datatype == "uint16_t")
+				{
+					cout << i->datatype << " " << i->name
+						<< " " << block.uint16_field(i->name) << endl;
+				}
+				else
+				{
+					cout << i->datatype << " " << i->name
+						<< " " << (uint16_t)block.field(i->name) << endl;
+				}
+			}
 		}
 	}
-
-	if (c.mode == context::edit || address != 0)
+	catch (traceable_error &e)
 	{
-		eds_block &block = econ.block_by_address(c.eds_block_address);
-
-		for (eds_block_fields_t::const_iterator i =
-				block.fields().begin(); i != block.fields().end(); i++)
-		{
-			if(address != 0 && c.eds_block_address != address) continue;
-			
-			if (i->datatype == "char")
-			{
-				cout << "char[" << i->size << "] " << i->name 
-					<< " '" << block.strfield(i->name) << "'" << endl;
-			}
-			else if (i->datatype == "uint16_t")
-			{
-				cout << i->datatype << " " << i->name
-					<< " " << block.uint16_field(i->name) << endl;
-			}
-			else
-			{
-				cout << i->datatype << " " << i->name
-					<< " " << (uint16_t)block.field(i->name) << endl;
-			}
-		}
+		cerr << e.what() << endl;
 	}
 }
 
 void eds_cmd_create(board_connection &bcon, eds_connection &econ, 
 		context &c, const string &type)
 {
-	eds_block &block = econ.create_block(type);
+	try
+	{
+		eds_block &block = econ.create_block(type);
 
-	cout << "creating new " << type 
-		<< ", type id = " << (uint16_t)(block.type()) << "..." << endl;
+		cout << "creating new " << type
+			<< ", type id = " << (uint16_t)(block.type()) << "..." << endl;
 
-	stringstream ss;
-	ss << "EDS/{" << block.type_name() << "}@" << block.address() << " > ";
+		stringstream ss;
+		ss << "EDS/{" << block.type_name() << "}@" << block.address() << " > ";
 
-	c.prompt = ss.str();
-	c.mode = context::edit;
-	c.eds_block_address = block.address();
+		c.prompt = ss.str();
+		c.mode = context::edit;
+		c.eds_block_address = block.address();
 
-	return;
+		return;
+	}
+	catch (traceable_error &e)
+	{
+		cerr << e.what() << endl;
+	}
 }
 
 void eds_cmd_delete(board_connection &bcon, eds_connection &econ, 
 		context &c, uint16_t address)
 {
-	econ.delete_block(econ.block_by_address(address));
+	try
+	{
+		econ.delete_block(econ.block_by_address(address));
+	}
+	catch (traceable_error &e)
+	{
+		cerr << e.what() << endl;
+	}
 }
 
 void eds_cmd_edit(board_connection &bcon, eds_connection &econ, context &c, 
 		uint16_t address)
 {
-	const eds_block &block = econ.block_by_address(address);
+	try
+	{
+		const eds_block &block = econ.block_by_address(address);
+		stringstream ss;
+		ss << "EDS/{" << block.type_name() << "}@" << address << " > ";
 
-	stringstream ss;
-	ss << "EDS/{" << block.type_name() << "}@" << address << " > ";
-
-	c.prompt = ss.str();
-	c.mode = context::edit;
-	c.eds_block_address = address;
+		c.prompt = ss.str();
+		c.mode = context::edit;
+		c.eds_block_address = address;
+	}
+	catch (traceable_error &e)
+	{
+		cerr << e.what() << endl;
+	}
 }
 
 
@@ -101,30 +132,37 @@ void eds_cmd_set_field(board_connection &bcon, eds_connection &econ,
 		context &c, uint16_t address, 
 		const string &key, const string &value)
 {
-	eds_block &block = econ.block_by_address(address);
-	string field_datatype = block.field_datatype(key);
+	try
+	{
+		eds_block &block = econ.block_by_address(address);
+		string field_datatype = block.field_datatype(key);
 
-	if (field_datatype == "char")
-	{
-		block.set_field_str(key,value);
+		if (field_datatype == "char")
+		{
+			block.set_field_str(key,value);
+		}
+		else if (field_datatype == "uint16_t")
+		{
+			istringstream ss(value);
+			int v;
+			ss >> v;
+			block.set_field_uint16(key, (uint16_t) v);
+		}
+		else if (field_datatype == "uint8_t")
+		{
+			istringstream ss(value);
+			int v;
+			ss >> v;
+			block.set_field_uint8(key, (uint8_t) v);
+		}
+		else
+		{
+			cout << "unknown eds field type defined in eds.xml: " << field_datatype << endl;
+		}
 	}
-	else if (field_datatype == "uint16_t")
+	catch (traceable_error &e)
 	{
-		istringstream ss(value);
-		int v;
-		ss >> v;
-		block.set_field_uint16(key, (uint16_t) v);
-	}
-	else if (field_datatype == "uint8_t")
-	{
-		istringstream ss(value);
-		int v;
-		ss >> v;
-		block.set_field_uint8(key, (uint8_t) v);
-	}
-	else
-	{
-		cout << "unknown eds field type: " << field_datatype << endl;
+		cerr << e.what() << endl;
 	}
 }
 

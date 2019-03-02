@@ -1,0 +1,176 @@
+#!/bin/bash
+XML='/usr/share/hcan/hcan-protocol.xml'
+
+if [ "$#" -ne 2 ]; then
+    echo "erster Parameter Service (oder ?), zweiter Parameter TEXT oder ID (dez oder hex z.B. 0x1b)"
+    exit 1
+fi
+
+if [ "$1" != "?" ]; then
+	parameter1=$(($1))
+else
+	parameter1=$1
+fi
+
+if [ "$2" != "?" ]; then
+	if  [[ "$2" == 0x* ]] || [ "$2" -eq "$2" ] 2>/dev/null; then
+		parameter2=$(($2))
+	else
+		#text suche
+		TEXT=$2
+		declare -l TEXT
+		TEXT=$TEXT
+	fi
+else
+	parameter2=$2
+fi
+
+#if [ -z $2 ]; then
+#	#nur ein Argument = text suche
+#	TEXT=$1
+#	declare -l TEXT
+#	TEXT=$TEXT
+#else
+#	#zwei Argumente = nummern suche
+#	if [ "$1" != "?" ]; then
+#		parameter1=$(($1))
+#	else
+#		parameter1=$1
+#	fi
+#	#if [[ $parameter1 == 0x* ]]; then
+#	#	parameter1=${parameter1#*0x}
+#	#	parameter1=$((16#$parameter1))
+#	#fi
+#
+#	parameter2=$(($2))
+#	#if [[ $parameter2 == 0x* ]]; then
+#	#	parameter2=${parameter2#*0x}
+#	#	parameter2=$((16#$parameter2))
+#	#fi
+#fi
+
+serviceCount=$(xmllint --xpath "count(//service)" $XML)
+for (( i=1; i <= $serviceCount; i++ )); do
+	serviceID=$(xmllint --xpath "string(//service[$i]/@id)" $XML)
+	serviceName=$(xmllint --xpath "string(//service[$i]/@name)" $XML)
+
+	if ! [ -z $TEXT ]; then
+		###### Text Suche ###### 
+		searchServiceID=$parameter1
+	
+		if [[ "$searchServiceID" != "?" ]]; then
+			if [ $searchServiceID != $serviceID ]; then
+				continue
+			fi
+		fi
+		
+		resultCount=$(xmllint --xpath "count(//service[$i]/message[contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$TEXT')])" $XML)
+		if [ $resultCount = 0 ]; then
+			continue
+		fi
+		echo "*** Service: $serviceName ($serviceID / $(printf '%#04x\n' $serviceID)) ***"
+	
+		for (( j=1; j <= $resultCount; j++ )); do
+			
+			messageID=$(xmllint --xpath "string(//service[$i]/message[contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$TEXT')][$j]/@id)" $XML)
+			messageName=$(xmllint --xpath "string(//service[$i]/message[contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$TEXT')][$j]/@name)" $XML)
+			messageDescription=$(xmllint --xpath "string(//service[$i]/message[contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$TEXT')][$j]/@description)" $XML)
+			
+			echo "  Message: $messageName ($messageID / $(printf '%#04x\n' $messageID))"
+			echo "  Description: $messageDescription"
+			
+			paramCount=$(xmllint --xpath "count(//service[$i]/message[contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$TEXT')][$j]/param)" $XML)
+			for (( k=1; k <= $paramCount; k++ )); do
+				paramPos=$(xmllint --xpath "string(//service[$i]/message[contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$TEXT')][$j]/param[$k]/@pos)" $XML)
+				paramName=$(xmllint --xpath "string(//service[$i]/message[contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$TEXT')][$j]/param[$k]/@name)" $XML)
+				paramDesc=$(xmllint --xpath "string(//service[$i]/message[contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$TEXT')][$j]/param[$k]/@description)" $XML)
+				
+				echo "    Parameter $paramPos: $paramName ($paramDesc)"
+			done
+			echo ""
+		done
+		###### Ende Text Suche ######
+	else
+		###### Nummern Suche ######
+		searchServiceID=$parameter1
+		searchMessageID=$parameter2
+		if [[ "$searchMessageID" == "?" ]]; then
+			xpath="//service[$i]/message"
+		else
+			xpath="//service[$i]/message[@id=$searchMessageID]"
+		fi
+
+		
+		if [[ "$searchServiceID" != "?" ]]; then
+			if [ $searchServiceID != $serviceID ]; then
+				continue
+				#echo "cont $searchServiceID != $serviceID"
+			fi
+		fi
+		
+		resultCount=$(xmllint --xpath "count($xpath)" $XML)
+		if [ $resultCount = 0 ]; then
+			continue
+		fi
+		echo "*** Service: $serviceName ($serviceID / $(printf '%#04x\n' $serviceID)) ***"
+		
+		for (( j=1; j <= $resultCount; j++ )); do
+			
+			messageID=$(xmllint --xpath "string($xpath[$j]/@id)" $XML)
+			messageName=$(xmllint --xpath "string($xpath[$j]/@name)" $XML)
+			messageDescription=$(xmllint --xpath "string($xpath[$j]/@description)" $XML)
+			
+			echo "Message: $messageName ($messageID / $(printf '%#04x\n' $messageID))"
+			echo "Description: $messageDescription"
+			
+			paramCount=$(xmllint --xpath "count($xpath[$j]/param)" $XML)
+			for (( k=1; k <= $paramCount; k++ )); do
+				paramPos=$(xmllint --xpath "string($xpath[$j]/param[$k]/@pos)" $XML)
+				paramName=$(xmllint --xpath "string($xpath[$j]/param[$k]/@name)" $XML)
+				paramDesc=$(xmllint --xpath "string($xpath[$j]/param[$k]/@description)" $XML)
+				
+				echo "	Parameter $paramPos: $paramName ($paramDesc)"
+			done
+			echo ""
+		done
+		###### Ende Suche ###### 
+	fi
+done
+
+#else
+#	searchServiceID=$1
+#	searchMessageID=$2
+#	if [[ "$searchServiceID" = "?" ]]; then
+#		xpath="//service[@id=@*]/message[@id=$searchMessageID]"
+#	else
+#		xpath="//message[@id=$searchMessageID]"
+#	fi
+#	echo $xpath
+#	exit 0
+#	
+#	resultCount=$(xmllint --xpath "count($xpath)" $XML)
+#	for (( i=1; i <= $resultCount; i++ )); do
+#		
+#		messageID=$(xmllint --xpath "string($xpath[$i]/@id)" $XML)
+#		messageName=$(xmllint --xpath "string($xpath[$i]/@name)" $XML)
+#		messageDescription=$(xmllint --xpath "string($xpath[$i]/@description)" $XML)
+#		
+#		serviceID=$(xmllint --xpath "string($xpath[$i]/ancestor::*[position()=1]/@id)" $XML)
+#		serviceName=$(xmllint --xpath "string($xpath[$i]/ancestor::*[position()=1]/@name)" $XML)
+#		
+#		echo "Service: $serviceName ($serviceID)"
+#		echo "Message: $messageName ($messageID)"
+#		echo "Description: $messageDescription"
+#		
+#		paramCount=$(xmllint --xpath "count($xpath[$i]/param)" $XML)
+#		for (( j=1; j <= $paramCount; j++ )); do
+#			paramPos=$(xmllint --xpath "string($xpath[$i]/param[$j]/@pos)" $XML)
+#			paramName=$(xmllint --xpath "string($xpath[$i]/param[$j]/@name)" $XML)
+#			paramDesc=$(xmllint --xpath "string($xpath[$i]/param[$j]/@description)" $XML)
+#			
+#			echo "	Parameter $paramPos: $paramName ($paramDesc)"
+#		done
+#		echo ""
+#	done
+#fi
+

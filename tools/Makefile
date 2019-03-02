@@ -1,6 +1,6 @@
 include ../ARCH.inc
 
-TARGET = hcan-backup-config hcan-discover hcan-restore-config
+TARGET = hcan-backup-config hcan-discover hcan-restore-config hcan-protocol
 
 .PHONY: all install
 

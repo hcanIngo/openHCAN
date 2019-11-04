@@ -293,7 +293,7 @@ const eds_block_fields_t &eds_block::fields() const
 	return m_desc.fields;
 }
 
-const string &eds_block::field_datatype(const string &key) const
+const string eds_block::field_datatype(const string &key) const
 {
 	const eds_block_field_desc_t &field_desc = 
 		get_block_field_desc_by_key(m_desc, key);
@@ -330,7 +330,14 @@ void eds_connection::update()
 
 		if (it && type)
 		{
-			m_blocks.push_back(eds_block(*this,it));
+			try
+			{
+				m_blocks.push_back(eds_block(*this,it));
+			}
+			catch (traceable_error &e)
+			{
+				cerr << e.what() << endl;
+			}
 		}
 	}
 	while (it != 0);

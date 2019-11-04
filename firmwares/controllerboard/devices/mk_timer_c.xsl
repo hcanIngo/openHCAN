@@ -86,6 +86,9 @@ void idle_handler(void)
 					<xsl:value-of select="@name" />_timer_handler( (device_data_<xsl:value-of select="@name" />*) p, 100);
 					break;
 	</xsl:for-each>
+					case EDS_dcf77_receiver_BLOCK_ID:
+		    			dcf77_receiver_timer_handler((device_data_dcf77_receiver *) p, 100);
+		    			break;
 				}
 			}
 		}

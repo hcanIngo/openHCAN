@@ -360,6 +360,7 @@ void board_driver::cmd_flash (const string &filename)
 	cout << endl << "MCU: ";
 	switch (arch)
 	{
+		case HCAN_ARCH_ATMEGA32_legacy :
 		case HCAN_ARCH_ATMEGA32 :
 			cout << "avr atmega32" << endl;
 			maxsize = 28672;
@@ -370,6 +371,7 @@ void board_driver::cmd_flash (const string &filename)
 			maxsize = 28672;
 			break;
 
+		case HCAN_ARCH_ATMEGA644P_legacy :
 		case HCAN_ARCH_ATMEGA644P :
 			cout << "avr atmega644p" << endl;
 			maxsize = 61440; // 61440 byte bei 4096 byte bootloader 			57344 byte bei 8192 byte bootloader

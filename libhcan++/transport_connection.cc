@@ -377,6 +377,7 @@ void transport_connection::syslog()
 								tm);
 
 						cout << timestamp << " " << f.src() << "  " << prio << "  " << s;
+						cout.flush();
 
 						// delete it from out messages hash
 						messages.erase(it);

@@ -64,7 +64,7 @@ namespace hcan
 			void set_field_uint16(const string &key, uint16_t v);
 			void set_field_str(const string &key, const string &v);
 			const eds_block_fields_t &fields() const;
-			const string &field_datatype(const string &key) const;
+			const string field_datatype(const string &key) const;
 	};
 
 	/**

@@ -67,6 +67,14 @@ void devices_load_config(void)
 				data_size = sizeof (device_data_<xsl:value-of select="@name" />);
 				break;
 	</xsl:for-each>
+	case EDS_dcf77_receiver_BLOCK_ID:
+	    config_size = sizeof(eds_dcf77_receiver_block_t);
+	    data_size = sizeof(device_data_dcf77_receiver);
+	    break;
+	case EDS_timeservice_BLOCK_ID:
+	    config_size = sizeof(eds_timeservice_block_t);
+	    data_size = sizeof(device_data_timeservice);
+	    break;
 			default: 
 				// Falls wir den Block Typ (ausser 255) nicht kennen, dann
 				// geben wir eine Syslog Meldung aus
@@ -151,7 +159,9 @@ void devices_load_config(void)
 				<xsl:value-of select="@name" />_init( (device_data_<xsl:value-of select="@name" />*) p, it);
 				break;
 	</xsl:for-each>
-			
+					case EDS_dcf77_receiver_BLOCK_ID:
+		    			dcf77_receiver_init((device_data_dcf77_receiver *) p, it);
+		    			break;
 
 		}
 	}

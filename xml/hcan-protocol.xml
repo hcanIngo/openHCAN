@@ -650,6 +650,18 @@
 				description="Error message for ports Device" >
 			</message>
 
+			<message name="WS2812B_SEND" id="125"
+				description="steuert ein WS2812B LED Band direkt" >
+				<param pos="0" name="gruppe" description="" />
+				<param pos="1" name="Pattern"
+				description="1 = Nicht gewaehlte LEDs gehen aus; 2 = Nicht gewaehlte LEDs bleiben an" />
+				<param pos="2" name="R" description="Wert fuer Rot (uint8_t)" />
+				<param pos="3" name="G" description="Wert fuerG ruen (uint8_t)" />
+				<param pos="4" name="B" description="Wert fuer Blau (uint8_t)" />
+				<param pos="5" name="BenutzeLEDsPattern"
+				description="1 = Jede LED; 2 = jede zweite LED; 3 = jede dritte LED, usw." />
+			</message>
+
 		</service>
 
 		<service name="RTS" description="Real Time Service" id="6">

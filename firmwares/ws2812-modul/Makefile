@@ -16,10 +16,10 @@ CXX = avr-gcc
 
 ifeq ($(MCU),atmega328p)
 	F_CPU = 16000000
-	MCU_DIR = C1416_$(MCU)_$(F_CPU)MHz
+	MCU_DIR = C1416_$(MCU)_$(F_CPU)Hz
 else # MCU_atmega32 || MCU_atmega644p
-	F_CPU = 16000000
-	MCU_DIR = C1612_$(MCU)_$(F_CPU)MHz
+	F_CPU = 3686400
+	MCU_DIR = C1612_$(MCU)_$(F_CPU)Hz
 endif
 
 F_CAN   = 8000000

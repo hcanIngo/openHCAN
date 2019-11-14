@@ -43,18 +43,6 @@
 
 struct cRGB led[maxLEDs];
 
-void inline ws2812_setleds(device_data_ws2812b *p)
-{
-	ws2812_setleds_pin(p->led,p->config.anzLEDs, _BV(p->config.port));
-}
-
-void inline ws2812_setleds_pin(struct cRGB *ledarray, uint16_t leds, uint8_t pinmask)
-{
-	DDRD |= pinmask; // Enable DDR
-	ws2812_sendarray_mask((uint8_t*)ledarray,leds+leds+leds,pinmask);
-	_delay_us(50);
-}
-
 /*
   This routine writes an array of bytes with RGB values to the Dataout pin
   using the fast 800kHz clockless WS2811/2812 protocol.
@@ -116,19 +104,23 @@ void inline ws2812_setleds_pin(struct cRGB *ledarray, uint16_t leds, uint8_t pin
 #define w_nop8  w_nop4 w_nop4
 #define w_nop16 w_nop8 w_nop8
 
-void inline ws2812_sendarray_mask(uint8_t *data,uint16_t datlen,uint8_t maskhi)
+/*
+ * The functions take a byte-array and send to the data output as WS2812 bitstream.
+ * The length is the number of bytes to send - three per LED.
+ */
+static void inline ws2812_sendarray_mask(uint8_t *data, uint16_t datlen, uint8_t maskhi)
 {
-	uint8_t curbyte,ctr,masklo;
+	uint8_t curbyte, ctr, masklo;
 	uint8_t sreg_prev;
 
-	masklo	=~maskhi&PORTD;
-	maskhi |=        PORTD;
-	sreg_prev=SREG;
+	masklo	= ~maskhi & ws2812_port;
+	maskhi |=           ws2812_port;
+	sreg_prev = SREG;
 	cli();
 
 	while (datlen--)
 	{
-		curbyte=*data++;
+		curbyte = *data++;
 
 		asm volatile(
 		"       ldi   %0,8  \n\t"
@@ -186,46 +178,48 @@ w_nop16
 		"       dec   %0    \n\t"    //  '1' [+2] '0' [+2]
 		"       brne  loop%=\n\t"    //  '1' [+3] '0' [+4]
 		:	"=&d" (ctr)
-		:	"r" (curbyte), "I" (_SFR_IO_ADDR(PORTD)), "r" (maskhi), "r" (masklo)
+		:	"r" (curbyte), "I" (_SFR_IO_ADDR(ws2812_port)), "r" (maskhi), "r" (masklo)
 		);
 	}
 
-	SREG=sreg_prev;
+	SREG = sreg_prev;
 }
 
-void ws2812b_init(device_data_ws2812b *p, eds_block_p it)
+static void inline ws2812_setleds_pin(struct cRGB *ledarray, uint16_t leds, uint8_t pinmask)
 {
-	setAll(p, 0, 0, 0, 1, 0);
-	p->mute = 0;
-	p->poti_farbe = 0;
+	ws2812_portReg |= pinmask; // Enable DDR: Output Modus setzen
+	ws2812_sendarray_mask((uint8_t*)ledarray, leds+leds+leds, pinmask);
+	_delay_us(50);
 }
 
-inline void ws2812b_timer_handler(device_data_ws2812b *p, uint8_t zyklus)
+static void inline ws2812_setleds(device_data_ws2812b *p)
 {
-	if (zyklus != 1) return; // 1s-Zyklus verwendet
+	uint8_t port = p->config.port;
+	if (p->config.port > 1) port++; // INT@D2 frei lassen:  2 -> PD3=D3
+	ws2812_setleds_pin(p->led, p->config.anzLEDs, _BV(port)); // _BV(bit)  (1 << (bit)) // Converts a bit number into a byte value
 }
 
-void setAll(device_data_ws2812b *p, uint8_t intensityR, uint8_t intensityG, uint8_t intensityB, uint8_t useLEDs, uint8_t unusedLEDs)
+static void setAll(device_data_ws2812b *p, uint8_t intensityR, uint8_t intensityG, uint8_t intensityB, uint8_t useLEDs, uint8_t unusedLEDs)
 {
-	if(useLEDs == 0) return;
+	if (useLEDs == 0) return;
 	uint8_t i = 0;
 	p->status = 0;
-	while(i < p->config.anzLEDs)
+	while (i < p->config.anzLEDs)
 	{
-		if(i % useLEDs != 0)
+		if (i % useLEDs != 0)
 		{
-			if(unusedLEDs == 0)
+			if (unusedLEDs == 0)
 			{
-				p->led[i].r=0;
-				p->led[i].g=0;
-				p->led[i].b=0;
+				p->led[i].r = 0;
+				p->led[i].g = 0;
+				p->led[i].b = 0;
 			}
 		}
 		else
 		{
-			p->led[i].r=intensityR;
-			p->led[i].g=intensityG;
-			p->led[i].b=intensityB;
+			p->led[i].r = intensityR;
+			p->led[i].g = intensityG;
+			p->led[i].b = intensityB;
 		}
 		if (p->led[i].r > 0 || p->led[i].g > 0 || p->led[i].b > 0)
 		{
@@ -236,16 +230,16 @@ void setAll(device_data_ws2812b *p, uint8_t intensityR, uint8_t intensityG, uint
 	ws2812_setleds(p);
 }
 
-void setOneColor(device_data_ws2812b *p, uint8_t color, uint8_t intensity, uint8_t useLEDs, uint8_t unusedLEDs)
+static void setOneColor(device_data_ws2812b *p, uint8_t color, uint8_t intensity, uint8_t useLEDs, uint8_t unusedLEDs)
 {
 	if(useLEDs == 0) return;
 	uint8_t i = 0;
 	p->status = 0;
-	while(i < p->config.anzLEDs)
+	while (i < p->config.anzLEDs)
 	{
-		if(i % useLEDs != 0)
+		if (i % useLEDs != 0)
 		{
-			if(unusedLEDs == 0)
+			if (unusedLEDs == 0)
 			{
 				if(color == COLOR_RED) p->led[i].r=0;
 				else if(color == COLOR_GREEN) p->led[i].g=0;
@@ -254,9 +248,9 @@ void setOneColor(device_data_ws2812b *p, uint8_t color, uint8_t intensity, uint8
 		}
 		else
 		{
-			if(color == COLOR_RED) p->led[i].r=intensity;
-			else if(color == COLOR_GREEN) p->led[i].g=intensity;
-			else if(color == COLOR_BLUE) p->led[i].b=intensity;
+			if (color == COLOR_RED) p->led[i].r=intensity;
+			else if (color == COLOR_GREEN) p->led[i].g=intensity;
+			else if (color == COLOR_BLUE) p->led[i].b=intensity;
 		}
 		if (p->led[i].r > 0 || p->led[i].g > 0 || p->led[i].b > 0)
 		{
@@ -268,9 +262,14 @@ void setOneColor(device_data_ws2812b *p, uint8_t color, uint8_t intensity, uint8
 	ws2812_setleds(p);
 }
 
-void ws2812b_toggle(device_data_ws2812b *p)
+inline void ws2812b_timer_handler(device_data_ws2812b *p, uint8_t zyklus)
 {
-	if (p->status) // ws218b ist aktiv
+	if (zyklus != 1) return; // 1s-Zyklus verwendet
+}
+
+static void ws2812b_toggle(device_data_ws2812b *p)
+{
+	if (p->status) // ws2812b ist aktiv
 	{
 		setAll(p, 0, 0, 0, 1, 0);
 	}
@@ -282,29 +281,35 @@ void ws2812b_toggle(device_data_ws2812b *p)
 
 static uint8_t is_in_group(const device_data_ws2812b *p, uint8_t group)
 {
-		uint8_t i;
-		uint8_t *gruppen;
-		uint8_t maxDeviceGruppen = MAX_WS2812B_GROUPS;
+	uint8_t i;
+	uint8_t *gruppen;
+	uint8_t maxDeviceGruppen = MAX_WS2812B_GROUPS;
 
-		// die 255 ist der Ersatzwert und wird ignoriert!
-		if (group == 255)
-				return 0;
+	// die 255 ist der Ersatzwert und wird ignoriert!
+	if (group == 255)
+			return 0;
 
-		gruppen = (uint8_t *) &(p->config.gruppe0);
+	gruppen = (uint8_t *) &(p->config.gruppe0);
 
-		for (i = 0; i < maxDeviceGruppen; i++)
-		{
-				if (gruppen[i] == group)
-						return 1;
-		}
+	for (i = 0; i < maxDeviceGruppen; i++)
+	{
+			if (gruppen[i] == group)
+					return 1;
+	}
 
-		return 0;
+	return 0;
+}
+
+void ws2812b_init(device_data_ws2812b *p, eds_block_p it)
+{
+	setAll(p, 0, 0, 0, 1, 0); // einschalten
+	p->mute = 0;
+	p->poti_farbe = 0;
 }
 
 void ws2812b_can_callback(device_data_ws2812b *p, const canix_frame *frame)
 {
 	canix_frame answer;
-
 	answer.src = canix_selfaddr();
 	answer.dst = frame->src;
 	answer.proto = HCAN_PROTO_SFP;
@@ -315,11 +320,11 @@ void ws2812b_can_callback(device_data_ws2812b *p, const canix_frame *frame)
 		switch (frame->data[1])
 		{
 			case HCAN_HES_WS2812B_SEND :
-				if (frame->data[3] == 1) //alle LEDs auf eine Farbe setzen. Nicht gewählte LEDs aus
+				if (frame->data[3] == 1) // alle LEDs auf eine Farbe setzen. Nicht gewaehlte LEDs aus
 				{
 					if (!p->mute) setAll(p, frame->data[4], frame->data[5], frame->data[6], frame->data[7], 0);
 				}
-				else if (frame->data[3] == 2) //alle LEDs auf eine Farbe setzen. Nicht gewählte LEDs bleiben wie sie sind
+				else if (frame->data[3] == 2) // alle LEDs auf eine Farbe setzen. Nicht gewaehlte LEDs bleiben wie sie sind
 				{
 					if (!p->mute) setAll(p, frame->data[4], frame->data[5], frame->data[6], frame->data[7], 1);
 				}
@@ -347,7 +352,7 @@ void ws2812b_can_callback(device_data_ws2812b *p, const canix_frame *frame)
 	}
 	else if (HCAN_HES_DEVICE_STATES_REQUEST == frame->data[1])
 	{
-		if(p->config.gruppe0 != 255)
+		if (p->config.gruppe0 != 255)
 		{
 			wdt_reset();
 			canix_sleep_100th(10); // 100msec Pause
@@ -360,7 +365,7 @@ void ws2812b_can_callback(device_data_ws2812b *p, const canix_frame *frame)
 			canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 		}
 	}
-	else if(frame->data[1] == HCAN_HES_POTI_POS_CHANGED)
+	else if (frame->data[1] == HCAN_HES_POTI_POS_CHANGED)
 	{
 		uint16_t adcValue = (frame->data[3] << 8) + frame->data[4];
 		if ( frame->data[2] == p->config.poti_farb_gruppe )

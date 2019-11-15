@@ -37,7 +37,7 @@
 #define COLOR_BLUE 3
 #define COLOR_WHITE 4
 
-#define maxLEDs 34                 // 80 geht // ToDo: 5m-Band mit 300 LED's (60/m)  -  max. 255-Byte-Block-data_size
+#define maxLEDs 150                 // 5m-Band mit 150 LED's (30/m)
 #define ws2812_portBez D     		// Data port
 #define WS2812B_FEATURE_ONLYWHITE 0 // Bit0 (the LSB)
 
@@ -47,10 +47,9 @@ typedef struct
 {
 	uint8_t type;
 	eds_ws2812b_block_t config;
-	uint8_t status;
-	struct cRGB led[maxLEDs];
-	uint8_t mute;            // Aktiv: ws2812b kann Kommandos entgegennehmen; oder mute=1
-	uint8_t onlyWhite;       // Aktiv: ws2812b leuchtet nur weiß, unabhaenig von poti_farbe
+	uint8_t status;    // 0 = alle LED's sind ausgeschaltet, 1 = min. eine LED im RGB-Band ist aktiv
+	uint8_t mute;      // Aktiv: ws2812b kann Kommandos entgegennehmen; oder mute=1
+	uint8_t onlyWhite; // Aktiv: ws2812b leuchtet nur weiß, unabhaenig von poti_farbe
 
 	/* poti_farbe speichert die Farbe die mit der naechsten HCAN_HES_POTI_POS_CHANGED Meldung geaedndert wird
 	 * 0 = die naechste Meldung aendert/setzt die Helligkeit von Weiss
@@ -58,7 +57,6 @@ typedef struct
 	 * 2 = die naechste Meldung aendert/setzt die Helligkeit von Gruen
 	 * 3 = die naechste Meldung aendert/setzt die Helligkeit von Blau 	 */
 	uint8_t poti_farbe;
-
 } device_data_ws2812b;
 
 // Internal defines:

@@ -37,7 +37,34 @@ int getMessage4cb (char * msg, struct can_frame * msg4cb)
 	char* token = strtok(msg, "/");
 	if (NULL != token)
 	{
-		if (is(token, "ON")) // setPowerON
+		if (is(token, "C")) // Color (RGB-Farbvorgabe)
+		{
+			msg4cb->data[1] = HCAN_HES_WS2812B_SEND;
+
+			token = strtok(NULL, "/"); if(NULL == token) return 0;
+			msg4cb->data[2] = atoi(token); // Gruppe
+
+			token = strtok(NULL, "/"); if(NULL == token) return 0;
+			msg4cb->data[3] = atoi(token); // Pattern: 1 = Nicht gewaehlte LEDs gehen aus; 2 = Nicht gewaehlte LEDs bleiben an
+
+			token = strtok(NULL, "/"); if(NULL == token) return 0;
+			msg4cb->data[7] = atoi(token); // BenutzeLEDsPattern: 1 = Jede LED (Pattern ohne Wirkung); 2 = jede zweite LED; 3 = jede dritte LED, usw.
+
+
+			token = strtok(NULL, "/"); if(NULL == token) return 0; // naechster token = R,G,B
+			char* rgbToken = strtok(token, ","); if(NULL == rgbToken) return 0;
+			msg4cb->data[4] = atoi(rgbToken); // R
+
+			rgbToken = strtok(NULL, ","); if(NULL == rgbToken) return 0;
+			msg4cb->data[5] = atoi(rgbToken); // G
+
+			rgbToken = strtok(NULL, ","); if(NULL == rgbToken) return 0;
+			msg4cb->data[6] = atoi(rgbToken); // B
+
+			return 8; // Anzahl der Daten-Bytes des Frames
+		}
+
+		else if (is(token, "ON")) // setPowerON
 		{
 			msg4cb->data[1] = HCAN_HES_POWER_GROUP_ON;
 			token = strtok(NULL, "/"); if(NULL == token) return 0;

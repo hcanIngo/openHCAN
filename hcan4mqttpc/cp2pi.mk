@@ -2,7 +2,7 @@
 
 TARGET = hcan4mqttpc
 
-CONF = /home/ingo/Dropbox/HCAN/HI_SERVER/openhab2_conf_mqtt
+CONF = /home/il/Dropbox/HCAN/HI_SERVER/openhab2_conf_mqtt
 include $(CONF)/myconf.inc
 ZIEL_PC = bananapi
 ZIEL_USER = tt

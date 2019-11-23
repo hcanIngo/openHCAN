@@ -937,7 +937,7 @@
 		<field datatype="uint8_t" name="ignore3" pos="7" />
 	</block>
 
-	<block type="135" name="ws2812b" size="9">
+	<block type="135" name="ws2812b" size="10">
 		<field datatype="uint8_t" name="feature" pos="0" />
 		<field datatype="uint8_t" name="gruppe0" pos="1" />
 		<field datatype="uint8_t" name="gruppe1" pos="2" />
@@ -945,8 +945,8 @@
 		<field datatype="uint8_t" name="poti_helligkeits_gruppe" pos="4" />
 		<field datatype="uint8_t" name="poti_farb_gruppe" pos="5" />
 		<field datatype="uint8_t" name="port" pos="6" />
-		<field datatype="uint8_t" name="anzLEDs" pos="7" />
-		<field datatype="uint8_t" name="mute" pos="8" />
+		<field datatype="uint16_t" name="anzLEDs" pos="7" />
+		<field datatype="uint8_t" name="mute" pos="9" />
 	</block>
 
 	<block type="200" name="dcf77_receiver" size="7">

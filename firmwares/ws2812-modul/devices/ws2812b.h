@@ -32,12 +32,13 @@
 
 #define MAX_WS2812B_GROUPS 3
 
-#define COLOR_RED 1
-#define COLOR_GREEN 2
-#define COLOR_BLUE 3
-#define COLOR_WHITE 4
+#define COLOR_GREEN 0
+#define COLOR_RED   1
+#define COLOR_BLUE  2
+#define COLOR_WHITE 3
 
-#define maxLEDs 150                 // 5m-Band mit 150 LED's (30/m)
+#define maxLEDs 300                 // 5m-Band mit 300 LED's (60/m)
+#define maxLedStructLen 30			// spaetestens nach 30 LED's wdh sich das Muster (Speichermangel)
 #define ws2812_portBez D     		// Data port
 #define WS2812B_FEATURE_ONLYWHITE 0 // Bit0 (the LSB)
 
@@ -50,6 +51,8 @@ typedef struct
 	uint8_t status;    // 0 = alle LED's sind ausgeschaltet, 1 = min. eine LED im RGB-Band ist aktiv
 	uint8_t mute;      // Aktiv: ws2812b kann Kommandos entgegennehmen; oder mute=1
 	uint8_t onlyWhite; // Aktiv: ws2812b leuchtet nur weiß, unabhaenig von poti_farbe
+
+	struct cRGB sLED[maxLedStructLen];
 
 	/* poti_farbe speichert die Farbe die mit der naechsten HCAN_HES_POTI_POS_CHANGED Meldung geaedndert wird
 	 * 0 = die naechste Meldung aendert/setzt die Helligkeit von Weiss

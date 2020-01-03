@@ -49,12 +49,6 @@
 #define w_zeropulse   350  // 0 bit: 0.40us HI, 0.85us LO
 #define w_onepulse    900  // 1 bit: 0.80us HI, 0.45us LO
 #define w_totalperiod 1250
-/*#define w_zeropulse   370
-#define w_onepulse    880
-#define w_totalperiod 1250*/
-/*#define w_zeropulse   340
-#define w_onepulse    910
-#define w_totalperiod 1250*/
 
 // Fixed cycles used by the inner loop
 #define w_fixedlow    2
@@ -67,11 +61,13 @@
 #define w_totalcycles   (((F_CPU/1000)*w_totalperiod +500000)/1000000) // 16000*1250 / 1000000 = 20   Zyklen
 
 // w1 - nops between rising edge and falling edge - low
-#define w1 (w_zerocycles-w_fixedlow)
+#define w1 (w_zerocycles-w_fixedlow)          //  5.6 - 2             = 3.6 Zyklen
+
 // w2   nops between fe low and fe high
-#define w2 (w_onecycles-w_fixedhigh-w1)
+#define w2 (w_onecycles-w_fixedhigh-w1)       // 14.4 - 4 - 3.6       = 6.8 Zyklen
+
 // w3   nops to complete loop
-#define w3 (w_totalcycles-w_fixedtotal-w1-w2)
+#define w3 (w_totalcycles-w_fixedtotal-w1-w2) // 20   - 8 - 3.6 - 6.8 = 1.6 Zyklen
 
 #if w1>0
   #define w1_nops w1
@@ -111,20 +107,21 @@
  * The functions take a byte-array and send to the data output as WS2812 bitstream.
  * The length is the number of bytes to send - three per LED.
  */
-static void inline ws2812_sendarray_mask(uint8_t *data, uint16_t datlen, uint8_t maskhi)
+static void inline ws2812_sendarray_mask(uint8_t *data, uint16_t datlen, uint8_t pin_maskhi)
 {
-	 // ggf. spaeter: uint8_t *dataStart = data;
+	uint8_t *dataStart = data;
 	uint8_t ctr;
 
-	uint8_t masklo	= ~maskhi & ws2812_port;
-	maskhi |= ws2812_port;
+	uint8_t masklo	= ~pin_maskhi & ws2812_port;
+	pin_maskhi |= ws2812_port;
 	uint8_t sreg_prev = SREG;
 	cli(); // Interrupts sperren
 
 	while (datlen--)
 	{
-		// ggf. spaeter: if (datlen % (maxLedStructLen*3) == 0) data = dataStart; // wdh  (z.B. maxLedStructLen = 30  und  p->config.anzLEDs = 300)
 		uint8_t curbyte = *data++;
+		if (datlen % (maxLedStructLen*3) == 0) data = dataStart; // wdh  (z.B. maxLedStructLen = 30  und  p->config.anzLEDs = 300)
+		// Hinweis: Ist jede 3. ausgewaehlt und anzLEDs=3, dann leuchtet nur die erste LED ab "Einspeisung".
 
 		asm volatile(
 		"       ldi   %0,8  \n\t"
@@ -182,7 +179,7 @@ w_nop16
 		"       dec   %0    \n\t"    //  '1' [+2] '0' [+2]
 		"       brne  loop%=\n\t"    //  '1' [+3] '0' [+4]
 		:	"=&d" (ctr)
-		:	"r" (curbyte), "I" (_SFR_IO_ADDR(ws2812_port)), "r" (maskhi), "r" (masklo)
+		:	"r" (curbyte), "I" (_SFR_IO_ADDR(ws2812_port)), "r" (pin_maskhi), "r" (masklo)
 		);
 	}
 
@@ -252,7 +249,7 @@ static void setOneColor(device_data_ws2812b *p, uint8_t color, uint8_t intensity
 
 	p->status = 0;
 
-	uint8_t iMax = p->config.anzLEDs > maxLedStructLen  ? maxLedStructLen : p->config.anzLEDs; // Begrenzung auf maxLedStructLen
+	uint8_t iMax = p->config.anzLEDs > maxLedStructLen ? maxLedStructLen : p->config.anzLEDs; // Begrenzung auf maxLedStructLen
 	for (uint8_t i = 0; i < iMax; i++)
 	{
 		if (i % useLEDs == 0)

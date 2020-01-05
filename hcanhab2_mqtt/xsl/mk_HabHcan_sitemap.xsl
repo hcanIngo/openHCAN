@@ -54,7 +54,7 @@ Frame {
 Frame {
 	Text label="<xsl:value-of select="@name" />" icon="<xsl:value-of select="@icon" />" {		
 <!-- Frame nur setzen, wenn eines der Devices gefunden wurde -> kein leerer "Frame {}" -->
-	<xsl:if test="count(powerport | board/powerport | reedkontakt | board/reedkontakt | tempsensor | board/tempsensor) > 0">
+	<xsl:if test="count(powerport | board/powerport | ws2812b | board/ws2812b | reedkontakt | board/reedkontakt | tempsensor | board/tempsensor) > 0">
 		Frame {
 		<xsl:apply-templates select="powerport"/>
 		<xsl:apply-templates select="reedkontakt"/>
@@ -65,10 +65,12 @@ Frame {
 		<xsl:apply-templates select="board/tempsensor"/>	
 		}
     </xsl:if>
-		
+    
+    	<xsl:apply-templates select="ws2812b"/>		
 		<xsl:apply-templates select="heizung"/>
 		<xsl:apply-templates select="rolladen"/>
 		
+		<xsl:apply-templates select="board/ws2812b"/>
 		<xsl:apply-templates select="board/heizung"/>
 		<xsl:apply-templates select="board/rolladen"/>
 	}
@@ -80,9 +82,10 @@ Frame {
 		<xsl:call-template name="heizungHatTempsensor" />
 	</xsl:for-each>
 	
-	<xsl:if test="count(powerport | reedkontakt | tempsensor) > 0">
+	<xsl:if test="count(powerport | ws2812b | reedkontakt | tempsensor) > 0">
 		Frame {
 		<xsl:apply-templates select="powerport"/>
+		<xsl:apply-templates select="ws2812b"/>
 		<xsl:if test="count(heizung) = 0">
 			<xsl:apply-templates select="tempsensor"/>
 		</xsl:if>
@@ -108,6 +111,14 @@ Frame {
 			Switch item=SONSTIGE_<xsl:value-of select="@name" /> label="<xsl:value-of select="substring-after(@name,'__')" /> [MAP(de.map):%s]"
 		</xsl:otherwise>
 		</xsl:choose>
+</xsl:template>
+
+<xsl:template match="ws2812b">
+	Frame label="<xsl:value-of select="@stt" />-RGB-Band: " {
+		Selection item=RgbLicht_<xsl:value-of select="@gruppe" />_Pattern_welcheLEDs label="Welche LED's:" mappings=[1="alle", 2="jede 2.", 3="jede 3.", 4="jede 4.", 5="jede 5.", 6="jede 6.", 7="jede 7.", 8="jede 8.", 9="jede 9.", 10="jede 10.", 11="jede 11.", 12="jede 12.", 13="jede 13.", 14="jede 14.", 15="jede 15.", 16="jede 16.", 17="jede 17.", 18="jede 18.", 19="jede 19.", 20="jede 20.", 21="jede 21.", 22="jede 22.", 23="jede 23.", 24="jede 24.", 25="jede 25.", 26="jede 26.", 27="jede 27.", 28="jede 28.", 29="jede 29.", 30="jede 30.", 31="jede 31.", 32="jede 32.", 33="jede 33.", 34="jede 34."]
+		Switch item=RgbLicht_<xsl:value-of select="@gruppe" />_Pattern_andereLEDs label="Andere LED's:" icon="rgb" mappings=[1="aus", 2="unveraendert"]
+		Colorpicker item=RgbLicht_<xsl:value-of select="@gruppe" />_hsb label="Farbwahl"
+	}
 </xsl:template>
   
 <xsl:template match="reedkontakt">

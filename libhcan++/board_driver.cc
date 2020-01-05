@@ -46,7 +46,7 @@ bool board_driver::show_help ()
 		"	set ee <address> <value>           save value to eeprom\n" <<
 		"	set address <hcan-address>         save a new hcan address\n" <<
 		"	set boardtyp <hcan-boardtyp>       save a new hcan boardtyp [3=C1416|4=C1612|5=UI]\n" <<
-		"	set sysloglevel <level>            set the syslog level\n" <<
+		"	set sysloglevel <level>            set the syslog level [1=Critical|2=Error|3=Warning|4=Debug]\n" <<
 		"	bootloader                         boot into bootloader\n" <<
 		"	loadapp                            load the application\n" <<
 		"	reset                              generated a reset\n" << endl;

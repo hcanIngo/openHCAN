@@ -46,11 +46,11 @@ $(TARGET).hex: $(TARGET).out
 	$(OBJCOPY) -R .eeprom -O ihex $(TARGET).out $(TARGET).hex 
 	avr-size $(TARGET).hex
 
-$(TARGET).out:
+$(TARGET).out: $(SRC)
 	$(CXX) $(CFLAGS) -o $(TARGET).out $(SRC) -Wl,-Map,$(TARGET).map
 
 clean_part:
-	sudo rm -f *.map *.out
+	sudo rm -f *.map *.hex *.out
 
 clean:
 	make clean_part

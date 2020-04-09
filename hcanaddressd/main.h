@@ -22,6 +22,7 @@
 #define MAIN_H
 
 #define MAX_PEER 32
+#define START_PEER 512
 
 // Timeout nach 5 minuten
 #define TIMEOUT   300

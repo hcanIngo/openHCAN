@@ -392,7 +392,15 @@ void board_driver::cmd_flash (const string &filename)
 
 	// Das zu flashende Hexfile laden
 	ihexfile hexfile;
-	hexfile.load(filename,m_page_size);
+	try
+	{
+		hexfile.load(filename,m_page_size);
+	}
+	catch (traceable_error &e)
+	{
+		cerr << e.what() << endl;
+		return;
+	}
 	size_t size = hexfile.size();
 
 	vector<uint8_t> data = hexfile.data();

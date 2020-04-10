@@ -57,6 +57,33 @@ typedef struct
 } peer_t;
 
 peer_t peers[MAX_PEER];
+uint16_t startPeer = START_PEER;
+
+static int parse_options(int argc, char ** argv)
+{
+	int opt; /* it's actually going to hold a char */
+
+	while ((opt = getopt(argc, argv, "s:N")) > 0)
+	{
+		switch (opt)
+		{
+			case 's':
+			   startPeer = atoi(optarg);
+				//strncpy(device,optarg,sizeof(device)-1);
+				fprintf(stderr,"Starting with Adress: %d\n",startPeer);
+				break;
+
+			case '?':
+			case 'h':
+			default:
+				fprintf(stderr, "usage: %s [options]\n", basename(argv[0]));
+				fprintf(stderr, "  -s  First address to assign\n");
+				return 1;
+		}
+	}
+
+	return 0;
+}
 
 void init_peer_array()
 {
@@ -67,7 +94,7 @@ void init_peer_array()
 	for (i = 0; i < MAX_PEER; i++)
 	{
 		peers[i].socket = -1;
-		peers[i].address = 512 + i;
+		peers[i].address = startPeer + i;
 	}
 }
 
@@ -85,8 +112,11 @@ int assign_address(int sock)
 	return -1;
 }
 
-int main()
+int main(int argc, char ** argv)
 {
+	// Optionen parsen:
+	if (parse_options(argc,argv) != 0) exit (1);
+
 	int sock_fd;
 
 	openlog("hcanaddressd",LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,

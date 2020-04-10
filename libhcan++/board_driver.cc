@@ -392,7 +392,15 @@ void board_driver::cmd_flash (const string &filename)
 
 	// Das zu flashende Hexfile laden
 	ihexfile hexfile;
-	hexfile.load(filename,m_page_size);
+	try
+	{
+		hexfile.load(filename,m_page_size);
+	}
+	catch (traceable_error &e)
+	{
+		cerr << e.what() << endl;
+		return;
+	}
 	size_t size = hexfile.size();
 
 	vector<uint8_t> data = hexfile.data();
@@ -766,6 +774,29 @@ void board_driver::cmd_show_system()
 	m_tcon.send_BUILD_VERSION_QUERY(m_bcon.src(), m_bcon.dst());
 	m_tcon.recv_BUILD_VERSION_REPLAY(m_bcon.dst(), m_bcon.src(), &hi, &lo);
 	cout << endl << "Build #:        " << (uint16_t)((hi << 8) | lo);
+	
+	uint8_t sysloglevel = read_eeprom_byte(EEPR_DEBUG_LEVEL);
+	cout << endl << "Sysloglevel:    ";
+	switch (sysloglevel)
+	{
+		case 1 :
+			cout << "CRITICAL (1)";
+			break;
+
+		case 2 :
+			cout << "ERROR (2)";
+			break;
+
+		case 3 :
+			cout << "WARNING (3)";
+			break;
+
+		case 4 :
+			cout << "DEBUG (4)";
+			break;
+
+		default : cout << "unknown";
+	}
 	cout << endl;
 
 }

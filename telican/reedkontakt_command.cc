@@ -16,33 +16,40 @@ reedkontakt_command::~reedkontakt_command()
 
 bool reedkontakt_command::exec(const string &line)
 {
-	boost::cmatch matches;
-
-	boost::regex re1("^reedkontakt *$");
-	if (boost::regex_match(line.c_str(), matches, re1))
+	try
 	{
-		cout << "Gruppe:  Status:   Name:" << endl;
-		vector<string> reedkontakte = global_installation_data.
-			reedkontakte_names();
-		for (vector<string>::iterator i = reedkontakte.begin();
-				i != reedkontakte.end(); i++)
+		boost::cmatch matches;
+
+		boost::regex re1("^reedkontakt *$");
+		if (boost::regex_match(line.c_str(), matches, re1))
 		{
-			// Lampen-Gruppe besorgen:
-			uint8_t gruppe = global_installation_data.
-				reedkontakt_gruppe_by_name(*i);
+			cout << "Gruppe:  Status:   Name:" << endl;
+			vector<string> reedkontakte = global_installation_data.
+				reedkontakte_names();
+			for (vector<string>::iterator i = reedkontakte.begin();
+					i != reedkontakte.end(); i++)
+			{
+				// Lampen-Gruppe besorgen:
+				uint8_t gruppe = global_installation_data.
+					reedkontakt_gruppe_by_name(*i);
 
-			uint8_t status;
-			m_tcon.send_REEDKONTAKT_STATE_QUERY(m_src,
-					HCAN_MULTICAST_CONTROL,gruppe);
-			m_tcon.recv_REEDKONTAKT_STATE_REPLAY(0, m_src, &gruppe, &status);
+				uint8_t status;
+				m_tcon.send_REEDKONTAKT_STATE_QUERY(m_src,
+						HCAN_MULTICAST_CONTROL,gruppe);
+				m_tcon.recv_REEDKONTAKT_STATE_REPLAY(0, m_src, &gruppe, &status);
 
 
-			cout << setw(4) << setfill(' ') << (int)gruppe
-				<< "     " << (status != 0 ? "offen" : " - ")  
-				<< "      " << *i << endl;
+				cout << setw(4) << setfill(' ') << (int)gruppe
+					<< "     " << (status != 0 ? "offen" : " - ")
+					<< "      " << *i << endl;
+			}
+
+			return true;
 		}
-
-		return true;
+	}
+	catch (traceable_error &e)
+	{
+		cerr << e.what() << endl;
 	}
 
 	return false;

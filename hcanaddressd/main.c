@@ -63,12 +63,12 @@ static int parse_options(int argc, char ** argv)
 {
 	int opt; /* it's actually going to hold a char */
 
-	while ((opt = getopt(argc, argv, "s:N")) > 0)
+	while ((opt = getopt(argc, argv, "s:N?h")) > 0)
 	{
 		switch (opt)
 		{
 			case 's':
-			   startPeer = atoi(optarg);
+				startPeer = atoi(optarg);
 				//strncpy(device,optarg,sizeof(device)-1);
 				fprintf(stderr,"Starting with Adress: %d\n",startPeer);
 				break;
@@ -76,8 +76,8 @@ static int parse_options(int argc, char ** argv)
 			case '?':
 			case 'h':
 			default:
-				fprintf(stderr, "usage: %s [options]\n", basename(argv[0]));
-				fprintf(stderr, "  -s  First address to assign\n");
+				fprintf(stderr, "usage: %s [options]\n", argv[0]);
+				fprintf(stderr, "  -s [first] First address to assign\n");
 				return 1;
 		}
 	}

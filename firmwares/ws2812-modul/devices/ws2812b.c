@@ -117,10 +117,16 @@ static void inline ws2812_sendarray_mask(uint8_t *data, uint16_t datlen, uint8_t
 	uint8_t sreg_prev = SREG;
 	cli(); // Interrupts sperren
 
+	uint8_t counter = 0;
 	while (datlen--)
 	{
 		uint8_t curbyte = *data++;
-		if (datlen % (maxLedStructLen*3) == 0) data = dataStart; // wdh  (z.B. maxLedStructLen = 30  und  p->config.anzLEDs = 300)
+		//if (datlen % (maxLedStructLen*3) == 0) data = dataStart; // wdh  (z.B. maxLedStructLen = 30  und  p->config.anzLEDs = 300)
+		if (counter == ((maxLedStructLen*3)-1))
+		{
+			data = dataStart;
+			counter = 0;
+		}
 		// Hinweis: Ist jede 3. ausgewaehlt und anzLEDs=3, dann leuchtet nur die erste LED ab "Einspeisung".
 
 		asm volatile(
@@ -181,6 +187,7 @@ w_nop16
 		:	"=&d" (ctr)
 		:	"r" (curbyte), "I" (_SFR_IO_ADDR(ws2812_port)), "r" (pin_maskhi), "r" (masklo)
 		);
+		counter++;
 	}
 
 	sei();
@@ -218,7 +225,8 @@ static void setAll(device_data_ws2812b *p, uint8_t intensityR, uint8_t intensity
 	p->status = 0;
 
 	uint8_t iMax = p->config.anzLEDs > maxLedStructLen  ? maxLedStructLen : p->config.anzLEDs; // Begrenzung auf maxLedStructLen
-	for (uint8_t i = 0; i < iMax; i++)
+	uint8_t i;
+	for (i = 0; i < iMax; i++)
 	{
 		if (i % useLEDs == 0)
 		{
@@ -250,7 +258,8 @@ static void setOneColor(device_data_ws2812b *p, uint8_t color, uint8_t intensity
 	p->status = 0;
 
 	uint8_t iMax = p->config.anzLEDs > maxLedStructLen ? maxLedStructLen : p->config.anzLEDs; // Begrenzung auf maxLedStructLen
-	for (uint8_t i = 0; i < iMax; i++)
+	uint8_t i;
+	for (i = 0; i < iMax; i++)
 	{
 		if (i % useLEDs == 0)
 		{

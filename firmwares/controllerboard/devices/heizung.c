@@ -540,57 +540,73 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 	}
 
 	//PID
-        if (p->pidcounter-- == 0)
-        {
-                //canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("pidcounter:0;_neu:%d"), ABSTANDPIDMESSUNGEN);
-                p->pidcounter = ABSTANDPIDMESSUNGEN;
-                if (p->destination_value != 0 && p->measure_value != 0)
-                {
-                        p->sollist[p->sollistIndex] = p->destination_value - p->measure_value;
-                        //canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("sollist[%d]:%d"), p->sollistIndex, p->sollist[p->sollistIndex]);
+		if(p->destination_value < p->measure_value)
+		{
+			// wenn die gewuenschte Temperatur unter der gemessenen ist, Heizung direkt auf 0% schalten.
+			p->pidvalue = 0;
+			//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("PID fix:0"));
+		}
+		// 80 = 5 Grad mal 16!
+		else if((p->measure_value + 80) < p->destination_value)
+		{
+			// wenn die gewuenschte Temperatur 5° über der gemessenen liegt, Heizung direkt auf 100% schalten.
+			p->pidvalue = 3000;
+			//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("PID fix:3000"));
+		}
+		else
+		{
+			if (p->pidcounter-- == 0)
+			{
+					//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("pidcounter:0;_neu:%d"), ABSTANDPIDMESSUNGEN);
+					p->pidcounter = ABSTANDPIDMESSUNGEN;
+					if (p->destination_value != 0 && p->measure_value != 0)
+					{
+						p->sollist[p->sollistIndex] = p->destination_value - p->measure_value;
+						//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("dest:%d measure:%d"), p->destination_value, p->measure_value);
 
-                        uint8_t letzter = p->sollistIndex;
-                        uint8_t vorletzter = 0;
-                        uint8_t vorvorletzter = 0;
+						uint8_t letzter = p->sollistIndex;
+						uint8_t vorletzter = 0;
+						uint8_t vorvorletzter = 0;
 
-                        switch (letzter)
-                        {
-                                case 0:
-                                vorletzter = 2;
-                                vorvorletzter = 1;
-                                break;
-                                case 1:
-                                vorletzter = 0;
-                                vorvorletzter = 2;
-                                break;
-                                case 2:
-                                vorletzter = 1;
-                                vorvorletzter = 0;
-                                break;
-                                default:
-                                /* Your code here */
-                                break;
-                        }
-                        //canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("letzter:%d_vorletzter:%d_vorvorletzter:%d"), letzter, vorletzter, vorvorletzter);
+						switch (letzter)
+						{
+								case 0:
+								vorletzter = 2;
+								vorvorletzter = 1;
+								break;
+								case 1:
+								vorletzter = 0;
+								vorvorletzter = 2;
+								break;
+								case 2:
+								vorletzter = 1;
+								vorvorletzter = 0;
+								break;
+								default:
+								/* Your code here */
+								break;
+						}
+						//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("letzter:%d vorletzter:%d vorvorletzter:%d"), p->sollist[letzter], p->sollist[vorletzter], p->sollist[vorvorletzter]);
 
-                        int32_t pwert = ( p->pfaktor * (p->sollist[letzter]) );
-                        int32_t iwert = ( p->ifaktor * (p->sollist[letzter] + p->sollist[vorletzter] + p->sollist[vorvorletzter]) );
-                        int32_t dwert = ( p->dfaktor * (p->sollist[letzter] - p->sollist[vorletzter]) );
-                        //int32_t pidwert = pwert + iwert + dwert;
-                        p->pidvalue = pwert + iwert + dwert;
+						int32_t pwert = ( p->pfaktor * (p->sollist[letzter]) );
+						int32_t iwert = ( p->ifaktor * (p->sollist[letzter] + p->sollist[vorletzter] + p->sollist[vorvorletzter]) );
+						int32_t dwert = ( p->dfaktor * (p->sollist[letzter] - p->sollist[vorletzter]) );
+						//int32_t pidwert = pwert + iwert + dwert;
+						p->pidvalue = pwert + iwert + dwert;
 
-                        //canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("P:%d I:%d D:%d PID:%d"), pwert, iwert, dwert, pidwert);
-                        //canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("P:%d"), pwert);
-                        //canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("I:%d"), iwert);
-                        //canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("D:%d"), dwert);
-                        //canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("PID:%d"), pidwert);
+						//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("P:%d I:%d D:%d PID:%d"), pwert, iwert, dwert, pidwert);
+						//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("P:%d"), pwert);
+						//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("I:%d"), iwert);
+						//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("D:%d"), dwert);
+						//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("PID:%d"), p->pidvalue );
 
-                        if (++p->sollistIndex >= SOLLISTWERTE)
-                        {
-                                p->sollistIndex = 0;
-                        }
-                }
-        }
+						if (++p->sollistIndex >= SOLLISTWERTE)
+						{
+								p->sollistIndex = 0;
+						}
+					}
+			}
+		}
 }
 
 void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)

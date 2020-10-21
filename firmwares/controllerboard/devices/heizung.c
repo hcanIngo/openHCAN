@@ -60,15 +60,12 @@ void heizung_init(device_data_heizung *p, eds_block_p it)
  */
 void heizung_update_heizstop(device_data_heizung *p)
 {
-	if (p->reed_heiz_stop_counter)
-	{
-		canix_syslog_P(SYSLOG_PRIO_DEBUG,
-				PSTR("Heizstop aktiv (id=%d)"), p->config.id);
+	canix_syslog_P(SYSLOG_PRIO_DEBUG,
+			PSTR("Heizstop aktiv (id=%d)"), p->config.id);
 
-		// Heizung ganz ausschalten
-		p->pwm_end = p->config.pwm_periode;
-		p->pwm_width = 0;
-	}
+	// Heizung ganz ausschalten
+	p->pwm_end = p->config.pwm_periode;
+	p->pwm_width = 0;
 }
 
 void heizung_set_pwm(device_data_heizung *p, uint8_t rate)
@@ -402,16 +399,14 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 			canix_syslog_P(SYSLOG_PRIO_DEBUG,
 					PSTR("heiz-stop ende (heizung %d)"), p->config.id);
 		}
+		/*
+		 * Schaltet die HK-Ventile aus, wenn ein Heizstop vorliegt. Dies passiert
+		 * in regelmaessigen Abstaenden, da eventuell aufgrund der Heizsteuerlogik
+		 * die PWM nicht regelmaessig upgedatet wird und so das HK-Ventil nicht auf
+		 * den Reedkontakt reagiert.
+		 */
+		heizung_update_heizstop(p);
 	}
-
-	/*
-	 * Schaltet die HK-Ventile aus, wenn ein Heizstop vorliegt. Dies passiert
-	 * in regelmaessigen Abstaenden, da eventuell aufgrund der Heizsteuerlogik
-	 * die PWM nicht regelmaessig upgedatet wird und so das HK-Ventil nicht auf
-	 * den Reedkontakt reagiert.
-	 */
-	heizung_update_heizstop(p);
-
 	if (p->timer_counter++ >= 5)
 	{
 		p->timer_counter = 0;

@@ -1,8 +1,8 @@
 CONF = /home/il/Dropbox/HCAN/HI_SERVER/openhab2_conf_mqtt
 include $(CONF)/myconf.inc
 
-#OPENHABVERSION = openhab-2.5.0.M5
-OPENHABVERSION = openhab-2.5.0
+#OPENHABVERSION = openhab-2.5.0
+OPENHABVERSION = openhab-2.5.10
 HCAN_INSTALLATION = installation.xml
 
 

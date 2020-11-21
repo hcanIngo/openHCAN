@@ -28,5 +28,7 @@ openHAB2 für openHCAN verwenden - [hcanhab](https://github.com/hcanIngo/openHCA
 6.  - auf dem Bananapi openhab manuell starten:
 	  -> ssh tt@bananapi
 	  -> ./myOpenHabInstallation/start.sh  
-	  -> feature:install openhab-runtime-compat1x (binding-mqtt1 - 1.13.0  ermoeglichen)
+	   
+	  -> 1. PaperUI: Configuration -> System -> Include Lagacy 1.x Bindings -> save
+	     2. PaperUI: Add-ons -> Bindings -> MQTT Binding (1.x) -> install    (binding-mqtt1 - 1.14.0)
     

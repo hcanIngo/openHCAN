@@ -225,11 +225,10 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 				}
 				break;
 
-			case HCAN_HES_DEVICES_CONFIGS_REQUEST :
 			case HCAN_HES_POWER_GROUP_CONFIG_RQ :
 				{
 					answer.data[1] = HCAN_HES_POWER_GROUP_CONFIG_REPLAY;
-					answer.data[2] = p->config.gruppe0;
+					answer.data[2] = frame->data[2];
 					answer.size = 3;
 					canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 				}
@@ -281,6 +280,19 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 			if(p->countDownTimer) answer.data[4] = (p->countDownTimer/60) + 1;
 			else answer.data[4] = 0;
 			answer.size = 5;
+			canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
+		}
+	}
+	else if (HCAN_HES_DEVICES_CONFIGS_REQUEST == frame->data[1])
+	{
+		if (p->config.gruppe0 != 255)
+		{
+			wdt_reset();
+			canix_sleep_100th(10); // 100msec Pause
+
+			answer.data[1] = HCAN_HES_POWER_GROUP_CONFIG_REPLAY;
+			answer.data[2] = p->config.gruppe0;
+			answer.size = 3;
 			canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 		}
 	}

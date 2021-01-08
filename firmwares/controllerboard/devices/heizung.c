@@ -683,6 +683,16 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			}
 			break;
 
+		case HCAN_HES_DEVICES_CONFIGS_REQUEST :
+		case HCAN_HES_HEIZUNG_CONFIG_RQ :
+			{
+				answer.data[1] = HCAN_HES_HEIZUNG_CONFIG_REPLAY;
+				answer.data[2] = frame->data[2];
+				answer.size = 3;
+				canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
+			}
+			break;
+
 		case HCAN_HES_HEIZUNG_TIST_REQUEST :
 			if (frame->data[2] == p->config.id)
 			{

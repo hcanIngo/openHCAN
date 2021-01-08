@@ -214,14 +214,23 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 			// Ggf. den Zustand im EEPROM sichern!!!
 			case HCAN_HES_POWER_GROUP_STATE_QUERY :
 				{
-					answer.data[1] = 
-						HCAN_HES_POWER_GROUP_STATE_REPLAY;
+					answer.data[1] = HCAN_HES_POWER_GROUP_STATE_REPLAY;
 					answer.data[2] = frame->data[2];
 					answer.data[3] = powerport_get(p) != 0;
 					// UI-PowerPortPage kann einen Timerwert bis zum Schalten anzeigen: 
 					if(p->countDownTimer) answer.data[4] = (p->countDownTimer/60) + 1;
 					else answer.data[4] = 0;
 					answer.size = 5;
+					canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
+				}
+				break;
+
+			case HCAN_HES_DEVICES_CONFIGS_REQUEST :
+			case HCAN_HES_POWER_GROUP_CONFIG_RQ :
+				{
+					answer.data[1] = HCAN_HES_POWER_GROUP_CONFIG_REPLAY;
+					answer.data[2] = frame->data[2];
+					answer.size = 3;
 					canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 				}
 				break;

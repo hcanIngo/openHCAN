@@ -544,6 +544,20 @@
 				<param pos="1" name="idx" description="Index der Config Zeile" />
 			</message>
 
+			<message name="POTI_POS_CHANGED" id="70"
+				description="Liefert die Position des Potis (Aufloesung: 10Bit)" >
+				<param pos="0" name="gruppe" description="Poti-Gruppe" />
+				<param pos="1" name="pos_hi" description="hi byte der Position" />
+				<param pos="2" name="pos_lo" description="lo hyte der Position" />
+			</message>
+
+			<message name="HELLIGKEITS_INFO" id="71"
+				description="Liefert die Helligkeit am ADC (Aufloesung: 10Bit)" >
+				<param pos="0" name="gruppe" description="Helligkeits-Gruppe" />
+				<param pos="1" name="brightness_hi" description="hi byte der Helligkeit" />
+				<param pos="2" name="brightness_lo" description="lo hyte der Helligkeit" />
+			</message>
+
 			<message name="WECKER_SET" id="72"
 				description="Wecker incl Parameter" >
 				<param pos="0" name="id" description="Wecker-ID" />
@@ -562,32 +576,99 @@
 				<param pos="2" name="duration_lo" description="Timer in x Sekunden (LSB)" />
 			</message>
 
-			<message name="HELLIGKEITS_INFO" id="71"
-				description="Liefert die Helligkeit am ADC (Aufloesung: 10Bit)" >
-				<param pos="0" name="gruppe" description="Helligkeits-Gruppe" />
-				<param pos="1" name="brightness_hi" description="hi byte der Helligkeit" />
-				<param pos="2" name="brightness_lo" description="lo hyte der Helligkeit" />
-			</message>
-
-			<message name="POTI_POS_CHANGED" id="70"
-				description="Liefert die Position des Potis (Aufloesung: 10Bit)" >
-				<param pos="0" name="gruppe" description="Poti-Gruppe" />
-				<param pos="1" name="pos_hi" description="hi byte der Position" />
-				<param pos="2" name="pos_lo" description="lo hyte der Position" />
-			</message>
-
 			<message name="DEVICE_STATES_REQUEST" id="75"
-				description="Sendet der MQTT-Client, nach Connect zum Broker und CAN-Bus. 
-				Daraufhin erhaelt der Broker zeitnah alle CAN-Bus-Devicezustaende von den Controllerboard." >
+				description="Sendet der MQTT-Client, nach Connect zum Broker und CAN-Bus.
+				Daraufhin erhaelt der Broker zeitnah alle CAN-Bus-Devicezustaende von den Controllerboard.
+				==hcan4mqttpc==" >
 			</message>
 
-			<message name="DCF77_ERROR" id="80"
+			<message name="DEVICES_CONFIGS_REQUEST" id="76"
+				description="Sendet der HA-MQTT-Client, nach Connect zum Broker und CAN-Bus.
+				Daraufhin erhaelt der Broker zeitnah alle CAN-Bus-Device-Konfigs von den Controllerboards.
+				Daher alle POWER_GROUP_CONFIG_REPLAY, usw. 
+				==hcan4mqttha== " >
+			</message>
+
+			<message name="POWER_GROUP_CONFIG_RQ" id="77"
+				description="Sendet der HA-MQTT-Client, nach Broker-config-Anfrage fuer das Device. 
+				Daraufhin erhaelt der Broker zeitnah die CAN-Bus-Device-Konfig des Devices: POWER_GROUP_CONFIG_REPLAY. 
+				==hcan4mqttha== " >
+			</message>
+			
+			<message name="POWER_GROUP_CONFIG_REPLAY" id="78"
+				description="Antwort auf POWER_GROUP_CONFIG_RQ.
+				==hcan4mqttha== " >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>
+			
+			<message name="ROLLADEN_CONFIG_RQ" id="79"
+				description="Sendet der HA-MQTT-Client, nach Broker-config-Anfrage fuer das Device. 
+				Daraufhin erhaelt der Broker zeitnah die CAN-Bus-Device-Konfig des Devices: ROLLADEN_CONFIG_REPLAY. 
+				==hcan4mqttha== " >
+			</message>
+			
+			<message name="ROLLADEN_CONFIG_REPLAY" id="80"
+				description="Antwort auf ROLLADEN_CONFIG_RQ.
+				==hcan4mqttha== " >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>			
+
+			<message name="REEDKONTAKT_CONFIG_RQ" id="81"
+				description="Sendet der HA-MQTT-Client, nach Broker-config-Anfrage fuer das Device. 
+				Daraufhin erhaelt der Broker zeitnah die CAN-Bus-Device-Konfig des Devices: REEDKONTAKT_CONFIG_REPLAY. 
+				==hcan4mqttha== " >
+			</message>
+			
+			<message name="REEDKONTAKT_CONFIG_REPLAY" id="82"
+				description="Antwort auf REEDKONTAKT_CONFIG_RQ.
+				==hcan4mqttha== " >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>	
+
+			<message name="1WIRE_TEMPERATURE_CONFIG_RQ" id="83"
+				description="Sendet der HA-MQTT-Client, nach Broker-config-Anfrage fuer das Device. 
+				Daraufhin erhaelt der Broker zeitnah die CAN-Bus-Device-Konfig des Devices: 1WIRE_TEMPERATURE_CONFIG_REPLAY. 
+				==hcan4mqttha== " >
+			</message>
+			
+			<message name="1WIRE_TEMPERATURE_CONFIG_REPLAY" id="84"
+				description="Antwort auf 1WIRE_TEMPERATURE_CONFIG_RQ.
+				==hcan4mqttha== " >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>	
+			
+			<message name="HEIZUNG_CONFIG_RQ" id="85"
+				description="Sendet der HA-MQTT-Client, nach Broker-config-Anfrage fuer das Device. 
+				Daraufhin erhaelt der Broker zeitnah die CAN-Bus-Device-Konfig des Devices: HEIZUNG_CONFIG_REPLAY. 
+				==hcan4mqttha== " >
+			</message>
+			
+			<message name="HEIZUNG_CONFIG_REPLAY" id="86"
+				description="Antwort auf HEIZUNG_CONFIG_RQ.
+				==hcan4mqttha== " >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>			
+			
+			<message name="WS2812B_CONFIG_RQ" id="87"
+				description="Sendet der HA-MQTT-Client, nach Broker-config-Anfrage fuer das Device. 
+				Daraufhin erhaelt der Broker zeitnah die CAN-Bus-Device-Konfig des Devices: WS2812B_CONFIG_REPLAY. 
+				==hcan4mqttha== " >
+			</message>
+			
+			<message name="WS2812B_CONFIG_REPLAY" id="88"
+				description="Antwort auf WS2812B_CONFIG_RQ.
+				==hcan4mqttha== " >
+				<param pos="0" name="gruppe" description="Gruppe" />
+			</message>			
+			
+			
+			<message name="DCF77_ERROR" id="98"
 				description="Meldet die festgestellten Fehler der letzten Empfangsminute" >
 				<param pos="0" name="id" description="Identifikation des DCF77-Moduls" />
 				<param pos="1" name="error" description="Fehlercode" />
 			</message>
 
-			<message name="DCF77_PULSE_DURATION" id="81"
+			<message name="DCF77_PULSE_DURATION" id="99"
 				description="Liefert die Länge des letzten Pulse in 1/100s" >
 				<param pos="0" name="id" description="Identifikation des DCF77-Moduls" />
 				<param pos="1" name="length" description="Pulslaenge" />

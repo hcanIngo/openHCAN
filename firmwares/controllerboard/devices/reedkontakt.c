@@ -99,11 +99,9 @@ inline void reedkontakt_timer_handler(device_data_reedkontakt *p, uint8_t zyklus
 
 }
 
-void reedkontakt_can_callback(device_data_reedkontakt *p, 
-		const canix_frame *frame)
+void reedkontakt_can_callback(device_data_reedkontakt *p, const canix_frame *frame)
 {
 	canix_frame answer;
-
 	answer.src = canix_selfaddr();
 	answer.dst = frame->src;
 	answer.proto = HCAN_PROTO_SFP;
@@ -111,18 +109,33 @@ void reedkontakt_can_callback(device_data_reedkontakt *p,
 
 	if (p->config.gruppe == frame->data[2])
 	{
-		if (HCAN_HES_REEDKONTAKT_STATE_QUERY == frame->data[1])
+		switch (frame->data[1])
 		{
-			answer.data[1] = HCAN_HES_REEDKONTAKT_STATE_REPLAY;
-			answer.data[2] = frame->data[2];
-			answer.data[3] = inputport_read(1, p->config.port) != 0;
-			answer.size    = 4;
-			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
+			case HCAN_HES_REEDKONTAKT_STATE_QUERY :
+				if (frame->data[2] == p->config.gruppe)
+				{
+					answer.data[1] = HCAN_HES_REEDKONTAKT_STATE_REPLAY;
+					answer.data[2] = frame->data[2];
+					answer.data[3] = inputport_read(1, p->config.port) != 0;
+					answer.size    = 4;
+					canix_frame_send(&answer);
+				}
+				break;
+
+			case HCAN_HES_REEDKONTAKT_CONFIG_RQ :
+				if (frame->data[2] == p->config.gruppe)
+				{
+					answer.data[1] = HCAN_HES_REEDKONTAKT_CONFIG_REPLAY;
+					answer.data[2] = frame->data[2];
+					answer.size    = 3;
+					canix_frame_send(&answer);
+				}
+				break;
 		}
 	}
 	else if (HCAN_HES_DEVICE_STATES_REQUEST == frame->data[1])
 	{
-		if(p->config.gruppe != 255)
+		if (p->config.gruppe != 255)
 		{
 			wdt_reset();
 			canix_sleep_100th(10); // 100msec Pause
@@ -131,7 +144,20 @@ void reedkontakt_can_callback(device_data_reedkontakt *p,
 			answer.data[2] = p->config.gruppe; // wird in main.c fuer jedes Device einmal aufgerufen
 			answer.data[3] = inputport_read(1, p->config.port) != 0;
 			answer.size    = 4;
-			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
+			canix_frame_send(&answer);
+		}
+	}
+	else if (HCAN_HES_DEVICES_CONFIGS_REQUEST == frame->data[1])
+	{
+		if (p->config.gruppe != 255)
+		{
+			wdt_reset();
+			canix_sleep_100th(10); // 100msec Pause
+
+			answer.data[1] = HCAN_HES_REEDKONTAKT_CONFIG_REPLAY;
+			answer.data[2] = p->config.gruppe; // wird in main.c fuer jedes Device einmal aufgerufen
+			answer.size    = 3;
+			canix_frame_send(&answer);
 		}
 	}
 }

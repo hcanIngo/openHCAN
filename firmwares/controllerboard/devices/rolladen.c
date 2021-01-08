@@ -371,6 +371,16 @@ void rolladen_can_callback(device_data_rolladen *p, const canix_frame *frame)
 				canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
 			}
 			break;
+
+		case HCAN_HES_DEVICES_CONFIGS_REQUEST :
+		case HCAN_HES_ROLLADEN_CONFIG_RQ :
+			{
+				answer.data[1] = HCAN_HES_ROLLADEN_CONFIG_REPLAY;
+				answer.data[2] = frame->data[2];
+				answer.size = 3;
+				canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
+			}
+			break;
 	}
 
 	if (p->config.mute == frame->data[2])

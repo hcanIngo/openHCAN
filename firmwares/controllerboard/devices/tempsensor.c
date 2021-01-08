@@ -163,51 +163,70 @@ inline void tempsensor_timer_handler(device_data_tempsensor *p, uint8_t zyklus)
 
 }
 
-void tempsensor_can_callback(device_data_tempsensor *p, 
-		const canix_frame *frame)
+void tempsensor_can_callback(device_data_tempsensor *p, const canix_frame *frame)
 {
-	switch (frame->data[1])
+	canix_frame answer;
+	answer.src = canix_selfaddr();
+	answer.dst = frame->src;
+	answer.proto = HCAN_PROTO_SFP;
+	answer.data[0] = HCAN_SRV_HES;
+
+	if (p->config.gruppe == frame->data[2])
 	{
-		case HCAN_HES_1WIRE_TEMPERATURE_QUERY :
-			{
+		switch (frame->data[1])
+		{
+			case HCAN_HES_1WIRE_TEMPERATURE_QUERY :
+				{
+					if (frame->data[2] == p->config.gruppe)
+					{
+						answer.data[1] = HCAN_HES_1WIRE_TEMPERATURE_REPLAY;
+						answer.data[2] = p->config.gruppe;
+						answer.data[3] = p->temperature >> 8;
+						answer.data[4] = p->temperature;
+						answer.size    = 5;
+						canix_frame_send(&answer);
+					}
+				}
+				break;
+
+			case HCAN_HES_1WIRE_TEMPERATURE_CONFIG_RQ :
 				if (frame->data[2] == p->config.gruppe)
 				{
-					canix_frame message;
-					message.src = canix_selfaddr();
-					message.dst = frame->src;
-					message.proto = HCAN_PROTO_SFP;
-					message.data[0] = HCAN_SRV_HES;
-					message.data[1] = HCAN_HES_1WIRE_TEMPERATURE_REPLAY;
-					message.data[2] = p->config.gruppe;
-					message.data[3] = p->temperature >> 8;
-					message.data[4] = p->temperature;
-					message.size    = 5;
-					canix_frame_send(&message);
+					answer.data[1] = HCAN_HES_1WIRE_TEMPERATURE_CONFIG_REPLAY;
+					answer.data[2] = p->config.gruppe;
+					answer.size    = 3;
+					canix_frame_send(&answer);
 				}
-			}
-			break;
+				break;
+		}
+	}
+	else if (HCAN_HES_DEVICE_STATES_REQUEST == frame->data[1])
+	{
+		if (p->config.gruppe != 255)
+		{
+			wdt_reset();
+			canix_sleep_100th(10); // 100msec Pause
 
-		case HCAN_HES_DEVICE_STATES_REQUEST :
-			{
-				if(p->config.gruppe != 255)
-				{
-					wdt_reset();
-					canix_sleep_100th(10); // 100msec Pause
+			answer.data[1] = HCAN_HES_1WIRE_TEMPERATURE_REPLAY;
+			answer.data[2] = p->config.gruppe; // wird in main.c fuer jedes Device einmal aufgerufen
+			answer.data[3] = p->temperature >> 8;
+			answer.data[4] = p->temperature;
+			answer.size    = 5;
+			canix_frame_send(&answer);
+		}
+	}
+	else if (HCAN_HES_DEVICES_CONFIGS_REQUEST == frame->data[1])
+	{
+		if (p->config.gruppe != 255)
+		{
+			wdt_reset();
+			canix_sleep_100th(10); // 100msec Pause
 
-					canix_frame message;
-					message.src = canix_selfaddr();
-					message.dst = frame->src;
-					message.proto = HCAN_PROTO_SFP;
-					message.data[0] = HCAN_SRV_HES;
-					message.data[1] = HCAN_HES_1WIRE_TEMPERATURE_REPLAY;
-					message.data[2] = p->config.gruppe; // wird in main.c fuer jedes Device einmal aufgerufen
-					message.data[3] = p->temperature >> 8;
-					message.data[4] = p->temperature;
-					message.size    = 5;
-					canix_frame_send(&message);
-				}
-			}
-			break;
+			answer.data[1] = HCAN_HES_1WIRE_TEMPERATURE_CONFIG_REPLAY;
+			answer.data[2] = p->config.gruppe; // wird in main.c fuer jedes Device einmal aufgerufen
+			answer.size    = 3;
+			canix_frame_send(&answer);
+		}
 	}
 }
 

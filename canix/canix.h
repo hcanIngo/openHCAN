@@ -147,7 +147,7 @@ typedef struct
 	/**
 	 * Die Datenbytes des Frames
 	 */
-	uint8_t data[8];
+	uint8_t data[10];
 
 } canix_frame;
 

@@ -309,7 +309,9 @@ static void heizung_send_details(device_data_heizung *p, const uint16_t answerDs
 			answer.data[4] = p->thermostat_temp;
 			answer.data[5] = p->duration_counter >> 8;
 			answer.data[6] = p->duration_counter;
-			answer.size = 7;
+			answer.data[7] = p->measure_value >> 8;
+			answer.data[8] = p->measure_value;
+			answer.size = 9;
 			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
 			break;
 
@@ -326,13 +328,14 @@ static void heizung_send_details(device_data_heizung *p, const uint16_t answerDs
 						&(p->config.zeitzone0_id);
 
 					master_value = zeitzone[index].temp;
-					answer.data[1] =
-						HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
+					answer.data[1] = HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
 					answer.data[2] = p->config.id;
 					answer.data[3] = master_value >> 8;
 					answer.data[4] = master_value;
 					answer.data[5] = heizung_get_matching_zeitzone_id(p);
-					answer.size = 6;
+					answer.data[6] = p->measure_value >> 8;
+					answer.data[7] = p->measure_value;
+					answer.size = 8;
 				}
 				else
 				{
@@ -687,7 +690,7 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 		case HCAN_HES_HEIZUNG_CONFIG_RQ :
 			{
 				answer.data[1] = HCAN_HES_HEIZUNG_CONFIG_REPLAY;
-				answer.data[2] = frame->data[2];
+				answer.data[2] = p->config.id;
 				answer.size = 3;
 				canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 			}

@@ -229,7 +229,7 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 			case HCAN_HES_POWER_GROUP_CONFIG_RQ :
 				{
 					answer.data[1] = HCAN_HES_POWER_GROUP_CONFIG_REPLAY;
-					answer.data[2] = frame->data[2];
+					answer.data[2] = p->config.gruppe0;
 					answer.size = 3;
 					canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 				}

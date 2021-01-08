@@ -309,9 +309,7 @@ static void heizung_send_details(device_data_heizung *p, const uint16_t answerDs
 			answer.data[4] = p->thermostat_temp;
 			answer.data[5] = p->duration_counter >> 8;
 			answer.data[6] = p->duration_counter;
-			answer.data[7] = p->measure_value >> 8;
-			answer.data[8] = p->measure_value;
-			answer.size = 9;
+			answer.size = 7;
 			canix_frame_send_with_prio(&answer, HCAN_PRIO_HI);
 			break;
 

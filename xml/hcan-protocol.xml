@@ -461,8 +461,6 @@
 				<param pos="2" name="temp_lo" description="Soll-Temperatur (LSB)" />
 				<param pos="3" name="duration_hi" description="Restdauer (MSB), 0 = unbegrenzt" />
 				<param pos="4" name="duration_lo" description="Restdauer (LSB)" />
-				<param pos="5" name="tIst_hi" description="Ist-Temperatur (MSB)" />
-				<param pos="6" name="tIst_lo" description="Ist-Temperatur (LSB)" />
 			</message>
 			<message name="HEIZUNG_SET_MODE_THERMOSTAT_DETAILS" id="56"
 				description="Set Thermostat Modus incl Parameter" >

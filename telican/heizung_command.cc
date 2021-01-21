@@ -201,8 +201,20 @@ bool heizung_command::exec(const string &line)
 			return true;
 		}
 
-		boost::regex re5("^heizung *([[:word:]-]+) +manuell +([0-9]+) +([0-9]+) *$");
+		boost::regex re5("^heizung *([[:word:]-]+) +manuell +([0-9]+) +([0-9]+)([ ]{0,1})(h|H|std|Std) *$");
 		if (boost::regex_match(line.c_str(), matches, re5))
+		{
+			uint8_t id = global_installation_data.heizung_id_by_name(
+					matches[1]);
+			uint8_t stellgrad = boost::lexical_cast<int>(matches[2]);
+			uint16_t dauer = boost::lexical_cast<int>(matches[3]) * 60 * 60; // Sekunden!
+			m_tcon.send_HEIZUNG_SET_MODE_MANUAL(m_src,
+					HCAN_MULTICAST_CONTROL,id,stellgrad,dauer>>8,dauer);
+			return true;
+		}
+
+		boost::regex re6("^heizung *([[:word:]-]+) +manuell +([0-9]+) +([0-9]+)([ ]{0,1})(m|M|min|Min) *$");
+		if (boost::regex_match(line.c_str(), matches, re6))
 		{
 			uint8_t id = global_installation_data.heizung_id_by_name(
 					matches[1]);
@@ -213,8 +225,48 @@ bool heizung_command::exec(const string &line)
 			return true;
 		}
 
-		boost::regex re6("^heizung *([[:word:]-]+) +therm +([0-9\\.]+) +([0-9]+) *$");
-		if (boost::regex_match(line.c_str(), matches, re6))
+		boost::regex re7("^heizung *([[:word:]-]+) +manuell +([0-9]+) +([0-9]+) *$");
+		if (boost::regex_match(line.c_str(), matches, re7))
+		{
+			uint8_t id = global_installation_data.heizung_id_by_name(
+					matches[1]);
+			uint8_t stellgrad = boost::lexical_cast<int>(matches[2]);
+			uint16_t dauer = boost::lexical_cast<int>(matches[3]) * 60; // Sekunden!
+			m_tcon.send_HEIZUNG_SET_MODE_MANUAL(m_src,
+					HCAN_MULTICAST_CONTROL,id,stellgrad,dauer>>8,dauer);
+			return true;
+		}
+
+		boost::regex re8("^heizung *([[:word:]-]+) +therm +([0-9\\.]+) +([0-9]+)([ ]{0,1})(h|H|std|Std) *$");
+		if (boost::regex_match(line.c_str(), matches, re8))
+		{
+			uint8_t id = global_installation_data.heizung_id_by_name(
+					matches[1]);
+			float temp = boost::lexical_cast<float>(matches[2]);
+			uint8_t hi = (uint16_t)(temp * 16) >> 8;
+			uint8_t lo = (uint16_t)(temp * 16);
+			uint16_t dauer = boost::lexical_cast<int>(matches[3]) * 60 * 60; // Sekunden!
+			m_tcon.send_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS(m_src,
+					HCAN_MULTICAST_CONTROL,id,hi,lo,dauer>>8,dauer);
+			return true;
+		}
+
+		boost::regex re9("^heizung *([[:word:]-]+) +therm +([0-9\\.]+) +([0-9]+)([ ]{0,1})(m|M|min|Min) *$");
+		if (boost::regex_match(line.c_str(), matches, re9))
+		{
+			uint8_t id = global_installation_data.heizung_id_by_name(
+					matches[1]);
+			float temp = boost::lexical_cast<float>(matches[2]);
+			uint8_t hi = (uint16_t)(temp * 16) >> 8;
+			uint8_t lo = (uint16_t)(temp * 16);
+			uint16_t dauer = boost::lexical_cast<int>(matches[3]) * 60; // Sekunden!
+			m_tcon.send_HEIZUNG_SET_MODE_THERMOSTAT_DETAILS(m_src,
+					HCAN_MULTICAST_CONTROL,id,hi,lo,dauer>>8,dauer);
+			return true;
+		}
+
+		boost::regex re10("^heizung *([[:word:]-]+) +therm +([0-9\\.]+) +([0-9]+) *$");
+		if (boost::regex_match(line.c_str(), matches, re10))
 		{
 			uint8_t id = global_installation_data.heizung_id_by_name(
 					matches[1]);

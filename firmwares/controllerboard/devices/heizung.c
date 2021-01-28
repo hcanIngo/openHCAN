@@ -342,7 +342,7 @@ static void heizung_send_details(device_data_heizung *p, const uint16_t answerDs
 				else
 				{
 					canix_syslog_P(SYSLOG_PRIO_ERROR,
-							PSTR("zeitzone: no match!"));
+							PSTR("zeitzone: no match! (id=%d)"), p->config.id);
 
 					answer.data[1] =
 						HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
@@ -484,7 +484,7 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 					else
 					{
 						canix_syslog_P(SYSLOG_PRIO_ERROR, 
-								PSTR("keine Sensor-Messwerte vorhanden!"));
+								PSTR("keine Sensor-Messwerte vorhanden! (id=%d)"), p->config.id);
 					}
 				}
 				break;
@@ -501,7 +501,7 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 					else
 					{
 						canix_syslog_P(SYSLOG_PRIO_ERROR, 
-								PSTR("keine Sensor-Messwerte vorhanden!"));
+								PSTR("keine Sensor-Messwerte vorhanden! (id=%d)"), p->config.id);
 					}
 				}
 				break;

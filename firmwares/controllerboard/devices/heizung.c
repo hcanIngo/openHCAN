@@ -504,6 +504,14 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 		}
 	}
 
+	//Wenn kein gueltiger Messwert vorliegt
+	//keine Waermebedarfsmeldung versenden
+	//keine PID Berechnung machen
+	if (p->received_interval_counter == 255)
+	{
+		return;
+	}
+
 	// Waermebedarfsmeldung versenden:
 	if (p->waermebedarf_counter-- == 0)
 	{

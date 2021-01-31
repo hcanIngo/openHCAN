@@ -262,15 +262,17 @@ void heizung_check_ventilpflege(device_data_heizung *p)
 		|| (p->config.feature & (1<<HEIZUNG_FEATURE_VENTIL_IMMER_PFLEGEN)) ) )
 	{
 		// Startzeitpunkt der Ventilpflege ist immer:
-		// Sonntags, 12:00 + Heizungs-ID * 3
+		// Sonntags, 11:00 + Heizungs-ID * 3 (in Minuten)
 		//
-		// Beispiel: ID: 67;  -> Startzeitpunkt: 3:21
-		// Beispiel: ID: 160; -> Startzeitpunkt: 8:00
+		// Beispiel: ID: 1;   -> Startzeitpunkt: 11:03
+		// Beispiel: ID: 67;  -> Startzeitpunkt: 14:21
+		// Beispiel: ID: 160; -> Startzeitpunkt: 19:00
+		// Beispiel: ID: 254; -> Startzeitpunkt: 23:42
 
 		uint16_t time = canix_rtc_clock.hour * 60 + canix_rtc_clock.minute;
 
 		if ((canix_rtc_clock.day_of_week == 7) && // Sonntag
-				(time == (p->config.id * 3) + (12*60 + 0)))
+				(time == (p->config.id * 3) + (11*60 + 0)))
 		{
 			// Ventilpflege aktivieren:
 			p->ventilpflege_counter = 600;

@@ -101,6 +101,7 @@ std::string installation_data::query_name(const string &xpathq)
 {
 	Element *rn = m_parser.get_document()->get_root_node();
 
+	//NodeSet ns = rn->find(xpathq + "/@name"); // <-- ToDo
 	NodeSet ns = rn->find(xpathq);
 
 	for (NodeSet::iterator i = ns.begin(); i != ns.end(); i++)
@@ -149,4 +150,14 @@ string installation_data::heizung_name_by_id(const int id)
 uint8_t installation_data::tempsensor_gruppe_by_name(const string &name)
 {
   return query_gruppe("//tempsensor[@name='" + name + "']");
+}
+
+string installation_data::tempsensor_name_by_gruppe(const uint16_t gruppe)
+{
+  return query_name("//tempsensor[@gruppe='" + boost::lexical_cast<string>(gruppe) + "']");
+}
+
+string installation_data::board_name_by_addr(const uint16_t addr)
+{
+  return query_name("//board[@addr='" + boost::lexical_cast<string>(addr) + "']");
 }

@@ -88,8 +88,8 @@ namespace hcan
 			uint32_t size() const { return m_size; };
 			void set_size(uint32_t size) { m_size = size; };
 			void set_prio(uint8_t prio);
-			void print(bool numeric, bool color, 
-					const std::string &prefix = "") const;
+			void print(bool numeric, bool color,
+					bool resolve, const std::string &prefix = "") const;
 	};
 }
 

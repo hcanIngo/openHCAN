@@ -45,7 +45,7 @@ void print_frame(data_file_frame_entry &fe)
 			<< brightness << std::endl;
 	}
 	else
-		f.print(numeric,color,string(ts));
+		f.print(numeric,color,false,string(ts));
 }
 
 void query_file(const string &file, 

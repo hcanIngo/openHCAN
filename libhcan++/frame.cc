@@ -21,6 +21,7 @@
 #include <assert.h>
 
 #include <libhcan++/frame_message_description.h>
+#include <../telican/installation_data.h>
 
 using namespace hcan;
 using namespace std;
@@ -213,19 +214,63 @@ const frame_message_description_t &find_frame_message_description (
 }
 
 
-void frame::print(bool numeric, bool color, const std::string &prefix) const
+void frame::print(bool numeric, bool color, bool resolve, const std::string &prefix) const
 {
 	bool ascii = true;
+
 	cout << prefix;
 	cout.flush();
+
+	stringstream source;
+	stringstream destination;
+
+	if(resolve)
+	{
+		if((src() >= 1 && src() <= 63) || (src() >= 960 && src() <= 1022))
+		{
+			source << "\"MULTICAST\"";
+		}
+		else
+		{
+			try
+			{
+				source << "\"" << global_installation_data.board_name_by_addr(src()) << "\"";
+			}
+			catch (const traceable_error &e)
+			{
+				source << setw(4) << setfill('0') << src();
+			}
+		}
+
+		if((dst() >= 1 && dst() <= 63) || (dst() >= 960 && dst() <= 1022))
+		{
+			destination << "\"MULTICAST\"";
+		}
+		else
+		{
+			try
+			{
+				destination << "\"" << global_installation_data.board_name_by_addr(dst()) << "\"";
+			}
+			catch (const traceable_error &e)
+			{
+				destination << setw(4) << setfill('0') << dst();
+			}
+		}
+	}
+	else
+	{
+		source << setw(4) << setfill('0') << src();
+		destination << setw(4) << setfill('0') << dst();
+	}
 
 	if (numeric)
 	{
 		// numeric mode; just print the raw frame:
 
 		cout << setbase(10) << " ";
-		cout << setw(4) << setfill('0') << src() << " -> ";
-		cout << setw(4) << setfill('0') << dst() << " :" <<
+		cout << source.str() << " -> ";
+		cout << destination.str() << " :" <<
 			setw(1) << (uint16_t)proto() << "  ["; 
 
 		cout << setbase(16) << setfill('0') << setw(2);
@@ -239,8 +284,8 @@ void frame::print(bool numeric, bool color, const std::string &prefix) const
 	else
 	{
 		cout << setbase(10) << " ";
-		cout << setw(4) << setfill('0') << src() << " -> ";
-		cout << setw(4) << setfill('0') << dst();
+		cout << source.str() << " -> ";
+		cout << destination.str();
 
 		if (color)
 			cout << COLOR_BLUE;

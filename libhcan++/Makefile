@@ -4,6 +4,7 @@ TARGET = libhcan++
 
 SRC = $(patsubst %.cc, %.cc , $(wildcard *.cc))
 OBJ = $(patsubst %.cc,%.o,$(wildcard *.cc))
+OBJ += ../telican/installation_data.o
 
 CXX = g++ #-m32
 CXXFLAGS = -Wall
@@ -33,5 +34,4 @@ clean:
 	rm -f $(TARGET).* *.o 
 
 doc:
-	doxygen    
-      
+	doxygen

@@ -25,7 +25,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-
 #ifdef __WIN32__
 #define sleep(a) _sleep(a)
 #endif
@@ -59,14 +58,16 @@ vector<string> parse_command_list(const string &commands)
 void run_templog_mode(const po::variables_map &map)
 {
 	hcan::transport_connection con(hcand_ip);
-	con.templog();
+	const bool resolve = map.count("resolve");
+	con.templog(resolve);
 	exit(0);
 }
 
 void run_syslog_mode(const po::variables_map &map)
 {
 	hcan::transport_connection con(hcand_ip);
-	con.syslog();
+	const bool resolve = map.count("resolve");
+	con.syslog(resolve);
 	exit(0);
 }
 
@@ -148,6 +149,15 @@ void handle_given_options (const po::parsed_options &options,
 {
 	/** if (options.options.size() == 0 || map.count("help")) */
 
+	if (map.count("resolve"))
+	{
+		if (!map.count("templog") && !map.count("dump") && !map.count("dump-no-syslog") && !map.count("syslog"))
+		{
+			cerr << "resolve only works with \"--templog\", \"--syslog\", \"--dump\" or \"--dump-no-syslog\"" << "\n";
+			exit(1);
+		}
+	}
+
 	if (map.count("help"))
 	{
 		cerr << option_desc << "\n";
@@ -189,17 +199,19 @@ void handle_given_options (const po::parsed_options &options,
 		hcan::transport_connection con(hcand_ip);
 		const bool numeric = map.count("numeric");
 		const bool nocolor = map.count("nocolor");
-		con.dump(numeric, !nocolor, true);
+		const bool resolve = map.count("resolve");
+		con.dump(numeric, !nocolor, true, resolve);
 		exit(0);
 	}
-        if (map.count("dump-no-syslog"))
-        {
-                hcan::transport_connection con(hcand_ip);
-                const bool numeric = map.count("numeric");
-                const bool nocolor = map.count("nocolor");
-                con.dump(numeric, !nocolor, false);
-                exit(0);
-        }
+	if (map.count("dump-no-syslog"))
+	{
+		hcan::transport_connection con(hcand_ip);
+		const bool numeric = map.count("numeric");
+		const bool nocolor = map.count("nocolor");
+		const bool resolve = map.count("resolve");
+		con.dump(numeric, !nocolor, false, resolve);
+		exit(0);
+	}
 
 	// Standard NonPolite
 	if (map.count("polite-time"))
@@ -480,6 +492,7 @@ int main (int argc, char *argv[])
 			("dump-no-syslog,D", "dump mode; dump all messages; exept of syslog messages")
 			("nocolor", "no color in dump mode")
 			("numeric,n", "in dump mode, print frame data as numbers")
+			("resolve", "try to resolve group numbers and IDs from installation.xml")
 			("ping,p", po::value<uint16_t>(), 
 			 "sends ping frames to the given destination")
 			("floodping,P", po::value<uint16_t>(), 

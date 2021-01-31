@@ -36,6 +36,8 @@ class installation_data
 		uint8_t tempsensor_gruppe_by_name(const string &name);
 		uint8_t sonstige_gruppe_by_name(const string &name);
 		std::string heizung_name_by_id(const int id);
+		std::string tempsensor_name_by_gruppe(const uint16_t gruppe);
+		std::string board_name_by_addr(const uint16_t addr);
 };
 
 extern installation_data global_installation_data;

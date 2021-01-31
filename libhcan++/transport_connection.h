@@ -37,9 +37,9 @@ namespace hcan
 			void ping(uint16_t src, uint16_t dst);
 			void ping_once(uint16_t src, uint16_t dst);
 			void flood_ping(uint16_t src, uint16_t dst, const int load);
-			void dump(bool numeric, bool color, bool syslog);
-			void templog();
-			void syslog();
+			void dump(bool numeric, bool color, bool syslog, bool resolve);
+			void templog(bool resolve);
+			void syslog(bool resolve);
 			void send(const frame &f);
 			virtual frame recv_frame (const uint16_t dst);
 			/** receives a frame for the given destination. If too much

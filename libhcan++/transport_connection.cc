@@ -3,6 +3,7 @@
 #include <traceable_error.h>
 
 #include <frame_message_description.h>
+#include <../telican/installation_data.h>
 
 #include <hcan_multicast.h>
 #include <hcan.h>
@@ -287,8 +288,21 @@ frame transport_connection::recv_frame_with_timeout(int seconds)
 	return frame::read_from(m_socket);
 }
 
-void transport_connection::templog()
+void transport_connection::templog(bool resolve)
 {
+	if (resolve)
+	{
+		try
+		{
+			global_installation_data.load(INSTALLATION_XML);
+		}
+		catch (std::exception &e)
+		{
+			cout << "cannot resolve: installation.xml not found" << endl;
+			resolve = false;
+		}
+	}
+
 	while (! done)
 	{
 		try
@@ -301,6 +315,7 @@ void transport_connection::templog()
 					(f.data(0) == HCAN_SRV_HES) &&
 					(f.data(1) == HCAN_HES_1WIRE_TEMPERATURE ))
 			{
+				string name = "";
 
 				const uint8_t hi = f.data(3);
 				const uint8_t lo = f.data(4);
@@ -309,7 +324,19 @@ void transport_connection::templog()
 				float ftemp = temp;
 				ftemp /= 16;
 
-				cout << "group: " << (uint16_t)f.data(2) << " temp: " << ftemp << endl;
+				if (resolve)
+				{
+					try
+					{
+						name = " name: \"" + global_installation_data.tempsensor_name_by_gruppe(f.data(2)) + "\"";
+					}
+					catch (const traceable_error &e)
+					{
+						name = "";
+					}
+				}
+
+					cout << "group: " << (uint16_t)f.data(2) << name << " temp: " << ftemp << endl;
 			}
 		}
 		catch (const transport_error &e)
@@ -325,8 +352,21 @@ typedef struct
 	string msg; 
 } message_entry;
 
-void transport_connection::syslog()
+void transport_connection::syslog(bool resolve)
 {
+	if (resolve)
+	{
+		try
+		{
+			global_installation_data.load(INSTALLATION_XML);
+		}
+		catch (std::exception &e)
+		{
+			cout << "cannot resolve: installation.xml not found" << endl;
+			resolve = false;
+		}
+	}
+
 	map<uint16_t, message_entry> messages;
 
 	while (! done)
@@ -376,7 +416,20 @@ void transport_connection::syslog()
 						strftime(timestamp,sizeof(timestamp), "%b %d %H:%M:%S",
 								tm);
 
-						cout << timestamp << " " << f.src() << "  " << prio << "  " << s;
+						string name = "";
+						if (resolve)
+						{
+							try
+							{
+								name = " (\"" + global_installation_data.board_name_by_addr(f.src()) + "\")";
+							}
+							catch (const traceable_error &e)
+							{
+								name = "";
+							}
+						}
+
+						cout << timestamp << " " << f.src() << name << "  " << prio << "  " << s;
 						cout.flush();
 
 						// delete it from out messages hash
@@ -398,11 +451,24 @@ void transport_connection::syslog()
 	}
 }
 
-void transport_connection::dump(bool numeric, bool color, bool syslog)
+void transport_connection::dump(bool numeric, bool color, bool syslog, bool resolve)
 {
 	// this fills the frame_message_description vector
 	// (see mk_frame_message_description_h.xsl for details)
 	init_frame_message_description();
+
+	if (resolve)
+	{
+		try
+		{
+			global_installation_data.load(INSTALLATION_XML);
+		}
+		catch (std::exception &e)
+		{
+			cout << "cannot resolve: installation.xml not found" << endl;
+			resolve = false;
+		}
+	}
 
 	int count = 0;
 	while (! done)
@@ -416,7 +482,7 @@ void transport_connection::dump(bool numeric, bool color, bool syslog)
 				continue;
 			}
 
-			f.print(numeric,color,"");
+			f.print(numeric,color,resolve,"");
 
 			count++;
 		}

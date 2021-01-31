@@ -258,7 +258,8 @@ void heizung_check_ventilpflege(device_data_heizung *p)
 {
 	// Pruefen: ist die Heizung aus und keine Ventilpflege aktiv? 
 	// Nur dann pruefen wir weiter, ob eine Ventilpflege ansteht:
-	if ((p->mode == HEIZUNG_MODE_OFF) && (p->ventilpflege_counter == 0))
+	if ( (p->ventilpflege_counter == 0) && ( (p->mode == HEIZUNG_MODE_OFF)
+		|| (p->config.feature & (1<<HEIZUNG_FEATURE_VENTIL_IMMER_PFLEGEN)) ) )
 	{
 		// Startzeitpunkt der Ventilpflege ist immer:
 		// Sonntags, 12:00 + Heizungs-ID * 3
@@ -274,7 +275,7 @@ void heizung_check_ventilpflege(device_data_heizung *p)
 			// Ventilpflege aktivieren:
 			p->ventilpflege_counter = 600;
 			canix_syslog_P(SYSLOG_PRIO_DEBUG,
-					PSTR("heizung %d: ventilpflege"), p->config.id);
+					PSTR("heizung %d: ventilpflege start"), p->config.id);
 		}
 	}
 }
@@ -416,37 +417,34 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 	{
 		p->timer_counter = 0;
 
+		if (p->ventilpflege_counter)
+		{
+			// Sonderfall: Ventilpflege ist aktiv; dazu
+			// Ventil einschalten, sonst aber nichts
+			// unternehmen:
+
+			p->manual_rate = 0;
+
+			// Ventil einschalten:
+			//heizung_set_pwm(p,100);
+			darlingtonoutput_setpin(p->config.port, 1);
+
+			canix_syslog_P(SYSLOG_PRIO_DEBUG,
+					PSTR("heizung: %d ventilpflege aktiv"), p->config.id);
+			return; // Funktion verlassen, da keine Waermebedarfsmeldung und PID berechnung nötig sind.
+		}
+
 		switch (p->mode)
 		{
 			case HEIZUNG_MODE_OFF : 
 				{
-					if (p->ventilpflege_counter)
-					{
-						// Sonderfall: Ventilpflege ist aktiv; dazu
-						// Ventil einschalten, sonst aber nichts
-						// unternehmen:
-						
-						p->manual_rate = 0;
-
-						// Ventil einschalten:
-						heizung_set_pwm(p,100);
-						darlingtonoutput_setpin(p->config.port, 1);
-
-						canix_syslog_P(SYSLOG_PRIO_DEBUG, 
-								PSTR("ventilpflege: 1"));
-					}
-					else
-					{
-						// das ist Normalfall: keine Ventilpflege aktiv.
-						p->manual_rate = 0;
-						heizung_set_pwm(p,0);
-
-						// Ventil ausschalten, falls es an ist:
-						if (darlingtonoutput_getpin(p->config.port))
+					p->manual_rate = 0;
+					heizung_set_pwm(p,0);
+					// Ventil ausschalten, falls es an ist:
+					if (darlingtonoutput_getpin(p->config.port))
 							darlingtonoutput_setpin(p->config.port, 0);
-					}
-					return;
 				}
+				break;
 			case HEIZUNG_MODE_MANUAL :
 				{
 					heizung_set_pwm(p, p->manual_rate);

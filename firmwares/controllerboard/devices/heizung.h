@@ -20,7 +20,8 @@
  * Setzen dieses Feature-Bits erwirkt werden, dass bei
  * Waermebedarf nicht 100, sondern 200% angefordert werden.
  */
-#define HEIZUNG_FEATURE_DOPPEL_WAERMEBEDARF 0
+#define HEIZUNG_FEATURE_DOPPEL_WAERMEBEDARF   0
+#define HEIZUNG_FEATURE_VENTIL_IMMER_PFLEGEN  1
 
 typedef struct
 {

@@ -36,6 +36,13 @@ all:
 	make allX
 	
 allX: $(TARGET).hex
+ifeq ($(MCU),atmega328p)
+	@SIZE="$(shell avr-size $(TARGET).hex | grep '$(TARGET).hex' | cut -f4 | xargs)" && if [ "$$SIZE" -gt "$(MAXSIZE_ATMEGA328P)" ]; then tput setaf 1; echo "Hex to large for ATmega328p!"; tput sgr0; exit 1;  fi;
+else ifeq ($(MCU),atmega32)
+	@SIZE="$(shell avr-size $(TARGET).hex | grep '$(TARGET).hex' | cut -f4 | xargs)" && if [ "$$SIZE" -gt $(MAXSIZE_ATMEGA32) ]; then tput setaf 1; echo "Hex to largefor ATmega32!"; tput sgr0; exit 1;  fi;
+else ifeq ($(MCU),atmega644p)
+	@SIZE="$(shell avr-size $(TARGET).hex | grep '$(TARGET).hex' | cut -f4 | xargs)" && if [ "$$SIZE" -gt $(MAXSIZE_ATMEGA644P) ]; then tput setaf 1; echo "Hex to large!for ATmega644p"; tput sgr0; exit 1;  fi;
+endif
 	mkdir -p $(MCU_DIR)
 	sudo mv $(TARGET).hex ./$(MCU_DIR)
 

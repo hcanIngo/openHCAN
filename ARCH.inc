@@ -32,3 +32,10 @@ export IP_HI = 192.168.1.42
 # z.B. -DhcanXYZ
 export GLOBAL_DEFINES = 
 ###########################
+
+# Max Hex Size in byte when using the bootloader
+###########################
+MAXSIZE_ATMEGA328P = 28672
+MAXSIZE_ATMEGA32   = 28672
+MAXSIZE_ATMEGA644P = 61440
+###########################

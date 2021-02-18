@@ -2,7 +2,13 @@
 
 	<block type="10" name="taster" size="3">
 		<field datatype="uint8_t" name="port" pos="0" />
-		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="1">
+			<bit no="0" description="Entprellzeit 1s statt 30msec" />
+			<bit no="1" description="Rollladentaster auf" />
+			<bit no="2" description="Rollladentaster zu" />
+			<bit no="3" description="Flankenbetrieb: 1: Nur POWER_GROUP_ON Meldungen senden" />
+			<bit no="4" description="Flankenbetrieb: 2: Nur POWER_GROUP_OFF Meldungen senden" />
+		</field>
 		<field datatype="uint8_t" name="gruppe" pos="2" />
 		Ein Taster-Device kann z.Z. zum Schalten von
 		Powerports (Lampen,Steckdosen) oder Steuern von Roll"aden
@@ -18,7 +24,14 @@
 
 	<block type="11" name="powerport" size="7">
 		<field datatype="uint8_t" name="port" pos="0" />
-		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="1">
+			<bit no="0" description="Impulsausgang (zur Ansteuerung bistabiler Relais)" />
+			<bit no="1" description="Verzoegert ein (z.B. Badzimmerluefter). timer = Nachlaufzeit (max 255 sec)" />
+			<bit no="2" description="Automatisch aus (z.B. Speisekammerluefter, Haustuerklingel, Treppenhausbeleuchtung). timer = Nachlaufzeit (max 255 sec)" />
+			<bit no="3" description="Nachlauf (z.B. Beamersteckdose). timer = Nachlaufzeit (max 255 sec)" />
+			<bit no="4" description="Benoetigt fuer Wecker (weck_page) und frei zu halten." />
+			<bit no="5" description="Benoetigt fuer Wecker (weck_page) und frei zu halten." />
+		</field>
 		<field datatype="uint8_t" name="gruppe0" pos="2" />
 		<field datatype="uint8_t" name="gruppe1" pos="3" />
 		<field datatype="uint8_t" name="gruppe2" pos="4" />
@@ -40,7 +53,9 @@
 	<block type="12" name="rolladen" size="14">
 		<field datatype="uint8_t" name="port_power" pos="0" />
 		<field datatype="uint8_t" name="port_dir" pos="1" />
-		<field datatype="uint8_t" name="taster" pos="2" />
+		<field datatype="uint8_t" name="taster" pos="2">
+			<bit no="0" description="Kalibieren in der Obenlage" />
+		</field>
 		<field datatype="uint8_t" name="dummy" pos="3" />
 		<field datatype="uint8_t" name="feature" pos="4" />
 		<field datatype="uint16_t" name="laufzeit" pos="5" />
@@ -85,7 +100,9 @@
 		<field datatype="uint16_t" name="zeitzone6_temp" pos="23" />
 		<field datatype="uint8_t" name="zeitzone7_id" pos="25" />
 		<field datatype="uint16_t" name="zeitzone7_temp" pos="26" />
-		<field datatype="uint8_t" name="feature" pos="28" />
+		<field datatype="uint8_t" name="feature" pos="28">
+			<bit no="0" description="Doppelter Waermebedarf melden" />
+		</field>
 		<field datatype="uint8_t" name="hysterese" pos="29" />
 		<field datatype="uint8_t" name="reed0" pos="30" />
 		<field datatype="uint8_t" name="reed1" pos="31" />
@@ -162,7 +179,16 @@
 
 	<block type="18" name="zeitzone" size="6">
 		<field datatype="uint8_t" name="gruppe" pos="0" />
-		<field datatype="uint8_t" name="day_pattern" pos="1" />
+		<field datatype="uint8_t" name="day_pattern" pos="1">
+			<bit no="0" description="nicht verwendet" />
+			<bit no="1" description="Montag" />
+			<bit no="2" description="Dienstag" />
+			<bit no="3" description="Mittwoch" />
+			<bit no="4" description="Donnerstag" />
+			<bit no="5" description="Freitag" />
+			<bit no="6" description="Samstag" />
+			<bit no="7" description="Sonntag" />
+		</field>
 		<field datatype="uint8_t" name="from_hour" pos="2" />
 		<field datatype="uint8_t" name="from_minute" pos="3" />
 		<field datatype="uint8_t" name="to_hour" pos="4" />
@@ -252,7 +278,11 @@
 	<block type="23" name="multitaster" size="13">
 		<field datatype="uint8_t" name="poti_gruppe" pos="0" />
 		<field datatype="uint8_t" name="taster_port" pos="1" />
-		<field datatype="uint8_t" name="feature" pos="2" />
+		<field datatype="uint8_t" name="feature" pos="2">
+			<bit no="0" description="Entprellzeit 1s statt 30msec" />
+			<bit no="1" description="Rollladentaster auf" />
+			<bit no="2" description="Rollladentaster zu" />
+		</field>
 		<field datatype="uint8_t" name="gruppe0" pos="3" />
 		<field datatype="uint8_t" name="gruppe1" pos="4" />
 		<field datatype="uint8_t" name="gruppe2" pos="5" />
@@ -288,7 +318,10 @@
 
 	<block type="25" name="schalter" size="3">
 		<field datatype="uint8_t" name="port" pos="0" />
-		<field datatype="uint8_t" name="feature" pos="1" />
+		<field datatype="uint8_t" name="feature" pos="1">
+			<bit no="0" description="Der gelesene Zustand wird invertiert" />
+			<bit no="1" description="Der internen Pullup am port wird deaktiviert" />
+		</field>
 		<field datatype="uint8_t" name="gruppe" pos="2" />
 		Ein Schalter-Device kann z.Z. zum Schalten von
 		Powerports (Lampen,Steckdosen) verwendet werden.

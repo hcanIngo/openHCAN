@@ -8,6 +8,8 @@
 #include <sstream>
 #include <fstream>
 #include <inttypes.h>
+#include <sys/ioctl.h> //ioctl() and TIOCGWINSZ
+#include <unistd.h> // for STDOUT_FILENO
 
 #include <eds_desc.h>
 #include <eds_connection.h>
@@ -67,6 +69,61 @@ void eds_cmd_list(board_connection &bcon, eds_connection &econ, context &c, uint
 	catch (traceable_error &e)
 	{
 		cerr << e.what() << endl;
+	}
+}
+
+void eds_cmd_field_hint(board_connection &bcon, eds_connection &econ,
+		context &c, const string &field)
+{
+	uint16_t adressToList = c.eds_block_address;
+
+	eds_block &block = econ.block_by_address(adressToList);
+
+	for (eds_block_fields_t::const_iterator i =
+			block.fields().begin(); i != block.fields().end(); i++)
+	{
+		if(i->name != field) continue;
+		if(i->bits.size() != 0)
+		{
+			signed vorlauf = 6;
+			vorlauf += block.type_name().length();
+			vorlauf += (std::to_string(c.eds_block_address)).length();
+
+			struct winsize size;
+			ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
+			signed windowWidth = size.ws_col;
+			signed noOfBits = i->bits.size()-1;
+
+			for (signed j = noOfBits; j >= 0; j--)
+			{
+				cout << "# bit " << j << "   ";
+
+				for (signed k = 0; k < vorlauf; k++) cout << " ";
+				for (unsigned k = 0; k < i->name.length(); k++) cout << " ";
+				for (signed k = 0; k < 8-noOfBits; k++) cout << " ";
+				for (signed k = noOfBits; k >= j; k--) cout << "|";
+				for (signed k = 0; k < 2+j; k++) cout << "-";
+
+				std::string description = (std::string)i->bits[j].description;
+				if(description.length() >= (unsigned)(windowWidth-28))
+				{
+					description = description.substr (0,windowWidth-29-3) + "...";
+				}
+				cout << " " << description << endl;
+			}
+
+			cout << "# " << i->datatype;
+			for (signed k = 0; k < vorlauf-1; k++) cout << " ";
+			cout << i->name << " ";
+			uint16_t no = (uint16_t)block.field(i->name);
+			std::string binary = "0b";
+			for(int i = 7; i >= 0; i--)
+			{
+				if(no & (1<<i)) binary += "1";
+				else binary += "0";
+			}
+			cout << binary << " (" << (uint16_t)block.field(i->name) << ")" << endl;
+		}
 	}
 }
 
@@ -152,7 +209,38 @@ void eds_cmd_set_field(board_connection &bcon, eds_connection &econ,
 		{
 			istringstream ss(value);
 			int v;
-			ss >> v;
+			if(value.rfind("0b", 0) == 0 && value.length() == 10)
+			{
+				string bitvalue = value.substr (2,8);
+				v = 0;
+
+				for(int i = 0; i < 8; i++)
+				{
+					if (bitvalue.substr (7-i,1)  == "1")
+					{
+						v |= (1<<i);
+					}
+					else if (bitvalue.substr (7-i,1)  == "0")
+					{
+						v &= ~(1<<i);
+					}
+					else
+					{
+						cout << "Error: bei binaerer Eingaben ist nur 0 und 1 erlaubt!" << endl;
+						return;
+					}
+				}
+			}
+			else if ((value.rfind("0b", 0) == 0 && value.length() != 10) ||
+					value.find("b") != std::string::npos || value.find("B") != std::string::npos)
+			{
+				cout << "Error: Binaere Eingaben wird als 0b00000000 erwartet!" << endl;
+				return;
+			}
+			else
+			{
+				 ss >> v;
+			}
 			block.set_field_uint8(key, (uint8_t) v);
 		}
 		else
@@ -279,6 +367,14 @@ bool eds_exec_cmd(board_connection &bcon, eds_connection &econ,
 		return true;
 	}
 
+	if ((s == "hint") && (c.mode == context::edit))
+	{
+		sin >> s;
+
+		eds_cmd_field_hint(bcon, econ, c, s);
+		return true;
+	}
+
 	if (c.mode == context::edit)
 	{
 		if (s == "set")
@@ -312,6 +408,7 @@ bool eds_show_help ()
 		"	print <n>             EDS: Zeigt die Felder des Blocks <n> an\n" <<
 		"	edit <n>              EDS: Editiert den Block <n>\n" <<
 		"	set <field> <v>       EDS: Setzt das Feld <field> auf den Wert <v>\n" <<
+		"	hint <field>          EDS: Gibt erleuternde Infos fuer das Feld <field> aus, soweit vorhanden\n" <<
 		"	create <blocktype>    EDS: Legt einen neuen Block an\n" <<
 		"	delete <n>            EDS: Loescht den mit <n> spez. Block\n" <<
 		"	defragment            EDS: Defragmentiert das EEPROM\n" <<

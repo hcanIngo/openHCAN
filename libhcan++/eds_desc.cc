@@ -66,9 +66,25 @@ vector < eds_block_desc_t > eds_get_block_descriptions()
 							size = glib_ustring2uint16(field_e->
 									get_attribute("size")->get_value());
 						}
+						Node::NodeList nlbits = field_e->get_children();
+						vector <eds_block_field_bit_desc_t> bits;
+						if(nlbits.size() != 0)
+						{
+							for (Node::NodeList::const_iterator bit = nlbits.begin(); bit != nlbits.end(); bit++)
+							{
+								const Element *field_e2= (const Element *)(*bit);
+								assert(field_e2);
+								if ( field_e2->get_name() == "bit")
+								{
+									const uint8_t no = glib_ustring2uint16(field_e2->get_attribute("no")->get_value());
+									const string description = field_e2->get_attribute("description")->get_value();
+									bits.push_back(eds_block_field_bit_desc_t(no, description));
+								}
+							}
+						}
 
 						block.fields.push_back(eds_block_field_desc_t(
-									datatype, name, pos,size));
+									datatype, name, pos, bits, size));
 
 					}
 				}

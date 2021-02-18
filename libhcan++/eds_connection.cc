@@ -1,4 +1,5 @@
 #include <eds_connection.h>
+#include <eds_validation.h>
 #include <board_connection.h>
 #include <transport_connection.h>
 #include <iostream>
@@ -307,6 +308,14 @@ eds_connection::eds_connection(board_connection &bcon) :
 	m_bcon(bcon),
 	m_tcon(m_bcon.tcon())
 {
+	try
+	{
+		eds_check_block_descriptions();
+	}
+	catch (traceable_error &e)
+	{
+		cerr << COLOR_ERROR << "ERROR:" << COLOR_ERROR_RED << " " << e.what() << COLOR_NORMAL <<endl;
+	}
 	update();
 }
 

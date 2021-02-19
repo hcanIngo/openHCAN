@@ -60,8 +60,12 @@ void heizung_init(device_data_heizung *p, eds_block_p it)
  */
 void heizung_update_heizstop(device_data_heizung *p)
 {
-	canix_syslog_P(SYSLOG_PRIO_DEBUG,
-			PSTR("Heizstop aktiv (id=%d)"), p->config.id);
+	//Heizstoppmeldungen nur jede Minute verschicken. Aber nicht für alle Heizungen gleichzeitig
+	if(canix_rtc_clock.second == (p->config.id & 0x3b))
+	{
+		canix_syslog_P(SYSLOG_PRIO_DEBUG,
+				PSTR("Heizstop aktiv (id=%d)"), p->config.id);
+	}
 
 	// Heizung ganz ausschalten
 	p->pwm_end = p->config.pwm_periode;

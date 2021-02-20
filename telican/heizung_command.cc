@@ -278,6 +278,14 @@ bool heizung_command::exec(const string &line)
 					HCAN_MULTICAST_CONTROL,id,hi,lo,dauer>>8,dauer);
 			return true;
 		}
+
+		// Jede Eingaben die oben nicht abgefangen wird, ist offensichtlich falsch -> Fehlermeldung
+		boost::regex re11("^heizung(.*)?$");
+		if (boost::regex_match(line.c_str(), matches, re11))
+		{
+			cerr << "Error: Command not understood." << endl;
+		}
+
 	}
 	catch (traceable_error &e)
 	{

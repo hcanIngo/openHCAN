@@ -23,7 +23,7 @@
 #define HISTFILE ".telican-control-history"
 
 
-void control_mode(const in_addr_t &hcand_ip)
+void control_mode(const in_addr_t &hcand_ip, string &installationFileXML)
 {
 	// History laden
 	char *home_env = getenv("HOME");
@@ -32,16 +32,33 @@ void control_mode(const in_addr_t &hcand_ip)
 		histfile = string(home_env) + "/" + HISTFILE;
 	readlinepp::history history(histfile);
 
-	try
+	if(installationFileXML == "")
 	{
-		// HCAN Installation laden (Singleton!)
-		global_installation_data.load(INSTALLATION_XML);
+		try
+		{
+			// HCAN Installation laden (Singleton!)
+			global_installation_data.load(INSTALLATION_XML);
+		}
+		catch (std::exception &e)
+		{
+			cout << "cannot enter telican control mode:" << endl;
+			cout << "error while loading " << INSTALLATION_XML << endl;
+			return;
+		}
 	}
-	catch (std::exception &e)
+	else
 	{
-		cout << "cannot enter telican control mode:" << endl;
-		cout << "error while loading " << INSTALLATION_XML << endl;
-		return;
+		try
+		{
+			// HCAN Installation laden (Singleton!)
+			global_installation_data.load(installationFileXML);
+		}
+		catch (std::exception &e)
+		{
+			cout << "cannot enter telican control mode:" << endl;
+			cout << "error while loading " << installationFileXML << endl;
+			return;
+		}
 	}
 
 	// HCAN Zugriff vorbereiten

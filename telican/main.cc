@@ -36,6 +36,7 @@ namespace po = boost::program_options;
 using namespace std;
 
 in_addr_t hcand_ip;
+string installationFileXML = "";
 
 vector<string> parse_command_list(const string &commands)
 {
@@ -162,6 +163,11 @@ void handle_given_options (const po::parsed_options &options,
 	{
 		cerr << option_desc << "\n";
 		exit(1);
+	}
+
+	if (map.count("xml"))
+	{
+		installationFileXML = map["xml"].as<string>();
 	}
 
 	if (getenv("HCAND_ADDRESS"))
@@ -474,7 +480,7 @@ void handle_given_options (const po::parsed_options &options,
 	// wenn kein Modus mehr uebrigbleibt, dann ist es
 	// der Control-Modus
 
-	control_mode(hcand_ip);
+	control_mode(hcand_ip, installationFileXML);
 }
 
 int main (int argc, char *argv[])
@@ -487,6 +493,7 @@ int main (int argc, char *argv[])
 
 		options.add_options()
 			("help,h", "shows the available options")
+			("xml,x", po::value<string>(), "load another installation xml")
 			("ip-address,a", po::value<string>(),  "IP adress of hcand (default 127.0.0.1)")
 			("dump,d", "dump mode; dump all messages")
 			("dump-no-syslog,D", "dump mode; dump all messages; exept of syslog messages")

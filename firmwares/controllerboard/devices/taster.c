@@ -74,7 +74,7 @@ inline void taster_timer_handler(device_data_taster *p, uint8_t zyklus)
 	}
 
 	if (p->config.feature & (1<<FEATURE_TASTER_ENTPRELL_1S))
-		time = 100;
+		time = 6;
 	else
 		time = 3;
 

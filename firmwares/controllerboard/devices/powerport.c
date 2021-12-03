@@ -51,7 +51,7 @@ void set_powerport_or_timer(device_data_powerport *p, uint8_t Flanke)
 		{
 			powerport_setup_timer(p); // neu laden -> Timer aktiv
 		}
-	else
+		else
 		{
 			powerport_on(p); // sofort einschalten
 			p->countDownTimer = 0; // Timer aus
@@ -61,9 +61,9 @@ void set_powerport_or_timer(device_data_powerport *p, uint8_t Flanke)
 	{
 		if ( p->config.feature & (1<<POWERPORT_FEATURE_NACHLAUF) )
 		{
-			powerport_setup_timer(p); //neu laden -> Timer aktiv
+			powerport_setup_timer(p); // neu laden -> Timer aktiv
 		}
-	else
+		else
 		{
 			powerport_off(p); // sofort ausschalten
 			p->countDownTimer = 0; // Timer aus
@@ -302,7 +302,15 @@ void powerport_can_callback(device_data_powerport *p, const canix_frame *frame)
 		if (HCAN_HES_MUTE_OFF == frame->data[1])
 			p->mute = 0; // Powerport aktiv
 		else if (HCAN_HES_MUTE_ON == frame->data[1])
+		{
 			p->mute = 1; // Powerport passiv (per Taster nicht aenderbar)
+
+			if ( p->config.feature & (1<<POWERPORT_FEATURE_NACHLAUF) // Nachlauf konfiguriert?
+			&& (0 == p->countDownTimer)) // ist der Timer aus?
+			{
+				powerport_setup_timer(p); // neu laden -> Timer aktiv (immer abschalten nach Zeitablauf)
+			}
+		}
 	}
 }
 

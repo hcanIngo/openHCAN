@@ -4,6 +4,8 @@ https://dl.armbian.com/bananapi/nightly/  Armbian_5.34.171121_Bananapi_Debian_st
 ---
 SD-Card vorbereiten: 
 sudo dd if=/home/ingo/Downloads/Armbian_5.34.171121_Bananapi_Debian_stretch_next_4.13.14.img of=/dev/mmcblk0 bs=1M && sync
+
+sudo dd if=/home/il/Downloads/Armbian_21.08.1_Bananapi_bullseye_current_5.10.60.img of=/dev/mmcblk0p1 bs=1M && sync
 ---
 default user=root passwd=1234
 ssh root@bananapi
@@ -27,3 +29,18 @@ sudo ntpdate -u de.pool.ntp.org
 ---
 Manuell:
 sudo date 11172013
+
+
+
+__________________________
+SD-Card clonen:
+1.        Zu clonende SD-Karte einlegen
+2.        sudo fdisk -l   oder  gparted  um  /dev/mmcblk0p1  zu finden
+3.        sudo umount /dev/mmcblk0p1
+4. SAVE:  sudo dd if=/dev/mmcblk0p1 of=~/hcanArmBian_5_34.img bs=1M status=progress && sync
+
+5.        Neue SD-Karte einlegen und 2. und 3. durchfuehren  
+6. CLONE: sudo dd if=~/hcanArmBian_5_34.img of=/dev/mmcblk0p1 bs=1M status=progress && sync
+---
+mit gepartet von sd zu sd kopiert:  4 vorne frei gelassen  -> bootet :) aber upgrade klappt nicht.
+__________________________

@@ -1,7 +1,7 @@
 # Systemd
-CONF = /home/ingo/Dropbox/HCAN/HI_SERVER/openhab2_conf_mqtt
+CONF = /home/il/Dropbox/HCAN/HI_SERVER/openhab2_conf_mqtt
 include $(CONF)/myconf.inc	
-ZIEL_PC = bananapi
+ZIEL_PC = bpi # bananapi
 ZIEL_USER = tt
 
 SERVICE = hcan
@@ -13,7 +13,7 @@ SCP_ZIEL_DIR = $(ZIEL_USER)@$(ZIEL_PC):/home/$(ZIEL_USER)
 
 all:
 	make 1_installMosq
-	make 2_canDToverlay
+	make 2_canDToverlay # Device-Tree-patchen
 	make testCan
 	make 3_ipLinkSet_CAN__Persistent
 	make pwMosq_1
@@ -26,8 +26,9 @@ all:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo apt-get install mosquitto
 
 2_canDToverlay:
-	$(_SCP) ./armbianEnv.txt $(ZIEL_USER)@$(ZIEL_PC):/boot/armbianEnv.txt
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo reboot
+	armbian-add-overlay sun7i-a20-can.dts
+	#$(_SCP) ./armbianEnv.txt $(ZIEL_USER)@$(ZIEL_PC):/boot/armbianEnv.txt
+	#$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo reboot
 	@# https://docs.armbian.com/User-Guide_Allwinner_overlays/ 
 	@# /boot/dtb/overlay/README.sun7i-a20-overlays,  /boot/dtb/overlay/sun7i-a20-can.dtbo
 	@# 1. overlays=can   in  /boot/armbianEnv.txt  einfuegen
@@ -47,12 +48,12 @@ all:
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) cd openHCAN; sudo make strukturen xx="sudo make clean"; make cDienste xx="sudo make clean"; make cppDienste xx="sudo make clean"
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) cd openHCAN; sudo make strukturen xx="make all"; make cDienste xx="make all"; make cppDienste xx="make all"	
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) cd openHCAN; sudo make strukturen xx="make install"; make cDienste xx="make install"; make cppDienste xx="make install"
-	make autostart
+	make autostartHcanDienste
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo apt-get update	
 	
 5_audio:
 	@# https://forum.armbian.com/index.php?/topic/1960-guide-configuring-orange-pi-pc-for-analog-line-out-jack-audio-output-and-simultaneous-hdmi-output-with-software-mixing/
-	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo sudo apt-get install mplayer
+	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo apt-get install mplayer
 
 pwMosq_1: 
 	# siehe:  http://www.steves-internet-guide.com/mqtt-username-password-example/
@@ -72,7 +73,7 @@ testCan:
 	@echo -- sun4i_can meldet sich? --
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) sudo modinfo sun4i_can
 	@echo ----------------------------
-	@echo -- can0 aufgelistet?  - falls nicht: Device-Tree-patchen --
+	@echo -- can0 aufgelistet?  - falls nicht: Device-Tree-patchen (2_canDToverlay) --
 	$(_SSH) $(ZIEL_USER)@$(ZIEL_PC) ip link
 
 testMosq: 

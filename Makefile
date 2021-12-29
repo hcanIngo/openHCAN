@@ -53,6 +53,7 @@ install:
 	make strukturen xx="sudo make install"
 	make cDienste xx="sudo make install"
 	make cppDienste xx="sudo make install"
+	sudo chmod +x ./pi/Systemd/installBpi.sh
 	##############################################################################
 	# Nun kann die Firmware geladen werden (Bootloader flashen, Firmware loaden) #
 	##############################################################################
@@ -73,6 +74,7 @@ cDienste:
 	cd hcanaddressd; $(xx)
 	cd hcansocketd; $(xx)
 	cd hcan4mqttpc; $(xx)
+	cd hcan4mqttha; $(xx)
 
 cppDienste:	
 	cd libhcan++; $(xx)

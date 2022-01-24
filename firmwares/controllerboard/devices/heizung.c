@@ -701,7 +701,8 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			{
 				answer.data[1] = HCAN_HES_HEIZUNG_CONFIG_REPLAY;
 				answer.data[2] = p->config.id;
-				answer.size = 3;
+				answer.data[3] = p->config.sensor_id;
+				answer.size = 4;
 				canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 			}
 			break;

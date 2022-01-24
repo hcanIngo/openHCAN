@@ -649,6 +649,7 @@
 				description="Antwort auf HEIZUNG_CONFIG_RQ.
 				==hcan4mqttha== " >
 				<param pos="0" name="gruppe" description="Gruppe" />
+				<param pos="1" name="sensor_id" description="ID des der Heizung zugeordneten Temperatursensors" />
 			</message>			
 			
 			<message name="WS2812B_CONFIG_RQ" id="87"

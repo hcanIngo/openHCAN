@@ -63,6 +63,10 @@ pwMosq_2() {
 	sudo mv /home/$ZIEL_USER/mosquitto_pw.conf /etc/mosquitto/conf.d/
 	# Kontrolle
 	less /etc/mosquitto/conf.d/mosquitto_pw.conf
+	#
+	# https://stackoverflow.com/questions/65278648/mosquitto-starting-in-local-only-mode:
+	# sudo echo "listener 1883" >> /etc/mosquitto/mosquitto.conf
+    # sudo echo "allow_anonymous true" >> /etc/mosquitto/mosquitto.conf
 }
 
 testCan() {
@@ -103,6 +107,11 @@ showKernelVersion() {
 autostartHcanDienste() {
 	ZIEL_USER=$1
 	SERVICE=$2 # hcan
+	
+	test -d /etc/hcan || sudo mkdir /etc/hcan
+	cp /home/$ZIEL_USER/installation.xml /etc/hcan/
+	sudo chown tt /etc/hcan/installation.xml
+	
 	echo "-- Systemd-Autostart --"
 	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/startHcanDienste.sh /home/$ZIEL_USER
 	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/$SERVICE.service /home/$ZIEL_USER

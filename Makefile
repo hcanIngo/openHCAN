@@ -74,7 +74,7 @@ cDienste:
 	cd hcanaddressd; $(xx)
 	cd hcansocketd; $(xx)
 	cd hcan4mqttpc; $(xx)
-#	cd hcan4mqttha; $(xx)
+	cd hcan4mqttha; $(xx)
 
 cppDienste:	
 	cd libhcan++; $(xx)

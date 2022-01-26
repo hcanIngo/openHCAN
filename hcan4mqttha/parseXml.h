@@ -54,7 +54,7 @@ extern char stt[lenStt];
 
 #define lenFilename 256
 extern char filenameInstallationXml[lenFilename];
-#define INSTALLATION_XML "./installation.xml" // "/etc/hcan/installation.xml"
+#define INSTALLATION_XML "/etc/hcan/installation.xml" // "./installation.xml"
 
 extern bool getXmlDatenZurId(unsigned char id);
 

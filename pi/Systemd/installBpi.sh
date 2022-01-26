@@ -120,7 +120,7 @@ autostartHcanDienste() {
 	#
 	# Auf dem Bananapi verschieben + Anpassung der Rechte
 	sudo chmod a+x /home/$ZIEL_USER/startHcanDienste.sh
-	sudo mv ./$SERVICE.service /etc/systemd/system/$SERVICE.service	
+	sudo cp ./$SERVICE.service /etc/systemd/system/$SERVICE.service	
 	start hcan
 	#
 	# Symbolischen Link fuer Autostart beim Booten: 

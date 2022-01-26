@@ -1,0 +1,8 @@
+{
+	"~": "hc/switch/id",
+	"name": "id",
+	"cmd_t": "~/<--/set",
+	"stat_t": "~/-->/state",
+	"payload_on": "ON",
+	"payload_off": "OFF"
+}

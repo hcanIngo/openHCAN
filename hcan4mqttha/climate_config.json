@@ -1,0 +1,21 @@
+{
+	"~": "hc/climate/id",
+	"name": "id",
+	"mode_cmd_t": "~/<--/thermostatModeCmd",
+	"mode_stat_t": "~/-->/state",
+	"mode_stat_tpl": "{{'auto' if value_json.mode == 'auto' else 'heat' if value_json.mode == 'heat' else 'cool' if value_json.mode == 'cool' else 'off'}}",
+	"temp_cmd_t": "~/<--/targetTempCmd",
+	"temp_stat_t": "~/-->/state",
+	"temp_stat_tpl": "{{value_json.target_temp}}",
+	"curr_temp_t": "~/-->/state",
+	"curr_temp_tpl": "{{value_json.current_temp}}",
+	"min_temp": "10",
+	"max_temp": "25",
+	"temp_step": "0.5",
+	"modes": [
+		"off",
+		"cool",
+		"heat",
+		"auto"
+	]
+}

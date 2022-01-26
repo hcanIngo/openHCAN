@@ -1,0 +1,8 @@
+{
+	"~": "hc/cover/id",
+	"name": "id",
+	"cmd_t": "~/<--/set",
+	"stat_t": "~/-->/state",
+	"dev_cla": "shutter",
+	"value_template": "{{ value_json.state }}"
+}

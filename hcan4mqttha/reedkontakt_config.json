@@ -1,0 +1,10 @@
+{
+	"~": "hc/binary_sensor/id",
+	"name": "id",
+	"stat_t": "~/-->/state",
+	"payload_on": "OPEN",
+	"payload_off": "CLOSE",
+	"qos": "0",
+	"dev_cla": "opening",
+	"value_template": "{{ value_json.state }}"
+}

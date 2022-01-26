@@ -1,0 +1,8 @@
+{
+	"~": "hc/sensor/id",
+	"name": "id",
+	"dev_cla": "temperature",
+	"stat_t": "~/-->/state",
+	"unit_of_measurement": "°C",
+	"value_template": "{{value_json.temperature}}"
+}

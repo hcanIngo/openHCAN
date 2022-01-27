@@ -5,5 +5,5 @@ echo Starte die HCAN-Dienste
 /usr/sbin/hcanaddressd & 
 /usr/sbin/hcansocketd &
 /usr/bin/telican --timed &
-/usr/sbin/hcan4mqttha &
+/usr/bin/hcan4mqttha &
 

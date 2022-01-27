@@ -173,7 +173,7 @@ int main(int argc, char ** argv)
 
     openlog("hcan4mqttha", LOG_CONS|LOG_NDELAY|LOG_PERROR|LOG_PID, LOG_LOCAL7);
 
-    printf("hcan4mqttha erwartet: %s\n", filenameInstallationXml);
+    syslog(LOG_INFO, "hcan4mqttha gestartet. Erwarte: %s", filenameInstallationXml);
 
     initMqtt(brokerHost_ip); // initMqtt() -> transport_open()
 
@@ -220,7 +220,8 @@ int main(int argc, char ** argv)
     	if (!RQSmsgSent && (time(NULL) > (secsAtStart + timeoutSecs)))
     	{
     		createReqMsg4cb("RQS"); // "RQS": Nachricht "HCAN_HES_DEVICES_CONFIGS_REQUEST" an den CAN-Bus
-    		printf("\n\nRQS msg sent.\n\n");
+    		TRACE("\nRQS msg sent.\n");
+    		syslog(LOG_INFO, "RQS msg sent.");
     		RQSmsgSent = true;
     	}
 

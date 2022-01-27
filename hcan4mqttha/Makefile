@@ -34,8 +34,8 @@ clean:
 	rm -fR ./scanBuild
 
 install:
-	strip $(TARGET)
-	sudo install $(TARGET) /usr/sbin
+	#strip $(TARGET)
+	sudo install $(TARGET) /usr/bin
 	
 run: 
 	$(TARGET) -D

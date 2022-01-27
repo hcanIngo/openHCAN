@@ -108,17 +108,18 @@ autostartHcanDienste() {
 	ZIEL_USER=$1
 	SERVICE=$2 # hcan
 	
-	test -d /etc/hcan || sudo mkdir /etc/hcan
-	cp /home/$ZIEL_USER/installation.xml /etc/hcan/
-	sudo chown tt /etc/hcan/installation.xml
-	
-	echo "-- Systemd-Autostart --"
-	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/startHcanDienste.sh /home/$ZIEL_USER
-	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/$SERVICE.service /home/$ZIEL_USER
+	echo "-- HCAN Systemd-Autostart --"
+	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/startHcanDienste.sh /home/$ZIEL_USER/startHcanDienste.sh
+	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/$SERVICE.service /home/$ZIEL_USER/$SERVICE.service
 	#
 	# stop
 	#
 	# Auf dem Bananapi verschieben + Anpassung der Rechte
+	test -d /etc/hcan || sudo mkdir /etc/hcan
+	sudo chown tt /etc/hcan
+	sudo cp /home/$ZIEL_USER/installation.xml /etc/hcan/installation.xml
+	sudo chown tt /etc/hcan/installation.xml
+	#
 	sudo chmod a+x /home/$ZIEL_USER/startHcanDienste.sh
 	sudo cp ./$SERVICE.service /etc/systemd/system/$SERVICE.service	
 	start hcan

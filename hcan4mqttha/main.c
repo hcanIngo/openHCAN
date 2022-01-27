@@ -21,6 +21,7 @@
 #include <fcntl.h>
 #include <libgen.h> // basename
 #include <sys/ioctl.h> // ioctl
+#include <time.h>
 
 #include <linux/can.h>
 #include "../hcan4mqttha/mqttClient.h"
@@ -200,12 +201,7 @@ int main(int argc, char ** argv)
 
 
     initMqttHcan();
-    /* "RQ": Nachricht "HES_DEVICE_STATES_REQUEST" an den CAN-Bus
-
-       Mit Empfang von "HCAN_HES_DEVICE_STATES_REQUEST"
-       senden alle Controllerboards alle ihre konfigurierten
-       Lampen-, Sonstige-, Rolladen-, Heizungs- Zustaende. */
-    createReqMsg4cb("RQ");
+    createReqMsg4cb("RQC"); // "RQC": Nachricht "HCAN_HES_DEVICE_STATES_REQUEST" an den CAN-Bus
 
     fd_set recv_fdset;
     fd_set send_fdset;
@@ -215,9 +211,20 @@ int main(int argc, char ** argv)
     if(sock_can > max_fd)
         max_fd = sock_can;
 
+    time_t secsAtStart = time(NULL);
+    time_t timeoutSecs = 120; // 2 minuten
+    bool RQSmsgSent = false;
+
     while (1)
     {
-        timeout.tv_sec = 2;
+    	if (!RQSmsgSent && (time(NULL) > (secsAtStart + timeoutSecs)))
+    	{
+    		createReqMsg4cb("RQS"); // "RQS": Nachricht "HCAN_HES_DEVICES_CONFIGS_REQUEST" an den CAN-Bus
+    		printf("\n\nRQS msg sent.\n\n");
+    		RQSmsgSent = true;
+    	}
+
+    	timeout.tv_sec = 2;
         timeout.tv_usec = 500000;
         FD_ZERO(&recv_fdset);
         FD_ZERO(&send_fdset);

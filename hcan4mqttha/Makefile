@@ -20,6 +20,8 @@ CFLAGS += -I/usr/include/libxml2 # fuer libxml2
 CFLAGS += -L/usr/include/        # fuer libxml2
 # alternativ: CFLAGS += $(shell xml2-config --cflags) $(shell xml2-config --libs)
 
+# CFLAGS += -DDEBUG # ermoeglicht das Aktivieren der Debug-Ausgaben (per hcan4mqttha -D oder -T) 
+
 
 # LDFLAGS = -lasan # Speicherzugriffsfehler ermitteln 
 LDFLAGS = -ljson-c -lxml2

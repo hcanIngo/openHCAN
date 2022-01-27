@@ -176,18 +176,23 @@ static int prepareReqMsg4cb (char * msg, struct can_frame * msg4cb)
 
 	TRACE("prepareReqMsg4cb token=%s\n", token);
 
-	if (is(token, "RQH")) // Heizungs-Details Request
+	if (is(token, "RQC")) // Request Devices-Configs
+	{
+		msg4cb->data[1] = HCAN_HES_DEVICES_CONFIGS_REQUEST;
+		rtnCanMsgLen = 2;
+	}
+	else if (is(token, "RQS")) // Request Device-States
+	{
+		msg4cb->data[1] = HCAN_HES_DEVICE_STATES_REQUEST;
+		rtnCanMsgLen = 2;
+	}
+	else if (is(token, "RQH")) // Heizungs-Details Request
 	{
 		token = strtok(NULL, "/"); if(NULL == token) return -19;
 		msg4cb->data[2] = atoi(token); // Gruppe
 
 		msg4cb->data[1] = HCAN_HES_HEIZUNG_DETAILS_REQUEST; // --> Antwort vom CAN-Bus: HCAN_HES_HEIZUNG_MODE_THERMOSTAT_DETAILS
 		rtnCanMsgLen = 3; // Anzahl der Daten-Bytes des Frames
-	}
-	else if (is(token, "RQ")) // Request Devices-Configs
-	{
-		msg4cb->data[1] = HCAN_HES_DEVICES_CONFIGS_REQUEST;
-		rtnCanMsgLen = 2;
 	}
 	// else: s.o.
 

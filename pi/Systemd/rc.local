@@ -12,11 +12,11 @@
 # By default this script does nothing.
 
 /bin/ip link set can0 up type can bitrate 125000
-systemctl stop openhab
+#systemctl stop openhab
 systemctl stop hcan
 sleep 10
 systemctl start hcan
-systemctl start openhab
+#systemctl start openhab
 
 exit 0
 

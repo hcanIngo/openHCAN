@@ -34,8 +34,9 @@ clean:
 	rm -fR ./scanBuild
 
 install:
-	#strip $(TARGET)
+	strip $(TARGET)
 	sudo install $(TARGET) /usr/bin
+	sudo cp ./*_config.json /etc/hcan
 	
 run: 
 	$(TARGET) -D

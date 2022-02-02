@@ -24,6 +24,7 @@
 #include <json-c/json.h>
 #include "../hcan4mqttha/mqttClient.h"
 #include "../hcan4mqttha/parseXml.h"
+#define PATH_TO_JSON_FILES "/etc/hcan/"
 
 typedef enum eDev       {    eLight = 0,  eSwitch = 1,  eClimate = 2,  eTempsensor = 3,  eReedkontakt = 4,  eCover = 5,  eAnzDev = 6 } teDev;
 char* strDevName[]    = {    "light",     "switch",     "climate",     "tempsensor",     "reedkontakt",     "cover"                  }; // Teil-Dateiname
@@ -343,7 +344,7 @@ static size_t erzeugeConfigTopicUndPayload(teDev eDev, unsigned char id, char * 
 
 
 	char strDateiname[40];
-	snprintf(strDateiname, sizeof strDateiname, "%s_config.json", strDevName[eDev]);
+	snprintf(strDateiname, sizeof strDateiname, "%s%s_config.json", PATH_TO_JSON_FILES, strDevName[eDev]);
 	FILE *fp = fopen(strDateiname, "r");
 	fread(strPayload, dStrLen, 1, fp);
 	fclose(fp);

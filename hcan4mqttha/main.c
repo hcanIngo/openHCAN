@@ -17,16 +17,18 @@
  *
  *  (c) 2022 Ingo Lages, i dot Lages (at) gmx (dot) de
  */
-#include <syslog.h>
 #include <fcntl.h>
 #include <libgen.h> // basename
 #include <sys/ioctl.h> // ioctl
-#include <time.h>
 
 #include <linux/can.h>
 #include "../hcan4mqttha/mqttClient.h"
 #include "../hcan4mqttha/mqttHcan.h" // msgOfInterest
 #include "../hcan4mqttha/parseXml.h"
+
+time_t secsAtStart;
+bool sendMsgRQC = false;
+bool sendMsgRQS = false;
 
 int sock_mqtt = INVALID_SOCKET;
 int sock_can = INVALID_SOCKET;
@@ -201,7 +203,6 @@ int main(int argc, char ** argv)
 
 
     initMqttHcan();
-    createReqMsg4cb("RQC"); // "RQC": Nachricht "HCAN_HES_DEVICE_STATES_REQUEST" an den CAN-Bus
 
     fd_set recv_fdset;
     fd_set send_fdset;
@@ -211,18 +212,29 @@ int main(int argc, char ** argv)
     if(sock_can > max_fd)
         max_fd = sock_can;
 
-    time_t secsAtStart = time(NULL);
-    time_t timeoutSecs = 120; // 2 minuten
-    bool RQSmsgSent = false;
+    secsAtStart = time(NULL);
+    sendMsgRQC = true;           // bei hcan4mqttha-Start einmal sofort die configs an HA senden
+    time_t timeoutSecsRQC = 0;   // bei hcan4mqttha-Start einmal sofort die configs an HA senden
+    time_t timeoutSecsRQS = 120; // 2 Minuten
+
 
     while (1)
     {
-    	if (!RQSmsgSent && (time(NULL) > (secsAtStart + timeoutSecs)))
+    	if (sendMsgRQC && (time(NULL) > (secsAtStart + timeoutSecsRQC)))
     	{
-    		createReqMsg4cb("RQS"); // "RQS": Nachricht "HCAN_HES_DEVICES_CONFIGS_REQUEST" an den CAN-Bus
+    		createReqMsg4cb("RQC"); // "RQC": Nachricht "HCAN_HES_DEVICES_CONFIGS_REQUEST" an den CAN-Bus
+    		TRACE("\nRQC msg sent.\n");
+    		syslog(LOG_INFO, "RQC msg sent.");
+    		sendMsgRQC = false;
+    		sendMsgRQS = true;
+    		timeoutSecsRQC = 600; // 10 Minuten (falls HA nicht online)
+    	}
+    	else if (sendMsgRQS && (time(NULL) > (secsAtStart + timeoutSecsRQS)))
+    	{
+    		createReqMsg4cb("RQS"); // "RQS": Nachricht "HCAN_HES_DEVICE_STATES_REQUEST" an den CAN-Bus
     		TRACE("\nRQS msg sent.\n");
     		syslog(LOG_INFO, "RQS msg sent.");
-    		RQSmsgSent = true;
+    		sendMsgRQS = false;
     	}
 
     	timeout.tv_sec = 2;

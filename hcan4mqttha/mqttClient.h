@@ -20,6 +20,7 @@
 #ifndef MQTTCLIENT_H_
 #define MQTTCLIENT_H_
 
+#include <time.h>
 #include <inttypes.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -55,6 +56,10 @@ extern uint8_t mqttBufWIdx;
 extern uint8_t mqttBufRIdx;
 extern uint8_t debug;
 extern uint8_t debugWay;
+extern time_t secsAtStart;
+extern bool sendMsgRQC;
+extern bool sendMsgRQS;
+
 
 #ifdef DEBUG
 #define TRACE(...) do { if(debug) printf(__VA_ARGS__); } while (0)

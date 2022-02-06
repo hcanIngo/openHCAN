@@ -22,15 +22,10 @@
 
 #define dStrLen 4000
 
+
 #include "../include/hcan-def.h"
 
-/*
- * mqttHcan:
- * - Filterung auf nur gewuenscht hcan-Nachrichten
- * - Formatierung der zum Broker versendeten Nachrichten
- * */
-
-
+#include <syslog.h>
 #include <inttypes.h>
 #include <stdlib.h>
 #include <stdint.h>

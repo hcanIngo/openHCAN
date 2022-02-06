@@ -343,9 +343,15 @@ static size_t erzeugeConfigTopicUndPayload(teDev eDev, unsigned char id, char * 
 	if ((eLight == eDev) && dev[id].sonstige) eDev = eSwitch; // eSwitch verwenden (dev[id].sonstige wurde in getXmlDatenZurId() ermittelt)
 
 
-	char strDateiname[40];
+	char strDateiname[125];
 	snprintf(strDateiname, sizeof strDateiname, "%s%s_config.json", PATH_TO_JSON_FILES, strDevName[eDev]);
 	FILE *fp = fopen(strDateiname, "r");
+	if (!fp) // json-Datei dort nicht vorhanden?
+	{
+		syslog(LOG_ERR, "\nFehler: %s NICHT gefunden! \n", strDateiname);
+		TRACE("\nFehler: %s NICHT gefunden! \n", strDateiname);
+		exit (1);
+	}
 	fread(strPayload, dStrLen, 1, fp);
 	fclose(fp);
 	struct json_object *jPayload = json_tokener_parse(strPayload);
@@ -403,7 +409,7 @@ size_t catHesTopic4Broker(char * strTopic, char * strPayload, const struct can_f
 			return erzeugeConfigTopicUndPayload(eLight,  cf->data[2], strTopic, strPayload);
 
 		case HCAN_HES_POWER_GROUP_STATE_REPLAY:
-		case HCAN_HES_POWER_GROUP_STATE_INFO: // TODO \"dev_cla\": \"motion\"  fuer Bewegungsmelder-switch     siehe https://www.home-assistant.io/integrations/cover#device-class
+		case HCAN_HES_POWER_GROUP_STATE_INFO: // ggf. \"dev_cla\": \"motion\"  fuer Bewegungsmelder-switch     siehe https://www.home-assistant.io/integrations/cover#device-class
 		{
 			teDev eDev = dev[cf->data[2]].sonstige ? eSwitch:eLight;
 			snprintf(strTopic, maxSize, "%s/%u%s", strDateiEintrag[eDev].TildeOhneId, cf->data[2], strDateiEintrag[eDev].stat_t); // switch damit es in der Oberflaeche "schaltet"
@@ -416,6 +422,9 @@ size_t catHesTopic4Broker(char * strTopic, char * strPayload, const struct can_f
 
 		case HCAN_HES_1WIRE_TEMPERATURE:
 		case HCAN_HES_1WIRE_TEMPERATURE_REPLAY:
+			if (sendMsgRQC) // RQC wurde noch nicht versendet?
+				return 0; // noch keine config an HA-UI senden
+
 			if ((dev[cf->data[2]].tempSensor.HeizkoerperId == 255) && !dev[cf->data[2]].tempSensor.UIelement) // Temperatursensor (noch) keinem Heizkoerper zugeordnet  und  noch nicht in UI?
 			{
 				dev[cf->data[2]].tempSensor.UIelement = true;

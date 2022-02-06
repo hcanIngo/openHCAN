@@ -21,7 +21,6 @@
 #include "../hcan4mqttha/mqttClient.h"
 
 #include <linux/can.h>
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -261,8 +260,9 @@ static int recvMQTTsubcribedAck(void)
 static void onMQTTBrokerConnected(MQTTString topicFilters[])
 {
 	int req_qos = 0;
-	int msgid = 1;
-	int len = MQTTSerialize_subscribe(buf, buflen, 0, msgid, 1, topicFilters, &req_qos);
+	int msgid = 1; // ggf. msgid + 1
+	int cntTopics = 1; // ggf.  sizeof topicFilters / sizeof MQTTString
+	int len = MQTTSerialize_subscribe(buf, buflen, 0, msgid, cntTopics, topicFilters, &req_qos);
 	if(0 == write(sock_mqtt, buf, len)) TRACE("Fehler: Write hat 0 Byte geschrieben\n");
 
 	TRACE("broker_connected -> subscribe-Topic=%s (Nachrichten zum CAN-Bus)\n", topicFilters->cstring);
@@ -314,18 +314,14 @@ void initMqtt(char *brokerHost_ip)
 
 
 	MQTTString topic1 = MQTTString_initializer;
-	//topic1.cstring = "hc/<--/#";
-	//topic1.cstring = "hc/<--/light/1/set"; // Dennoch kein Topic-Name @ MQTTDeserialize_publish
-	//topic1.cstring = "hc/<--/+/+/set"; // z. B. UI-Schalter bewegt -> Nachricht zum CAN-Bus (hc/<--)
-	//topic1.cstring = "hc/<--/+/+/+"; // z. B. UI-Schalter bewegt -> Nachricht zum CAN-Bus (hc/<--)
 	topic1.cstring = "hc/+/+/<--/+"; // z. B. UI-Schalter bewegt -> Nachricht zum CAN-Bus (hc)
-	onMQTTBrokerConnected(&topic1); // Verbindung steht -> Broker-Nachrichten abonnieren
+	onMQTTBrokerConnected(&topic1);
+	// TEST: hc/1/2/<--/ Payload=3
 
-/*  Alternative topicFilters[]:
 	MQTTString topic2 = MQTTString_initializer;
-	topic2.cstring = "hc/<--/+/+/state"; // Nachrichten zum CAN-Bus (hc/<--)
-	onMQTTBrokerConnected(&topic2); // Verbindung steht -> Broker-Nachrichten abonnieren
-*/
+	topic2.cstring = "homeassistant/status"; // online   oder   offline
+	onMQTTBrokerConnected(&topic2);
+	// TEST: homeassistant/status/ Payload=online
 }
 
 // write to mqttBuf
@@ -344,22 +340,33 @@ int rxFromBroker(void)
 
 		MQTTString receivedTopic;
 		int rcd = MQTTDeserialize_publish(&dup, &qos, &retained, &msgid, &receivedTopic, &payload_rx, &payloadlen_rx, buf, buflen);
-		// Mehrere subscriptions, dann:    "we have to find the right message handler - indexed by topic"
+		// Mehrere subscriptions, dann:    "we have to find the right message handler - indexed by topic"                      siehe   https://github.com/eclipse/paho.mqtt.embedded-c/blob/master/MQTTClient/src/MQTTClient.h
 		if ((1 == rcd) && (0 < payloadlen_rx))
 		{
 			// got message:
 			TRACE("cb <--Broker  Topic=%.*s Payload=%.*s (Qos=%d)\n", receivedTopic.lenstring.len, receivedTopic.lenstring.data, payloadlen_rx, payload_rx, qos);
 
-			int rtn = createMsg4cb(receivedTopic.lenstring.data/*receivedTopic.cstring*/, (char*)payload_rx); // mqttBufWIdx++, falls msg 4 cb
-			if (rtn > 0)
+			if (is(receivedTopic.lenstring.data, "homeassistant/status"))
 			{
-				// alles ok
-				if (debug > 1) TRACE("Broker <--cb  %u Gr=%u\n", mqttRxBuf[mqttBufWIdx].data[1], mqttRxBuf[mqttBufWIdx].data[2]);
+				bool HaOnline = is((char*)payload_rx, "online") ? true:false;
+				TRACE("HA %s\n", HaOnline ? "online":"offline");
+				sendMsgRQC = HaOnline; // false -> stoppen da offline; true -> starten da online
+				sendMsgRQS = false;
+				if (HaOnline) secsAtStart = 0; // homeassistant/status/online   0=sofort ->  RQC -> RQS
 			}
 			else
 			{
-				TRACE("\ncreateMsg4cb()-NG liefert %d\n", rtn); // rtn=msgLen hier 0 oder negativ
-				rc = rtn; // createMsg4cb abgebrochen
+				int rtn = createMsg4cb(receivedTopic.lenstring.data/*receivedTopic.cstring*/, (char*)payload_rx); // mqttBufWIdx++, falls msg 4 cb
+				if (rtn > 0)
+				{
+					// alles ok
+					if (debug > 1) TRACE("Broker <--cb  %u Gr=%u\n", mqttRxBuf[mqttBufWIdx].data[1], mqttRxBuf[mqttBufWIdx].data[2]);
+				}
+				else
+				{
+					TRACE("\ncreateMsg4cb()-NG liefert %d\n", rtn); // rtn=msgLen hier 0 oder negativ
+					rc = rtn; // createMsg4cb abgebrochen
+				}
 			}
 		}
 		else TRACE("mqttPUBLISH-Err: payloadlen_rx=%d, rcd=%d\n", payloadlen_rx, rcd);

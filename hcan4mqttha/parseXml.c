@@ -56,8 +56,16 @@ static void getDatenZuId(xmlNode *node, unsigned char gesuchteId, const xmlChar 
 					dev[gesuchteId].sonstige = true;
 				else dev[gesuchteId].sonstige = false;
 
-				if (debug > 0) snprintf(stt, sizeof stt, "%s %s %u", dev[gesuchteId].Bereichsname, xmlGetProp(node, (const xmlChar *)"stt"), gesuchteId);
-				else           snprintf(stt, sizeof stt, "%s %s", dev[gesuchteId].Bereichsname, xmlGetProp(node, (const xmlChar *)"stt"));
+				if (NULL != xmlGetProp(node, (const xmlChar *)"stt")) // stt verfuegbar?
+				{
+					if (debug > 0) snprintf(stt, sizeof stt, "%s %s %u", dev[gesuchteId].Bereichsname, xmlGetProp(node, (const xmlChar *)"stt"), gesuchteId);
+					else           snprintf(stt, sizeof stt, "%s %s", dev[gesuchteId].Bereichsname, xmlGetProp(node, (const xmlChar *)"stt"));
+				}
+				else // stt nicht verfuegbar (z.B. bei Reedkontakt):
+				{
+					if (debug > 0) snprintf(stt, sizeof stt, "%s %s %u", dev[gesuchteId].Bereichsname, xmlGetProp(node, (const xmlChar *)"nostt"), gesuchteId);
+					else           snprintf(stt, sizeof stt, "%s %s", dev[gesuchteId].Bereichsname, xmlGetProp(node, (const xmlChar *)"nostt"));
+				}
 
 				//printf("\n\t%s (%s,%s)\n", stt, Raumname, dev[gesuchteId].Bereichsname);
 				nodeAnz = maxNodeAnz; // gefunden -> Abbruch

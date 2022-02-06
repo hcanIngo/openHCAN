@@ -56,9 +56,8 @@ extern uint8_t mqttBufWIdx;
 extern uint8_t mqttBufRIdx;
 extern uint8_t debug;
 extern uint8_t debugWay;
-extern time_t secsAtStart;
-extern bool sendMsgRQC;
-extern bool sendMsgRQS;
+extern bool HaOnline;
+extern bool HaOnlineStateChanged;
 
 
 #ifdef DEBUG

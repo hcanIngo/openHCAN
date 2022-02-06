@@ -422,7 +422,7 @@ size_t catHesTopic4Broker(char * strTopic, char * strPayload, const struct can_f
 
 		case HCAN_HES_1WIRE_TEMPERATURE:
 		case HCAN_HES_1WIRE_TEMPERATURE_REPLAY:
-			if (sendMsgRQC) // RQC wurde noch nicht versendet?
+			if (!HaOnline) // HA noch nicht online, daher wurde RQC noch nicht versendet?
 				return 0; // noch keine config an HA-UI senden
 
 			if ((dev[cf->data[2]].tempSensor.HeizkoerperId == 255) && !dev[cf->data[2]].tempSensor.UIelement) // Temperatursensor (noch) keinem Heizkoerper zugeordnet  und  noch nicht in UI?

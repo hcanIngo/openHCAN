@@ -316,12 +316,10 @@ void initMqtt(char *brokerHost_ip)
 	MQTTString topic1 = MQTTString_initializer;
 	topic1.cstring = "hc/+/+/<--/+"; // z. B. UI-Schalter bewegt -> Nachricht zum CAN-Bus (hc)
 	onMQTTBrokerConnected(&topic1);
-	// TEST: hc/1/2/<--/ Payload=3
 
 	MQTTString topic2 = MQTTString_initializer;
-	topic2.cstring = "homeassistant/status"; // online   oder   offline
+	topic2.cstring = "homeassistant/status"; // Payload = online   oder  = offline
 	onMQTTBrokerConnected(&topic2);
-	// TEST: homeassistant/status/ Payload=online
 }
 
 // write to mqttBuf
@@ -340,7 +338,6 @@ int rxFromBroker(void)
 
 		MQTTString receivedTopic;
 		int rcd = MQTTDeserialize_publish(&dup, &qos, &retained, &msgid, &receivedTopic, &payload_rx, &payloadlen_rx, buf, buflen);
-		// Mehrere subscriptions, dann:    "we have to find the right message handler - indexed by topic"                      siehe   https://github.com/eclipse/paho.mqtt.embedded-c/blob/master/MQTTClient/src/MQTTClient.h
 		if ((1 == rcd) && (0 < payloadlen_rx))
 		{
 			// got message:
@@ -348,11 +345,9 @@ int rxFromBroker(void)
 
 			if (is(receivedTopic.lenstring.data, "homeassistant/status"))
 			{
-				bool HaOnline = is((char*)payload_rx, "online") ? true:false;
+				HaOnlineStateChanged = true;
+				HaOnline = is((char*)payload_rx, "online") ? true:false;
 				TRACE("HA %s\n", HaOnline ? "online":"offline");
-				sendMsgRQC = HaOnline; // false -> stoppen da offline; true -> starten da online
-				sendMsgRQS = false;
-				if (HaOnline) secsAtStart = 0; // homeassistant/status/online   0=sofort ->  RQC -> RQS
 			}
 			else
 			{

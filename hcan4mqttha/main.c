@@ -26,9 +26,8 @@
 #include "../hcan4mqttha/mqttHcan.h" // msgOfInterest
 #include "../hcan4mqttha/parseXml.h"
 
-time_t secsAtStart;
-bool sendMsgRQC = false;
-bool sendMsgRQS = false;
+bool HaOnline = false;
+bool HaOnlineStateChanged = false;
 
 int sock_mqtt = INVALID_SOCKET;
 int sock_can = INVALID_SOCKET;
@@ -212,30 +211,48 @@ int main(int argc, char ** argv)
     if(sock_can > max_fd)
         max_fd = sock_can;
 
-    secsAtStart = time(NULL);
-    sendMsgRQC = true;           // bei hcan4mqttha-Start einmal sofort die configs an HA senden
-    time_t timeoutSecsRQC = 0;   // bei hcan4mqttha-Start einmal sofort die configs an HA senden
-    time_t timeoutSecsRQS = 120; // 2 Minuten
 
+    time_t timeoutSecsHaOnline = 0;
+    time_t timeoutSecsRQS = 0;
+    bool RQSmsgSent = false;
+    HaOnlineStateChanged = true; // Dienststart
 
     while (1)
     {
-    	if (sendMsgRQC && (time(NULL) > (secsAtStart + timeoutSecsRQC)))
-    	{
-    		createReqMsg4cb("RQC"); // "RQC": Nachricht "HCAN_HES_DEVICES_CONFIGS_REQUEST" an den CAN-Bus
-    		TRACE("\nRQC msg sent.\n");
-    		syslog(LOG_INFO, "RQC msg sent.");
-    		sendMsgRQC = false;
-    		sendMsgRQS = true;
-    		timeoutSecsRQC = 600; // 10 Minuten (falls HA nicht online)
-    	}
-    	else if (sendMsgRQS && (time(NULL) > (secsAtStart + timeoutSecsRQS)))
-    	{
-    		createReqMsg4cb("RQS"); // "RQS": Nachricht "HCAN_HES_DEVICE_STATES_REQUEST" an den CAN-Bus
-    		TRACE("\nRQS msg sent.\n");
-    		syslog(LOG_INFO, "RQS msg sent.");
-    		sendMsgRQS = false;
-    	}
+		if (HaOnline) // HA online?
+		{
+			if (HaOnlineStateChanged)
+			{
+				createReqMsg4cb("RQC"); // "RQC": Nachricht "HCAN_HES_DEVICES_CONFIGS_REQUEST" an den CAN-Bus
+				TRACE("\nRQC msg sent.\n");
+				syslog(LOG_INFO, "RQC msg sent.");
+				timeoutSecsRQS = 120 + time(NULL); // 2 min bis RQS
+				RQSmsgSent = false;
+				HaOnlineStateChanged = false;
+			}
+			else if (!RQSmsgSent && time(NULL) > timeoutSecsRQS)
+			{
+				createReqMsg4cb("RQS"); // "RQS": Nachricht "HCAN_HES_DEVICE_STATES_REQUEST" an den CAN-Bus
+				TRACE("\nRQS msg sent.\n");
+				syslog(LOG_INFO, "RQS msg sent.");
+				RQSmsgSent = true;
+			}
+		}
+		else // HA offline:
+		{
+			if (HaOnlineStateChanged)
+			{
+				timeoutSecsHaOnline = 600 + time(NULL); // 10 min Timeout, nach dem wir HA als online annehmen
+				HaOnlineStateChanged = false;
+			}
+			else if (time(NULL) > timeoutSecsHaOnline)
+			{
+				TRACE("\n%lus-Timeout -> HA online set, as expected.\n", timeoutSecsHaOnline);
+				syslog(LOG_INFO, "%lus-Timeout -> HA online set, as expected", timeoutSecsHaOnline);
+				HaOnline = true; // wir gehen von HA online aus
+				HaOnlineStateChanged = true; // wir gehen von HA online aus
+			}
+		}
 
     	timeout.tv_sec = 2;
         timeout.tv_usec = 500000;

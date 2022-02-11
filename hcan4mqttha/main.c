@@ -212,7 +212,7 @@ int main(int argc, char ** argv)
         max_fd = sock_can;
 
 
-    time_t timeoutSecsHaOnline = 0;
+    time_t timeoutSecsHaOnline = 600 + time(NULL); // 10 min Timeout, nach dem wir HA als online annehmen
     time_t timeoutSecsRQS = 0;
     bool RQSmsgSent = false;
     HaOnlineStateChanged = true; // Dienststart
@@ -267,7 +267,7 @@ int main(int argc, char ** argv)
 
         debugWay = 0;
         int rtn = select (max_fd+1, &recv_fdset, &send_fdset, NULL, &timeout);
-        if(rtn > 0) // no timeout?
+        if (rtn > 0) // no timeout?
         {
             if (FD_ISSET(sock_can, &recv_fdset))
             {
@@ -284,7 +284,7 @@ int main(int argc, char ** argv)
         		else
         		{
         			int rc = rxFromBroker(); // ggf. mqttBufWIdx++
-        			if (rc == -1)
+        			if (rc == -1 || rc == 0)
         			{
         				shutdown(sock_mqtt, SHUT_WR);
         				recv(sock_mqtt, NULL, (size_t)0, 0);

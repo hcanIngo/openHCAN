@@ -355,7 +355,23 @@ static size_t erzeugeConfigTopicUndPayload(teDev eDev, unsigned char id, char * 
 	fread(strPayload, dStrLen, 1, fp);
 	fclose(fp);
 	struct json_object *jPayload = json_tokener_parse(strPayload);
-	json_object_object_add(jPayload, "name", json_object_new_string(stt)); // name ersetzen (stt wurde in getXmlDatenZurId() ermittelt)
+	json_object_object_add(jPayload, "name", json_object_new_string(stt)); // name ersetzen (stt wird in getXmlDatenZurId() ermittelt)
+	char unique_id[10];
+	snprintf(unique_id, sizeof unique_id, "hcanId%u", id);
+	json_object_object_add(jPayload, "unique_id", json_object_new_string(unique_id));
+
+	struct json_object *jDevice = json_object_new_object();
+	json_object_object_add(jDevice, "configuration_url", json_object_new_string("https://github.com/hcanIngo/openHCAN/wiki"));
+
+	struct json_object *jArray = json_object_new_array();
+	json_object_array_add(jArray, json_object_new_string(unique_id)); // oder hcan2mqtt_idXY
+	json_object_object_add(jDevice, "identifiers", jArray);
+
+	json_object_object_add(jDevice, "manufacturer", json_object_new_string("openHCAN"));
+	json_object_object_add(jDevice, "suggested_area", json_object_new_string(dev[id].Bereichsname));
+	json_object_object_add(jDevice, "name", json_object_new_string(stt));
+	json_object_object_add(jDevice, "sw_version", json_object_new_string("1.0"));
+	json_object_object_add(jPayload, "device", jDevice);
 
 
 	switch (eDev)
@@ -401,6 +417,9 @@ static size_t erzeugeConfigTopicUndPayload(teDev eDev, unsigned char id, char * 
 
 size_t catHesTopic4Broker(char * strTopic, char * strPayload, const struct can_frame * cf)
 {
+	if (!HaOnline) // HA noch nicht online, daher wurde RQC noch nicht versendet?
+		return 0; // noch nichts an HA-UI senden
+
 	const size_t maxSize = dStrLen;
 
 	switch (cf->data[1])
@@ -422,9 +441,6 @@ size_t catHesTopic4Broker(char * strTopic, char * strPayload, const struct can_f
 
 		case HCAN_HES_1WIRE_TEMPERATURE:
 		case HCAN_HES_1WIRE_TEMPERATURE_REPLAY:
-			if (!HaOnline) // HA noch nicht online, daher wurde RQC noch nicht versendet?
-				return 0; // noch keine config an HA-UI senden
-
 			if ((dev[cf->data[2]].tempSensor.HeizkoerperId == 255) && !dev[cf->data[2]].tempSensor.UIelement) // Temperatursensor (noch) keinem Heizkoerper zugeordnet  und  noch nicht in UI?
 			{
 				dev[cf->data[2]].tempSensor.UIelement = true;

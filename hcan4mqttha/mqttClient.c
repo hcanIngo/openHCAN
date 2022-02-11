@@ -348,6 +348,7 @@ int rxFromBroker(void)
 				HaOnlineStateChanged = true;
 				HaOnline = is((char*)payload_rx, "online") ? true:false;
 				TRACE("HA %s\n", HaOnline ? "online":"offline");
+				syslog(LOG_INFO, "HA %s", HaOnline ? "online":"offline");
 			}
 			else
 			{

@@ -50,7 +50,10 @@ audio() {
 pwMosq_1() {
 	ZIEL_USER=$1
 	# siehe:  http://www.steves-internet-guide.com/mqtt-username-password-example/
-	# Pw im pi-tt-home erzeugen: 
+	# Pw im pi-tt-home-Verzeichnis erzeugen: 
+	echo "-------------------------------------------"
+	echo "Passwort fuer mosquitto-User hcan vergeben:"
+	echo "-------------------------------------------"
 	mosquitto_passwd -c /home/$ZIEL_USER/pwmosq.txt hcan
 	# Pw-Datei auf dem pi verschieben:
 	sudo mv /home/$ZIEL_USER/pwmosq.txt /etc/mosquitto/pwmosq.txt
@@ -187,7 +190,7 @@ Auswahl() {
 	  alles)
 		clear
 		installMosq
-		canDToverlay
+		canDToverlay tt
 		ipLinkSet_CAN__Persistent tt
 		pwMosq_1 tt
 		pwMosq_2 tt

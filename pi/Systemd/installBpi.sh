@@ -64,12 +64,13 @@ pwMosq_2() {
 	# Eintrag einfuegen, sodass die pw-Datei verwendet wird: 
 	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/mosquitto_pw.conf /home/$ZIEL_USER/
 	sudo mv /home/$ZIEL_USER/mosquitto_pw.conf /etc/mosquitto/conf.d/
-	# Kontrolle
-	less /etc/mosquitto/conf.d/mosquitto_pw.conf
 	#
-	# https://stackoverflow.com/questions/65278648/mosquitto-starting-in-local-only-mode:
-	# sudo echo "listener 1883" >> /etc/mosquitto/mosquitto.conf
-    # sudo echo "allow_anonymous true" >> /etc/mosquitto/mosquitto.conf
+	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/mosquitto_bind_address.conf /home/$ZIEL_USER/
+	sudo mv /home/$ZIEL_USER/mosquitto_bind_address.conf /etc/mosquitto/conf.d/
+	#
+	# Kontrolle:
+	# less /etc/mosquitto/conf.d/mosquitto_pw.conf
+	# less /etc/mosquitto/conf.d/mosquitto_bind_address.conf
 }
 
 testCan() {

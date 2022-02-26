@@ -14,7 +14,7 @@ installMosq() {
 }
 
 canDToverlay() {
-	#ZIEL_USER=$1
+	ZIEL_USER=$1
 	#sudo echo "overlays=can" >> /boot/armbianEnv.txt  # https://docs.armbian.com/User-Guide_Allwinner_overlays/ 
 	cd /home/$ZIEL_USER/openHCAN/pi/Systemd/           # sun7i-a20-can.dts verwenden da das von Armbian nicht geht
 	sudo armbian-add-overlay sun7i-a20-can.dts
@@ -71,6 +71,18 @@ pwMosq_2() {
 	# Kontrolle:
 	# less /etc/mosquitto/conf.d/mosquitto_pw.conf
 	# less /etc/mosquitto/conf.d/mosquitto_bind_address.conf
+}
+
+pyMqttRing() {
+	ZIEL_USER=$1
+	# Eintrag einfuegen, sodass die pw-Datei verwendet wird: 
+	sudo cp /home/$ZIEL_USER/openHCAN/pi/ring.py /home/$ZIEL_USER/
+	sudo mv /home/$ZIEL_USER/ring.py /usr/bin
+	sudo cp /home/$ZIEL_USER/openHCAN/pi/doorbell.mp3 /home/$ZIEL_USER/
+	#
+	test -d /etc/hcan || sudo mkdir /etc/hcan
+	sudo chown tt /etc/hcan
+	sudo mv /home/$ZIEL_USER/doorbell.mp3 /etc/hcan
 }
 
 testCan() {
@@ -184,6 +196,7 @@ Auswahl() {
 		 "ipLinkSet_CAN__Persistent" "Bpi-Overlay fuer CAN" off \
 		 "pwMosq_1" "mosquitto Conf" off \
 		 "pwMosq_2" "mosquitto Conf" off \
+		 "pyMqttRing" "Klingel-App" off \
 		 "autostartHcanDienste" "" off
 		 )
 
@@ -195,6 +208,7 @@ Auswahl() {
 		ipLinkSet_CAN__Persistent tt
 		pwMosq_1 tt
 		pwMosq_2 tt
+		pyMqttRing tt
 		audio
 		autostartHcanDienste tt hcan
 		echo "Reboot erforderlich. Bitte manuell anstossen."
@@ -222,6 +236,10 @@ Auswahl() {
 	  pwMosq_2)
 		clear
 		pwMosq_2 tt
+		;;
+	  pyMqttRing)
+		clear
+		pyMqttRing tt
 		;;
 	  autostartHcanDienste)
 		clear

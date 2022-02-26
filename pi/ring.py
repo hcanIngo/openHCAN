@@ -12,13 +12,13 @@ import syslog
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
-    #client.subscribe("$SYS/#") # alles vom Broker
-    #client.subscribe("hc/#") # alles vom Broker
-    client.subscribe("hc/light/37/-->/state") # DG
+    #client.subscribe("$SYS/#") # alles System-Msg. vom Broker
+    #client.subscribe("hc/#")
+    client.subscribe("hc/light/37/-->/state") # DG, aber nur die 81 setzt Trafo unter Spg. 
     client.subscribe("hc/switch/81/-->/state") # EG Audiohinweis
 
 def on_message(client, userdata, msg):
-  if str(msg.payload) == "ON": # TODO auf bpi (python3:    hc/light/37/-->/state b'ON'): 
+  if str(msg.payload) == "ON": # (python3 liefert:    hc/light/37/-->/state b'ON'): 
     print("\nklingeln")
     print(msg.topic+" "+str(msg.payload))
   else:

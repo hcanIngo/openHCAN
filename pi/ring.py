@@ -18,13 +18,14 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("hc/switch/81/-->/state") # EG Audiohinweis
 
 def on_message(client, userdata, msg):
-  if str(msg.payload) == "ON": # (python3 liefert:    hc/light/37/-->/state b'ON'): 
+  payload = msg.payload.decode('utf-8') # bin-str 2 str  (oder: 'ascii')
+  if payload == "ON":
     print("\nklingeln")
-    print(msg.topic+" "+str(msg.payload))
+    print(msg.topic+" "+payload)
   else:
     print("\n--aus--")
-    print(msg.topic+" "+str(msg.payload))
-  syslog.syslog(syslog.LOG_INFO, msg.topic+" "+str(msg.payload))
+    print(msg.topic+" "+payload)
+  syslog.syslog(syslog.LOG_INFO, msg.topic+" "+str(payload))
   myCmd = "mplayer /etc/hcan/doorbell.mp3"
   os.system(myCmd)
 

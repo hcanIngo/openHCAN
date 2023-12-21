@@ -73,7 +73,6 @@ cDienste:
 	cd hcand; $(xx)
 	cd hcanaddressd; $(xx)
 	cd hcansocketd; $(xx)
-	cd hcan4mqttpc; $(xx)
 	cd hcan4mqttha; $(xx)
 
 cppDienste:	

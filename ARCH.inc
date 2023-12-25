@@ -29,8 +29,8 @@ export MCU = atmega644p
 export IP_HI = 192.168.1.42
 ###########################
 
-# z.B. -DhcanXYZ
-export GLOBAL_DEFINES = 
+# z.B. -DhcanXYZ oder -DHEIZUNG_INCL_PID_REGLER_CODE
+export GLOBAL_DEFINES =
 ###########################
 
 # Max Hex Size in byte when using the bootloader

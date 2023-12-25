@@ -10,10 +10,13 @@
 #define HEIZUNG_MODE_THERMOSTAT   2
 #define HEIZUNG_MODE_AUTOMATIK    3
 
-//PID
+//#define HEIZUNG_INCL_PID_REGLER_CODE 0 // 1: PID-Regler-Code hineinnehmen
+
+#if HEIZUNG_INCL_PID_REGLER_CODE == 1
 #define SOLLISTWERTE			3
 #define ABSTANDPIDMESSUNGEN		30		// 60 sekunden
 #define PWMCHANGEFREQENCY		300		// 300 Sekunden
+#endif
 
 /**
  * Falls 2 HK parallel angesteuert werden, kann durch
@@ -22,6 +25,7 @@
  */
 #define HEIZUNG_FEATURE_DOPPEL_WAERMEBEDARF   0
 #define HEIZUNG_FEATURE_VENTIL_IMMER_PFLEGEN  1
+#define HEIZUNG_FEATURE_PID_REGLER            2 // PID-Reglers aktivieren (anstelle des 2-Punkt-Regler)
 
 typedef struct
 {
@@ -29,8 +33,9 @@ typedef struct
 	int16_t temp;
 } solltemp_line_t;
 
-/*
- */
+// die Ventilstellung erst in 3:30 Minuten (210s) bekanntgeben, damit die
+// Therme aufgrund der noch geschlossenen Ventile nicht taktet:
+#define HEIZUNG_WAERMEBEDARF_VERZOEGERUNG_s  210 // Einstellung: 60..210
 
 typedef struct
 {
@@ -44,7 +49,6 @@ typedef struct
 	uint16_t pwm_width;
 	uint16_t pwm_end;
 	uint8_t waermebedarf_counter;
-	uint16_t pwm_change_counter;
 	uint8_t received_interval_counter;
 	int16_t measure_value;
 	int16_t destination_value;
@@ -55,23 +59,25 @@ typedef struct
 	/**
 	 * Wenn die Heizung zu einer bestimmten Tageszeit (abhaengig von der
 	 * ID, damit nicht alle gleichzeitig) im Modus HEIZUNG_MODE_OFF ist,
-	 * wird der ventilpflege_counter auf 600 (Sekunden = 10min) gesetzt 
+	 * wird der ventilpflege_counter auf 600 (Sekunden = 10min) gesetzt
 	 * und das Ventil geoeffnet. Ist der ventilpflege_counter auf 0, so
 	 * wird das Ventil wieder geschlossen. In der Zeit wird keine
 	 * Waermeanforderung gesendet.
 	 */
 	uint16_t ventilpflege_counter;
-	// PID
+#if HEIZUNG_INCL_PID_REGLER_CODE == 1
+	uint16_t pwm_change_counter;
 	uint8_t pfaktor;	// als 1/100
 	uint8_t ifaktor;	// als 1/100
 	uint8_t dfaktor;	// als 1/100
-	uint8_t pidcounter;			// sekunden seit der letzen messung/aufzeichnung
+	uint8_t pidcounter; // Sekunden seit der letzen Messung/Aufzeichnung
 	int32_t pidvalue;
 	//int16_t sollist0;	// letzter Soll - ist als 1/16 Grad
 	//int16_t sollist1;	// vorletzter Soll - ist als 1/16 Grad
 	//int16_t sollist2;	// vorvorletzter Soll - ist als 1/16 Grad
 	int16_t sollist[SOLLISTWERTE]; // Soll - ist als 1/16 Grad
 	uint8_t sollistIndex;
+#endif
 } device_data_heizung;
 
 void heizung_init(device_data_heizung *p, eds_block_p it);

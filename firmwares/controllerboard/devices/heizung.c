@@ -18,9 +18,6 @@ void heizung_init(device_data_heizung *p, eds_block_p it)
 	p->it = it;
 	p->mode = HEIZUNG_MODE_AUTOMATIK;
 	p->manual_rate = 0;
-	p->pwm_counter = 0;
-	p->pwm_width = 0;
-	p->pwm_end = 0;
 	p->waermebedarf_counter = p->config.id & 0x3f; // Pseudo-Zufall Init
 	p->received_interval_counter = 255;
 	p->measure_value = 0;
@@ -28,31 +25,37 @@ void heizung_init(device_data_heizung *p, eds_block_p it)
 	p->thermostat_temp = 0;
 	p->reed_heiz_stop_counter = 0;
 	p->ventilpflege_counter = 0;
-	p->last_soll_temp = -1;
+	p->pwm_counter = 0;
+	p->pwm_width = 0;
+	p->pwm_end = p->config.pwm_periode;
 
-	//PID
-	p->pidcounter = ABSTANDPIDMESSUNGEN;
-	p->pfaktor = 30; // 1/100; 30 == 0,3
-	p->ifaktor = 50; // 1/100; 50 == 0,5
-	p->dfaktor = 30; // 1/100; 30 == 0,3
-	p->sollistIndex = 0;
+  canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_init: %d"), p->config.id);
+#if HEIZUNG_INCL_PID_REGLER_CODE == 1
+  if (p->config.feature & (1<<HEIZUNG_FEATURE_PID_REGLER))
+  {
+    p->last_soll_temp = -1;
 
-	uint8_t i;
-	for (i = 0; i < SOLLISTWERTE; i++)
-	{
-			p->sollist[i] = 0;
-	}
+    p->pidcounter = ABSTANDPIDMESSUNGEN;
+    p->pfaktor = 30; // 1/100; 30 == 0,3
+    p->ifaktor = 50; // 1/100; 50 == 0,5
+    p->dfaktor = 30; // 1/100; 30 == 0,3
+    p->sollistIndex = 0;
 
-	canix_syslog_P(SYSLOG_PRIO_DEBUG,
-		PSTR("heizung_init: %d"), p->config.id);
-	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_p:%d"), p->pfaktor);
-	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_i:%d"), p->ifaktor);
-	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_d:%d"), p->dfaktor);
-	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_abstandPid:%d"), ABSTANDPIDMESSUNGEN);
-	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_SOLLISTWERTE:%d"), SOLLISTWERTE);
+    for (uint8_t i = 0; i < SOLLISTWERTE; i++)
+    {
+        p->sollist[i] = 0;
+    }
+
+    canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_p:%d"), p->pfaktor);
+    canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_i:%d"), p->ifaktor);
+    canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_d:%d"), p->dfaktor);
+    canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_abstandPid:%d"), ABSTANDPIDMESSUNGEN);
+    canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung_SOLLISTWERTE:%d"), SOLLISTWERTE);
+  }
+#endif
 }
 
-/** 
+/**
  * Schaltet die HK-Ventile aus, wenn ein Heizstop vorliegt. Dies sollte
  * in regelmaessigen Abstaenden aufgerufen werden, da eventuell aufgrund der
  * Heizsteuerlogik die PWM nicht regelmaessig upgedatet wird und so das HK-Ventil
@@ -60,11 +63,10 @@ void heizung_init(device_data_heizung *p, eds_block_p it)
  */
 void heizung_update_heizstop(device_data_heizung *p)
 {
-	//Heizstoppmeldungen nur jede Minute verschicken. Aber nicht für alle Heizungen gleichzeitig
-	if(canix_rtc_clock.second == (p->config.id & 0x3b))
+	// Heizstoppmeldungen nur jede Minute verschicken. Aber nicht für alle Heizungen gleichzeitig
+	if (canix_rtc_clock.second == (p->config.id & 0x3b))
 	{
-		canix_syslog_P(SYSLOG_PRIO_DEBUG,
-				PSTR("Heizstop aktiv (id=%d)"), p->config.id);
+		canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("Heizstop aktiv (id=%d)"), p->config.id);
 	}
 
 	// Heizung ganz ausschalten
@@ -85,10 +87,13 @@ void heizung_set_pwm(device_data_heizung *p, uint8_t rate)
 		p->pwm_end = p->config.pwm_periode;
 		p->pwm_width = (int32_t)p->pwm_end * (int32_t)rate / 100;
 	}
+
+	canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("set_pwm id%d c%d p%d  e%d r%d w%d"),
+	  p->config.id, p->pwm_counter, p->config.pwm_periode, p->pwm_end, rate, p->pwm_width);
 }
 
 /**
- * Liefert die aktuelle PWM Heizrate in % (0..100). Achtung: Durch kurze 
+ * Liefert die aktuelle PWM Heizrate in % (0..100). Achtung: Durch kurze
  * config.pwm_periode Werte entstehen bei Hin- und Rueckrechung
  * Quantisierungsfehler!
  */
@@ -98,6 +103,12 @@ uint8_t heizung_get_pwm(device_data_heizung *p)
 
 	if (p->mode != HEIZUNG_MODE_OFF)
 	{
+		if ((uint32_t)p->pwm_end == 0)
+		{
+			canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("pwm_end ist 0! (id=%d)"), p->config.id);
+			return 100; // Ventil oeffnen
+		}
+
 		rate = (uint32_t)p->pwm_width * 100 / (uint32_t)p->pwm_end;
 	}
 
@@ -105,64 +116,56 @@ uint8_t heizung_get_pwm(device_data_heizung *p)
 }
 
 /**
- * this one cares about the PWM (pulse width modulation) for 
- * achieving heating rates between off and on 
+ * this one cares about the PWM (pulse width modulation) for
+ * achieving heating rates between off and on
  */
 void heizung_handle_pwm(device_data_heizung *p)
 {
+	uint8_t state = 1;
 	if (++p->pwm_counter >= (p->pwm_end))
 	{
-		p->pwm_counter = 0;
-		darlingtonoutput_setpin(p->config.port, 1);
+		p->pwm_counter = 0; // und  state = 1
 	}
 
 	if (p->pwm_counter >= p->pwm_width)
 	{
-		darlingtonoutput_setpin(p->config.port, 0);
+		state = 0;
 	}
-	/*
+
+	darlingtonoutput_setpin(p->config.port, state);
 	canix_syslog_P(SYSLOG_PRIO_DEBUG,
-			PSTR("handle_pwm: heiz: %d: %d"), p->config.id, 
-			darlingtonoutput_getpin(p->config.port));
-	*/
+			PSTR("handle_pwm: heiz: %d: %d %d  c%d e%d w%d  %d"), p->config.id,
+			darlingtonoutput_getpin(p->config.port), state, p->pwm_counter, p->pwm_end, p->pwm_width, p->measure_value);
+
 }
 
-/**
- * Liefert die zeitzone id des aktiven solltemp_line_t zurueck
- */
+// Liefert die zeitzone id des aktiven solltemp_line_t zurueck
 int8_t heizung_get_matching_zeitzone_id(device_data_heizung *p)
 {
-	uint8_t i;
-	solltemp_line_t *solltemp_line = (solltemp_line_t *) 
-		&(p->config.zeitzone0_id);
+	solltemp_line_t *solltemp_line = (solltemp_line_t *) &(p->config.zeitzone0_id);
 
-	for (i = 0; i < 8; i++)
+	for (uint8_t i = 0; i < 8; i++)
 	{
 		const uint8_t tr_id = solltemp_line[i].id;
 		if (zeitzone_matches(tr_id))
 		{
-			// we got an zeitzone which matches
-			return tr_id;
+			return tr_id; // we got an zeitzone which matches
 		}
 	}
 	return -1;
 }
-/**
- * Liefert den Index des aktiven solltemp_line_t zurueck
- */
+
+// Liefert den Index des aktiven solltemp_line_t zurueck
 int8_t heizung_get_matching_zeitzone_index(device_data_heizung *p)
 {
-	uint8_t i;
-	solltemp_line_t *solltemp_line = (solltemp_line_t *) 
-		&(p->config.zeitzone0_id);
+	solltemp_line_t *solltemp_line = (solltemp_line_t *) &(p->config.zeitzone0_id);
 
-	for (i = 0; i < 8; i++)
+	for (uint8_t i = 0; i < 8; i++)
 	{
 		const uint8_t tr_id = solltemp_line[i].id;
 		if (zeitzone_matches(tr_id))
 		{
-			// we got an zeitzone which matches
-			return i;
+			return i; // we got an zeitzone which matches
 		}
 	}
 	return -1;
@@ -174,46 +177,37 @@ int8_t heizung_get_matching_zeitzone_index(device_data_heizung *p)
  *
  * Zur Zeit ist ein einfacher 2-Punkt-Regler mit einer Hysterese realisiert:
  *
- * Ist die Heizung an, so geht sie erst bei 
+ * Ist die Heizung an, so geht sie erst bei
  *   Isttemp > Solltemp + Hysterese aus;
- * Ist die Heizung aus, so geht sie erst bei 
+ * Ist die Heizung aus, so geht sie erst bei
  *   Isttemp < Solltemp - Hysterese an
- *
  */
 void heizung_set_pwm_by_temp(device_data_heizung *p, int16_t soll, int16_t ist)
 {
-	// Beispiel: Soll = 20 Grad, Hysterese = 0.5 Grad
-	// Wenn Heizung an ist und die Temperatur > 20.5 Grad, dann
-	// Heizung ausschalten!
+	// Beispiel: Soll = 20 Grad, Hysterese = 0.25 K (4/16 K)
+	// Wenn Heizung an ist und die Temperatur > 20.25 Grad, dann Heizung ausschalten!
 	if ((heizung_get_pwm(p) > 0) && (ist > (soll + p->config.hysterese)))
 	{
-		// Ventil schliessen, es ist in ca. 3 Minuten zu
-		heizung_set_pwm(p,0);
+		heizung_set_pwm(p,0); // Ventil schliessen, es ist in ca. 3 Minuten zu
 		return;
 	}
 
-	// Beispiel: Soll = 20 Grad, Hysterese = 0.5 Grad
-	// Wenn Heizung aus ist und die Temperatur < 19.5 Grad, dann
-	// Heizung ein schalten!
+	// Beispiel: Soll = 20 Grad, Hysterese = 0.25 K (4/16 K)
+	// Wenn Heizung aus ist und die Temperatur < 19.45 Grad, dann Heizung einschalten!
 	if ((heizung_get_pwm(p) == 0) && (ist < (soll - p->config.hysterese)))
 	{
-		// Ventil oeffnen, es ist in ca. 3 Minuten offen
-		heizung_set_pwm(p,100);
-
-		// die Ventilstellung erst in 3:30 Minuten bekanntgeben, damit die
-		// Therme aufgrund der noch geschlossenen Ventile nicht taktet:
-		p->waermebedarf_counter = 210;
+		heizung_set_pwm(p,100); // Ventil oeffnen, es ist in ca. 3 Minuten offen
+		p->waermebedarf_counter = HEIZUNG_WAERMEBEDARF_VERZOEGERUNG_s;
 		return;
 	}
 }
 
-/**
-* Einfacher PID Regler
-*
-*/
+
+#if HEIZUNG_INCL_PID_REGLER_CODE == 1
+// Einfacher PID Regler
 void heizung_set_pwm_by_pid(device_data_heizung *p, int32_t pidvalue)
 {
-        if(p->pwm_change_counter != 0)
+        if (p->pwm_change_counter != 0)
         {
                 return;
         }
@@ -231,9 +225,7 @@ void heizung_set_pwm_by_pid(device_data_heizung *p, int32_t pidvalue)
 
                         heizung_set_pwm(p, pwm);
                         canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("ID: %d pwm: %d PID: %d"), p->config.id, pwm, pidvalue);
-                        // die Ventilstellung erst in 3:30 Minuten bekanntgeben, damit die
-                        // Therme aufgrund der noch geschlossenen Ventile nicht taktet:
-                        p->waermebedarf_counter = 210;
+                        p->waermebedarf_counter = HEIZUNG_WAERMEBEDARF_VERZOEGERUNG_s;
                 }
                 else if (pwm == 0)
                 {
@@ -253,10 +245,11 @@ void heizung_set_pwm_by_pid(device_data_heizung *p, int32_t pidvalue)
         p->pwm_change_counter = PWMCHANGEFREQENCY;
         return;
 }
+#endif
 
 void heizung_check_ventilpflege(device_data_heizung *p)
 {
-	// Pruefen: ist die Heizung aus und keine Ventilpflege aktiv? 
+	// Pruefen: ist die Heizung aus und keine Ventilpflege aktiv?
 	// Nur dann pruefen wir weiter, ob eine Ventilpflege ansteht:
 	if ( (p->ventilpflege_counter == 0) && ( (p->mode == HEIZUNG_MODE_OFF)
 		|| (p->config.feature & (1<<HEIZUNG_FEATURE_VENTIL_IMMER_PFLEGEN)) ) )
@@ -274,10 +267,8 @@ void heizung_check_ventilpflege(device_data_heizung *p)
 		if ((canix_rtc_clock.day_of_week == 7) && // Sonntag
 				(time == (p->config.id * 3) + (11*60 + 0)))
 		{
-			// Ventilpflege aktivieren:
-			p->ventilpflege_counter = 600;
-			canix_syslog_P(SYSLOG_PRIO_DEBUG,
-					PSTR("heizung %d: ventilpflege start"), p->config.id);
+			p->ventilpflege_counter = 600; // Ventilpflege aktivieren
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung %d: ventilpflege start"), p->config.id);
 		}
 	}
 }
@@ -322,15 +313,12 @@ static void heizung_send_details(device_data_heizung *p, const uint16_t answerDs
 
 		case HEIZUNG_MODE_AUTOMATIK :
 			{
-				int8_t index;
-				index = heizung_get_matching_zeitzone_index(p);
+				int8_t index = heizung_get_matching_zeitzone_index(p);
 				if (index != -1)
 				{
 					// we got an zeitzone which matches
 					int16_t master_value = 0;
-					solltemp_line_t *zeitzone =
-						(solltemp_line_t *)
-						&(p->config.zeitzone0_id);
+					solltemp_line_t *zeitzone =	(solltemp_line_t *)	&(p->config.zeitzone0_id);
 
 					master_value = zeitzone[index].temp;
 					answer.data[1] = HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
@@ -344,11 +332,9 @@ static void heizung_send_details(device_data_heizung *p, const uint16_t answerDs
 				}
 				else
 				{
-					canix_syslog_P(SYSLOG_PRIO_ERROR,
-							PSTR("zeitzone: no match! (id=%d)"), p->config.id);
+					canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("zeitzone: no match! (id=%d)"), p->config.id);
 
-					answer.data[1] =
-						HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
+					answer.data[1] = HCAN_HES_HEIZUNG_MODE_AUTOMATIK_DETAILS;
 					answer.data[2] = p->config.id;
 					answer.data[3] = 0;
 					answer.data[4] = 0;
@@ -361,9 +347,7 @@ static void heizung_send_details(device_data_heizung *p, const uint16_t answerDs
 	}
 }
 
-/**
- * this timer handler is called every second
- */
+// this timer handler is called every second
 inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 {
 	if (zyklus != 1) return; // 1s-Zyklus verwendet
@@ -371,11 +355,15 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 	if (p->ventilpflege_counter > 0)
 		p->ventilpflege_counter--;
 
-	//PID
-    if (p->pwm_change_counter > 0)
-    {
-    	p->pwm_change_counter--;
-    }
+#if HEIZUNG_INCL_PID_REGLER_CODE == 1
+	if (p->config.feature & (1<<HEIZUNG_FEATURE_PID_REGLER))
+	{
+		if (p->pwm_change_counter > 0)
+		{
+			p->pwm_change_counter--;
+		}
+	}
+#endif
 
 	// Ventilpflege aktivieren, falls der richtige Zeitpunkt dazu ist:
 	heizung_check_ventilpflege(p);
@@ -390,16 +378,14 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 		p->duration_counter -= 1;
 		if (p->duration_counter == 0)
 		{
-			// Zeit ist abgelaufen; nun wieder auf Automatik-Modus
-			// stellen:
-			//
+			// Zeit ist abgelaufen; nun wieder auf Automatik-Modus stellen:
 			p->mode = HEIZUNG_MODE_AUTOMATIK;
 			heizung_send_details(p, HCAN_MULTICAST_INFO); // Mode-Wechsel melden
 		}
 	}
 
 	if (p->reed_heiz_stop_counter > 0)
-	{	
+	{
 		p->reed_heiz_stop_counter -= 1;
 
 		if (p->reed_heiz_stop_counter == 0)
@@ -415,6 +401,7 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 		 */
 		heizung_update_heizstop(p);
 	}
+
 	if (p->timer_counter++ >= 5)
 	{
 		p->timer_counter = 0;
@@ -422,119 +409,112 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 		if (p->ventilpflege_counter)
 		{
 			// Sonderfall: Ventilpflege ist aktiv; dazu
-			// Ventil einschalten, sonst aber nichts
-			// unternehmen:
-
+			// Ventil einschalten, sonst aber nichts unternehmen:
 			p->manual_rate = 0;
 
 			// Ventil einschalten:
-			//heizung_set_pwm(p,100);
-			darlingtonoutput_setpin(p->config.port, 1);
-
-			canix_syslog_P(SYSLOG_PRIO_DEBUG,
-					PSTR("heizung: %d ventilpflege aktiv"), p->config.id);
+			darlingtonoutput_setpin(p->config.port, 1); //heizung_set_pwm(p,100);
+			canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heizung: %d ventilpflege aktiv"), p->config.id);
 			return; // Funktion verlassen, da keine Waermebedarfsmeldung und PID berechnung nötig sind.
 		}
 
 		switch (p->mode)
 		{
-			case HEIZUNG_MODE_OFF : 
-				{
-					p->manual_rate = 0;
-					heizung_set_pwm(p,0);
-					// Ventil ausschalten, falls es an ist:
-					if (darlingtonoutput_getpin(p->config.port))
-							darlingtonoutput_setpin(p->config.port, 0);
-				}
+			case HEIZUNG_MODE_OFF :
+				p->manual_rate = 0;
+				heizung_set_pwm(p,0);
+				// Ventil ausschalten, falls es an ist:
+				if (darlingtonoutput_getpin(p->config.port))
+						darlingtonoutput_setpin(p->config.port, 0);
 				break;
+
 			case HEIZUNG_MODE_MANUAL :
-				{
-					heizung_set_pwm(p, p->manual_rate);
-				}
+				heizung_set_pwm(p, p->manual_rate);
 				break;
+
 			case HEIZUNG_MODE_AUTOMATIK :
+				// Wenn ein gueltiger Messwert vorliegt
+				// (d.h. wenn innerhalb eines definierten Zeitraumes
+				// ein Sensor-Messwert eingetroffen ist:
+				if (p->received_interval_counter < 255)
 				{
-					// Wenn ein gueltiger Messwert vorliegt
-					// (d.h. wenn innerhalb eines definierten Zeitraumes
-					// ein Sensor-Messwert eingetroffen ist:
-					if (p->received_interval_counter < 255)
+					int8_t index = heizung_get_matching_zeitzone_index(p);
+					if (index != -1) // passende Zeitzone?
 					{
-						int8_t index;
-						index = heizung_get_matching_zeitzone_index(p);
-						if (index != -1)
+						solltemp_line_t *solltemp_line = (solltemp_line_t*) &(p->config.zeitzone0_id);
+#if HEIZUNG_INCL_PID_REGLER_CODE == 1
+						if (p->config.feature & (1<<HEIZUNG_FEATURE_PID_REGLER))
 						{
-							// we got an zeitzone which matches
-							solltemp_line_t *solltemp_line = (solltemp_line_t*) 
-								&(p->config.zeitzone0_id);
 							heizung_set_pwm_by_pid(p, p->pidvalue);
 							p->destination_value = solltemp_line[index].temp;
-							
-							if (p->last_soll_temp != solltemp_line[index].temp) // Solltemperatur-Aenderung?
-							{
-								heizung_send_details(p, HCAN_MULTICAST_INFO); // infomiere darueber
-								p->last_soll_temp = solltemp_line[index].temp;
-							}
 						}
 						else
+#endif
 						{
-							// keine passende Zeitzone gefunden
-							heizung_set_pwm(p,0);
+						  heizung_set_pwm_by_temp(p, solltemp_line[index].temp, p->measure_value); // 2-Punkt-Regler
+						}
+
+						if (p->last_soll_temp != solltemp_line[index].temp) // Solltemperatur-Aenderung?
+						{
+							heizung_send_details(p, HCAN_MULTICAST_INFO); // infomiere darueber
+							p->last_soll_temp = solltemp_line[index].temp;
 						}
 					}
-					else
+					else // keine passende Zeitzone gefunden:
 					{
-						canix_syslog_P(SYSLOG_PRIO_ERROR, 
-								PSTR("keine Sensor-Messwerte vorhanden! (id=%d)"), p->config.id);
+						heizung_set_pwm(p,0);
 					}
 				}
-				break;
-			case HEIZUNG_MODE_THERMOSTAT :
+				else
 				{
-					// Wenn ein gueltiger Messwert vorliegt
-					// (d.h. wenn innerhalb eines definierten Zeitraumes
-					// ein Sensor-Messwert eingetroffen ist:
-					if (p->received_interval_counter < 255)
+					canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("keine Sensor-Messwerte vorhanden! (id=%d)"), p->config.id);
+				}
+				break;
+
+			case HEIZUNG_MODE_THERMOSTAT :
+				// Wenn ein gueltiger Messwert vorliegt
+				// (d.h. wenn innerhalb eines definierten Zeitraumes
+				// ein Sensor-Messwert eingetroffen ist:
+				if (p->received_interval_counter < 255)
+				{
+#if HEIZUNG_INCL_PID_REGLER_CODE == 1
+					if (p->config.feature & (1<<HEIZUNG_FEATURE_PID_REGLER))
 					{
 						heizung_set_pwm_by_pid(p, p->pidvalue);
-                                                p->destination_value = p->thermostat_temp;
+						p->destination_value = p->thermostat_temp;
 					}
 					else
+#endif
 					{
-						canix_syslog_P(SYSLOG_PRIO_ERROR, 
-								PSTR("keine Sensor-Messwerte vorhanden! (id=%d)"), p->config.id);
+					  heizung_set_pwm_by_temp(p, p->thermostat_temp, p->measure_value); // 2-Punkt-Regler
 					}
+				}
+				else
+				{
+					canix_syslog_P(SYSLOG_PRIO_ERROR, PSTR("keine Sensor-Messwerte vorhanden! (id=%d)"), p->config.id);
 				}
 				break;
 		}
 	}
 
-	//Wenn kein gueltiger Messwert vorliegt
-	//keine Waermebedarfsmeldung versenden
-	//keine PID Berechnung machen
-	if (p->received_interval_counter == 255)
+	if ((p->received_interval_counter == 255) && (HEIZUNG_MODE_MANUAL != p->mode)) // keine Sensor-Messwert?
 	{
-		return;
+		return; // keine Waermebedarfsmeldung versenden  und  keine PID Berechnung
 	}
 
 	// Waermebedarfsmeldung versenden:
 	if (p->waermebedarf_counter-- == 0)
 	{
-		canix_frame message;
+		p->waermebedarf_counter = 60; // Waermebedarfsmeldungen alle 60 Sekunden
+		uint8_t rate = heizung_get_pwm(p); // den aktuellen Ventilstand / Heizrate ermitteln
 
-		// Waermebedarfsmeldungen alle 60 Sekunden
-		p->waermebedarf_counter = 60;
-
-		// den aktuellen Ventilstand / Heizrate ermitteln:
-		uint8_t rate = heizung_get_pwm(p);
-
-		// Feature-Bit testen, und ggfls Waermebedarf verdoppeln:
 		if (p->config.feature & (1<<HEIZUNG_FEATURE_DOPPEL_WAERMEBEDARF))
-			rate = rate << 1;
+			rate = rate << 1; // Waermebedarf verdoppeln
 
 		// Der Waermebedarf ist proportional zur Ventilstellung, d.h.
 		// der Bedarf ist hoch, wenn das Ventil voll offen ist, und ist
 		// nicht vorhanden, wenn das Ventil zu ist.
-
+		canix_frame message;
 		message.src = canix_selfaddr();
 		message.dst = HCAN_MULTICAST_INFO;
 		message.proto = HCAN_PROTO_SFP;
@@ -543,19 +523,20 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 		message.data[2] = p->config.id;
 		message.data[3] = rate;
 		message.size = 4;
-
 		canix_frame_send_with_prio(&message, HCAN_PRIO_LOW);
 	}
 
-	//PID
-		if(p->destination_value < p->measure_value)
+#if HEIZUNG_INCL_PID_REGLER_CODE == 1
+	if (p->config.feature & (1<<HEIZUNG_FEATURE_PID_REGLER))
+	{
+		if (p->destination_value < p->measure_value)
 		{
 			// wenn die gewuenschte Temperatur unter der gemessenen ist, Heizung direkt auf 0% schalten.
 			p->pidvalue = 0;
 			//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("PID fix:0"));
 		}
 		// 80 = 5 Grad mal 16!
-		else if((p->measure_value + 80) < p->destination_value)
+		else if ((p->measure_value + 80) < p->destination_value)
 		{
 			// wenn die gewuenschte Temperatur 5° über der gemessenen liegt, Heizung direkt auf 100% schalten.
 			p->pidvalue = 3000;
@@ -615,6 +596,37 @@ inline void heizung_timer_handler(device_data_heizung *p, uint8_t zyklus)
 					}
 			}
 		}
+	}
+#endif
+}
+
+void case_reedkontakt_offen(device_data_heizung *p, const canix_frame *frame)
+{
+	// Schauen, ob wir einen Heiz-Stop einlegen muessen, weil
+	// eines unserer Fenster geoeffnet wurde:
+	for (uint8_t i = 0; i < 8; i++) // es gibt 8 Reedkontakt-Eintrage...
+	{
+		uint8_t reed_gruppe = (&p->config.reed0)[i];
+		if (reed_gruppe == frame->data[2])
+		{
+			//canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("HSp h=%d,r=%d"), p->config.id, reed_gruppe);
+			if (p->reed_heiz_stop_counter == 0)
+			{
+				// nur zu Debugging Zwecke: das Fenster wurde
+				// jetzt geoeffnet, der Heiz-Stop ist ab jetzt aktiv:
+				canix_syslog_P(SYSLOG_PRIO_DEBUG, PSTR("heiz-stop begin (heizung %d, reed %d)"),
+					p->config.id, reed_gruppe);
+			}
+
+			// ja, es ist eines unserer Fenster; also Heiz-Stop
+			// fuer eine Minute einlegen - falls das Fenster
+			// weiter offen bleibt, kommt die naechste Reed-
+			// Meldung auf jeden Fall innerhalb einer Minute
+			// (Normalfall: alle 10 Sekunden)!
+			p->reed_heiz_stop_counter = 60;
+			return; // wenn mindst. ein Fenster offen ist, hat sich die Sache jetzt erledigt
+		}
+	}
 }
 
 void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
@@ -634,11 +646,8 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 				// now look if if fits to the heizung
 
 				// temperature is a fixed point number mit 4 LSB Bits
-				int16_t sensor_temp = frame->data[3] << 8 | 
-					frame->data[4];
-
-				// store the measure value
-				p->measure_value = sensor_temp;
+				int16_t sensor_temp = frame->data[3] << 8 |	frame->data[4];
+				p->measure_value = sensor_temp; // speichern
 				p->received_interval_counter = 0;
 			}
 			break;
@@ -698,13 +707,11 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 
 		case HCAN_HES_DEVICES_CONFIGS_REQUEST :
 		case HCAN_HES_HEIZUNG_CONFIG_RQ :
-			{
-				answer.data[1] = HCAN_HES_HEIZUNG_CONFIG_REPLAY;
-				answer.data[2] = p->config.id;
-				answer.data[3] = p->config.sensor_id;
-				answer.size = 4;
-				canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
-			}
+			answer.data[1] = HCAN_HES_HEIZUNG_CONFIG_REPLAY;
+			answer.data[2] = p->config.id;
+			answer.data[3] = p->config.sensor_id;
+			answer.size = 4;
+			canix_frame_send_with_prio(&answer,HCAN_PRIO_HI);
 			break;
 
 		case HCAN_HES_HEIZUNG_TIST_REQUEST :
@@ -720,16 +727,15 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			break;
 
 		case HCAN_HES_HEIZUNG_SOLLTEMP_LINE_REQUEST :
-			if ((frame->data[2] == p->config.id) &&
-					(frame->data[3] <= 7)) // Idx pruefen
-			{	
+			if ((frame->data[2] == p->config.id) && (frame->data[3] <= 7)) // Idx pruefen
+			{
 				solltemp_line_t *solltemp_line;
 				uint8_t idx = frame->data[3];
 
 				answer.data[1] = HCAN_HES_HEIZUNG_SOLLTEMP_LINE_REPLAY;
 				answer.data[2] = p->config.id;
 				answer.data[3] = idx;
-				solltemp_line = (solltemp_line_t *) 
+				solltemp_line = (solltemp_line_t *)
 					&(p->config.zeitzone0_id);
 				answer.data[4] = solltemp_line[idx].temp >> 8;
 				answer.data[5] = solltemp_line[idx].temp & 0xff;
@@ -740,23 +746,20 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			break;
 
 		case HCAN_HES_HEIZUNG_SOLLTEMP_WRITE_LINE :
-			if ((frame->data[2] == p->config.id) &&
-					(frame->data[3] <= 7)) // Idx pruefen
-			{	
+			if ((frame->data[2] == p->config.id) && (frame->data[3] <= 7)) // Idx pruefen
+			{
 				uint8_t idx = frame->data[3];
 				solltemp_line_t *solltemp_line;
 
 				// EEPROM/EDS Validierungstests:
-				if ((p->it != 0) && 
-						(EDS_BLOCK_TYPE(p->it) == EDS_heizung_BLOCK_ID))
+				if ((p->it != 0) && (EDS_BLOCK_TYPE(p->it) == EDS_heizung_BLOCK_ID))
 				{
 					// neue Daten ins EEPROM schreiben; dazu:
 					//  2 Bytes Offset fuer Typ + Size
 					//  4 Byte  Offset fuer Ueberspringen der ersten
 					//  Felder
 
-					solltemp_line = (solltemp_line_t *) 
-						&(p->config.zeitzone0_id);
+					solltemp_line = (solltemp_line_t *)	&(p->config.zeitzone0_id);
 
 					// ACHTUNG: zeitzone_id wird bisher NICHT geschrieben
 					// Grund: bisher bei HomeCenter keine Notwendigkeit; somit
@@ -765,12 +768,8 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 					// solltemp_line[idx].id = frame->data[6];
 					// eeprom_write_byte(p->it + 6 + (idx *3), frame->data[6]);
 
-					// solltemp_line0_temp (2 Bytes)
-					solltemp_line[idx].temp = (frame->data[4] << 8) |
-						frame->data[5];
-					eeprom_write_word((uint16_t*)(p->it + 6 + (idx *3) + 1),
-							solltemp_line[idx].temp);
-
+					solltemp_line[idx].temp = (frame->data[4] << 8) | frame->data[5]; // solltemp_line0_temp (2 Bytes)
+					eeprom_write_word((uint16_t*)(p->it + 6 + (idx *3) + 1), solltemp_line[idx].temp);
 					answer.data[1] = HCAN_HES_HEIZUNG_SOLLTEMP_WRITE_LINE_ACK;
 					answer.data[2] = p->config.id;
 					answer.data[3] = idx;
@@ -780,49 +779,8 @@ void heizung_can_callback(device_data_heizung *p, const canix_frame *frame)
 			}
 			break;
 
-		case HCAN_HES_REEDKONTAKT_OFFEN : 
-			{
-				// Schauen, ob wir einen Heiz-Stop einlegen muessen, weil
-				// eines unserer Fenster geoeffnet wurde:
-				
-				uint8_t i;
-				for (i = 0; i < 8; i++) // es gibt 8 Reedkontakt-Eintrage...
-				{
-					uint8_t reed_gruppe;
-
-					reed_gruppe = (&p->config.reed0)[i];
-
-
-					if (reed_gruppe == frame->data[2])
-					{	
-						//canix_syslog_P(SYSLOG_PRIO_DEBUG,
-						//	PSTR("HSp h=%d,r=%d"), p->config.id, reed_gruppe);
-
-						if (p->reed_heiz_stop_counter == 0)
-						{
-							// nur zu Debugging Zwecke: das Fenster wurde
-							// jetzt geoeffnet, der Heiz-Stop ist ab jetzt
-							// aktiv:
-
-							canix_syslog_P(SYSLOG_PRIO_DEBUG,
-								PSTR("heiz-stop begin (heizung %d, reed %d)"),
-								p->config.id, reed_gruppe);
-						}
-
-						// ja, es ist eines unserer Fenster; also Heiz-Stop
-						// fuer eine Minute einlegen - falls das Fenster
-						// weiter offen bleibt, kommt die naechste Reed-
-						// Meldung auf jeden Fall innerhalb einer Minute
-						// (Normalfall: alle 10 Sekunden)!
-						p->reed_heiz_stop_counter = 60;
-
-						// wenn mindst. ein Fenster offen ist, hat sich
-						// die Sache jetzt erledigt
-						return;
-					}
-				}
-			}
+		case HCAN_HES_REEDKONTAKT_OFFEN :
+			case_reedkontakt_offen(p, frame);
 			break;
 	}
 }
-

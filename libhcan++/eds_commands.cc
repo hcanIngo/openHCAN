@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 #include <inttypes.h>
 #include <sys/ioctl.h> //ioctl() and TIOCGWINSZ
 #include <unistd.h> // for STDOUT_FILENO
@@ -187,7 +188,7 @@ void eds_cmd_edit(board_connection &bcon, eds_connection &econ, context &c,
 
 void eds_cmd_set_field(board_connection &bcon, eds_connection &econ,
 		context &c, uint16_t address, 
-		const string &key, const string &value)
+		const string &key, string &value)
 {
 	try
 	{
@@ -208,6 +209,19 @@ void eds_cmd_set_field(board_connection &bcon, eds_connection &econ,
 		else if (field_datatype == "uint8_t")
 		{
 			istringstream ss(value);
+
+			// kommentar suchen
+			std::size_t foundComment = value.find("#");
+			if (foundComment != std::string::npos)
+			{
+				// es wurde ein kommentar gefunden und wird abgeschnitten
+				foundComment = foundComment;
+				value = value.substr (0, foundComment);
+			}
+
+			// leerzeichen entfernden
+			value.erase(std::remove_if(value.begin(), value.end(), ::isspace), value.end());
+
 			int v;
 			if(value.rfind("0b", 0) == 0 && value.length() == 10)
 			{
@@ -231,8 +245,8 @@ void eds_cmd_set_field(board_connection &bcon, eds_connection &econ,
 					}
 				}
 			}
-			else if ((value.rfind("0b", 0) == 0 && value.length() != 10) ||
-					value.find("b") != std::string::npos || value.find("B") != std::string::npos)
+			else if ((value.rfind("0b") == 0 && value.length() != 10) ||
+					value.rfind("b") != std::string::npos || value.rfind("B") != std::string::npos)
 			{
 				cout << "Error: Binaere Eingaben wird als 0b00000000 erwartet!" << endl;
 				return;

@@ -44,3 +44,6 @@ SD-Card clonen:
 ---
 mit gepartet von sd zu sd kopiert:  4M vorne frei lassen -> bootet
 __________________________
+
+
+https://imval.tech/index.php/blog/victron-mqtt-server-bridging

@@ -369,7 +369,7 @@ static size_t erzeugeConfigTopicUndPayload(teDev eDev, unsigned char id, char * 
 
 	json_object_object_add(jDevice, "manufacturer", json_object_new_string("openHCAN"));
 	json_object_object_add(jDevice, "suggested_area", json_object_new_string(dev[id].Bereichsname));
-	json_object_object_add(jDevice, "name", json_object_new_string(stt));
+	json_object_object_add(jDevice, "name", json_object_new_string("")); // doppelte Benamung in HA verhindern
 	json_object_object_add(jDevice, "sw_version", json_object_new_string("1.0"));
 	json_object_object_add(jPayload, "device", jDevice);
 

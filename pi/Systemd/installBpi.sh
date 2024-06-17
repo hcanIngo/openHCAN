@@ -39,6 +39,7 @@ ipLinkSet_CAN__Persistent() {
 	cd openHCAN; sudo make strukturen xx="make all"; make cDienste xx="make all"; make cppDienste xx="make all"	
 	cd openHCAN; sudo make strukturen xx="make install"; make cDienste xx="make install"; make cppDienste xx="make install"
 	autostartHcanDienste tt hcan
+	autostartEvDienst tt ev
 	sudo apt-get update
 }
 
@@ -137,13 +138,31 @@ autostartHcanDienste() {
 	sudo chown tt /etc/hcan/installation.xml
 	#
 	sudo chmod a+x /home/$ZIEL_USER/startHcanDienste.sh
-	sudo cp ./$SERVICE.service /etc/systemd/system/$SERVICE.service	
+	sudo cp ./$SERVICE.service /etc/systemd/system/$SERVICE.service
+	sudo systemctl daemon-reload	
 	start hcan
 	#
 	# Symbolischen Link fuer Autostart beim Booten: 
 	# https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
 	sudo systemctl enable hcan
 	# Ergebnis:  Created symlink /etc/systemd/system/multi-user.target.wants/hcan.service → /etc/systemd/system/hcan.service
+}
+
+autostartEvDienst() {
+	ZIEL_USER=$1
+	SERVICE=$2 # ev
+	
+	echo "-- Ev Systemd-Autostart --"
+	sudo cp /home/$ZIEL_USER/openHCAN/pi/Systemd/$SERVICE.service /home/$ZIEL_USER/$SERVICE.service
+	#
+	# stop
+	#
+	sudo cp ./$SERVICE.service /etc/systemd/system/$SERVICE.service	
+	sudo systemctl daemon-reload
+	start ev
+	#
+	# Symbolischen Link fuer Autostart beim Booten: 
+	sudo systemctl enable hcan
 }
 
 start() {
@@ -197,7 +216,8 @@ Auswahl() {
 		 "pwMosq_1" "mosquitto Conf" off \
 		 "pwMosq_2" "mosquitto Conf" off \
 		 "pyMqttRing" "Klingel-App" off \
-		 "autostartHcanDienste" "" off
+		 "autostartHcanDienste" "" off \
+		 "autostartEvDienst" "" off
 		 )
 
 	case "$auswahl" in
@@ -244,6 +264,10 @@ Auswahl() {
 	  autostartHcanDienste)
 		clear
 		autostartHcanDienste tt hcan
+		;;
+      autostartEvDienst)
+		clear
+		autostartEvDienst tt ev
 		;;
 	  *) 
 	    clear

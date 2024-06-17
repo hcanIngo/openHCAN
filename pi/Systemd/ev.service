@@ -1,0 +1,30 @@
+[Unit]
+Description=ev startet evcc (falls socat laeuft) (Systemd)
+# sudo cp ./ev.service /etc/systemd/system/ev.service
+# sudo systemctl daemon-reload
+# sudo systemctl enable ev.service
+# sudo systemctl start ev.service
+# sudo systemctl status ev.service
+# sudo journalctl -u ev.service
+
+After=network.target
+
+[Service]
+Type=simple
+GuessMainPID=yes
+
+
+# Warte auf erfolgreiche socat-Start, bevor evcc gestartet wird
+ExecStartPre=/bin/bash -c "while :; do socat /dev/null TCP4:192.168.1.92:502 && break; sleep 2; done; echo OK"
+ExecStart=/bin/bash -c "socat -d -d pty,link=/tmp/ttyV0,b38400,rawer,echo=0 TCP4:192.168.1.92:502 & /home/tt/evcc/evcc_armLinux -c /home/tt/evcc/evcc.yaml"
+
+
+# Beende den Hauptprozess mit SIGKILL
+ExecStop=/bin/kill -SIGKILL $MAINPID
+
+User=tt
+Group=daemon
+WorkingDirectory=/home/tt
+
+[Install]
+WantedBy=multi-user.target

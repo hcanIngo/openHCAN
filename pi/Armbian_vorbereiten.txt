@@ -37,13 +37,14 @@ SD-Card clonen:
 1.        Zu clonende SD-Karte einlegen
 2.        sudo fdisk -l   oder  gparted  um  /dev/mmcblk0p1  zu finden
 3.        sudo umount /dev/mmcblk0p1
-4. SAVE:  sudo dd if=/dev/mmcblk0p1 of=~/hcanArmBian_21_08.img bs=4M status=progress && sync
+          sudo blockdev --getbsz /dev/mmcblk0p1  // blocksize ermitteln
+4   SAVE: sudo dd bs=4M if=/dev/mmcblk0p1 of=/media/il/500gb/bpi_image`date +%d%m%y`.img status=progress && sync   //  ex. hcanArmBian_21_08.img
 
-5.        Neue SD-Karte einlegen und 2. und 3. durchfuehren  
-6. CLONE: sudo dd if=~/hcanArmBian_21_08.img of=/dev/mmcblk0p1 bs=4M status=progress && sync
+5.         Neue SD-Karte einlegen und 2. und 3. durchfuehren  
+6.b CLONE: sudo dd if=/media/il/500gb/bpi_image060624.img of=/dev/mmcblk0p1 bs=4M status=progress && sync
 ---
 mit gepartet von sd zu sd kopiert:  4M vorne frei lassen -> bootet
 __________________________
 
-
+https://www.markus-gerber.ch/2016/01/backup-einer-sd-card-mit-dd/
 https://imval.tech/index.php/blog/victron-mqtt-server-bridging

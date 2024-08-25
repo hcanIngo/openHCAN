@@ -3,7 +3,8 @@ INDENT_OPTS = -orig -ci4
 all: eds.sql eds.xml hcan-protocol.xml validate hcan-def.h oap-def.h hcan_transport.h hcan_transport.cc eds-structs.h oap-def.h hcan-protocol-referenz.txt
 
 install:
-	test -d /usr/share/hcan || mkdir /usr/share/hcan 
+	test -d /etc/hcan || mkdir /etc/hcan
+	test -d /usr/share/hcan || mkdir /usr/share/hcan
 	sudo /usr/bin/install hcan-protocol.xml /usr/share/hcan
 	sudo /usr/bin/install eds.xml /usr/share/hcan
 	sudo /usr/bin/install oap.xml /usr/share/hcan

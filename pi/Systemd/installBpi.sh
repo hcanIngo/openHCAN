@@ -33,13 +33,13 @@ ipLinkSet_CAN__Persistent() {
 
 4_all_hcan() {
 	sudo apt-get update
-	sudo apt-get install git pkg-config indent xalan g++ libboost-dev libboost-program-options-dev libboost-regex-dev libreadline-gplv2-dev libxml++2.6-dev clang
+	sudo apt-get install git pkg-config indent xalan g++ libboost-dev libboost-program-options-dev libboost-regex-dev libreadline-dev libxml++2.6-dev clang
 	git clone https://github.com/hcanIngo/openHCAN.git
 	cd openHCAN; sudo make strukturen xx="sudo make clean"; make cDienste xx="sudo make clean"; make cppDienste xx="sudo make clean"
 	cd openHCAN; sudo make strukturen xx="make all"; make cDienste xx="make all"; make cppDienste xx="make all"	
 	cd openHCAN; sudo make strukturen xx="make install"; make cDienste xx="make install"; make cppDienste xx="make install"
 	autostartHcanDienste tt hcan
-	autostartEvDienst tt ev
+	#autostartEvDienst tt ev
 	sudo apt-get update
 }
 

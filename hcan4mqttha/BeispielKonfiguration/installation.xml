@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!DOCTYPE haus SYSTEM "/usr/share/hcan/installation.dtd">
+
+<!--
+Diese XML Datei beschreibt die HCAN Installation. 
+Verwendet um Openhab-Dateien zu generieren. 
+
+
+Hinweise Syntax: 
+ Geschoss_Raum__Bezeichnung (EG_Bad__genauerOrt)
+ oder z. B. nur EG_Windfang
+
+ Wo ein Temperatursensor einer Heizung zugeordnet ist,
+ dort muessen beide einen identischen Namen tragen.
+ 
+ sammel z. B. fuer Rolladen EG
+-->
+
+<haus>
+	<bereich name="OG" icon="firstfloor">
+		<raum name="K1" icon="office">
+			<board addr="161">
+				<reedkontakt gruppe="255" name="OG_K1__K1_Einzelfenster" sammel="-"  />
+			</board>
+			<board addr="164">
+				<powerport typ="lampe" gruppe="255" name="OG_K1__Decke_Tuer" sammel="-"  />
+				<heizung gruppe="255" name="OG_K1__K1_Heizung" sammel="OG_Heizungen"  />	
+				<tempsensor gruppe="255" name="OG_K1__K1_Temperatur" sammel="OG_Heizungen"  />
+				<rolladen gruppe="255" name="OG_K1__K1_Einzelfenster" sammel="OG_Rolladen"  />
+			</board>
+		</raum>
+	</bereich>
+</haus>

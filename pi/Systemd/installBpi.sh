@@ -17,7 +17,7 @@ canDToverlay() {
 	ZIEL_USER=$1
 	#sudo echo "overlays=can" >> /boot/armbianEnv.txt  # https://docs.armbian.com/User-Guide_Allwinner_overlays/ 
 	cd /home/$ZIEL_USER/openHCAN/pi/Systemd/           # sun7i-a20-can.dts verwenden da das von Armbian nicht geht
-	sudo armbian-add-overlay sun7i-a20-can.dts
+	sudo armbian-add-overlay ./sun7i-a20-can.dts
 	
 	echo "Reboot erforderlich! (Dieses Sktipt beenden und den Neustart manuell anstossen)"
 	#sudo reboot

@@ -44,3 +44,9 @@ run:
 	make clean
 	$(CXX) $(CFLAGS) -DDEBUG -o $(TARGET) $(SRC) $(LDFLAGS) # make all  incl Debug
 	./$(TARGET) -D
+
+
+###################################################################
+cp2pi:
+	scp -r ./mqttHcan.c tt@bananapi:/home/tt/openHCAN/hcan4mqttha
+	# auf pi bauen..

@@ -355,9 +355,9 @@ static size_t erzeugeConfigTopicUndPayload(teDev eDev, unsigned char id, char * 
 	fread(strPayload, dStrLen, 1, fp);
 	fclose(fp);
 	struct json_object *jPayload = json_tokener_parse(strPayload);
-	json_object_object_add(jPayload, "name", json_object_new_string(stt)); // name ersetzen (stt wird in getXmlDatenZurId() ermittelt)
+	json_object_object_add(jPayload, "name", json_object_new_string("")); // doppelte Benamung in HA verhindern
 	char unique_id[10];
-	snprintf(unique_id, sizeof unique_id, "hcanId%u", id);
+	snprintf(unique_id, sizeof unique_id, "%u", id); // <object_id> to unique_id siehe https://www.home-assistant.io/integrations/mqtt/#configuration-via-mqtt-discovery   (ex hcanId%u)
 	json_object_object_add(jPayload, "unique_id", json_object_new_string(unique_id));
 
 	struct json_object *jDevice = json_object_new_object();
@@ -369,7 +369,7 @@ static size_t erzeugeConfigTopicUndPayload(teDev eDev, unsigned char id, char * 
 
 	json_object_object_add(jDevice, "manufacturer", json_object_new_string("openHCAN"));
 	json_object_object_add(jDevice, "suggested_area", json_object_new_string(dev[id].Bereichsname));
-	json_object_object_add(jDevice, "name", json_object_new_string("")); // doppelte Benamung in HA verhindern
+	json_object_object_add(jDevice, "name", json_object_new_string(stt)); // name ersetzen (stt wird in getXmlDatenZurId() ermittelt)
 	json_object_object_add(jDevice, "sw_version", json_object_new_string("1.0"));
 	json_object_object_add(jPayload, "device", jDevice);
 

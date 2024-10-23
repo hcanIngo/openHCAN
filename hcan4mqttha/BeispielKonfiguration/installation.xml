@@ -3,7 +3,7 @@
 
 <!--
 Diese XML Datei beschreibt die HCAN Installation. 
-Verwendet um Openhab-Dateien zu generieren. 
+Verwendet um hcan-Devices per "MQTT Discovery" z. B. hier Homeassistant bereitzustellen. 
 
 
 Hinweise Syntax: 
@@ -13,20 +13,21 @@ Hinweise Syntax:
  Wo ein Temperatursensor einer Heizung zugeordnet ist,
  dort muessen beide einen identischen Namen tragen.
  
- sammel z. B. fuer Rolladen EG
+ stt: Ein sprechender Name
+ sammel: z. B. fuer Rolladen EG
 -->
 
 <haus>
 	<bereich name="OG" icon="firstfloor">
 		<raum name="K1" icon="office">
 			<board addr="161">
-				<reedkontakt gruppe="255" name="OG_K1__K1_Einzelfenster" sammel="-"  />
+				<reedkontakt gruppe="255" name="OG_K1__K1_Einzelfenster" nostt="Buero" sammel="-"  />
 			</board>
 			<board addr="164">
-				<powerport typ="lampe" gruppe="255" name="OG_K1__Decke_Tuer" sammel="-"  />
-				<heizung gruppe="255" name="OG_K1__K1_Heizung" sammel="OG_Heizungen"  />	
-				<tempsensor gruppe="255" name="OG_K1__K1_Temperatur" sammel="OG_Heizungen"  />
-				<rolladen gruppe="255" name="OG_K1__K1_Einzelfenster" sammel="OG_Rolladen"  />
+				<powerport typ="lampe" gruppe="255" name="OG_K1__Decke_Tuer" stt="Buero" sammel="-"  />
+				<heizung gruppe="255" name="OG_K1__K1_Heizung" stt="Buero" sammel="OG_Heizungen"  />	
+				<tempsensor gruppe="255" name="OG_K1__K1_Temperatur" stt="Buero" sammel="OG_Heizungen"  />
+				<rolladen gruppe="255" name="OG_K1__K1_Einzelfenster" stt="Buero" sammel="OG_Rolladen"  />
 			</board>
 		</raum>
 	</bereich>

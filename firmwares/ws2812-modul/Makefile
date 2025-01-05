@@ -30,6 +30,7 @@ DEFINES = -DMCU_$(MCU) -DF_CPU=$(F_CPU) -DF_CAN=$(F_CAN) -DCAN_SPEED=$(CAN_SPEED
 DEFINES += $(GLOBAL_DEFINES)
 
 CFLAGS =  -mmcu=$(MCU) -Wall -Werror -Wstrict-prototypes -Os -mcall-prologues
+CFLAGS += -Wno-misleading-indentation
 CFLAGS += -std=gnu99
 CFLAGS += -I. -I../../canix -I../.. -I../../include
 CFLAGS += $(DEFINES)

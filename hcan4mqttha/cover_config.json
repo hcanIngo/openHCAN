@@ -3,6 +3,8 @@
 	"name": "id",
 	"cmd_t": "~/<--/set",
 	"stat_t": "~/-->/state",
+	"set_pos_t": "~/<--/set_pos",
+	"pos_t": "~/-->/position",
 	"dev_cla": "shutter",
 	"value_template": "{{ value_json.state }}"
 }

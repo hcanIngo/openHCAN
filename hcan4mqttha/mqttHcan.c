@@ -33,6 +33,8 @@ typedef struct configTopic
 	char TildeOhneId[35]; // "~" z.B. "hc/switch" aus switch_config.json   oder    "sensor/TEMPERATURE"  aus tempsensor_config.json
 	char stat_t[30];      // "stat_t" = state  -Topic  z.B. "/-->/state"
 	char cmd_t[20];       // "cmd_t"  = command-Topic  z.B. "/<--/set"
+	char pos_t[30];       // "pos_t"  = position-Topic z.B. "/-->/position" (nur cover)
+	char set_pos_t[30];   // "set_pos_t" = position-Command-Topic z.B. "/<--/set_pos" (nur cover)
 } tConfigTopic;
 tConfigTopic strDateiEintrag[eAnzDev];
 
@@ -52,6 +54,8 @@ void initMqttHcan(void)
 		memset(strDateiEintrag[eDev].TildeOhneId, '\0', sizeof strDateiEintrag[eDev].TildeOhneId);
 		memset(strDateiEintrag[eDev].stat_t, '\0', sizeof strDateiEintrag[eDev].stat_t);
 		memset(strDateiEintrag[eDev].cmd_t, '\0', sizeof strDateiEintrag[eDev].cmd_t);
+		memset(strDateiEintrag[eDev].pos_t, '\0', sizeof strDateiEintrag[eDev].pos_t);
+		memset(strDateiEintrag[eDev].set_pos_t, '\0', sizeof strDateiEintrag[eDev].set_pos_t);
 	}
 	memset(strDateiEintragClimate.mode_cmd_t, '\0', sizeof strDateiEintragClimate.mode_cmd_t);
 	memset(strDateiEintragClimate.temp_cmd_t, '\0', sizeof strDateiEintragClimate.temp_cmd_t);
@@ -132,6 +136,22 @@ static void holeConfigDateiEintrag(struct json_object * jPayload, teDev eDev, co
 		snprintf(strDateiEintrag[eDev].cmd_t, bisPos+1, "%s", &strQuelle[vonPos]);
 		TRACE("\n\t ### %s-Eintrag aus %s_config.json: %s -> %s|### ", key, strDevName[eDev], strQuelle, strDateiEintrag[eDev].cmd_t);
 	}
+	else if (is (key,"pos_t")) // z.B. "~/-->/position" (nur cover)
+	{
+		size_t vonPos = sizeof "~" - 1; //  "~" auslassen
+		size_t bisPos = strnlen(strQuelle, sizeof strDateiEintrag[eDev].pos_t); // bis wohin kopiert wird
+		memset(strDateiEintrag[eDev].pos_t, '\0', sizeof strDateiEintrag[eDev].pos_t); // WICHTIG!
+		snprintf(strDateiEintrag[eDev].pos_t, bisPos+1, "%s", &strQuelle[vonPos]);
+		TRACE("\n\t ### %s-Eintrag aus %s_config.json: %s -> %s|### ", key, strDevName[eDev], strQuelle, strDateiEintrag[eDev].pos_t);
+	}
+	else if (is (key,"set_pos_t")) // z.B. "~/<--/set_pos" (nur cover)
+	{
+		size_t vonPos = sizeof "~" - 1; //  "~" auslassen
+		size_t bisPos = strnlen(strQuelle, sizeof strDateiEintrag[eDev].set_pos_t); // bis wohin kopiert wird
+		memset(strDateiEintrag[eDev].set_pos_t, '\0', sizeof strDateiEintrag[eDev].set_pos_t); // WICHTIG!
+		snprintf(strDateiEintrag[eDev].set_pos_t, bisPos+1, "%s", &strQuelle[vonPos]);
+		TRACE("\n\t ### %s-Eintrag aus %s_config.json: %s -> %s|### ", key, strDevName[eDev], strQuelle, strDateiEintrag[eDev].set_pos_t);
+	}
 }
 
 static size_t setClimateCanMsg(teDev eDev, char* restTopic, size_t bisPos, char* payload_rx, struct can_frame * msg4cb)
@@ -210,7 +230,7 @@ size_t prepareMsg4cb (char* topic_rx, char* payload_rx, struct can_frame * msg4c
 			char * restTopic;
 			msg4cb->data[2] = strtol(&topic_rx[bisPos+1], &restTopic, 10); // Gruppe/ID
 			if (restTopic == NULL) restTopic = &rest;
-			size_t bisPos = strnlen(restTopic, 30) - strnlen(payload_rx, 20) - 1; // restTopic enthaelt zusatzlich das Payload (-1, da von 0 gezaehlt)
+			size_t bisPos = strnlen(restTopic, 30) - strnlen(payload_rx, 20); // restTopic enthaelt zusatzlich das Payload (kein -1, da der Trenner-Slash Teil von restTopic ist)
 			TRACE("\n\t ### id=%d restTopic=%s bisPos=%u (%s)\n", msg4cb->data[2], restTopic, bisPos, strDevName[eDev]);
 
 			switch (eDev)
@@ -255,6 +275,12 @@ size_t prepareMsg4cb (char* topic_rx, char* payload_rx, struct can_frame * msg4c
 						else if (is(payload_rx, "OPEN"))  msg4cb->data[3] = 201;   // gewuenschte Rollladenposition: Pos=201=100%=auf
 						else if (is(payload_rx, "STOP"))  msg4cb->data[3] = 202;   // stop
 						// moeglich waere auch            msg4cb->data[3] = 0..100 // gewuenschte Rollladenposition: von 0%..100% vorgeben
+						rtnCanMsgLen = 4; // Anzahl der Daten-Bytes des Frames
+					}
+					else if (isEq(strDateiEintrag[eDev].set_pos_t, restTopic, bisPos)) // z.B. "/<--/set_pos": Position 0..100 setzen
+					{
+						msg4cb->data[1] = HCAN_HES_ROLLADEN_POSITION_SET;
+						msg4cb->data[3] = (uint8_t)strtol(payload_rx, NULL, 10); // gewuenschte Rollladenposition: 0%..100%
 						rtnCanMsgLen = 4; // Anzahl der Daten-Bytes des Frames
 					}
 					break;
@@ -393,6 +419,8 @@ static size_t erzeugeConfigTopicUndPayload(teDev eDev, unsigned char id, char * 
 			holeConfigDateiEintrag(jPayload, eDev, "~");
 			holeConfigDateiEintrag(jPayload, eDev, "stat_t");
 			holeConfigDateiEintrag(jPayload, eDev, "cmd_t");
+			holeConfigDateiEintrag(jPayload, eDev, "pos_t");
+			holeConfigDateiEintrag(jPayload, eDev, "set_pos_t");
 			break;
 
 		case eClimate:
@@ -508,6 +536,11 @@ size_t catHesTopic4Broker(char * strTopic, char * strPayload, const struct can_f
 		case HCAN_HES_ROLLADEN_POSITION_REPLAY:
 		case HCAN_HES_ROLLADEN_POSITION_CHANGED_INFO:
 			snprintf(strTopic, maxSize, "%s/%u%s", strDateiEintrag[eCover].TildeOhneId, cf->data[2], strDateiEintrag[eCover].stat_t);
+			if (strnlen(strDateiEintrag[eCover].pos_t, sizeof strDateiEintrag[eCover].pos_t)) // pos_t konfiguriert?
+			{
+				snprintf(strTopic, maxSize, "%s/%u%s", strDateiEintrag[eCover].TildeOhneId, cf->data[2], strDateiEintrag[eCover].pos_t);
+				return snprintf(strPayload, maxSize, "{\"position\": %u}", cf->data[3]); // Position 0..100
+			}
 			switch (cf->data[3])
 			{
 				// state-Payload: closed, closing, open, opening, stopped
